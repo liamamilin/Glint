@@ -1,0 +1,30 @@
+# macOS
+.DS_Store
+*.swp
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+
+# Glint runtime data (local privacy data, never commit)
+brain-server/data/usage.db
+brain-server/data/usage.db-wal
+brain-server/data/usage.db-shm
+brain-server/logs/
+
+# Xcode / Swift
+macos-app/build/
+macos-app/.build/
+macos-app/.swiftpm/
+macos-app/DerivedData/
+macos-app/Config/Signing.local.xcconfig
+*.xcuserdata
+*.xcscmblueprint

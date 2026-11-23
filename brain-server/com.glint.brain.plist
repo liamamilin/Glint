@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.glint.brain</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/opt/homebrew/bin/python3.12</string>
+        <string>-m</string>
+        <string>uvicorn</string>
+        <string>main:app</string>
+        <string>--host</string>
+        <string>127.0.0.1</string>
+        <string>--port</string>
+        <string>8765</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Volumes/个人资料/2026/开发项目/Glint/brain-server</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>GLINT_MODEL</key>
+        <string>qwen3.5:2b</string>
+        <key>GLINT_ENABLE_THINKING</key>
+        <string>false</string>
+        <key>GLINT_WARMUP</key>
+        <string>true</string>
+    </dict>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>KeepAlive</key>
+    <true/>
+
+    <key>StandardOutPath</key>
+    <string>/tmp/com.glint.brain.out.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/tmp/com.glint.brain.err.log</string>
+</dict>
+</plist>
