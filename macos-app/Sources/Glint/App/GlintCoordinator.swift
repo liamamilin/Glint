@@ -13,7 +13,16 @@ final class GlintCoordinator: ObservableObject {
     @Published private(set) var isHotkeyRunning: Bool = false
     @Published private(set) var backendSummary: String = "检查中…"
     @Published private(set) var lastLatencyMs: Double?
-    @Published private(set) var lastStatusMessage: String = "按 ⌥Space 在任意输入框呼出认知卡片"
+    @Published private(set) var lastStatusMessage: String = "按 Fn+Space 在任意输入框呼出认知卡片"
+    @Published var hotkeyPreset: GlintHotkeyPreset {
+        didSet {
+            UserDefaults.standard.set(hotkeyPreset.rawValue, forKey: Self.hotkeyDefaultsKey)
+            inputMonitor.preset = hotkeyPreset
+            lastStatusMessage = "快捷键已切换为 \(hotkeyPreset.shortLabel)"
+        }
+    }
+
+    private static let hotkeyDefaultsKey = "glint.hotkeyPreset"
 
     private let brainClient = BrainClient()
     private let contextReader = ContextReader()
@@ -27,8 +36,16 @@ final class GlintCoordinator: ObservableObject {
     private var isPopupVisible: Bool = false
     private var inFlightTask: Task<Void, Never>?
     private var permissionTimer: Timer?
+    private var outsideClickMonitor: Any?
+    private var appSwitchObserver: NSObjectProtocol?
 
     init() {
+        let savedRaw = UserDefaults.standard.string(forKey: Self.hotkeyDefaultsKey)
+        let resolvedPreset = savedRaw.flatMap(GlintHotkeyPreset.init(rawValue:)) ?? .doubleRightOption
+        self.hotkeyPreset = resolvedPreset
+        self.lastStatusMessage = "按 \(resolvedPreset.shortLabel) 在任意输入框呼出认知卡片"
+        inputMonitor.preset = resolvedPreset
+
         inputMonitor.onTriggerHotkey = { [weak self] in
             self?.handleTriggerHotkey()
         }
@@ -75,8 +92,11 @@ final class GlintCoordinator: ObservableObject {
     }
 
     func requestAccessibilityPermission() {
-        let options = [kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String: true] as CFDictionary
-        AXIsProcessTrustedWithOptions(options)
+        // Avoid triggering redundant macOS prompt dialogs when already trusted.
+        if !AXIsProcessTrusted() {
+            let options = [kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String: true] as CFDictionary
+            AXIsProcessTrustedWithOptions(options)
+        }
         if let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility") {
             NSWorkspace.shared.open(url)
         }
@@ -88,7 +108,7 @@ final class GlintCoordinator: ObservableObject {
             let ollamaLabel = health.ollama_reachable ? "Ollama 在线" : "Ollama 未连"
             backendSummary = "\(health.model) · \(health.cards_loaded) 张卡 · \(ollamaLabel)"
         } catch {
-            backendSummary = "未连接 (localhost:8765)"
+            backendSummary = "未连接 (localhost:18765)"
         }
     }
 
@@ -103,11 +123,22 @@ final class GlintCoordinator: ObservableObject {
         inFlightTask?.cancel()
         inFlightTask = Task { [weak self] in
             guard let self else { return }
-            guard let context = await self.contextReader.captureContext() else {
-                self.lastStatusMessage = "未读取到可用文本（或当前为敏感密码框）"
+            let outcome = await self.contextReader.captureContext()
+            guard !Task.isCancelled else { return }
+
+            let context: CapturedContext
+            switch outcome {
+            case .captured(let captured):
+                context = captured
+            case .blockedSecureField:
+                self.lastStatusMessage = "已在密码/敏感输入框自动忽略"
+                self.panel.presentToast(message: "已在密码框自动忽略", symbol: "lock.shield")
+                return
+            case .emptyText:
+                self.lastStatusMessage = "未检测到可路由的文本"
+                self.panel.presentToast(message: "未检测到文本，请先输入或划选", symbol: "text.cursor")
                 return
             }
-            guard !Task.isCancelled else { return }
 
             do {
                 let response = try await self.brainClient.route(
@@ -119,10 +150,13 @@ final class GlintCoordinator: ObservableObject {
                 self.activeResponse = response
                 self.selectedIndex = 0
                 self.lastLatencyMs = response.latency_ms
+                self.backendSummary = "\(response.model) · 在线 (\(Int(response.latency_ms))ms)"
                 self.lastStatusMessage = "已在 \(context.appName) 路由 \(response.cards.count) 张卡片 (\(Int(response.latency_ms))ms)"
                 self.showPopup()
             } catch {
+                self.backendSummary = "未连接 (localhost:18765)"
                 self.lastStatusMessage = "路由失败：请确认 brain-server 已启动 (\(error.localizedDescription))"
+                self.panel.presentToast(message: "brain-server 未启动 (18765)", symbol: "bolt.slash")
                 NSLog("[Glint] Route failed: \(error.localizedDescription)")
             }
         }
@@ -133,6 +167,43 @@ final class GlintCoordinator: ObservableObject {
         isPopupVisible = true
         renderPopup(response: response, context: context)
         inputMonitor.setPopupInterceptionActive(true)
+        installDismissMonitors()
+    }
+
+    private func installDismissMonitors() {
+        removeDismissMonitors()
+
+        outsideClickMonitor = NSEvent.addGlobalMonitorForEvents(matching: [.leftMouseDown, .rightMouseDown]) { [weak self] _ in
+            Task { @MainActor [weak self] in
+                guard let self, self.isPopupVisible else { return }
+                let clickPoint = NSEvent.mouseLocation
+                if !self.panel.frame.contains(clickPoint) {
+                    self.dismissPopup(recordNegativeFeedback: true)
+                }
+            }
+        }
+
+        appSwitchObserver = NSWorkspace.shared.notificationCenter.addObserver(
+            forName: NSWorkspace.didActivateApplicationNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor [weak self] in
+                guard let self, self.isPopupVisible else { return }
+                self.dismissPopup(recordNegativeFeedback: true)
+            }
+        }
+    }
+
+    private func removeDismissMonitors() {
+        if let monitor = outsideClickMonitor {
+            NSEvent.removeMonitor(monitor)
+            outsideClickMonitor = nil
+        }
+        if let observer = appSwitchObserver {
+            NSWorkspace.shared.notificationCenter.removeObserver(observer)
+            appSwitchObserver = nil
+        }
     }
 
     private func renderPopup(response: RouteResponse, context: CapturedContext) {
@@ -206,6 +277,7 @@ final class GlintCoordinator: ObservableObject {
         let prevResponse = activeResponse
 
         isPopupVisible = false
+        removeDismissMonitors()
         inputMonitor.setPopupInterceptionActive(false)
         panel.dismiss()
         activeContext = nil

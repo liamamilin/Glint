@@ -58,14 +58,19 @@ final class TextInjector {
     private var savedClipboard: [PasteboardSnapshot.ItemSnapshot]?
     private var cachedPasteMenuItems: [pid_t: AXUIElement] = [:]
 
+    private static let prePasteKeySettleDelay: TimeInterval = 0.035
+
     func inject(card: CardItem, mode: InjectMode, context: CapturedContext) {
         let textToInsert: String
+        var didPostSelectionKey = false
+
         switch mode {
         case .append:
             textToInsert = card.prompt.replacingOccurrences(of: "{{input}}", with: "")
             // If the user originally highlighted text, collapse selection to the end before appending.
             if context.captureScope == .selection {
                 postKey(virtualKey: 124, flags: []) // Right arrow
+                didPostSelectionKey = true
             }
         case .wrap:
             if card.prompt.contains("{{input}}") {
@@ -79,12 +84,22 @@ final class TextInjector {
                 break // Still selected
             case .paragraph:
                 postKey(virtualKey: 126, flags: [.maskCommand, .maskShift])
+                didPostSelectionKey = true
             case .fullField:
                 postKey(virtualKey: 0, flags: .maskCommand)
+                didPostSelectionKey = true
             }
         }
 
-        pasteViaClipboard(textToInsert, targetPID: context.appPID)
+        if didPostSelectionKey {
+            // Give Electron/browser hosts a brief settle window so the selection/caret move
+            // finishes before Edit > Paste fires.
+            DispatchQueue.main.asyncAfter(deadline: .now() + Self.prePasteKeySettleDelay) { [weak self] in
+                self?.pasteViaClipboard(textToInsert, targetPID: context.appPID)
+            }
+        } else {
+            pasteViaClipboard(textToInsert, targetPID: context.appPID)
+        }
     }
 
     private func pasteViaClipboard(_ text: String, targetPID: pid_t) {

@@ -7,14 +7,14 @@
 
     <key>ProgramArguments</key>
     <array>
-        <string>/opt/homebrew/bin/python3.12</string>
+        <string>/Users/milin/.pyenv/versions/3.10.13/bin/python3</string>
         <string>-m</string>
         <string>uvicorn</string>
         <string>main:app</string>
         <string>--host</string>
         <string>127.0.0.1</string>
         <string>--port</string>
-        <string>8765</string>
+        <string>18765</string>
     </array>
 
     <key>WorkingDirectory</key>

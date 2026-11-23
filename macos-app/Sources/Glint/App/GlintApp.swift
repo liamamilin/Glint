@@ -16,11 +16,25 @@ struct GlintApp: App {
 
                 // Accessibility status
                 if coordinator.isAccessibilityGranted {
-                    Label("辅助功能权限：已授权 (⌥Space 就绪)", systemImage: "checkmark.circle.fill")
+                    Label("辅助功能权限：已授权 (\(coordinator.hotkeyPreset.shortLabel) 就绪)", systemImage: "checkmark.circle.fill")
                 } else {
                     Label("辅助功能权限：未授权", systemImage: "exclamationmark.triangle.fill")
                     Button("前往系统设置授权…") {
                         coordinator.requestAccessibilityPermission()
+                    }
+                }
+
+                Menu("呼出快捷键：\(coordinator.hotkeyPreset.shortLabel)") {
+                    ForEach(GlintHotkeyPreset.allCases) { preset in
+                        Button {
+                            coordinator.hotkeyPreset = preset
+                        } label: {
+                            if preset == coordinator.hotkeyPreset {
+                                Text("✓ \(preset.label)")
+                            } else {
+                                Text(preset.label)
+                            }
+                        }
                     }
                 }
 

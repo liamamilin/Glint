@@ -5,7 +5,7 @@ final class BrainClient: Sendable {
     let baseURL: URL
     private let session: URLSession
 
-    init(baseURL: URL = URL(string: "http://127.0.0.1:8765")!) {
+    init(baseURL: URL = URL(string: "http://127.0.0.1:18765")!) {
         self.baseURL = baseURL
         let config = URLSessionConfiguration.ephemeral
         config.timeoutIntervalForRequest = 6.0

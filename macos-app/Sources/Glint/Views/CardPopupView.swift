@@ -72,6 +72,13 @@ private struct CardRow: View {
     let card: CardItem
     let isSelected: Bool
 
+    private var expandedPromptText: String {
+        card.prompt
+            .replacingOccurrences(of: "{{input}}", with: "「你的输入」")
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .replacingOccurrences(of: "\n+", with: " ", options: .regularExpression)
+    }
+
     var body: some View {
         HStack(alignment: .top, spacing: 10) {
             // Shortcut badge (1 / 2 / 3)
@@ -85,7 +92,7 @@ private struct CardRow: View {
                 .foregroundStyle(isSelected ? Color.white : Color.primary)
                 .padding(.top, 1)
 
-            VStack(alignment: .leading, spacing: 3) {
+            VStack(alignment: .leading, spacing: 4) {
                 HStack(spacing: 6) {
                     Text(card.title)
                         .font(.system(size: 13, weight: .semibold))
@@ -106,10 +113,11 @@ private struct CardRow: View {
                         .foregroundStyle(.tertiary)
                 }
 
-                Text(card.preview)
+                Text(isSelected ? expandedPromptText : card.preview)
                     .font(.system(size: 11.5))
-                    .foregroundStyle(.secondary)
-                    .lineLimit(1)
+                    .foregroundStyle(isSelected ? Color.primary.opacity(0.82) : Color.secondary)
+                    .lineLimit(isSelected ? 3 : 1)
+                    .fixedSize(horizontal: false, vertical: true)
                     .truncationMode(.tail)
             }
         }
@@ -125,6 +133,30 @@ private struct CardRow: View {
                     isSelected ? Color.accentColor.opacity(0.55) : Color.clear,
                     lineWidth: 1
                 )
+        )
+    }
+}
+
+struct GlintToastView: View {
+    let symbol: String
+    let message: String
+
+    var body: some View {
+        HStack(spacing: 8) {
+            Image(systemName: symbol)
+                .font(.system(size: 12, weight: .semibold))
+                .foregroundStyle(.secondary)
+            Text(message)
+                .font(.system(size: 12.5, weight: .medium))
+                .foregroundStyle(.primary)
+                .lineLimit(1)
+        }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 9)
+        .background(.ultraThinMaterial, in: Capsule())
+        .overlay(
+            Capsule()
+                .strokeBorder(Color.primary.opacity(0.12), lineWidth: 0.75)
         )
     }
 }

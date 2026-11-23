@@ -11,17 +11,85 @@ enum PopupKeyCommand: Sendable {
     case cancel
 }
 
+/// Built-in low-conflict hotkey presets persisted in UserDefaults.
+enum GlintHotkeyPreset: String, CaseIterable, Identifiable, Sendable {
+    case doubleRightOption = "double_right_option"
+    case optionSemicolon = "option_semicolon"
+    case controlOptionSpace = "ctrl_opt_space"
+    case fnSpace = "fn_space"
+    case optionSpace = "option_space"
+
+    var id: String { rawValue }
+
+    var label: String {
+        switch self {
+        case .doubleRightOption: return "双击右 Option (推荐 · 零冲突)"
+        case .optionSemicolon: return "Option + ; (⌥;)"
+        case .controlOptionSpace: return "Control + Option + Space (⌃⌥Space)"
+        case .fnSpace: return "Fn + Space (🌐Space)"
+        case .optionSpace: return "Option + Space (⌥Space)"
+        }
+    }
+
+    var shortLabel: String {
+        switch self {
+        case .doubleRightOption: return "双击右⌥"
+        case .optionSemicolon: return "⌥;"
+        case .controlOptionSpace: return "⌃⌥Space"
+        case .fnSpace: return "Fn+Space"
+        case .optionSpace: return "⌥Space"
+        }
+    }
+
+    var isDoubleModifierTap: Bool {
+        self == .doubleRightOption
+    }
+
+    var keyCode: CGKeyCode {
+        switch self {
+        case .doubleRightOption: return 61 // Right Option (kVK_RightOption)
+        case .fnSpace, .controlOptionSpace, .optionSpace: return 49 // Space
+        case .optionSemicolon: return 41 // ;
+        }
+    }
+
+    var modifiers: CGEventFlags {
+        switch self {
+        case .doubleRightOption: return .maskAlternate
+        case .fnSpace: return .maskSecondaryFn
+        case .optionSemicolon: return .maskAlternate
+        case .controlOptionSpace: return [.maskControl, .maskAlternate]
+        case .optionSpace: return .maskAlternate
+        }
+    }
+}
+
 /// Manages two lightweight CGEventTaps (requiring only Accessibility permission, no Input Monitoring):
-/// 1. `hotkeyTap`: always-on tap that consumes Option+Space to summon Glint.
+/// 1. `hotkeyTap`: always-on tap that detects the configured hotkey (default: Double Right Option).
 /// 2. `popupTap`: enabled ONLY while the 3-card panel is visible to intercept 1/2/3/↑/↓/Enter/Esc.
 @MainActor
 final class HotkeyAndInputMonitor {
     var onTriggerHotkey: (@MainActor () -> Void)?
     var onPopupKeyCommand: (@MainActor (PopupKeyCommand) -> Void)?
 
-    // Default hotkey: Option + Space (keyCode 49).
-    var triggerKeyCode: CGKeyCode = 49
-    var triggerModifiers: CGEventFlags = .maskAlternate
+    // Default hotkey: Double Right Option (zero conflict across macOS apps).
+    var preset: GlintHotkeyPreset = .doubleRightOption {
+        didSet {
+            triggerKeyCode = preset.keyCode
+            triggerModifiers = preset.modifiers
+            resetDoubleTapState()
+        }
+    }
+
+    var triggerKeyCode: CGKeyCode = GlintHotkeyPreset.doubleRightOption.keyCode
+    var triggerModifiers: CGEventFlags = GlintHotkeyPreset.doubleRightOption.modifiers
+
+    private var activeOptionKeyCode: CGKeyCode?
+    private var otherKeyPressedDuringOption: Bool = false
+    private var lastCleanOptionReleaseKeyCode: CGKeyCode?
+    private var lastCleanOptionReleaseUptime: TimeInterval = 0
+    private static let optionKeyCodes: Set<CGKeyCode> = [61] // Right Option only (close to arrow keys & Return)
+    private static let doubleTapWindow: TimeInterval = 0.42
 
     private var hotkeyTapPort: CFMachPort?
     private var hotkeyRunLoopSource: CFRunLoopSource?
@@ -34,14 +102,17 @@ final class HotkeyAndInputMonitor {
         guard AXIsProcessTrusted() else { return false }
         if hotkeyTapPort != nil { return true }
 
-        let mask = CGEventMask(1 << CGEventType.keyDown.rawValue)
+        let hotkeyMask = CGEventMask(
+            (1 << CGEventType.keyDown.rawValue) | (1 << CGEventType.flagsChanged.rawValue)
+        )
+        let popupMask = CGEventMask(1 << CGEventType.keyDown.rawValue)
         let userInfo = Unmanaged.passUnretained(self).toOpaque()
 
         guard let hotPort = CGEvent.tapCreate(
             tap: .cgSessionEventTap,
             place: .headInsertEventTap,
             options: .defaultTap,
-            eventsOfInterest: mask,
+            eventsOfInterest: hotkeyMask,
             callback: Self.hotkeyCallback,
             userInfo: userInfo
         ) else {
@@ -61,7 +132,7 @@ final class HotkeyAndInputMonitor {
             tap: .cgSessionEventTap,
             place: .headInsertEventTap,
             options: .defaultTap,
-            eventsOfInterest: mask,
+            eventsOfInterest: popupMask,
             callback: Self.popupCallback,
             userInfo: userInfo
         ) {
@@ -105,6 +176,13 @@ final class HotkeyAndInputMonitor {
         }
     }
 
+    private func resetDoubleTapState() {
+        activeOptionKeyCode = nil
+        otherKeyPressedDuringOption = false
+        lastCleanOptionReleaseKeyCode = nil
+        lastCleanOptionReleaseUptime = 0
+    }
+
     private func handleHotkeyEvent(type: CGEventType, event: CGEvent) -> Unmanaged<CGEvent>? {
         if type == .tapDisabledByTimeout || type == .tapDisabledByUserInput {
             if let port = hotkeyTapPort {
@@ -112,16 +190,65 @@ final class HotkeyAndInputMonitor {
             }
             return Unmanaged.passUnretained(event)
         }
+
+        // Double Option mode: supports both Left Option (58) and Right Option (61),
+        // triggering only on two clean tap-releases of the same Option key within 420ms.
+        if preset.isDoubleModifierTap {
+            if type == .keyDown {
+                if activeOptionKeyCode != nil {
+                    otherKeyPressedDuringOption = true
+                }
+                lastCleanOptionReleaseUptime = 0
+                lastCleanOptionReleaseKeyCode = nil
+                return Unmanaged.passUnretained(event)
+            }
+            if type == .flagsChanged {
+                let keyCode = CGKeyCode(event.getIntegerValueField(.keyboardEventKeycode))
+                let flags = event.flags.intersection([.maskCommand, .maskAlternate, .maskControl, .maskShift])
+
+                if Self.optionKeyCodes.contains(keyCode) {
+                    if flags == .maskAlternate {
+                        activeOptionKeyCode = keyCode
+                        otherKeyPressedDuringOption = false
+                    } else if activeOptionKeyCode == keyCode && flags.isEmpty {
+                        activeOptionKeyCode = nil
+                        if !otherKeyPressedDuringOption {
+                            let now = ProcessInfo.processInfo.systemUptime
+                            if lastCleanOptionReleaseKeyCode == keyCode
+                                && (now - lastCleanOptionReleaseUptime) <= Self.doubleTapWindow {
+                                lastCleanOptionReleaseUptime = 0
+                                lastCleanOptionReleaseKeyCode = nil
+                                DispatchQueue.main.async { [weak self] in
+                                    self?.onTriggerHotkey?()
+                                }
+                            } else {
+                                lastCleanOptionReleaseKeyCode = keyCode
+                                lastCleanOptionReleaseUptime = now
+                            }
+                        }
+                    } else {
+                        // Combined with another modifier; cancel tap sequence.
+                        resetDoubleTapState()
+                    }
+                } else if activeOptionKeyCode != nil {
+                    otherKeyPressedDuringOption = true
+                }
+            }
+            return Unmanaged.passUnretained(event)
+        }
+
         guard type == .keyDown else { return Unmanaged.passUnretained(event) }
 
         let keyCode = CGKeyCode(event.getIntegerValueField(.keyboardEventKeycode))
-        let relevantFlags = event.flags.intersection([.maskCommand, .maskAlternate, .maskControl, .maskShift])
+        let relevantFlags = event.flags.intersection([
+            .maskCommand, .maskAlternate, .maskControl, .maskShift, .maskSecondaryFn
+        ])
 
         if keyCode == triggerKeyCode && relevantFlags == triggerModifiers {
             DispatchQueue.main.async { [weak self] in
                 self?.onTriggerHotkey?()
             }
-            // Swallow Option+Space so the host app does not receive NBSP.
+            // Swallow the hotkey so the host app does not receive a stray space/character.
             return nil
         }
         return Unmanaged.passUnretained(event)

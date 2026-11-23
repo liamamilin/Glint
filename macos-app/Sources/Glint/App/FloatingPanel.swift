@@ -25,22 +25,52 @@ final class FloatingPanel: NSPanel {
         animationBehavior = .utilityWindow
     }
 
+    private var toastDismissWorkItem: DispatchWorkItem?
+
     func present<Content: View>(
         rootView: Content,
         anchorAXRect: CGRect?,
-        size: CGSize = CGSize(width: 440, height: 268)
+        fixedWidth: CGFloat? = 440
     ) {
+        toastDismissWorkItem?.cancel()
+        toastDismissWorkItem = nil
+
         let hosting = NSHostingView(rootView: rootView)
+        if let fixedWidth {
+            hosting.frame = NSRect(x: 0, y: 0, width: fixedWidth, height: 400)
+            hosting.layoutSubtreeIfNeeded()
+        }
+        let fitting = hosting.fittingSize
+        let size = CGSize(
+            width: fixedWidth ?? max(160, ceil(fitting.width)),
+            height: max(38, ceil(fitting.height))
+        )
         hosting.frame = NSRect(origin: .zero, size: size)
         contentView = hosting
         setContentSize(size)
 
         let targetOrigin = resolveOrigin(anchorAXRect: anchorAXRect, panelSize: size)
         setFrameOrigin(targetOrigin)
+        alphaValue = 1.0
         orderFrontRegardless()
     }
 
+    func presentToast(message: String, symbol: String = "sparkles", duration: TimeInterval = 1.35) {
+        present(
+            rootView: GlintToastView(symbol: symbol, message: message),
+            anchorAXRect: nil,
+            fixedWidth: nil
+        )
+        let work = DispatchWorkItem { [weak self] in
+            self?.dismiss()
+        }
+        toastDismissWorkItem = work
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration, execute: work)
+    }
+
     func dismiss() {
+        toastDismissWorkItem?.cancel()
+        toastDismissWorkItem = nil
         orderOut(nil)
     }
 

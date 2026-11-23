@@ -2,6 +2,12 @@ import AppKit
 import ApplicationServices
 import Foundation
 
+enum ContextCaptureOutcome: Sendable {
+    case captured(CapturedContext)
+    case blockedSecureField
+    case emptyText
+}
+
 /// Reads frontmost app name, caret anchor geometry, and input text using a safe 3-tier fallback:
 /// 1. Selected text (AX first, clipboard probe fallback)
 /// 2. Current paragraph only for document/code editors (never Cmd+A in editors!)
@@ -14,17 +20,20 @@ final class ContextReader {
         "typora", "bear", "craft", "pages", "word", "sublime", "zed", "nova", "textedit"
     ]
 
-    func captureContext() async -> CapturedContext? {
-        guard let frontApp = NSWorkspace.shared.frontmostApplication else { return nil }
+    private var primedAppPIDs: Set<pid_t> = []
+
+    func captureContext() async -> ContextCaptureOutcome {
+        guard let frontApp = NSWorkspace.shared.frontmostApplication else { return .emptyText }
         let appName = frontApp.localizedName ?? "Unknown"
         let pid = frontApp.processIdentifier
 
+        primeAccessibilityIfNeeded(for: pid)
         let focusedElement = focusedAXElement()
 
         // Privacy redline: never read from password or sensitive fields.
         if let element = focusedElement, isElementSecure(element) {
             NSLog("[Glint] Blocked capture: focused field is sensitive/secure")
-            return nil
+            return .blockedSecureField
         }
 
         let anchorRect = focusedElement.flatMap(resolveCaretOrElementRect)
@@ -33,25 +42,30 @@ final class ContextReader {
         if let element = focusedElement,
            let selected = stringAttribute(kAXSelectedTextAttribute as CFString, of: element),
            !selected.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            return CapturedContext(
+            return .captured(CapturedContext(
                 appName: appName,
                 appPID: pid,
                 inputText: selected,
                 captureScope: .selection,
                 anchorRect: anchorRect
-            )
+            ))
         }
 
-        // Tier 1b: Clipboard probe for selection in Electron/browser apps where AXSelectedText is empty.
-        if let copiedSelection = await probeClipboardViaCopy(selectBeforeCopy: nil),
+        // Tier 1b: Only probe selection via Cmd+C if AX couldn't prove the selection is empty.
+        // Skipping Cmd+C when selection length is 0 saves ~100ms and eliminates macOS beep / menu flash.
+        let axSelectionLength = focusedElement.flatMap(selectedRangeLength)
+        let shouldProbeSelectionViaClipboard = (axSelectionLength == nil) || (axSelectionLength! > 0)
+
+        if shouldProbeSelectionViaClipboard,
+           let copiedSelection = await probeClipboardViaCopy(selectBeforeCopy: nil),
            !copiedSelection.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            return CapturedContext(
+            return .captured(CapturedContext(
                 appName: appName,
                 appPID: pid,
                 inputText: copiedSelection,
                 captureScope: .selection,
                 anchorRect: anchorRect
-            )
+            ))
         }
 
         let isEditor = isEditorApp(appName)
@@ -63,22 +77,22 @@ final class ContextReader {
             if isEditor {
                 let paragraph = extractParagraphAroundCaret(in: fullValue, element: element)
                 if !paragraph.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                    return CapturedContext(
+                    return .captured(CapturedContext(
                         appName: appName,
                         appPID: pid,
                         inputText: paragraph,
                         captureScope: .paragraph,
                         anchorRect: anchorRect
-                    )
+                    ))
                 }
             } else {
-                return CapturedContext(
+                return .captured(CapturedContext(
                     appName: appName,
                     appPID: pid,
                     inputText: fullValue,
                     captureScope: .fullField,
                     anchorRect: anchorRect
-                )
+                ))
             }
         }
 
@@ -87,29 +101,29 @@ final class ContextReader {
             // Editors: ONLY select current paragraph (Cmd + Shift + Up), never Cmd + A.
             if let paragraph = await probeClipboardViaCopy(selectBeforeCopy: .currentParagraph),
                !paragraph.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                return CapturedContext(
+                return .captured(CapturedContext(
                     appName: appName,
                     appPID: pid,
                     inputText: paragraph,
                     captureScope: .paragraph,
                     anchorRect: anchorRect
-                )
+                ))
             }
         } else {
             // Standalone chat / input boxes: safe to select field text.
             if let fullText = await probeClipboardViaCopy(selectBeforeCopy: .selectAll),
                !fullText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                return CapturedContext(
+                return .captured(CapturedContext(
                     appName: appName,
                     appPID: pid,
                     inputText: fullText,
                     captureScope: .fullField,
                     anchorRect: anchorRect
-                )
+                ))
             }
         }
 
-        return nil
+        return .emptyText
     }
 
     private func isEditorApp(_ appName: String) -> Bool {
@@ -118,6 +132,26 @@ final class ContextReader {
     }
 
     // MARK: - Accessibility helpers
+
+    /// Enables Chromium/Electron accessibility tree lazily once per process PID.
+    private func primeAccessibilityIfNeeded(for pid: pid_t) {
+        guard !primedAppPIDs.contains(pid) else { return }
+        primedAppPIDs.insert(pid)
+        let appElement = AXUIElementCreateApplication(pid)
+        AXUIElementSetAttributeValue(appElement, "AXManualAccessibility" as CFString, kCFBooleanTrue)
+    }
+
+    private func selectedRangeLength(of element: AXUIElement) -> Int? {
+        var rangeValue: CFTypeRef?
+        guard AXUIElementCopyAttributeValue(element, kAXSelectedTextRangeAttribute as CFString, &rangeValue) == .success,
+              let axVal = rangeValue,
+              CFGetTypeID(axVal) == AXValueGetTypeID() else {
+            return nil
+        }
+        var cfRange = CFRange(location: 0, length: 0)
+        guard AXValueGetValue(axVal as! AXValue, .cfRange, &cfRange) else { return nil }
+        return cfRange.length
+    }
 
     private func focusedAXElement() -> AXUIElement? {
         let systemWide = AXUIElementCreateSystemWide()

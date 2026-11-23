@@ -3,11 +3,38 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 APP_NAME="Glint"
+BUNDLE_ID="com.glint.app"
 BUILD_DIR="$ROOT_DIR/build"
 APP_BUNDLE="$BUILD_DIR/$APP_NAME.app"
-SIGN_IDENTITY="${GLINT_SIGN_IDENTITY:--}"
-
 SCRATCH_DIR="/tmp/glint-swift-build"
+
+resolve_sign_identity() {
+  if [[ -n "${GLINT_SIGN_IDENTITY:-}" ]]; then
+    echo "$GLINT_SIGN_IDENTITY"
+    return
+  fi
+
+  local identities
+  identities="$(security find-identity -v -p codesigning 2>/dev/null || true)"
+
+  # Prefer dedicated Glint certificate if present
+  if echo "$identities" | grep -q '"Glint Local Dev"'; then
+    echo "Glint Local Dev"
+    return
+  fi
+
+  # Otherwise reuse the first valid local codesigning identity so TCC permissions persist across rebuilds
+  local first_sha
+  first_sha="$(echo "$identities" | awk '/^[[:space:]]*[0-9]+\)/ { print $2; exit }')"
+  if [[ -n "$first_sha" ]]; then
+    echo "$first_sha"
+    return
+  fi
+
+  echo "-"
+}
+
+SIGN_IDENTITY="$(resolve_sign_identity)"
 
 echo "[Glint] Building Swift release binary..."
 cd "$ROOT_DIR"
@@ -26,7 +53,10 @@ cp "$BIN_PATH" "$APP_BUNDLE/Contents/MacOS/$APP_NAME"
 cp "$ROOT_DIR/Info.plist" "$APP_BUNDLE/Contents/Info.plist"
 
 echo "[Glint] Signing bundle with identity: $SIGN_IDENTITY"
-codesign --force --deep --sign "$SIGN_IDENTITY" "$APP_BUNDLE"
+codesign --force --deep --identifier "$BUNDLE_ID" --sign "$SIGN_IDENTITY" "$APP_BUNDLE"
+if [[ "$SIGN_IDENTITY" == "-" ]]; then
+  echo "[Glint] Warning: using ad-hoc signing; Accessibility permission may reset after rebuilds."
+fi
 
 echo "[Glint] Launching $APP_BUNDLE..."
 pkill -x "$APP_NAME" 2>/dev/null || true

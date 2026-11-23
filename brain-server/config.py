@@ -20,7 +20,7 @@ def _env_bool(name: str, default: bool) -> bool:
 @dataclass(frozen=True)
 class Settings:
     host: str = os.getenv("GLINT_HOST", "127.0.0.1")
-    port: int = int(os.getenv("GLINT_PORT", "8765"))
+    port: int = int(os.getenv("GLINT_PORT", "18765"))
 
     # Local inference (Ollama)
     ollama_base_url: str = os.getenv("GLINT_OLLAMA_URL", "http://127.0.0.1:11434")
