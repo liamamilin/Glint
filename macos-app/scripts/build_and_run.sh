@@ -51,6 +51,9 @@ rm -rf "$APP_BUNDLE"
 mkdir -p "$APP_BUNDLE/Contents/MacOS" "$APP_BUNDLE/Contents/Resources"
 cp "$BIN_PATH" "$APP_BUNDLE/Contents/MacOS/$APP_NAME"
 cp "$ROOT_DIR/Info.plist" "$APP_BUNDLE/Contents/Info.plist"
+if [[ -f "$ROOT_DIR/Resources/AppIcon.icns" ]]; then
+  cp "$ROOT_DIR/Resources/AppIcon.icns" "$APP_BUNDLE/Contents/Resources/AppIcon.icns"
+fi
 
 echo "[Glint] Signing bundle with identity: $SIGN_IDENTITY"
 codesign --force --deep --identifier "$BUNDLE_ID" --sign "$SIGN_IDENTITY" "$APP_BUNDLE"
@@ -58,7 +61,18 @@ if [[ "$SIGN_IDENTITY" == "-" ]]; then
   echo "[Glint] Warning: using ad-hoc signing; Accessibility permission may reset after rebuilds."
 fi
 
-echo "[Glint] Launching $APP_BUNDLE..."
-pkill -x "$APP_NAME" 2>/dev/null || true
-open "$APP_BUNDLE"
+LAUNCH_TARGET="$APP_BUNDLE"
+if [[ "${1:-}" != "--local" ]] && [[ -w "/Applications" ]]; then
+  INSTALL_TARGET="/Applications/$APP_NAME.app"
+  echo "[Glint] Installing to $INSTALL_TARGET (pass --local to skip)..."
+  pkill -x "$APP_NAME" 2>/dev/null || true
+  rm -rf "$INSTALL_TARGET"
+  ditto "$APP_BUNDLE" "$INSTALL_TARGET"
+  LAUNCH_TARGET="$INSTALL_TARGET"
+else
+  pkill -x "$APP_NAME" 2>/dev/null || true
+fi
+
+echo "[Glint] Launching $LAUNCH_TARGET..."
+open "$LAUNCH_TARGET"
 echo "[Glint] Done! Check your macOS menu bar for the ✨ icon."

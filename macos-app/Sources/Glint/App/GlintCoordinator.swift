@@ -2,6 +2,7 @@ import AppKit
 import ApplicationServices
 import Combine
 import Foundation
+import ServiceManagement
 import SwiftUI
 
 /// Orchestrates the end-to-end Phase 1 Glint loop:
@@ -11,6 +12,8 @@ import SwiftUI
 final class GlintCoordinator: ObservableObject {
     @Published private(set) var isAccessibilityGranted: Bool = AXIsProcessTrusted()
     @Published private(set) var isHotkeyRunning: Bool = false
+    @Published private(set) var isRouting: Bool = false
+    @Published private(set) var isLaunchAtLoginEnabled: Bool = (SMAppService.mainApp.status == .enabled)
     @Published private(set) var backendSummary: String = "检查中…"
     @Published private(set) var lastLatencyMs: Double?
     @Published private(set) var lastStatusMessage: String = "按 Fn+Space 在任意输入框呼出认知卡片"
@@ -34,10 +37,12 @@ final class GlintCoordinator: ObservableObject {
     private var activeResponse: RouteResponse?
     private var selectedIndex: Int = 0
     private var isPopupVisible: Bool = false
+    private var isEditingCustomIntent: Bool = false
     private var inFlightTask: Task<Void, Never>?
     private var permissionTimer: Timer?
     private var outsideClickMonitor: Any?
     private var appSwitchObserver: NSObjectProtocol?
+    private var wakeObserver: NSObjectProtocol?
 
     init() {
         let savedRaw = UserDefaults.standard.string(forKey: Self.hotkeyDefaultsKey)
@@ -65,11 +70,30 @@ final class GlintCoordinator: ObservableObject {
                 self?.refreshPermissionsAndTaps()
             }
         }
+
+        if wakeObserver == nil {
+            wakeObserver = NSWorkspace.shared.notificationCenter.addObserver(
+                forName: NSWorkspace.didWakeNotification,
+                object: nil,
+                queue: .main
+            ) { [weak self] _ in
+                Task { @MainActor [weak self] in
+                    guard let self else { return }
+                    // Quietly re-warm the local 2B model after macOS sleep so the first trigger stays snappy.
+                    await self.brainClient.warmup()
+                    await self.refreshBackendHealth()
+                }
+            }
+        }
     }
 
     func stop() {
         permissionTimer?.invalidate()
         permissionTimer = nil
+        if let wakeObserver {
+            NSWorkspace.shared.notificationCenter.removeObserver(wakeObserver)
+            self.wakeObserver = nil
+        }
         inFlightTask?.cancel()
         dismissPopup(recordNegativeFeedback: false)
         inputMonitor.stop()
@@ -102,6 +126,31 @@ final class GlintCoordinator: ObservableObject {
         }
     }
 
+    func toggleLaunchAtLogin() {
+        do {
+            if SMAppService.mainApp.status == .enabled {
+                try SMAppService.mainApp.unregister()
+            } else {
+                try SMAppService.mainApp.register()
+            }
+            isLaunchAtLoginEnabled = (SMAppService.mainApp.status == .enabled)
+            lastStatusMessage = isLaunchAtLoginEnabled ? "已开启登录时自动启动" : "已关闭登录时自动启动"
+        } catch {
+            isLaunchAtLoginEnabled = (SMAppService.mainApp.status == .enabled)
+            lastStatusMessage = "开机自启设置失败：请确保 Glint 位于 /Applications"
+            NSLog("[Glint] SMAppService toggle failed: \(error.localizedDescription)")
+        }
+    }
+
+    func openCardsFile() {
+        let cardsURL = URL(fileURLWithPath: "/Volumes/个人资料/2026/开发项目/Glint/brain-server/data/cards.yaml")
+        if FileManager.default.fileExists(atPath: cardsURL.path) {
+            NSWorkspace.shared.open(cardsURL)
+        } else {
+            panel.presentToast(message: "未找到 cards.yaml", symbol: "exclamationmark.triangle")
+        }
+    }
+
     func refreshBackendHealth() async {
         do {
             let health = try await brainClient.health()
@@ -130,15 +179,20 @@ final class GlintCoordinator: ObservableObject {
             switch outcome {
             case .captured(let captured):
                 context = captured
+            case .silentIgnore:
+                // Password managers / sensitive apps: stay completely invisible.
+                return
             case .blockedSecureField:
                 self.lastStatusMessage = "已在密码/敏感输入框自动忽略"
-                self.panel.presentToast(message: "已在密码框自动忽略", symbol: "lock.shield")
                 return
             case .emptyText:
                 self.lastStatusMessage = "未检测到可路由的文本"
-                self.panel.presentToast(message: "未检测到文本，请先输入或划选", symbol: "text.cursor")
+                self.panel.presentToast(message: "未检测到文本", symbol: "text.cursor")
                 return
             }
+
+            self.isRouting = true
+            defer { self.isRouting = false }
 
             do {
                 let response = try await self.brainClient.route(
@@ -165,6 +219,8 @@ final class GlintCoordinator: ObservableObject {
     private func showPopup() {
         guard let response = activeResponse, let context = activeContext else { return }
         isPopupVisible = true
+        isEditingCustomIntent = false
+        panel.allowsKeyFocus = false
         renderPopup(response: response, context: context)
         inputMonitor.setPopupInterceptionActive(true)
         installDismissMonitors()
@@ -187,9 +243,14 @@ final class GlintCoordinator: ObservableObject {
             forName: NSWorkspace.didActivateApplicationNotification,
             object: nil,
             queue: .main
-        ) { [weak self] _ in
+        ) { [weak self] notification in
+            let activatedPID = (notification.userInfo?[NSWorkspace.applicationUserInfoKey] as? NSRunningApplication)?.processIdentifier
             Task { @MainActor [weak self] in
                 guard let self, self.isPopupVisible else { return }
+                // Ignore activating Glint itself when entering the 4th option's inline text field.
+                if activatedPID == ProcessInfo.processInfo.processIdentifier {
+                    return
+                }
                 self.dismissPopup(recordNegativeFeedback: true)
             }
         }
@@ -212,8 +273,15 @@ final class GlintCoordinator: ObservableObject {
             selectedIndex: selectedIndex,
             latencyMs: response.latency_ms,
             appName: context.appName,
+            isEditingCustomIntent: isEditingCustomIntent,
             onSelect: { [weak self] idx, forceWrap in
                 self?.commitSelection(index: idx, forceWrap: forceWrap)
+            },
+            onOpenCustomInput: { [weak self] in
+                self?.enterCustomIntentMode()
+            },
+            onSubmitCustomIntent: { [weak self] customText, shouldInject in
+                self?.commitCustomIntent(customText, shouldInject: shouldInject)
             },
             onDismiss: { [weak self] in
                 self?.dismissPopup(recordNegativeFeedback: true)
@@ -223,25 +291,86 @@ final class GlintCoordinator: ObservableObject {
     }
 
     private func handlePopupKeyCommand(_ command: PopupKeyCommand) {
-        guard isPopupVisible, let response = activeResponse, let context = activeContext else { return }
-        let count = response.cards.count
-        guard count > 0 else { return }
+        guard isPopupVisible, !isEditingCustomIntent,
+              let response = activeResponse, let context = activeContext else { return }
+        let cardCount = response.cards.count
+        let totalOptions = cardCount + 1 // 3 cards + 4th custom intent option
+        guard cardCount > 0 else { return }
 
         switch command {
         case .selectIndex(let idx):
-            guard idx < count else { return }
+            guard idx < cardCount else { return }
             commitSelection(index: idx, forceWrap: false)
+        case .openCustomInput:
+            enterCustomIntentMode()
         case .moveUp:
-            selectedIndex = (selectedIndex - 1 + count) % count
+            selectedIndex = (selectedIndex - 1 + totalOptions) % totalOptions
             renderPopup(response: response, context: context)
         case .moveDown:
-            selectedIndex = (selectedIndex + 1) % count
+            selectedIndex = (selectedIndex + 1) % totalOptions
             renderPopup(response: response, context: context)
         case .confirm(let forceWrap):
-            commitSelection(index: selectedIndex, forceWrap: forceWrap)
+            if selectedIndex == cardCount {
+                enterCustomIntentMode()
+            } else {
+                commitSelection(index: selectedIndex, forceWrap: forceWrap)
+            }
         case .cancel:
             dismissPopup(recordNegativeFeedback: true)
+        case .dismissAndPassThrough:
+            dismissPopup(recordNegativeFeedback: true)
         }
+    }
+
+    private func enterCustomIntentMode() {
+        guard isPopupVisible, let response = activeResponse, let context = activeContext else { return }
+        isEditingCustomIntent = true
+        selectedIndex = response.cards.count
+        // Release CGEventTap interception so the inline NSTextField & Chinese IME receive all keys normally.
+        inputMonitor.setPopupInterceptionActive(false)
+        panel.allowsKeyFocus = true
+        renderPopup(response: response, context: context)
+    }
+
+    private func commitCustomIntent(_ customText: String, shouldInject: Bool) {
+        guard let response = activeResponse, let context = activeContext else {
+            dismissPopup(recordNegativeFeedback: false)
+            return
+        }
+
+        let trimmed = customText.trimmingCharacters(in: .whitespacesAndNewlines)
+        dismissPopup(recordNegativeFeedback: false)
+
+        // Return focus back to the original host app cleanly.
+        if let hostApp = NSRunningApplication(processIdentifier: context.appPID) {
+            hostApp.activate(options: [])
+        }
+
+        if shouldInject && !trimmed.isEmpty {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.08) { [weak self] in
+                guard let self else { return }
+                let outcome = self.textInjector.injectRawAppend(trimmed, context: context)
+                if outcome == .copiedToClipboard {
+                    self.panel.presentToast(message: "已复制，可 ⌘V 粘贴", symbol: "doc.on.clipboard")
+                }
+            }
+            lastStatusMessage = "已记录并追加自定义指令"
+        } else {
+            lastStatusMessage = "已记录自定义需求到 usage.db"
+            panel.presentToast(message: "已记录你的需求，用于后续迭代", symbol: "checkmark.circle")
+        }
+
+        let feedback = FeedbackRequest(
+            app_name: context.appName,
+            skill_type: response.skill_type,
+            input_text: context.inputText,
+            recommended_ids: response.cards.map(\.id),
+            selected_id: "__custom__",
+            inject_mode: shouldInject ? InjectMode.append.rawValue : nil,
+            latency_ms: response.latency_ms,
+            custom_intent: trimmed
+        )
+        Task { await brainClient.sendFeedback(feedback) }
     }
 
     private func commitSelection(index: Int, forceWrap: Bool) {
@@ -257,8 +386,13 @@ final class GlintCoordinator: ObservableObject {
 
         // Close popup and release key interception before injecting text.
         dismissPopup(recordNegativeFeedback: false)
-        textInjector.inject(card: card, mode: effectiveMode, context: context)
-        lastStatusMessage = "已注入「\(card.title)」(\(effectiveMode.rawValue))"
+        let injectOutcome = textInjector.inject(card: card, mode: effectiveMode, context: context)
+        if injectOutcome == .copiedToClipboard {
+            lastStatusMessage = "只读区域：已复制「\(card.title)」完整指令"
+            panel.presentToast(message: "已复制，可 ⌘V 粘贴", symbol: "doc.on.clipboard")
+        } else {
+            lastStatusMessage = "已注入「\(card.title)」(\(effectiveMode.rawValue))"
+        }
 
         let feedback = FeedbackRequest(
             app_name: context.appName,
@@ -275,13 +409,20 @@ final class GlintCoordinator: ObservableObject {
     private func dismissPopup(recordNegativeFeedback: Bool) {
         let prevContext = activeContext
         let prevResponse = activeResponse
+        let wasEditingCustom = isEditingCustomIntent
 
         isPopupVisible = false
+        isEditingCustomIntent = false
         removeDismissMonitors()
         inputMonitor.setPopupInterceptionActive(false)
         panel.dismiss()
         activeContext = nil
         activeResponse = nil
+
+        if wasEditingCustom, let context = prevContext,
+           let hostApp = NSRunningApplication(processIdentifier: context.appPID) {
+            hostApp.activate(options: [])
+        }
 
         if recordNegativeFeedback, let context = prevContext, let response = prevResponse {
             lastStatusMessage = "已取消（已记录负反馈）"

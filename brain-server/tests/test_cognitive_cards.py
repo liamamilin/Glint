@@ -179,3 +179,19 @@ def test_feedback_persists_positive_and_negative_samples(tmp_path: Path) -> None
         )
         assert r2.status_code == 200
         assert r2.json()["record_id"] == 2
+
+        # Custom intent sample (4th option: user wrote what they actually wanted)
+        r3 = client.post(
+            "/feedback",
+            json={
+                "app_name": "备忘录",
+                "input_text": "帮我总结这一段文字",
+                "recommended_ids": ["de_ai_rewrite", "mece_breakdown", "red_team"],
+                "selected_id": "__custom__",
+                "inject_mode": "append",
+                "latency_ms": 210.4,
+                "custom_intent": "请提炼出 3 条核心要点，每条不超过 20 字",
+            },
+        )
+        assert r3.status_code == 200
+        assert r3.json()["record_id"] == 3

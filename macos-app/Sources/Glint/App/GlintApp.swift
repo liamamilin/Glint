@@ -7,7 +7,7 @@ struct GlintApp: App {
     @StateObject private var coordinator = GlintCoordinator()
 
     var body: some Scene {
-        MenuBarExtra("Glint", systemImage: "sparkles") {
+        MenuBarExtra("Glint", systemImage: coordinator.isRouting ? "square.stack.3d.up.fill" : "square.stack.3d.up") {
             VStack(alignment: .leading, spacing: 6) {
                 Text("Glint · 常驻语义路由器")
                     .font(.headline)
@@ -49,10 +49,22 @@ struct GlintApp: App {
 
                 Divider()
 
+                Button("编辑认知卡片库 (cards.yaml)…") {
+                    coordinator.openCardsFile()
+                }
+
+                Button {
+                    coordinator.toggleLaunchAtLogin()
+                } label: {
+                    Text(coordinator.isLaunchAtLoginEnabled ? "✓ 开机自动启动 Glint" : "开机自动启动 Glint")
+                }
+
                 Button("刷新后端与权限状态") {
                     coordinator.refreshPermissionsAndTaps()
                     Task { await coordinator.refreshBackendHealth() }
                 }
+
+                Divider()
 
                 Button("退出 Glint") {
                     coordinator.stop()

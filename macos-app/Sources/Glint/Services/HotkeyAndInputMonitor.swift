@@ -5,10 +5,13 @@ import Foundation
 /// High-level keyboard commands intercepted while the Glint card popup is visible.
 enum PopupKeyCommand: Sendable {
     case selectIndex(Int)
+    case openCustomInput
     case moveUp
     case moveDown
     case confirm(forceWrap: Bool)
     case cancel
+    /// User kept typing in the host app: dismiss silently without swallowing the keystroke.
+    case dismissAndPassThrough
 }
 
 /// Built-in low-conflict hotkey presets persisted in UserDefaults.
@@ -276,6 +279,8 @@ final class HotkeyAndInputMonitor {
             command = .selectIndex(1)
         case 20 where flags.isEmpty: // 3
             command = .selectIndex(2)
+        case 21 where flags.isEmpty: // 4 -> custom intent input
+            command = .openCustomInput
         case 126 where flags.isEmpty: // Up Arrow
             command = .moveUp
         case 125 where flags.isEmpty: // Down Arrow
@@ -295,6 +300,14 @@ final class HotkeyAndInputMonitor {
         }
 
         guard let command else {
+            // Type-to-Dismiss: if the user simply resumes typing or deletes text,
+            // fade Glint out quietly and let the keystroke pass straight through to the host app.
+            let isTypingOrDeleting = flags.isEmpty || flags == .maskShift
+            if isTypingOrDeleting {
+                DispatchQueue.main.async { [weak self] in
+                    self?.onPopupKeyCommand?(.dismissAndPassThrough)
+                }
+            }
             return Unmanaged.passUnretained(event)
         }
 

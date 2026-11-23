@@ -38,9 +38,16 @@ class FeedbackRequest(BaseModel):
     skill_type: str = Field(default="cognitive_cards")
     input_text: str = Field(..., min_length=1)
     recommended_ids: list[str] = Field(default_factory=list)
-    selected_id: str | None = Field(default=None, description="Selected card ID, or null if cancelled with Esc")
+    selected_id: str | None = Field(
+        default=None,
+        description="Selected card ID, '__custom__' when user typed custom intent, or null if cancelled with Esc",
+    )
     inject_mode: Literal["append", "wrap"] | None = Field(default=None)
     latency_ms: float | None = Field(default=None)
+    custom_intent: str | None = Field(
+        default=None,
+        description="Free-text intent typed by the user when none of the 3 cards satisfied them",
+    )
 
 
 class FeedbackResponse(BaseModel):

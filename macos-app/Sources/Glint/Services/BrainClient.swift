@@ -21,6 +21,16 @@ final class BrainClient: Sendable {
     }
 
     func route(inputText: String, appName: String) async throws -> RouteResponse {
+        do {
+            return try await routeOnce(inputText: inputText, appName: appName)
+        } catch {
+            // Silent single retry (200ms) absorbs launchd startup / brief loopback hiccups.
+            try? await Task.sleep(nanoseconds: 200_000_000)
+            return try await routeOnce(inputText: inputText, appName: appName)
+        }
+    }
+
+    private func routeOnce(inputText: String, appName: String) async throws -> RouteResponse {
         let url = baseURL.appendingPathComponent("route")
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -32,6 +42,14 @@ final class BrainClient: Sendable {
         let (data, response) = try await session.data(for: request)
         try validateHTTP(response)
         return try JSONDecoder().decode(RouteResponse.self, from: data)
+    }
+
+    func warmup() async {
+        let url = baseURL.appendingPathComponent("warmup")
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.timeoutInterval = 15.0
+        _ = try? await session.data(for: request)
     }
 
     func sendFeedback(_ payload: FeedbackRequest) async {

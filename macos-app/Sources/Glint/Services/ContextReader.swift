@@ -5,6 +5,7 @@ import Foundation
 enum ContextCaptureOutcome: Sendable {
     case captured(CapturedContext)
     case blockedSecureField
+    case silentIgnore
     case emptyText
 }
 
@@ -15,9 +16,17 @@ enum ContextCaptureOutcome: Sendable {
 /// Enforces SecureFieldDetector before reading any field text.
 @MainActor
 final class ContextReader {
-    private static let editorAppKeywords: [String] = [
+    /// Apps where we NEVER issue Cmd+A (document editors, code editors, and web browsers
+    /// where users may be editing Notion / Feishu Docs / Google Docs / Yuque).
+    private static let conservativeAppKeywords: [String] = [
         "obsidian", "cursor", "code", "xcode", "notion", "notes", "备忘录",
-        "typora", "bear", "craft", "pages", "word", "sublime", "zed", "nova", "textedit"
+        "typora", "bear", "craft", "pages", "word", "sublime", "zed", "nova", "textedit",
+        "chrome", "safari", "arc", "firefox", "edge", "brave", "opera", "vivaldi", "dia", "zen"
+    ]
+
+    /// Apps where Glint stays completely invisible even if triggered accidentally.
+    private static let silentAvoidAppKeywords: [String] = [
+        "1password", "bitwarden", "keepass", "keychain", "钥匙串", "passwords", "密码", "loginwindow"
     ]
 
     private var primedAppPIDs: Set<pid_t> = []
@@ -26,6 +35,11 @@ final class ContextReader {
         guard let frontApp = NSWorkspace.shared.frontmostApplication else { return .emptyText }
         let appName = frontApp.localizedName ?? "Unknown"
         let pid = frontApp.processIdentifier
+
+        let lowerApp = appName.lowercased()
+        if Self.silentAvoidAppKeywords.contains(where: { lowerApp.contains($0) }) {
+            return .silentIgnore
+        }
 
         primeAccessibilityIfNeeded(for: pid)
         let focusedElement = focusedAXElement()
@@ -37,6 +51,7 @@ final class ContextReader {
         }
 
         let anchorRect = focusedElement.flatMap(resolveCaretOrElementRect)
+        let isEditable = focusedElement.map(isElementEditable) ?? true
 
         // Tier 1a: AX selected text (zero side effects).
         if let element = focusedElement,
@@ -47,7 +62,8 @@ final class ContextReader {
                 appPID: pid,
                 inputText: selected,
                 captureScope: .selection,
-                anchorRect: anchorRect
+                anchorRect: anchorRect,
+                isEditable: isEditable
             ))
         }
 
@@ -64,17 +80,18 @@ final class ContextReader {
                 appPID: pid,
                 inputText: copiedSelection,
                 captureScope: .selection,
-                anchorRect: anchorRect
+                anchorRect: anchorRect,
+                isEditable: isEditable
             ))
         }
 
-        let isEditor = isEditorApp(appName)
+        let isConservative = isConservativeApp(appName)
 
         // Tier 2 / Tier 3a: Try reading AXValue directly (zero side effects).
         if let element = focusedElement,
            let fullValue = stringAttribute(kAXValueAttribute as CFString, of: element),
            !fullValue.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            if isEditor {
+            if isConservative {
                 let paragraph = extractParagraphAroundCaret(in: fullValue, element: element)
                 if !paragraph.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                     return .captured(CapturedContext(
@@ -82,7 +99,8 @@ final class ContextReader {
                         appPID: pid,
                         inputText: paragraph,
                         captureScope: .paragraph,
-                        anchorRect: anchorRect
+                        anchorRect: anchorRect,
+                        isEditable: isEditable
                     ))
                 }
             } else {
@@ -91,14 +109,15 @@ final class ContextReader {
                     appPID: pid,
                     inputText: fullValue,
                     captureScope: .fullField,
-                    anchorRect: anchorRect
+                    anchorRect: anchorRect,
+                    isEditable: isEditable
                 ))
             }
         }
 
         // Tier 2 / Tier 3b: Safe synthetic selection + copy fallback for Electron/web composers.
-        if isEditor {
-            // Editors: ONLY select current paragraph (Cmd + Shift + Up), never Cmd + A.
+        if isConservative {
+            // Editors & browsers: ONLY select current paragraph (Cmd + Shift + Up), never Cmd + A.
             if let paragraph = await probeClipboardViaCopy(selectBeforeCopy: .currentParagraph),
                !paragraph.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 return .captured(CapturedContext(
@@ -106,7 +125,8 @@ final class ContextReader {
                     appPID: pid,
                     inputText: paragraph,
                     captureScope: .paragraph,
-                    anchorRect: anchorRect
+                    anchorRect: anchorRect,
+                    isEditable: isEditable
                 ))
             }
         } else {
@@ -118,7 +138,8 @@ final class ContextReader {
                     appPID: pid,
                     inputText: fullText,
                     captureScope: .fullField,
-                    anchorRect: anchorRect
+                    anchorRect: anchorRect,
+                    isEditable: isEditable
                 ))
             }
         }
@@ -126,9 +147,46 @@ final class ContextReader {
         return .emptyText
     }
 
-    private func isEditorApp(_ appName: String) -> Bool {
+    private func isConservativeApp(_ appName: String) -> Bool {
         let lower = appName.lowercased()
-        return Self.editorAppKeywords.contains { lower.contains($0) }
+        return Self.conservativeAppKeywords.contains { lower.contains($0) }
+    }
+
+    private func isElementEditable(_ element: AXUIElement) -> Bool {
+        let role = stringAttribute(kAXRoleAttribute as CFString, of: element) ?? ""
+        let editableRoles: Set<String> = [
+            kAXTextFieldRole as String,
+            kAXTextAreaRole as String,
+            kAXComboBoxRole as String,
+            "AXSearchField"
+        ]
+        if editableRoles.contains(role) {
+            return true
+        }
+        // For web/Electron surfaces, check whether AXValue is settable or AXEditable is true.
+        var settable: DarwinBoolean = false
+        if AXUIElementIsAttributeSettable(element, kAXValueAttribute as CFString, &settable) == .success,
+           settable.boolValue {
+            return true
+        }
+        var editableRef: CFTypeRef?
+        if AXUIElementCopyAttributeValue(element, "AXEditable" as CFString, &editableRef) == .success,
+           let flag = editableRef as? Bool {
+            return flag
+        }
+        // Static read-only elements (PDF, web articles, terminal output) return false.
+        let readOnlyRoles: Set<String> = [
+            kAXStaticTextRole as String,
+            "AXHeading",
+            "AXLink",
+            "AXImage",
+            "AXGroup"
+        ]
+        if readOnlyRoles.contains(role) {
+            return false
+        }
+        // Default to true when uncertain (e.g. custom Electron composers).
+        return true
     }
 
     // MARK: - Accessibility helpers

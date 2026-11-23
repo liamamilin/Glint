@@ -51,6 +51,11 @@ enum PasteboardSnapshot {
 /// - Prefers pressing the host app's real `Edit > Paste` menu item via Accessibility (bypasses IME & Chromium modifier bugs).
 /// - Falls back to annotated-session synthetic Cmd+V.
 /// - Restores the user's full clipboard after 300ms unless newer user clipboard activity wins.
+enum InjectOutcome: Sendable {
+    case pasted
+    case copiedToClipboard
+}
+
 @MainActor
 final class TextInjector {
     private static let pasteboardRestoreDelay: TimeInterval = 0.30
@@ -60,7 +65,42 @@ final class TextInjector {
 
     private static let prePasteKeySettleDelay: TimeInterval = 0.035
 
-    func inject(card: CardItem, mode: InjectMode, context: CapturedContext) {
+    func injectRawAppend(_ customText: String, context: CapturedContext) -> InjectOutcome {
+        let trimmed = customText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return .pasted }
+
+        if !context.isEditable {
+            let combined = context.inputText + "\n\n" + trimmed
+            copyPlainToClipboard(combined)
+            return .copiedToClipboard
+        }
+
+        let payload = "\n\n" + trimmed
+        if context.captureScope == .selection {
+            postKey(virtualKey: 124, flags: []) // Right arrow
+            DispatchQueue.main.asyncAfter(deadline: .now() + Self.prePasteKeySettleDelay) { [weak self] in
+                self?.pasteViaClipboard(payload, targetPID: context.appPID)
+            }
+        } else {
+            pasteViaClipboard(payload, targetPID: context.appPID)
+        }
+        return .pasted
+    }
+
+    @discardableResult
+    func inject(card: CardItem, mode: InjectMode, context: CapturedContext) -> InjectOutcome {
+        // Read-only surface (web article, PDF, terminal output): assemble full prompt and copy to clipboard.
+        if !context.isEditable {
+            let combined: String
+            if card.prompt.contains("{{input}}") {
+                combined = card.prompt.replacingOccurrences(of: "{{input}}", with: context.inputText)
+            } else {
+                combined = context.inputText + card.prompt
+            }
+            copyPlainToClipboard(combined)
+            return .copiedToClipboard
+        }
+
         let textToInsert: String
         var didPostSelectionKey = false
 
@@ -100,6 +140,16 @@ final class TextInjector {
         } else {
             pasteViaClipboard(textToInsert, targetPID: context.appPID)
         }
+        return .pasted
+    }
+
+    private func copyPlainToClipboard(_ text: String) {
+        pendingRestore?.cancel()
+        pendingRestore = nil
+        savedClipboard = nil
+        let pasteboard = NSPasteboard.general
+        pasteboard.clearContents()
+        pasteboard.setString(text, forType: .string)
     }
 
     private func pasteViaClipboard(_ text: String, targetPID: pid_t) {

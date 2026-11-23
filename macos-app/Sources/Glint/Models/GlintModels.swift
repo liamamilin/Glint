@@ -44,6 +44,27 @@ struct FeedbackRequest: Codable, Sendable {
     let selected_id: String?
     let inject_mode: String?
     let latency_ms: Double?
+    let custom_intent: String?
+
+    init(
+        app_name: String,
+        skill_type: String,
+        input_text: String,
+        recommended_ids: [String],
+        selected_id: String?,
+        inject_mode: String?,
+        latency_ms: Double?,
+        custom_intent: String? = nil
+    ) {
+        self.app_name = app_name
+        self.skill_type = skill_type
+        self.input_text = input_text
+        self.recommended_ids = recommended_ids
+        self.selected_id = selected_id
+        self.inject_mode = inject_mode
+        self.latency_ms = latency_ms
+        self.custom_intent = custom_intent
+    }
 }
 
 struct HealthResponse: Codable, Sendable {
@@ -65,4 +86,5 @@ struct CapturedContext: Sendable {
     let inputText: String
     let captureScope: CaptureScope
     let anchorRect: CGRect?
+    let isEditable: Bool
 }

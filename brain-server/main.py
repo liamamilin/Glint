@@ -74,6 +74,11 @@ def create_app(
     async def list_cards() -> list[CardItem]:
         return cognitive_skill.cards
 
+    @app.post("/warmup")
+    async def warmup() -> dict[str, bool]:
+        await inference.warmup(cognitive_skill.system_prompt)
+        return {"ok": True}
+
     @app.post("/route", response_model=RouteResponse)
     async def route(request: RouteRequest) -> RouteResponse:
         return await semantic_router.route(request)

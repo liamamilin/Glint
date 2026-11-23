@@ -19,7 +19,8 @@ CREATE TABLE IF NOT EXISTS usage_logs (
     recommended_ids TEXT NOT NULL,
     selected_id TEXT,
     inject_mode TEXT,
-    latency_ms REAL
+    latency_ms REAL,
+    custom_intent TEXT
 );
 CREATE INDEX IF NOT EXISTS idx_usage_logs_timestamp ON usage_logs(timestamp);
 CREATE INDEX IF NOT EXISTS idx_usage_logs_skill_type ON usage_logs(skill_type);
@@ -43,6 +44,11 @@ class UsageLogger:
     def _init_db(self) -> None:
         with self._connect() as conn:
             conn.executescript(CREATE_TABLE_SQL)
+            # Safe forward migration for existing usage.db files created before custom_intent existed.
+            cols = {row[1] for row in conn.execute("PRAGMA table_info(usage_logs)").fetchall()}
+            if "custom_intent" not in cols:
+                conn.execute("ALTER TABLE usage_logs ADD COLUMN custom_intent TEXT")
+                conn.commit()
 
     def log_feedback(self, req: FeedbackRequest) -> int:
         ts = datetime.now(timezone.utc).isoformat()
@@ -58,8 +64,9 @@ class UsageLogger:
                     recommended_ids,
                     selected_id,
                     inject_mode,
-                    latency_ms
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                    latency_ms,
+                    custom_intent
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 (
                     ts,
@@ -70,6 +77,7 @@ class UsageLogger:
                     req.selected_id,
                     req.inject_mode,
                     req.latency_ms,
+                    req.custom_intent,
                 ),
             )
             conn.commit()
