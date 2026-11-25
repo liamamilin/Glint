@@ -1,0 +1,28 @@
+{
+  "id": "pt_study_notes",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#study-notes",
+  "title": "把课程材料做成复习笔记",
+  "content": "根据【课程材料】给【考试或学习目标】做复习笔记。先画出概念关系的文字提纲，再列关键定义、例子和常见混淆。每节附一个闭卷回忆问题，并说明材料没有覆盖的目标。",
+  "content_hash": "4aef1ff3db7f29289462afd51e44a8bfeccde541f9f7d3f817abffc64ae53f75",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "learning",
+    "课堂",
+    "笔记",
+    "复习",
+    "study notes"
+  ],
+  "problem_solved": "保留知识结构和自测入口。",
+  "when_to_use": "分类: 学习与辅导",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "study-notes",
+    "category": "learning",
+    "variables": [
+      "课程材料",
+      "考试或学习目标"
+    ]
+  }
+}

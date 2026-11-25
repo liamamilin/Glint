@@ -1,0 +1,28 @@
+{
+  "id": "pt_customer_complaint",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#customer-complaint",
+  "title": "回应一条客户投诉",
+  "content": "根据【客户的投诉和已核实事实】拟回复，团队当前能做的是【可承诺动作和时间】。先确认客户遇到的具体问题，再说明当前处理和下一次更新。缺少的信息用一个明确问题补齐。",
+  "content_hash": "e2bb1ddca00784dc403adbb5ba5390d9070e367861a1463f4c222bdd05c488e3",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "communication",
+    "投诉",
+    "客服",
+    "customer service",
+    "complaint"
+  ],
+  "problem_solved": "先确认事实和影响，再写可兑现的下一步。",
+  "when_to_use": "分类: 沟通与协商",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "customer-complaint",
+    "category": "communication",
+    "variables": [
+      "客户的投诉和已核实事实",
+      "可承诺动作和时间"
+    ]
+  }
+}

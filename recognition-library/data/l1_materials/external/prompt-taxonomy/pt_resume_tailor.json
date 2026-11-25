@@ -1,0 +1,28 @@
+{
+  "id": "pt_resume_tailor",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#resume-tailor",
+  "title": "按目标岗位调整简历",
+  "content": "根据【已有简历】和【岗位说明】调整简历。提取重点要求，给对应经历和证据，再重写最相关的三条经历。沿用实际职位、日期和数字，缺的量化信息用待补充标出。",
+  "content_hash": "490568a7ae59d678d2bbcc6b0c8b58e646d8d9d3905846c07330764e80b13228",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "career",
+    "CV",
+    "简历",
+    "求职",
+    "resume"
+  ],
+  "problem_solved": "用真实经历证明与岗位的匹配度。",
+  "when_to_use": "分类: 求职与职业",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "resume-tailor",
+    "category": "career",
+    "variables": [
+      "已有简历",
+      "岗位说明"
+    ]
+  }
+}

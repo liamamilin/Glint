@@ -1,0 +1,46 @@
+id: pt_creative_draft
+title: 短故事起草
+tagline: 把冲突、细节与转折写成一篇短故事
+routing:
+  primitive: diverge
+  goals:
+  - create
+  clarity_fit:
+  - concrete
+  domains:
+  - creative_writing
+  - fiction
+  - storytelling
+  - narrative
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 想写短故事却不知如何把冲突、细节和转折落到文字里，开头难切入、结尾难收束
+  trigger_utterances:
+  - 帮我写个短故事
+  - 想写小说但没头绪
+  - 给我一个有转折的故事
+  - 短篇 fiction 怎么写
+  - 帮我起草一篇带冲突的小说
+  anti_triggers:
+  - 长篇小说大纲规划
+  - 诗歌或歌词创作
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 写一个约 {{word_count}} 字的短故事。主角和冲突是 {{character_and_conflict}}，希望产生 {{reader_feeling}}。开头用可观察的动作进入场景，中段让角色做一个有代价的选择，结尾用一个细节回应开头。另给一个不同方向的结尾提纲。
+  variables:
+  - word_count
+  - character_and_conflict
+  - reader_feeling
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#creative-draft
+  source_hash: 7fe18493f43fe70954b5bbc19f572f6593e8c21ee3f6ba6ed8af6d47338b777a
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

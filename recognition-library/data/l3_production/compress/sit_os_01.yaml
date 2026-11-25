@@ -1,0 +1,49 @@
+id: sit_os_01
+title: 认知降噪复位器
+tagline: 把发烫的大脑按回当下，只做一件15分钟小事
+routing:
+  primitive: compress
+  goals:
+  - optimize
+  clarity_fit:
+  - vague
+  - conflicted
+  domains:
+  - personal_os
+  - mental_health
+  - focus
+  - productivity
+  app_affinity:
+  - Notion
+  - Obsidian
+  pain_point: 用户被无休止的过度思考和对遥远不确定性的焦虑困住，休息时也无法真正放松，需要把注意力拉回当下。
+  trigger_utterances:
+  - 我脑子停不下来一直在想各种可能
+  - 休息时也焦虑得没法真正放松
+  - 过度思考到失眠
+  - 对未来不确定性慌得一批
+  - 脑子发烫想先清个噪
+  anti_triggers:
+  - 真正需要紧急拍板的危机场景
+  - 需要深度分析问题根因或制定长期方案时
+execution:
+  action_type: open_resource
+  inject_mode: null
+  content: 认知降噪复位器：1) 列出此刻物理层面的3个基本事实（安全、温饱、当下无致命威胁）；2) 把担忧分为“此刻能动”与“此刻不可控”；3) 对不可控项挂起封存，从可控项中选1件15分钟内可完成的小动作立刻执行。交付物：一张极简《当下锚定单》（3个物理事实
+    + 1个15分钟微动作）。
+  variables: []
+  workflow: null
+meta:
+  source: super-individual-toolbox
+  source_ref: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/personal-os.json#os-01
+  source_hash: 3bc916ae61c8779b24b3aacaaa2e473379fb54a185920289e757e36ada6e5bd6
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  category: product_business
+  subcategory: product_design
+  collections: []
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

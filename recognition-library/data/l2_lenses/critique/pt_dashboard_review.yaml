@@ -1,0 +1,47 @@
+id: pt_dashboard_review
+title: 评审看板决策支持
+tagline: 检查指标布局缺口，确保看板支持决策
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  - optimize
+  clarity_fit:
+  - concrete
+  - vague
+  domains:
+  - data
+  - analytics
+  - dashboard
+  - visualization
+  app_affinity:
+  - Chrome
+  - Notion
+  - Figma
+  pain_point: 现有数据看板信息堆砌，无法判断是否支撑具体决策，指标含义、更新频率和异常显示都不清晰
+  trigger_utterances:
+  - 这个 dashboard 能支持我们做决策吗
+  - 评审一下这个看板的指标布局
+  - 看板数据看不懂，帮我找缺口
+  - 这个仪表盘能不能回答业务问题
+  - review dashboard for decision support
+  anti_triggers:
+  - 从零设计一个新的数据看板
+  - 编写 SQL 查询或数据清洗脚本
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 评审 {{dashboard}} 能否让 {{audience}} 判断 {{decision}}。逐项指出指标意义、更新频率、分母、异常显示和可执行动作的缺口。给最重要的三项修改并说明如何验证读者更易找到答案。
+  variables:
+  - dashboard
+  - audience
+  - decision
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#dashboard-review
+  source_hash: 4ff66b095a1d58f4bcadced641e5c7cbc202a822e52151c0a3cfe4c9745f59ba
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

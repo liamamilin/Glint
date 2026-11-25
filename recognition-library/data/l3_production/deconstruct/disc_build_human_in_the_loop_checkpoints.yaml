@@ -1,0 +1,64 @@
+id: disc_build_human_in_the_loop_checkpoints
+title: 关键卡点确认清单
+tagline: 先自动跑前90%，只在高风险动作前停下来确认。
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - debug
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - automation
+  - human_in_the_loop
+  - agents
+  - safety
+  - workflow_design
+  app_affinity:
+  - Cursor
+  - Notion
+  - Terminal
+  pain_point: 自动化要么全自动无人值守，要么每步弹窗确认，既烦人又挡不住真正高风险动作。
+  trigger_utterances:
+  - 这个自动化流程帮我拆成自动跑的部分和必须我确认的卡点
+  - AI 草拟回复发出去前要不要加个确认
+  - 别每步弹窗，只在花钱或删除时问我
+  - 帮我设计低打扰但安全的审批兜底
+  anti_triggers:
+  - 需要完全无人值守的批处理任务
+  - 只想让 AI 全自动发邮件不设任何确认
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '1. 明确工作流目标与最终产物。
+
+    2. 列出所有步骤，标出可自动执行的 90%：搜集、清洗、草拟、格式化。
+
+    3. 识别高风险动作：对外发送、花钱、删除/覆盖、权限变更、不可逆判断。
+
+    4. 只在高风险动作前设置 1~2 个清晰确认卡点，说明确认内容与通过/驳回后果。
+
+    5. 为每个卡点设计低打扰兜底：摘要预览、差异对比、单键确认、失败回滚。
+
+    6. 明确无人值守失败时的降级：暂停、通知、保留草稿，不静默执行。
+
+    7. 用一个真实样例跑通：自动段完成后停在卡点，人工确认后再继续。
+
+    8. 复盘卡点是否过多/过少，调整阈值。'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/build.json#build-human-in-the-loop-checkpoints
+  source_hash: bbaffc76f5d9c1203d782f4a7245358b0a222ccd65923bb3039b4c3e55a4e90c
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: engineering
+  subcategory: ai_workflow
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

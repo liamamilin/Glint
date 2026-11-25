@@ -1,0 +1,27 @@
+{
+  "id": "pt_landing_page_outline",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#landing-page-outline",
+  "title": "为一个落地页规划信息与行动",
+  "content": "围绕【目标动作】给【产品和受众】规划落地页。按首屏、痛点、结果、如何使用、信任证据、疑问和行动排列，给每块要回答的问题及素材。没有证据的承诺先留待确认。",
+  "content_hash": "46fa7e3fd24945092be65093d1aa3547db95fecc8598df31d769e655b33b00ac",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "marketing",
+    "落地页",
+    "转化",
+    "landing page"
+  ],
+  "problem_solved": "把承诺、证据和下一步连成读者路径。",
+  "when_to_use": "分类: 营销与销售",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "landing-page-outline",
+    "category": "marketing",
+    "variables": [
+      "目标动作",
+      "产品和受众"
+    ]
+  }
+}

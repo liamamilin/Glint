@@ -1,0 +1,53 @@
+id: pt_reply_with_constraints
+title: 有约束回信
+tagline: 按往来材料逐项回应对方问题与承诺
+routing:
+  primitive: translate
+  goals:
+  - optimize
+  - create
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - writing
+  - email
+  - communication
+  - business_writing
+  app_affinity:
+  - Mail
+  - Gmail
+  - Outlook
+  - Notion
+  pain_point: 收到对方来信后，需要按往来材料与自身权限边界写回信，逐项回应问题与承诺，避免遗漏或越权答复
+  trigger_utterances:
+  - 帮我按往来邮件写一封回信
+  - 这封邮件怎么回，对方问了好几个问题
+  - reply to this email with constraints
+  - 帮我起草回信，能承诺的和不能承诺的要分开
+  - need to respond to this thread point by point
+  anti_triggers:
+  - 只是润色已有回信 wording，不涉及逐项回应与权限边界
+  - 撰写全新营销/推广邮件而非回信
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: '读【往来邮件】后，以【身份和答复边界】写一封回信。开头概括已经同意的事项，逐项回应对方问题，具体写能承诺的动作和时间。没有权限答复或信息不足的点写成明确的待确认项。
+
+
+    {{input}}
+
+
+    请基于以上往来材料与身份边界生成回信。'
+  variables:
+  - '{''name'': ''往来邮件'', ''description'': ''对方来信及历史往来内容''}'
+  - '{''name'': ''身份和答复边界'', ''description'': ''发件人身份、权限范围与不可承诺事项''}'
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#reply-with-constraints
+  source_hash: a50df4b5155216642b02ec9d6639beb28f2c84e6427d744c46348dd93c57570a
+  status: active
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

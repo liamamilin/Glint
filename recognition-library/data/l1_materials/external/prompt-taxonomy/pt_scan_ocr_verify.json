@@ -1,0 +1,28 @@
+{
+  "id": "pt_scan_ocr_verify",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#scan-ocr-verify",
+  "title": "对扫描件做可核对的文字提取",
+  "content": "从【扫描件或图片】提取【范围与需要保留的格式】。按页和段落输出，保留数字、单位、姓名与原图顺序。把看不清的字符标为待核对；列可能影响后续使用的疑点、页码和位置。",
+  "content_hash": "e27a1051237a82401036108b8104baa07fdfbe046b4ea40c431d0471281f4861",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "files",
+    "扫描件",
+    "图片文字",
+    "OCR",
+    "text extraction"
+  ],
+  "problem_solved": "标出猜测字符、遗漏和不确定页。",
+  "when_to_use": "分类: 文档与文件",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "scan-ocr-verify",
+    "category": "files",
+    "variables": [
+      "扫描件或图片",
+      "范围与需要保留的格式"
+    ]
+  }
+}

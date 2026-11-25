@@ -1,0 +1,33 @@
+{
+  "id": "disc_life_micro_experiments_lifestyle",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/life.json#life-micro-experiments-lifestyle",
+  "title": "用“14 天微型实验”替代宏大的人生决定",
+  "content": "旧共识（盲区）：换城市、转行、开启副业或改变作息，必须先彻底想清楚再孤注一掷。\n\n新现实（破盲视角）：绝大多数人生纠结都是“空想出来的”；把宏大决定压缩成一个低成本、可回滚的 14 天原型实验，亲身跑一遍拿到真实体感数据，答案立刻浮现。\n\n破冰追问母题：\n- 我一直在纠结一个比较大的人生/生活方式选择：[描述你的纠结，如移居/自由职业/新方向]。请帮我把它压缩成一个“成本极低、完全可回滚”的 14 天微型原型实验，包含具体执行动作和 3 个评估指标。\n- 针对我想尝试的新生活方式 [描述理想状态]，列出我目前最可能高估的幻想和最可能低估的日常麻烦，设计一次周末就能跑通的“最小现实模拟”。",
+  "content_hash": "3873180ea74aa4871e506ee21840275ece345226d127c7ff551675fc5e8b3dae",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "life",
+    "cost-collapse",
+    "first-principles",
+    "experiments",
+    "tiny-bets",
+    "lifestyle",
+    "prototyping"
+  ],
+  "problem_solved": "换城市、转行、开启副业或改变作息，必须先彻底想清楚再孤注一掷。",
+  "when_to_use": "绝大多数人生纠结都是“空想出来的”；把宏大决定压缩成一个低成本、可回滚的 14 天原型实验，亲身跑一遍拿到真实体感数据，答案立刻浮现。",
+  "procedural_steps": [
+    "我一直在纠结一个比较大的人生/生活方式选择：[描述你的纠结，如移居/自由职业/新方向]。请帮我把它压缩成一个“成本极低、完全可回滚”的 14 天微型原型实验，包含具体执行动作和 3 个评估指标。",
+    "针对我想尝试的新生活方式 [描述理想状态]，列出我目前最可能高估的幻想和最可能低估的日常麻烦，设计一次周末就能跑通的“最小现实模拟”。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "life-micro-experiments-lifestyle",
+    "arena": "life",
+    "lenses": [
+      "cost-collapse",
+      "first-principles"
+    ]
+  }
+}

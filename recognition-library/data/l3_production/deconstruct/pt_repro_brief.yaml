@@ -1,0 +1,81 @@
+id: pt_repro_brief
+title: 把零散报错整理成复现报告
+tagline: 把零散日志和报错整理成维护者能直接复现的 Bug 报告
+routing:
+  primitive: deconstruct
+  goals:
+  - debug
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - engineering
+  - debugging
+  - bug_report
+  - issue_tracking
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Terminal
+  - Linear
+  pain_point: 用户手里一堆零散报错、日志和环境信息，不知道如何组织成维护者能复现的 Bug Report，导致 issue 被打回或无法定位
+  trigger_utterances:
+  - 帮我把这些报错整理成一个 bug report
+  - 这个错误复现步骤怎么写
+  - issue 要包含哪些信息
+  - 零散日志整理成缺陷报告
+  - maintainer 复现不了我的 bug
+  anti_triggers:
+  - 只是想快速修代码不想写 issue
+  - 需要的是代码 patch 而非报告
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: '请根据以下我上面提供的错误现象和零散记录，输出一份可复现的 Bug Report：
+
+
+    {{input}}
+
+
+    报告需包含以下章节（Markdown）：
+
+    1. 标题：一句话概括缺陷
+
+    2. 环境：OS、运行时/语言版本、依赖版本、硬件、网络/代理等
+
+    3. 前置条件：数据状态、账号/权限、配置、已安装插件等
+
+    4. 最短复现步骤：编号列表，仅保留必要步骤，去掉无关操作
+
+    5. 期望行为
+
+    6. 实际行为
+
+    7. 复现频率：必现/偶现/概率，并附触发条件
+
+    8. 相关日志与证据位置：文件路径、命令、截图、trace ID 等
+
+    9. 尚缺的证据/待确认项：明确列出缺失信息
+
+
+    要求：去除冗余步骤；信息不足处用「待补充」占位并列出需要我上面提供的证据；语气客观、面向维护者。'
+  variables: []
+  workflow:
+    workflow_id: fix-and-release
+    step: 1
+    next_lens_id: pt_debug_error
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#repro-brief
+  source_hash: 7e62614a69e6256ecf30c4199199782886e81cb51c44dd6e3eb33c8b91e3ace8
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: engineering
+  subcategory: debugging
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

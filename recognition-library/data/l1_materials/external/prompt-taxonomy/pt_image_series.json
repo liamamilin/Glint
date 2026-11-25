@@ -1,0 +1,28 @@
+{
+  "id": "pt_image_series",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#image-series",
+  "title": "用同一视觉规则设计一组图",
+  "content": "为【系列主题】规划【张数和用途】张图。先写共同的主体特征、光线、色彩和画幅，再给每张唯一变化和完整出图描述。最后列必须保持一致并可目视检查的三项。",
+  "content_hash": "2dbdfe711034a78745d23f6c1a5024a96bd2cff849d9d351afce2ae85a920efc",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "creative",
+    "系列图",
+    "视觉一致性",
+    "品牌",
+    "image series"
+  ],
+  "problem_solved": "保留主角与视觉调性，按张变化。",
+  "when_to_use": "分类: 创作与多媒体",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "image-series",
+    "category": "creative",
+    "variables": [
+      "系列主题",
+      "张数和用途"
+    ]
+  }
+}

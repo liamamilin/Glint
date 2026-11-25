@@ -1,0 +1,29 @@
+{
+  "id": "sit_ops_03",
+  "source": "super-individual-toolbox",
+  "source_ref": "https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/ops-automation.json#ops-03",
+  "title": "API 额度与服务熔断哨兵",
+  "content": "定位：给自动化流装上防刷爆账单的保险丝\n\n触发场景：当你跑起定时脚本、Agent 或公开小工具，生怕死循环一夜刷爆信用卡，或线上页面静默挂掉时。\n\n核心机制：\n- 在所有大模型 API 后台强制设死“硬性月度消费上限（Hard Limit）”与 50%/80% 告警线\n- 在自动化脚本里写入最大重试次数（Max Retries）与单次 Token 熔断阈值\n- 配置免费定时拨测（Uptime Check），静态站或关键接口返回非 200 状态时立即发通知\n\n交付物：一份《API 预算硬限清单》+ 自动化存活拨测告警流\n\n推荐装配：API 平台预算硬限 + GitHub Actions 拨测 / 免费 Uptime 监控\n\n误用警告：不要只在代码里写软限制而不开平台级硬限；代码本身可能出 Bug，平台账单锁才是最后底线。",
+  "content_hash": "cd95ef4ae9bbb21383009b6db12a95b8b57beb88e4510144a49ba64d197d6bfa",
+  "suggested_action_type": "open_resource",
+  "domain_hints": [
+    "ops-automation",
+    "运营与自动化官"
+  ],
+  "problem_solved": "当你跑起定时脚本、Agent 或公开小工具，生怕死循环一夜刷爆信用卡，或线上页面静默挂掉时。",
+  "when_to_use": "当你跑起定时脚本、Agent 或公开小工具，生怕死循环一夜刷爆信用卡，或线上页面静默挂掉时。",
+  "procedural_steps": [
+    "在所有大模型 API 后台强制设死“硬性月度消费上限（Hard Limit）”与 50%/80% 告警线",
+    "在自动化脚本里写入最大重试次数（Max Retries）与单次 Token 熔断阈值",
+    "配置免费定时拨测（Uptime Check），静态站或关键接口返回非 200 状态时立即发通知"
+  ],
+  "anti_patterns": [
+    "不要只在代码里写软限制而不开平台级硬限；代码本身可能出 Bug，平台账单锁才是最后底线。"
+  ],
+  "metadata": {
+    "original_id": "ops-03",
+    "drawer": "ops-automation",
+    "drawer_zh": "运营与自动化官",
+    "deliverable": "一份《API 预算硬限清单》+ 自动化存活拨测告警流"
+  }
+}

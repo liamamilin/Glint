@@ -1,0 +1,47 @@
+id: pt_support_kb
+title: 工单转知识库文章
+tagline: 把已解决的工单归纳成可复现的 KB 步骤与适用范围
+routing:
+  primitive: translate
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - support
+  - knowledge_base
+  - customer_service
+  - documentation
+  - help_center
+  app_affinity:
+  - Notion
+  - Slack
+  - Feishu
+  - Chrome
+  pain_point: 解决了的工单散落在聊天记录里，无法复用，新人遇到同类问题还要重新排查
+  trigger_utterances:
+  - 这个工单解决了帮我写成知识库文章
+  - 把这次修复整理成 KB 给客户看
+  - ticket 解决了转成 help doc
+  - same issue 又来了 把上次处理写成步骤
+  - 去掉客户信息保留可复现步骤
+  anti_triggers:
+  - 只是要回复单个客户的邮件或消息
+  - 工单还在排查未验证修复
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 根据【已验证工单和修复】为【目标读者】写知识库文章。包括症状、适用条件、检查、解决步骤和何时转人工。去掉单个客户信息，保留可验证异常和对应版本。
+  variables:
+  - 已验证工单和修复
+  - 目标读者
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#support-kb
+  source_hash: 573281e1baa893de671092989ebd0a6226ce8273fe71b99fc5f1d8baea1e9523
+  status: active
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

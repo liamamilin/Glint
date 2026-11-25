@@ -1,0 +1,28 @@
+{
+  "id": "pt_journal_reflection",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#journal-reflection",
+  "title": "把零散日记整理成一周观察",
+  "content": "根据【日记片段或一周记录】，围绕【我想弄清的问题】找反复出现的情境、感受和做法。用具体片段支持观察，保留可能的其他解释。最后给两道写给自己的问题和一个可以下周试的小调整。",
+  "content_hash": "ce08c90a5ca752471027722dceb45ac26af61f868e66d45809e1a6995885f2bd",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "planning",
+    "日记",
+    "反思",
+    "生活复盘",
+    "journaling"
+  ],
+  "problem_solved": "区分发生的事实、主观感受和想尝试的调整。",
+  "when_to_use": "分类: 计划与生活",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "journal-reflection",
+    "category": "planning",
+    "variables": [
+      "日记片段或一周记录",
+      "我想弄清的问题"
+    ]
+  }
+}

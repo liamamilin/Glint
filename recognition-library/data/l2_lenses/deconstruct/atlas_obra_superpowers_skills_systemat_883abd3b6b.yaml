@@ -1,0 +1,62 @@
+id: atlas_obra_superpowers_skills_systemat_883abd3b6b
+title: 系统化调试四阶段法
+tagline: 根因调查优先，禁止未查清就动手修
+routing:
+  primitive: deconstruct
+  goals:
+  - debug
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - debugging
+  - software_engineering
+  - problem_solving
+  - quality_assurance
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Terminal
+  - Claude
+  pain_point: 用户修 bug 时总忍不住先动手改代码，未查清根因就修症状，导致问题反复出现、引入新缺陷、越修越乱。
+  trigger_utterances:
+  - 这个 bug 我修了三次又出现了
+  - 先快速修一下之后再查
+  - 测试一直失败但不知道为什么
+  - 生产环境报错先改了再说
+  - debug 一下这个报错
+  anti_triggers:
+  - 只是想快速了解代码功能而非排查现有缺陷
+  - 需要实现新功能而非调试已有问题
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '系统化调试铁律：未完成根因调查，不得提出或实施任何修复。所有技术问题按四阶段顺序推进，每阶段完成才能进入下一阶段。
+
+
+    阶段1 根因调查：完整阅读错误信息与堆栈（记录行号、文件、错误码）；确认能否可靠复现及确切步骤；检查近期变更（git diff、新依赖、配置、环境差异）；多组件系统先在每个组件边界记录进出数据、验证环境/配置传递，运行一次以定位断裂层，再针对该层调查；向上追溯坏值源头，在源头而非症状处修复。无法复现时收集更多数据而非猜测。
+
+
+    阶段2 模式分析：寻找可用示例或参照实现并完整阅读；与当前代码逐项比较差异，列出每一处差异无论多小，不假设任何差异无影响；不自行改编参照实现。
+
+
+    阶段3 假设验证：形成单一理论解释根因，用最小改动做一次实验验证；确认或得到新假设；每次只改变一个变量。
+
+
+    阶段4 实现：创建失败测试复现缺陷；做单一修复；验证缺陷解决且无回归。
+
+
+    升级规则：连续3次以上修复失败，停止修症状，质疑架构设计。
+
+
+    红线信号（出现即回到阶段1）：先快速修一下之后再查；先改X试试；一次加多个改动；跳过测试手动验证；大概X我改掉它；我不太懂但这样也许行；参照太长只做改编；看到问题就修；已试2+次还想再来一次；每次修复都在不同地方引出新问题。'
+  variables: []
+  workflow: null
+meta:
+  source: atlas-methods
+  source_ref: obra/superpowers:skills/systematic-debugging/SKILL.md
+  source_hash: 948aff0ed0daf4bc0b16879ade6c078c78a22b2dd9681ffcbd53c229942124a9
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

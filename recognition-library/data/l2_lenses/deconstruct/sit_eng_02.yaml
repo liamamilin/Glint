@@ -1,0 +1,43 @@
+id: sit_eng_02
+title: 报错根因二分排查法
+tagline: 先诊断再动刀，用二分法把 Bug 逼进死角
+routing:
+  primitive: deconstruct
+  goals:
+  - debug
+  clarity_fit:
+  - concrete
+  - vague
+  domains:
+  - software_engineering
+  - debugging
+  - testing
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Terminal
+  - Claude
+  pain_point: 代码报错时把整段错误甩给 AI，结果它瞎改导致修一个坏两个，陷入死循环
+  trigger_utterances:
+  - 这个报错帮我修一下
+  - AI 改完又出新 bug 了
+  - 越改越乱怎么办
+  - 别让 AI 瞎改代码 先诊断
+  - 二分法定位 bug
+  anti_triggers:
+  - 只是想让 AI 解释报错含义
+  - 需要全新功能开发而非修 bug
+execution:
+  action_type: open_resource
+  inject_mode: null
+  content: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/engineer.json#eng-02
+  variables: []
+  workflow: null
+meta:
+  source: super-individual-toolbox
+  source_ref: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/engineer.json#eng-02
+  source_hash: 96dffb2f66d864c4b3832a7f9346312cc20b2a8f7a2322479f35e723bb48941b
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

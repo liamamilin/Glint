@@ -1,0 +1,27 @@
+{
+  "id": "pt_concept_map",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#concept-map",
+  "title": "从材料画出概念关系",
+  "content": "根据【材料和主题】构建概念图，用适合【读者水平】的文本树或 Mermaid。每条连线说明关系，区分材料直接给出的关系和推断。最后列两个容易被误画成因果的联系。",
+  "content_hash": "9af46f4c1ebd75bfba05d00b635f6d81f5b22e9c7a7e03d76e2e266cd84daea4",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "learning",
+    "知识图谱",
+    "思维导图",
+    "concept map"
+  ],
+  "problem_solved": "说明概念之间是前提、因果还是对比。",
+  "when_to_use": "分类: 学习与辅导",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "concept-map",
+    "category": "learning",
+    "variables": [
+      "材料和主题",
+      "读者水平"
+    ]
+  }
+}

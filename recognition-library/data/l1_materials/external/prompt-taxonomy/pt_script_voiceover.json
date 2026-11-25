@@ -1,0 +1,28 @@
+{
+  "id": "pt_script_voiceover",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#script-voiceover",
+  "title": "为画面写自然的旁白",
+  "content": "为【画面或分镜】写一段【目标时长和语气】的旁白。按镜头分段，留停顿和画面独立叙述的空间。标注需要校对的发音，估计朗读时长并指出可删的句子。",
+  "content_hash": "f971437905da17212d8e80f2e454cde4cb65311c11a8c11b464478732091a04b",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "creative",
+    "旁白",
+    "配音",
+    "口播",
+    "voiceover"
+  ],
+  "problem_solved": "按画面节奏写口语文本。",
+  "when_to_use": "分类: 创作与多媒体",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "script-voiceover",
+    "category": "creative",
+    "variables": [
+      "画面或分镜",
+      "目标时长和语气"
+    ]
+  }
+}

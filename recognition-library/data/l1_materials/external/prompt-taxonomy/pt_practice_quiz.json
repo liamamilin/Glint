@@ -1,0 +1,28 @@
+{
+  "id": "pt_practice_quiz",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#practice-quiz",
+  "title": "按难度出练习题",
+  "content": "根据【教材、笔记或考点】出针对【当前水平】的练习。按识记、理解、迁移各给两题；先展示全部题目，再单列答案、解析和典型错误。每题注明它在测试哪个知识点。",
+  "content_hash": "5908e43a3e57a59b450ce6dbf7c4e4a562b3cc7eadf1401ed48c53ab3200a151",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "learning",
+    "题库",
+    "复习",
+    "测验",
+    "quiz"
+  ],
+  "problem_solved": "通过答案和解析发现知识缺口。",
+  "when_to_use": "分类: 学习与辅导",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "practice-quiz",
+    "category": "learning",
+    "variables": [
+      "教材、笔记或考点",
+      "当前水平"
+    ]
+  }
+}

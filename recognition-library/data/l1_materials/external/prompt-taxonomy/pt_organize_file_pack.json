@@ -1,0 +1,26 @@
+{
+  "id": "pt_organize_file_pack",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#organize-file-pack",
+  "title": "把材料包整理成可查找的交付清单",
+  "content": "根据【文件列表与项目目标】制作资料清单。每条写文件名、日期、版本、用途、是否重复和建议目录。标出关键文件缺失与同名不同版，给共享前需要核对的权限或范围。",
+  "content_hash": "b0ac831f2011ca827b9c3e480afcc2ce92add4dc32aa14e45af4202163320014",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "files",
+    "文件归档",
+    "资料包",
+    "manifest"
+  ],
+  "problem_solved": "为每份文件写版本、用途和缺口。",
+  "when_to_use": "分类: 文档与文件",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "organize-file-pack",
+    "category": "files",
+    "variables": [
+      "文件列表与项目目标"
+    ]
+  }
+}

@@ -1,0 +1,48 @@
+id: disc_build_keyboard_first_friction_cuts
+title: 把高频动作绑成快捷键
+tagline: 盘点3个高频入口，给无冲突快捷键建议
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - build
+  - ergonomics
+  - productivity
+  - developer_tools
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Terminal
+  pain_point: 每天重复打开工具、切窗口要多点鼠标翻菜单，微摩擦累积浪费专注力与时间
+  trigger_utterances:
+  - 帮我把常用工具绑成快捷键
+  - 每天切窗口太烦了
+  - 有哪些一键触发的配置
+  - 设置快捷键无冲突组合
+  - reduce friction hotkeys
+  anti_triggers:
+  - 一次性任务无需快捷键
+  - 纯手机端操作
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '1. 盘点每天最常重复打开或切换的 5 个窗口/工具/动作：[填入你的高频操作]。
+
+    2. 从中挑出最值得优先设快捷键的 3 个，并给出无冲突的按键组合建议。
+
+    3. 在常用编辑器/终端/浏览器/启动器中，找出能把多步操作压成一键触发的实用小配置。
+
+    4. 应用配置并试用一周，记录使用频率变化。'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/build.json#build-keyboard-first-friction-cuts
+  source_hash: ef8a25fd12f51fb1fece36b50588b66541c7fb2faf5ca7567df05ae426eed3ea
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

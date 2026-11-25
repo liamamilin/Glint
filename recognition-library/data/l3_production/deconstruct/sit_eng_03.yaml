@@ -1,0 +1,68 @@
+id: sit_eng_03
+title: 自动化校验 CI 门禁
+tagline: 上线前自动拦截数据与代码错误，阻断手滑导致的线上白屏
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - ci_cd
+  - devops
+  - quality_assurance
+  - automation
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Terminal
+  pain_point: 一个人维护几十上百条数据或代码文件时，担心手滑改错逗号或拼错 ID 导致线上白屏
+  trigger_utterances:
+  - 我改了几十个 json 文件怕手滑出错
+  - 线上白屏是不是我拼错 id 了
+  - 帮我加个 ci 校验阻断部署
+  - 数据文件一多就怕 comma 写错
+  - push 前怎么自动检查不变量
+  anti_triggers:
+  - 需要搭建复杂端到端测试集群
+  - 提升单元测试覆盖率与代码重构
+execution:
+  action_type: open_resource
+  inject_mode: null
+  content: '定位：在上线前装一道冷酷的自动安检门
+
+
+    触发场景：当你一个人维护几十上百条数据或代码文件，生怕手滑改错一个逗号或拼错 ID 导致线上白屏时。
+
+
+    核心机制：
+
+    1. 用原生脚本（如 Node .mjs）写出核心不变量检查：JSON 语法、必填字段、ID 唯一性与引用完整性
+
+    2. 在 GitHub Actions 配置 push 触发工作流，校验不通过直接阻断部署
+
+    3. 每次线上踩过一个新坑，就往校验脚本里补一条对应的防复发规则
+
+
+    交付物：一套本地与云端双运行的校验脚本 + GitHub Actions 流水线文件
+
+    推荐装配：Node.js 原生脚本 + GitHub Actions CI/CD
+
+    误用警告：不要一开始就搭复杂的端到端测试集群，先守住“数据不坏、页面不挂”的 80/20 底线。'
+  variables: []
+  workflow: null
+meta:
+  source: super-individual-toolbox
+  source_ref: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/engineer.json#eng-03
+  source_hash: b9e1fbb5711c76d7982c14180ffeddb30292bbd62eacd60e1332090affe9f438
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: engineering
+  subcategory: ai_workflow
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

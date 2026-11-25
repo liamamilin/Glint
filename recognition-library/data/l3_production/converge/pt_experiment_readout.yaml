@@ -1,0 +1,55 @@
+id: pt_experiment_readout
+title: 实验结果解读
+tagline: 根据实验数据解读假设，给出继续/回滚/补证据的决策建议
+routing:
+  primitive: converge
+  goals:
+  - evaluate
+  - digest
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - product_strategy
+  - experimentation
+  - ab_testing
+  - analytics
+  app_affinity:
+  - Notion
+  - Chrome
+  - Linear
+  pain_point: 实验跑完了但不知道结果到底支持继续、回滚还是需要补更多证据，无法把数据转成明确的下一步行动
+  trigger_utterances:
+  - 实验结果出来了帮我解读一下
+  - 这个 A/B 测试数据怎么读
+  - 实验跑完了该继续还是回滚
+  - 帮我写实验 readout
+  - 数据出来了但结论不明确
+  anti_triggers:
+  - 设计一个新的实验方案或假设
+  - 纯数据清洗或 SQL 查询
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 根据【实验记录与数值】解释【原始假设】。给实际分组、样本与时间窗，列主指标、保护指标、区间或不确定性。解释主要限制，明确什么结果支持何种行动（继续 / 回滚 / 补证据）。
+  variables:
+  - 实验记录与数值
+  - 原始假设
+  workflow:
+    workflow_id: product-discovery
+    step: 5
+    next_lens_id: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#experiment-readout
+  source_hash: a4f0d4aab1d5f6025d64d378bfbe550ce81fa08115e251ee36ae237445a37471
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: engineering
+  subcategory: code_review
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

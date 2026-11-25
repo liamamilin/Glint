@@ -1,0 +1,88 @@
+id: disc_business_free_high_value_lead_magnet
+title: 互动小工具替代PDF引流
+tagline: 设计一个3数字/4题就能出诊断的互动获客工具
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - lead_generation
+  - marketing
+  - conversion
+  - interactive_tool
+  - business
+  app_affinity:
+  - Notion
+  - Figma
+  - Chrome
+  - Cursor
+  pain_point: 做获客或建专业影响力，只会硬广或写长篇PDF资料包，参与感低、转发差，无法让用户快速感知价值
+  trigger_utterances:
+  - 获客只会发PDF白皮书没人下载
+  - 想做一个互动计算器做引流
+  - 客户算不清自己能省多少钱
+  - 设计一个诊断小工具提升转化
+  - lead magnet 除了 PDF 还能做什么
+  anti_triggers:
+  - 用户要写一篇长文博客或电子书
+  - 用户要投放付费广告或做SEO
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '## 互动引流小工具设计清单
+
+
+    ### 1. 找到“算不清的账”
+
+    - [ ] 列出目标客户最关心但算不清的一笔账/风险（如：能省多少钱、还差哪一步、存在什么隐患）
+
+    - [ ] 确认该问题可以在1分钟内得出结果
+
+
+    ### 2. 设计极简输入（≤3数字 / ≤4题）
+
+    - [ ] 选出3个关键输入参数（如：团队人数、月成本、当前转化率）
+
+    - [ ] 或设计4道选择题，每题2-4选项
+
+    - [ ] 避免自由文本输入，降低摩擦
+
+
+    ### 3. 定义核心公式/打分逻辑
+
+    - [ ] 写出明确的计算公式或加权打分规则
+
+    - [ ] 给出结果分级（如：优秀/需优化/高风险）
+
+    - [ ] 为每个分级准备1-2句解读文案
+
+
+    ### 4. 结果页与转化钩子
+
+    - [ ] 展示定制诊断结果（数字/分数/等级）
+
+    - [ ] 提供1个明确的下一步CTA（预约/下载/联系）
+
+    - [ ] 加入分享按钮，鼓励转发
+
+
+    ### 5. 验证与迭代
+
+    - [ ] 用真实客户试用，记录完成率与分享率
+
+    - [ ] A/B测试不同CTA文案
+
+    - [ ] 根据数据调整公式或题目'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-free-high-value-lead-magnet
+  source_hash: 537c84e154ba1cf9666bdb51e8e6dbf33c495dcf20c3f4b557b7fd07e60143fd
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

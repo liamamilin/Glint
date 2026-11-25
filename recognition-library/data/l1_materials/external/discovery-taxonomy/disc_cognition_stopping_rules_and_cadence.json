@@ -1,0 +1,33 @@
+{
+  "id": "disc_cognition_stopping_rules_and_cadence",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/cognition.json#cognition-stopping-rules-and-cadence",
+  "title": "定好“何时停手”的规则，别在边际收益归零处死磕",
+  "content": "旧共识（盲区）：一件事没做完、没调到完美就不该停，越往后改越精细总是好的。\n\n新现实（破盲视角）：很多工作和研究在 80% 处就已经够用，后面 20% 往往边际收益极低却耗掉 80% 精力；提前设好“时间盒 / 止损线”，把省下的精力留给下一局。\n\n破冰追问母题：\n- 我经常在 [某类任务，如查资料/改稿/调参数/挑方案] 上陷进去停不下来。请帮我设计一套“提前设定的停手规则（Stopping Rule）”，帮我及时收尾。\n- 针对我本周的一件重要事项：[描述事项]，帮我定义“什么叫已经足够好（Good Enough to Ship）”的务实标准。",
+  "content_hash": "50c115db921bce940a97bb2ae7992a2f940d561f37be5e77239f52609b686f67",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "cognition",
+    "invisible-friction",
+    "cost-collapse",
+    "stopping-rule",
+    "diminishing-returns",
+    "focus",
+    "cadence"
+  ],
+  "problem_solved": "一件事没做完、没调到完美就不该停，越往后改越精细总是好的。",
+  "when_to_use": "很多工作和研究在 80% 处就已经够用，后面 20% 往往边际收益极低却耗掉 80% 精力；提前设好“时间盒 / 止损线”，把省下的精力留给下一局。",
+  "procedural_steps": [
+    "我经常在 [某类任务，如查资料/改稿/调参数/挑方案] 上陷进去停不下来。请帮我设计一套“提前设定的停手规则（Stopping Rule）”，帮我及时收尾。",
+    "针对我本周的一件重要事项：[描述事项]，帮我定义“什么叫已经足够好（Good Enough to Ship）”的务实标准。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "cognition-stopping-rules-and-cadence",
+    "arena": "cognition",
+    "lenses": [
+      "invisible-friction",
+      "cost-collapse"
+    ]
+  }
+}

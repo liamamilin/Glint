@@ -1,0 +1,29 @@
+{
+  "id": "pt_localize_ui",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#localize-ui",
+  "title": "翻译并本地化软件界面字符串",
+  "content": "将【界面字符串】本地化为【目标地区语言】，使用【术语表、位置及字符限制】。保留键名、占位符、转义序列和标签。输出译文与有语境疑问的键，并为会超长的字符串给短版。",
+  "content_hash": "445923168dc0884f80014eaeb9b5875ada3a70475146f8afcea471b34d1cbdd3",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "language",
+    "UI本地化",
+    "i18n",
+    "界面翻译",
+    "locale"
+  ],
+  "problem_solved": "保留变量、术语和字数限制。",
+  "when_to_use": "分类: 语言练习与本地化",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "localize-ui",
+    "category": "language",
+    "variables": [
+      "界面字符串",
+      "目标地区语言",
+      "术语表、位置及字符限制"
+    ]
+  }
+}

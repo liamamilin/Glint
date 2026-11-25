@@ -1,0 +1,42 @@
+id: pt_evaluate_grounding
+title: 评测回答的证据支撑
+tagline: 逐条拆解模型回答，核查引用是否真正被材料支持
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  clarity_fit:
+  - concrete
+  domains:
+  - rag
+  - evaluation
+  - citation
+  - prompt_workflows
+  app_affinity:
+  - ChatGPT
+  - Claude
+  - Cursor
+  pain_point: 模型回答里混着编造的引用和无出处的断言，不知道哪些结论真的有材料支撑
+  trigger_utterances:
+  - 这个回答的引用是对的吗
+  - 帮我检查一下模型回答有没有证据支撑
+  - RAG 回答里哪些说法没出处
+  - verify the citations in this answer
+  - check if this response is grounded in the docs
+  anti_triggers:
+  - 想让模型生成新内容
+  - 优化提示词 wording
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 对【模型回答及参考材料】逐条评测。拆出可验证主张并找支持、矛盾或无出处的片段，标记引用是否对版。统计有出处且被支持的条目，写影响最大的一处问题和修复后的验收样例。
+  variables: []
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#evaluate-grounding
+  source_hash: 828a7b592066dffa70657ea837f5f98942066232271fbf9ced29349434158c1a
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

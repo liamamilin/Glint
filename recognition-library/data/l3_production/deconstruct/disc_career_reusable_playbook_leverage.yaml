@@ -1,0 +1,73 @@
+id: disc_career_reusable_playbook_leverage
+title: 把做完的事沉淀成手册
+tagline: 把踩坑经验固化成 Playbook，下次同类任务启动快 5 倍。
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - career
+  - playbooks
+  - templates
+  - leverage
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Cursor
+  pain_point: 做完一次复杂任务就翻篇，下次遇到类似任务又从零摸索、反复踩坑。
+  trigger_utterances:
+  - 刚做完一个复杂任务怎么沉淀成模板
+  - 每次做同类任务都要重新摸索
+  - 帮我把踩坑经验整理成 checklist
+  - 重复任务太多想做成 Playbook
+  - 这个流程下次还要做怎么复用
+  anti_triggers:
+  - 单纯想写周报总结
+  - 一次性任务无需复用
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '把复杂任务沉淀为可复用手册（Playbook）：
+
+
+    □ 1. 回顾刚完成的复杂任务，列出踩过的坑与关键决策
+
+    □ 2. 拆解为前置准备 / 执行步骤 / 常见陷阱 / 验收标准 四段
+
+    □ 3. 把其中可复用的 AI 提示词、检查清单、模板一并固化
+
+    □ 4. 盘点过去一个月重复≥2 次的工作，挑 2 项值得模板化的任务
+
+    □ 5. 为每项写出最小骨架（输入、步骤、输出、验收）
+
+    □ 6. 存入 Notion/Obsidian，并打标签便于检索复用
+
+
+    提示词模板 A：
+
+    「我最近刚完成一件比较复杂的任务：[描述任务与踩过的坑]。请帮我把它整理成一份可复用的标准操作手册（Playbook），包含前置准备、执行步骤、常见陷阱和验收标准。」
+
+
+    提示词模板 B：
+
+    「盘点我过去一个月里重复做过至少两次的 [某类工作任务]，挑出最值得沉淀成模板/清单的 2 项，给出最小骨架。」'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/career.json#career-reusable-playbook-leverage
+  source_hash: 817cc7acc7c3cbc98a43d2e633e29dbb270d095c121c8bdab8d2d2beab6b9d7d
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: personal_career
+  subcategory: career
+  collections: []
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

@@ -1,0 +1,33 @@
+{
+  "id": "disc_content_clear_takeaway_and_next_step",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/content.json#content-clear-takeaway-and-next-step",
+  "title": "结尾给一个“5 分钟就能试的小动作”，别只留一句空泛升华",
+  "content": "旧共识（盲区）：文章或分享结尾应该拔高立意、抒情总结或喊一句口号才算收尾。\n\n新现实（破盲视角）：赞同感几分钟就会淡去；结尾给一个 5 分钟就能试的小动作或自检问题，读者更容易真正带走改变。\n\n破冰追问母题：\n- 这是我准备发布的一篇内容/分享正文：[粘贴正文或核心要点]。请帮我写一个不矫情、不拔高的结尾，附带 1 个读者 5 分钟内就能动手试的小动作。\n- 针对 [你常写的某类主题内容]，帮我设计 3 种不同风格的“结尾行动钩子”（如自测题/小实验/反向思考）。",
+  "content_hash": "d1e0520658f796ad887ca31e1c84f3a565e4d1778cce8e22305af2f695ab4234",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "content",
+    "invisible-friction",
+    "role-inversion",
+    "ending",
+    "actionability",
+    "clarity",
+    "reader-value"
+  ],
+  "problem_solved": "文章或分享结尾应该拔高立意、抒情总结或喊一句口号才算收尾。",
+  "when_to_use": "赞同感几分钟就会淡去；结尾给一个 5 分钟就能试的小动作或自检问题，读者更容易真正带走改变。",
+  "procedural_steps": [
+    "这是我准备发布的一篇内容/分享正文：[粘贴正文或核心要点]。请帮我写一个不矫情、不拔高的结尾，附带 1 个读者 5 分钟内就能动手试的小动作。",
+    "针对 [你常写的某类主题内容]，帮我设计 3 种不同风格的“结尾行动钩子”（如自测题/小实验/反向思考）。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "content-clear-takeaway-and-next-step",
+    "arena": "content",
+    "lenses": [
+      "invisible-friction",
+      "role-inversion"
+    ]
+  }
+}

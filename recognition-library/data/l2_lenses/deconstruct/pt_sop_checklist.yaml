@@ -1,0 +1,49 @@
+id: pt_sop_checklist
+title: 把流程写成操作清单
+tagline: 将现有流程沉淀为可逐步复查的 SOP 操作清单
+routing:
+  primitive: deconstruct
+  goals:
+  - digest
+  - create
+  clarity_fit:
+  - concrete
+  - vague
+  domains:
+  - office
+  - process
+  - sop
+  - documentation
+  - operations
+  app_affinity:
+  - Notion
+  - Feishu
+  - Obsidian
+  - Linear
+  pain_point: 团队里有经验的人走了流程就断了，新人不知道每一步该做什么、做到什么程度算完成，异常情况更是没人记录
+  trigger_utterances:
+  - 把这段操作步骤整理成 SOP 清单
+  - 流程太依赖老员工了帮我写成可复查的 checklist
+  - 新人培训总漏步骤能不能按步骤列出来
+  - 这个录屏文字整理成操作手册
+  - 流程文档太散了按步骤拆解一下
+  anti_triggers:
+  - 只是想把长文缩成摘要
+  - 要批判某份流程的漏洞而非重写成清单
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 请将【现有流程或录屏文字】改写为供【操作人员】使用的操作清单。要求：每一步明确列出「输入」「操作」「完成判据」「异常处理」；在会影响结果的分岔处注明何时升级、升级给谁；末尾附一个完整样例。输出为 Markdown 清单，步骤编号清晰，可直接作为
+    SOP 文档使用。
+  variables:
+  - 现有流程或录屏文字
+  - 操作人员
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#sop-checklist
+  source_hash: 795e61a5a4d9fe823c5c749d9bc2537abcfd3aa29360ae2c60ec7baba835c7c9
+  status: active
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

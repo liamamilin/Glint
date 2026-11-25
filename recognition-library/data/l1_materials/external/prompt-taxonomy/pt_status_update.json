@@ -1,0 +1,28 @@
+{
+  "id": "pt_status_update",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#status-update",
+  "title": "写一份项目周报",
+  "content": "把【本周记录】整理成给【读者】的项目周报。先写整体状态及最需要关注的一点，再列本周交付、可量化的进展、风险和下周动作。需要对方决策的事项单列，标清截止日期及其影响。",
+  "content_hash": "d5fe2322abbbe950af62e1a8754e2258dfac5f21d33dffd29fe72cd125044de9",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "office",
+    "周报",
+    "汇报",
+    "进度",
+    "status update"
+  ],
+  "problem_solved": "让读者知道进展、风险和需要的决定。",
+  "when_to_use": "分类: 办公与协作",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "status-update",
+    "category": "office",
+    "variables": [
+      "本周记录",
+      "读者"
+    ]
+  }
+}

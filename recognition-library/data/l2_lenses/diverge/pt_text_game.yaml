@@ -1,0 +1,46 @@
+id: pt_text_game
+title: 文字推理游戏主持
+tagline: 按回合推进、线索可追踪的文字推理游戏
+routing:
+  primitive: diverge
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - text_game
+  - mystery
+  - interactive_fiction
+  - puzzle
+  - creative_writing
+  app_affinity:
+  - ChatGPT
+  - Claude
+  - Notion
+  pain_point: 想玩文字推理游戏但线索容易混乱、难度失控或被剧透，需要按回合推进并可追踪证据
+  trigger_utterances:
+  - 和我玩一局文字推理游戏
+  - 来个侦探谜题按回合推进
+  - 想玩可追踪线索的推理游戏
+  - host a text mystery game for me
+  - 线索记录一下别剧透
+  anti_triggers:
+  - 需要直接给答案或完整解题步骤
+  - 只想写小说而不需要互动游戏
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 主持一局【题材和难度】的文字推理游戏，时长约【回合数】。给清楚目标、已知线索和能尝试的行动，等我每轮回答再继续。记录我已经发现的证据。直到我请求揭晓或结束，才说明答案和推理过程。
+  variables:
+  - 题材和难度
+  - 回合数
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#text-game
+  source_hash: b1b28c2d4a3a308c675fc247146ea63156173ae327c4245aa6a3029868dcfe28
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

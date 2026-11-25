@@ -1,0 +1,60 @@
+id: pt_brainstorm
+title: 约束头脑风暴
+tagline: 用约束逼出6个差异方案并快速验证
+routing:
+  primitive: diverge
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - brainstorming
+  - ideation
+  - planning
+  - product_strategy
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 用户有很多模糊想法但缺乏差异化的可行方案和快速验证方法，头脑风暴产出同质化点子
+  trigger_utterances:
+  - 帮我头脑风暴一下这个产品方向
+  - 想点子但总是千篇一律
+  - 给我想几个差异大的方案
+  - brainstorm 一下怎么验证
+  - 围绕这个问题想点子
+  anti_triggers:
+  - 仅需单个最优方案决策
+  - 已有明确方案只求润色
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '围绕问题：{{problem}}
+
+    目标人群：{{audience}}
+
+    约束：{{constraints}}
+
+
+    请给出 6 个机制各异的方案，每个包含：改变了什么、适合谁、最大弱点。然后从中选 2 个最容易验证的，给出 1 小时内可完成的验证步骤。'
+  variables:
+  - problem
+  - audience
+  - constraints
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#brainstorm
+  source_hash: fa3676fdd331c8b5a456b66fcad813a07434751543f4f89d9d4e3b8e106d6d8c
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  category: product_business
+  subcategory: product_design
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

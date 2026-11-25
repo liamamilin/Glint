@@ -1,0 +1,96 @@
+id: disc_life_low_friction_joy_menu
+title: 低门槛恢复菜单
+tagline: 疲惫早期就充电，别等假期攒够再放松
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - life
+  - burnout
+  - recovery
+  - rest
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Slack
+  pain_point: 用户疲惫时只会刷短视频或等假期一次性大放松，越刷越空，没有低成本的及时充电动作。
+  trigger_utterances:
+  - 好累但又刷手机停不下来
+  - 等周末再休息吧
+  - 帮我做个恢复清单
+  - 最近好 burnout 怎么办
+  - 烦躁拖延提不起劲
+  anti_triggers:
+  - 用户明确要求深度心理治疗方案
+  - 用户在做项目排期或任务拆解
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '个人恢复菜单（低门槛版）
+
+
+    【15 分钟快充档】（疲惫早期立刻做）
+
+    - 散步 10-15 分钟，不看手机
+
+    - 听完一张完整专辑（非短视频）
+
+    - 做一顿简单饭 / 泡杯茶
+
+    - 给一位老友发条消息
+
+    - 5-4-3-2-1 呼吸或拉伸
+
+
+    【半天放松档】
+
+    - 半天不安排任务，只做一件喜欢的事
+
+    - 离开屏幕 2 小时
+
+    - 一个低强度户外活动
+
+
+    【周末深度充电档】
+
+    - 一天完全离线
+
+    - 与朋友/家人深度相处
+
+    - 一项不为产出的爱好
+
+
+    微小止损动作（烦躁/拖延/没劲时立刻做 3 个）：
+
+    1. 站起来走 3 分钟 + 喝水
+
+    2. 关掉一个标签页/应用，降低刺激
+
+    3. 写下「我现在最烦的是 ___」并做最小一步
+
+
+    使用规则：感到烦躁/拖延/没劲 = 已进入早期疲惫，立刻从快充档选 1 项，不等假期。'
+  variables:
+  - 15 分钟快充档
+  - 半天放松档
+  - 周末深度充电档
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/life.json#life-low-friction-joy-menu
+  source_hash: 045d7564900859570b2db1042209a75adf12064258b7837097b75f514a1c50a2
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: personal_career
+  subcategory: personal_os
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

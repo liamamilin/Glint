@@ -1,0 +1,28 @@
+{
+  "id": "pt_process_exception_log",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#process-exception-log",
+  "title": "从异常记录中整理流程问题",
+  "content": "检查【异常记录或工单】中的【流程范围】。逐类列触发条件、频率、额外耗时、临时处理方式与依据。区分正常例外和流程缺陷，为优先项给一个不改变主流程的验证试点。",
+  "content_hash": "4c5a47388e14aa465fcb940f029aebce4b63beb0d3fa5c2f2f3c6dbd0db96130",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "office",
+    "流程异常",
+    "例外",
+    "持续改进",
+    "process exception"
+  ],
+  "problem_solved": "查出频繁的绕行、耗时和升级原因。",
+  "when_to_use": "分类: 办公与协作",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "process-exception-log",
+    "category": "office",
+    "variables": [
+      "异常记录或工单",
+      "流程范围"
+    ]
+  }
+}

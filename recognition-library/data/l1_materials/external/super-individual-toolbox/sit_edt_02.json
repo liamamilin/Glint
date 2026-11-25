@@ -1,0 +1,29 @@
+{
+  "id": "sit_edt_02",
+  "source": "super-individual-toolbox",
+  "source_ref": "https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/editorial.json#edt-02",
+  "title": "长文逻辑骨架师",
+  "content": "定位：先焊死论证钢筋，再浇筑文字水泥\n\n触发场景：当你脑子里有一堆零散洞察想写成深度长文，但动笔就跑偏、写到一半逻辑散架时。\n\n核心机制：\n- 把所有碎片想法语音转文字或无序倒出，不追求通顺\n- 让 AI 帮你找出 1 个核心论点（Thesis），并将碎片重排为“反常识钩子 → 痛点拆解 → 底层机制 → 落地解法”的论证链\n- 检查相邻段落之间是否存在逻辑断层或循环论证，确认骨架无误后再展开写正文\n\n交付物：一份带逐段核心句与论据锚点的《长文逻辑大纲》\n\n推荐装配：语音速记 + 逻辑大纲构建 Prompt\n\n误用警告：不要直接让 AI 根据大纲一键生成 3000 字全文；骨架可以合搭，关键观点和案例必须自己写。",
+  "content_hash": "ea16cc08b63c46d6015cd8544aceb5d5d2e31bbe5702692e82e3b75d2fcbcab9",
+  "suggested_action_type": "open_resource",
+  "domain_hints": [
+    "editorial",
+    "内容与叙事官"
+  ],
+  "problem_solved": "当你脑子里有一堆零散洞察想写成深度长文，但动笔就跑偏、写到一半逻辑散架时。",
+  "when_to_use": "当你脑子里有一堆零散洞察想写成深度长文，但动笔就跑偏、写到一半逻辑散架时。",
+  "procedural_steps": [
+    "把所有碎片想法语音转文字或无序倒出，不追求通顺",
+    "让 AI 帮你找出 1 个核心论点（Thesis），并将碎片重排为“反常识钩子 → 痛点拆解 → 底层机制 → 落地解法”的论证链",
+    "检查相邻段落之间是否存在逻辑断层或循环论证，确认骨架无误后再展开写正文"
+  ],
+  "anti_patterns": [
+    "不要直接让 AI 根据大纲一键生成 3000 字全文；骨架可以合搭，关键观点和案例必须自己写。"
+  ],
+  "metadata": {
+    "original_id": "edt-02",
+    "drawer": "editorial",
+    "drawer_zh": "内容与叙事官",
+    "deliverable": "一份带逐段核心句与论据锚点的《长文逻辑大纲》"
+  }
+}

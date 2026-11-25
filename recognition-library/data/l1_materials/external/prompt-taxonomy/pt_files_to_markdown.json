@@ -1,0 +1,28 @@
+{
+  "id": "pt_files_to_markdown",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#files-to-markdown",
+  "title": "把多个来源转换成便于查找的 Markdown",
+  "content": "将【文件包】转换为供【目标用途】使用的 Markdown。每个原文件独立成节，保留标题层级、表头、列表及图说明。未能转换的表格、图或格式单列并定位到来源。",
+  "content_hash": "600170378ba1211c81e9ff8c2d5388213f9ec8b1b2192dc9a852b5d51ea6c4e3",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "files",
+    "格式转换",
+    "Markdown",
+    "PDF转文本",
+    "document conversion"
+  ],
+  "problem_solved": "统一标题和记录来源，保留文档边界。",
+  "when_to_use": "分类: 文档与文件",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "files-to-markdown",
+    "category": "files",
+    "variables": [
+      "文件包",
+      "目标用途"
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "disc_build_local_sandbox_rehearsal",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/build.json#build-local-sandbox-rehearsal",
+  "title": "给危险或高成本动作加一层“本地沙盒预演”",
+  "content": "旧共识（盲区）：批量改文件、群发消息、调外部接口或跑自动化脚本，要么小心翼翼手动点，要么出事了才后悔。\n\n新现实（破盲视角）：先在本地临时目录或“只打印计划不执行（Dry-Run）”模式下跑一遍预览与差异对比，确认无误再放行，极大降低自动化焦虑。\n\n破冰追问母题：\n- 我打算写一个自动处理 [文件整理/数据清洗/批量修改] 的脚本，最怕误删或改错。请帮我设计标准的 `--dry-run` 预览与备份回滚机制。\n- 盘点我最容易“手滑点错或批量改崩”的 3 个电脑操作，如何用极简的预演/确认步骤把容错率拉满？",
+  "content_hash": "67394e91351dd18bfac8192a65f577947c2fdf1181af8098c816dd1f2cb95074",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "build",
+    "cost-collapse",
+    "invisible-friction",
+    "dry-run",
+    "sandbox",
+    "local-first",
+    "testing"
+  ],
+  "problem_solved": "批量改文件、群发消息、调外部接口或跑自动化脚本，要么小心翼翼手动点，要么出事了才后悔。",
+  "when_to_use": "先在本地临时目录或“只打印计划不执行（Dry-Run）”模式下跑一遍预览与差异对比，确认无误再放行，极大降低自动化焦虑。",
+  "procedural_steps": [
+    "我打算写一个自动处理 [文件整理/数据清洗/批量修改] 的脚本，最怕误删或改错。请帮我设计标准的 `--dry-run` 预览与备份回滚机制。",
+    "盘点我最容易“手滑点错或批量改崩”的 3 个电脑操作，如何用极简的预演/确认步骤把容错率拉满？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "build-local-sandbox-rehearsal",
+    "arena": "build",
+    "lenses": [
+      "cost-collapse",
+      "invisible-friction"
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "id": "pt_interview_debrief",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#interview-debrief",
+  "title": "复盘刚结束的面试",
+  "content": "复盘【面试过程和记得的问题】，目标岗位是【岗位】。标出答得具体和模糊的地方，给两个下次可用的修改版，并列要在跟进邮件中补充的材料或问题。",
+  "content_hash": "dac5c5d627c38fb913ba1ac6f3921ab4fc7b5e9c8209015dfd7fb2cfb61e5fe6",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "career",
+    "面试复盘",
+    "面试",
+    "interview debrief"
+  ],
+  "problem_solved": "从记忆里提取可以改进和跟进的点。",
+  "when_to_use": "分类: 求职与职业",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "interview-debrief",
+    "category": "career",
+    "variables": [
+      "面试过程和记得的问题",
+      "岗位"
+    ]
+  }
+}

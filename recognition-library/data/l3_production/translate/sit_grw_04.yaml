@@ -1,0 +1,71 @@
+id: sit_grw_04
+title: 冷启动种子用户话术库
+tagline: V1 上线后用三段式短消息敲开前 20 个真实种子用户
+routing:
+  primitive: translate
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - growth
+  - seed_users
+  - outreach
+  - copywriting
+  app_affinity:
+  - Slack
+  - WeChat
+  - Mail
+  - Notion
+  pain_point: 产品 V1 刚上线需要找到前 20 个真实种子用户收集反馈，但不好意思开口推广，不知道该怎么发消息
+  trigger_utterances:
+  - v1 上线了怎么找前 20 个种子用户
+  - 不好意思推广产品怎么开口
+  - 冷启动 outreach 话术模板
+  - how to get first 20 users for my new product
+  - need seed user outreach scripts for v1 launch
+  anti_triggers:
+  - 已有大量用户需要规模化营销活动
+  - 产品尚未完成开发需要技术方案
+execution:
+  action_type: open_resource
+  inject_mode: null
+  content: '定位：不群发、不卑微，精准敲开前 20 个用户的门
+
+
+    触发场景：当你的 V1 产品刚上线，需要找到前 20 个真实种子用户收集反馈，但不好意思开口推广时。
+
+
+    核心机制：
+
+    - 在社区/评论区锁定正在吐槽该痛点的具体人，绝不盲目群发
+
+    - 采用“具体观察 + 免费解法 + 零压力退路”三段式短消息（控制在 100 字以内）
+
+    - 把每一次回复里的真实措辞记录下来，直接反哺成你的着陆页文案
+
+
+    交付物：3 套不同场景（评论区、私信、老友内测）的极简触达话术模板
+
+
+    推荐装配：个性化触达 Prompt + 简易种子用户反馈表（Markdown）
+
+
+    误用警告：不要一上来就发长达三屏的产品介绍和收费链接；先提供价值、建立对话，再谈转化。'
+  variables: []
+  workflow: null
+meta:
+  source: super-individual-toolbox
+  source_ref: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/growth-commercial.json#grw-04
+  source_hash: 1a3db3b62f04b8ba43bcf0d7068bcc04d3c99138c16aa77d81352b7b7a8d94eb
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: product_business
+  subcategory: growth_marketing
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

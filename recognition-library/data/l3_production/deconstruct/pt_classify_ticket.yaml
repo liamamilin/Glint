@@ -1,0 +1,71 @@
+id: pt_classify_ticket
+title: 客服工单分类分派
+tagline: 按字典给工单打标签、定优先级并路由到对应队列
+routing:
+  primitive: deconstruct
+  goals:
+  - evaluate
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - support
+  - ticket_routing
+  - customer_service
+  - service_desk
+  app_affinity:
+  - Slack
+  - Feishu
+  - Mail
+  - Notion
+  pain_point: 客服团队每天收到大量工单，难以快速判断每条该分给谁、优先级有多高，手动分类耗时且容易漏掉高风险请求。
+  trigger_utterances:
+  - 这些工单帮我分一下该给谁
+  - 这个 ticket 优先级怎么定
+  - 帮我按字典把工单打标签路由
+  - support tickets 太多了谁来处理
+  - 这个请求要人工先看吗
+  anti_triggers:
+  - 只是想写一封客服回复邮件
+  - 需要的是工单系统配置教程
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请根据【工单和分类字典】对每条工单输出结构化分类结果：
+
+    - 工单编号（保留原编号）
+
+    - 任务/动作
+
+    - 主要问题
+
+    - 影响对象
+
+    - 优先级依据
+
+    - 建议队列/处理人
+
+    允许多标签；证据不足时明确列出「待补信息」。
+
+    标出需要人工优先查看的请求（高风险/影响面大/信息不全）。'
+  variables:
+  - 工单和分类字典
+  workflow:
+    workflow_id: handle-support-case
+    step: 1
+    next_lens_id: pt_support_first_reply
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#classify-ticket
+  source_hash: d9aeb5d3c1ea2604a2535b8560cc59e417cdde6f9c711322b6c7a2ebe47153df
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: general
+  subcategory: problem_solving
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

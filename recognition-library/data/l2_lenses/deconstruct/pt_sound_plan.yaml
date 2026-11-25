@@ -1,0 +1,61 @@
+id: pt_sound_plan
+title: 短片声音清单
+tagline: 按分镜输出对白/环境/音效/音乐表
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - concrete
+  domains:
+  - creative
+  - sound_design
+  - film
+  - audio
+  - multimedia
+  app_affinity:
+  - Notion
+  pain_point: 短片的声音元素散落在分镜和粗剪里，不清楚每场该录什么对白、环境和音效，音乐该从哪进，也说不清声音如何帮助理解
+  trigger_utterances:
+  - 帮我给这个短片列个声音表
+  - 对白环境音效音乐怎么分场
+  - 短片声音设计 checklist
+  - rough cut 的声音任务怎么拆
+  - sound plan for this short film
+  anti_triggers:
+  - 纯配乐作曲或歌曲编曲
+  - 把已有音频转成文字字幕
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: '你是一名声音设计师。请根据以下分镜或粗剪说明，为播放场景「{{playback_scene}}」设计一份逐场声音表。
+
+
+    输入素材：
+
+    {{input}}
+
+
+    输出要求：
+
+    1. 逐场（按镜头/场次）列出：对白（含说话人与要点）、环境声、关键音效、音乐进入点与退出点。
+
+    2. 为每场说明声音如何帮助观众理解剧情或情绪。
+
+    3. 标注每项声音的来源：现场录制 / 授权素材库 / 仍需确认（附确认事项）。
+
+    4. 最后给出一份录音与素材采购清单，并标出高风险项。
+
+
+    请用表格或分场列表呈现，保持可执行、可落地。'
+  variables:
+  - playback_scene
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#sound-plan
+  source_hash: eff71efcec0e91040603657f62d2d6e060b007e6ba5995c515d5432d94f13057
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

@@ -1,0 +1,28 @@
+{
+  "id": "pt_decline_request",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#decline-request",
+  "title": "清楚而礼貌地拒绝请求",
+  "content": "帮我回复【对方请求】，我们的关系是【关系】，目前约束是【实际限制】。提供一个简短直接的版本和一个更体谅背景的版本。两者都写清我能否提供其他帮助和会不会再次跟进。",
+  "content_hash": "269767a92ab53d94ad39b9dc7bb9023dffb19c1d713fc6e83aa28a71d842028e",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "communication",
+    "拒绝",
+    "边界",
+    "decline"
+  ],
+  "problem_solved": "说明限制并给可行替代项。",
+  "when_to_use": "分类: 沟通与协商",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "decline-request",
+    "category": "communication",
+    "variables": [
+      "对方请求",
+      "关系",
+      "实际限制"
+    ]
+  }
+}

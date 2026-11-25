@@ -1,0 +1,78 @@
+id: pt_study_notes
+title: 课程材料转复习笔记
+tagline: 从课件提炼考点、例题与自测题，保留知识结构。
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - digest
+  clarity_fit:
+  - concrete
+  - vague
+  domains:
+  - learning
+  - education
+  - study_notes
+  - exam_prep
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  - ChatGPT
+  pain_point: 手头一堆课件与笔记，不知道怎么压成有结构、能自测的复习材料，复习时只能重读原文。
+  trigger_utterances:
+  - 把这门课的材料整理成复习笔记
+  - 帮我从课件里提炼考点和易混点
+  - 做一份能自测的复习提纲
+  - 课程材料太多不知道怎么复习
+  - 把 lecture notes 变成 exam notes
+  anti_triggers:
+  - 只是想翻译或润色一段文本
+  - 需要从零创作新内容而非整理已有材料
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: '请基于以下课程材料，为指定的考试/学习目标制作一份可自测的复习笔记：
+
+
+    课程材料：
+
+    {{input}}
+
+
+    考试/学习目标：{{exam_or_learning_goal}}
+
+
+    输出要求：
+
+    1. 概念关系文字提纲：用层级缩进列出核心概念及其依赖、因果、包含关系。
+
+    2. 关键定义：每个核心概念给出简洁准确的定义。
+
+    3. 例子：每个概念配 1 个典型例子或反例。
+
+    4. 常见混淆：列出易混概念的区分点。
+
+    5. 闭卷回忆问题：每节末尾附 1 个不看材料也能回答的自测题。
+
+    6. 覆盖缺口：明确指出材料未覆盖、但目标要求掌握的内容。
+
+
+    保持结构清晰、可快速扫读，避免冗长复述原文。'
+  variables:
+  - exam_or_learning_goal
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#study-notes
+  source_hash: 4aef1ff3db7f29289462afd51e44a8bfeccde541f9f7d3f817abffc64ae53f75
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: personal_career
+  subcategory: learning
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

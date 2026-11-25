@@ -1,0 +1,46 @@
+id: pt_compare_docs
+title: 比对两份文档
+tagline: 快速看清两版文档的增删与实际影响
+routing:
+  primitive: deconstruct
+  goals:
+  - evaluate
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - document_comparison
+  - version_control
+  - office_collaboration
+  app_affinity:
+  - Notion
+  - Feishu
+  - Mail
+  - Chrome
+  pain_point: 两版文档改动散落各处，难以一眼看清增删内容及其对业务的实际影响
+  trigger_utterances:
+  - 帮我对比一下这两个版本改了什么
+  - 版本A和版本B的差异在哪
+  - 这两版合同有什么差别
+  - diff 一下这两个文档
+  - 新旧版本变化帮我理一下
+  anti_triggers:
+  - 帮我写一篇新文档
+  - 把这段话润色一下
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 对比 {{version_a}} 与 {{version_b}}，关注 {{focus}}。用表格列出位置、旧内容、新内容、变化类型和影响，合并语义相同的格式变化。对需要负责人确认的变化单列问题。
+  variables:
+  - version_a
+  - version_b
+  - focus
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#compare-docs
+  source_hash: e753ce6935e63868f6d56ec9b3e98eda4c1ba1a760fce572d1bcce54f6ae8ce4
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

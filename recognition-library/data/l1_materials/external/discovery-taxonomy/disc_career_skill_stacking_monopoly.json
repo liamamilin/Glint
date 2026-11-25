@@ -1,0 +1,33 @@
+{
+  "id": "disc_career_skill_stacking_monopoly",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/career.json#career-skill-stacking-monopoly",
+  "title": "用“2+1 技能组合”构造微型个人垄断",
+  "content": "旧共识（盲区）：要在职场上胜出，必须在某一个单一赛道卷到全球前 1%。\n\n新现实（破盲视角）：单一维度卷前 1% 极难，但把两项前 20% 的常见技能加上一个独特行业语境交叉叠加，就能立刻在交叉点形成几乎没有竞争对手的微型垄断。\n\n破冰追问母题：\n- 我目前具备的技能、经历和兴趣包括：[列出 3-5 个你的标签]。请帮我做交叉组合，找出 5 个我不需要和顶级专家硬碰硬、却能天然占据优势的“微型生态位”。\n- 在我现有的核心能力 [技能 A] 之外，只需花 3 个月补齐哪一个“低门槛跨界技能 [技能 B]”，就能让我的稀缺度和议价能力翻倍？",
+  "content_hash": "68025816c11c9835af90c587a6037ffd8637a4163ea307fee975f4cc86c9dd0e",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "career",
+    "cross-domain",
+    "first-principles",
+    "talent-stack",
+    "positioning",
+    "niche",
+    "个人生态位"
+  ],
+  "problem_solved": "要在职场上胜出，必须在某一个单一赛道卷到全球前 1%。",
+  "when_to_use": "单一维度卷前 1% 极难，但把两项前 20% 的常见技能加上一个独特行业语境交叉叠加，就能立刻在交叉点形成几乎没有竞争对手的微型垄断。",
+  "procedural_steps": [
+    "我目前具备的技能、经历和兴趣包括：[列出 3-5 个你的标签]。请帮我做交叉组合，找出 5 个我不需要和顶级专家硬碰硬、却能天然占据优势的“微型生态位”。",
+    "在我现有的核心能力 [技能 A] 之外，只需花 3 个月补齐哪一个“低门槛跨界技能 [技能 B]”，就能让我的稀缺度和议价能力翻倍？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "career-skill-stacking-monopoly",
+    "arena": "career",
+    "lenses": [
+      "cross-domain",
+      "first-principles"
+    ]
+  }
+}

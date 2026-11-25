@@ -1,0 +1,27 @@
+{
+  "id": "pt_repro_brief",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#repro-brief",
+  "title": "把零散报错整理成维护者可复现的记录",
+  "content": "根据【错误现象和零散记录】写一份缺陷报告。包含环境、前置条件、最短复现步骤、期望行为、实际行为和相关日志位置。去掉无关步骤，说明复现频率及尚缺的证据。",
+  "content_hash": "7e62614a69e6256ecf30c4199199782886e81cb51c44dd6e3eb33c8b91e3ace8",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "coding",
+    "缺陷",
+    "issue",
+    "重现",
+    "bug report"
+  ],
+  "problem_solved": "交代环境、前置条件和最短操作。",
+  "when_to_use": "分类: 开发与调试",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "repro-brief",
+    "category": "coding",
+    "variables": [
+      "错误现象和零散记录"
+    ]
+  }
+}

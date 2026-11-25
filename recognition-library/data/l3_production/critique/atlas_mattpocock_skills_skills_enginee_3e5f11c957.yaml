@@ -1,0 +1,59 @@
+id: atlas_mattpocock_skills_skills_enginee_3e5f11c957
+title: 双轴代码审查
+tagline: 同一diff并行校验代码规范与需求忠实度
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  clarity_fit:
+  - concrete
+  domains:
+  - code_review
+  - engineering
+  - git
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Terminal
+  pain_point: 审查PR时代码规范全过但实现错需求，或需求做对但违反项目惯例，单轴审查容易漏检
+  trigger_utterances:
+  - 帮我review这个PR
+  - 这个diff代码规范过但需求做错了吗
+  - 并行审查Standards和Spec
+  - 代码审查两轴
+  - review这个分支的改动
+  anti_triggers:
+  - 仅需格式化检查的小改动
+  - 没有spec或issue的单文件微调
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '对同一 diff 同时运行两条独立审查轴：Standards 轴检查代码是否符合仓库文档化的编码标准，并始终附带 Fowler《Refactoring》第 3 章气味基线；Spec 轴检查代码是否忠实实现原始 issue/spec。两轴由全新上下文子代理并行执行、互不污染，最后分别呈现两份报告，不合并、不跨轴重排。
+
+
+    流程：确定固定点（用户给定或询问）→ 捕获 git diff <fixed-point>...HEAD（三点）与 commit 列表 → 预检固定点可解析且 diff 非空 → 定位 spec（commit issue 引用→用户路径→docs/specs/.scratch→询问→无则跳过并注明）→
+    定位标准（仓库编码规范文档，CODING_STANDARDS/CONTRIBUTING 必须列入；始终附带 Fowler 气味基线）→ 两子代理并行 → 分轴报告。
+
+
+    Fowler 气味基线（逐项“是什么→怎么改”）：Mysterious Name→重命名；Duplicated Code→抽取共享形状；Feature Envy→方法移到羡慕的数据上；Data Clumps→打包成类型；Primitive
+    Obsession→小类型；Repeated Switches→多态或共用 map；Shotgun Surgery→聚到一个模块；Divergent Change→拆分；Speculative Generality→删除、内联；Message
+    Chains→第一个对象上方法隐藏导航；Middle Man→去掉转发；Refused Bequest→组合替代继承。每项都是有标签的启发式（如 possible Feature Envy），永远不是硬违规；仓库文档化标准优先，认可的做法抑制基线气味；工具已强制检查的内容跳过。
+
+
+    报告区分硬违规（违反文档化标准）与判断性意见（基线气味）；两轴报告置于 ## Standards 与 ## Spec 下，不合并不重排发现；不跨轴挑选单一冠军问题；总结行仅给每轴数量与各轴内部最严重项；子代理报告限 400 词以内。'
+  variables: []
+  workflow: null
+meta:
+  source: atlas-methods
+  source_ref: mattpocock/skills:skills/engineering/code-review/SKILL.md
+  source_hash: 811e73d738a19e7cc058c68a407528149e0a8da073cff0636807f88d9edbde30
+  status: active
+  scope: domain_specific
+  shelf: off_shelf
+  tier: A
+  category: engineering
+  subcategory: code_review
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

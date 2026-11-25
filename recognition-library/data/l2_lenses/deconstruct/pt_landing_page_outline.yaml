@@ -1,0 +1,46 @@
+id: pt_landing_page_outline
+title: 落地页信息与行动规划
+tagline: 把承诺、证据和下一步连成读者路径。
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - concrete
+  domains:
+  - marketing
+  - landing_page
+  - conversion
+  - copywriting
+  app_affinity:
+  - Figma
+  - Notion
+  - Chrome
+  - ChatGPT
+  pain_point: 落地页各区块零散，承诺与证据脱节，访客看完不知道下一步该点什么。
+  trigger_utterances:
+  - 帮我规划这个落地页的结构
+  - 这个落地页转化太低帮我理一下
+  - 落地页各段怎么排
+  - 给我一个落地页大纲
+  - landing page outline 怎么写
+  anti_triggers:
+  - 只是想润色某一段文案，不是整体规划
+  - 只想要配色或视觉设计建议
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 围绕 {{target_action}}，为 {{product_and_audience}} 规划落地页。按以下区块排列，每块写出要回答的问题与所需素材：首屏（价值主张+主 CTA）、痛点（用户现在卡在哪）、结果（用上之后变成什么样）、如何使用（3
+    步内）、信任证据（案例/数据/logos）、疑问（FAQ）、行动（最终 CTA）。没有证据的承诺先标记为「待确认」，不要编造。
+  variables:
+  - target_action
+  - product_and_audience
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#landing-page-outline
+  source_hash: 46fa7e3fd24945092be65093d1aa3547db95fecc8598df31d769e655b33b00ac
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

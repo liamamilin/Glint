@@ -1,0 +1,60 @@
+id: disc_content_reader_first_opening_hook
+title: 前三句直击切口
+tagline: 砍掉慢热背景，开头直接抓痛点与反差
+routing:
+  primitive: compress
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - content
+  - writing
+  - storytelling
+  - attention
+  - clarity
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  - ChatGPT
+  pain_point: 文章或分享开头先铺垫背景和心路，读者在信息流里几秒内流失
+  trigger_utterances:
+  - 开头太拖沓帮我砍掉背景
+  - 前三句怎么写更抓人
+  - 帮我重写一个不浮夸的开头
+  - 这开头像流水账改一下
+  - 给这个主题写3个钩子开头
+  anti_triggers:
+  - 需要完整长文结构拆解
+  - 不是开头而是结尾优化
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '开头前三句直击切口检查：
+
+    1. 第一句先指出反常识现象、用户痛点或可解决收益。
+
+    2. 删除历史背景、个人心路和“最近我一直在想”式铺垫。
+
+    3. 每句只保留一个强信息点，避免形容词堆砌。
+
+    4. 用克制语气，不用夸张承诺。
+
+    5. 30 秒内让读者知道“这和我有关”。
+
+    6. 提供 3 个不同角度的开头版本供选择。
+
+    7. 最终保留最短、最具体的版本。'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/content.json#content-reader-first-opening-hook
+  source_hash: 7730efbc86696a64adeb83daa5a34b72837b2e7fed142de45d66850f0c9b7e78
+  status: active
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

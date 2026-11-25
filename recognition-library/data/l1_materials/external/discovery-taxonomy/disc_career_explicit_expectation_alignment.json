@@ -1,0 +1,33 @@
+{
+  "id": "disc_career_explicit_expectation_alignment",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/career.json#career-explicit-expectation-alignment",
+  "title": "在开工前把“验收标准与预期”说透，而不是做完再返工",
+  "content": "旧共识（盲区）：任务接过来先埋头做完再交差，做出来不合意再改，这叫“能干、不挑活”。\n\n新现实（破盲视角）：很多加班和返工源于一开始对“什么算做好”没有对齐；花 5 分钟确认核心目标、边界和样例标准，往往能省掉后面 5 轮修改。\n\n破冰追问母题：\n- 我即将开始一项 [项目/任务/合作]：[简述任务]。请帮我列出一份“开工 5 分钟对齐清单”，帮我把模糊要求变成可验收的具体标准。\n- 当上级或合作方给的需求很模糊、甚至前后矛盾时，帮我写一套温和但清晰的“澄清与确认话术”，既不显得顶撞又能把边界定准。",
+  "content_hash": "4824bc9d14e887cb997d4a1513df36fe7f96d5969cdba12f85b444d6456105be",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "career",
+    "invisible-friction",
+    "first-principles",
+    "alignment",
+    "expectations",
+    "feedback",
+    "growth"
+  ],
+  "problem_solved": "任务接过来先埋头做完再交差，做出来不合意再改，这叫“能干、不挑活”。",
+  "when_to_use": "很多加班和返工源于一开始对“什么算做好”没有对齐；花 5 分钟确认核心目标、边界和样例标准，往往能省掉后面 5 轮修改。",
+  "procedural_steps": [
+    "我即将开始一项 [项目/任务/合作]：[简述任务]。请帮我列出一份“开工 5 分钟对齐清单”，帮我把模糊要求变成可验收的具体标准。",
+    "当上级或合作方给的需求很模糊、甚至前后矛盾时，帮我写一套温和但清晰的“澄清与确认话术”，既不显得顶撞又能把边界定准。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "career-explicit-expectation-alignment",
+    "arena": "career",
+    "lenses": [
+      "invisible-friction",
+      "first-principles"
+    ]
+  }
+}

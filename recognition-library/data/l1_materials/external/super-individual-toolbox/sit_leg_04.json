@@ -1,0 +1,29 @@
+{
+  "id": "sit_leg_04",
+  "source": "super-individual-toolbox",
+  "source_ref": "https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/legal-finance.json#leg-04",
+  "title": "独立报价单与收款防坑模版",
+  "content": "定位：把范围、修改次数和首付款写死在开工之前\n\n触发场景：当你接独立咨询、定制开发或设计单，怕遇到需求无限膨胀、反复免费返工或干完活被拖欠尾款时。\n\n核心机制：\n- 在报价单里明确写出“包含项（In-Scope）”与“明确不包含项（Out-of-Scope）”\n- 绑定免费修改次数上限（如 2 轮），超出部分按透明的按次或按天费率计费\n- 强制执行里程碑付款（如 50% 预付款启动，尾款结清后再移交最终源码或源文件）\n\n交付物：一份 1 页纸极简专业《独立项目报价与里程碑确认单》\n\n推荐装配：Markdown / PDF 报价单模板 + 范围边界生成 Prompt\n\n误用警告：不要因为是熟人介绍就省去书面范围确认；越是熟人，口头模糊越容易最后伤感情。",
+  "content_hash": "781c104dfe250b767fa2780c86bdd6e25427da6d0f15cdf79f5e44cae7d0a57d",
+  "suggested_action_type": "open_resource",
+  "domain_hints": [
+    "legal-finance",
+    "法务与财务官"
+  ],
+  "problem_solved": "当你接独立咨询、定制开发或设计单，怕遇到需求无限膨胀、反复免费返工或干完活被拖欠尾款时。",
+  "when_to_use": "当你接独立咨询、定制开发或设计单，怕遇到需求无限膨胀、反复免费返工或干完活被拖欠尾款时。",
+  "procedural_steps": [
+    "在报价单里明确写出“包含项（In-Scope）”与“明确不包含项（Out-of-Scope）”",
+    "绑定免费修改次数上限（如 2 轮），超出部分按透明的按次或按天费率计费",
+    "强制执行里程碑付款（如 50% 预付款启动，尾款结清后再移交最终源码或源文件）"
+  ],
+  "anti_patterns": [
+    "不要因为是熟人介绍就省去书面范围确认；越是熟人，口头模糊越容易最后伤感情。"
+  ],
+  "metadata": {
+    "original_id": "leg-04",
+    "drawer": "legal-finance",
+    "drawer_zh": "法务与财务官",
+    "deliverable": "一份 1 页纸极简专业《独立项目报价与里程碑确认单》"
+  }
+}

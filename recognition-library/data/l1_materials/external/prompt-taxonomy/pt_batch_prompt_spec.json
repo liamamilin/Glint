@@ -1,0 +1,28 @@
+{
+  "id": "pt_batch_prompt_spec",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#batch-prompt-spec",
+  "title": "把一次性指令写成批处理规范",
+  "content": "把【单次 Prompt】参考【输入样本与下游要求】写成批处理规范。为每条输入定义稳定字段、输出模式、错误码、自检例和人工抽检点。给一条正常、缺资料和格式异常的预期结果。",
+  "content_hash": "fcc935935bef7509eb28eb446ef94e49f9fb7cd0c0551631fce61f6b111700bc",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "prompt-workflows",
+    "批处理",
+    "可复用",
+    "批量",
+    "prompt batch"
+  ],
+  "problem_solved": "约定记录结构、边界处理和失败回收。",
+  "when_to_use": "分类: 提示词与 AI 工作流",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "batch-prompt-spec",
+    "category": "prompt-workflows",
+    "variables": [
+      "单次 Prompt",
+      "输入样本与下游要求"
+    ]
+  }
+}

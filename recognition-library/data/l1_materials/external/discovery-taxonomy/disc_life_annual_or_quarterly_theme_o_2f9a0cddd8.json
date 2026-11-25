@@ -1,0 +1,33 @@
+{
+  "id": "disc_life_annual_or_quarterly_theme_o_2f9a0cddd8",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/life.json#life-annual-or-quarterly-theme-over-rigid-resolutions",
+  "title": "用“阶段主题词”替代死板的 Flag，允许计划随现实长出新样子",
+  "content": "旧共识（盲区）：定目标就要列一长串具体 KPI 和死板打卡表，没全完成就是失败。\n\n新现实（破盲视角）：现实变化很快，死板的 KPI 容易让人中途放弃；一个清晰的阶段“主题词”（比如“精简与沉淀 / 轻装试错 / 专注交付”）既能指明方向，又留有调整空间。\n\n破冰追问母题：\n- 结合我接下来 [3 个月 / 半年 / 一年] 的生活与工作重点：[简述现状与期望]。请帮我提炼 2 个贴切的“阶段主题词”，并说明在日常做选择时怎么用它做判断。\n- 帮我把一份原本有点死板、让人有压力的计划：[简述计划]，改造成更有弹性、聚焦核心方向的阶段主题与 2～3 个关键里程碑。",
+  "content_hash": "079222b047765f3c71200d069df515d4ad871266b448436d5d3273b9f287735b",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "life",
+    "role-inversion",
+    "cost-collapse",
+    "themes",
+    "goals",
+    "planning",
+    "reflection"
+  ],
+  "problem_solved": "定目标就要列一长串具体 KPI 和死板打卡表，没全完成就是失败。",
+  "when_to_use": "现实变化很快，死板的 KPI 容易让人中途放弃；一个清晰的阶段“主题词”（比如“精简与沉淀 / 轻装试错 / 专注交付”）既能指明方向，又留有调整空间。",
+  "procedural_steps": [
+    "结合我接下来 [3 个月 / 半年 / 一年] 的生活与工作重点：[简述现状与期望]。请帮我提炼 2 个贴切的“阶段主题词”，并说明在日常做选择时怎么用它做判断。",
+    "帮我把一份原本有点死板、让人有压力的计划：[简述计划]，改造成更有弹性、聚焦核心方向的阶段主题与 2～3 个关键里程碑。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "life-annual-or-quarterly-theme-over-rigid-resolutions",
+    "arena": "life",
+    "lenses": [
+      "role-inversion",
+      "cost-collapse"
+    ]
+  }
+}

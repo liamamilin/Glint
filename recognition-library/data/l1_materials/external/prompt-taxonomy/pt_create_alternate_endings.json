@@ -1,0 +1,28 @@
+{
+  "id": "pt_create_alternate_endings",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#create-alternate-endings",
+  "title": "为同一故事设计分歧结局",
+  "content": "基于【现有故事或大纲】设计【希望变化的感觉】的三个结局。逐个写关键决定、代价、回收的伏笔，以及需要改动的前文细节。推荐一个与人物动机最一致的方向。",
+  "content_hash": "aad24a2c5eafdbefb2b750be83cb782784217e4b1d165e98f3af28f62f2dc8dd",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "creative",
+    "结尾",
+    "故事选择",
+    "受众反应",
+    "alternate ending"
+  ],
+  "problem_solved": "让不同结局来自角色选择而非巧合。",
+  "when_to_use": "分类: 创作与多媒体",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "create-alternate-endings",
+    "category": "creative",
+    "variables": [
+      "现有故事或大纲",
+      "希望变化的感觉"
+    ]
+  }
+}

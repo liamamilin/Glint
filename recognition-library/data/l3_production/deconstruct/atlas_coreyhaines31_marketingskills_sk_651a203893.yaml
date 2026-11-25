@@ -1,0 +1,72 @@
+id: atlas_coreyhaines31_marketingskills_sk_651a203893
+title: A/B 测试实验程序
+tagline: 把零散 A/B 测试转成可复用、统计有效的增长实验程序
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - create
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - growth_experimentation
+  - a_b_testing
+  - conversion_optimization
+  - analytics
+  app_affinity:
+  - Notion
+  - Linear
+  - Chrome
+  - Cursor
+  pain_point: 团队反复凭感觉做 A/B 测试，提前停测、中途改方案、解读误用且没有积累，无法形成可复用的增长实验程序。
+  trigger_utterances:
+  - 这个 A/B 测试我该怎么设计样本量
+  - 帮我梳理一下实验流程避免提前停测
+  - 版本 A 和 B 哪个好很纠结要不要继续测
+  - 我们老是测试完没结论怎么建立实验 backlog
+  - ICE 排序 backlog 怎么做
+  anti_triggers:
+  - 仅需单次文案微调无需统计显著性
+  - 已有完整实验平台只需写代码实现变体
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '你是一名增长实验负责人。请按以下程序化步骤协助设计并落地 A/B 测试：
+
+
+    1. 上下文与目标：复用已有产品/营销上下文，只补问任务特有信息（改进点、基线转化率、流量、技术复杂度、时间线）。
+
+    2. 假设：按固定句式写“因为[观察/数据]，我们相信[变更]会为[受众]带来[预期结果]；当[指标]达到时判定成立”。每次只改变一个变量。
+
+    3. 选型与样本：根据基线转化率与期望相对提升估算每变体样本量（95% 双侧、80% 功效）；类型 A/B、A/B/n、MVT、Split URL 流量需求依次升高。
+
+    4. 指标：主指标绑定业务价值，次指标提供上下文，护栏指标防损害；保证分流一致性与曝光在日/周内均衡。
+
+    5. 上线前 QA：假设已文档化、主指标已定义、样本量已算、变体实现、跟踪验证、所有变体 QA 完成。
+
+    6. 运行期：不提前看结果、不改变体、不引新流量；护栏显著恶化即停。
+
+    7. 分析：达到样本量后检查样本量、显著性（看置信区间）、效应量与 MDE、次指标、护栏、分群；报告 p 值必须同时报告置信区间与效应量；无显著差异按预定停止规则结束；未计划分群标为探索性并在新测试确认。
+
+    8. 记录与程序化：每次测试记录假设、变体、结果与决定；胜出按模板沉淀模式。backlog 用 ICE（Impact/Confidence/Ease，1–10，Confidence 基于数据）排序；按周技术/护栏检查、双周分析与 playbook
+    更新、月度速度复盘与 ICE 重排、季度 playbook 审计节奏运行。
+
+
+    请针对用户当前场景输出：假设句式、选型与样本量估算、指标清单、上线前 QA 清单、分析报告模板与 ICE backlog 条目。'
+  variables: []
+  workflow: null
+meta:
+  source: atlas-methods
+  source_ref: coreyhaines31/marketingskills:skills/ab-testing/SKILL.md
+  source_hash: 836936e6a30c27f156d7f25700bf3ef5879522f921a850e73157098c5ecb2e59
+  status: active
+  scope: domain_specific
+  shelf: off_shelf
+  tier: A
+  category: engineering
+  subcategory: code_review
+  collections: []
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

@@ -1,0 +1,51 @@
+id: pt_news_context
+title: 新闻背景速解
+tagline: 用时间线+事实+待核实项快速读懂一条新闻
+routing:
+  primitive: deconstruct
+  goals:
+  - digest
+  clarity_fit:
+  - concrete
+  domains:
+  - research
+  - news
+  - journalism
+  - context
+  app_affinity:
+  - Chrome
+  - Slack
+  - Feishu
+  - WeChat
+  pain_point: 用户刚看到一条新闻或链接，只知道部分背景，想快速搞清事件前因、本次新增事实、各方说法和待核实信息，避免被标题党带偏
+  trigger_utterances:
+  - 我刚看到这个新闻，只了解一点背景，帮我理一下
+  - 这条新闻怎么回事，帮我梳理一下时间线
+  - 帮我把这条新闻的前因后果讲清楚，哪些还没确认
+  - 刚刷到这个新闻链接，帮我拆解一下事实和待核实项
+  - 'news context: 帮我解释这条新闻的背景'
+  anti_triggers:
+  - 用户要对新闻事件发表评论或写稿，而非理解背景
+  - 用户要求翻译或润色新闻稿
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 我刚看到【新闻或链接】，只了解【已知背景】。请用简短时间线解释事件前因，再列出本次新增事实、各方说法和待核实信息。区分事件时间与报道时间，优先引用当事机构的一手材料；若无联网能力请标记待核实。
+  variables:
+  - 新闻或链接
+  - 已知背景
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#news-context
+  source_hash: 310bc5656b8747f9ecee5a393b02c20766ae63410715538040d565acd1e57404
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: general
+  subcategory: research
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

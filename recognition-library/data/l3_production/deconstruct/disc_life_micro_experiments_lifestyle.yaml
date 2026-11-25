@@ -1,0 +1,89 @@
+id: disc_life_micro_experiments_lifestyle
+title: 14天微型实验
+tagline: 把宏大人生决定压缩成可回滚的14天原型实验
+routing:
+  primitive: deconstruct
+  goals:
+  - evaluate
+  - optimize
+  clarity_fit:
+  - vague
+  - conflicted
+  domains:
+  - life
+  - lifestyle
+  - experiments
+  - prototyping
+  - tiny_bets
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 总觉得必须先彻底想清楚才能换城市/转行/副业，结果长期空想、不敢行动
+  trigger_utterances:
+  - 要不要辞职去做自由职业
+  - 想搬家但不确定是否适合
+  - 这个人生决定太大了不敢下
+  - 空想没用想先跑个原型
+  - 先做个14天实验试试
+  anti_triggers:
+  - 已有明确方案只需执行
+  - 具体的代码或架构选型决策
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '## 14天微型实验设计清单
+
+
+    ### 1. 明确纠结点
+
+    - [ ] 用一句话写出你的纠结：[描述你的纠结，如移居/自由职业/新方向]
+
+    - [ ] 写出你理想中的新生活方式：[描述理想状态]
+
+
+    ### 2. 拆解幻想与麻烦
+
+    - [ ] 列出你最可能高估的 3 个幻想
+
+    - [ ] 列出你最可能低估的 3 个日常麻烦
+
+
+    ### 3. 设计 14 天微型实验
+
+    - [ ] 定义一个成本极低、完全可回滚的实验动作
+
+    - [ ] 明确实验起止日期（14 天内）
+
+    - [ ] 列出 3 个可量化评估指标（体感/时间/成本/情绪）
+
+
+    ### 4. 周末最小现实模拟
+
+    - [ ] 设计一次周末就能跑通的最小模拟
+
+    - [ ] 记录模拟中的真实摩擦与惊喜
+
+
+    ### 5. 回滚与决策
+
+    - [ ] 预设回滚条件（什么信号出现就放弃）
+
+    - [ ] 实验结束后对照 3 个指标做拍板'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/life.json#life-micro-experiments-lifestyle
+  source_hash: 3873180ea74aa4871e506ee21840275ece345226d127c7ff551675fc5e8b3dae
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: personal_career
+  subcategory: personal_os
+  collections: []
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

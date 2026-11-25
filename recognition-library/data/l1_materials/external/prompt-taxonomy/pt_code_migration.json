@@ -1,0 +1,29 @@
+{
+  "id": "pt_code_migration",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#code-migration",
+  "title": "规划一项兼容迁移",
+  "content": "为【当前版本或接口】迁移到【目标版本】拟实施方案，约束为【调用者和停机限制】。列受影响入口、分批顺序、兼容策略、每阶段验证和回退条件。把需要先确认的假设写成检查项。",
+  "content_hash": "e93978a10750164b96af54efee433756feace9f2ecd896e49fccb4643951b3aa",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "coding",
+    "升级",
+    "迁移",
+    "兼容",
+    "migration"
+  ],
+  "problem_solved": "把中断风险、回退点和验证步骤讲清楚。",
+  "when_to_use": "分类: 开发与调试",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "code-migration",
+    "category": "coding",
+    "variables": [
+      "当前版本或接口",
+      "目标版本",
+      "调用者和停机限制"
+    ]
+  }
+}

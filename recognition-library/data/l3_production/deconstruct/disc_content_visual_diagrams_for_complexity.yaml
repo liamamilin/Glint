@@ -1,0 +1,67 @@
+id: disc_content_visual_diagrams_for_complexity
+title: 复杂关系一张图讲清
+tagline: 把抽象机制转成节点+关系的示意图，5 秒看懂全貌
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - content
+  - visual_thinking
+  - explainers
+  - clarity
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Figma
+  - Chrome
+  pain_point: 用户试图用层层递进的长段落解释复杂机制，读者难懂且传播差；需要把因果回路/状态流转/层级关系可视化为一张干净示意图。
+  trigger_utterances:
+  - 这个架构太复杂了画个图讲清楚
+  - 帮我把这段文字转成流程图
+  - 用一张图解释这个概念关系
+  - 画个示意图说明因果回路
+  - 少写 800 字用图表达
+  anti_triggers:
+  - 只是润色或缩短文字
+  - 需要画 UI 界面或高保真原型
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '把复杂解释转成一张图的检查清单：
+
+    1. 明确要讲清的对象：[某个复杂机制/工作流/概念关系]，一句话说清目标读者需理解什么。
+
+    2. 识别关系类型：因果回路 / 状态流转 / 层级关系 / 对比，选定主图类型（信息图/流程图/象限图）。
+
+    3. 列出核心节点（3~7 个），每个节点用 2~4 字短语命名。
+
+    4. 标出节点间连线与方向，注明关系动词（导致/包含/流转/对比）。
+
+    5. 提取一句点睛标题，概括全图结论。
+
+    6. （可选）把偏抽象的文字 [粘贴文字] 改写为「节点 + 关系 + 关键结论」三段式，再画图。
+
+    7. 自检：5 秒内能否看懂全貌？不能则删节点或合并。'
+  variables:
+  - complex_mechanism_or_workflow
+  - abstract_text
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/content.json#content-visual-diagrams-for-complexity
+  source_hash: 3098cea23114ec43b531fd584f429c6392ad082ce223e8be0d7bc5956b8c5dc2
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: writing_comms
+  subcategory: content_creation
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

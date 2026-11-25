@@ -1,0 +1,61 @@
+id: pt_ask_for_help
+title: 把卡住的事写成可答问题
+tagline: 把问题、已试动作和证据整理成别人能直接回答的求助消息
+routing:
+  primitive: translate
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - communication
+  - asking_for_help
+  - collaboration
+  - workplace
+  app_affinity:
+  - Slack
+  - Feishu
+  - Mail
+  - Notion
+  pain_point: 卡在某个问题上，想向同事或专家求助，但消息里缺背景、证据和具体需求，对方看不懂或无法直接回答
+  trigger_utterances:
+  - 这个 bug 我搞不定，帮我写一段向同事求助的消息
+  - 卡住了不知道怎么问，帮我组织一下
+  - draft a help request for this blocker
+  - 怎么向别人求助说清楚一点
+  - 帮我把问题写成别人能回答的提问
+  anti_triggers:
+  - 只是想自己搜索资料或查文档
+  - 已经知道答案只是想分享结论
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: '请将以下卡住的内容整理成一则给 {{audience}} 的求助消息。要求：
+
+    1. 首句直接写希望对方具体帮什么（可回答的问题）。
+
+    2. 给最小必要背景（问题是什么、影响范围）。
+
+    3. 列出已尝试的动作与结果、已排除的原因。
+
+    4. 说明需要对方投入的时间与你能同步提供的资料/日志。
+
+    5. 语气简洁、可直接复制发送。
+
+
+    待整理内容：
+
+    {{input}}'
+  variables:
+  - audience
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#ask-for-help
+  source_hash: fe760294e87a8503fdb00e559445506ed31b3ac3d107cecde9e9587b1fbdfd09
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

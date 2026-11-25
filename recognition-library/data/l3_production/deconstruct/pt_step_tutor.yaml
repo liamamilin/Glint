@@ -1,0 +1,52 @@
+id: pt_step_tutor
+title: 逐步引导解题
+tagline: 不给答案，逐步提示并检验能否独立复用
+routing:
+  primitive: deconstruct
+  goals:
+  - debug
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - learning
+  - education
+  - tutoring
+  - problem_solving
+  app_affinity:
+  - ChatGPT
+  - Claude
+  - Notion
+  - Obsidian
+  pain_point: 做题卡住却不知错在哪一步，想要提示而非直接答案，逐步推进并最终检验能否独立复用方法
+  trigger_utterances:
+  - 这题我卡住了帮我提示一下
+  - 别直接给答案，一步步引导我
+  - 我做到这步不知道错哪了
+  - 作业不会做给我点提示
+  - 帮我找卡点并给一个推进提示
+  anti_triggers:
+  - 用户要求直接给出完整答案或完整解题步骤
+  - 与学习辅导无关的代码调试或架构问题
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 我正在做【题目】，已经尝试【思路或步骤】。先判断我卡在哪一步，每次只给一个能推进的提示，等待我尝试后再给下一步。最后用一个相似题检查我能否独立复用方法。
+  variables:
+  - 题目
+  - 思路或步骤
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#step-tutor
+  source_hash: c5d59b804ea6d2046c8e74ce3f8fdf43824ceed979e2977179b1efb15f2740e8
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: personal_career
+  subcategory: learning
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

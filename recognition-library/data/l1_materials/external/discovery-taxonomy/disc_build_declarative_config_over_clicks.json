@@ -1,0 +1,33 @@
+{
+  "id": "disc_build_declarative_config_over_clicks",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/build.json#build-declarative-config-over-clicks",
+  "title": "用“声明式配置/脚本”替代靠记忆点 20 步界面",
+  "content": "旧共识（盲区）：换电脑、重装环境或改一套配置，只能凭印象在设置面板里一步步点回去。\n\n新现实（破盲视角）：把偏好、环境依赖和常用组合写成一份可读的配置文件或脚本，重装、迁移和分享都能一键复现，再也不怕忘掉当初怎么配出来的。\n\n破冰追问母题：\n- 列出我每次换设备或重装时最容易漏掉的 5 个环境/工具配置项：[填入你的常用环境或工具]。帮我设计一份可版本管理的极简配置清单或一键初始化脚本思路。\n- 在 [你日常使用的某个软件/工作流] 中，哪些“靠手动勾选、记笔记”的设置其实可以沉淀成模板或配置，省去重复劳动？",
+  "content_hash": "ac728046717c886ba3629dcbdb786085f29acebbfda603ff6ff44424da248ca6",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "build",
+    "first-principles",
+    "invisible-friction",
+    "config-as-code",
+    "declarative",
+    "reproducible",
+    "automation"
+  ],
+  "problem_solved": "换电脑、重装环境或改一套配置，只能凭印象在设置面板里一步步点回去。",
+  "when_to_use": "把偏好、环境依赖和常用组合写成一份可读的配置文件或脚本，重装、迁移和分享都能一键复现，再也不怕忘掉当初怎么配出来的。",
+  "procedural_steps": [
+    "列出我每次换设备或重装时最容易漏掉的 5 个环境/工具配置项：[填入你的常用环境或工具]。帮我设计一份可版本管理的极简配置清单或一键初始化脚本思路。",
+    "在 [你日常使用的某个软件/工作流] 中，哪些“靠手动勾选、记笔记”的设置其实可以沉淀成模板或配置，省去重复劳动？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "build-declarative-config-over-clicks",
+    "arena": "build",
+    "lenses": [
+      "first-principles",
+      "invisible-friction"
+    ]
+  }
+}

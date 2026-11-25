@@ -1,0 +1,64 @@
+id: disc_cognition_separating_facts_from_stories
+title: 事实 vs 脑补拆分
+tagline: 把事实和脑补拆开，卡壳少一半
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - debug
+  clarity_fit:
+  - vague
+  - conflicted
+  domains:
+  - cognition
+  - clarity
+  - analysis
+  - emotion
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Slack
+  - Feishu
+  pain_point: 遇到挫折、误解或进度卡壳时，把猜测、担心和情绪误当成既成事实，导致越想越堵、越判越偏。
+  trigger_utterances:
+  - 这件事让我有点堵，到底是事实还是我脑补
+  - 消息没回，我是不是被针对了
+  - 进度卡了，别人都在怀疑我吧
+  - 这个判断有证据吗，还是我惯性联想
+  anti_triggers:
+  - 帮我把长文压缩成摘要
+  - 直接替我做最终决定
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '## 事实 vs 脑补拆分清单
+
+    1. 写下触发事件：只描述「发生了什么」，不加入评价。
+
+    2. 列出客观事实：只保留可被第三方验证、有证据支持的内容。
+
+    3. 列出我的故事：把猜测、担心、情绪、联想全部写出来。
+
+    4. 标注证据：为每条故事写出支持/反驳证据，或标记「无证据」。
+
+    5. 识别混淆点：指出哪些内容只是把情绪当成了事实。
+
+    6. 选择最小验证动作：用一个低成本动作验证最关键假设。
+
+    7. 暂停脑补：在验证前，不把故事当成决策依据。'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/cognition.json#cognition-separating-facts-from-stories
+  source_hash: 93d5a136e91b628131cf31206c0477c3b799de95204c41fe75267f8aef663fa0
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  category: general
+  subcategory: problem_solving
+  collections: []
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

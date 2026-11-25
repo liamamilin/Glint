@@ -1,0 +1,13 @@
+{
+  "id": "atlas_anthropics_skills_skills_brand_g_5efade7056",
+  "source": "atlas-methods",
+  "source_ref": "anthropics/skills:skills/brand-guidelines/SKILL.md",
+  "content_hash": "1120b3769e2985cefb3d25be981b1f914abeba57ae079b83c20c666c164fa9fe",
+  "title": "应用 Anthropic 官方品牌配色与字体",
+  "quality_score": 0.15,
+  "reasons": [
+    "内容为某公司品牌专属的静态配色/字体规范与套用规则，属于陈述性样式事实；缺乏可跨场景复用的诊断、决策或避坑认知方法，且离开该品牌语境即失去复用价值。",
+    "quality_score_below_threshold:0.15<0.65"
+  ],
+  "model": "opencode-go/beam-free"
+}

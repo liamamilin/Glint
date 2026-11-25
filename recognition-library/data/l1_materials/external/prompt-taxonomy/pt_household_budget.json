@@ -1,0 +1,28 @@
+{
+  "id": "pt_household_budget",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#household-budget",
+  "title": "把支出记录分成可管理的预算",
+  "content": "用【收入和支出记录】规划【月份和目标】的家庭预算。按固定支出、浮动支出、一次性支出和储备列出金额与依据。给三个可由我选择的调整方向和对现金流的影响，把缺失或不确定金额单列。",
+  "content_hash": "bcefaec32e0142ebef3a249bc47f34afea8b3bb88c0cef060209dbf65e51036f",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "planning",
+    "记账",
+    "支出",
+    "预算",
+    "budget"
+  ],
+  "problem_solved": "看清固定项、可调整项和一次性支出。",
+  "when_to_use": "分类: 计划与生活",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "household-budget",
+    "category": "planning",
+    "variables": [
+      "收入和支出记录",
+      "月份和目标"
+    ]
+  }
+}

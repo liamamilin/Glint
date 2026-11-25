@@ -1,0 +1,53 @@
+id: pt_visual_read
+title: 读图并用证据说明
+tagline: 把看到的和猜的分开写，结论可核对
+routing:
+  primitive: deconstruct
+  goals:
+  - digest
+  - evaluate
+  clarity_fit:
+  - concrete
+  - vague
+  domains:
+  - visual_analysis
+  - ocr
+  - screenshots
+  - creative
+  app_affinity:
+  - ChatGPT
+  - Claude
+  - Chrome
+  - Cursor
+  pain_point: 用户看截图或图片时分不清直接看见的内容与推测，AI 容易把猜测当事实，导致结论不可核对
+  trigger_utterances:
+  - 这张截图里到底写了什么
+  - 帮我读一下这张图
+  - 这个界面哪里有问题
+  - 图片里这个数字看不清
+  - 帮我分析这张截图的证据
+  anti_triggers:
+  - 需要生成或编辑图片而非读图
+  - 纯文字无图的场景
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 观察【图片或截图】，重点回答【问题】。先描述可见证据并定位区域，再给解释。看不清的文字标成「无法辨认」，有多种解释时列出支持和反对证据。最后给一个可用于核对结论的动作。
+  variables:
+  - 图片或截图
+  - 问题
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#visual-read
+  source_hash: 0aef737198c0e6c4c13f3049910a9c855ee45d026aae7cfdeb91d75e614e3b83
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: writing_comms
+  subcategory: content_creation
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

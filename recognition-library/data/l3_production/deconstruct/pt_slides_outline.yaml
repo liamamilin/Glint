@@ -1,0 +1,54 @@
+id: pt_slides_outline
+title: 演示大纲编译
+tagline: 把材料整理成面向受众、有时长限制的演示大纲
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - office
+  - presentation
+  - slides
+  app_affinity:
+  - Notion
+  - Chrome
+  - ChatGPT
+  - Claude
+  pain_point: 用户手头有零散材料，但不知道如何组织成每页任务清晰的演示文稿大纲
+  trigger_utterances:
+  - 帮我把这份材料整理成 PPT 大纲
+  - 做个 10 分钟演示的幻灯片结构
+  - slides outline 怎么写
+  - 把调研结果做成演示文稿
+  anti_triggers:
+  - 只需要润色某一页文案
+  - 只想生成完整 PPT 设计稿
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '把以下材料整理成一场面向{{audience}}、时长{{duration}}的演示。先给出一句核心主张；再逐页写标题、唯一要传达的观点、支撑证据或图示、口播提示；末页给出行动建议或需要确认的决定。
+
+
+    材料：'
+  variables:
+  - audience
+  - duration
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#slides-outline
+  source_hash: d3982ee7c7e588fb8f5d640c92de70426287a23fd03ce9d87d73896f2cf9c153
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: general
+  subcategory: problem_solving
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

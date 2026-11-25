@@ -1,0 +1,33 @@
+{
+  "id": "disc_cognition_separating_signal_from_hype",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/cognition.json#cognition-separating-signal-from-hype",
+  "title": "用“最小可验证问题”给热门概念挤泡沫",
+  "content": "旧共识（盲区）：某个概念被吹得很热，要么盲目追捧怕错过，要么一棍子打死觉得全是炒作。\n\n新现实（破盲视角）：真正的区分不在“信不信”，而在“具体卡在哪”——用 1～2 个直击成本、延迟、数据或真实留存的问题，就能快速剥出真价值与真局限。\n\n破冰追问母题：\n- 最近很火的一个概念/工具是：[填入概念或工具名]。请帮我拆解：它吹嘘的理想场景是什么、目前最真实的落地卡点是什么、以及哪些场景其实用传统简单方案就够了？\n- 给我设计一份“3 问挤泡沫清单”，以后我看到任何新名词或新方案，都能在 5 分钟内判断它值不值得我花时间深入。",
+  "content_hash": "9bfb2153f2e9f3a8a04ee9cd7d7889aa29b080547290f91c7b930394b7133ad9",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "cognition",
+    "cost-collapse",
+    "invisible-friction",
+    "hype-filter",
+    "verification",
+    "skepticism",
+    "research"
+  ],
+  "problem_solved": "某个概念被吹得很热，要么盲目追捧怕错过，要么一棍子打死觉得全是炒作。",
+  "when_to_use": "真正的区分不在“信不信”，而在“具体卡在哪”——用 1～2 个直击成本、延迟、数据或真实留存的问题，就能快速剥出真价值与真局限。",
+  "procedural_steps": [
+    "最近很火的一个概念/工具是：[填入概念或工具名]。请帮我拆解：它吹嘘的理想场景是什么、目前最真实的落地卡点是什么、以及哪些场景其实用传统简单方案就够了？",
+    "给我设计一份“3 问挤泡沫清单”，以后我看到任何新名词或新方案，都能在 5 分钟内判断它值不值得我花时间深入。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "cognition-separating-signal-from-hype",
+    "arena": "cognition",
+    "lenses": [
+      "cost-collapse",
+      "invisible-friction"
+    ]
+  }
+}

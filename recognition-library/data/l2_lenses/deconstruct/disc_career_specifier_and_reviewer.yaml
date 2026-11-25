@@ -1,0 +1,69 @@
+id: disc_career_specifier_and_reviewer
+title: 从执行者到定义与验收
+tagline: AI廉价化纯执行，把职业护城河迁移到规格定义与质量验收。
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - evaluate
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - career
+  - role_inversion
+  - ai_era
+  - skills
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 总觉得自己职业价值靠亲手把活干快、工具用熟，但 AI 正在把纯执行廉价化，担心被替代却不知往哪转。
+  trigger_utterances:
+  - 我每天写代码做方案，AI 能不能把我替代了
+  - 职业护城河是不是只剩执行速度了
+  - 怎么从自己动手变成把关验收
+  - 帮我看看哪些技能正在贬值
+  - 我想转型做 spec 和 review
+  anti_triggers:
+  - 只是想学某个工具的快捷操作或语法
+  - 需要具体的简历模板或面试题
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '## 从执行者到定义者与验收者
+
+
+    ### Part A：能力盘点（针对 {{role}}）
+
+    - [ ] 列出 5 个正在被 AI 迅速廉价化的纯执行技能
+
+    - [ ] 列出 5 个变得更值钱的「定义问题 / 质量验收 / 责任兜底」高杠杆能力
+
+    - [ ] 为每项高杠杆能力标出可交付的证据（产出物/指标）
+
+
+    ### Part B：资深专家级验收清单（针对 {{deliverable}}）
+
+    - [ ] 明确验收维度：正确性、完整性、可维护性、风险与边界
+
+    - [ ] 为每维度写出 3~5 条可判定标准
+
+    - [ ] 标注「阻断项」与「建议项」
+
+    - [ ] 定义通过 / 不通过 / 需修订的判定规则
+
+    - [ ] 留出 AI 产出的复核步骤与责任归属'
+  variables:
+  - role
+  - deliverable
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/career.json#career-specifier-and-reviewer
+  source_hash: a156c563d926c6af219caafb3c1ae042023f363232d2e8a698935091b13b5041
+  status: active
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

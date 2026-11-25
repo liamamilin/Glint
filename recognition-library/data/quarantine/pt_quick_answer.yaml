@@ -1,0 +1,45 @@
+id: pt_quick_answer
+source: prompt-taxonomy
+source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#quick-answer
+source_hash: a7b8cabfc23ec2ac651db7922a5ff87eebd615825e01b6c278353e11f62c2a86
+reasons:
+- wrap_mode_missing_input_placeholder
+duplicate_of: null
+duplicate_score: null
+draft:
+  confidence: 0.9
+  title: 直接答问题
+  tagline: 先给两句话结论，再附关键点与例外
+  routing:
+    primitive: compress
+    goals:
+    - digest
+    clarity_fit:
+    - concrete
+    domains:
+    - research
+    - qa
+    - fact_checking
+    - information_retrieval
+    app_affinity:
+    - Chrome
+    - ChatGPT
+    - Claude
+    - Notion
+    pain_point: 用户需要快速得到一个具体问题的明确答案，而不是冗长解释或开放讨论
+    trigger_utterances:
+    - 这个事到底是不是真的
+    - 直接告诉我答案别绕弯
+    - 'quick answer: 这个API支持批量吗'
+    - 帮我查下XX的官方说法是什么
+    - 一句话回答我XX
+    anti_triggers:
+    - 用户想深度分析某个话题的来龙去脉
+    - 用户需要做决策权衡而非事实查询
+  execution:
+    action_type: inject_prompt
+    inject_mode: wrap
+    content: 我想知道{{question}}。背景是{{context}}。先用两句话回答，再解释最多三个关键点和一个容易误解的例外。涉及近期事实时标注信息截至日期，并附可访问的原始来源；查不到的部分明确标为待核实。
+    variables:
+    - question
+    - context

@@ -1,0 +1,28 @@
+{
+  "id": "pt_sales_call_prep",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#sales-call-prep",
+  "title": "为一次销售沟通整理对客背景",
+  "content": "为与【客户角色与组织】的沟通做准备，已知【事实和以往接触】。列可能目标、已核实信息、需要了解的三件事和可举的案例，提供开场及退出条件。",
+  "content_hash": "e582ca9e09eee17a82cf03e7a9add6b41baf13e1e26fb6c0c807cd9661fbdc25",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "marketing",
+    "销售",
+    "商务",
+    "客户拜访",
+    "sales call"
+  ],
+  "problem_solved": "带着待验证的需求假设和提问进入会议。",
+  "when_to_use": "分类: 营销与销售",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "sales-call-prep",
+    "category": "marketing",
+    "variables": [
+      "客户角色与组织",
+      "事实和以往接触"
+    ]
+  }
+}

@@ -1,0 +1,57 @@
+id: disc_career_energy_aligned_scheduling
+title: 按精力曲线排程
+tagline: 把高脑力任务放峰值、琐事放低谷，同样工时产出不同
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - career
+  - energy
+  - chronotype
+  - deep_work
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Linear
+  pain_point: 把待办一股脑塞进日历空白格，高脑力任务总撞上低谷时段，产出极低却以为安排已满
+  trigger_utterances:
+  - 下午总是犯困但日程里全是硬骨头
+  - 帮我按精力高低重新排一下今天任务
+  - 我什么时段做深度工作最高效
+  - 日历塞满了但效率很低
+  - energy curve scheduling
+  anti_triggers:
+  - 只是想记录待办清单不涉及精力匹配
+  - 会议冲突协调与日程合并
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '## 精力曲线排程清单
+
+    - [ ] 记录连续 3 天每 2 小时的精力状态，标出峰值与低谷时段
+
+    - [ ] 列出本周任务，按「高认知/决策」与「低认知/执行」二分
+
+    - [ ] 把高认知任务移到精力峰值时段，低认知琐事移到低谷时段
+
+    - [ ] 为下午/晚上低谷准备 3~5 个低脑力但有推进感的收尾任务（整理、回复、归档、轻量修改）
+
+    - [ ] 预留 1 个缓冲块，避免峰值被会议切碎
+
+    - [ ] 每晚 5 分钟复盘：哪些任务时段失配？次日微调
+
+    - [ ] 一周后回顾产出，迭代个人精力曲线'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/career.json#career-energy-aligned-scheduling
+  source_hash: c5831a345b7e8a77bc6db8b22bde5198a2373c2558dbb0b88f84b273204c4803
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

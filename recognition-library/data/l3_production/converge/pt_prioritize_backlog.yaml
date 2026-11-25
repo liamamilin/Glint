@@ -1,0 +1,66 @@
+id: pt_prioritize_backlog
+title: 需求优先级比较
+tagline: 用影响/证据/成本/依赖给 backlog 排序并标出不确定性
+routing:
+  primitive: converge
+  goals:
+  - evaluate
+  - optimize
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - product
+  - backlog
+  - prioritization
+  - roadmap
+  app_affinity:
+  - Linear
+  - Notion
+  - Slack
+  pain_point: backlog 堆满需求，团队对先做什么争议大，排序依据含糊且风险不可见
+  trigger_utterances:
+  - 这些需求先做哪个
+  - backlog 太多排不过来
+  - A 和 B 哪个优先
+  - 帮我给需求排个优先级
+  - 需求优先级怎么定
+  anti_triggers:
+  - 单个需求的实现细节拆解
+  - 纯技术选型或架构对比
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: '请按以下框架对候选需求做优先级排序：
+
+
+    输入：{{input}}
+
+
+    输出要求：
+
+    1. 明确目标与已有约束（时间/人力/依赖/风险预算）。
+
+    2. 对每项候选做表：影响（用户/业务）、证据（数据/反馈）、成本（人天/复杂度）、依赖（前置/阻塞）。
+
+    3. 标注依据、未知项与排序敏感点（哪条假设改变就会重排）。
+
+    4. 给出前两项的最小可交付增量（MVP slice）与验证结果（如何证明有效）。
+
+    5. 最终排序 + 一句话理由。'
+  variables: []
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#prioritize-backlog
+  source_hash: 1e6ec1cb5bca436dea5c7e2738e203526df8f030a4eec1895b80bb5e7477c70a
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: product_business
+  subcategory: product_design
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

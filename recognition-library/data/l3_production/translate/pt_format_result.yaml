@@ -1,0 +1,78 @@
+id: pt_format_result
+title: 按模板制作交付文档
+tagline: 按参考模板结构化素材，保留样式约束并占位缺失内容
+routing:
+  primitive: translate
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - document_template
+  - formatting
+  - files
+  - report
+  app_affinity:
+  - Notion
+  - Feishu
+  - Word
+  - Chrome
+  pain_point: 手头有素材和模板，但不知道怎么把内容按模板的标题层级、日期、表格格式归置进去，还怕漏掉栏目
+  trigger_utterances:
+  - 按这个模板帮我把内容填进去
+  - 素材按模板格式出一份报告
+  - 帮我按已有模板做交付文档
+  - 套用模板生成文档保留格式
+  - 按模板结构整理这份内容
+  anti_triggers:
+  - 从零起稿新文档
+  - 只做文字润色不涉及模板结构
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: '请基于【参考模板】和【内容素材】制作【交付文件】。要求：
+
+    1. 沿用模板的标题层级、日期和表格格式，将各段信息归置到对应栏目。
+
+    2. 模板中有但素材未提供的内容，先用占位符（如「待补充」）占位。
+
+    3. 末尾列出模板中仍需补充的栏目。
+
+    4. 核对输出在正常阅读视图下是否完整、格式无错乱。
+
+
+    【参考模板】
+
+    {{template}}
+
+
+    【内容素材】
+
+    {{input}}
+
+
+    【交付文件】
+
+    {{output_name}}'
+  variables:
+  - template
+  - output_name
+  - 参考模板
+  - 内容素材
+  - 交付文件
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#format-result
+  source_hash: 9df42faff0351cb44d847e4fcb1e934beba740dd7851a7940824af1378fb00f1
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: writing_comms
+  subcategory: content_creation
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

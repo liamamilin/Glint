@@ -1,0 +1,33 @@
+{
+  "id": "disc_career_portfolio_of_small_bets",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/career.json#career-portfolio-of-small-bets",
+  "title": "靠“低成本小实验组合”攒职业期权，而不是把筹码全押在一处",
+  "content": "旧共识（盲区）：精力有限，只能死守一条主线，做点小实验就是“不务正业、分散注意力”。\n\n新现实（破盲视角）：单点押注在环境突变时很脆弱；用少量业余时间跑低成本、可复用的小项目或小研究，既能反哺主业，又能悄悄攒出备选路径和真实作品。\n\n破冰追问母题：\n- 结合我目前的主业/方向：[简述现状] 和每周最多可投入的 [如 3-5 小时] 时间，设计 2 个“低成本、能反哺主业又积累长期资产”的微型探索方向。\n- 如何判断一个副线实验该“继续加码”还是“果断止损关掉”，帮我定一套简单客观的退出标准。",
+  "content_hash": "949db0aa1c96fe2c354e7951a071354bf9912542eed0e20d6741ff8522b838e4",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "career",
+    "cost-collapse",
+    "cross-domain",
+    "optionality",
+    "side-projects",
+    "career-resilience",
+    "期权思维"
+  ],
+  "problem_solved": "精力有限，只能死守一条主线，做点小实验就是“不务正业、分散注意力”。",
+  "when_to_use": "单点押注在环境突变时很脆弱；用少量业余时间跑低成本、可复用的小项目或小研究，既能反哺主业，又能悄悄攒出备选路径和真实作品。",
+  "procedural_steps": [
+    "结合我目前的主业/方向：[简述现状] 和每周最多可投入的 [如 3-5 小时] 时间，设计 2 个“低成本、能反哺主业又积累长期资产”的微型探索方向。",
+    "如何判断一个副线实验该“继续加码”还是“果断止损关掉”，帮我定一套简单客观的退出标准。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "career-portfolio-of-small-bets",
+    "arena": "career",
+    "lenses": [
+      "cost-collapse",
+      "cross-domain"
+    ]
+  }
+}

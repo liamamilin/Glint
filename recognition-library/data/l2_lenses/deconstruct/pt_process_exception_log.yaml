@@ -1,0 +1,45 @@
+id: pt_process_exception_log
+title: 从异常记录中整理流程问题
+tagline: 把异常工单拆成正常例外与流程缺陷，给优先项一个不改主流程的试点
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - debug
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - office
+  - process_improvement
+  - workflow
+  - operations
+  app_affinity:
+  - Notion
+  - Feishu
+  - Slack
+  - Mail
+  pain_point: 面对一堆异常记录/工单，分不清哪些是正常例外、哪些是真流程缺陷，绕行和耗时反复发生却说不清根因
+  trigger_utterances:
+  - 异常工单堆了一堆帮我理清哪些是流程缺陷
+  - 这个流程总有人绕行帮我查原因
+  - 流程例外太多不知道从哪下手
+  - 帮我从工单里找出流程问题
+  - 每次异常都升级领导很烦
+  anti_triggers:
+  - 已知根因只需执行修复方案
+  - 单个工单的常规处理与回复
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 检查【异常记录或工单】中的【流程范围】。逐类列触发条件、频率、额外耗时、临时处理方式与依据。区分正常例外和流程缺陷，为优先项给一个不改变主流程的验证试点。
+  variables: []
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#process-exception-log
+  source_hash: 4c5a47388e14aa465fcb940f029aebce4b63beb0d3fa5c2f2f3c6dbd0db96130
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

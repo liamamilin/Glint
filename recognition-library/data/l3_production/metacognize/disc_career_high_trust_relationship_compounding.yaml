@@ -1,0 +1,79 @@
+id: disc_career_high_trust_relationship_compounding
+title: 靠谱交付积累信任复利
+tagline: 把答应的事按时做好，让合作方自然回流
+routing:
+  primitive: metacognize
+  goals:
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - career
+  - relationships
+  - reputation
+  - trust
+  - compounding
+  app_affinity:
+  - Slack
+  - Feishu
+  - Mail
+  - Notion
+  pain_point: 用户把职业机会和人脉增长寄托在多加好友、多参加社交或频繁客套上，却忽略了“答应的事按时做到、遇到坑提前说清、不制造额外麻烦”这类高稀缺度的靠谱交付
+  trigger_utterances:
+  - 我是不是应该多参加活动多加人
+  - 怎么让合作方觉得我靠谱愿意长期合作
+  - 项目有点延期但还没和对方说
+  - stressed about networking but not delivering
+  - 怎么积累职业信任复利
+  anti_triggers:
+  - 用户只是想润色一封社交寒暄消息
+  - 用户在做纯技术架构拆解而非人际交付
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '## 靠谱交付·信任复利自检清单
+
+
+    ### 一、当前承诺进度审计
+
+    - [ ] 列出正在推进的几项合作/承诺（含负责人、截止日期）
+
+    - [ ] 标出进度滞后但尚未主动同步的事项
+
+    - [ ] 为每项滞后事项起草一句真诚、不推卸的提前沟通话术
+
+
+    ### 二、高信任日常细节（选 3 个落地）
+
+    - [ ] 答应的事在截止日前交付，无法交付时提前 24h+ 说明原因与替代方案
+
+    - [ ] 遇到坑第一时间同步，不等对方追问
+
+    - [ ] 交付物附带“下一步/风险/需要对方配合”的简明说明，减少对方认知负担
+
+    - [ ] 回复消息明确结论与时间点，避免“收到/好的”式空回复
+
+    - [ ] 会议/沟通后 24h 内发出纪要与 action items
+
+
+    ### 三、破冰追问
+
+    - 我目前在推进的合作有哪些还没主动同步进度？
+
+    - 哪 3 个小细节最能让对方觉得“这人特别靠谱、愿意长期合作”？'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/career.json#career-high-trust-relationship-compounding
+  source_hash: 341e8b1ff5799550b59aa6f040bc2c81c5549ef10f8413be37828ed9e6f68eae
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: personal_career
+  subcategory: career
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

@@ -1,0 +1,27 @@
+{
+  "id": "pt_portfolio_case",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#portfolio-case",
+  "title": "将项目写进作品集",
+  "content": "把【项目材料】整理为给【目标岗位】看的作品集案例。写问题、约束、我的职责、主要决定、替代方案和结果。给可附证据的位置，并指出仍可补做的验证。",
+  "content_hash": "9e189317d72c65b4e01ec527f055b63de43940527de61cf5ba1d2265207d1b91",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "career",
+    "作品集",
+    "项目复盘",
+    "portfolio"
+  ],
+  "problem_solved": "展示从问题到决定与结果的过程。",
+  "when_to_use": "分类: 求职与职业",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "portfolio-case",
+    "category": "career",
+    "variables": [
+      "项目材料",
+      "目标岗位"
+    ]
+  }
+}

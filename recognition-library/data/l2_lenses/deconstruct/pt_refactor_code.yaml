@@ -1,0 +1,44 @@
+id: pt_refactor_code
+title: 重构并保持行为
+tagline: 先固定行为再最小改动，安全降低维护成本
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - coding
+  - refactoring
+  - tech_debt
+  - maintenance
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Terminal
+  pain_point: 代码越来越难维护，想重构但怕改坏现有行为，不知从哪下手
+  trigger_utterances:
+  - 帮我重构这段代码但别改变行为
+  - 这段代码太乱了想整理一下
+  - 重构一下这个函数保持接口不变
+  - 技术债太多了想做最小改动重构
+  - refactor this without breaking callers
+  anti_triggers:
+  - 从零实现新功能
+  - 修复明确的 bug 或报错
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: 重构 {{input}}，目标是 {{具体维护问题}}，已知调用约束是 {{公共接口或边界}}。先用现有测试或示例固定行为，再做最小改动。给出重构前后的调用示例与验证方式，并指出需要单独处理的行为变化。
+  variables:
+  - 具体维护问题
+  - 公共接口或边界
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#refactor-code
+  source_hash: 1916df53216647ed13f78336c713c564e54ed897b3611accd05864c798eed90f
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

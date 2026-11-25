@@ -98,13 +98,30 @@ private struct CardRow: View {
     }
 
     private var dimensionDotColor: Color {
-        switch card.dimension.lowercased() {
+        switch (card.primitive ?? card.dimension).lowercased() {
         case "critique": return Color(red: 0.92, green: 0.45, blue: 0.45)
-        case "structure": return Color(red: 0.36, green: 0.68, blue: 0.94)
-        case "explore": return Color(red: 0.94, green: 0.72, blue: 0.34)
-        case "polish": return Color(red: 0.72, green: 0.56, blue: 0.94)
-        case "engineering": return Color(red: 0.34, green: 0.80, blue: 0.62)
+        case "deconstruct", "structure": return Color(red: 0.36, green: 0.68, blue: 0.94)
+        case "diverge", "explore": return Color(red: 0.94, green: 0.72, blue: 0.34)
+        case "translate", "polish": return Color(red: 0.72, green: 0.56, blue: 0.94)
+        case "converge", "engineering": return Color(red: 0.34, green: 0.80, blue: 0.62)
+        case "compress": return Color(red: 0.38, green: 0.78, blue: 0.85)
+        case "metacognize": return Color(red: 0.96, green: 0.58, blue: 0.36)
         default: return Color.secondary
+        }
+    }
+
+    private var actionBadgeText: String {
+        if card.is_workflow_next == true {
+            return "→ 下一步"
+        }
+        if card.is_l3_breakthrough == true {
+            return "✦ L3 发现"
+        }
+        switch card.action_type {
+        case "show_checklist": return "清单·阅读"
+        case "open_resource": return "兵器·阅读"
+        case "workflow_entry": return "工作流"
+        default: return card.mode == .wrap ? "包裹" : "追加"
         }
     }
 
@@ -134,10 +151,16 @@ private struct CardRow: View {
 
                     Spacer()
 
-                    if isSelected {
-                        Text(card.mode == .wrap ? "包裹" : "追加")
+                    if isSelected || card.is_workflow_next == true || card.is_l3_breakthrough == true {
+                        Text(card.is_exploration == true ? "✦ \(actionBadgeText)" : actionBadgeText)
                             .font(.system(size: 9.5, weight: .medium))
-                            .foregroundStyle(Color.primary.opacity(0.42))
+                            .foregroundStyle(
+                                card.is_workflow_next == true
+                                    ? Color.accentColor
+                                    : (card.is_l3_breakthrough == true
+                                        ? Color(red: 0.72, green: 0.56, blue: 0.94)
+                                        : Color.primary.opacity(0.42))
+                            )
                     }
                 }
 
@@ -280,6 +303,93 @@ private struct CustomIntentTextField: NSViewRepresentable {
             }
             return false
         }
+    }
+}
+
+struct LensReaderView: View {
+    let card: CardItem
+    let onCopy: () -> Void
+    let onInject: () -> Void
+    let onClose: () -> Void
+
+    private var cleanBody: String {
+        card.prompt.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    private var kindLabel: String {
+        card.action_type == "open_resource" ? "兵器机制" : "破盲清单"
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack(spacing: 8) {
+                Text(kindLabel)
+                    .font(.system(size: 10, weight: .semibold))
+                    .padding(.horizontal, 6)
+                    .padding(.vertical, 2)
+                    .background(Color.accentColor.opacity(0.16), in: Capsule())
+                    .foregroundStyle(Color.accentColor)
+
+                Text(card.title)
+                    .font(.system(size: 13.5, weight: .semibold))
+                    .lineLimit(1)
+
+                Spacer()
+
+                Button(action: onClose) {
+                    Image(systemName: "xmark")
+                        .font(.system(size: 10, weight: .semibold))
+                        .foregroundStyle(Color.primary.opacity(0.45))
+                }
+                .buttonStyle(.plain)
+            }
+
+            if !card.preview.isEmpty {
+                Text(card.preview)
+                    .font(.system(size: 11.5))
+                    .foregroundStyle(Color.primary.opacity(0.62))
+            }
+
+            Divider().opacity(0.25)
+
+            ScrollView {
+                Text(cleanBody)
+                    .font(.system(size: 12))
+                    .foregroundStyle(Color.primary.opacity(0.88))
+                    .textSelection(.enabled)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .frame(maxHeight: 260)
+
+            Divider().opacity(0.25)
+
+            HStack(spacing: 10) {
+                Button("↵ 复制到剪贴板", action: onCopy)
+                    .buttonStyle(.plain)
+                    .font(.system(size: 11, weight: .medium))
+                    .foregroundStyle(Color.accentColor)
+
+                Button("⇧↵ 仍要注入", action: onInject)
+                    .buttonStyle(.plain)
+                    .font(.system(size: 11))
+                    .foregroundStyle(Color.primary.opacity(0.6))
+
+                Spacer()
+
+                Button("Esc 关闭", action: onClose)
+                    .buttonStyle(.plain)
+                    .font(.system(size: 10.5))
+                    .foregroundStyle(Color.primary.opacity(0.42))
+            }
+        }
+        .padding(12)
+        .frame(width: 420)
+        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 14, style: .continuous)
+                .strokeBorder(Color.white.opacity(0.18), lineWidth: 0.75)
+        )
     }
 }
 

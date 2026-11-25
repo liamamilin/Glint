@@ -1,0 +1,65 @@
+id: disc_cognition_steelman_adversarial
+title: 红队事前验尸清单
+tagline: 让AI扮演冷酷反对派，先找出决策致命盲区。
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  - debug
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - decision
+  - critical_thinking
+  - product_strategy
+  - risk_management
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Slack
+  - Cursor
+  pain_point: 做决策时AI总顺着你说话，真正需要在投入前找出可能失败的盲区和最强反方论证。
+  trigger_utterances:
+  - 帮我挑这个方案的漏洞
+  - 这个决定会不会翻车
+  - 别鼓励我，帮我验尸
+  - Give me the strongest counterargument
+  - 这个项目3个月内可能怎么死
+  anti_triggers:
+  - 只想让AI润色文案或补充论据时
+  - 需要快速总结会议纪要时
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '红队事前验尸清单：
+
+    1. 写下你正打算做的决定或项目：[描述你的想法]。
+
+    2. 要求AI收起礼貌和鼓励，扮演最挑剔的行业老兵。
+
+    3. 让AI列出5个最可能导致这件事在3个月内彻底失败的致命盲区。
+
+    4. 针对你的核心判断：[填入你的核心观点]，让AI构建最强版本的反方论证（Steelman）。
+
+    5. 让AI指出只需要验证哪1个事实就能推翻你现在的假设。
+
+    6. 在完成盲区排查和反方论证验证前，不投入时间或资源。'
+  variables:
+  - decision
+  - core_view
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/cognition.json#cognition-steelman-adversarial
+  source_hash: 1cf9785ff04f55d72f3aaf7a9efb0347bc332ecef5db90350da66cf9db72d87c
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  category: product_business
+  subcategory: product_design
+  collections: []
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

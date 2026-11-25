@@ -1,0 +1,58 @@
+id: pt_design_regression_set
+title: 建立提示词回归样本集
+tagline: 为提示词/工作流沉淀日常、边界、缺失与矛盾样本
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - debug
+  clarity_fit:
+  - concrete
+  domains:
+  - prompt_engineering
+  - evaluation
+  - regression_testing
+  - llm_workflows
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Notion
+  - ChatGPT
+  pain_point: 改了提示词或工作流后不知道会不会把以前能跑通的用例搞坏，手里没有固定样本反复验证
+  trigger_utterances:
+  - 提示词改完怎么保证以前能用的还能用
+  - 帮我建个回归测试集留着验证
+  - need a regression dataset for my prompt
+  - 这个 workflow 要留些历史失败用例
+  - 别让优化把老功能搞坏
+  anti_triggers:
+  - 只是想写一个全新的提示词，没有历史用例
+  - 只想做单次输出润色或翻译
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: "为【{{prompt_or_workflow}}】建立回归集，以【{{task_distribution_and_failures}}】为线索。请按以下结构产出：\n1. 用例分组：日常样本、边界样本、材料缺失样本、矛盾样本，各至少\
+    \ 2 条。\n2. 每条用例包含：\n   - 输入（原始用户输入/上下文）\n   - 最小可接受行为（必须满足的最低输出标准）\n   - 关键失败模式（历史上或预期的失败表现）\n   - 加入原因（为什么值得保留）\n3. 留出至少\
+    \ 20% 的用例作为未参与优化的验证样本，明确标注“holdout”。\n4. 输出为可直接复制的表格/清单，便于后续自动化或人工回归。"
+  variables:
+  - prompt_or_workflow
+  - task_distribution_and_failures
+  - '{{prompt_or_workflow}}'
+  workflow:
+    workflow_id: evaluate-a-prompt
+    step: 2
+    next_lens_id: pt_prompt_rubric
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#design-regression-set
+  source_hash: 9985d1046823039e0f4b1a11f6cde2ea360fe8f2cea3aa0478eacfad5e01c0f2
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: engineering
+  subcategory: code_review
+  collections: []
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

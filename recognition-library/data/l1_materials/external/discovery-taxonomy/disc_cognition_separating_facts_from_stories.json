@@ -1,0 +1,33 @@
+{
+  "id": "disc_cognition_separating_facts_from_stories",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/cognition.json#cognition-separating-facts-from-stories",
+  "title": "把“客观事实”和“脑补故事”分开写，卡壳瞬间解开",
+  "content": "旧共识（盲区）：遇到挫折、误会或卡壳时，脑子里的猜测和情绪往往被当成了既成事实。\n\n新现实（破盲视角）：把事件拆成两栏——“纯客观发生的事” vs “我自己推演/脑补的故事”——很多内耗和误判会当场缩小一半。\n\n破冰追问母题：\n- 我现在因为 [某件事/某段沟通/某个进度卡点] 觉得有点堵或烦躁：[简述情况]。请帮我把“客观事实”和“我的主观猜测/担心”拆开列出来，并给出下一步最务实的验证动作。\n- 针对 [某个让你纠结的判断]，哪些是已经有证据支撑的，哪些只是惯性联想？",
+  "content_hash": "93d5a136e91b628131cf31206c0477c3b799de95204c41fe75267f8aef663fa0",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "cognition",
+    "role-inversion",
+    "invisible-friction",
+    "facts-vs-stories",
+    "clarity",
+    "emotion",
+    "analysis"
+  ],
+  "problem_solved": "遇到挫折、误会或卡壳时，脑子里的猜测和情绪往往被当成了既成事实。",
+  "when_to_use": "把事件拆成两栏——“纯客观发生的事” vs “我自己推演/脑补的故事”——很多内耗和误判会当场缩小一半。",
+  "procedural_steps": [
+    "我现在因为 [某件事/某段沟通/某个进度卡点] 觉得有点堵或烦躁：[简述情况]。请帮我把“客观事实”和“我的主观猜测/担心”拆开列出来，并给出下一步最务实的验证动作。",
+    "针对 [某个让你纠结的判断]，哪些是已经有证据支撑的，哪些只是惯性联想？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "cognition-separating-facts-from-stories",
+    "arena": "cognition",
+    "lenses": [
+      "role-inversion",
+      "invisible-friction"
+    ]
+  }
+}

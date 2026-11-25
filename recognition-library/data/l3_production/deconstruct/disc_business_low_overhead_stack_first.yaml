@@ -1,0 +1,76 @@
+id: disc_business_low_overhead_stack_first
+title: 极低固定成本冷启动
+tagline: 起步先砍掉非必要订阅与物料，用最低成本跑通真实需求验证。
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - business
+  - bootstrapping
+  - lean_ops
+  - cost_management
+  app_affinity:
+  - Notion
+  - Slack
+  - Mail
+  - Chrome
+  pain_point: 起步做项目或副业时，总想先把全套高级订阅、精美物料和复杂架构配齐，还没验证需求就堆满固定成本，导致试错压力大、容错率低。
+  trigger_utterances:
+  - 我准备做副业，先列了一堆工具要买
+  - 创业前要不要先买 Notion Pro 和 Figma
+  - 启动成本太高了怎么砍
+  - 先别买那么多订阅了帮我减
+  - early stage fixed cost too high
+  anti_triggers:
+  - 已有稳定收入需要升级基础设施的团队
+  - 单纯比价采购软件的场景
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '【极低固定成本冷启动 checklist】
+
+    项目：{{project}}
+
+    当前准备清单：{{current_stack}}
+
+    启动阶段：{{stage}}
+
+
+    1. 列出所有计划购买的工具/订阅/物料/时间投入。
+
+    2. 逐项判断：不买它是否仍能跑通最小验证？能则砍掉。
+
+    3. 区分“过早优化/烧钱” vs “花在刀刃上最快验证需求”。
+
+    4. 保留 0~极低固定成本方案：免费/开源/现成模板/手动流程。
+
+    5. 设定明确验证信号（真实付费或真实使用）后再升级。
+
+    6. 有正反馈后，按优先级逐步替换为更正式的工具/架构。
+
+    7. 每次升级前复盘：固定成本上升是否带来可衡量的效率/收入提升。'
+  variables:
+  - project
+  - current_stack
+  - stage
+  - 极低固定成本冷启动 checklist
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-low-overhead-stack-first
+  source_hash: 380cd5b147234113a343b66f9ad61382007c3104a1fa870cbf130d4a22e3e308
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: product_business
+  subcategory: indie_business
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

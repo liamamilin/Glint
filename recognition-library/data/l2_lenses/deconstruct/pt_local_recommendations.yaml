@@ -1,0 +1,47 @@
+id: pt_local_recommendations
+title: 查找符合条件的本地服务
+tagline: 帮你在指定范围内找到可验证的本地服务候选并列出核对清单
+routing:
+  primitive: deconstruct
+  goals:
+  - digest
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - research
+  - local_services
+  - consumer
+  - daily_life
+  app_affinity:
+  - Chrome
+  - ChatGPT
+  - Claude
+  - Notion
+  pain_point: 用户需要找本地服务，但要逐个确认营业时间、服务范围、交通与联系方式，耗时且容易漏掉可查证信息。
+  trigger_utterances:
+  - 帮我找附近靠谱的修电脑店
+  - 周围有哪些牙科诊所营业到晚上
+  - 找家离公司近的健身房
+  - 帮我搜一下本地家政服务
+  - 附近有没有24小时药店
+  anti_triggers:
+  - 不适用于购买商品或纯线上服务查询
+  - 不适用于全国范围的电商比价
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 帮我在【地点和可到达范围】找【服务】。优先根据【约束和偏好】筛选，列服务范围、营业时间、费用资料和官方联系入口。标注核对日期，只保留可查证的候选，列出建议打电话确认的问题。
+  variables:
+  - 地点和可到达范围
+  - 服务
+  - 约束和偏好
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#local-recommendations
+  source_hash: 3cd9d94213c0de37efdc687ac80389a1e6b046f243f230d5e32f40d6b391d1a8
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

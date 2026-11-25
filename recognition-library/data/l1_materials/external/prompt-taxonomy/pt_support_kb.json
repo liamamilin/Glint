@@ -1,0 +1,27 @@
+{
+  "id": "pt_support_kb",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#support-kb",
+  "title": "把已解决的工单写成知识库文章",
+  "content": "根据【已验证工单和修复】为【目标读者】写知识库文章。包括症状、适用条件、检查、解决步骤和何时转人工。去掉单个客户信息，保留可验证异常和对应版本。",
+  "content_hash": "573281e1baa893de671092989ebd0a6226ce8273fe71b99fc5f1d8baea1e9523",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "support",
+    "客服知识库",
+    "帮助文档",
+    "knowledge base"
+  ],
+  "problem_solved": "将个案归纳为可复现步骤和适用范围。",
+  "when_to_use": "分类: 客服与服务运营",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "support-kb",
+    "category": "support",
+    "variables": [
+      "已验证工单和修复",
+      "目标读者"
+    ]
+  }
+}

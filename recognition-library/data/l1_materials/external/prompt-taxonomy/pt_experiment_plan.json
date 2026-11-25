@@ -1,0 +1,28 @@
+{
+  "id": "pt_experiment_plan",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#experiment-plan",
+  "title": "设计一次产品实验",
+  "content": "围绕【假设】为【用户和场景】设计实验。给可检验预测、比较方案、主指标和保护指标、数据要求及提前定义的判断规则。考虑曝光、样本偏差和并行变化，给实验不可行时的替代验证。",
+  "content_hash": "1c0fcba891927c3ee653876f8c48c3908661e5a33aaf71e73453a515f60348fe",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "product",
+    "实验",
+    "A/B测试",
+    "hypothesis",
+    "experiment"
+  ],
+  "problem_solved": "提前定义可观察目标和解释边界。",
+  "when_to_use": "分类: 产品与业务",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "experiment-plan",
+    "category": "product",
+    "variables": [
+      "假设",
+      "用户和场景"
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "pt_refactor_code",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#refactor-code",
+  "title": "重构并保持已有行为",
+  "content": "重构【代码范围】，目标是【具体维护问题】，已知调用约束是【公共接口或边界】。先用现有测试或示例固定行为，再做最小改动。给出重构前后的调用示例与验证方式，并指出需要单独处理的行为变化。",
+  "content_hash": "1916df53216647ed13f78336c713c564e54ed897b3611accd05864c798eed90f",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "coding",
+    "重构",
+    "技术债",
+    "refactor"
+  ],
+  "problem_solved": "有针对性地降低维护成本。",
+  "when_to_use": "分类: 开发与调试",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "refactor-code",
+    "category": "coding",
+    "variables": [
+      "代码范围",
+      "具体维护问题",
+      "公共接口或边界"
+    ]
+  }
+}

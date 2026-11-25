@@ -1,0 +1,88 @@
+id: pt_support_close
+title: 工单结案说明
+tagline: 把工单处理结果写成用户能看懂的结案说明，含自查与重新联系
+routing:
+  primitive: translate
+  goals:
+  - digest
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - customer_support
+  - service_operations
+  - case_closure
+  app_affinity:
+  - Zendesk
+  - Linear
+  - Slack
+  - Mail
+  pain_point: 客服处理完工单后，用户不知道问题到底解决了什么、自己怎么验证、还有没有残留影响、以及如果再出问题怎么重新联系，导致反复追问或重复开单。
+  trigger_utterances:
+  - 帮我把工单处理结果写成发给用户的结案说明
+  - case resolved 了，给客户写个 closure email
+  - 这个 ticket 要关了，得告诉用户怎么自查
+  - 把工单经过和修复结果整理成用户版说明
+  - support ticket closed，写个总结给客户
+  anti_triggers:
+  - 用户还没确认问题是否解决、工单仍处于处理中
+  - 需要写内部复盘或根因分析报告而非面向客户的说明
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请将以下【工单经过、修复和验证结果】编译为面向用户的结案说明（Case Closure Notice）。
+
+
+    要求：
+
+    1. 用用户能理解的语言说明「解决了什么、怎么解决的」，避免内部技术黑话；若必须用术语，附简短解释。
+
+    2. 提供「用户自查步骤」：列出 2~4 个用户可自行验证的检查项，含预期结果与异常时的判断。
+
+    3. 明确「可能还剩哪些影响/已知限制」：如缓存未刷新、需重新登录、历史数据可能不一致等，给出缓解或等待时间。
+
+    4. 说明「如何重新联系」：提供重新打开工单/新建工单的渠道、引用编号使用方式、响应时效预期。
+
+    5. 附「用户可安全保留的参考编号」：工单号、会话号、修复版本/变更号等，注明哪些可对外分享、哪些仅内部使用。
+
+    6. 语气友好、简洁、无推卸责任；结尾给出感谢与后续帮助入口。
+
+
+    输出结构建议：
+
+    - 标题行（含工单号）
+
+    - 一句话结论
+
+    - 解决了什么
+
+    - 你如何自查（编号列表）
+
+    - 可能还剩的影响
+
+    - 如何重新联系我们
+
+    - 参考编号（可安全保留）
+
+
+    【工单经过、修复和验证结果】'
+  variables:
+  - 工单经过、修复和验证结果
+  workflow:
+    workflow_id: handle-support-case
+    step: 5
+    next_lens_id: pt_support_kb
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#support-close
+  source_hash: 027c78a0bafa372078f38ce2a81fe489fba8d6fb637112c97fa916d97eb641c5
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: general
+  subcategory: problem_solving
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

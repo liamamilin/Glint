@@ -1,0 +1,28 @@
+{
+  "id": "pt_prompt_rubric",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#prompt-rubric",
+  "title": "写一份可重复使用的评测规则",
+  "content": "为【模型任务】的【输出示例】设计评分规则。每条给检查项、通过标准、失败例和可用证据；标明硬错误和可容忍缺点。找出最容易因评审者不同而分歧的两项，补判定例。",
+  "content_hash": "f21204bb7b777a64fe040f2632e097ff10db4db053e02907fb8bdc9855fb1eec",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "prompt-workflows",
+    "评测",
+    "评分标准",
+    "rubric",
+    "eval"
+  ],
+  "problem_solved": "把主观要求变成可观察及可判定的条款。",
+  "when_to_use": "分类: 提示词与 AI 工作流",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "prompt-rubric",
+    "category": "prompt-workflows",
+    "variables": [
+      "模型任务",
+      "输出示例"
+    ]
+  }
+}

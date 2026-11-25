@@ -1,0 +1,56 @@
+id: sit_grw_03
+title: GEO/SEO语义优化
+tagline: 让内容同时被搜索引擎与AI问答引用
+routing:
+  primitive: translate
+  goals:
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - seo
+  - geo
+  - content_marketing
+  - growth
+  app_affinity:
+  - Chrome
+  - Notion
+  - Obsidian
+  - Cursor
+  pain_point: 做出了高质量的开源工具、文档或专栏，却在搜索引擎和大模型问答里完全搜不到自己，没有流量也没有被引用
+  trigger_utterances:
+  - 我的开源项目在 Google 和 ChatGPT 里都搜不到
+  - 文档写得很好但没人引用
+  - SEO 怎么做才能被 AI 引用
+  - 想让博客被 ChatGPT 推荐
+  - 页面怎么加结构化数据
+  anti_triggers:
+  - 需要从零写一篇新文章而不是优化现有页面
+  - 做付费广告投放或流量购买
+execution:
+  action_type: open_resource
+  inject_mode: null
+  content: "GEO/SEO 语义优化清单与可嵌入 <head> 的元数据模板\n\n优化清单：\n1. 为每个核心页面补齐语义标签：Title、Description、Open Graph、JSON-LD 结构化数据\n2. 在正文开头用\
+    \ 2–3 句话给出「可直接被 AI 摘录引用」的清晰定义，并附核心对比表\n3. 用真实用户会搜的自然语言问题作为小标题，而非晦涩的内部代号\n4. 提升信息密度与原创结构，避免关键词堆砌\n\n可嵌入 <head> 的元数据模板：\n\
+    <title>{{title}}</title>\n<meta name=\"description\" content=\"{{description}}\">\n<meta property=\"og:title\" content=\"\
+    {{title}}\">\n<meta property=\"og:description\" content=\"{{description}}\">\n<meta property=\"og:type\" content=\"article\"\
+    >\n<script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"TechArticle\",\n\
+    \  \"headline\": \"{{title}}\",\n  \"description\": \"{{description}}\"\n}\n</script>\n\n误用警告：不要堆砌关键词写垃圾内容；在大模型检索时代，信息密度与原创结构比词频重要得多。"
+  variables:
+  - title
+  - description
+  workflow: null
+meta:
+  source: super-individual-toolbox
+  source_ref: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/growth-commercial.json#grw-03
+  source_hash: e093a13df9757ece40142f6845d1eec3a3ce471aac5491a4b1aad8cb599b2f2b
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: product_business
+  subcategory: growth_marketing
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

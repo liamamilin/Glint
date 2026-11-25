@@ -1,0 +1,33 @@
+{
+  "id": "disc_business_unbundling_bloat",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-unbundling-bloat",
+  "title": "专拆巨头全家桶里的“10% 核心功能”",
+  "content": "旧共识（盲区）：赛道里已经有大厂巨头了，小团队进去就是送人头。\n\n新现实（破盲视角）：巨头为了服务大企业客户必然越来越臃肿昂贵，精准剥离其中 10% 高频功能并做到极致顺手、价格打三折，反而是最稳的印钞机。\n\n破冰追问母题：\n- 列出 5 款在 [你熟悉的行业/工作流] 中被用户疯狂吐槽“太重、太贵、功能用不到 10%”的巨头软件，指出每款软件最值得被单独拆出来的核心微功能。\n- 分析 [某款臃肿巨头软件，如 Jira/Salesforce/Photoshop] 在 Reddit 或 G2 上的一星差评，提炼出 3 个独立开发者可以切入的极简替代品切口。",
+  "content_hash": "7ccb8eeb2e2df8a5e68f61665009f9f5fd6c34596c5f69551704e3df2ebca4ac",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "business",
+    "first-principles",
+    "invisible-friction",
+    "unbundling",
+    "indie",
+    "pricing",
+    "lite-alternative"
+  ],
+  "problem_solved": "赛道里已经有大厂巨头了，小团队进去就是送人头。",
+  "when_to_use": "巨头为了服务大企业客户必然越来越臃肿昂贵，精准剥离其中 10% 高频功能并做到极致顺手、价格打三折，反而是最稳的印钞机。",
+  "procedural_steps": [
+    "列出 5 款在 [你熟悉的行业/工作流] 中被用户疯狂吐槽“太重、太贵、功能用不到 10%”的巨头软件，指出每款软件最值得被单独拆出来的核心微功能。",
+    "分析 [某款臃肿巨头软件，如 Jira/Salesforce/Photoshop] 在 Reddit 或 G2 上的一星差评，提炼出 3 个独立开发者可以切入的极简替代品切口。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "business-unbundling-bloat",
+    "arena": "business",
+    "lenses": [
+      "first-principles",
+      "invisible-friction"
+    ]
+  }
+}

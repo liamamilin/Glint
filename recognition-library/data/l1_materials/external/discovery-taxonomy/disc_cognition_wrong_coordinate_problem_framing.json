@@ -1,0 +1,33 @@
+{
+  "id": "disc_cognition_wrong_coordinate_problem_framing",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/cognition.json#cognition-wrong-coordinate-problem-framing",
+  "title": "别在“算错坐标系的题”上算得更准，先换题目坐标系",
+  "content": "旧共识（盲区）：推进不顺或结果不理想时，说明方法还不够细、执行还不够到位。\n\n新现实（破盲视角）：有时问题卡住不是算力不够，而是“题目本身问在错误的坐标系里”（比如用线性时间去解非线性跃迁，或用局部指标代替真实结果）；换坐标系比加倍努力更有效。\n\n破冰追问母题：\n- 我最近在 [某个目标/项目/难题] 上花了不少力气但进展有限：[简述现状]。请帮我跳出当前解法，提出 2 个完全不同的“问题坐标系”来重新定义这件事。\n- 检查我目前用来衡量 [某件事进展] 的指标：[填当前指标]，它有没有可能把人引向错误方向？建议一个更贴近本质的替代视角。",
+  "content_hash": "6d0360f25bdb4197d1d556e4aca3653c399b1d5614b0f7406f59f0dbbfbbf26e",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "cognition",
+    "first-principles",
+    "cross-domain",
+    "problem-framing",
+    "coordinates",
+    "blindspots",
+    "reframing"
+  ],
+  "problem_solved": "推进不顺或结果不理想时，说明方法还不够细、执行还不够到位。",
+  "when_to_use": "有时问题卡住不是算力不够，而是“题目本身问在错误的坐标系里”（比如用线性时间去解非线性跃迁，或用局部指标代替真实结果）；换坐标系比加倍努力更有效。",
+  "procedural_steps": [
+    "我最近在 [某个目标/项目/难题] 上花了不少力气但进展有限：[简述现状]。请帮我跳出当前解法，提出 2 个完全不同的“问题坐标系”来重新定义这件事。",
+    "检查我目前用来衡量 [某件事进展] 的指标：[填当前指标]，它有没有可能把人引向错误方向？建议一个更贴近本质的替代视角。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "cognition-wrong-coordinate-problem-framing",
+    "arena": "cognition",
+    "lenses": [
+      "first-principles",
+      "cross-domain"
+    ]
+  }
+}

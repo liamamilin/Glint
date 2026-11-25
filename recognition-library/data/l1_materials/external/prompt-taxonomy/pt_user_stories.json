@@ -1,0 +1,27 @@
+{
+  "id": "pt_user_stories",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#user-stories",
+  "title": "从流程生成用户故事",
+  "content": "把【目标和现有流程】分成面向【用户角色】的可交付用户故事。每条写情景、动机、期望结果和可观察验收例子，标外部依赖。按能最早验证用户价值的顺序排列。",
+  "content_hash": "7345a6d6d18752bef85fb71744e2966a5e6c27074f0a70505ace09b41c77e151",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "product",
+    "用户故事",
+    "验收",
+    "user story"
+  ],
+  "problem_solved": "用情景和验收条件描述可交付增量。",
+  "when_to_use": "分类: 产品与业务",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "user-stories",
+    "category": "product",
+    "variables": [
+      "目标和现有流程",
+      "用户角色"
+    ]
+  }
+}

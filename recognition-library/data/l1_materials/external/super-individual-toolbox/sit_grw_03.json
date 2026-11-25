@@ -1,0 +1,29 @@
+{
+  "id": "sit_grw_03",
+  "source": "super-individual-toolbox",
+  "source_ref": "https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/growth-commercial.json#grw-03",
+  "title": "GEO / SEO 语义优化器",
+  "content": "定位：同时讨好传统搜索引擎与 AI 问答的引用偏好\n\n触发场景：当你做出了高质量的开源工具、文档或专栏，却在搜索和大模型问答里完全搜不到自己时。\n\n核心机制：\n- 为每个核心页面补齐清晰的语义标签（Title、Description、Open Graph、JSON-LD 结构化数据）\n- 在正文开头用 2–3 句话给出“可直接被 AI 摘录引用”的清晰定义与核心对比表\n- 用真实用户会搜的自然语言问题作为小标题，而非晦涩的内部代号\n\n交付物：一套可直接嵌入 `<head>` 的元数据模板 + 页面语义结构优化清单\n\n推荐装配：静态 HTML Meta 模板 + 语义优化 Prompt\n\n误用警告：不要堆砌关键词写垃圾内容；在大模型检索时代，信息密度与原创结构比词频重要得多。",
+  "content_hash": "e093a13df9757ece40142f6845d1eec3a3ce471aac5491a4b1aad8cb599b2f2b",
+  "suggested_action_type": "open_resource",
+  "domain_hints": [
+    "growth-commercial",
+    "增长与商业官"
+  ],
+  "problem_solved": "当你做出了高质量的开源工具、文档或专栏，却在搜索和大模型问答里完全搜不到自己时。",
+  "when_to_use": "当你做出了高质量的开源工具、文档或专栏，却在搜索和大模型问答里完全搜不到自己时。",
+  "procedural_steps": [
+    "为每个核心页面补齐清晰的语义标签（Title、Description、Open Graph、JSON-LD 结构化数据）",
+    "在正文开头用 2–3 句话给出“可直接被 AI 摘录引用”的清晰定义与核心对比表",
+    "用真实用户会搜的自然语言问题作为小标题，而非晦涩的内部代号"
+  ],
+  "anti_patterns": [
+    "不要堆砌关键词写垃圾内容；在大模型检索时代，信息密度与原创结构比词频重要得多。"
+  ],
+  "metadata": {
+    "original_id": "grw-03",
+    "drawer": "growth-commercial",
+    "drawer_zh": "增长与商业官",
+    "deliverable": "一套可直接嵌入 `<head>` 的元数据模板 + 页面语义结构优化清单"
+  }
+}

@@ -1,0 +1,67 @@
+id: disc_business_niche_templates_and_starter_kits
+title: 冷启动起步套件设计清单
+tagline: 把空白页与环境配置的冷启动门槛，打包成 30 分钟跑通的起步套件。
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - business
+  - indie
+  - digital_products
+  - templates
+  - starter_kits
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Cursor
+  pain_point: 用户想做产品/项目却卡在空白页与环境配置的冷启动门槛，现成模板卖不动是因为大家觉得能搜教程拼出来。
+  trigger_utterances:
+  - 想做个产品但每次从零搭环境就放弃
+  - 模板卖不动大家觉得教程就能拼出来
+  - 帮我想一个能 30 分钟跑通的 starter kit
+  - 新手冷启动门槛太高怎么打包成套件
+  - 怎么给模板加上手路径和踩坑提示
+  anti_triggers:
+  - 只是想搜现成免费模板下载
+  - 只想写营销文案卖课
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '冷启动起步套件设计清单
+
+
+    1. 选定你熟悉的领域（技术/设计/运营/写作），列出新手在某类项目起步时最容易卡住的「空白页/配置环节」。
+
+    2. 为该卡点设计一款 30 分钟能跑通第一版的起步套件骨架（含可运行的最小工程/模板）。
+
+    3. 为套件附带「10 分钟上手路径」：步骤编号 + 每步预期结果 + 失败时的快速定位。
+
+    4. 整理「常见坑提示」：环境版本、依赖、权限、网络等高频踩坑与解法。
+
+    5. 提供一个可验证的 demo/截图，证明「30 分钟跑通第一版」。
+
+    6. 定价与交付：明确包含内容、不包含内容、升级路径。
+
+    7. 用真实新手走一遍流程，记录卡点并迭代。
+
+    8. 发布渠道与反馈收集（社区/商店/邮件列表）。'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-niche-templates-and-starter-kits
+  source_hash: 2519baa5c4b0191a36967135552f86660983313b151b412432b3fcbaebdc8eb7
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: product_business
+  subcategory: indie_business
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

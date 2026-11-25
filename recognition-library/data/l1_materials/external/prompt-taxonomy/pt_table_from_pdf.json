@@ -1,0 +1,28 @@
+{
+  "id": "pt_table_from_pdf",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#table-from-pdf",
+  "title": "把 PDF 里的表格还原为可计算数据",
+  "content": "提取【PDF 页码和表格】到【目标输出格式】。保留列名、单位、小计和脚注，检查跨页表头及合计。附三条可对照源页的示例，标记可能错位、无法识别或误判的单元格。",
+  "content_hash": "c10d6236f3e05e686d19a2dd5479c0a0aab3a650b606eab9c7c9045009015735",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "files",
+    "PDF表格",
+    "提取表格",
+    "CSV",
+    "pdf tables"
+  ],
+  "problem_solved": "核对跨页表头、列单位和合计。",
+  "when_to_use": "分类: 文档与文件",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "table-from-pdf",
+    "category": "files",
+    "variables": [
+      "PDF 页码和表格",
+      "目标输出格式"
+    ]
+  }
+}

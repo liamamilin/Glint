@@ -1,0 +1,26 @@
+{
+  "id": "pt_support_troubleshoot",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#support-troubleshoot",
+  "title": "为客服写一条逐步排障指引",
+  "content": "针对【故障表现、环境和客户熟练度】写一份排障指引。每一步写操作、预期信号和失败后的分支，从可逆检查看起。标出必须由支持人员做的动作，保留用户原资料。",
+  "content_hash": "febc9bb644c312f1824f75b46f6d4ec138dddaf781389204380266b991dd8456",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "support",
+    "客服排障",
+    "故障指引",
+    "troubleshooting"
+  ],
+  "problem_solved": "从低风险、容易回退的步骤开始。",
+  "when_to_use": "分类: 客服与服务运营",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "support-troubleshoot",
+    "category": "support",
+    "variables": [
+      "故障表现、环境和客户熟练度"
+    ]
+  }
+}

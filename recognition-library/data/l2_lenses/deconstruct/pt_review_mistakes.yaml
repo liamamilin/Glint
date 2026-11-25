@@ -1,0 +1,59 @@
+id: pt_review_mistakes
+title: 错题模式归因
+tagline: 把错题归成可修正的模式， pinpoint 第一个出错步骤并给小练习
+routing:
+  primitive: deconstruct
+  goals:
+  - debug
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - learning
+  - error_analysis
+  - exam_prep
+  - study_strategy
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 做错题后只记答案不改习惯，下次同类题仍出错，分不清是概念不清、读题失误还是计算执行失误
+  trigger_utterances:
+  - 这道错题我老是犯同类型错误
+  - 帮我分析我错在哪一步
+  - 错题本怎么归类才有效
+  - 我是不是概念没懂还是读题粗心
+  - 给个能针对这个错误的小练习
+  anti_triggers:
+  - 用户只是想直接要题目的标准答案或解题步骤
+  - 用户想生成新练习题而非复盘已有错题
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '根据【题目、我的解法与答案】复盘【目标知识】。逐题指出第一个离开正确路径的步骤，归因为概念、读题或执行，并给一个能针对该错误的小练习。最后告诉我先练哪个错误模式及如何判断改善。
+
+
+    输入：
+
+    - 题目：{{problem}}
+
+    - 我的解法：{{my_solution}}
+
+    - 正确答案：{{correct_answer}}
+
+    - 目标知识：{{target_knowledge}}'
+  variables:
+  - problem
+  - my_solution
+  - correct_answer
+  - target_knowledge
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#review-mistakes
+  source_hash: 917a2b64b99414bc59e2ccec8246fbf792b1d07e3f6f54e032064ccdb7103ef5
+  status: active
+  base_weight: 1.0
+  confidence: 0.86
+  version: 1

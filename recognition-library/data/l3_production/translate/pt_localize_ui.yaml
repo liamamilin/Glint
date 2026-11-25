@@ -1,0 +1,65 @@
+id: pt_localize_ui
+title: 翻译本地化界面字符串
+tagline: 把 UI 字符串翻成目标语言，保留变量与字数限制。
+routing:
+  primitive: translate
+  goals:
+  - create
+  clarity_fit:
+  - concrete
+  domains:
+  - localization
+  - i18n
+  - ui_translation
+  - product_copy
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Figma
+  pain_point: 界面字符串里含占位符、术语和字数限制，直译容易破坏功能或超长，需要保留键名/占位符并符合约束。
+  trigger_utterances:
+  - 帮我把这段 UI 文案翻译成英文
+  - 这些界面字符串本地化一下，变量别动
+  - 把按钮文案翻成日语别超长
+  - i18n 文件里的字符串要翻译保留占位符
+  - 把 locale 文件翻成目标语言
+  anti_triggers:
+  - 整篇文章翻译
+  - 普通文本润色或改写
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: '将以下界面字符串本地化为 {{target_locale}}，遵循术语表与字符限制：{{glossary_and_constraints}}。
+
+
+    要求：
+
+    - 保留所有键名、占位符（如 {name}、%s、{{var}}）、转义序列与标签，不得改动。
+
+    - 使用术语表中的译法，必要时给短版。
+
+    - 输出：译文列表；对语境不确定的键列出疑问；对会超长的字符串提供短版。
+
+
+    界面字符串：
+
+    {{input}}'
+  variables:
+  - target_locale
+  - glossary_and_constraints
+  - var
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#localize-ui
+  source_hash: 445923168dc0884f80014eaeb9b5875ada3a70475146f8afcea471b34d1cbdd3
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: product_business
+  subcategory: product_design
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

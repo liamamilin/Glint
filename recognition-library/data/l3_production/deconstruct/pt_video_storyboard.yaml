@@ -1,0 +1,64 @@
+id: pt_video_storyboard
+title: 故事转短视频分镜
+tagline: 把故事梗概拆成逐镜脚本，含运镜与声音
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - creative
+  - short_video
+  - storyboard
+  - video_production
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Feishu
+  - ChatGPT
+  pain_point: 用户手里有一段故事或文案，但不知道怎么拆成可拍摄的短视频镜头，缺少秒数、景别、运镜、声音等细节
+  trigger_utterances:
+  - 这个故事帮我拆成分镜
+  - 把这段文案改成短视频镜头脚本
+  - 帮我规划一下这个视频怎么拍
+  - 故事梗概转分镜 30秒竖屏
+  - 这个剧情怎么拆成镜头
+  anti_triggers:
+  - 只是想生成一张静态插画
+  - 需要完整电影长片剧本而非短视频
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: '把以下故事梗概改写为短视频分镜脚本，参数：时长={{duration}}，比例={{aspect_ratio}}，发布场景={{platform}}。
+
+
+    故事梗概：
+
+    {{input}}
+
+
+    要求：逐镜给出秒数、主体动作、场景、景别、镜头运动、声音；保持角色与道具在镜头间一致；最后标注最适合先试做的镜头及原因。'
+  variables:
+  - duration
+  - aspect_ratio
+  - platform
+  workflow:
+    workflow_id: idea-to-video
+    step: 2
+    next_lens_id: pt_shot_list
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#video-storyboard
+  source_hash: 21d97f0babd5d791dc61d184cd4911c5b13eba86c6f2b11424fc165174bd2e15
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: product_business
+  subcategory: product_design
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

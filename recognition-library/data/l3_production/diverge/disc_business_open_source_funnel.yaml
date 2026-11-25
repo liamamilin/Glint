@@ -1,0 +1,52 @@
+id: disc_business_open_source_funnel
+title: 免费开源信任漏斗
+tagline: 用免费工具建立信任，自然引向付费层
+routing:
+  primitive: diverge
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - business
+  - open_source
+  - monetization
+  - distribution
+  - trust
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  pain_point: 做了有用的工具或体系却不敢公开，怕免费等于白送、无法变现；不知道如何把开源/免费内容转成高客单付费客户。
+  trigger_utterances:
+  - 开源项目怎么变现
+  - 免费工具如何赚钱
+  - 做开源怎么接付费客户
+  - 知识库免费公开了怎么收钱
+  - how to monetize open source project
+  anti_triggers:
+  - 闭源商业软件定价策略
+  - 纯流量广告变现模式
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: "开源/免费信任漏斗设计清单：\n1. 选定 [目标领域] 的一个真实痛点，做最小可用的免费工具/知识库（足够好用，降低许可门槛）。\n2. 设计 3 条免费→付费衔接路径：\n   - 路径 A：托管/运维托管（免费自托管，付费省掉运维麻烦）。\n\
+    \   - 路径 B：定制/咨询服务（免费通用版，付费按场景定制）。\n   - 路径 C：进阶工作流/高级功能（免费基础版，付费解锁效率升级）。\n3. 为每条路径定义清晰的升级触发点与定价锚点。\n4. 分析一个知名开源/免费项目：它如何把零散用户转为付费客户（社区→文档→付费层）。\n\
+    5. 将上述拆解映射到你的场景，验证信任信号是否真实可感知。\n6. 检查：免费层是否“足够好用”且付费层是否“省掉麻烦或交付结果”。"
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-open-source-funnel
+  source_hash: 8cf4ba0533b1da8aa1361bb59dbb7cad1adc0f5c51fce12983e4cae88d83b699
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: product_business
+  subcategory: indie_business
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

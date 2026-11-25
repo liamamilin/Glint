@@ -1,0 +1,46 @@
+id: pt_context_pack
+title: 上下文交接包
+tagline: 把当前进展整理成新会话可直接接手的结构化输入
+routing:
+  primitive: deconstruct
+  goals:
+  - digest
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - prompt_workflows
+  - context_management
+  - handoff
+  - documentation
+  app_affinity:
+  - ChatGPT
+  - Claude
+  - Cursor
+  - Notion
+  pain_point: 开新会话时缺乏完整上下文，导致重复解释、遗漏事实与来源
+  trigger_utterances:
+  - 开新会话帮我整理一下当前上下文
+  - 把项目现状打包给新对话
+  - 交接给下一个AI需要准备什么
+  - 整理成可交接的输入
+  - 新会话要先读哪些材料
+  anti_triggers:
+  - 单纯总结单个文件内容
+  - 纯文本润色
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 为{{task}}整理{{materials}}。按目标、当前版本、相关文件、已确认事实、未解决问题和验证入口列出。标注时间与出处，指出新会话要先读哪些材料。
+  variables:
+  - task
+  - materials
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#context-pack
+  source_hash: 6f92e8ba4879e53fb12de1f99d295926cfe246403e1ac59add6ddb88fc4cd1da
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

@@ -1,0 +1,60 @@
+id: pt_speaking_feedback
+title: 外语口语复盘
+tagline: 挑出影响理解的两大问题并给重说练习
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - language
+  - speaking_feedback
+  - pronunciation
+  - foreign_language
+  app_affinity:
+  - ChatGPT
+  - Claude
+  - Notion
+  pain_point: 练完外语口语后不知道哪里说得不清楚、用词不准或发音有问题，缺乏可执行的改进练习
+  trigger_utterances:
+  - 帮我复盘这段英文口语哪里说不清楚
+  - 这段录音帮我挑两个影响理解的问题
+  - 口语表达怎么改进
+  - 帮我点评这段外语发言
+  anti_triggers:
+  - 单纯翻译句子
+  - 写邮件润色
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: '根据以下录音/逐字稿和目标听众评估口语表达：
+
+
+    录音/逐字稿：{{input}}
+
+    目标听众：{{audience}}
+
+
+    请先指出两个影响理解的问题，每个问题给出修正版本和重说练习。如果有音频，请标注可听到的语音证据；只有文字时聚焦表达组织和用词。'
+  variables:
+  - audience
+  workflow:
+    workflow_id: language-practice
+    step: 4
+    next_lens_id: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#speaking-feedback
+  source_hash: 3772159dd6cb14767777fb06943fdcfd233271955ec8565133edccfe30820d6d
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: writing_comms
+  subcategory: writing_polish
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

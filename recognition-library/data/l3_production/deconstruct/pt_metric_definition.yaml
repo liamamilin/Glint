@@ -1,0 +1,55 @@
+id: pt_metric_definition
+title: 定义可复算指标
+tagline: 把模糊指标变成可复算的口径定义
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - data
+  - metrics
+  - analytics
+  - kpi
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 用户需要定义一个指标但口径模糊，分子分母、时间窗、纳入排除条件都不清楚，导致数据不可复现或误导决策
+  trigger_utterances:
+  - 这个指标到底怎么算的
+  - DAU 的分子分母是什么
+  - 帮我定义一个留存率
+  - 这个 KPI 口径太模糊了
+  - 需要一个可复算的指标定义
+  anti_triggers:
+  - 只是想看已有报表的趋势
+  - 已经有明确 SQL 不需要重新定义口径
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 为 {{business_goal}} 定义指标 {{metric_name}}。请输出可复算的指标定义，包含：单位；计算粒度（用户/事件/订单等）；分子与分母的精确口径；时间窗（起止、时区、滚动或固定）；纳入条件；排除条件；一个符合样例与一个不符合样例；数据来源（表/字段/接口）；以及该指标在哪些情况下会误导（常见陷阱）。所有定义需可被他人复现。
+  variables:
+  - business_goal
+  - metric_name
+  workflow:
+    workflow_id: analyze-and-report
+    step: 1
+    next_lens_id: pt_explore_data
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#metric-definition
+  source_hash: b5858b79f02c72084368cfe65234adb3aa3e409f882709d78687e8f9f54dde30
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: product_business
+  subcategory: product_design
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

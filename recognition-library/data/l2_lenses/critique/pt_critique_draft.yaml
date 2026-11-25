@@ -1,0 +1,59 @@
+id: pt_critique_draft
+title: 评审一篇初稿
+tagline: 把编辑反馈变成可实施的修改清单
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - writing
+  - editing
+  - content_review
+  - copywriting
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Mail
+  - ChatGPT
+  - Claude
+  pain_point: 用户有一篇初稿，不确定能否达成传播目标，需要具体的可执行修改意见而非泛泛评价
+  trigger_utterances:
+  - 帮我看看这篇草稿哪里有问题
+  - 这篇文案读者能看懂吗
+  - 帮我审下初稿给修改建议
+  - review my draft for clarity
+  - 帮我评审这篇文章
+  anti_triggers:
+  - 从零开始写一篇新文章
+  - 只做语法错别字校对
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请评审以下初稿能否实现传播目标，读者是{{reader}}。
+
+
+    初稿：
+
+    {{draft}}
+
+
+    传播目标：{{communication_goal}}
+
+
+    请优先找出三处影响理解或可信度的问题，逐条给出：原句、问题、读者会怎样理解、改法。最后指出值得保留的一处，并重写影响最大的一小段。'
+  variables:
+  - draft
+  - communication_goal
+  - reader
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#critique-draft
+  source_hash: cbc258ad42606bc843dd4674e8f52fe8b6cc922c52202f7e3cec9ce00159cddc
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

@@ -1,0 +1,104 @@
+id: disc_business_outcome_pricing
+title: 按结果计费的报价设计
+tagline: 把按人头/按工时服务改成 AI 端到端交付的按单定价
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - business
+  - pricing
+  - saas
+  - productized_service
+  - ai_agent
+  app_affinity:
+  - Notion
+  - Linear
+  - Slack
+  - Chrome
+  pain_point: 用户想把传统按席位/按工时的软件或服务，改成 AI 端到端交付、按结果计费的产品化服务，但不知如何拆解环节、定价格、写 SLA 和防扯皮边界
+  trigger_utterances:
+  - 客户不愿意为多一个账号付钱了
+  - 想把我的服务按单交付收费
+  - 怎么设计按结果计费的报价
+  - SLA 和防扯皮边界怎么写
+  - AI 能干完活了怎么定价
+  anti_triggers:
+  - 只是讨论 SaaS 订阅续费或折扣策略
+  - 只是普通软件功能定价或打包
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '产品化服务（按结果计费）最小闭环设计清单
+
+
+    1. 选定可产品化环节
+
+    - [ ] 锁定一个传统按人工工时收费的环节（如财税 reconciliation、招聘初筛、法务合同审查、跨境 Listing 优化）
+
+    - [ ] 明确输入物、输出物、验收标准（可量化的结果）
+
+    - [ ] 确认 AI 可端到端完成 ≥80% 工作量
+
+
+    2. AI 自动执行 + 人工兜底
+
+    - [ ] 拆解步骤为可自动化的子任务 vs 需人工兜底的边界
+
+    - [ ] 定义人工介入触发条件（置信度阈值/异常/合规风险）
+
+    - [ ] 明确兜底成本与谁承担
+
+
+    3. 按结果计费的报价结构
+
+    - [ ] 定义计费单位（按件/按单/按结果/按挽回金额比例）
+
+    - [ ] 设计阶梯价与最低消费（避免长尾小单）
+
+    - [ ] 设计失败/未达标退款或重做条款
+
+    - [ ] 计算单位经济：AI 成本 + 人工兜底成本 + 毛利目标
+
+
+    4. 交付 SLA
+
+    - [ ] 响应/交付时效（如 24h 内交付）
+
+    - [ ] 质量标准（准确率/通过率/返工次数）
+
+    - [ ] 数据与隐私边界（客户数据范围、留存、脱敏）
+
+
+    5. 防扯皮边界
+
+    - [ ] 范围内/范围外事项清单（out-of-scope）
+
+    - [ ] 客户配合义务（提供数据、确认节点、审批）
+
+    - [ ] 变更与追加费用规则
+
+    - [ ] 争议处理与证据留存（交付物快照、日志）
+
+
+    6. 最小验证
+
+    - [ ] 用 3 个真实客户 scenario 跑通端到端
+
+    - [ ] 记录实际成本与交付时长，反推定价
+
+    - [ ] 收集客户对“按结果付费”的接受度反馈'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-outcome-pricing
+  source_hash: 1261904e36ec45809815a22aa64f82c3b92e00c6c7e9fc479eba30a3163a9942
+  status: active
+  base_weight: 1.0
+  confidence: 0.86
+  version: 1

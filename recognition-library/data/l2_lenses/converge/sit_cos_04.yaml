@@ -1,0 +1,45 @@
+id: sit_cos_04
+title: 单向门决策矩阵
+tagline: 小事秒拍板，大事慢三拍，别在可逆决定上空耗几天
+routing:
+  primitive: converge
+  goals:
+  - optimize
+  - evaluate
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - decision_making
+  - strategy
+  - product_management
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Linear
+  - Slack
+  pain_point: 在技术选型、定价、合作、域名等决定上反复纠结，几天都拍不了板，把可逆的小事当大事开会研究，时间被空耗
+  trigger_utterances:
+  - 技术选型 A 和 B 该选哪个纠结好几天了
+  - 定价定多少反复改拿不定主意
+  - 这个域名/合作要不要签反复犹豫
+  - 按钮颜色小事也开会对齐好烦
+  - 到底该不该现在做这个决定
+  anti_triggers:
+  - 按钮颜色、初期文案这类随时可改的小事
+  - 需要完整评审的不可逆战略决策
+execution:
+  action_type: open_resource
+  inject_mode: null
+  content: "本地决策日志（Markdown）模板：\n\n# 决策备忘录\n- 决策事项：\n- 门类型：双向门（48h 内可低成本撤回） / 单向门（不可逆）\n- 双向门：设 15 分钟倒计时直接拍板，禁止继续调研\n- 单向门：\n\
+    \  - 最坏结果：\n  - 止损底线：\n  - 必须满足的 3 个前提条件：\n- 复盘日期：\n\n极简决策判定 Prompt：先判定该决定是双向门还是单向门；双向门直接拍板，单向门按上表填写后再决定。"
+  variables: []
+  workflow: null
+meta:
+  source: super-individual-toolbox
+  source_ref: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/chief-of-staff.json#cos-04
+  source_hash: 7f2236340086d28c0dbd1eac55806b1dab1985ec7768f5ea2b7051561ee5525c
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

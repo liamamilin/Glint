@@ -1,0 +1,29 @@
+{
+  "id": "pt_outreach",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#outreach",
+  "title": "写一封职业交流邀约",
+  "content": "写一封给【对方和关系】的交流邀约，我希望了解【具体问题】，背景是【真实连接点】。先说明来意，提出一个低负担的请求，并给两种时间安排或书面回复选项。",
+  "content_hash": "354f6a299f858fd9d390b047228b2d730af9e9fb441e8300c66063b80a68a2e3",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "career",
+    "人脉",
+    "内推",
+    "networking",
+    "outreach"
+  ],
+  "problem_solved": "让对方知道为何找他以及请求有多大。",
+  "when_to_use": "分类: 求职与职业",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "outreach",
+    "category": "career",
+    "variables": [
+      "对方和关系",
+      "具体问题",
+      "真实连接点"
+    ]
+  }
+}

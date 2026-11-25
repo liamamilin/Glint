@@ -1,0 +1,33 @@
+{
+  "id": "disc_cognition_second_order_consequences",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/cognition.json#cognition-second-order-consequences",
+  "title": "多问一层“然后呢？”，盯紧规则变化后的二阶效应",
+  "content": "旧共识（盲区）：看到一个新工具或新规则，只看它直接带来的眼前好处就下结论。\n\n新现实（破盲视角）：当所有人都能用同一个新手段时，激励结构和竞争生态会发生二阶变化——原本的优势可能变成新拥堵，真正的机会往往藏在下一层反应里。\n\n破冰追问母题：\n- 针对 [某个正在普及的新工具/新规则/新趋势，如 AI 生成内容/自动化工具/某平台机制]，请帮我推演它的“一阶直接好处”以及 3 个可能出现的“二阶副作用或新机会”。\n- 如果 [某个你打算采取的行动/习惯改变] 持续执行半年，除了预期结果之外，它可能会悄悄改变我的哪些作息、精力或人际节奏？",
+  "content_hash": "1d0650e1f0ffc51ebea4c50a6ea7fc6115a1ae55a9028fbfe80d3dddce6f217a",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "cognition",
+    "role-inversion",
+    "first-principles",
+    "second-order",
+    "consequences",
+    "incentives",
+    "systems"
+  ],
+  "problem_solved": "看到一个新工具或新规则，只看它直接带来的眼前好处就下结论。",
+  "when_to_use": "当所有人都能用同一个新手段时，激励结构和竞争生态会发生二阶变化——原本的优势可能变成新拥堵，真正的机会往往藏在下一层反应里。",
+  "procedural_steps": [
+    "针对 [某个正在普及的新工具/新规则/新趋势，如 AI 生成内容/自动化工具/某平台机制]，请帮我推演它的“一阶直接好处”以及 3 个可能出现的“二阶副作用或新机会”。",
+    "如果 [某个你打算采取的行动/习惯改变] 持续执行半年，除了预期结果之外，它可能会悄悄改变我的哪些作息、精力或人际节奏？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "cognition-second-order-consequences",
+    "arena": "cognition",
+    "lenses": [
+      "role-inversion",
+      "first-principles"
+    ]
+  }
+}

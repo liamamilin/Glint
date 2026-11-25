@@ -1,0 +1,28 @@
+{
+  "id": "pt_fact_check",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#fact-check",
+  "title": "逐条核对说法",
+  "content": "核对【原文或说法】，目标受众是【受众】。提取可验证的主张，对每条用「支持 / 有条件支持 / 证据不足 / 与证据矛盾」标记，并附最直接的证据链接、发布日期和一句判断理由。保留来源之间有意义的差异。",
+  "content_hash": "85dfbbaa08014026a2167af8620d002e027b65021bc9781b006ced6b7f0e3d8e",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "research",
+    "事实核查",
+    "验证",
+    "引用",
+    "fact check"
+  ],
+  "problem_solved": "把一句笼统判断拆成可核验主张。",
+  "when_to_use": "分类: 查找与研究",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "fact-check",
+    "category": "research",
+    "variables": [
+      "原文或说法",
+      "受众"
+    ]
+  }
+}

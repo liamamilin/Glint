@@ -1,0 +1,53 @@
+id: pt_skill_gap_plan
+title: 岗位要求转技能补强计划
+tagline: 找出面试关键技能缺口，给出可练任务、产物与自检标准。
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - career
+  - skill_gap
+  - interview
+  - upskilling
+  app_affinity:
+  - Notion
+  - Chrome
+  - Obsidian
+  pain_point: 面对目标岗位要求不知道自己缺什么、该先补哪几项，以及如何在有限时间内练出可展示的成果并自检是否达标。
+  trigger_utterances:
+  - 这个岗位要求这么多我该先补哪个
+  - 转岗怎么快速补齐技能
+  - 面试前一个月怎么准备技能
+  - JD 和我的简历差在哪
+  - 给我一个技能补强计划
+  anti_triggers:
+  - 只是想润色简历 wording 而非补技能
+  - 直接帮我写代码或做项目实现
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 比较{{target_job_requirements}}和{{existing_evidence}}。找出最影响面试的一到三个缺口，为每项给可在{{time_budget}}内练习的任务、可展示产物和自检方法。
+  variables:
+  - target_job_requirements
+  - existing_evidence
+  - time_budget
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#skill-gap-plan
+  source_hash: 1e165fb1597c669ab51fdec231a36c1c89d326c94e2fd1f33d7cf0c4e1d86603
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: personal_career
+  subcategory: career
+  collections: []
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

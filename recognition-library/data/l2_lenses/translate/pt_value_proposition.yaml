@@ -1,0 +1,44 @@
+id: pt_value_proposition
+title: 写出可验证的价值主张
+tagline: 用可证明的差异与结果解释为何选你
+routing:
+  primitive: translate
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - marketing
+  - positioning
+  - value_proposition
+  - copywriting
+  app_affinity:
+  - Notion
+  - Figma
+  - Chrome
+  - Slack
+  pain_point: 用户说不清产品为何值得选，卖点空泛、缺乏可证明的差异与结果，说服不了目标受众
+  trigger_utterances:
+  - 帮我写个价值主张
+  - 这个产品凭什么选我们
+  - 卖点怎么讲才可信
+  - need a value prop for this audience
+  - positioning 怎么写
+  anti_triggers:
+  - 只需一句广告口号 slogans
+  - 纯竞品功能对比表
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 根据【产品事实和现有证据】为【目标受众与场景】制定价值主张。写用户当前做法、主要障碍、承诺结果与证据。给两种可区分的定位和一个能验证区分度的测试。
+  variables: []
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#value-proposition
+  source_hash: 70a441c0ce5ff77c677e5b22c7aa87cab8ac45b95a268452d536aa5b69c4be02
+  status: active
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

@@ -1,0 +1,28 @@
+{
+  "id": "pt_accessibility_review",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#accessibility-review",
+  "title": "在真实页面找无障碍问题",
+  "content": "评估【页面或组件】在【支持设备与场景】下的无障碍。检查键盘路径、焦点顺序、可读名称和状态反馈，记录每项复现与影响。为可修复项给最小改法和可手动复验的标准。",
+  "content_hash": "36db45162c030b735fc239038640c9bd285511a70ad2c3c981efb87cb47c3860",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "coding",
+    "无障碍",
+    "键盘",
+    "屏幕阅读器",
+    "accessibility"
+  ],
+  "problem_solved": "用可复现步骤检查键盘、标注和对比度。",
+  "when_to_use": "分类: 开发与调试",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "accessibility-review",
+    "category": "coding",
+    "variables": [
+      "页面或组件",
+      "支持设备与场景"
+    ]
+  }
+}

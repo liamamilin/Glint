@@ -1,0 +1,158 @@
+version: "1.0"
+description: "Glint M1 Golden Eval — 24 core real-world cases across 7 primitives, short vague queries, and modifier-vs-intent tests"
+
+cases:
+  # 1. Research / Vague exploration (the exact real-world case from screenshot!)
+  - id: research_blockchain_short
+    app_name: "Antigravity"
+    input_text: "我想要调研一下区块链"
+    expected_primitives: ["deconstruct", "metacognize", "critique"]
+    expected_ids: ["pt_source_research", "pt_research_question", "disc_cognition_separating_signal_from_hype", "disc_cognition_weak_signal_radar", "pt_claim_evidence_matrix", "core_clarify_first"]
+    forbidden_ids: ["disc_business_open_source_funnel", "disc_business_micro_glue", "core_code_review", "pt_dashboard_review"]
+
+  - id: research_topic_broad
+    app_name: "Notion"
+    input_text: "想系统研究一下具身智能和机器人赛道，不知道从哪切入"
+    expected_primitives: ["metacognize", "deconstruct", "critique"]
+    expected_ids: ["pt_research_question", "pt_source_research", "disc_cognition_weak_signal_radar", "disc_cognition_separating_signal_from_hype", "core_clarify_first", "core_mece_breakdown"]
+
+  # 2. Modifier != Intent (要求不等于意图)
+  - id: modifier_arch_deconstruct
+    app_name: "Cursor"
+    input_text: "硬核一点、去AI味、只给表格，帮我分析这个微服务架构，感觉模块耦合太重了"
+    expected_primitives: ["deconstruct", "critique"]
+    expected_ids: ["core_mece_breakdown", "core_code_review", "pt_task_breakdown", "sit_prd_01"]
+    forbidden_ids: ["core_de_ai_rewrite"]
+
+  - id: modifier_decision_table
+    app_name: "Obsidian"
+    input_text: "别废话直接给对比表：后端用 Rust 还是 Go，好纠结"
+    expected_primitives: ["converge", "critique"]
+    expected_ids: ["core_decision_matrix", "pt_compare_options", "disc_cognition_making_decisions_under_uncertainty", "core_premortem"]
+
+  # 3. Pure Translate / Rewrite
+  - id: translate_de_ai_email
+    app_name: "Mail"
+    input_text: "把这段回复客户的延期邮件改得自然一点，去掉AI套话"
+    expected_primitives: ["translate"]
+    expected_ids: ["core_de_ai_rewrite", "pt_draft_email", "pt_stakeholder_read"]
+
+  - id: translate_jargon_to_boss
+    app_name: "Feishu"
+    input_text: "把这段数据库分库分表的技术改造方案翻译成老板能听懂的业务价值"
+    expected_primitives: ["translate", "compress"]
+    expected_ids: ["disc_career_translating_jargon_for_stakeholders", "pt_exec_brief", "core_de_ai_rewrite"]
+
+  - id: translate_explain_concept
+    app_name: "Obsidian"
+    input_text: "用通俗的例子给我解释一下什么是零知识证明"
+    expected_primitives: ["translate"]
+    expected_ids: ["pt_explain", "disc_career_translating_jargon_for_stakeholders"]
+
+  # 4. Critique / Premortem / Code Review / Debugging
+  - id: critique_code_review
+    app_name: "Cursor"
+    input_text: "帮我 review 一下这段 Go 并发代码，看看有没有 race condition 或内存泄漏风险"
+    expected_primitives: ["critique"]
+    expected_ids: ["core_code_review", "pt_review_code", "core_root_cause"]
+
+  - id: critique_root_cause_bug
+    app_name: "Terminal"
+    input_text: "线上 Redis 连接池突然报错 timeout，帮我排查一下根因"
+    expected_primitives: ["critique", "deconstruct"]
+    expected_ids: ["core_root_cause", "pt_debug_error", "pt_perf_investigation"]
+
+  - id: critique_premortem_plan
+    app_name: "Notion"
+    input_text: "我们下季度准备把整个 SaaS 改成按量计费，帮我看看这个方案有什么致命风险"
+    expected_primitives: ["critique"]
+    expected_ids: ["core_premortem", "core_red_team", "disc_cognition_steelman_adversarial", "disc_cognition_looking_for_disconfirming_evidence"]
+
+  - id: critique_fact_check
+    app_name: "Chrome"
+    input_text: "这篇文章说某开源模型全面超越 GPT-5，帮我核实一下里面的论据靠不靠谱"
+    expected_primitives: ["critique"]
+    expected_ids: ["pt_fact_check", "disc_cognition_separating_signal_from_hype", "disc_cognition_looking_for_disconfirming_evidence"]
+
+  # 5. Converge / Decision Making
+  - id: converge_tech_choice
+    app_name: "Obsidian"
+    input_text: "向量检索选本地 numpy 还是上 Qdrant，帮我对比权衡一下"
+    expected_primitives: ["converge", "critique"]
+    expected_ids: ["core_decision_matrix", "pt_compare_options", "disc_cognition_making_decisions_under_uncertainty"]
+
+  - id: converge_mvp_scope
+    app_name: "Notion"
+    input_text: "功能列表列了 20 个，下周就要上线，怎么砍需求收敛出最小 MVP"
+    expected_primitives: ["converge", "compress", "deconstruct"]
+    expected_ids: ["pt_mvp_scope", "disc_life_simplifying_when_overwhelmed", "core_decision_matrix"]
+
+  - id: converge_offer_compare
+    app_name: "Notes"
+    input_text: "手里有两个 offer，一个大厂高薪但卷，一个创业公司期权多，怎么选"
+    expected_primitives: ["converge", "metacognize"]
+    expected_ids: ["pt_offer_compare", "core_decision_matrix", "pt_compare_options"]
+
+  # 6. Deconstruct / Planning / Breakdown
+  - id: deconstruct_messy_project
+    app_name: "Notion"
+    input_text: "这个季度重构项目一团麻，涉及前后端、数据迁移和灰度发布，帮我理一下拆解步骤"
+    expected_primitives: ["deconstruct"]
+    expected_ids: ["core_mece_breakdown", "pt_task_breakdown", "pt_project_plan"]
+
+  - id: deconstruct_api_doc
+    app_name: "Cursor"
+    input_text: "帮我给这几个后端接口整理一份清晰的调用文档和错误码说明"
+    expected_primitives: ["translate", "deconstruct"]
+    expected_ids: ["pt_api_docs", "pt_handoff"]
+
+  # 7. Compress / Summarize / Distill
+  - id: compress_meeting_notes
+    app_name: "Feishu"
+    input_text: "这是一小时的产品评审会议逐字稿，太长了，帮我整理成纪要和待办"
+    expected_primitives: ["compress"]
+    expected_ids: ["pt_meeting_notes", "pt_exec_brief"]
+
+  - id: compress_long_article
+    app_name: "Obsidian"
+    input_text: "这篇 2 万字行业长文信息量太大，帮我提炼最核心的 3 个颠覆性观点"
+    expected_primitives: ["compress"]
+    expected_ids: ["disc_content_distilling_long_reads_into_key_shifts", "pt_exec_brief", "pt_research_to_brief"]
+
+  - id: compress_cut_fluff
+    app_name: "Notion"
+    input_text: "我写的这篇公众号文章太啰嗦了，帮我狠狠删掉废话压紧凑一点"
+    expected_primitives: ["compress", "translate"]
+    expected_ids: ["disc_content_tightening_prose_by_cutting_fluff", "core_de_ai_rewrite"]
+
+  # 8. Diverge / Brainstorm / Headlines
+  - id: diverge_brainstorm_ideas
+    app_name: "Notion"
+    input_text: "给我们的本地 AI 效率工具脑暴 10 个有意思的增长传播点子"
+    expected_primitives: ["diverge"]
+    expected_ids: ["pt_brainstorm", "disc_cognition_cross_domain_analogy", "pt_headlines"]
+
+  - id: diverge_headlines
+    app_name: "Obsidian"
+    input_text: "文章写完了，帮我起几个不同角度、抓人眼球的标题"
+    expected_primitives: ["diverge", "compress"]
+    expected_ids: ["pt_headlines", "disc_content_reader_first_opening_hook"]
+
+  # 9. Metacognize / Vague / Assumptions
+  - id: metacognize_vague_product
+    app_name: "Notion"
+    input_text: "想做个独立的 AI 产品，但现在脑子很散，完全不知道第一步该问什么"
+    expected_primitives: ["metacognize", "diverge"]
+    expected_ids: ["core_clarify_first", "disc_cognition_question_refinement_loop", "disc_cognition_explicit_assumptions_audit", "pt_research_question"]
+
+  - id: metacognize_sunk_cost
+    app_name: "Obsidian"
+    input_text: "这个副业做了半年一直没起色，但已经投入太多心血舍不得放弃"
+    expected_primitives: ["metacognize", "critique", "converge"]
+    expected_ids: ["disc_cognition_avoiding_sunk_cost_trap", "disc_cognition_stopping_rules_and_cadence", "core_premortem"]
+
+  - id: metacognize_find_bottleneck
+    app_name: "Notion"
+    input_text: "最近每天忙到凌晨，做了很多优化但业务增长完全不动，感觉用力用偏了"
+    expected_primitives: ["metacognize", "deconstruct"]
+    expected_ids: ["disc_cognition_identifying_true_bottleneck", "disc_build_local_optimization_deadlocks", "disc_life_simplifying_when_overwhelmed"]

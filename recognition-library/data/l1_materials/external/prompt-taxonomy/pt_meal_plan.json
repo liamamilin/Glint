@@ -1,0 +1,29 @@
+{
+  "id": "pt_meal_plan",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#meal-plan",
+  "title": "用现有食材规划餐食",
+  "content": "我有【食材和大致用量】，要做【人数和餐次】的餐，限制是【忌口、设备和用时】。给一份菜单、用量、步骤与总耗时。优先消耗保质期短的食材，再列真正需要补买的东西。",
+  "content_hash": "80dccf40db3dfc05092457074bc06ccad89e69be8368fc71962b9358f7ca3387",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "planning",
+    "食谱",
+    "菜单",
+    "做饭",
+    "recipes"
+  ],
+  "problem_solved": "按人数和时间减少浪费。",
+  "when_to_use": "分类: 计划与生活",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "meal-plan",
+    "category": "planning",
+    "variables": [
+      "食材和大致用量",
+      "人数和餐次",
+      "忌口、设备和用时"
+    ]
+  }
+}

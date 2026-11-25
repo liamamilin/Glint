@@ -1,0 +1,64 @@
+id: sit_prd_04
+title: 核心路径走查表
+tagline: 以陌生访客视角找出首屏3大流失摩擦点
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - product
+  - ux
+  - onboarding
+  - user_experience
+  app_affinity:
+  - Chrome
+  - Figma
+  - ChatGPT
+  pain_point: 产品做久了自己觉得都理所当然，完全察觉不到新用户打开第一眼就懵、卡在哪里。
+  trigger_utterances:
+  - 这个产品我自己用着很顺，但新用户总在第一步就流失
+  - 新用户注册完就跑，我却看不出他们卡在哪
+  - 帮我以陌生人的视角走查一下 onboarding 流程
+  - 首屏体验太差但我不知道具体哪里有问题
+  anti_triggers:
+  - 帮我从零设计一个全新的 onboarding 流程
+  - 分析用户留存数据找出流失原因
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '首屏体验走查清单（核心路径 3–5 步）
+
+
+    前置：截下从首屏到完成首次核心动作的 3–5 步连续截图。
+
+
+    步骤：
+
+    1. 截图走查：按顺序截取首屏 → ... → 完成首次核心动作的 3–5 步截图。
+
+    2. AI 扮演陌生访客：把截图喂给多模态视觉模型，要求它扮演「毫无背景、只有 30 秒耐心的陌生访客」，逐屏说出困惑点。
+
+    3. 砍掉摩擦：删除首次体验前所有非必要弹窗、注册墙、术语解释。
+
+    4. 输出《首屏体验改造单》：标出 3 个最大流失摩擦点及对应改造动作。
+
+
+    交付物：《首屏体验改造单》（含 3 个最大流失摩擦点 + 改造动作）
+
+    推荐装配：多模态视觉模型 + 连续截图走查
+
+
+    避坑：不要用「加一段更长的新手引导文字」来解决界面本身不直观的问题。'
+  variables: []
+  workflow: null
+meta:
+  source: super-individual-toolbox
+  source_ref: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/product-architect.json#prd-04
+  source_hash: ffcb529764942d018f32f71957fd86e3bdfeb6abc2986675d15e3fb8dbe993f1
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

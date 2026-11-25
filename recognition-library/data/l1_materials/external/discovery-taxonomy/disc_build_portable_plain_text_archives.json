@@ -1,0 +1,33 @@
+{
+  "id": "disc_build_portable_plain_text_archives",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/build.json#build-portable-plain-text-archives",
+  "title": "把核心资产存成“纯文本/JSON”，不被单一工具绑架",
+  "content": "旧共识（盲区）：把笔记、清单和方案全塞进某个热门 App 的私有格式里，方便又省事。\n\n新现实（破盲视角）：工具会涨价、改版、关停或换代，但 Markdown、CSV 和 JSON 跨越几十年依然能被任何编辑器、脚本和 AI 直接读写。\n\n破冰追问母题：\n- 我目前把 [某类重要资料/笔记/清单] 放在 [某个软件或平台] 里。请帮我设计一套导出与落盘为 Markdown / JSON 的结构方案，兼顾可读性与脚本可处理性。\n- 如何让“平时顺手写在某个工具里”和“定期沉淀成跨工具可复用的纯文本/JSON”不变成两张皮？",
+  "content_hash": "ff66249518694f017171eff1015829616fcf6cffc75c01c956e613bf98226351",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "build",
+    "invisible-friction",
+    "first-principles",
+    "plain-text",
+    "markdown",
+    "json",
+    "portability"
+  ],
+  "problem_solved": "把笔记、清单和方案全塞进某个热门 App 的私有格式里，方便又省事。",
+  "when_to_use": "工具会涨价、改版、关停或换代，但 Markdown、CSV 和 JSON 跨越几十年依然能被任何编辑器、脚本和 AI 直接读写。",
+  "procedural_steps": [
+    "我目前把 [某类重要资料/笔记/清单] 放在 [某个软件或平台] 里。请帮我设计一套导出与落盘为 Markdown / JSON 的结构方案，兼顾可读性与脚本可处理性。",
+    "如何让“平时顺手写在某个工具里”和“定期沉淀成跨工具可复用的纯文本/JSON”不变成两张皮？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "build-portable-plain-text-archives",
+    "arena": "build",
+    "lenses": [
+      "invisible-friction",
+      "first-principles"
+    ]
+  }
+}

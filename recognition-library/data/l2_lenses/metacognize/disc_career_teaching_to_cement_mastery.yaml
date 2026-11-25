@@ -1,0 +1,59 @@
+id: disc_career_teaching_to_cement_mastery
+title: 教别人验证真懂
+tagline: 用费曼技巧把理解漏洞讲出来，顺手留下公开资产。
+routing:
+  primitive: metacognize
+  goals:
+  - evaluate
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - career
+  - learning
+  - teaching
+  - knowledge_management
+  - personal_development
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 学了很多概念和资料却以为自己会了，一讲给外行或写教程就卡壳，暴露理解漏洞。
+  trigger_utterances:
+  - 我学完了这个概念，但讲给别人听就讲不清
+  - 收藏了很多资料但感觉没真正掌握
+  - 用费曼技巧检验自己是不是真懂
+  - 帮我把这段理解改写成小白能懂的解释
+  - 我怀疑自己只是死记硬背
+  anti_triggers:
+  - 需要真正执行代码或操作的场景
+  - 已有明确结论只需润色文案的场景
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '## 费曼自检清单
+
+
+    1. 写下你对 [概念/技能] 的当前理解（100~200字，允许有黑话）。
+
+    2. 请 AI 扮演好奇无背景新手，向你提 4 个“为什么/如果……会怎样”问题，逐一作答。
+
+    3. 对每个卡壳点，回到原始资料或动手实验补漏洞，直到能答出。
+
+    4. 把最终理解改写成一段无黑话、带生活类比的 150 字通俗解释。
+
+    5. 把解释发布为公开笔记/教程，作为可复用资产并接受外部反馈。
+
+    6. 一周后不看资料复述一遍，仍能讲清才算真掌握。'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/career.json#career-teaching-to-cement-mastery
+  source_hash: c5f487a9cfd7165d6a8bef6002ad4ef0ceb6f981e7bd5dd2a5dbd757d9097d5a
+  status: active
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

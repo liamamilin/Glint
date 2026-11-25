@@ -1,0 +1,29 @@
+{
+  "id": "sit_ops_04",
+  "source": "super-individual-toolbox",
+  "source_ref": "https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/ops-automation.json#ops-04",
+  "title": "高频任务 Skill 封装器",
+  "content": "定位：凡是重复敲了 3 遍的指令，直接铸成一键技能\n\n触发场景：当你发现自己每周都在向 AI 重复解释同一套背景、格式要求和避坑规则，越写越烦时。\n\n核心机制：\n- 翻出最近 3 次最满意的同类对话记录，提取共性的输入参数、执行步骤与输出格式\n- 把隐性默契写成显性的标准操作规程（SKILL.md），明确触发条件与禁止事项\n- 存入个人公开或私有 Skills 仓库，每次实战发现新边缘情况就迭代更新版本号\n\n交付物：一个可跨对话一键调用的标准化 Skill 模块\n\n推荐装配：自定义 AI Skills / Gems + GitHub 版本化托管\n\n误用警告：不要为只干一次的临时活去封装复杂 Skill；严格遵守“事不过三”原则，第 3 次重复再动手封装。",
+  "content_hash": "d9347a026b59d02d6ac91943743cc1a76e88edc73c20dba7a7df34096c87bb82",
+  "suggested_action_type": "open_resource",
+  "domain_hints": [
+    "ops-automation",
+    "运营与自动化官"
+  ],
+  "problem_solved": "当你发现自己每周都在向 AI 重复解释同一套背景、格式要求和避坑规则，越写越烦时。",
+  "when_to_use": "当你发现自己每周都在向 AI 重复解释同一套背景、格式要求和避坑规则，越写越烦时。",
+  "procedural_steps": [
+    "翻出最近 3 次最满意的同类对话记录，提取共性的输入参数、执行步骤与输出格式",
+    "把隐性默契写成显性的标准操作规程（SKILL.md），明确触发条件与禁止事项",
+    "存入个人公开或私有 Skills 仓库，每次实战发现新边缘情况就迭代更新版本号"
+  ],
+  "anti_patterns": [
+    "不要为只干一次的临时活去封装复杂 Skill；严格遵守“事不过三”原则，第 3 次重复再动手封装。"
+  ],
+  "metadata": {
+    "original_id": "ops-04",
+    "drawer": "ops-automation",
+    "drawer_zh": "运营与自动化官",
+    "deliverable": "一个可跨对话一键调用的标准化 Skill 模块"
+  }
+}

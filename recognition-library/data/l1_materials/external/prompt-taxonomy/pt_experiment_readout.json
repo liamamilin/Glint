@@ -1,0 +1,27 @@
+{
+  "id": "pt_experiment_readout",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#experiment-readout",
+  "title": "写一份实验结果解读",
+  "content": "根据【实验记录与数值】解释【原始假设】。给实际分组、样本与时间窗，列主指标、保护指标、区间或不确定性。解释主要限制，明确什么结果支持何种行动。",
+  "content_hash": "a4f0d4aab1d5f6025d64d378bfbe550ce81fa08115e251ee36ae237445a37471",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "product",
+    "实验复盘",
+    "A/B测试",
+    "readout"
+  ],
+  "problem_solved": "用结果决定继续、回滚或补证据。",
+  "when_to_use": "分类: 产品与业务",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "experiment-readout",
+    "category": "product",
+    "variables": [
+      "实验记录与数值",
+      "原始假设"
+    ]
+  }
+}

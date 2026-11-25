@@ -1,0 +1,82 @@
+id: pt_support_macro
+title: 标准回复宏（客服
+tagline: 为重复请求写可复用的标准回复，标出可变字段与升级条件
+routing:
+  primitive: translate
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - customer_support
+  - support_ops
+  - copywriting
+  - templates
+  app_affinity:
+  - Slack
+  - Feishu
+  - Mail
+  - Notion
+  pain_point: 客服每天重复回答相同问题，回复质量不一致，容易越权承诺或遗漏升级条件，需要一套统一且可个性化的标准回复
+  trigger_utterances:
+  - 这个请求每天都有人问，帮我写个标准回复
+  - 客服宏怎么写，既能统一口径又能填入客户信息
+  - 写一个可复用的客服回复模板，包含升级条件
+  - support macro for recurring request with placeholders
+  - 帮我给常见问题写 canned response
+  anti_triggers:
+  - 需要写一次性个性化长邮件而非可复用模板
+  - 需要设计整个工单流程或 SLA 而非单条回复
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请为【常见请求和服务政策】编写一个标准回复（support macro）。
+
+
+    要求：
+
+    1. 标出所有可替换的背景字段，使用 {{字段名}} 占位符（如 {{customer_name}}、{{order_id}}、{{date}}），并附字段说明。
+
+    2. 明确「允许承诺」：列出回复中可以给出的承诺/补偿/时间表。
+
+    3. 明确「必须升级的条件」：什么情况下不能用此回复，必须转人工/主管/法务。
+
+    4. 提供一个「正常适用例」：填好字段后的完整回复样例。
+
+    5. 提供一个「反例」：一个不该使用同一回复的场景及原因。
+
+
+    输出结构：
+
+    - 标题与适用场景
+
+    - 可替换字段表（字段/说明/示例）
+
+    - 允许承诺
+
+    - 必须升级条件
+
+    - 正常适用例
+
+    - 反例'
+  variables:
+  - customer_name
+  - order_id
+  - date
+  - 常见请求和服务政策
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#support-macro
+  source_hash: 9bb707a8eb97209c1f790022a95c055a6d66a394d49ab22e18e26e94299ca88d
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: writing_comms
+  subcategory: writing_polish
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

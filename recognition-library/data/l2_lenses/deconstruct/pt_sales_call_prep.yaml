@@ -1,0 +1,61 @@
+id: pt_sales_call_prep
+title: 销售沟通背景整理
+tagline: 把客户背景、目标与提问结构化，避免白跑一趟
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - sales
+  - marketing
+  - customer_success
+  - b2b
+  app_affinity:
+  - Notion
+  - Feishu
+  - Mail
+  - Chrome
+  pain_point: 带着未经验证的需求假设和零散信息就去见客户，沟通容易跑偏或白跑一趟
+  trigger_utterances:
+  - 明天要见客户帮我整理下背景
+  - 销售拜访前准备一下
+  - 跟客户开会前要准备什么
+  - 帮我做销售 call prep
+  - 客户拜访准备清单
+  anti_triggers:
+  - 内部技术评审或非销售场景的会议准备
+  - 已成交客户的售后跟进记录
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '为与{{customer_role}}的沟通做准备，已知事实与以往接触：{{known_facts}}。
+
+
+    请按以下结构输出销售沟通准备单：
+
+    1. 可能目标（我方希望达成的 2~3 个目标，按优先级排序）
+
+    2. 已核实信息（已确认的事实，标注来源）
+
+    3. 需要了解的三件事（待验证的需求假设与关键提问）
+
+    4. 可举的案例（1~2 个与客户场景匹配的成功案例）
+
+    5. 开场（前 2 分钟的破冰与议程设定话术）
+
+    6. 退出条件（达成/未达成时的下一步与收尾话术）'
+  variables:
+  - customer_role
+  - known_facts
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#sales-call-prep
+  source_hash: e582ca9e09eee17a82cf03e7a9add6b41baf13e1e26fb6c0c807cd9661fbdc25
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

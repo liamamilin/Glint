@@ -1,0 +1,29 @@
+{
+  "id": "sit_cos_03",
+  "source": "super-individual-toolbox",
+  "source_ref": "https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/chief-of-staff.json#cos-03",
+  "title": "竞品信号雷达",
+  "content": "定位：不看对手吹什么，只盯用户骂什么和定价怎么变\n\n触发场景：当你想切入一个细分赛道，需要快速看清现有玩家的真实软肋与未被满足的缺口时。\n\n核心机制：\n- 锁定 3–5 个标杆竞品，抓取其差评区、更新日志（Changelog）与定价页\n- 让 AI 按“高频吐槽点 / 过度臃肿功能 / 隐形门槛”三个维度聚类\n- 提炼出 1 个对手因为船大难掉头而不敢做的切入点\n\n交付物：一份《竞品软肋与切入点一页纸报告》\n\n推荐装配：联网搜索模型 + 结构化信息抽取模板\n\n误用警告：不要天天盯着竞品动态产生焦虑，也不要变成“对手加什么功能我就抄什么”。",
+  "content_hash": "1134a7326b3756060c744b30cb07e678dbb151068f21ea755871eddff3463ff9",
+  "suggested_action_type": "open_resource",
+  "domain_hints": [
+    "chief-of-staff",
+    "参谋与战略官"
+  ],
+  "problem_solved": "当你想切入一个细分赛道，需要快速看清现有玩家的真实软肋与未被满足的缺口时。",
+  "when_to_use": "当你想切入一个细分赛道，需要快速看清现有玩家的真实软肋与未被满足的缺口时。",
+  "procedural_steps": [
+    "锁定 3–5 个标杆竞品，抓取其差评区、更新日志（Changelog）与定价页",
+    "让 AI 按“高频吐槽点 / 过度臃肿功能 / 隐形门槛”三个维度聚类",
+    "提炼出 1 个对手因为船大难掉头而不敢做的切入点"
+  ],
+  "anti_patterns": [
+    "不要天天盯着竞品动态产生焦虑，也不要变成“对手加什么功能我就抄什么”。"
+  ],
+  "metadata": {
+    "original_id": "cos-03",
+    "drawer": "chief-of-staff",
+    "drawer_zh": "参谋与战略官",
+    "deliverable": "一份《竞品软肋与切入点一页纸报告》"
+  }
+}

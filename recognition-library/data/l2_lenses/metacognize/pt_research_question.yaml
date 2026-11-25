@@ -1,0 +1,47 @@
+id: pt_research_question
+title: 宽泛主题变研究问题
+tagline: 把模糊主题收敛成可回答的研究问题与边界
+routing:
+  primitive: metacognize
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - research
+  - academic_writing
+  - problem_framing
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  - ChatGPT
+  pain_point: 用户只有一个模糊的研究主题，不知道如何限定对象、比较维度、时间窗与证据范围，导致选题发散、无法落地
+  trigger_utterances:
+  - 这个主题太大了不知道怎么研究
+  - 帮我把选题收窄成具体的研究问题
+  - 我要写文章但研究问题还没定
+  - research question 怎么写比较好
+  - 选题太宽泛了需要缩小范围
+  anti_triggers:
+  - 用户只是想让 AI 总结一篇已有论文的结论
+  - 用户需要的是文献检索关键词而非问题重构
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 我关注【宽泛主题】，要支持【决定或文章】。请给我三个范围逐渐缩小的研究问题，分别说明比较对象、时间窗和能回答它的证据。然后选一个最适合【时间预算】的问题，并写清研究边界（包含明确不研究的内容）。
+  variables:
+  - 宽泛主题
+  - 决定或文章
+  - 时间预算
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#research-question
+  source_hash: 6ad1fd4d22c2d24b34183ee55865ed9dae3046ec9e87982395a1264525d37edd
+  status: active
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

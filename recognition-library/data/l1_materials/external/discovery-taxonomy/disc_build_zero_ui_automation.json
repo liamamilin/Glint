@@ -1,0 +1,33 @@
+{
+  "id": "disc_build_zero_ui_automation",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/build.json#build-zero-ui-automation",
+  "title": "无界面 / 隐形自动化（Zero-UI Automation）",
+  "content": "旧共识（盲区）：好工具必须有精美的控制台和仪表盘，让用户每天点开操作。\n\n新现实（破盲视角）：最高级的个人工具根本没有界面——它藏在快捷键、文件夹监听或后台脚本里，平时完全隐身，只在异常时才提醒你。\n\n破冰追问母题：\n- 盘点我每天在电脑上重复超过 3 次的机械操作：[列出 2-3 个具体动作]。帮我把它们改造成“零界面后台自动化”（如文件夹监听、全局快捷键、定时脚本），并给出最小实现方案。\n- 如果把 [你常用的某个效率工具/流程] 的图形界面全部砍掉，只保留“触发条件 → 自动执行 → 异常通知”三步，它的极简工作流应该怎么设计？",
+  "content_hash": "33677e0f654e2980415205a703e17adad4a30cde3f2eff6a3e85556fffac7a63",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "build",
+    "invisible-friction",
+    "first-principles",
+    "zero-ui",
+    "automation",
+    "ambient",
+    "scripts"
+  ],
+  "problem_solved": "好工具必须有精美的控制台和仪表盘，让用户每天点开操作。",
+  "when_to_use": "最高级的个人工具根本没有界面——它藏在快捷键、文件夹监听或后台脚本里，平时完全隐身，只在异常时才提醒你。",
+  "procedural_steps": [
+    "盘点我每天在电脑上重复超过 3 次的机械操作：[列出 2-3 个具体动作]。帮我把它们改造成“零界面后台自动化”（如文件夹监听、全局快捷键、定时脚本），并给出最小实现方案。",
+    "如果把 [你常用的某个效率工具/流程] 的图形界面全部砍掉，只保留“触发条件 → 自动执行 → 异常通知”三步，它的极简工作流应该怎么设计？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "build-zero-ui-automation",
+    "arena": "build",
+    "lenses": [
+      "invisible-friction",
+      "first-principles"
+    ]
+  }
+}

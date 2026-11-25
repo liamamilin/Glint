@@ -1,0 +1,50 @@
+id: pt_concept_map
+title: 从材料画概念关系
+tagline: 把材料里的概念关系画成图，标清因果与推断
+routing:
+  primitive: deconstruct
+  goals:
+  - digest
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - learning
+  - knowledge_graph
+  - concept_map
+  - education
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  - ChatGPT
+  pain_point: 读完材料仍理不清概念之间是前提、因果还是对比，容易把相关误画成因果
+  trigger_utterances:
+  - 帮我把这篇材料的概念关系画出来
+  - 这些概念之间到底是因果还是对比
+  - 读完还是理不清概念关系
+  - 帮我做一张概念图
+  - 把知识点之间的关系标清楚
+  anti_triggers:
+  - 只需要单个术语的定义时
+  - 只需要一段摘要而非关系结构时
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: '根据以下材料和主题构建概念图：
+
+    {{input}}
+
+
+    请用适合 {{reader_level}} 的文本树或 Mermaid 表达。每条连线必须说明关系类型（前提/因果/对比/组成等），并区分材料直接给出的关系与你的推断。最后列出两个最容易被误画成因果的联系并解释。'
+  variables:
+  - reader_level
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#concept-map
+  source_hash: 9af46f4c1ebd75bfba05d00b635f6d81f5b22e9c7a7e03d76e2e266cd84daea4
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

@@ -1,0 +1,66 @@
+id: disc_build_llm_as_compiler_for_docs
+title: 文档编译成结构化系统
+tagline: 把长文档当源码，自动编译成配置/清单/断言，改了自动同步。
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - docs
+  - build
+  - structured_data
+  - pipeline
+  - automation
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Mail
+  - Chrome
+  pain_point: 需求文档、规则书、会议纪要更新后，下游配置、代码、待办没人同步，经常漏掉或过期。
+  trigger_utterances:
+  - 需求文档改了但代码还没更新
+  - 报销规则PDF改版了待办没跟上
+  - 会议纪要里有action items手动抄太累
+  - 把这篇长文抽成JSON配置
+  - 规则书更新了自动同步任务清单
+  anti_triggers:
+  - 只是想总结文章大意
+  - 需要法律合规审查原文
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '文档→结构化系统编译清单：
+
+    1. 明确文档类型与更新频率（需求/规则/纪要/邮件）。
+
+    2. 列出每次更新后必须同步的下游产物（配置、代码、待办、日程）。
+
+    3. 设计提取 Schema：字段、类型、必填项、枚举值。
+
+    4. 用轻量脚本+AI 抽取结构化数据，输出 JSON/清单/断言。
+
+    5. 加校验：缺字段、冲突、过期版本自动报警。
+
+    6. 建立触发器：文档变更→重新编译→diff→同步下游。
+
+    7. 先在最小场景试跑一周，记录漏同步案例并迭代。'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/build.json#build-llm-as-compiler-for-docs
+  source_hash: 94bcaeb17e8422fcf503453dd429a6e443e3fa97f112bfe371509b022316241f
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: engineering
+  subcategory: ai_workflow
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

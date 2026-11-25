@@ -1,0 +1,55 @@
+id: pt_sort_out_concern
+title: 分清事实与下一步
+tagline: 把一件烦心事拆成事实、担心和未知，再选低压力下一步
+routing:
+  primitive: deconstruct
+  goals:
+  - digest
+  - optimize
+  clarity_fit:
+  - vague
+  - conflicted
+  domains:
+  - planning
+  - reflection
+  - self_organization
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 遇到一件让人放不下、脑子一团乱的烦心事，分不清哪些是已知事实、哪些只是担心，也不知道接下来该做什么，越想越焦虑。
+  trigger_utterances:
+  - 这事让我好烦，我不知道该怎么办
+  - 我被这件事困住了，理不清头绪
+  - 分不清这是真的还是我瞎想
+  - 帮我把这件事捋清楚一点
+  - 我好焦虑，想理清一下
+  anti_triggers:
+  - 不适用：用户只想倾诉情绪、不需要拆解
+  - 不适用：用户已明确问题、只想要直接决策或方案
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 我想梳理【让我在意的事】，目前已知【事实和感受】。先简短复述我的处境，然后一次只问一个开放问题，帮我区分事实、担心和还不知道的部分。我准备好后再给几种低压力的下一步，结果由我选择。
+  variables:
+  - 让我在意的事
+  - 事实和感受
+  workflow:
+    workflow_id: reflect-and-adjust
+    step: 2
+    next_lens_id: pt_routine_design
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#sort-out-concern
+  source_hash: 007c0e9b72c4e7ed09583ae3d222597dfeed24b1db4efa22f144527c1a424d74
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: personal_career
+  subcategory: personal_os
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

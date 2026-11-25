@@ -1,0 +1,29 @@
+{
+  "id": "pt_apology_repair",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#apology-repair",
+  "title": "为失误准备一句具体道歉",
+  "content": "我在【情境】做了【具体动作】，对方受到【已知影响】。拟一段适合【沟通渠道】的道歉，承认事实和责任，提出可以执行的修复。将尚不清楚的影响写为愿意了解的问题。",
+  "content_hash": "1ecb3a983b8aa664c6608771a15f10d9383820897a4cde87df1737f67a15af11",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "communication",
+    "道歉",
+    "关系",
+    "apology"
+  ],
+  "problem_solved": "承担该承担的责任并把修复动作讲清。",
+  "when_to_use": "分类: 沟通与协商",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "apology-repair",
+    "category": "communication",
+    "variables": [
+      "情境",
+      "具体动作",
+      "已知影响",
+      "沟通渠道"
+    ]
+  }
+}

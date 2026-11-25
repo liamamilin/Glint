@@ -1,0 +1,33 @@
+{
+  "id": "disc_business_clear_offer_and_positioning",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-clear-offer-and-positioning",
+  "title": "用一句话说清“帮谁解决什么具体事”，别堆砌形容词",
+  "content": "旧共识（盲区）：介绍产品或服务时，词藻越高级、覆盖面越广，听起来就越有分量。\n\n新现实（破盲视角）：含糊其辞只会让目标用户划走；一句直白写清“目标人群 + 具体痛点/结果 + 为什么现在不同”的话，往往比十句华丽形容词更有成交力。\n\n破冰追问母题：\n- 这是我目前对 [产品/服务/项目] 的介绍：[粘贴你的简介]。请帮我挑出其中的空话和行话，改写成 3 个不同侧重点（省时/省钱/降险）的一句话价值主张。\n- 针对 [你的目标用户]，帮我写出“他们看到第一眼就会觉得‘这说的就是我’”的开场痛点句式。",
+  "content_hash": "369b81c33f6f1537fdc7269bb60be1705798066da21e58d6111f1a6024bcfa7e",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "business",
+    "first-principles",
+    "invisible-friction",
+    "positioning",
+    "offer",
+    "clarity",
+    "value-proposition"
+  ],
+  "problem_solved": "介绍产品或服务时，词藻越高级、覆盖面越广，听起来就越有分量。",
+  "when_to_use": "含糊其辞只会让目标用户划走；一句直白写清“目标人群 + 具体痛点/结果 + 为什么现在不同”的话，往往比十句华丽形容词更有成交力。",
+  "procedural_steps": [
+    "这是我目前对 [产品/服务/项目] 的介绍：[粘贴你的简介]。请帮我挑出其中的空话和行话，改写成 3 个不同侧重点（省时/省钱/降险）的一句话价值主张。",
+    "针对 [你的目标用户]，帮我写出“他们看到第一眼就会觉得‘这说的就是我’”的开场痛点句式。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "business-clear-offer-and-positioning",
+    "arena": "business",
+    "lenses": [
+      "first-principles",
+      "invisible-friction"
+    ]
+  }
+}

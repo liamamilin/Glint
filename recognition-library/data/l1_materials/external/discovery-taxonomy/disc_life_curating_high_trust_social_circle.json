@@ -1,0 +1,33 @@
+{
+  "id": "disc_life_curating_high_trust_social_circle",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/life.json#life-curating-high-trust-social-circle",
+  "title": "把社交精力留给“聊得来、不消耗人”的少数深度连接",
+  "content": "旧共识（盲区）：社交圈子越大越好，逢场作戏、应酬或勉强维持关系是一种必要付出。\n\n新现实（破盲视角）：个人社交带宽有限；把时间和情绪留给真正同频、相处轻松、能互相滋养的少数人，比维系十个客套关系更有获得感。\n\n破冰追问母题：\n- 帮我梳理一下我目前的日常社交与互动：[简述现状]，看看哪些互动真正让我觉得轻松、有启发，哪些更多是习惯性消耗。\n- 如果我想和一位很久没联系但很投缘的朋友恢复轻量联系，帮我写 2 条自然、没有压力的破冰消息。",
+  "content_hash": "574dc3c26216b3fae2bd3919a0544ea7a913a0a9da66ce868b449b575b882233",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "life",
+    "role-inversion",
+    "invisible-friction",
+    "relationships",
+    "energy",
+    "boundaries",
+    "connection"
+  ],
+  "problem_solved": "社交圈子越大越好，逢场作戏、应酬或勉强维持关系是一种必要付出。",
+  "when_to_use": "个人社交带宽有限；把时间和情绪留给真正同频、相处轻松、能互相滋养的少数人，比维系十个客套关系更有获得感。",
+  "procedural_steps": [
+    "帮我梳理一下我目前的日常社交与互动：[简述现状]，看看哪些互动真正让我觉得轻松、有启发，哪些更多是习惯性消耗。",
+    "如果我想和一位很久没联系但很投缘的朋友恢复轻量联系，帮我写 2 条自然、没有压力的破冰消息。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "life-curating-high-trust-social-circle",
+    "arena": "life",
+    "lenses": [
+      "role-inversion",
+      "invisible-friction"
+    ]
+  }
+}

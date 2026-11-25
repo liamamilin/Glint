@@ -1,0 +1,54 @@
+id: atlas_anthropics_skills_skills_internal_comms_skill_md
+title: 内部沟通类型化写作
+tagline: 按沟通类型套用固定格式起草内部消息
+routing:
+  primitive: translate
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - internal_comms
+  - organizational_comms
+  - writing
+  - workplace
+  app_affinity:
+  - Slack
+  - Notion
+  - Feishu
+  - Mail
+  pain_point: 需要写团队更新、全公司通讯或 FAQ，但不确定该用什么格式、结构和语气，容易写成流水账或信息混乱
+  trigger_utterances:
+  - 帮我写个团队周报 3P 格式
+  - 全公司 newsletter 怎么组织内容
+  - 把这几个常见问题整理成 FAQ
+  - 领导层更新邮件该怎么写
+  - 事故报告内部通报模板
+  anti_triggers:
+  - 对外营销文案或广告语撰写
+  - 技术 API 文档或代码注释编写
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: "请按内部沟通类型化方法起草内容：\n1. 先判定类型：3P 团队更新 / 公司通讯 / FAQ / 状态·领导层·项目更新 / 事故报告 / 其他。\n2. 若无匹配标准格式，先向用户确认受众、目的、语气与格式要求。\n\
+    3. 按类型采集素材：优先高关注度渠道与官方信息，覆盖目标时段；无工具权限时询问用户期望覆盖内容。\n4. 套用固定版式：\n   - 3P：emoji+团队名+日期；Progress/Plans/Problems 各 1–3 句，数据驱动、就事论事，30–60\
+    \ 秒可读；时间范围通常一周（Progress 上周、Plans 下周、Problems 上周）。\n   - 公司通讯：约 20–25 条要点，每条 1–2 句，使用 we 人称，多链接，按板块聚合，聚焦全公司影响与领导层公告，避免细碎或重复。\n\
+    \   - FAQ：Question 1 句 + Answer 1–2 句，基于官方沟通；不确定时明确说明并链接权威来源，需高管输入时标注。\n5. 复查：3P 可读性与数据驱动；通讯 we 人称与链接；FAQ 基于官方信息并标注不确定。\n\
+    6. 通用沟通：清晰简明、主动语态、结论先行。"
+  variables: []
+  workflow: null
+meta:
+  source: atlas-methods
+  source_ref: anthropics/skills:skills/internal-comms/SKILL.md
+  source_hash: 0d500c0e0df7b35655b7fedb022494e3b9e74d36d04ee4670df81b85ec80d6c4
+  status: active
+  scope: domain_specific
+  shelf: off_shelf
+  tier: A
+  category: writing_comms
+  subcategory: writing_polish
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

@@ -1,0 +1,28 @@
+{
+  "id": "pt_api_docs",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#api-docs",
+  "title": "给已有 API 写调用文档",
+  "content": "根据【接口代码或协议】为【调用者】写使用文档。给请求参数、响应结构、正常示例、常见错误和幂等或分页行为。凡实现没证明的行为标待确认，并给最短调用例。",
+  "content_hash": "6e5900bca950e6f3d3bdada180dfc38d515fee4e670d52e756ea18bae0b3b8fd",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "coding",
+    "接口文档",
+    "OpenAPI",
+    "HTTP",
+    "API docs"
+  ],
+  "problem_solved": "展示认证、边界和最常见调用。",
+  "when_to_use": "分类: 开发与调试",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "api-docs",
+    "category": "coding",
+    "variables": [
+      "接口代码或协议",
+      "调用者"
+    ]
+  }
+}

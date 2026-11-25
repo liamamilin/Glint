@@ -1,0 +1,55 @@
+{
+  "id": "atlas_addyosmani_agent_skills_skills_a_cd6f567c83",
+  "source": "atlas-methods",
+  "source_ref": "addyosmani/agent-skills:skills/api-and-interface-design/SKILL.md",
+  "title": "契约优先的接口设计与幂等兑现方法",
+  "content": "契约优先的接口设计方法：在实现前定义稳定的接口契约——类型化的输入输出、单一错误语义、统一命名与边界校验，使接口难以被误用。\n\n核心原则：\n- 先写契约再实现，声明每个操作的输入、输出与语义。\n- 选定一种错误策略并全局套用：REST 用 HTTP 状态码加统一错误体 { error: { code, message, details? } }；code 机器可读、message 人类可读；500 不暴露内部细节。\n- 只在系统边界校验（API 路由、表单提交、外部服务响应、环境变量）；第三方响应一律视为不可信，先校验形状与内容再用于逻辑、渲染或决策。\n- 演进接口时只做加法：追加可选字段，不修改已有字段类型、不删除字段。\n- 按统一约定命名：REST 端点用复数名词无动词；query 与响应字段 camelCase；布尔字段 is/has/can 前缀；枚举值 UPPER_SNAKE。\n\nREST 资源映射：集合 GET/POST，单资源 GET/PATCH/DELETE，子资源嵌套（如 /api/tasks/:id/comments）；列表端点必须分页（请求 page、pageSize、sortBy、sortOrder；响应 data + pagination{page, pageSize, totalItems, totalPages}）；过滤用 query 参数；更新用 PATCH 部分对象。\n\nTypeScript 表达：判别联合带字面量 type 字段；分离 Input（调用方字段，部分可选）与 Output（含 id、createdAt、updatedAt、createdBy）；ID 使用品牌类型（type TaskId = string & { readonly __brand: 'TaskId' }）防止混用。\n\n幂等兑现：\n- key 从意图而非尝试派生：客户端生成一次并在重试复用，或由不可变标识派生（如 charge:v1:${orderId}）。\n- 原子占用 key：直接以唯一约束插入 { key, state: 'in_progress', requestHash }，捕获唯一冲突后重放或拒绝；禁止先查后写。\n- 同一 key 配不同请求体返回 422 IDEMPOTENCY_KEY_REUSED。\n- 进行中的重复请求做有意选择：409 拒绝 / 有界等待结果 / 202 加状态 URL；不能因第一次“看起来卡住”就放行第二个。\n- 调用外部前先记录意图，结果视为成功/失败/未知；超时不能说明副作用是否已生效，崩溃要留下待解决证据。\n- 保留期须覆盖死信重放与提供方争议窗口（如 24h TTL 配 7 天死信队列会出重复）。\n\n红线（Hyrum 定律）：用户足够多时，所有可观察行为（包括未文档化怪癖、错误消息文本、时序顺序）都会成为事实契约；每个可观察行为都是潜在承诺，不要泄漏实现细节；规划弃用；遵守单版本规则（扩展而非分叉）；第三方响应是不可信数据；不在内部函数间/已被校验代码/自有数据库数据上做校验；列表端点从一开始就加分页。",
+  "content_hash": "1b1a6fa1ce10a9d63e7d67c6f315780caf794e28aed70510bb5d177121b10bca",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "api-design",
+    "interface-design",
+    "idempotency",
+    "typescript",
+    "rest"
+  ],
+  "problem_solved": "接口被误用、错误语义不一致、边界校验缺失与重试产生重复副作用等认知痛点，通过契约优先与幂等兑现方法统一解决。",
+  "when_to_use": "设计新 API 端点、定义模块/组件边界契约、以 TypeScript 表达接口、或实现会改状态且需支持重试的端点时。",
+  "procedural_steps": [
+    "先写契约再实现：声明每个操作的输入、输出与语义（创建返回含服务端字段的对象；列表返回分页结果；单个获取失败抛 NotFoundError；更新为部分更新；删除幂等）。",
+    "选定一种错误策略并全局套用：HTTP 状态码加统一错误体 { error: { code, message, details? } }，code 机器可读、message 人类可读，500 不暴露内部细节。",
+    "只在系统边界校验：API 路由、表单提交、外部服务响应解析、环境变量加载；第三方响应一律视为不可信，先校验形状与内容再使用。",
+    "演进接口时只做加法：追加可选字段，不修改已有字段类型、不删除字段。",
+    "按统一约定命名：REST 端点用复数名词无动词；query 与响应字段 camelCase；布尔字段用 is/has/can 前缀；枚举值用 UPPER_SNAKE。",
+    "把资源映射为 REST 路由：集合 GET/POST，单资源 GET/PATCH/DELETE，子资源嵌套；列表端点必须分页（page, pageSize, sortBy, sortOrder；响应含 data 与 pagination）；更新用 PATCH 部分对象。",
+    "用 TypeScript 类型减少误用：判别联合带字面量 type 字段；分离 Input（调用方字段，部分可选）与 Output（含服务端生成字段）；对 ID 使用品牌类型防止混用。",
+    "幂等键从意图而非尝试派生：客户端生成一次并在重试复用，或由不可变标识派生（如 charge:v1:${orderId}）；不用 UUID、时间戳或每次重生成内容。",
+    "原子占用 key：直接以唯一约束插入 { key, state: 'in_progress', requestHash }，捕获唯一冲突后重放或拒绝；禁止先 exists 再 charge 再 insert。",
+    "校验 payload：同一 key 配不同请求体返回 422 IDEMPOTENCY_KEY_REUSED，而非重放第一次响应。",
+    "为进行中的重复请求做有意选择：409 拒绝、有界等待结果、或 202 加状态 URL；不能因第一次“看起来卡住”就放行第二个。",
+    "在调用外部之前先记录意图，把结果视为成功/失败/未知；超时不能说明副作用是否已生效，调用与响应间的崩溃要留下待解决证据。"
+  ],
+  "anti_patterns": [
+    "端点按条件返回不同形状",
+    "错误格式跨端点不一致",
+    "校验散落在内部代码而非边界",
+    "对已有字段做破坏性变更（改类型、删除）",
+    "列表端点无分页",
+    "REST URL 含动词",
+    "第三方响应未校验或未净化就直接使用",
+    "用 SELECT 查幂等 key 再 INSERT（竞态而非保护）",
+    "key 由 UUID、时间戳或每次尝试重生成的内容派生",
+    "同一 key 配不同 body 却静默返回第一次响应",
+    "保留窗口短于最长可重新投递路径",
+    "在内部函数间、已被校验代码调用的工具函数、刚来自自有数据库的数据上做校验",
+    "500 响应暴露内部细节"
+  ],
+  "metadata": {
+    "repository": "addyosmani/agent-skills",
+    "skill_path": "skills/api-and-interface-design/SKILL.md",
+    "commit_sha": "301b02b12bff98e4688e6984af6556802322bbde",
+    "l0_content_hash": "cc5e2166c484b2c297e8253f56e7525e5031f81d66101ca4e760ef378ea6bad0",
+    "l0_quality_score": 0.9,
+    "refined_by": "opencode-go/beam-free"
+  }
+}

@@ -1,0 +1,948 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Glint 统一后台管理台</title>
+  <style>
+    :root {
+      --bg: #0e1015;
+      --surface: #161922;
+      --surface-2: #1e2330;
+      --border: #2a3040;
+      --text: #e8ecf4;
+      --muted: #8b95aa;
+      --accent: #6ea8fe;
+      --accent-soft: rgba(110, 168, 254, 0.14);
+      --green: #4ade80;
+      --amber: #fbbf24;
+      --red: #f87171;
+      --purple: #c084fc;
+      --radius: 10px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
+    header {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+      padding: 12px 20px; border-bottom: 1px solid var(--border); background: var(--surface); position: sticky; top: 0; z-index: 30;
+    }
+    .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; }
+    .brand .badge { font-size: 11px; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 500; }
+    .tabs { display: flex; gap: 4px; flex-wrap: wrap; }
+    .tab-btn { background: transparent; border: 1px solid transparent; color: var(--muted); padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 500; }
+    .tab-btn.active { background: var(--surface-2); color: var(--text); border-color: var(--border); }
+    .actions { display: flex; gap: 8px; }
+    button.btn { background: var(--surface-2); color: var(--text); border: 1px solid var(--border); padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 12.5px; }
+    button.btn.primary { background: var(--accent); color: #0a1220; border-color: var(--accent); font-weight: 600; }
+    button.btn.danger { border-color: rgba(248,113,113,0.4); color: var(--red); }
+    button.btn.sm { padding: 3px 8px; font-size: 11.5px; }
+    button.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    main { max-width: 1440px; margin: 0 auto; padding: 18px 20px 60px; }
+    .panel { display: none; }
+    .panel.active { display: block; }
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 16px; }
+    .kpi { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 13px 15px; }
+    .kpi .label { font-size: 11.5px; color: var(--muted); }
+    .kpi .val { font-size: 24px; font-weight: 700; margin-top: 3px; }
+    .kpi .sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .shelf-layout { display: grid; grid-template-columns: 290px 1fr; gap: 16px; align-items: start; }
+    .sidebar { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; position: sticky; top: 68px; max-height: calc(100vh - 88px); overflow-y: auto; }
+    .sidebar h4 { margin: 12px 0 6px; font-size: 11.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; display: flex; justify-content: space-between; align-items: center; }
+    .sidebar h4:first-child { margin-top: 0; }
+    .nav-item { display: flex; align-items: center; justify-content: space-between; gap: 6px; padding: 6px 8px; border-radius: 7px; cursor: pointer; font-size: 12.5px; color: #c8d0e0; }
+    .nav-item:hover { background: var(--surface-2); }
+    .nav-item.active { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+    .nav-row { display: flex; align-items: center; justify-content: space-between; gap: 4px; margin-bottom: 3px; }
+    .mode-select { padding: 2px 5px; font-size: 11px; background: var(--bg); border: 1px solid var(--border); color: var(--muted); border-radius: 6px; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 15px 17px; margin-bottom: 14px; }
+    .card h3 { margin: 0 0 10px; font-size: 14px; font-weight: 600; }
+    .bar-row { display: grid; grid-template-columns: 150px 1fr 48px; align-items: center; gap: 10px; margin-bottom: 7px; font-size: 12.5px; }
+    .bar-track { height: 7px; background: var(--surface-2); border-radius: 999px; overflow: hidden; }
+    .bar-fill { height: 100%; background: var(--accent); border-radius: 999px; }
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; align-items: center; }
+    input, select, textarea { background: var(--surface-2); color: var(--text); border: 1px solid var(--border); border-radius: 8px; padding: 7px 10px; font-size: 12.5px; font-family: inherit; }
+    textarea { width: 100%; min-height: 110px; resize: vertical; }
+    .lens-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 10px; }
+    .lens-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 14px; cursor: pointer; transition: border-color 0.15s; position: relative; }
+    .lens-item:hover { border-color: var(--accent); }
+    .lens-item.off-shelf { opacity: 0.72; border-style: dashed; }
+    .lens-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+    .lens-title { font-weight: 600; font-size: 13.5px; }
+    .pill { display: inline-block; font-size: 10.5px; padding: 1px 6px; border-radius: 5px; background: var(--surface-2); color: var(--muted); border: 1px solid var(--border); margin: 3px 3px 0 0; }
+    .pill.prim { background: var(--accent-soft); color: var(--accent); border-color: rgba(110,168,254,0.3); }
+    .pill.tier-S { background: rgba(74,222,128,0.16); color: var(--green); border-color: rgba(74,222,128,0.35); font-weight: 600; }
+    .pill.tier-A { background: rgba(192,132,252,0.16); color: var(--purple); border-color: rgba(192,132,252,0.35); }
+    .pill.ov { background: rgba(251,191,36,0.14); color: var(--amber); border-color: rgba(251,191,36,0.35); }
+    .pill.ok { background: rgba(74,222,128,0.12); color: var(--green); }
+    .pill.bad { background: rgba(248,113,113,0.12); color: var(--red); }
+    .tagline { font-size: 11.5px; color: var(--muted); margin: 5px 0; }
+    .pain { font-size: 11.5px; color: #c4ccda; background: var(--surface-2); padding: 6px 8px; border-radius: 6px; margin-bottom: 6px; }
+    .batch-bar { display: none; align-items: center; gap: 8px; flex-wrap: wrap; background: var(--surface-2); border: 1px solid var(--accent); border-radius: 8px; padding: 8px 12px; margin-bottom: 10px; font-size: 12px; }
+    .batch-bar.show { display: flex; }
+    .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.68); z-index: 50; align-items: center; justify-content: center; padding: 18px; }
+    .modal-backdrop.open { display: flex; }
+    .modal { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; width: min(840px, 95vw); max-height: 90vh; overflow-y: auto; padding: 18px 22px; }
+    .modal pre, .code-box { white-space: pre-wrap; background: var(--bg); padding: 10px; border-radius: 8px; border: 1px solid var(--border); font-size: 12px; color: #d6deeb; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+    .form-field { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--muted); }
+    .toast { position: fixed; right: 20px; bottom: 20px; background: var(--surface-2); border: 1px solid var(--accent); color: var(--text); padding: 10px 16px; border-radius: 8px; font-size: 13px; display: none; z-index: 60; }
+    .toast.show { display: block; }
+    table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--border); }
+    th { color: var(--muted); font-weight: 500; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">✨ Glint 管理台 <span class="badge">L0 → L1 → L2 → L3 库存 → L4 货架</span></div>
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="overview">总览与发布</button>
+      <button class="tab-btn" data-tab="shelf">L3 库存 &amp; L4 货架</button>
+      <button class="tab-btn" data-tab="forge">L0–L4 供给工坊</button>
+      <button class="tab-btn" data-tab="evolution">进化飞轮 (M3)</button>
+      <button class="tab-btn" data-tab="sandbox">沙盒 &amp; 黄金评测</button>
+      <button class="tab-btn" data-tab="policy">策略与日志</button>
+    </div>
+    <div class="actions">
+      <button class="btn" id="btn-refresh">刷新</button>
+      <button class="btn" id="btn-rollback">回滚</button>
+      <button class="btn primary" id="btn-build">L2→L3→L4 清洗发布</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. Overview -->
+    <section id="tab-overview" class="panel active">
+      <div class="kpi-grid" id="kpi-grid"></div>
+      <div class="two-col">
+        <div class="card"><h3>7 大认知元操作分布（L4 上架）</h3><div id="primitive-bars"></div></div>
+        <div class="card"><h3>二级主领域分布（L4 上架 / L3 库存）</h3><div id="category-bars"></div></div>
+      </div>
+      <div class="two-col">
+        <div class="card"><h3>L2 → L3 确定性清洗报告</h3><div id="cleaning-report-box" style="font-size:12px;color:var(--muted)"></div></div>
+        <div class="card"><h3>当前线上 L4 原子产物（dist/current）</h3><pre id="release-manifest" class="code-box" style="margin:0"></pre></div>
+      </div>
+    </section>
+
+    <!-- 2. Hierarchical L3 Inventory & L4 Shelf -->
+    <section id="tab-shelf" class="panel">
+      <div class="shelf-layout">
+        <aside class="sidebar">
+          <h4>货架视图</h4>
+          <div id="nav-shelves"></div>
+          <h4>领域分类树 <span style="font-size:10px;font-weight:400">右侧切换 L4 规则</span></h4>
+          <div id="nav-categories"></div>
+          <h4>自定义合集 <button class="btn sm" id="btn-new-col">+ 新建</button></h4>
+          <div id="nav-collections"></div>
+        </aside>
+        <div>
+          <!-- Recall Inspector & Calibration Bar -->
+          <div class="card" style="padding:11px 14px;margin-bottom:12px;border-color:rgba(110,168,254,0.35)">
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+              <span style="font-size:12.5px;font-weight:600;color:var(--accent)">🔍 召回排序诊断</span>
+              <input type="text" id="ri-query" style="flex:1;min-width:240px" placeholder="输入刚才觉得召回不准的原话，查看 L4 + L3 全库精排排序并手动校准..." />
+              <button class="btn primary" id="btn-ri-run">模拟线上召回</button>
+              <button class="btn" id="btn-ri-close" style="display:none">返回常规浏览</button>
+            </div>
+            <div id="ri-panel" style="display:none;margin-top:12px">
+              <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px">
+                <div id="ri-meta" style="font-size:12px;color:var(--muted)"></div>
+                <div style="display:flex;gap:6px;flex-wrap:wrap">
+                  <button class="btn sm" id="btn-gap-save">🕳️ 记入认知缺口</button>
+                  <button class="btn sm primary" id="btn-gap-ai">✨ 缺口一键 AI 锻造</button>
+                  <button class="btn sm" id="btn-gap-manual">✍️ 手工建卡(预填口语)</button>
+                </div>
+              </div>
+              <div id="ri-top3" style="margin-bottom:10px"></div>
+              <div id="ri-table" style="max-height:460px;overflow-y:auto"></div>
+            </div>
+          </div>
+
+          <div class="filters">
+            <input type="search" id="f-q" style="flex:1;min-width:200px" placeholder="搜索标题、痛点、口语触发句、领域、正文..." />
+            <select id="f-tier">
+              <option value="">全部 Tier</option>
+              <option value="S">S 级 (常青通用)</option>
+              <option value="A">A 级 (领域精品)</option>
+              <option value="B">B 级 (长尾细分)</option>
+            </select>
+            <select id="f-primitive"><option value="">全部元操作</option></select>
+            <select id="f-source"><option value="">全部来源</option></select>
+            <button class="btn primary" id="btn-new-manual">+ 手工新建卡片</button>
+            <span id="lens-count" style="font-size:12px;color:var(--muted)"></span>
+          </div>
+          <div class="batch-bar" id="batch-bar">
+            <span id="batch-count">已选 0 项</span>
+            <button class="btn sm" onclick="runBatch({shelf:'on_shelf'})">批量上架 L4</button>
+            <button class="btn sm" onclick="runBatch({shelf:'off_shelf'})">批量下架回 L3</button>
+            <button class="btn sm" onclick="runBatch({tier:'S',shelf:'evergreen'})">设为 S 级常青</button>
+            <button class="btn sm" onclick="runBatch({tier:'A'})">设为 A 级</button>
+            <select id="batch-col-select" style="padding:3px 6px;font-size:11.5px"><option value="">加入合集...</option></select>
+            <button class="btn sm" id="btn-batch-clear">取消选择</button>
+          </div>
+          <div class="lens-grid" id="lens-grid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. M4 Supply Forge (L0-L4) -->
+    <section id="tab-forge" class="panel">
+      <div class="two-col">
+        <div class="card">
+          <h3>通道 A：投喂 L0 原始材料（自动 L0 → L1 → L2）</h3>
+          <div class="form-field"><label>标题</label><input type="text" id="l0-title" placeholder="例如：分布式事务排障复盘" /></div>
+          <div class="form-field" style="margin-top:8px"><label>L0 原文（长文 / 笔记 / 规范）</label><textarea id="l0-text" placeholder="粘贴原始 Markdown 或文章正文..."></textarea></div>
+          <div style="margin-top:10px;text-align:right"><button class="btn primary" id="btn-l0-submit">投入 L0→L2 精炼流水线</button></div>
+        </div>
+        <div class="card">
+          <h3>通道 B：Glint Forge 零原料冷启动（合成 7 元操作领域包）</h3>
+          <div class="form-grid">
+            <div class="form-field"><label>目标新领域</label><input type="text" id="fg-domain" placeholder="例如：区块链与 Web3 调研" /></div>
+            <div class="form-field"><label>归属主类目</label><select id="fg-cat"></select></div>
+          </div>
+          <div class="form-field" style="margin-top:8px"><label>高频痛点与期望状态</label><input type="text" id="fg-pain" placeholder="例如：概念泡沫多、分不清一手信源、需要快速摸清技术与商业真伪" /></div>
+          <div class="form-field" style="margin-top:8px"><label>表达风格偏好</label><input type="text" id="fg-style" value="硬核实战、去AI味、直击本质" /></div>
+          <div style="margin-top:10px;text-align:right"><button class="btn primary" id="btn-fg-submit">一键合成 7 张 Starter Pack</button></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>通道 C：ATLAS-METHODS 按主题精选入 L3 库存（默认 off_shelf，不污染 L4）</h3>
+        <div class="filters">
+          <input type="text" id="atlas-q" style="flex:1" placeholder="输入关键词搜索 ATLAS-METHODS（如 react / sql / security / review）" />
+          <button class="btn" id="btn-atlas-search">搜索预览</button>
+          <button class="btn primary" id="btn-atlas-import">将勾选条目精炼入 L3</button>
+        </div>
+        <div id="atlas-results" style="max-height:240px;overflow-y:auto"></div>
+      </div>
+
+      <div class="two-col">
+        <div class="card">
+          <h3>后台任务进度（异步 OpenCode Go 流水线） <button class="btn sm" id="btn-jobs-refresh">刷新</button></h3>
+          <div id="jobs-list" style="font-size:12px;color:var(--muted)">暂无任务</div>
+        </div>
+        <div class="card">
+          <h3>认知缺口清单（Cognitive Gaps · 待补齐） <button class="btn sm" id="btn-gaps-refresh">刷新</button></h3>
+          <div id="gaps-list" style="max-height:220px;overflow-y:auto;font-size:12px;color:var(--muted)">暂无认知缺口</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>隔离区与 L0 拒收审计（Gate 1 / 2 / 3）</h3>
+        <div id="q-summary" style="max-height:220px;overflow-y:auto"></div>
+      </div>
+    </section>
+
+    <!-- 4. M3 Evolution Flywheel -->
+    <section id="tab-evolution" class="panel">
+      <div class="kpi-grid" id="evo-kpis"></div>
+      <div class="two-col">
+        <div class="card">
+          <h3>动态垂直货架调度建议（常青 S 级豁免淘汰）</h3>
+          <div style="font-size:11.5px;color:var(--muted);margin-bottom:8px">高曝光零点击垂直卡建议下架回 L3；命中近期 Esc / 自定义需求的 L3 库存卡建议上架 L4。</div>
+          <div id="evo-proposals"></div>
+        </div>
+        <div class="card">
+          <h3>Top 热门透镜 &amp; App 使用分布</h3>
+          <div id="evo-apps" style="margin-bottom:12px"></div>
+          <div id="evo-top-cards"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>第 4 选项自定义意图摩擦（一键转 L2 草稿） &amp; 外环微调数据导出</h3>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <span style="font-size:12px;color:var(--muted)">仅导出正负反馈 JSONL 供后续本地 MLX LoRA 使用（当前不自动触发微调）</span>
+          <a class="btn sm" href="./api/evolution/export-sft" target="_blank">导出 SFT JSONL 训练集</a>
+        </div>
+        <div id="evo-custom-list"></div>
+      </div>
+    </section>
+
+    <!-- 5. Sandbox & Golden Eval -->
+    <section id="tab-sandbox" class="panel">
+      <div class="two-col">
+        <div class="card">
+          <h3>实时语义召回沙盒（L4 dist/current + bge-m3）</h3>
+          <div class="filters">
+            <input type="text" id="sb-query" style="flex:1" placeholder="输入碎片口语，例如：我想要调研一下区块链" />
+            <select id="sb-primitive"><option value="">不限元操作</option></select>
+            <button class="btn primary" id="btn-search">测试召回</button>
+          </div>
+          <div id="sb-mode" style="font-size:11.5px;color:var(--muted);margin-bottom:8px"></div>
+          <div class="lens-grid" id="sb-results"></div>
+        </div>
+        <div class="card">
+          <h3>Golden Eval 自动化回归门禁（24 条黄金集）</h3>
+          <p style="font-size:12px;color:var(--muted);margin-top:0">直接针对线上 18765 端口跑全量 24 条黄金样本，检验 Hit@1 / Hit@3 / 禁忌误召回率与 P95 延迟。</p>
+          <button class="btn primary" id="btn-run-eval">一键运行 Golden Eval</button>
+          <pre id="eval-output" class="code-box" style="margin-top:12px;min-height:140px">点击上方按钮开始评测...</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Policy & Config Center -->
+    <section id="tab-policy" class="panel">
+      <div class="two-col">
+        <div class="card">
+          <h3>策略配置文件在线编辑（保存后热生效 / 发布生效）</h3>
+          <div class="filters">
+            <select id="cfg-select">
+              <option value="routing_policy">routing_policy.yaml (路由权重与策略)</option>
+              <option value="shelf_policy">shelf_policy.yaml (L4 声明式货架与合集)</option>
+              <option value="cleaning_rules">cleaning_rules.yaml (L2→L3 清洗与查重)</option>
+              <option value="taxonomy">taxonomy.yaml (二级领域分类树)</option>
+            </select>
+            <button class="btn primary" id="btn-cfg-save">保存 YAML</button>
+          </div>
+          <textarea id="cfg-editor" style="min-height:360px;font-family:ui-monospace,Menlo,monospace;font-size:12px"></textarea>
+        </div>
+        <div class="card">
+          <h3>最近脱敏日志抽查（usage.db · 验证 Key/手机号已擦除）</h3>
+          <div id="recent-logs-box" style="max-height:420px;overflow-y:auto"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Lens Detail & Overlay Modal -->
+  <div class="modal-backdrop" id="lens-modal">
+    <div class="modal">
+      <div class="lens-head">
+        <div><h2 id="m-title" style="margin:0;font-size:17px"></h2><div id="m-id" style="font-size:11.5px;color:var(--muted);margin-top:2px"></div></div>
+        <button class="btn" id="m-close">关闭</button>
+      </div>
+      <div id="m-tags" style="margin:8px 0"></div>
+      <div class="pain" id="m-pain"></div>
+      <div style="font-size:11.5px;color:var(--muted);margin:6px 0 3px">触发口语（trigger_utterances）：</div>
+      <div id="m-triggers" style="margin-bottom:8px"></div>
+      <div style="font-size:11.5px;color:var(--muted);margin:6px 0 3px">执行内容（execution.content）：</div>
+      <pre id="m-content"></pre>
+      <hr style="border:0;border-top:1px solid var(--border);margin:14px 0" />
+      <h3 style="margin:0 0 6px;font-size:13.5px">本地不可变覆写层（Overlay · 写入 overrides.yaml）</h3>
+      <div class="form-grid">
+        <div class="form-field"><label>覆写标题</label><input type="text" id="ov-title" /></div>
+        <div class="form-field"><label>基础权重 (0.0~5.0)</label><input type="number" step="0.1" min="0" max="5" id="ov-weight" /></div>
+        <div class="form-field"><label>质量层级 (Tier)</label><select id="ov-tier"><option value="S">S (常青通用)</option><option value="A">A (领域精品)</option><option value="B">B (长尾细分)</option></select></div>
+        <div class="form-field"><label>货架状态 (L3 ↔ L4)</label><select id="ov-shelf"><option value="evergreen">evergreen (L4 常青)</option><option value="on_shelf">on_shelf (L4 动态上架)</option><option value="off_shelf">off_shelf (仅留 L3 库存)</option></select></div>
+        <div class="form-field"><label>归属主类目</label><select id="ov-category"></select></div>
+        <div class="form-field"><label>归属元操作</label><select id="ov-primitive"></select></div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:12px;justify-content:flex-end">
+        <button class="btn danger" id="ov-reset">清除覆写</button>
+        <button class="btn primary" id="ov-save">保存 Overlay</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Manual Lens Modal -->
+  <div class="modal-backdrop" id="manual-modal">
+    <div class="modal">
+      <div class="lens-head"><h2 style="margin:0;font-size:16px">手工新建个人认知卡片（写入 L2）</h2><button class="btn" id="mm-close">关闭</button></div>
+      <div class="form-grid">
+        <div class="form-field"><label>短标题 (<=12字)</label><input type="text" id="mm-title" /></div>
+        <div class="form-field"><label>一句话摘要</label><input type="text" id="mm-tagline" /></div>
+        <div class="form-field"><label>元操作</label><select id="mm-primitive"></select></div>
+        <div class="form-field"><label>主类目</label><select id="mm-category"></select></div>
+        <div class="form-field"><label>Tier</label><select id="mm-tier"><option value="A">A 级精品</option><option value="S">S 级常青</option><option value="B">B 级长尾</option></select></div>
+        <div class="form-field"><label>动作类型</label><select id="mm-action"><option value="inject_prompt">inject_prompt</option><option value="show_checklist">show_checklist</option><option value="open_resource">open_resource</option></select></div>
+      </div>
+      <div class="form-field" style="margin-top:8px"><label>解决的真实痛点</label><input type="text" id="mm-pain" /></div>
+      <div class="form-field" style="margin-top:8px"><label>触发口语（每行一句，至少 2 句）</label><textarea id="mm-triggers" style="min-height:66px"></textarea></div>
+      <div class="form-field" style="margin-top:8px"><label>执行指令 / 清单正文</label><textarea id="mm-content"></textarea></div>
+      <div style="margin-top:12px;text-align:right"><button class="btn primary" id="mm-save">创建并入 L2</button></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const state = {
+      overview: null, lenses: [], selectedLens: null,
+      nav: { shelf: '', category: '', subcategory: '', collection: '' },
+      checkedIds: new Set(),
+      atlasOffsets: new Set(),
+    };
+
+    function esc(v) { return String(v ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+    function toast(msg) { const el=document.getElementById('toast'); el.textContent=msg; el.classList.add('show'); setTimeout(()=>el.classList.remove('show'), 3000); }
+    async function api(path, opts = {}) {
+      const res = await fetch('./' + path.replace(/^\//, ''), { headers: { 'Content-Type': 'application/json' }, ...opts });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.detail || JSON.stringify(data));
+      return data;
+    }
+
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+        if (btn.dataset.tab === 'evolution') loadEvolution();
+        if (btn.dataset.tab === 'forge') { loadJobs(); loadGaps(); loadQuarantine(); }
+        if (btn.dataset.tab === 'policy') { loadConfig(); loadRecentLogs(); }
+      });
+    });
+
+    function renderBars(id, obj, labelFn = k => k) {
+      const entries = Object.entries(obj || {});
+      const maxV = Math.max(1, ...entries.map(([,v]) => typeof v === 'number' ? v : v.l4));
+      document.getElementById(id).innerHTML = entries.map(([k, v]) => {
+        const num = typeof v === 'number' ? v : v.l4;
+        const txt = typeof v === 'number' ? v : `${v.l4}/${v.l3}`;
+        return `<div class="bar-row"><div>${esc(labelFn(k))}</div><div class="bar-track"><div class="bar-fill" style="width:${Math.round(num/maxV*100)}%"></div></div><div style="text-align:right;font-weight:600">${esc(txt)}</div></div>`;
+      }).join('');
+    }
+
+    async function loadOverview() {
+      const d = await api('api/overview');
+      state.overview = d;
+      const sh = d.by_shelf || {};
+      const ti = d.by_tier || {};
+      document.getElementById('kpi-grid').innerHTML = `
+        <div class="kpi"><div class="label">L4 线上上架货架</div><div class="val" style="color:var(--green)">${esc(d.l4_total)}</div><div class="sub">常青S: ${esc(sh.evergreen||0)} · 动态: ${esc(sh.on_shelf||0)}</div></div>
+        <div class="kpi"><div class="label">L3 合格总库存</div><div class="val">${esc(d.l3_total)}</div><div class="sub">待命: ${esc(sh.off_shelf||0)} · S:${esc(ti.S||0)} A:${esc(ti.A||0)} B:${esc(ti.B||0)}</div></div>
+        <div class="kpi"><div class="label">隔离 / L0 拒收</div><div class="val" style="color:var(--amber)">${esc(d.quarantined_l2)} / ${esc(d.rejected_l0)}</div><div class="sub">Gate 1–3 拦截保护</div></div>
+        <div class="kpi"><div class="label">本地 Overlay</div><div class="val">${esc(d.overlays_count)}</div><div class="sub">永不被上游同步冲掉</div></div>
+        <div class="kpi"><div class="label">当前 L4 版本</div><div class="val" style="font-size:14px;margin-top:8px">${esc(d.current_release ? d.current_release.version : '未发布')}</div><div class="sub">${esc(d.current_release ? d.current_release.embedding_model : '')}</div></div>
+      `;
+      renderBars('primitive-bars', d.l2_by_primitive, k => `${d.ontology.primitives[k]?.label || k} (${k})`);
+      const catPairs = {};
+      Object.entries(d.taxonomy).forEach(([k, info]) => {
+        catPairs[k] = { l4: d.by_category_l4[k] || 0, l3: d.by_category_l3[k] || 0 };
+      });
+      renderBars('category-bars', catPairs, k => d.taxonomy[k]?.label || k);
+
+      const cr = d.l3_cleaning_report;
+      const crBox = document.getElementById('cleaning-report-box');
+      if (cr) {
+        const acts = Object.entries(cr.action_counts || {}).map(([k,v]) => `<span class="pill ok">${esc(k)}: ${esc(v)}</span>`).join('');
+        crBox.innerHTML = `<div style="margin-bottom:6px">L2 输入: <b>${esc(cr.total_l2_input)}</b> · L3 合格: <b>${esc(cr.total_l3_active)}</b> · 查重隔离: <b>${esc(cr.total_quarantined_dedup)}</b></div><div>${acts}</div>`;
+      } else crBox.textContent = '尚未执行清洗';
+      document.getElementById('release-manifest').textContent = d.current_release ? JSON.stringify(d.current_release, null, 2) : '未发布';
+
+      // Populate dropdowns
+      const primOpts = Object.entries(d.ontology.primitives).map(([k,v]) => `<option value="${esc(k)}">${esc(v.label)} (${esc(k)})</option>`).join('');
+      const catOpts = Object.entries(d.taxonomy).map(([k,v]) => `<option value="${esc(k)}">${esc(v.label)}</option>`).join('');
+      ['f-primitive','sb-primitive'].forEach(id => { const el=document.getElementById(id); const cur=el.value; el.innerHTML='<option value="">全部元操作</option>'+primOpts; el.value=cur; });
+      ['ov-primitive','mm-primitive'].forEach(id => document.getElementById(id).innerHTML = primOpts);
+      ['ov-category','mm-category','fg-cat'].forEach(id => document.getElementById(id).innerHTML = catOpts);
+      const fSrc = document.getElementById('f-source'); const curS = fSrc.value;
+      fSrc.innerHTML = '<option value="">全部来源</option>' + Object.keys(d.l2_by_source).map(s => `<option value="${esc(s)}">${esc(s)}</option>`).join('');
+      fSrc.value = curS;
+      const colOpts = Object.entries(d.shelf_policy.collections || {}).map(([cid, c]) => `<option value="${esc(cid)}">${esc(c.name)}</option>`).join('');
+      document.getElementById('batch-col-select').innerHTML = '<option value="">加入合集...</option>' + colOpts;
+
+      renderSidebar(d);
+    }
+
+    function renderSidebar(d) {
+      const sh = d.by_shelf || {};
+      const shelfViews = [
+        { k: '', label: '全部 L3 库存', cnt: d.l3_total },
+        { k: 'l4_all', label: 'L4 全部上架', cnt: d.l4_total },
+        { k: 'evergreen', label: 'S 级常青底座', cnt: sh.evergreen || 0 },
+        { k: 'on_shelf', label: 'L4 动态垂直', cnt: sh.on_shelf || 0 },
+        { k: 'off_shelf', label: 'L3 待命库存', cnt: sh.off_shelf || 0 },
+      ];
+      document.getElementById('nav-shelves').innerHTML = shelfViews.map(v => `
+        <div class="nav-item ${state.nav.shelf===v.k && !state.nav.category && !state.nav.collection ? 'active':''}" onclick="selectNav({shelf:'${v.k}'})">
+          <span>${esc(v.label)}</span><span class="pill">${esc(v.cnt)}</span>
+        </div>
+      `).join('');
+
+      const modes = d.shelf_policy.category_modes || {};
+      document.getElementById('nav-categories').innerHTML = Object.entries(d.taxonomy).map(([cat, info]) => {
+        const l4 = d.by_category_l4[cat] || 0;
+        const l3 = d.by_category_l3[cat] || 0;
+        const m = modes[cat] || 'all';
+        return `
+          <div class="nav-row">
+            <div class="nav-item ${state.nav.category===cat ? 'active':''}" style="flex:1" onclick="selectNav({category:'${esc(cat)}'})">
+              <span>${esc(info.label)}</span><span style="font-size:11px;color:var(--muted)">${l4}/${l3}</span>
+            </div>
+            <select class="mode-select" onchange="changeCategoryMode('${esc(cat)}', this.value)" title="声明式 L4 货架规则">
+              <option value="all" ${m==='all'?'selected':''}>A+B全开</option>
+              <option value="tier_a" ${m==='tier_a'?'selected':''}>仅A级</option>
+              <option value="off" ${m==='off'?'selected':''}>仅S常青</option>
+            </select>
+          </div>`;
+      }).join('');
+
+      const activeCols = new Set(d.shelf_policy.active_collections || []);
+      document.getElementById('nav-collections').innerHTML = Object.entries(d.shelf_policy.collections || {}).map(([cid, c]) => {
+        const on = activeCols.has(cid);
+        return `
+          <div class="nav-row">
+            <div class="nav-item ${state.nav.collection===cid ? 'active':''}" style="flex:1" onclick="selectNav({collection:'${esc(cid)}'})">
+              <span>📦 ${esc(c.name)}</span><span style="font-size:11px;color:var(--muted)">${(c.lens_ids||[]).length}</span>
+            </div>
+            <button class="btn sm ${on?'primary':''}" onclick="toggleCollection('${esc(cid)}', ${!on})">${on?'已上架':'上架'}</button>
+            <button class="btn sm danger" onclick="deleteCollection('${esc(cid)}', '${esc(c.name)}')" title="删除合集">×</button>
+          </div>`;
+      }).join('') || '<div style="font-size:11.5px;color:var(--muted);padding:4px">暂无自定义合集</div>';
+    }
+
+    function selectNav(patch) {
+      state.nav = { shelf: '', category: '', subcategory: '', collection: '', ...patch };
+      renderSidebar(state.overview);
+      loadLenses();
+    }
+
+    async function changeCategoryMode(cat, mode) {
+      try {
+        await api('api/shelf/category-mode', { method: 'PUT', body: JSON.stringify({ category: cat, mode }) });
+        toast(`已将「${cat}」设为 ${mode}（实时预览已更新，点击清洗发布同步至线上）`);
+        await refreshAll();
+      } catch (e) { toast('切换失败: ' + e.message); }
+    }
+
+    async function toggleCollection(cid, active) {
+      try {
+        await api(`api/shelf/collections/${encodeURIComponent(cid)}/toggle`, { method: 'PUT', body: JSON.stringify({ active }) });
+        toast(active ? '合集已设为上架（实时预览已更新，点击清洗发布同步至线上）' : '合集已撤回 L3（点击清洗发布同步至线上）');
+        await refreshAll();
+      } catch (e) { toast('切换失败: ' + e.message); }
+    }
+
+    async function deleteCollection(cid, name) {
+      if (!confirm(`确定删除自定义合集「${name}」吗？（不会删除卡片本身）`)) return;
+      try {
+        await api(`api/shelf/collections/${encodeURIComponent(cid)}`, { method: 'DELETE' });
+        if (state.nav.collection === cid) state.nav.collection = '';
+        toast(`已删除合集「${name}」`);
+        await refreshAll();
+      } catch (e) { toast('删除失败: ' + e.message); }
+    }
+
+    document.getElementById('btn-new-col').onclick = async () => {
+      const name = prompt('输入新自定义合集名称（如：区块链调研包）：');
+      if (!name || !name.trim()) return;
+      try {
+        await api('api/shelf/collections', { method: 'POST', body: JSON.stringify({ name: name.trim(), active: true }) });
+        toast('已创建自定义合集');
+        await loadOverview();
+      } catch (e) { toast('创建失败: ' + e.message); }
+    };
+
+    function lensCardHtml(lens, score = null, showCheckbox = true) {
+      const primLabel = state.overview?.ontology?.primitives?.[lens.routing.primitive]?.label || lens.routing.primitive;
+      const tier = lens.meta.tier || 'B';
+      const shelf = lens.meta.shelf || 'on_shelf';
+      const checked = state.checkedIds.has(lens.id) ? 'checked' : '';
+      return `
+        <div class="lens-item ${shelf === 'off_shelf' ? 'off-shelf' : ''}" data-id="${esc(lens.id)}">
+          <div class="lens-head">
+            <div style="display:flex;align-items:center;gap:6px">
+              ${showCheckbox ? `<input type="checkbox" class="lens-chk" data-id="${esc(lens.id)}" ${checked} onclick="event.stopPropagation();toggleCheck('${esc(lens.id)}',this.checked)" />` : ''}
+              <div class="lens-title">${esc(lens.title)}</div>
+            </div>
+            ${score !== null ? `<span class="pill ok">sim ${score.toFixed(3)}</span>` : `<span class="pill tier-${esc(tier)}">${esc(tier)}级</span>`}
+          </div>
+          <div class="tagline">${esc(lens.tagline)}</div>
+          <div class="pain">${esc(lens.routing.pain_point)}</div>
+          <div>
+            <span class="pill prim">${esc(primLabel)}</span>
+            <span class="pill">${esc(lens.meta.category)}</span>
+            <span class="pill ${shelf==='evergreen'?'ok':(shelf==='off_shelf'?'bad':'')}">${esc(shelf)}</span>
+            ${lens.has_override ? '<span class="pill ov">Overlay</span>' : ''}
+          </div>
+        </div>`;
+    }
+
+    function toggleCheck(id, isChecked) {
+      if (isChecked) state.checkedIds.add(id); else state.checkedIds.delete(id);
+      const bar = document.getElementById('batch-bar');
+      document.getElementById('batch-count').textContent = `已选 ${state.checkedIds.size} 项`;
+      bar.classList.toggle('show', state.checkedIds.size > 0);
+    }
+
+    async function runBatch(payload) {
+      if (!state.checkedIds.size) return;
+      try {
+        await api('api/overlays/batch', { method: 'POST', body: JSON.stringify({ lens_ids: Array.from(state.checkedIds), ...payload }) });
+        toast(`已批量更新 ${state.checkedIds.size} 张卡（点击清洗发布生效）`);
+        state.checkedIds.clear();
+        document.getElementById('batch-bar').classList.remove('show');
+        await refreshAll();
+      } catch (e) { toast('批量操作失败: ' + e.message); }
+    }
+    document.getElementById('batch-col-select').onchange = (e) => { if (e.target.value) { runBatch({ add_collection: e.target.value }); e.target.value = ''; } };
+    document.getElementById('btn-batch-clear').onclick = () => { state.checkedIds.clear(); document.getElementById('batch-bar').classList.remove('show'); loadLenses(); };
+
+    async function loadLenses() {
+      const params = new URLSearchParams({
+        q: document.getElementById('f-q').value,
+        tier: document.getElementById('f-tier').value,
+        primitive: document.getElementById('f-primitive').value,
+        source: document.getElementById('f-source').value,
+        shelf: state.nav.shelf,
+        category: state.nav.category,
+        collection: state.nav.collection,
+      });
+      const data = await api('api/lenses?' + params.toString());
+      state.lenses = data.items;
+      document.getElementById('lens-count').textContent = `共 ${data.total} 条`;
+      const grid = document.getElementById('lens-grid');
+      grid.innerHTML = data.items.map(l => lensCardHtml(l)).join('');
+      grid.querySelectorAll('.lens-item').forEach(el => {
+        el.addEventListener('click', () => openModal(data.items.find(x => x.id === el.dataset.id)));
+      });
+    }
+
+    function openModal(lens) {
+      if (!lens) return;
+      state.selectedLens = lens;
+      document.getElementById('m-title').textContent = lens.title;
+      document.getElementById('m-id').textContent = `${lens.id} · ${lens.meta.source} · ${lens.meta.category}/${lens.meta.subcategory}`;
+      document.getElementById('m-tags').innerHTML = `<span class="pill prim">${esc(lens.routing.primitive)}</span><span class="pill tier-${esc(lens.meta.tier)}">${esc(lens.meta.tier)}级</span>` + (lens.routing.domains||[]).map(d=>`<span class="pill">#${esc(d)}</span>`).join('');
+      document.getElementById('m-pain').textContent = '痛点：' + lens.routing.pain_point;
+      document.getElementById('m-triggers').innerHTML = (lens.routing.trigger_utterances||[]).map(t=>`<span class="pill">“${esc(t)}”</span>`).join('');
+      document.getElementById('m-content').textContent = lens.execution.content;
+      document.getElementById('ov-title').value = lens.override?.title || '';
+      document.getElementById('ov-weight').value = lens.meta.base_weight;
+      document.getElementById('ov-tier').value = lens.meta.tier || 'B';
+      document.getElementById('ov-shelf').value = lens.meta.shelf || 'on_shelf';
+      document.getElementById('ov-category').value = lens.meta.category || 'general';
+      document.getElementById('ov-primitive').value = lens.routing.primitive;
+      document.getElementById('lens-modal').classList.add('open');
+    }
+    document.getElementById('m-close').onclick = () => document.getElementById('lens-modal').classList.remove('open');
+    document.getElementById('ov-save').onclick = async () => {
+      const l = state.selectedLens;
+      const ov = l.override || {};
+      const payload = {};
+      const newTitle = document.getElementById('ov-title').value.trim();
+      if (newTitle) payload.title = newTitle;
+      const newWeight = parseFloat(document.getElementById('ov-weight').value);
+      if (!Number.isNaN(newWeight) && (newWeight !== l.meta.base_weight || ov.base_weight !== undefined)) payload.base_weight = newWeight;
+      const newTier = document.getElementById('ov-tier').value;
+      if (newTier !== (l.meta.tier || 'B') || ov.tier !== undefined) payload.tier = newTier;
+      const newShelf = document.getElementById('ov-shelf').value;
+      if (newShelf !== (l.meta.shelf || 'on_shelf') || ov.shelf !== undefined) payload.shelf = newShelf;
+      const newCat = document.getElementById('ov-category').value;
+      if (newCat !== (l.meta.category || 'general') || ov.category !== undefined) payload.category = newCat;
+      const newPrim = document.getElementById('ov-primitive').value;
+      if (newPrim !== l.routing.primitive || ov.primitive !== undefined) payload.primitive = newPrim;
+      try {
+        await api('api/overlays/' + encodeURIComponent(l.id), { method: 'PUT', body: JSON.stringify(payload) });
+        toast('Overlay 已保存（仅写入变更项，点击清洗发布生效）');
+        document.getElementById('lens-modal').classList.remove('open');
+        await refreshAll();
+      } catch (e) { toast('保存失败: ' + e.message); }
+    };
+    document.getElementById('ov-reset').onclick = async () => {
+      try {
+        await api('api/overlays/' + encodeURIComponent(state.selectedLens.id), { method: 'DELETE' });
+        toast('已清除覆写');
+        document.getElementById('lens-modal').classList.remove('open');
+        await refreshAll();
+      } catch (e) { toast('清除失败: ' + e.message); }
+    };
+
+    // Manual Lens Modal
+    document.getElementById('btn-new-manual').onclick = () => document.getElementById('manual-modal').classList.add('open');
+    document.getElementById('mm-close').onclick = () => document.getElementById('manual-modal').classList.remove('open');
+    document.getElementById('mm-save').onclick = async () => {
+      try {
+        await api('api/lenses/manual', { method: 'POST', body: JSON.stringify({
+          title: document.getElementById('mm-title').value,
+          tagline: document.getElementById('mm-tagline').value,
+          primitive: document.getElementById('mm-primitive').value,
+          category: document.getElementById('mm-category').value,
+          tier: document.getElementById('mm-tier').value,
+          action_type: document.getElementById('mm-action').value,
+          pain_point: document.getElementById('mm-pain').value,
+          trigger_utterances: document.getElementById('mm-triggers').value.split('\n').filter(Boolean),
+          content: document.getElementById('mm-content').value,
+        })});
+        toast('手工卡片已写入 L2（点击清洗发布即可上架）');
+        ['mm-title','mm-tagline','mm-pain','mm-triggers','mm-content'].forEach(id => document.getElementById(id).value = '');
+        document.getElementById('manual-modal').classList.remove('open');
+        await refreshAll();
+      } catch (e) { toast('创建失败: ' + e.message); }
+    };
+
+    // Recall Inspector & Calibration + Cognitive Gaps
+    let _lastRiQuery = '';
+    async function runRecallInspector() {
+      const q = document.getElementById('ri-query').value.trim();
+      if (!q) return toast('请输入要诊断的查询语句');
+      _lastRiQuery = q;
+      try {
+        const d = await api('api/inspect-recall', { method: 'POST', body: JSON.stringify({ query: q, top_k: 20 }) });
+        document.getElementById('ri-panel').style.display = 'block';
+        document.getElementById('btn-ri-close').style.display = 'inline-block';
+        const bp = d.breakthrough_policy || {};
+        document.getElementById('ri-meta').innerHTML = `剥离修饰词后: <b>${esc(d.cleaned_query)}</b> · 引擎: <b>${d.reranker_active ? 'BM25 + bge-m3 + MPS bge-reranker-v2-m3' : 'bge-m3 降级'}</b> · L3 断层门禁: cos≥${esc(bp.min_cosine ?? 0.45)}, logit≥${esc(bp.min_rerank_logit ?? -1.0)}, ΔTop1≥+${esc(bp.margin_over_top1 ?? 1.5)}`;
+
+        const top3 = d.would_show_top3 || [];
+        document.getElementById('ri-top3').innerHTML = top3.length ? (
+          `<div style="font-size:11.5px;color:var(--muted);margin-bottom:4px">此时弹窗实际会推送的 Top-3：</div><div style="display:flex;gap:8px;flex-wrap:wrap">` +
+          top3.map((c, i) => `<div class="pain" style="flex:1;min-width:200px;margin:0;border:1px solid ${c.is_l3_breakthrough?'var(--purple)':'var(--border)'}"><b>#${i+1} ${esc(c.title)}</b> <span class="pill prim">${esc(c.primitive||c.dimension)}</span>${c.is_l3_breakthrough?'<span class="pill tier-A">L3 发现</span>':''}<div style="color:var(--muted);font-size:11px;margin-top:3px">score: ${esc(c.score)} · ${esc(c.preview)}</div></div>`).join('') + `</div>`
+        ) : '';
+
+        const rows = d.ranked_all || [];
+        document.getElementById('ri-table').innerHTML = rows.length ? `<table><tr><th>#</th><th>透镜</th><th>货架/层</th><th>精排分</th><th>向量</th><th>穿透判定</th><th>一键校准</th></tr>` + rows.map(r => {
+          let btHtml = '<span class="pill">L4</span>';
+          if (r.breakthrough_status === 'triggered') btHtml = '<span class="pill tier-A">✓ L3穿透触发</span>';
+          else if (r.breakthrough_status === 'blocked_orthogonal') btHtml = '<span class="pill ov">达标(被正交/上限拦)</span>';
+          else if (r.breakthrough_status === 'eligible_gap') btHtml = `<span class="pill ov">差 +${esc(Math.min(r.breakthrough_gap_top1 ?? 99, r.breakthrough_gap_top3 ?? 99))} 穿透</span>`;
+          else if (r.breakthrough_status === 'manual_excluded') btHtml = '<span class="pill bad">人工下架豁免</span>';
+          else if (r.breakthrough_status === 'below_floor') btHtml = '<span class="pill">低于底线</span>';
+          const isOff = r.shelf === 'off_shelf';
+          return `<tr style="${r.in_live_top3 ? 'background:rgba(110,168,254,0.08)' : ''}">
+            <td><b>#${r.rank}</b>${r.in_live_top3?' ⭐':''}</td>
+            <td><b>${esc(r.title)}</b> <span class="pill prim">${esc(r.primitive)}</span><div style="color:var(--muted);font-size:11px">${esc(r.tagline)}</div></td>
+            <td><span class="pill tier-${esc(r.tier)}">${esc(r.tier)}</span><span class="pill ${isOff?'bad':(r.shelf==='evergreen'?'ok':'')}">${esc(r.shelf)}</span></td>
+            <td><b>${r.rerank_logit !== null ? esc(r.rerank_logit) : '-'}</b></td>
+            <td>${esc(r.cosine)}</td>
+            <td>${btHtml}</td>
+            <td style="white-space:nowrap">
+              <button class="btn sm" onclick="calibrateBindTrigger('${esc(r.id)}')">+绑口语</button>
+              <button class="btn sm ${isOff?'primary':'danger'}" onclick="calibrateShelf('${esc(r.id)}','${isOff?'on_shelf':'off_shelf'}')">${isOff?'上架L4':'下架L3'}</button>
+            </td>
+          </tr>`;
+        }).join('') + `</table>` : '<div style="font-size:12px;color:var(--muted)">无匹配结果</div>';
+      } catch (e) { toast('诊断失败: ' + e.message); }
+    }
+    document.getElementById('btn-ri-run').onclick = runRecallInspector;
+    document.getElementById('ri-query').addEventListener('keydown', e => { if (e.key === 'Enter') runRecallInspector(); });
+    document.getElementById('btn-ri-close').onclick = () => {
+      document.getElementById('ri-panel').style.display = 'none';
+      document.getElementById('btn-ri-close').style.display = 'none';
+    };
+
+    async function calibrateBindTrigger(id) {
+      if (!_lastRiQuery) return;
+      try {
+        await api(`api/overlays/${encodeURIComponent(id)}/add-trigger`, { method: 'POST', body: JSON.stringify({ utterance: _lastRiQuery }) });
+        toast(`已将「${_lastRiQuery.slice(0,18)}」绑定为触发口语（点击顶部清洗发布后重算向量生效）`);
+        await loadOverview();
+      } catch (e) { toast('绑定失败: ' + e.message); }
+    }
+    async function calibrateShelf(id, shelf) {
+      try {
+        await api(`api/overlays/${encodeURIComponent(id)}`, { method: 'PUT', body: JSON.stringify({ shelf }) });
+        toast(`已设为 ${shelf}（点击顶部清洗发布同步至线上）`);
+        await refreshAll();
+      } catch (e) { toast('操作失败: ' + e.message); }
+    }
+
+    document.getElementById('btn-gap-save').onclick = async () => {
+      const q = _lastRiQuery || document.getElementById('ri-query').value.trim();
+      if (!q) return;
+      try {
+        await api('api/gaps', { method: 'POST', body: JSON.stringify({ query: q }) });
+        toast('已记入认知缺口清单（可在 L0-L4 供给工坊集中处理）');
+      } catch (e) { toast('保存失败: ' + e.message); }
+    };
+    document.getElementById('btn-gap-ai').onclick = async () => {
+      const q = _lastRiQuery || document.getElementById('ri-query').value.trim();
+      if (!q) return;
+      try {
+        await api('api/gaps', { method: 'POST', body: JSON.stringify({ query: q, note: '已触发 AI 锻造' }) });
+        await api('api/evolution/friction-to-draft', { method: 'POST', body: JSON.stringify({ custom_intent: q, sample_input: q }) });
+        toast('已记录缺口并启动 AI 锻造 L2 草稿（可在供给工坊查看进度）');
+      } catch (e) { toast('启动失败: ' + e.message); }
+    };
+    document.getElementById('btn-gap-manual').onclick = () => {
+      const q = _lastRiQuery || document.getElementById('ri-query').value.trim();
+      document.getElementById('mm-triggers').value = q;
+      document.getElementById('mm-pain').value = q;
+      document.getElementById('manual-modal').classList.add('open');
+    };
+
+    async function loadGaps() {
+      try {
+        const d = await api('api/gaps');
+        const box = document.getElementById('gaps-list');
+        box.innerHTML = d.gaps.length ? d.gaps.map(g => `
+          <div class="pain" style="display:flex;justify-content:space-between;align-items:center;gap:8px;opacity:${g.status==='resolved'?0.55:1}">
+            <div><b>${esc(g.query)}</b> <span class="pill ${g.status==='resolved'?'ok':'ov'}">${esc(g.status)}</span><div style="font-size:11px;color:var(--muted)">${esc(g.created_at)} ${g.note ? '· '+esc(g.note) : ''}</div></div>
+            <div style="display:flex;gap:4px;white-space:nowrap">
+              ${g.status !== 'resolved' ? `<button class="btn sm primary" onclick="forgeGap('${esc(g.id)}', ${esc(JSON.stringify(g.query))})">AI锻造</button><button class="btn sm" onclick="resolveGap('${esc(g.id)}')">已解决</button>` : ''}
+              <button class="btn sm danger" onclick="deleteGap('${esc(g.id)}')">×</button>
+            </div>
+          </div>`).join('') : '暂无认知缺口记录';
+      } catch (e) { toast('加载缺口失败: ' + e.message); }
+    }
+    document.getElementById('btn-gaps-refresh').onclick = loadGaps;
+    async function forgeGap(id, query) {
+      try {
+        await api('api/evolution/friction-to-draft', { method: 'POST', body: JSON.stringify({ custom_intent: query, sample_input: query }) });
+        toast('已启动缺口 AI 锻造任务'); loadJobs();
+      } catch (e) { toast(e.message); }
+    }
+    async function resolveGap(id) {
+      try { await api(`api/gaps/${encodeURIComponent(id)}`, { method: 'PUT', body: JSON.stringify({ status: 'resolved' }) }); loadGaps(); } catch (e) { toast(e.message); }
+    }
+    async function deleteGap(id) {
+      try { await api(`api/gaps/${encodeURIComponent(id)}`, { method: 'DELETE' }); loadGaps(); } catch (e) { toast(e.message); }
+    }
+
+    // M4 Forge & ATLAS & Jobs
+    async function loadJobs() {
+      const d = await api('api/jobs');
+      document.getElementById('jobs-list').innerHTML = d.jobs.length ? d.jobs.map(j => `
+        <div class="pain"><b>${esc(j.label)}</b> <span class="pill ${j.status==='done'?'ok':(j.status==='failed'?'bad':'ov')}">${esc(j.status)}</span> (${esc(j.started_at)} → ${esc(j.finished_at||'运行中')})
+        ${j.error ? `<div style="color:var(--red)">${esc(j.error)}</div>` : (j.result ? `<div style="color:var(--muted)">${esc(JSON.stringify(j.result).slice(0,220))}</div>` : '')}</div>
+      `).join('') : '暂无后台任务';
+    }
+    document.getElementById('btn-jobs-refresh').onclick = loadJobs;
+
+    document.getElementById('btn-l0-submit').onclick = async () => {
+      try {
+        await api('api/forge/l0-text', { method: 'POST', body: JSON.stringify({ title: document.getElementById('l0-title').value, raw_text: document.getElementById('l0-text').value }) });
+        toast('已启动 L0→L2 后台精炼任务'); loadJobs();
+      } catch (e) { toast(e.message); }
+    };
+    document.getElementById('btn-fg-submit').onclick = async () => {
+      try {
+        await api('api/forge/starter-pack', { method: 'POST', body: JSON.stringify({
+          domain_name: document.getElementById('fg-domain').value,
+          pain_points: document.getElementById('fg-pain').value,
+          style_pref: document.getElementById('fg-style').value,
+          category: document.getElementById('fg-cat').value,
+        })});
+        toast('已启动 Glint Forge 7 元操作领域包合成'); loadJobs();
+      } catch (e) { toast(e.message); }
+    };
+    document.getElementById('btn-atlas-search').onclick = async () => {
+      try {
+        const q = document.getElementById('atlas-q').value;
+        const d = await api('api/forge/atlas-search?q=' + encodeURIComponent(q));
+        state.atlasOffsets.clear();
+        document.getElementById('atlas-results').innerHTML = d.items.length ? `<table><tr><th>选</th><th>标题</th><th>仓库</th><th>摘要</th></tr>` + d.items.map(it => `
+          <tr><td><input type="checkbox" onchange="if(this.checked)state.atlasOffsets.add(${it.offset});else state.atlasOffsets.delete(${it.offset})" /></td>
+          <td><b>${esc(it.title)}</b></td><td>${esc(it.repository)}</td><td style="color:var(--muted)">${esc(it.summary)}</td></tr>`).join('') + `</table>` : '<div style="font-size:12px;color:var(--muted)">无匹配结果</div>';
+      } catch (e) { toast('搜索失败: ' + e.message); }
+    };
+    document.getElementById('btn-atlas-import').onclick = async () => {
+      if (!state.atlasOffsets.size) return toast('请先勾选要导入的 ATLAS 条目');
+      try {
+        await api('api/forge/atlas-import', { method: 'POST', body: JSON.stringify({ offsets: Array.from(state.atlasOffsets) }) });
+        toast(`已启动导入 ${state.atlasOffsets.size} 条 ATLAS 原料到 L3 库存`); loadJobs();
+      } catch (e) { toast('导入失败: ' + e.message); }
+    };
+    async function loadQuarantine() {
+      const d = await api('api/quarantine');
+      const items = [...(d.l2_quarantined||[]).map(x => `[L2/L3] ${x.id} (${x.source}): ${(x.reasons||[]).join('; ')}`), ...(d.l0_rejected||[]).map(x => `[L0拒收] ${x.title||x.id}: ${(x.reasons||[]).join('; ')}`)];
+      document.getElementById('q-summary').innerHTML = items.length ? items.map(t => `<div class="pain">${esc(t)}</div>`).join('') : '<div style="font-size:12px;color:var(--muted)">暂无隔离记录</div>';
+    }
+
+    // M3 Evolution
+    async function loadEvolution() {
+      const [ana, prop] = await Promise.all([api('api/evolution/analytics?days=30'), api('api/evolution/proposals?days=30')]);
+      document.getElementById('evo-kpis').innerHTML = `
+        <div class="kpi"><div class="label">近 30 天呼出总数</div><div class="val">${esc(ana.total_events)}</div><div class="sub">点击 ${esc(ana.clicks)} · Esc ${esc(ana.escapes)} · 自定义 ${esc(ana.custom_intents)}</div></div>
+        <div class="kpi"><div class="label">整体点击率 (CTR)</div><div class="val" style="color:var(--green)">${Math.round((ana.ctr||0)*100)}%</div><div class="sub">Esc 跳过率: ${Math.round((ana.esc_rate||0)*100)}%</div></div>
+        <div class="kpi"><div class="label">实机 P50 / P95 延迟</div><div class="val">${esc(ana.p50_ms)} / ${esc(ana.p95_ms)}ms</div><div class="sub">来自 usage.db 真实记录</div></div>
+        <div class="kpi"><div class="label">常青 S 级免淘汰保护</div><div class="val">${esc(prop.evergreen_protected)}</div><div class="sub">仅调度动态垂直货架</div></div>
+      `;
+      renderBars('evo-apps', ana.by_app);
+      document.getElementById('evo-top-cards').innerHTML = ana.top_cards.length ? `<table><tr><th>透镜</th><th>Tier</th><th>点击/曝光</th><th>CTR</th></tr>` + ana.top_cards.map(c => `<tr><td>${esc(c.title)}</td><td>${esc(c.tier)}</td><td>${c.clicks}/${c.impressions}</td><td>${Math.round(c.ctr*100)}%</td></tr>`).join('') + `</table>` : '<div style="font-size:12px;color:var(--muted)">暂无点击数据，日常使用后自动呈现</div>';
+
+      const demotes = (prop.demote_to_l3||[]).map(p => `<div class="pain" style="display:flex;justify-content:space-between;align-items:center"><div><b>[建议下架回 L3] ${esc(p.title)}</b> · ${esc(p.reason)}</div><button class="btn sm danger" onclick="applyShelfProposal('${esc(p.id)}','off_shelf')">下架回 L3</button></div>`).join('');
+      const promotes = (prop.promote_to_l4||[]).map(p => `<div class="pain" style="display:flex;justify-content:space-between;align-items:center"><div><b>[建议上架 L4] ${esc(p.title)}</b> · ${esc(p.reason)}</div><button class="btn sm primary" onclick="applyShelfProposal('${esc(p.id)}','on_shelf')">上架 L4</button></div>`).join('');
+      document.getElementById('evo-proposals').innerHTML = (demotes + promotes) || '<div style="font-size:12px;color:var(--muted)">当前货架状态健康，暂无上下架调整建议。</div>';
+
+      document.getElementById('evo-custom-list').innerHTML = ana.custom_intent_logs.length ? ana.custom_intent_logs.map(c => `
+        <div class="pain" style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+          <div><b>${esc(c.custom_intent)}</b><div style="color:var(--muted)">[${esc(c.app_name)}] 原文: ${esc(c.input_text)}</div></div>
+          <button class="btn sm primary" onclick="frictionToDraft(${esc(JSON.stringify(c.custom_intent))}, ${esc(JSON.stringify(c.input_text))})">生成 L2 草稿</button>
+        </div>`).join('') : '<div style="font-size:12px;color:var(--muted)">暂无第 4 选项自定义意图摩擦记录</div>';
+    }
+    async function applyShelfProposal(id, shelf) {
+      try {
+        await api('api/overlays/' + encodeURIComponent(id), { method: 'PUT', body: JSON.stringify({ shelf }) });
+        toast(`已写入 Overlay: ${id} → ${shelf}（点击顶部清洗发布生效）`);
+        loadEvolution(); loadOverview();
+      } catch (e) { toast('操作失败: ' + e.message); }
+    }
+    async function frictionToDraft(custom_intent, sample_input) {
+      try {
+        await api('api/evolution/friction-to-draft', { method: 'POST', body: JSON.stringify({ custom_intent, sample_input }) });
+        toast('已启动摩擦转 L2 草稿后台任务（可在供给工坊查看进度）');
+      } catch (e) { toast('启动失败: ' + e.message); }
+    }
+
+    // Sandbox & Eval
+    document.getElementById('btn-search').onclick = async () => {
+      const q = document.getElementById('sb-query').value.trim(); if (!q) return;
+      try {
+        const d = await api('api/search', { method: 'POST', body: JSON.stringify({ query: q, primitive: document.getElementById('sb-primitive').value || null, top_k: 6 }) });
+        document.getElementById('sb-mode').textContent = `引擎: ${d.mode} · 返回 ${d.results.length} 条`;
+        document.getElementById('sb-results').innerHTML = d.results.map(r => lensCardHtml(r.lens, r.score, false)).join('');
+      } catch (e) { toast('召回测试失败: ' + e.message); }
+    };
+    document.getElementById('btn-run-eval').onclick = async () => {
+      const out = document.getElementById('eval-output');
+      try {
+        const res = await api('api/eval/run', { method: 'POST' });
+        out.textContent = `评测任务已启动 (${res.job.id})，请稍候约 8 秒...`;
+        const timer = setInterval(async () => {
+          try {
+            const jlist = await api('api/jobs');
+            const job = jlist.jobs.find(j => j.id === res.job.id);
+            if (job && job.status !== 'running') {
+              clearInterval(timer);
+              out.textContent = job.status === 'done' ? JSON.stringify(job.result, null, 2) : '评测失败: ' + job.error;
+            }
+          } catch (err) {
+            clearInterval(timer);
+            out.textContent = '轮询任务状态失败: ' + err.message;
+          }
+        }, 2000);
+      } catch (e) { out.textContent = '启动失败: ' + e.message; }
+    };
+
+    // Policy & Logs
+    async function loadConfig() {
+      const name = document.getElementById('cfg-select').value;
+      const d = await api('api/config/' + name);
+      document.getElementById('cfg-editor').value = d.yaml_text;
+    }
+    document.getElementById('cfg-select').onchange = loadConfig;
+    document.getElementById('btn-cfg-save').onclick = async () => {
+      const name = document.getElementById('cfg-select').value;
+      try {
+        await api('api/config/' + name, { method: 'PUT', body: JSON.stringify({ yaml_text: document.getElementById('cfg-editor').value }) });
+        toast(`${name}.yaml 已保存`);
+      } catch (e) { toast('保存失败: ' + e.message); }
+    };
+    async function loadRecentLogs() {
+      const ana = await api('api/evolution/analytics?days=30');
+      document.getElementById('recent-logs-box').innerHTML = ana.recent_logs.length ? `<table><tr><th>时间</th><th>App</th><th>脱敏输入</th><th>选中</th><th>耗时</th></tr>` + ana.recent_logs.map(r => `<tr><td>${esc((r.timestamp||'').slice(5,16))}</td><td>${esc(r.app_name)}</td><td>${esc((r.input_text||'').slice(0,40))}</td><td>${esc(r.selected_id||'Esc')}</td><td>${esc(r.latency_ms||'-')}ms</td></tr>`).join('') + `</table>` : '<div style="font-size:12px;color:var(--muted)">暂无日志</div>';
+    }
+
+    // Header actions
+    document.getElementById('btn-build').onclick = async () => {
+      const btn = document.getElementById('btn-build'); btn.disabled = true; btn.textContent = '清洗发布中...';
+      try {
+        const r = await api('api/build', { method: 'POST' });
+        toast(`发布成功: ${r.manifest.version} (L4=${r.manifest.total_active_lenses}, L3=${r.manifest.total_l3_inventory})`);
+        await refreshAll();
+      } catch (e) { toast('发布失败: ' + e.message); }
+      finally { btn.disabled = false; btn.textContent = 'L2→L3→L4 清洗发布'; }
+    };
+    document.getElementById('btn-rollback').onclick = async () => {
+      try { const r = await api('api/rollback', { method: 'POST', body: '{}' }); toast('已回滚至 ' + r.active_version); await refreshAll(); }
+      catch (e) { toast(e.message); }
+    };
+
+    let _qTimer = null;
+    document.getElementById('f-q').addEventListener('input', () => {
+      clearTimeout(_qTimer);
+      _qTimer = setTimeout(loadLenses, 180);
+    });
+    ['f-tier','f-primitive','f-source'].forEach(id => {
+      document.getElementById(id).addEventListener('change', loadLenses);
+    });
+    async function refreshAll() { await loadOverview(); await loadLenses(); }
+    document.getElementById('btn-refresh').onclick = refreshAll;
+    refreshAll();
+  </script>
+</body>
+</html>

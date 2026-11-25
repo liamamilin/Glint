@@ -1,0 +1,57 @@
+id: disc_content_opinionated_comparisons
+title: 写有立场的对比测评
+tagline: 别写骑墙水文，按场景给出明确取舍与踩坑边界。
+routing:
+  primitive: converge
+  goals:
+  - create
+  - evaluate
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - content
+  - comparison
+  - tradeoffs
+  - decision_guide
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  - ChatGPT
+  pain_point: 写评测或对比时总想面面俱到、不得罪人，结果写出「各有优缺点」的骑墙水文，读者看完仍不知道该选谁；AI 也能秒生成这种总结。
+  trigger_utterances:
+  - 帮我写个 A vs B 对比，别写成各有优缺点
+  - 这篇评测太骑墙了，帮我写出明确立场
+  - 对比文章怎么写出真实取舍和踩坑边界
+  - 帮我把这篇对比写得有立场一点
+  - write an opinionated comparison not a fence-sitting review
+  anti_triggers:
+  - 需要严格中立的学术综述或文献回顾
+  - 纯信息罗列、无需给出选择建议的场景
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: "立场鲜明对比测评写作清单：\n1. 明确场景与受众：先写出「给谁、在什么场景下选」，避免脱离上下文的优缺点罗列。\n2. 对比主体：{{comparison_subjects}}\n   - 不要水端平列出优缺点；改为「什么人选\
+    \ A、什么人选 B、各自最隐蔽的坑」三段式框架。\n   - 为每个选项写出放弃它的真实理由，而非泛泛而谈。\n3. 热门工具/做法拆解：{{popular_tool}}\n   - 列出 3 个「主流吹捧但实际有明显代价」的细节。\n\
+    \   - 为每个代价写出诚实且有洞察的边界说明（在什么条件下代价可接受）。\n4. 取舍声明：明确写出「我选 X、放弃 Y」及一条可验证的最小验证步骤。\n5. 自检：全文是否仍可被 AI 秒生成成骑墙总结？若是，重写立场句。"
+  variables:
+  - '{''name'': ''comparison_subjects'', ''description'': ''要对比的两个工具/方案/方法，如 A vs B''}'
+  - '{''name'': ''popular_tool'', ''description'': ''要拆解的热门工具或流行做法''}'
+  - comparison_subjects
+  - popular_tool
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/content.json#content-opinionated-comparisons
+  source_hash: 25aff517b08abdb8676cefa50d8d5457fcab9407dcf3321b4d89ec8d12df71d6
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: writing_comms
+  subcategory: content_creation
+  collections: []
+  base_weight: 1.0
+  confidence: 0.86
+  version: 1

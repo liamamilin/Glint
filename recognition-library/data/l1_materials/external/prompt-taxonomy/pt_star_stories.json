@@ -1,0 +1,27 @@
+{
+  "id": "pt_star_stories",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#star-stories",
+  "title": "把真实经历整理成行为面试故事",
+  "content": "将【经历原始记录】整理成可用于【面试能力主题】的情境、任务、行动、结果故事。明确团队与个人贡献，保留真实数字。给一个九十秒口述版本和两个会被追问的薄弱点。",
+  "content_hash": "326bd9327927dd16939b998450b658820d6aef326a4b83cb664a25a72b75c59d",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "career",
+    "行为面试",
+    "STAR",
+    "interview story"
+  ],
+  "problem_solved": "把责任、动作和结果讲具体。",
+  "when_to_use": "分类: 求职与职业",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "star-stories",
+    "category": "career",
+    "variables": [
+      "经历原始记录",
+      "面试能力主题"
+    ]
+  }
+}

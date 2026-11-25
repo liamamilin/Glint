@@ -1,0 +1,33 @@
+{
+  "id": "disc_career_asking_high_signal_questions",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/career.json#career-asking-high-signal-questions",
+  "title": "提“带背景和尝试过什么”的问题，拿到 10 倍有用的回答",
+  "content": "旧共识（盲区）：向别人或 AI 请教时，丢一句“怎么办”或“帮我看看这个”，对方自然会给完整答案。\n\n新现实（破盲视角）：把“目标、已有上下文、已经试过的做法、具体卡点”讲清楚，别人和 AI 都能跳过废话直接给干货，请教成本和对方负担都会大幅降低。\n\n破冰追问母题：\n- 我想向 [某位资深同行/导师/专家] 请教 [某个具体问题]：[简述你的问题与现状]。请帮我整理一段 120 字以内、重点突出、尊重对方时间的请教消息。\n- 把下面这段我准备发出去的求助/提问：[粘贴提问]，改写成结构更清晰、更容易被快速回答的版本。",
+  "content_hash": "e3a3fd005466f9709aabed83778472a4fa445c9af2df1a1a71036952dc751189",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "career",
+    "role-inversion",
+    "invisible-friction",
+    "questions",
+    "mentorship",
+    "communication",
+    "problem-solving"
+  ],
+  "problem_solved": "向别人或 AI 请教时，丢一句“怎么办”或“帮我看看这个”，对方自然会给完整答案。",
+  "when_to_use": "把“目标、已有上下文、已经试过的做法、具体卡点”讲清楚，别人和 AI 都能跳过废话直接给干货，请教成本和对方负担都会大幅降低。",
+  "procedural_steps": [
+    "我想向 [某位资深同行/导师/专家] 请教 [某个具体问题]：[简述你的问题与现状]。请帮我整理一段 120 字以内、重点突出、尊重对方时间的请教消息。",
+    "把下面这段我准备发出去的求助/提问：[粘贴提问]，改写成结构更清晰、更容易被快速回答的版本。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "career-asking-high-signal-questions",
+    "arena": "career",
+    "lenses": [
+      "role-inversion",
+      "invisible-friction"
+    ]
+  }
+}

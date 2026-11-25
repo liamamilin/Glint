@@ -1,0 +1,29 @@
+{
+  "id": "sit_cos_02",
+  "source": "super-individual-toolbox",
+  "source_ref": "https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/chief-of-staff.json#cos-02",
+  "title": "第一性原理拆解刀",
+  "content": "定位：扒掉行业惯例的外壳，只看底层物理约束\n\n触发场景：当你陷入“别人都这么做，所以我也要做”的惯性，或者觉得某个方案成本高得离谱时。\n\n核心机制：\n- 列出当前主流做法中默认成立的 5 条“行业常识”\n- 逐条拷问：这是物理/法律铁律，还是历史遗留的习惯？\n- 删掉所有非铁律约束，仅基于剩余底线重新拼装最简解法\n\n交付物：一张《真约束 vs. 伪惯例》对照表及 1 个非共识替代方案\n\n推荐装配：多轮苏格拉底追问 Prompt + 思维导图/白板\n\n误用警告：不要在已有成熟廉价标准件的琐事上重造轮子，把这把刀留给核心差异化环节。",
+  "content_hash": "d692a3b3cf0b6629901c5b29d6fadeddc778e7073ff41e8068729c04e304726b",
+  "suggested_action_type": "open_resource",
+  "domain_hints": [
+    "chief-of-staff",
+    "参谋与战略官"
+  ],
+  "problem_solved": "当你陷入“别人都这么做，所以我也要做”的惯性，或者觉得某个方案成本高得离谱时。",
+  "when_to_use": "当你陷入“别人都这么做，所以我也要做”的惯性，或者觉得某个方案成本高得离谱时。",
+  "procedural_steps": [
+    "列出当前主流做法中默认成立的 5 条“行业常识”",
+    "逐条拷问：这是物理/法律铁律，还是历史遗留的习惯？",
+    "删掉所有非铁律约束，仅基于剩余底线重新拼装最简解法"
+  ],
+  "anti_patterns": [
+    "不要在已有成熟廉价标准件的琐事上重造轮子，把这把刀留给核心差异化环节。"
+  ],
+  "metadata": {
+    "original_id": "cos-02",
+    "drawer": "chief-of-staff",
+    "drawer_zh": "参谋与战略官",
+    "deliverable": "一张《真约束 vs. 伪惯例》对照表及 1 个非共识替代方案"
+  }
+}

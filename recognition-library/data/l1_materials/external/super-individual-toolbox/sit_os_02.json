@@ -1,0 +1,29 @@
+{
+  "id": "sit_os_02",
+  "source": "super-individual-toolbox",
+  "source_ref": "https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/personal-os.json#os-02",
+  "title": "概念记忆编码器",
+  "content": "定位：给抽象概念焊上画面挂钩，直接钉进记忆\n\n触发场景：当你跨界学习陌生硬核领域，当下看懂了原理，但过两天就忘、临场调用不出来时。\n\n核心机制：\n- 剥离冗长定义，只提炼待记概念的 1 个核心特征或底层结构\n- 将其强绑定到一个具象、有动作感或空间感的“编码物/画面”上\n- 反向盲测还原：只看编码画面，强制用自己的话复述原概念并修补断裂处\n\n交付物：一组高还原度的“编码画面 + 概念映射卡”\n\n推荐装配：自定义记忆编码 Skill + 间隔重复工具（Anki / 本地 Markdown）\n\n误用警告：不要给查一下就能用的 API 参数或琐碎日期做编码；只给需要内化的底层框架用。",
+  "content_hash": "c7af0db4336c48817f4d8fdf0ac62cc82ccf1bad66124270a8c4127e79c24bd0",
+  "suggested_action_type": "open_resource",
+  "domain_hints": [
+    "personal-os",
+    "个人操作系统"
+  ],
+  "problem_solved": "当你跨界学习陌生硬核领域，当下看懂了原理，但过两天就忘、临场调用不出来时。",
+  "when_to_use": "当你跨界学习陌生硬核领域，当下看懂了原理，但过两天就忘、临场调用不出来时。",
+  "procedural_steps": [
+    "剥离冗长定义，只提炼待记概念的 1 个核心特征或底层结构",
+    "将其强绑定到一个具象、有动作感或空间感的“编码物/画面”上",
+    "反向盲测还原：只看编码画面，强制用自己的话复述原概念并修补断裂处"
+  ],
+  "anti_patterns": [
+    "不要给查一下就能用的 API 参数或琐碎日期做编码；只给需要内化的底层框架用。"
+  ],
+  "metadata": {
+    "original_id": "os-02",
+    "drawer": "personal-os",
+    "drawer_zh": "个人操作系统",
+    "deliverable": "一组高还原度的“编码画面 + 概念映射卡”"
+  }
+}

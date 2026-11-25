@@ -1,0 +1,81 @@
+id: disc_life_saying_no_with_default_criteria
+title: 用预设标准说不
+tagline: 提前定好红绿灯规则，拒绝变成顺理成章而非针对某人。
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - conflicted
+  domains:
+  - life
+  - boundaries
+  - priorities
+  - time
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Slack
+  - Mail
+  pain_point: 每次有人求助、约饭或塞任务，都要当场纠结拒绝会不会伤感情，心软答应后又后悔累垮。
+  trigger_utterances:
+  - 又有人找我帮忙，拒绝会不会伤感情
+  - 这饭局不想去但不好意思推
+  - 被塞任务了怎么婉拒
+  - 总是心软答应最后累垮
+  - 帮我写个拒绝模板
+  anti_triggers:
+  - 与职业晋升或薪资谈判相关的拒绝场景
+  - 已经明确决定拒绝只需润色措辞的场景
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '【个人精力红绿灯 · 说不默认标准】
+
+
+    一、先定红绿灯（默认规则，不必每次重新纠结）
+
+    - 绿灯（直接答应）：____（例：不超 15 分钟、在擅长领域、与核心目标一致）
+
+    - 黄灯（延后/条件答应）：____（例：需先确认时间、需对方明确需求）
+
+    - 红灯（直接婉拒）：____（例：消耗周末、超出职责、与优先级冲突）
+
+
+    二、婉拒模板（3 种语气，按关系与场景选用）
+
+    1. 温和礼貌：感谢邀请/求助，说明当前精力有限，给出替代建议（如推荐他人/延后）。
+
+    2. 真诚坦率：直接说明无法投入的原因与影响，表达歉意但不过度解释。
+
+    3. 明确边界：清晰 stating 能力/时间上限，避免模糊承诺。
+
+
+    三、执行步骤
+
+    1. 收到请求先不立即回复，按红绿灯归类。
+
+    2. 红灯直接用模板回复，不追加解释。
+
+    3. 黄灯给出条件与截止时间，对方不接受则转红灯。
+
+    4. 事后记录一次，校准规则。
+
+
+    四、自检
+
+    - 本次拒绝是因为规则而非针对个人吗？
+
+    - 是否避免了过度解释与道歉？'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/life.json#life-saying-no-with-default-criteria
+  source_hash: 2b3b73e9c6df340faf8dc6191826f8503f8d5e5807ddf8c75e37895fb219ad49
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

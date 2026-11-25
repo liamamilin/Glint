@@ -1,0 +1,28 @@
+{
+  "id": "pt_discovery_interview",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#discovery-interview",
+  "title": "设计一份用户访谈提纲",
+  "content": "围绕【产品问题】访谈【用户群】，可用【时长】。按开场、最近一次实际经历、现有替代办法、影响和收尾设计。每题用中性措辞，给一个适合事实追问的提示和访谈记录模板。",
+  "content_hash": "21564b532af1bf73c63f90aeb3d3a19fa33f7bb5adcda86e36daffb6da439e93",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "product",
+    "用户访谈",
+    "调研",
+    "discovery interview"
+  ],
+  "problem_solved": "用真实行为和实例了解问题。",
+  "when_to_use": "分类: 产品与业务",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "discovery-interview",
+    "category": "product",
+    "variables": [
+      "产品问题",
+      "用户群",
+      "时长"
+    ]
+  }
+}

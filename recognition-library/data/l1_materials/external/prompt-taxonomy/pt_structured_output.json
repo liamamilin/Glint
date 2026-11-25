@@ -1,0 +1,27 @@
+{
+  "id": "pt_structured_output",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#structured-output",
+  "title": "为重复调用定义结构化输出",
+  "content": "为【任务】和【下游程序】设计 JSON 结构。定义字段名、类型、必填项、枚举和缺失或证据不足的表示。给一个正常示例和一个边界示例，再写用模式验证结果的步骤。",
+  "content_hash": "18c6d19c061932b0e984030d87382dfbb3aa8fc11c6f0193ef698282696f0c58",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "prompt-workflows",
+    "结构化输出",
+    "JSON Schema",
+    "prompt schema"
+  ],
+  "problem_solved": "明确字段、约束和解析失败如何表示。",
+  "when_to_use": "分类: 提示词与 AI 工作流",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "structured-output",
+    "category": "prompt-workflows",
+    "variables": [
+      "任务",
+      "下游程序"
+    ]
+  }
+}

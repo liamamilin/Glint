@@ -1,0 +1,1898 @@
+{
+  "manifest": {
+    "drawers": [
+      {
+        "code": "00",
+        "id": "personal-os",
+        "file": "personal-os.json",
+        "prefix": "os-",
+        "zh": "个人操作系统",
+        "en": "Personal OS",
+        "question": {
+          "zh": "脑子乱了、精力耗尽了、学不进去了怎么办？",
+          "en": "Overthinking, drained, or struggling to retain new knowledge?"
+        }
+      },
+      {
+        "code": "01",
+        "id": "chief-of-staff",
+        "file": "chief-of-staff.json",
+        "prefix": "cos-",
+        "zh": "参谋与战略官",
+        "en": "Chief of Staff",
+        "question": {
+          "zh": "这件事值不值得做？我有没有致命盲区？",
+          "en": "Is this worth doing? What are my fatal blind spots?"
+        }
+      },
+      {
+        "code": "02",
+        "id": "product-architect",
+        "file": "product-architect.json",
+        "prefix": "prd-",
+        "zh": "产品与架构师",
+        "en": "Product & Architect",
+        "question": {
+          "zh": "想法很模糊，怎么变成清晰的规格与边界？",
+          "en": "How do I turn a fuzzy idea into crisp specs and boundaries?"
+        }
+      },
+      {
+        "code": "03",
+        "id": "engineer",
+        "file": "engineer.json",
+        "prefix": "eng-",
+        "zh": "工程师",
+        "en": "Engineer",
+        "question": {
+          "zh": "怎么用最低成本做出来、跑稳定、守住隐私？",
+          "en": "How do I build it lean, keep it stable, and guard privacy?"
+        }
+      },
+      {
+        "code": "04",
+        "id": "design-creative",
+        "file": "design-creative.json",
+        "prefix": "des-",
+        "zh": "设计师与美术",
+        "en": "Design & Creative",
+        "question": {
+          "zh": "怎么让它看起来专业、有审美、有辨识度？",
+          "en": "How do I make it look sharp, cohesive, and unmistakable?"
+        }
+      },
+      {
+        "code": "05",
+        "id": "editorial",
+        "file": "editorial.json",
+        "prefix": "edt-",
+        "zh": "内容与叙事官",
+        "en": "Editorial",
+        "question": {
+          "zh": "怎么把观点写透、讲清楚、沉淀成长期资产？",
+          "en": "How do I sharpen my voice and turn insights into lasting assets?"
+        }
+      },
+      {
+        "code": "06",
+        "id": "growth-commercial",
+        "file": "growth-commercial.json",
+        "prefix": "grw-",
+        "zh": "增长与商业官",
+        "en": "Growth & Commercial",
+        "question": {
+          "zh": "东西做出来了，怎么让人看见并愿意买单？",
+          "en": "It's built—how do I get it seen and paid for?"
+        }
+      },
+      {
+        "code": "07",
+        "id": "ops-automation",
+        "file": "ops-automation.json",
+        "prefix": "ops-",
+        "zh": "运营与自动化官",
+        "en": "Ops & Automation",
+        "question": {
+          "zh": "这件重复的破事，怎么让系统以后自己干？",
+          "en": "How do I automate this recurring chore for good?"
+        }
+      },
+      {
+        "code": "08",
+        "id": "legal-finance",
+        "file": "legal-finance.json",
+        "prefix": "leg-",
+        "zh": "法务与财务官",
+        "en": "Legal & Finance",
+        "question": {
+          "zh": "这里面有没有坑？这笔账算下来划不划算？",
+          "en": "Where are the legal traps, and do the unit economics work?"
+        }
+      }
+    ]
+  },
+  "drawers": {
+    "personal-os": [
+      {
+        "id": "os-01",
+        "drawer": "personal-os",
+        "title": {
+          "zh": "认知降噪复位器",
+          "en": "Cognitive Noise Resetter"
+        },
+        "metaphor": {
+          "zh": "给发烫的大脑按下物理复位键",
+          "en": "A physical reset button for an overheated brain"
+        },
+        "trigger": {
+          "zh": "当你陷入无休止的过度思考、对遥远的不确定性焦虑，甚至连休息时都无法真正放松沉浸时。",
+          "en": "When you're spiraling in overthinking, anxious about distant uncertainties, or unable to unwind even during downtime."
+        },
+        "mechanism": {
+          "zh": [
+            "剥离抽象的现代焦虑，强制列出此刻物理层面的 3 个基本事实（安全、温饱、当下无致命威胁）",
+            "把脑中盘旋的担忧一分为二：“此刻能动”与“此刻不可控”",
+            "对不可控项挂起封存，只从可控项里挑 1 件 15 分钟内可完成的小动作立刻执行"
+          ],
+          "en": [
+            "Strip away abstract anxieties by listing 3 immediate physical facts (safe, fed, no imminent threat)",
+            "Split swirling worries into two buckets: actionable right now vs. out of your control today",
+            "Shelve the uncontrollable items and execute one 15-minute micro-action immediately"
+          ]
+        },
+        "deliverable": {
+          "zh": "一张极简《当下锚定单》（3 个物理事实 + 1 个 15 分钟微动作）",
+          "en": "A minimalist Present-Anchor Card (3 physical facts + 1 fifteen-minute micro-action)"
+        },
+        "current_stack": {
+          "zh": "置顶对话协议 / 手机快捷指令（1 分钟文字或语音复位）",
+          "en": "Pinned chat protocol or mobile shortcut (1-minute text/voice reset)"
+        },
+        "anti_pattern": {
+          "zh": "不要用它来逃避真正需要拍板的紧急危机；它是用来清噪的，不是用来装鸵鸟的。",
+          "en": "Don't use it to dodge genuine urgent crises; it clears mental noise, not real emergencies."
+        },
+        "combos": [
+          "os-03",
+          "cos-04"
+        ],
+        "tags": {
+          "layer": "Thinking",
+          "form_factor": "Prompt / Protocol",
+          "leverage": "Risk"
+        }
+      },
+      {
+        "id": "os-02",
+        "drawer": "personal-os",
+        "title": {
+          "zh": "概念记忆编码器",
+          "en": "Concept Mnemonic Encoder"
+        },
+        "metaphor": {
+          "zh": "给抽象概念焊上画面挂钩，直接钉进记忆",
+          "en": "Welding vivid visual hooks onto abstract concepts"
+        },
+        "trigger": {
+          "zh": "当你跨界学习陌生硬核领域，当下看懂了原理，但过两天就忘、临场调用不出来时。",
+          "en": "When learning an unfamiliar domain where everything makes sense today, but you draw a blank two days later."
+        },
+        "mechanism": {
+          "zh": [
+            "剥离冗长定义，只提炼待记概念的 1 个核心特征或底层结构",
+            "将其强绑定到一个具象、有动作感或空间感的“编码物/画面”上",
+            "反向盲测还原：只看编码画面，强制用自己的话复述原概念并修补断裂处"
+          ],
+          "en": [
+            "Strip verbose definitions down to 1 core trait or structural mechanism",
+            "Bind the concept to a concrete, action-driven, or spatial visual anchor",
+            "Run a blind recall test: look only at the visual anchor, reconstruct the concept in your own words, and patch gaps"
+          ]
+        },
+        "deliverable": {
+          "zh": "一组高还原度的“编码画面 + 概念映射卡”",
+          "en": "A set of high-recall visual anchor & concept mapping cards"
+        },
+        "current_stack": {
+          "zh": "自定义记忆编码 Skill + 间隔重复工具（Anki / 本地 Markdown）",
+          "en": "Custom Mnemonic Encoding Skill + spaced repetition (Anki / local Markdown)"
+        },
+        "anti_pattern": {
+          "zh": "不要给查一下就能用的 API 参数或琐碎日期做编码；只给需要内化的底层框架用。",
+          "en": "Don't encode lookup trivia or syntax; reserve it for core mental models you need on tap."
+        },
+        "combos": [
+          "ops-02",
+          "cos-02"
+        ],
+        "tags": {
+          "layer": "Memory",
+          "form_factor": "Skill / Template",
+          "leverage": "Quality"
+        }
+      },
+      {
+        "id": "os-03",
+        "drawer": "personal-os",
+        "title": {
+          "zh": "上下文切换熔断器",
+          "en": "Context-Switch Circuit Breaker"
+        },
+        "metaphor": {
+          "zh": "给深度工作拉上防切屏的物理警戒线",
+          "en": "A physical firewall protecting deep work blocks"
+        },
+        "trigger": {
+          "zh": "当你上午写代码、中午改文案、下午调 UI，大脑在多个岗位间反复切屏导致全天精疲力竭却零交付时。",
+          "en": "When juggling code, copy, and UI in the same morning leaves you drained with zero shipped output."
+        },
+        "mechanism": {
+          "zh": [
+            "开工前锁定当前 90 分钟的唯一虚拟岗位（例如：只当工程师，拒绝审文案）",
+            "过程中冒出的跨岗位灵感或杂念，5 秒内丢进“暂存收件箱”，绝不顺手切窗口处理",
+            "计时结束后统一分拣暂存区，决定直接丢弃还是排入下一个专场"
+          ],
+          "en": [
+            "Lock a single virtual role for the next 90 minutes (e.g., Engineer only—no copywriting)",
+            "Dump any cross-role ideas or distractions into a Parking Lot inbox within 5 seconds without switching windows",
+            "Triage the Parking Lot only after the timer ends—either discard or schedule into a dedicated block"
+          ]
+        },
+        "deliverable": {
+          "zh": "一段无切屏污染的深度产出 + 一份分拣后的《暂存灵感队列》",
+          "en": "One uncontaminated deep-work deliverable + a triaged Parking Lot queue"
+        },
+        "current_stack": {
+          "zh": "本地极简倒计时 + 一键速记脚本 / 语音转文字收件箱",
+          "en": "Local minimalist timer + one-key capture script or voice-to-text inbox"
+        },
+        "anti_pattern": {
+          "zh": "不要把单次熔断设得超过 2 小时；也不要在等待外部紧急响应的窗口期强行开启。",
+          "en": "Don't set blocks longer than 2 hours, or activate it while awaiting time-critical external blockers."
+        },
+        "combos": [
+          "os-04",
+          "ops-02"
+        ],
+        "tags": {
+          "layer": "Thinking",
+          "form_factor": "Skill / Template",
+          "leverage": "Time"
+        }
+      },
+      {
+        "id": "os-04",
+        "drawer": "personal-os",
+        "title": {
+          "zh": "每周复盘与清仓仪",
+          "en": "Weekly Review & Backlog Purger"
+        },
+        "metaphor": {
+          "zh": "每周一次给大脑和半成品做断舍离",
+          "en": "A weekly declutter for your brain and half-built projects"
+        },
+        "trigger": {
+          "zh": "当你手里攒了一堆“改天再做”的半成品、收藏夹吃灰，感觉隐隐焦虑却说不清在忙什么时。",
+          "en": "When half-finished projects and unread bookmarks pile up, creating background anxiety with unclear progress."
+        },
+        "mechanism": {
+          "zh": [
+            "列出本周已完成交付物与所有卡住的半成品清单",
+            "强制执行“三选一清仓”：继续推进（限 3 项）、明确归档放弃、或降级为低优备忘",
+            "提炼本周重复超过 2 次的摩擦点，指定 1 个下周要封装或自动化的目标"
+          ],
+          "en": [
+            "Export this week's shipped deliverables alongside all stalled work-in-progress",
+            "Force a 3-way purge: keep active (max 3), explicitly kill/archive, or demote to backlog",
+            "Spot any friction repeated more than twice this week and pick 1 target to templatize or automate next week"
+          ]
+        },
+        "deliverable": {
+          "zh": "一份《周度清仓报告》（3 项主线 + 主动放弃清单 + 1 个待自动化摩擦点）",
+          "en": "A Weekly Purge Report (top 3 priorities + explicit kill list + 1 friction point to automate)"
+        },
+        "current_stack": {
+          "zh": "固定周日复盘模板 + 15 分钟 AI 对话式引导访谈",
+          "en": "Fixed Sunday review template + 15-minute AI-guided interview"
+        },
+        "anti_pattern": {
+          "zh": "不要把它写成自我检讨的流水账日记；核心是做“减法决策”，不是抒发愧疚。",
+          "en": "Don't turn it into a guilt-ridden journal; the goal is ruthless subtraction, not self-criticism."
+        },
+        "combos": [
+          "ops-04",
+          "prd-01"
+        ],
+        "tags": {
+          "layer": "Memory",
+          "form_factor": "Prompt / Protocol",
+          "leverage": "Time"
+        }
+      }
+    ],
+    "chief-of-staff": [
+      {
+        "id": "cos-01",
+        "drawer": "chief-of-staff",
+        "title": {
+          "zh": "红队拷问器",
+          "en": "Red-Team Devil's Advocate"
+        },
+        "metaphor": {
+          "zh": "雇一个专门唱反调的毒舌合伙人",
+          "en": "A ruthless co-founder paid to kill your bad ideas"
+        },
+        "trigger": {
+          "zh": "当你对一个新点子极度兴奋、准备立刻熬夜开工，但身边没人给你泼冷水时。",
+          "en": "When you're hyped about a new idea and ready to build, with no one around to challenge your blind spots."
+        },
+        "mechanism": {
+          "zh": [
+            "把你的方案压缩成 3 句话的核心假设",
+            "强制 AI 站在“做空者/竞争对手”立场，列出 3 个最致命的死法",
+            "对每个死法追问：有没有低成本的证伪实验（48 小时内可验证）"
+          ],
+          "en": [
+            "Compress your plan into 3 core assumptions",
+            "Force the AI into a short-seller/competitor persona to list 3 fatal failure modes",
+            "For each failure mode, design a low-cost falsification test runnable within 48 hours"
+          ]
+        },
+        "deliverable": {
+          "zh": "一份含 3 个致命死法与对应 48 小时证伪实验的《排雷清单》",
+          "en": "A Failure-Mode Checklist with 3 fatal risks and 48-hour falsification tests"
+        },
+        "current_stack": {
+          "zh": "高推理模型对话 + 禁用顺从偏好的 System Prompt",
+          "en": "Reasoning model chat + strict anti-sycophancy System Prompt"
+        },
+        "anti_pattern": {
+          "zh": "不要在灵感刚萌芽、还没成形时使用，否则容易把好苗子过早扼杀。",
+          "en": "Don't use during raw brainstorming; it kills fragile ideas before they take shape."
+        },
+        "combos": [
+          "prd-01",
+          "cos-04"
+        ],
+        "tags": {
+          "layer": "Thinking",
+          "form_factor": "Prompt / Protocol",
+          "leverage": "Risk"
+        }
+      },
+      {
+        "id": "cos-02",
+        "drawer": "chief-of-staff",
+        "title": {
+          "zh": "第一性原理拆解刀",
+          "en": "First-Principles Scalpel"
+        },
+        "metaphor": {
+          "zh": "扒掉行业惯例的外壳，只看底层物理约束",
+          "en": "Stripping away industry dogma down to raw constraints"
+        },
+        "trigger": {
+          "zh": "当你陷入“别人都这么做，所以我也要做”的惯性，或者觉得某个方案成本高得离谱时。",
+          "en": "When you're copying competitors out of habit or facing a seemingly impossible cost barrier."
+        },
+        "mechanism": {
+          "zh": [
+            "列出当前主流做法中默认成立的 5 条“行业常识”",
+            "逐条拷问：这是物理/法律铁律，还是历史遗留的习惯？",
+            "删掉所有非铁律约束，仅基于剩余底线重新拼装最简解法"
+          ],
+          "en": [
+            "List 5 unspoken assumptions baked into the current standard approach",
+            "Interrogate each: is this a hard law of physics/economics, or just legacy convention?",
+            "Delete every convention and rebuild the simplest solution from the remaining hard constraints"
+          ]
+        },
+        "deliverable": {
+          "zh": "一张《真约束 vs. 伪惯例》对照表及 1 个非共识替代方案",
+          "en": "A Hard-Constraints vs. Conventions table plus 1 non-consensus alternative"
+        },
+        "current_stack": {
+          "zh": "多轮苏格拉底追问 Prompt + 思维导图/白板",
+          "en": "Multi-turn Socratic Prompt + whiteboard"
+        },
+        "anti_pattern": {
+          "zh": "不要在已有成熟廉价标准件的琐事上重造轮子，把这把刀留给核心差异化环节。",
+          "en": "Don't reinvent cheap commodity parts; save this scalpel for core differentiation."
+        },
+        "combos": [
+          "prd-01",
+          "eng-01"
+        ],
+        "tags": {
+          "layer": "Thinking",
+          "form_factor": "Prompt / Protocol",
+          "leverage": "Quality"
+        }
+      },
+      {
+        "id": "cos-03",
+        "drawer": "chief-of-staff",
+        "title": {
+          "zh": "竞品信号雷达",
+          "en": "Competitor Signal Radar"
+        },
+        "metaphor": {
+          "zh": "不看对手吹什么，只盯用户骂什么和定价怎么变",
+          "en": "Ignoring competitor hype to track user complaints and pricing shifts"
+        },
+        "trigger": {
+          "zh": "当你想切入一个细分赛道，需要快速看清现有玩家的真实软肋与未被满足的缺口时。",
+          "en": "When entering a niche and needing to spot incumbents' real weaknesses and unmet gaps fast."
+        },
+        "mechanism": {
+          "zh": [
+            "锁定 3–5 个标杆竞品，抓取其差评区、更新日志（Changelog）与定价页",
+            "让 AI 按“高频吐槽点 / 过度臃肿功能 / 隐形门槛”三个维度聚类",
+            "提炼出 1 个对手因为船大难掉头而不敢做的切入点"
+          ],
+          "en": [
+            "Pick 3–5 benchmark competitors and collect their 1-star reviews, changelogs, and pricing pages",
+            "Cluster findings into recurring complaints, bloated features, and hidden friction",
+            "Extract 1 wedge opportunity incumbents are too slow or conflicted to pursue"
+          ]
+        },
+        "deliverable": {
+          "zh": "一份《竞品软肋与切入点一页纸报告》",
+          "en": "A 1-page Competitor Weaknesses & Wedge Opportunity brief"
+        },
+        "current_stack": {
+          "zh": "联网搜索模型 + 结构化信息抽取模板",
+          "en": "Web-enabled LLM + structured extraction template"
+        },
+        "anti_pattern": {
+          "zh": "不要天天盯着竞品动态产生焦虑，也不要变成“对手加什么功能我就抄什么”。",
+          "en": "Don't obsess over daily competitor moves or fall into reactive feature-copying."
+        },
+        "combos": [
+          "ops-01",
+          "grw-02"
+        ],
+        "tags": {
+          "layer": "Thinking",
+          "form_factor": "Skill / Template",
+          "leverage": "Time"
+        }
+      },
+      {
+        "id": "cos-04",
+        "drawer": "chief-of-staff",
+        "title": {
+          "zh": "单向门决策矩阵",
+          "en": "One-Way Door Decision Matrix"
+        },
+        "metaphor": {
+          "zh": "小事秒拍板，大事慢三拍",
+          "en": "Move fast on reversible calls; slow down on irreversible ones"
+        },
+        "trigger": {
+          "zh": "当你在技术选型、定价、合作或域名等决定上反复纠结，白白耗掉好几天时。",
+          "en": "When you're paralyzed for days over a tech stack, pricing, or partnership choice."
+        },
+        "mechanism": {
+          "zh": [
+            "判定该决定属于“双向门”（错了 48 小时内可低成本撤回）还是“单向门”（不可逆）",
+            "双向门直接设 15 分钟倒计时拍板，禁止继续调研",
+            "单向门则列出“最坏结果 + 止损底线 + 必须满足的 3 个前提条件”后再做决定"
+          ],
+          "en": [
+            "Classify the call as a Two-Way Door (reversible within 48h) or One-Way Door (irreversible)",
+            "For Two-Way Doors, set a 15-minute timer, decide, and ban further research",
+            "For One-Way Doors, define the worst-case floor, stop-loss line, and 3 non-negotiable criteria"
+          ]
+        },
+        "deliverable": {
+          "zh": "一份带止损线与复盘日期的《决策备忘录》",
+          "en": "A Decision Memo with stop-loss criteria and a scheduled review date"
+        },
+        "current_stack": {
+          "zh": "极简决策判定 Prompt + 本地决策日志（Markdown）",
+          "en": "Decision triage Prompt + local Markdown decision log"
+        },
+        "anti_pattern": {
+          "zh": "不要把本可以随时改掉的小事（如按钮颜色、初期文案）当成单向门来开会研究。",
+          "en": "Don't treat easily reversible tweaks (like copy or colors) as high-stakes One-Way Doors."
+        },
+        "combos": [
+          "cos-01",
+          "leg-02"
+        ],
+        "tags": {
+          "layer": "Thinking",
+          "form_factor": "Prompt / Protocol",
+          "leverage": "Risk"
+        }
+      }
+    ],
+    "product-architect": [
+      {
+        "id": "prd-01",
+        "drawer": "product-architect",
+        "title": {
+          "zh": "MVP 极简裁剪刀",
+          "en": "MVP Ruthless Trimmer"
+        },
+        "metaphor": {
+          "zh": "把三个月的宏大蓝图，砍成 48 小时能上线的核心切片",
+          "en": "Slicing a 3-month roadmap down to a 48-hour shippable core"
+        },
+        "trigger": {
+          "zh": "当你越想功能越多，登录、权限、后台、社区全想一起做，导致项目迟迟无法上线时。",
+          "en": "When feature creep hits—auth, admin panels, communities—and your project never ships."
+        },
+        "mechanism": {
+          "zh": [
+            "写出你脑中完整的理想功能清单",
+            "强制划出一条红线：删掉它，核心价值是否依然成立？（能删的全进 V2 冰柜）",
+            "把留下的最小闭环压成 1 条主路径，确保 1 个周末内能跑通交付"
+          ],
+          "en": [
+            "Dump your entire dream feature list onto paper",
+            "Apply one brutal filter: if we cut this, does the core value survive? Freeze everything else for V2",
+            "Compress the survivors into a single happy path shippable in one weekend"
+          ]
+        },
+        "deliverable": {
+          "zh": "一份《V1 必做清单（限 3 项）》与一份《V2 冰柜清单》",
+          "en": "A V1 Must-Ship list (max 3 items) and a V2 Icebox list"
+        },
+        "current_stack": {
+          "zh": "需求裁剪对话协议 + Markdown Scope 文档",
+          "en": "Scope-cutting protocol + Markdown scope doc"
+        },
+        "anti_pattern": {
+          "zh": "裁剪的是“锦上添花的功能”，不是“核心体验的完成度”；别把 MVP 做成无法使用的残次品。",
+          "en": "Cut nice-to-have scope, not core reliability—an MVP still has to be genuinely usable."
+        },
+        "combos": [
+          "eng-01",
+          "prd-04"
+        ],
+        "tags": {
+          "layer": "Building",
+          "form_factor": "Prompt / Protocol",
+          "leverage": "Time"
+        }
+      },
+      {
+        "id": "prd-02",
+        "drawer": "product-architect",
+        "title": {
+          "zh": "Taxonomy 分类骨架仪",
+          "en": "Taxonomy Skeleton Builder"
+        },
+        "metaphor": {
+          "zh": "先搭好不重不漏的抽屉，再往里装东西",
+          "en": "Building mutually exclusive drawers before filling them"
+        },
+        "trigger": {
+          "zh": "当你要做知识库、卡片库、产品目录或数据结构，但分类总是互相打架、越加越乱时。",
+          "en": "When building a library, directory, or data model where categories keep overlapping and breaking."
+        },
+        "mechanism": {
+          "zh": [
+            "分离“前台心智模型（用户怎么找）”与“后台正交标签（系统怎么筛）”",
+            "对相邻分类强制写出“裁决线”（明确某类灰色内容归 A 不归 B）",
+            "锁定受控词表（Enum）与单条记录 Schema，先跑通 4 条样板数据再扩量"
+          ],
+          "en": [
+            "Separate front-end mental models (how users browse) from back-end orthogonal tags (how systems filter)",
+            "Write explicit boundary rules for every pair of adjacent categories",
+            "Lock controlled vocabularies (enums) and record schemas, then stress-test with 4 sample records"
+          ]
+        },
+        "deliverable": {
+          "zh": "一份含分类边界裁决线与 JSON Schema 的《DESIGN.md》",
+          "en": "A DESIGN.md spec with boundary rules and a locked JSON Schema"
+        },
+        "current_stack": {
+          "zh": "多轮架构对齐对话 + JSON Schema / 校验脚本",
+          "en": "Iterative design-first chat + JSON Schema / validation script"
+        },
+        "anti_pattern": {
+          "zh": "不要在只有 5 条零散笔记时过度设计三层嵌套分类，体量上来再抽象。",
+          "en": "Don't over-engineer 3-level taxonomies for 5 loose notes; wait until volume demands structure."
+        },
+        "combos": [
+          "eng-03",
+          "prd-03"
+        ],
+        "tags": {
+          "layer": "Memory",
+          "form_factor": "Skill / Template",
+          "leverage": "Quality"
+        }
+      },
+      {
+        "id": "prd-03",
+        "drawer": "product-architect",
+        "title": {
+          "zh": "边缘案例审计清单",
+          "en": "Edge-Case Audit Checklist"
+        },
+        "metaphor": {
+          "zh": "上线前先雇一群“手欠用户”把产品摔一遍",
+          "en": "Stress-testing your product against chaotic real-world inputs before launch"
+        },
+        "trigger": {
+          "zh": "当你的功能在自己电脑上跑得很完美，准备发给真实用户前的最后 1 小时。",
+          "en": "Right before shipping, when everything works smoothly on your machine under ideal conditions."
+        },
+        "mechanism": {
+          "zh": [
+            "按 4 类极端态逐一拷问：空状态（0 数据）、超长文本/双语换行、弱网/断网、非法或重复点击",
+            "检查移动端窄屏与深浅色模式下的遮挡与溢出",
+            "把高发致命边缘态补上优雅降级提示，低频项记录在案"
+          ],
+          "en": [
+            "Audit 4 extreme states: empty data, ultra-long/bilingual text overflow, offline/slow network, and duplicate/invalid inputs",
+            "Check narrow mobile viewports and dark/light mode contrast",
+            "Add graceful fallbacks for high-impact edge cases and log the rest"
+          ]
+        },
+        "deliverable": {
+          "zh": "一份已勾选修复的《上线前边缘态通关表》",
+          "en": "A signed-off Pre-Launch Edge-Case Audit sheet"
+        },
+        "current_stack": {
+          "zh": "固定审计 Prompt + 浏览器设备模拟器",
+          "en": "Standard audit Prompt + browser DevTools device emulator"
+        },
+        "anti_pattern": {
+          "zh": "不要为了修复发生概率万分之一的极端 Bug 而无限推迟首次发布。",
+          "en": "Don't delay launch indefinitely chasing 0.01% theoretical edge cases."
+        },
+        "combos": [
+          "eng-03",
+          "des-01"
+        ],
+        "tags": {
+          "layer": "Building",
+          "form_factor": "Skill / Template",
+          "leverage": "Risk"
+        }
+      },
+      {
+        "id": "prd-04",
+        "drawer": "product-architect",
+        "title": {
+          "zh": "核心路径走查表",
+          "en": "First-30-Seconds Walkthrough"
+        },
+        "metaphor": {
+          "zh": "强迫自己失忆，以完全陌生人的眼睛看前 30 秒",
+          "en": "Simulating total amnesia to experience your product's first 30 seconds"
+        },
+        "trigger": {
+          "zh": "当你对自己的产品太熟悉，已经看不出新用户进来第一眼会卡在哪里时。",
+          "en": "When you're so close to your own product that you can't see where a newcomer gets lost."
+        },
+        "mechanism": {
+          "zh": [
+            "截下首屏到完成首次核心动作的 3–5 步连续截图",
+            "让 AI 扮演“毫无背景、只有 30 秒耐心的陌生访客”，逐屏说出困惑点",
+            "砍掉首次体验前的所有非必要弹窗、注册墙或术语解释"
+          ],
+          "en": [
+            "Capture 3–5 sequential screenshots from landing to the first 'aha' action",
+            "Have AI roleplay an impatient first-time visitor with zero context to call out every point of confusion",
+            "Remove any non-essential modals, sign-up walls, or jargon blocking that first action"
+          ]
+        },
+        "deliverable": {
+          "zh": "一份标注了 3 个最大流失摩擦点的《首屏体验改造单》",
+          "en": "A First-Run Friction Report highlighting the top 3 drop-off points"
+        },
+        "current_stack": {
+          "zh": "多模态视觉模型 + 连续截图走查",
+          "en": "Vision-capable LLM + sequential screenshot walkthrough"
+        },
+        "anti_pattern": {
+          "zh": "不要用“加一段更长的新手引导文字”来解决界面本身不直观的问题。",
+          "en": "Don't patch an unintuitive UI by slapping a longer onboarding tooltip on top of it."
+        },
+        "combos": [
+          "des-01",
+          "grw-02"
+        ],
+        "tags": {
+          "layer": "Building",
+          "form_factor": "Prompt / Protocol",
+          "leverage": "Quality"
+        }
+      }
+    ],
+    "engineer": [
+      {
+        "id": "eng-01",
+        "drawer": "engineer",
+        "title": {
+          "zh": "零依赖静态站脚手架",
+          "en": "Zero-Dependency Static Scaffold"
+        },
+        "metaphor": {
+          "zh": "甩掉构建工具包袱，原生三件套直接上线",
+          "en": "Ditching heavy bundlers to ship raw HTML, CSS, and JS"
+        },
+        "trigger": {
+          "zh": "当你只想快速上线一个工具站或展示库，却被 Webpack、npm 依赖冲突和服务器运维劝退时。",
+          "en": "When you just want to ship a lightweight web tool, but npm dependency hell and server ops slow you down."
+        },
+        "mechanism": {
+          "zh": [
+            "采用原生 HTML + CSS Variables + ES Modules，彻底跳过前端构建打包环节",
+            "数据层全部抽离为纯静态 JSON，通过原生 fetch 加载与前端过滤",
+            "直接托管至 GitHub Pages 或 Cloudflare Pages，实现零服务器账单与秒级全球分发"
+          ],
+          "en": [
+            "Use native HTML, CSS Variables, and ES Modules to eliminate build steps entirely",
+            "Decouple content into plain static JSON files loaded via native fetch",
+            "Deploy directly to GitHub Pages or Cloudflare Pages for zero server bills and instant global delivery"
+          ]
+        },
+        "deliverable": {
+          "zh": "一套零 npm 依赖、开箱即部署的静态站基础仓库模板",
+          "en": "A zero-dependency static site boilerplate ready for instant deployment"
+        },
+        "current_stack": {
+          "zh": "原生 HTML/CSS/JS + GitHub Pages + GitHub Actions",
+          "en": "Vanilla HTML/CSS/JS + GitHub Pages + GitHub Actions"
+        },
+        "anti_pattern": {
+          "zh": "不要强行用纯静态站去扛需要复杂后端鉴权、实时多人协作或高并发写入的业务。",
+          "en": "Don't force static architecture onto apps needing complex server-side auth or real-time multi-user writes."
+        },
+        "combos": [
+          "prd-01",
+          "eng-03"
+        ],
+        "tags": {
+          "layer": "Building",
+          "form_factor": "Local / Code",
+          "leverage": "Time"
+        }
+      },
+      {
+        "id": "eng-02",
+        "drawer": "engineer",
+        "title": {
+          "zh": "报错根因二分排查法",
+          "en": "Root-Cause Binary Debugger"
+        },
+        "metaphor": {
+          "zh": "别让 AI 瞎猜改代码，先用二分法把 Bug 逼进死角",
+          "en": "Cornering bugs via binary isolation instead of blind AI guessing"
+        },
+        "trigger": {
+          "zh": "当代码报错，你把整段报错甩给 AI 却越改越乱、陷入“修一个坏两个”的死循环时。",
+          "en": "When pasting stack traces into AI triggers a whack-a-mole loop that breaks more than it fixes."
+        },
+        "mechanism": {
+          "zh": [
+            "禁止 AI 直接重写代码，先要求它基于报错日志列出 3 个最可能的根因假设",
+            "在数据流中点插入最小化日志探针，用二分法一刀切掉一半嫌疑范围",
+            "拿到实测输出锁定唯一根因后，再执行最小侵入式修复并补充回归用例"
+          ],
+          "en": [
+            "Forbid the AI from rewriting code immediately; require 3 ranked root-cause hypotheses from the logs first",
+            "Insert a minimal probe halfway through the data flow to bisect the suspect surface in half",
+            "Once empirical output confirms the exact cause, apply the smallest surgical fix and add a regression check"
+          ]
+        },
+        "deliverable": {
+          "zh": "一份《根因定位记录》与最小侵入式代码补丁",
+          "en": "A confirmed root-cause diagnosis paired with a minimal surgical patch"
+        },
+        "current_stack": {
+          "zh": "Cursor / 代码模型 + 强制“先诊断后动刀”的 Debug 协议",
+          "en": "Cursor / coding LLM + strict diagnose-before-patching protocol"
+        },
+        "anti_pattern": {
+          "zh": "不要在还没复现稳定报错路径之前，就急着让 AI 大面积重构无关模块。",
+          "en": "Don't let AI refactor unrelated modules before you can reliably reproduce the failure."
+        },
+        "combos": [
+          "prd-03",
+          "eng-03"
+        ],
+        "tags": {
+          "layer": "Building",
+          "form_factor": "Prompt / Protocol",
+          "leverage": "Time"
+        }
+      },
+      {
+        "id": "eng-03",
+        "drawer": "engineer",
+        "title": {
+          "zh": "自动化校验 CI 门禁",
+          "en": "Automated CI Validation Gate"
+        },
+        "metaphor": {
+          "zh": "在上线前装一道冷酷的自动安检门",
+          "en": "An automated security checkpoint before anything hits production"
+        },
+        "trigger": {
+          "zh": "当你一个人维护几十上百条数据或代码文件，生怕手滑改错一个逗号或拼错 ID 导致线上白屏时。",
+          "en": "When maintaining growing data or code solo, fearing one typo or broken ID will crash production."
+        },
+        "mechanism": {
+          "zh": [
+            "用原生脚本（如 Node .mjs）写出核心不变量检查：JSON 语法、必填字段、ID 唯一性与引用完整性",
+            "在 GitHub Actions 配置 push 触发工作流，校验不通过直接阻断部署",
+            "每次线上踩过一个新坑，就往校验脚本里补一条对应的防复发规则"
+          ],
+          "en": [
+            "Write a zero-dependency script (e.g., Node .mjs) asserting core invariants: valid JSON, required fields, unique IDs, and referential integrity",
+            "Wire it into GitHub Actions on every push to block deployment upon any failure",
+            "Every time a new bug slips through, encode a permanent rule into the gate so it never recurs"
+          ]
+        },
+        "deliverable": {
+          "zh": "一套本地与云端双运行的校验脚本 + GitHub Actions 流水线文件",
+          "en": "A local/CI validation script paired with a GitHub Actions workflow YAML"
+        },
+        "current_stack": {
+          "zh": "Node.js 原生脚本 + GitHub Actions CI/CD",
+          "en": "Native Node.js script + GitHub Actions CI/CD"
+        },
+        "anti_pattern": {
+          "zh": "不要一开始就搭复杂的端到端测试集群，先守住“数据不坏、页面不挂”的 80/20 底线。",
+          "en": "Don't build a bloated E2E suite on day one; guard the 80/20 invariants that prevent total breakage first."
+        },
+        "combos": [
+          "prd-02",
+          "ops-03"
+        ],
+        "tags": {
+          "layer": "Automation",
+          "form_factor": "Local / Code",
+          "leverage": "Risk"
+        }
+      },
+      {
+        "id": "eng-04",
+        "drawer": "engineer",
+        "title": {
+          "zh": "本地优先隐私架构模版",
+          "en": "Local-First Privacy Architecture"
+        },
+        "metaphor": {
+          "zh": "敏感数据锁死在自己硬盘里，绝不上传云端",
+          "en": "Locking sensitive data on local hardware, completely off the cloud"
+        },
+        "trigger": {
+          "zh": "当你处理日记、财务账单、医疗记录或未公开商业源码等高度敏感内容，不放心喂给云端 API 时。",
+          "en": "When processing diaries, financials, medical records, or private IP that you refuse to upload to cloud APIs."
+        },
+        "mechanism": {
+          "zh": [
+            "强制数据存储与索引完全留在本地文件系统（SQLite / Markdown / IndexedDB）",
+            "接入端侧小模型（如 Ollama / WebGPU）处理脱敏、摘要与检索，物理断网亦可运行",
+            "若确需调用云端大模型，先经本地脚本完成实体脱敏（替换人名、金额、账号）再出网"
+          ],
+          "en": [
+            "Keep all storage and indexing strictly on the local filesystem (SQLite, Markdown, or IndexedDB)",
+            "Run on-device small models (Ollama / WebGPU) for offline summarization and retrieval",
+            "If cloud reasoning is strictly required, pass text through a local PII-redaction script before sending"
+          ]
+        },
+        "deliverable": {
+          "zh": "一份《离线隐私架构方案》与本地脱敏预处理脚本",
+          "en": "An offline-first architecture blueprint plus a local PII-redaction script"
+        },
+        "current_stack": {
+          "zh": "Ollama / 本地小模型 + 浏览器 IndexedDB / 本地 CLI",
+          "en": "Ollama / on-device SLM + browser IndexedDB or local CLI"
+        },
+        "anti_pattern": {
+          "zh": "不要拿端侧小模型去硬扛超长上下文复杂推理，合理拆分“本地脱敏/检索 + 云端重推理”的边界。",
+          "en": "Don't force tiny local models into heavy multi-step reasoning; split local privacy from cloud compute cleanly."
+        },
+        "combos": [
+          "leg-03",
+          "ops-02"
+        ],
+        "tags": {
+          "layer": "Building",
+          "form_factor": "Local / Code",
+          "leverage": "Risk"
+        }
+      }
+    ],
+    "design-creative": [
+      {
+        "id": "des-01",
+        "drawer": "design-creative",
+        "title": {
+          "zh": "截图级 UI 毒舌诊断器",
+          "en": "Screenshot UI Brutal Critic"
+        },
+        "metaphor": {
+          "zh": "请一位审美极高的设计总监盯着你的截图挑刺",
+          "en": "A ruthless design director tearing apart your UI screenshots"
+        },
+        "trigger": {
+          "zh": "当你自己写完前端页面，总觉得“哪里土土的、像程序员写的”，却说不出具体该改哪几个像素时。",
+          "en": "When your hand-coded UI feels amateurish, but you can't pinpoint which pixels or spacing rules are off."
+        },
+        "mechanism": {
+          "zh": [
+            "截取完整首屏与移动端窄屏两张图，喂给多模态模型",
+            "强制按“视觉层级、留白呼吸感、对比度、对齐精度”4 个维度只挑毛病、禁止夸奖",
+            "要求每一条批评必须附带具体的 CSS 修改数值（如字号、行高、padding、色值）"
+          ],
+          "en": [
+            "Feed full desktop and mobile viewport screenshots into a vision-capable model",
+            "Enforce zero-praise critique across 4 axes: visual hierarchy, whitespace, contrast, and alignment",
+            "Require every critique to include exact CSS fixes (font sizes, line-heights, padding, hex codes)"
+          ]
+        },
+        "deliverable": {
+          "zh": "一份带具体 CSS 像素/色值修改建议的《界面整容清单》",
+          "en": "A UI Facelift Checklist with exact CSS property adjustments"
+        },
+        "current_stack": {
+          "zh": "多模态视觉模型 + 固定 UI 评审 System Prompt",
+          "en": "Vision LLM + strict UI critique System Prompt"
+        },
+        "anti_pattern": {
+          "zh": "不要一次把 20 条建议全改完；每次只改影响最大的前 3 条（通常是留白和层级），再重新截图复查。",
+          "en": "Don't apply 20 tweaks at once; fix the top 3 hierarchy/spacing issues first, then re-evaluate."
+        },
+        "combos": [
+          "des-02",
+          "prd-04"
+        ],
+        "tags": {
+          "layer": "Building",
+          "form_factor": "Prompt / Protocol",
+          "leverage": "Quality"
+        }
+      },
+      {
+        "id": "des-02",
+        "drawer": "design-creative",
+        "title": {
+          "zh": "视觉风格宪法（Design Token）",
+          "en": "Visual Constitution (Design Tokens)"
+        },
+        "metaphor": {
+          "zh": "把色板、字体和间距写进宪法，告别随手乱配色",
+          "en": "Codifying colors, type, and spacing so you never eyeball styles again"
+        },
+        "trigger": {
+          "zh": "当你的页面越写越多，按钮颜色、圆角大小和字体层级开始各自为战、整体显得杂乱时。",
+          "en": "When growing pages accumulate inconsistent grays, random border-radii, and mismatched typography."
+        },
+        "mechanism": {
+          "zh": [
+            "锁定极简色板：1 个主背景、1 个卡片表面、2 级文字灰度、1 个高识别度强调色",
+            "锁定 4px/8px 基准间距阶梯与 4 级字号标尺（标题、副标、正文、铭牌）",
+            "将上述规则全部封装为 CSS `:root` 变量文件，后续开发严禁写死魔法数值"
+          ],
+          "en": [
+            "Lock a strict palette: 1 canvas background, 1 surface, 2 text grays, and 1 signature accent",
+            "Lock a 4px/8px spacing scale and a 4-step typography ramp (display, heading, body, meta)",
+            "Export everything into a CSS :root tokens file and ban hardcoded magic values thereafter"
+          ]
+        },
+        "deliverable": {
+          "zh": "一份可直接引用的 `tokens.css` 视觉宪法文件",
+          "en": "A drop-in tokens.css file governing the entire visual system"
+        },
+        "current_stack": {
+          "zh": "原生 CSS Custom Properties + AI 配色对比度校验",
+          "en": "Native CSS Custom Properties + AI contrast-ratio checker"
+        },
+        "anti_pattern": {
+          "zh": "不要为个人项目照搬大厂上百个 Token 的设计系统，15 个核心变量足够撑起极高质感。",
+          "en": "Don't copy enterprise 200-token design systems; 15 disciplined variables deliver better craft solo."
+        },
+        "combos": [
+          "des-04",
+          "eng-01"
+        ],
+        "tags": {
+          "layer": "Memory",
+          "form_factor": "Skill / Template",
+          "leverage": "Quality"
+        }
+      },
+      {
+        "id": "des-03",
+        "drawer": "design-creative",
+        "title": {
+          "zh": "多模态素材风格锁",
+          "en": "Multimodal Style Lock"
+        },
+        "metaphor": {
+          "zh": "给 AI 画师和作曲家发同一本美术设定集",
+          "en": "Handing your AI illustrators and composers the exact same art bible"
+        },
+        "trigger": {
+          "zh": "当你用 AI 生成配图、封面或音视频素材时，每张单看不错，拼在一起却画风割裂像拼夕夕时。",
+          "en": "When AI-generated illustrations, covers, or media look fine alone but clash wildly when placed together."
+        },
+        "mechanism": {
+          "zh": [
+            "确定 1 种极具辨识度的统一美学锚点（如特定插画流派、纸张质感、固定主色调）",
+            "把风格描述词拆成“不可变底座（画风/光线/材质）”与“可变槽位（主体/动作）”",
+            "每次生成新素材只替换可变槽位，并用参考图（Style Reference）锁死一致性"
+          ],
+          "en": [
+            "Choose one unmistakable aesthetic anchor (specific illustration movement, paper grain, fixed palette)",
+            "Split prompts into an immutable Style Base (medium, lighting, texture) and a swappable Subject Slot",
+            "Swap only the subject per asset and enforce consistency with reference images"
+          ]
+        },
+        "deliverable": {
+          "zh": "一套可复用的《视觉/音视频风格锁定 Prompt 模板》与参考图包",
+          "en": "A reusable Style-Lock Prompt template paired with a curated reference pack"
+        },
+        "current_stack": {
+          "zh": "图像/音乐生成工具 + 固定 Style Prompt 片段库",
+          "en": "Image/audio generation tools + reusable Style Prompt library"
+        },
+        "anti_pattern": {
+          "zh": "不要往风格底座里堆砌互相冲突的修饰词（如同时写“极简扁平”和“超写实 8K 虚幻引擎”）。",
+          "en": "Don't stuff conflicting keywords into the base (e.g., 'minimalist flat' alongside 'photorealistic 8K')."
+        },
+        "combos": [
+          "des-02",
+          "grw-01"
+        ],
+        "tags": {
+          "layer": "Memory",
+          "form_factor": "Skill / Template",
+          "leverage": "Quality"
+        }
+      },
+      {
+        "id": "des-04",
+        "drawer": "design-creative",
+        "title": {
+          "zh": "高审美界面逆向拆解器",
+          "en": "UI Aesthetic Reverse-Engineer"
+        },
+        "metaphor": {
+          "zh": "把神仙网站的布局与留白规律，翻译成自己的 CSS",
+          "en": "Translating world-class site layouts and rhythm into your own CSS"
+        },
+        "trigger": {
+          "zh": "当你看到一个极度克制高级的网站，想学它的设计语言，却不知从何下手转化为代码时。",
+          "en": "When you spot a stunning website and want to absorb its spatial rhythm into code without copying it blindly."
+        },
+        "mechanism": {
+          "zh": [
+            "截取参考网站的 2–3 个关键区块，要求 AI 剥离具体业务内容，只提炼“栅格比例、留白节奏、边框与阴影克制度”",
+            "将其抽象为 5 条可迁移的布局原则（而非照抄像素）",
+            "直接生成基于该原则的极简 HTML/CSS 骨架 Demo 供自己二次改造"
+          ],
+          "en": [
+            "Feed 2–3 key sections of a reference site and ask AI to ignore content, extracting only grid ratios, whitespace rhythm, and border/shadow restraint",
+            "Distill those observations into 5 transferable layout rules rather than pixel-copying",
+            "Generate a clean HTML/CSS skeleton applying those rules to your own content"
+          ]
+        },
+        "deliverable": {
+          "zh": "一份《参考界面设计语言拆解单》+ 可运行的极简布局 Demo",
+          "en": "A Design-Language Breakdown sheet plus a runnable minimalist layout demo"
+        },
+        "current_stack": {
+          "zh": "多模态模型 + 浏览器检查器（DevTools）",
+          "en": "Vision LLM + browser DevTools"
+        },
+        "anti_pattern": {
+          "zh": "拆解的是“骨架规律与克制感”，绝不是直接扒别人的品牌色和文案做山寨克隆。",
+          "en": "Extract structural rhythm and restraint—never clone another brand's exact palette or copy."
+        },
+        "combos": [
+          "des-02",
+          "eng-01"
+        ],
+        "tags": {
+          "layer": "Building",
+          "form_factor": "Prompt / Protocol",
+          "leverage": "Quality"
+        }
+      }
+    ],
+    "editorial": [
+      {
+        "id": "edt-01",
+        "drawer": "editorial",
+        "title": {
+          "zh": "个人语调校准器",
+          "en": "Personal Tone-of-Voice Calibrator"
+        },
+        "metaphor": {
+          "zh": "一键洗掉“总而言之”的廉价 AI 味",
+          "en": "Scrubbing generic AI-speak out to preserve your real voice"
+        },
+        "trigger": {
+          "zh": "当你让 AI 辅助写文章或产品文案，读起来却满屏“不仅如此、值得注意的是、赋能”，完全不像人话时。",
+          "en": "When AI-assisted drafts read like corporate fluff ('delve', 'moreover', 'in today's fast-paced world') instead of you."
+        },
+        "mechanism": {
+          "zh": [
+            "喂入 3 篇你最满意的亲笔旧作，让 AI 逆向提炼你的句式长短、用词偏好与情绪克制度",
+            "建立一份《禁用词黑名单》（拉黑所有翻译腔、播音腔和空洞形容词）",
+            "每次成稿后过一遍校准器，强制删掉铺垫废话，保留具象细节与个人判断"
+          ],
+          "en": [
+            "Feed 3 of your best human-written pieces so AI extracts your sentence cadence, vocabulary, and restraint",
+            "Maintain an explicit Banned-Words Blacklist killing filler transitions and hollow adjectives",
+            "Run every draft through the calibrator to cut throat-clearing intros and sharpen concrete specifics"
+          ]
+        },
+        "deliverable": {
+          "zh": "一份可常驻上下文的《个人写作风格宪法（Tone Guide）》",
+          "en": "A persistent Personal Tone-of-Voice Guide ready to inject into any chat"
+        },
+        "current_stack": {
+          "zh": "个人风格 Prompt 文件 + 禁用词检查清单",
+          "en": "Personal style Prompt file + banned-word checklist"
+        },
+        "anti_pattern": {
+          "zh": "不要试图用风格指南掩盖“本来就没想清楚观点”的硬伤；没干货的文章洗完还是空的。",
+          "en": "Style calibration can't rescue an empty argument; fix the thinking before polishing the voice."
+        },
+        "combos": [
+          "edt-02",
+          "edt-04"
+        ],
+        "tags": {
+          "layer": "Memory",
+          "form_factor": "Skill / Template",
+          "leverage": "Quality"
+        }
+      },
+      {
+        "id": "edt-02",
+        "drawer": "editorial",
+        "title": {
+          "zh": "长文逻辑骨架师",
+          "en": "Long-Form Logic Architect"
+        },
+        "metaphor": {
+          "zh": "先焊死论证钢筋，再浇筑文字水泥",
+          "en": "Welding the argument's steel frame before pouring any prose"
+        },
+        "trigger": {
+          "zh": "当你脑子里有一堆零散洞察想写成深度长文，但动笔就跑偏、写到一半逻辑散架时。",
+          "en": "When you have sharp scattered insights for a deep essay, but the draft rambles and loses structure halfway."
+        },
+        "mechanism": {
+          "zh": [
+            "把所有碎片想法语音转文字或无序倒出，不追求通顺",
+            "让 AI 帮你找出 1 个核心论点（Thesis），并将碎片重排为“反常识钩子 → 痛点拆解 → 底层机制 → 落地解法”的论证链",
+            "检查相邻段落之间是否存在逻辑断层或循环论证，确认骨架无误后再展开写正文"
+          ],
+          "en": [
+            "Brain-dump all raw fragments via voice or bullet notes without worrying about flow",
+            "Extract 1 central thesis and arrange fragments into a tight arc: hook, tension, mechanism, and resolution",
+            "Audit transitions between sections for logical leaps before drafting a single full paragraph"
+          ]
+        },
+        "deliverable": {
+          "zh": "一份带逐段核心句与论据锚点的《长文逻辑大纲》",
+          "en": "A structural outline with topic sentences and evidence anchors for every section"
+        },
+        "current_stack": {
+          "zh": "语音速记 + 逻辑大纲构建 Prompt",
+          "en": "Voice-to-text capture + outline-architect Prompt"
+        },
+        "anti_pattern": {
+          "zh": "不要直接让 AI 根据大纲一键生成 3000 字全文；骨架可以合搭，关键观点和案例必须自己写。",
+          "en": "Don't let AI auto-expand the outline into 3,000 words; co-build the skeleton, write the core insights yourself."
+        },
+        "combos": [
+          "edt-01",
+          "grw-01"
+        ],
+        "tags": {
+          "layer": "Thinking",
+          "form_factor": "Prompt / Protocol",
+          "leverage": "Quality"
+        }
+      },
+      {
+        "id": "edt-03",
+        "drawer": "editorial",
+        "title": {
+          "zh": "双语地道本地化器",
+          "en": "Bilingual Native Localizer"
+        },
+        "metaphor": {
+          "zh": "不是逐字翻译，而是用另一种语言重新表达一遍",
+          "en": "Re-expressing ideas natively instead of word-for-word translation"
+        },
+        "trigger": {
+          "zh": "当你要做中英双语产品、文档或卡片库，机翻出来的英文僵硬别扭、丢失原本的犀利感时。",
+          "en": "When building bilingual products or docs where literal translation kills the punch and reads awkwardly."
+        },
+        "mechanism": {
+          "zh": [
+            "先要求 AI 用一句话提炼原句的“真实意图与语气色彩”（如冷峻、幽默、克制）",
+            "严禁逐词直译，要求直接按目标语言的母语习惯重写 2 个版本（标准版 vs. 极简犀利版）",
+            "检查产品术语与 UI 标签在全站范围内的译名一致性"
+          ],
+          "en": [
+            "First have AI state the source text's core intent and tonal register (dry, witty, crisp)",
+            "Ban literal translation; generate 2 native rewrites (standard vs. punchy/minimalist)",
+            "Cross-check domain terms and UI labels for strict consistency across the entire project"
+          ]
+        },
+        "deliverable": {
+          "zh": "一组无翻译腔的双语对照文案与《项目术语表》",
+          "en": "Native-grade bilingual copy paired with a consistent Project Glossary"
+        },
+        "current_stack": {
+          "zh": "双语本地化 Prompt + 项目术语对照表（JSON/Markdown）",
+          "en": "Localization Prompt + project glossary (JSON/Markdown)"
+        },
+        "anti_pattern": {
+          "zh": "不要在 UI 按钮或短卡片上追求字数完全对称；英文通常更占宽度，要优先保证自然简洁。",
+          "en": "Don't force equal character counts on UI labels; prioritize native brevity and check layout overflow."
+        },
+        "combos": [
+          "edt-01",
+          "prd-03"
+        ],
+        "tags": {
+          "layer": "Building",
+          "form_factor": "Prompt / Protocol",
+          "leverage": "Time"
+        }
+      },
+      {
+        "id": "edt-04",
+        "drawer": "editorial",
+        "title": {
+          "zh": "金句与隐喻提炼炉",
+          "en": "Metaphor & Hook Distiller"
+        },
+        "metaphor": {
+          "zh": "把干瘪的专业术语，压成一眼记住的具象画面",
+          "en": "Compressing dry jargon into vivid, unforgettable mental hooks"
+        },
+        "trigger": {
+          "zh": "当你写完一个好产品或好观点，却发现标题平淡无奇、一句话说不清它到底牛在哪时。",
+          "en": "When you've built something great, but your headline is bland and takes three paragraphs to explain."
+        },
+        "mechanism": {
+          "zh": [
+            "输入核心机制或产品功能，找出读者最熟悉的 3 个日常物理隐喻（如工具箱、安检门、手术刀）",
+            "强制用“反差对比”或“动作画面”重写成 15 字以内的短句（例如：从 X 变成 Y）",
+            "做“陌生人 3 秒盲测”：删掉所有行业黑话，看外行能不能瞬间听懂"
+          ],
+          "en": [
+            "Map your abstract feature onto 3 familiar physical metaphors (toolbox, circuit breaker, scalpel)",
+            "Rewrite into a crisp sub-10-word hook using sharp contrast or concrete action",
+            "Run a 3-second outsider test: strip all jargon until a non-expert gets it instantly"
+          ]
+        },
+        "deliverable": {
+          "zh": "5 个备选高传播度 Slogan / 隐喻钩子",
+          "en": "5 sharp candidate slogans or metaphor hooks"
+        },
+        "current_stack": {
+          "zh": "隐喻联想 Prompt + 个人金句灵感库",
+          "en": "Metaphor-mapping Prompt + personal swipe file"
+        },
+        "anti_pattern": {
+          "zh": "不要为了押韵或抖机灵而牺牲准确性；好的隐喻是降低理解成本，不是制造歧义。",
+          "en": "Never sacrifice accuracy for clever wordplay; a good metaphor clarifies, not confuses."
+        },
+        "combos": [
+          "grw-02",
+          "grw-01"
+        ],
+        "tags": {
+          "layer": "Distribution",
+          "form_factor": "Prompt / Protocol",
+          "leverage": "Quality"
+        }
+      }
+    ],
+    "growth-commercial": [
+      {
+        "id": "grw-01",
+        "drawer": "growth-commercial",
+        "title": {
+          "zh": "一鱼多吃分发矩阵",
+          "en": "Content Atomizer Matrix"
+        },
+        "metaphor": {
+          "zh": "写透一篇母本，自动拆出全平台弹药",
+          "en": "Turning one deep piece into native ammo for every channel"
+        },
+        "trigger": {
+          "zh": "当你花三天写出一篇深度长文或做完一个项目，发完一次就沉底，没精力再挨个平台重写时。",
+          "en": "When you spend days on a deep essay or launch, post it once, and lack the energy to rewrite it for other platforms."
+        },
+        "mechanism": {
+          "zh": [
+            "锁定 1 份高密度母本（长文、设计文档或项目复盘）作为唯一信源",
+            "按目标平台的原生语境拆解：长推文串（钩子+反转）、图文卡片（3 条金句）、极简社区帖（纯干货无推广味）",
+            "为每个渠道保留独立观察标签，1 周后只保留转化最高的前 2 个渠道持续投入"
+          ],
+          "en": [
+            "Anchor on 1 high-density source asset (essay, design doc, or postmortem) as the single source of truth",
+            "Atomize natively per channel: a sharp thread (hook + twist), visual carousel (3 takeaways), and a zero-fluff community post",
+            "Track response per channel and cut everything except the top 2 performers after a week"
+          ]
+        },
+        "deliverable": {
+          "zh": "一套适配 3–4 个不同平台的原生分发文案包",
+          "en": "A native multi-channel distribution pack ready for 3–4 platforms"
+        },
+        "current_stack": {
+          "zh": "多平台改写 Skill + 个人语调校准器（edt-01）",
+          "en": "Multi-channel repurposing Skill + Tone-of-Voice Calibrator (edt-01)"
+        },
+        "anti_pattern": {
+          "zh": "不要把同一段文字直接复制粘贴到所有平台；不同社区的语境和反感点完全不同。",
+          "en": "Never copy-paste the exact same block everywhere; each community has distinct norms and triggers."
+        },
+        "combos": [
+          "edt-02",
+          "edt-01"
+        ],
+        "tags": {
+          "layer": "Distribution",
+          "form_factor": "Skill / Template",
+          "leverage": "Time"
+        }
+      },
+      {
+        "id": "grw-02",
+        "drawer": "growth-commercial",
+        "title": {
+          "zh": "着陆页 5 秒转化诊断",
+          "en": "5-Second Landing Page Audit"
+        },
+        "metaphor": {
+          "zh": "用陌生访客的 5 秒耐心，拷问首屏说清了没",
+          "en": "Testing if a cold visitor gets your value in 5 seconds flat"
+        },
+        "trigger": {
+          "zh": "当你把产品链接发出去，有不少人点进来，但几乎没人试用、收藏或留资时。",
+          "en": "When people click your launch link, bounce immediately, and nobody tries or bookmarks the product."
+        },
+        "mechanism": {
+          "zh": [
+            "只截取首屏（不滚动）喂给 AI，强制回答 3 个问题：这是什么、给谁用、我现在该点哪里",
+            "删掉所有宏大叙事与自嗨口号（如“重新定义下一代……”），换成具象痛点与结果",
+            "把核心行动按钮（CTA）和真实交互预览提到首屏视觉中心"
+          ],
+          "en": [
+            "Feed only the above-the-fold screenshot to AI and force 3 answers: what is it, who is it for, what do I click next?",
+            "Delete grandiloquent slogans ('redefining the next generation of...') in favor of concrete outcomes",
+            "Move the primary CTA and a live interactive preview directly into the first viewport"
+          ]
+        },
+        "deliverable": {
+          "zh": "一份《首屏 5 秒诊断报告》及 3 组可直接替换的主副标题",
+          "en": "A 5-Second Above-the-Fold Audit with 3 ready-to-swap hero headline options"
+        },
+        "current_stack": {
+          "zh": "多模态视觉模型 + 首屏转化检查 Prompt",
+          "en": "Vision LLM + landing-page conversion audit Prompt"
+        },
+        "anti_pattern": {
+          "zh": "不要在首屏堆砌 5 个同样显眼的按钮；一次只引导访客做 1 个最关键的动作。",
+          "en": "Don't cram 5 competing buttons above the fold; guide visitors toward one unmistakable action."
+        },
+        "combos": [
+          "edt-04",
+          "des-01"
+        ],
+        "tags": {
+          "layer": "Distribution",
+          "form_factor": "Prompt / Protocol",
+          "leverage": "Quality"
+        }
+      },
+      {
+        "id": "grw-03",
+        "drawer": "growth-commercial",
+        "title": {
+          "zh": "GEO / SEO 语义优化器",
+          "en": "GEO & SEO Semantic Optimizer"
+        },
+        "metaphor": {
+          "zh": "同时讨好传统搜索引擎与 AI 问答的引用偏好",
+          "en": "Structuring pages so both search engines and AI answers cite you"
+        },
+        "trigger": {
+          "zh": "当你做出了高质量的开源工具、文档或专栏，却在搜索和大模型问答里完全搜不到自己时。",
+          "en": "When you publish a solid tool or guide, yet remain invisible in both Google and AI search answers."
+        },
+        "mechanism": {
+          "zh": [
+            "为每个核心页面补齐清晰的语义标签（Title、Description、Open Graph、JSON-LD 结构化数据）",
+            "在正文开头用 2–3 句话给出“可直接被 AI 摘录引用”的清晰定义与核心对比表",
+            "用真实用户会搜的自然语言问题作为小标题，而非晦涩的内部代号"
+          ],
+          "en": [
+            "Add clean semantic metadata to every page (Title, Description, Open Graph, and JSON-LD schema)",
+            "Lead with a crisp 2-sentence definition and structured comparison tables that AI engines can cite verbatim",
+            "Use natural questions real users actually ask as headings instead of internal jargon"
+          ]
+        },
+        "deliverable": {
+          "zh": "一套可直接嵌入 `<head>` 的元数据模板 + 页面语义结构优化清单",
+          "en": "A drop-in <head> metadata template plus a semantic structure checklist"
+        },
+        "current_stack": {
+          "zh": "静态 HTML Meta 模板 + 语义优化 Prompt",
+          "en": "Static HTML Meta template + semantic audit Prompt"
+        },
+        "anti_pattern": {
+          "zh": "不要堆砌关键词写垃圾内容；在大模型检索时代，信息密度与原创结构比词频重要得多。",
+          "en": "Never stuff keywords into thin fluff; in AI search, original structure and density beat keyword spam."
+        },
+        "combos": [
+          "eng-01",
+          "grw-02"
+        ],
+        "tags": {
+          "layer": "Distribution",
+          "form_factor": "Skill / Template",
+          "leverage": "Quality"
+        }
+      },
+      {
+        "id": "grw-04",
+        "drawer": "growth-commercial",
+        "title": {
+          "zh": "冷启动种子用户话术库",
+          "en": "Cold-Start Outreach Playbook"
+        },
+        "metaphor": {
+          "zh": "不群发、不卑微，精准敲开前 20 个用户的门",
+          "en": "Knocking on your first 20 users' doors without sounding like spam"
+        },
+        "trigger": {
+          "zh": "当你的 V1 产品刚上线，需要找到前 20 个真实种子用户收集反馈，但不好意思开口推广时。",
+          "en": "When your V1 just shipped and you need 20 real early users for feedback without feeling pushy."
+        },
+        "mechanism": {
+          "zh": [
+            "在社区/评论区锁定正在吐槽该痛点的具体人，绝不盲目群发",
+            "采用“具体观察 + 免费解法 + 零压力退路”三段式短消息（控制在 100 字以内）",
+            "把每一次回复里的真实措辞记录下来，直接反哺成你的着陆页文案"
+          ],
+          "en": [
+            "Find specific people actively complaining about the exact problem in communities—never blast cold lists",
+            "Send a sub-80-word note: specific observation + free working fix + zero-pressure opt-out",
+            "Log the exact words prospects use in replies and recycle them straight into your landing page copy"
+          ]
+        },
+        "deliverable": {
+          "zh": "3 套不同场景（评论区、私信、老友内测）的极简触达话术模板",
+          "en": "3 concise outreach templates for threads, DMs, and warm beta invites"
+        },
+        "current_stack": {
+          "zh": "个性化触达 Prompt + 简易种子用户反馈表（Markdown）",
+          "en": "Personalized outreach Prompt + lightweight Markdown feedback log"
+        },
+        "anti_pattern": {
+          "zh": "不要一上来就发长达三屏的产品介绍和收费链接；先提供价值、建立对话，再谈转化。",
+          "en": "Don't lead with a 3-paragraph pitch and a paywall; deliver value and start a conversation first."
+        },
+        "combos": [
+          "grw-02",
+          "prd-04"
+        ],
+        "tags": {
+          "layer": "Distribution",
+          "form_factor": "Skill / Template",
+          "leverage": "Time"
+        }
+      }
+    ],
+    "ops-automation": [
+      {
+        "id": "ops-01",
+        "drawer": "ops-automation",
+        "title": {
+          "zh": "定时情报简报 Agent",
+          "en": "Scheduled Intel Briefing Agent"
+        },
+        "metaphor": {
+          "zh": "每天花 3 分钟看过滤后的情报，告别刷信息流",
+          "en": "A 3-minute filtered daily brief that replaces doomscrolling"
+        },
+        "trigger": {
+          "zh": "当你每天在 X、GitHub、Hacker News 和公众号之间反复刷屏，耗掉两小时却只记住一堆焦虑时。",
+          "en": "When bouncing between feeds, repos, and newsletters burns two hours a day and leaves only noise."
+        },
+        "mechanism": {
+          "zh": [
+            "锁定不超过 10 个高信噪比信息源（RSS、特定仓库 Release、核心行业关键词）",
+            "通过定时任务自动抓取，用大模型按“与我当前项目相关度”打分并剔除标题党与重复新闻",
+            "每天固定时间推送一份不超过 5 条的极简摘要，附带原始链接供深度阅读"
+          ],
+          "en": [
+            "Lock at most 10 high-signal sources (RSS feeds, key repo releases, core domain keywords)",
+            "Run a scheduled job that scores items by relevance to your active projects and strips clickbait duplicates",
+            "Deliver a crisp daily digest capped at 5 items with direct source links"
+          ]
+        },
+        "deliverable": {
+          "zh": "每日自动送达的《5 条高信噪比情报简报》",
+          "en": "An automated daily 5-item high-signal intelligence digest"
+        },
+        "current_stack": {
+          "zh": "GitHub Actions Cron / n8n + RSS + 轻量模型摘要",
+          "en": "GitHub Actions Cron / n8n + RSS + lightweight LLM summarizer"
+        },
+        "anti_pattern": {
+          "zh": "不要贪多订阅上百个源；简报超过 1 屏没人会看，最终只会变成新的未读焦虑。",
+          "en": "Don't subscribe to 100 feeds; any digest longer than one screen becomes another unread chore."
+        },
+        "combos": [
+          "cos-03",
+          "ops-02"
+        ],
+        "tags": {
+          "layer": "Automation",
+          "form_factor": "Workflow / Agent",
+          "leverage": "Time"
+        }
+      },
+      {
+        "id": "ops-02",
+        "drawer": "ops-automation",
+        "title": {
+          "zh": "私有知识库自动归档流",
+          "en": "Private Knowledge Auto-Archiver"
+        },
+        "metaphor": {
+          "zh": "碎片灵感随手一扔，自动打标归位不吃灰",
+          "en": "Tossing raw sparks into an inbox that auto-tags and files itself"
+        },
+        "trigger": {
+          "zh": "当你每天随手收藏了大量网页、对话金句和突发灵感，但过一周就再也找不到它们在哪时。",
+          "en": "When bookmarks, chat insights, and random sparks pile up across apps and vanish when you need them."
+        },
+        "mechanism": {
+          "zh": [
+            "设立唯一的碎片收集入口（如本地 Inbox 文件、快捷指令或私有仓库 Issue）",
+            "定期触发脚本调用模型，自动提取标题、3 个受控标签与 1 句话核心价值",
+            "按统一命名规范归档为纯文本 Markdown，确保未来十年不依赖任何闭源笔记软件"
+          ],
+          "en": [
+            "Funnel all loose sparks into a single capture inbox (local file, shortcut, or private repo issue)",
+            "Run an automated pass that extracts a clean title, 3 controlled tags, and a 1-line takeaway",
+            "File everything as plain Markdown with consistent naming—zero lock-in to proprietary note apps"
+          ]
+        },
+        "deliverable": {
+          "zh": "一套结构统一、可全文秒搜的本地 Markdown 知识库",
+          "en": "A cleanly structured, instantly searchable local Markdown knowledge base"
+        },
+        "current_stack": {
+          "zh": "本地脚本 / Obsidian + AI 自动打标归档流",
+          "en": "Local script / Obsidian + AI auto-tagging pipeline"
+        },
+        "anti_pattern": {
+          "zh": "不要收藏“以后可能会看”的万字长文原文；只归档经过你大脑筛选的核心片段或自己的评注。",
+          "en": "Don't hoard unread 10,000-word articles; archive only filtered excerpts and your own notes."
+        },
+        "combos": [
+          "os-02",
+          "eng-04"
+        ],
+        "tags": {
+          "layer": "Memory",
+          "form_factor": "Workflow / Agent",
+          "leverage": "Time"
+        }
+      },
+      {
+        "id": "ops-03",
+        "drawer": "ops-automation",
+        "title": {
+          "zh": "API 额度与服务熔断哨兵",
+          "en": "API Quota & Service Circuit Sentinel"
+        },
+        "metaphor": {
+          "zh": "给自动化流装上防刷爆账单的保险丝",
+          "en": "A fuse box stopping runaway agents from burning your API budget"
+        },
+        "trigger": {
+          "zh": "当你跑起定时脚本、Agent 或公开小工具，生怕死循环一夜刷爆信用卡，或线上页面静默挂掉时。",
+          "en": "When running cron agents or public tools and worrying a runaway loop will spike your bill or fail silently."
+        },
+        "mechanism": {
+          "zh": [
+            "在所有大模型 API 后台强制设死“硬性月度消费上限（Hard Limit）”与 50%/80% 告警线",
+            "在自动化脚本里写入最大重试次数（Max Retries）与单次 Token 熔断阈值",
+            "配置免费定时拨测（Uptime Check），静态站或关键接口返回非 200 状态时立即发通知"
+          ],
+          "en": [
+            "Enforce hard monthly spend caps and 50%/80% billing alerts on every LLM API provider",
+            "Code strict max-retry limits and per-run token circuit breakers into every automated script",
+            "Set up free uptime pings that alert you immediately if a site or endpoint returns non-200"
+          ]
+        },
+        "deliverable": {
+          "zh": "一份《API 预算硬限清单》+ 自动化存活拨测告警流",
+          "en": "An API Hard-Limit checklist paired with automated uptime alerting"
+        },
+        "current_stack": {
+          "zh": "API 平台预算硬限 + GitHub Actions 拨测 / 免费 Uptime 监控",
+          "en": "Provider hard spend caps + GitHub Actions ping / free uptime monitor"
+        },
+        "anti_pattern": {
+          "zh": "不要只在代码里写软限制而不开平台级硬限；代码本身可能出 Bug，平台账单锁才是最后底线。",
+          "en": "Never rely solely on code-level caps; buggy code can bypass them—provider-level hard limits are mandatory."
+        },
+        "combos": [
+          "eng-03",
+          "ops-01"
+        ],
+        "tags": {
+          "layer": "Automation",
+          "form_factor": "Workflow / Agent",
+          "leverage": "Risk"
+        }
+      },
+      {
+        "id": "ops-04",
+        "drawer": "ops-automation",
+        "title": {
+          "zh": "高频任务 Skill 封装器",
+          "en": "Recurring-Task Skill Packager"
+        },
+        "metaphor": {
+          "zh": "凡是重复敲了 3 遍的指令，直接铸成一键技能",
+          "en": "Casting any prompt you've typed three times into a reusable Skill"
+        },
+        "trigger": {
+          "zh": "当你发现自己每周都在向 AI 重复解释同一套背景、格式要求和避坑规则，越写越烦时。",
+          "en": "When you catch yourself re-explaining the same context, format, and guardrails to AI every week."
+        },
+        "mechanism": {
+          "zh": [
+            "翻出最近 3 次最满意的同类对话记录，提取共性的输入参数、执行步骤与输出格式",
+            "把隐性默契写成显性的标准操作规程（SKILL.md），明确触发条件与禁止事项",
+            "存入个人公开或私有 Skills 仓库，每次实战发现新边缘情况就迭代更新版本号"
+          ],
+          "en": [
+            "Pull 3 successful past chats of the same task and extract shared inputs, steps, and output schemas",
+            "Codify implicit habits into an explicit SOP (SKILL.md) with clear triggers and guardrails",
+            "Store it in a versioned personal Skills repo and refine it whenever real-world edge cases surface"
+          ]
+        },
+        "deliverable": {
+          "zh": "一个可跨对话一键调用的标准化 Skill 模块",
+          "en": "A standardized, reusable Skill module callable across sessions"
+        },
+        "current_stack": {
+          "zh": "自定义 AI Skills / Gems + GitHub 版本化托管",
+          "en": "Custom AI Skills / Gems + versioned GitHub repo"
+        },
+        "anti_pattern": {
+          "zh": "不要为只干一次的临时活去封装复杂 Skill；严格遵守“事不过三”原则，第 3 次重复再动手封装。",
+          "en": "Don't package one-off tasks; follow the Rule of Three and codify only on the third repetition."
+        },
+        "combos": [
+          "os-04",
+          "ops-02"
+        ],
+        "tags": {
+          "layer": "Automation",
+          "form_factor": "Skill / Template",
+          "leverage": "Time"
+        }
+      }
+    ],
+    "legal-finance": [
+      {
+        "id": "leg-01",
+        "drawer": "legal-finance",
+        "title": {
+          "zh": "合同与条款排雷仪",
+          "en": "Contract & Clause Minefield Scanner"
+        },
+        "metaphor": {
+          "zh": "签字前先用 X 光把霸王条款和隐形陷阱照出来",
+          "en": "X-raying contracts for hidden traps before you ever sign"
+        },
+        "trigger": {
+          "zh": "当你接到外包单、平台协议或合作合同，面对密密麻麻十几页法律术语头大、怕踩坑时。",
+          "en": "When facing a 15-page client contract, platform ToS, or partnership agreement packed with dense legalese."
+        },
+        "mechanism": {
+          "zh": [
+            "将脱敏后的合同全文喂给模型，重点扫描 5 大雷区：知识产权归属、无限连带赔偿、单方解约权、付款账期、竞业限制",
+            "要求用大白话标出“高危红灯条款”，并解释最坏情况下你会损失什么",
+            "针对每条红灯条款生成 1 段礼貌但坚定的修改替代措辞发给对方协商"
+          ],
+          "en": [
+            "Feed the redacted contract to AI and scan 5 minefields: IP ownership, uncapped liability, unilateral termination, payment terms, and non-competes",
+            "Flag red-light clauses in plain language, spelling out the worst-case downside",
+            "Draft a polite, firm counter-clause for each red flag to send back for negotiation"
+          ]
+        },
+        "deliverable": {
+          "zh": "一份《高危条款红绿灯清单》及可直接复制的修改建议措辞",
+          "en": "A Red-Flag Clause Report with ready-to-send negotiation counter-language"
+        },
+        "current_stack": {
+          "zh": "本地脱敏 + 长上下文推理模型合同审查 Prompt",
+          "en": "Local PII redaction + long-context reasoning contract-review Prompt"
+        },
+        "anti_pattern": {
+          "zh": "涉及大额资金、股权或跨境诉讼风险时，AI 只能做初筛准备，最终拍板必须找执业律师把关。",
+          "en": "For high-stakes equity, large sums, or cross-border disputes, AI is only a first pass—hire a licensed attorney."
+        },
+        "combos": [
+          "leg-04",
+          "eng-04"
+        ],
+        "tags": {
+          "layer": "Thinking",
+          "form_factor": "Prompt / Protocol",
+          "leverage": "Risk"
+        }
+      },
+      {
+        "id": "leg-02",
+        "drawer": "legal-finance",
+        "title": {
+          "zh": "定价与盈亏平衡模拟器",
+          "en": "Pricing & Break-Even Simulator"
+        },
+        "metaphor": {
+          "zh": "别拍脑袋定个便宜价，先算清回本线和时薪底线",
+          "en": "Replacing gut-feel pricing with hard margin and break-even math"
+        },
+        "trigger": {
+          "zh": "当你准备给自己的数字产品、订阅服务或咨询项目定价，纠结卖 9 块还是 99 块时。",
+          "en": "When pricing a digital product, SaaS tier, or consulting offer and guessing between $9 and $99."
+        },
+        "mechanism": {
+          "zh": [
+            "列出所有显性与隐性成本：固定工具/域名费、单用户 API 变动成本、支付渠道抽成与你的时间机会成本",
+            "建立 3 档价格与转化率假设（悲观 / 基准 / 乐观），算出各自达到盈亏平衡所需的最低付费人数",
+            "对比“薄利多销的客服噩梦”与“高客单小而美”，锁定最匹配一人产能的定价档位"
+          ],
+          "en": [
+            "List all fixed and variable costs: domains, per-user API compute, payment fees, and your own hourly floor",
+            "Model 3 price/conversion scenarios (bear, base, bull) to find the exact break-even customer count for each",
+            "Compare high-volume support burden against higher-ticket focus to pick a price a solo operator can sustain"
+          ]
+        },
+        "deliverable": {
+          "zh": "一张《3 档定价盈亏平衡与毛利测算表》",
+          "en": "A 3-tier Pricing, Margin & Break-Even simulation table"
+        },
+        "current_stack": {
+          "zh": "电子表格 / 极简交互式计算器 + 商业测算 Prompt",
+          "en": "Spreadsheet / interactive calculator + unit-economics Prompt"
+        },
+        "anti_pattern": {
+          "zh": "不要只按成本加成定价，更不要因为不好意思收钱而把高价值工具定成白菜价。",
+          "en": "Don't rely purely on cost-plus pricing, and never underprice high-leverage work out of imposter syndrome."
+        },
+        "combos": [
+          "cos-04",
+          "leg-04"
+        ],
+        "tags": {
+          "layer": "Thinking",
+          "form_factor": "Skill / Template",
+          "leverage": "Risk"
+        }
+      },
+      {
+        "id": "leg-03",
+        "drawer": "legal-finance",
+        "title": {
+          "zh": "隐私与开源协议自查表",
+          "en": "Privacy & Open-Source License Audit"
+        },
+        "metaphor": {
+          "zh": "开源发布前守住版权与用户隐私的合规底线",
+          "en": "Checking license obligations and privacy basics before going public"
+        },
+        "trigger": {
+          "zh": "当你准备把个人项目开源到 GitHub 或上线面向公众的静态站，不确定该选什么协议、有没有泄密风险时。",
+          "en": "When open-sourcing a repo or launching a public web app and checking for license clashes or leaked secrets."
+        },
+        "mechanism": {
+          "zh": [
+            "根据商业意图选定开源协议（MIT 宽松商用 / Apache 含专利保护 / AGPL 防闭源套壳）并核对第三方依赖兼容性",
+            "扫描代码库与 Git 历史，确保零硬编码 API Key、个人邮箱或私有路径残留",
+            "若站点使用本地存储或统计代码，在页脚补齐极简透明的隐私声明（如“数据仅存本地，零云端上传”）"
+          ],
+          "en": [
+            "Match your license to intent (MIT for permissive, Apache for patent grant, AGPL for copyleft) and verify dependency compatibility",
+            "Scan the repo and Git history to guarantee zero hardcoded API keys, private emails, or local paths",
+            "Add a plain-English privacy note in the footer if using localStorage or analytics"
+          ]
+        },
+        "deliverable": {
+          "zh": "一份通过核验的《LICENSE + 密钥清零 + 隐私声明》发布前包",
+          "en": "A verified pre-release pack: LICENSE file, zero-secrets scan, and plain privacy note"
+        },
+        "current_stack": {
+          "zh": "开源协议自查清单 + 本地密钥扫描命令（git grep / gitleaks）",
+          "en": "License checklist + local secret-scanning CLI (git grep / gitleaks)"
+        },
+        "anti_pattern": {
+          "zh": "不要以为“删掉最新一次提交里的 API Key”就安全了；只要推过 Git 历史，Key 必须立刻作废重签。",
+          "en": "Deleting a leaked API key in a later commit isn't enough—once pushed to Git history, rotate it immediately."
+        },
+        "combos": [
+          "eng-04",
+          "eng-03"
+        ],
+        "tags": {
+          "layer": "Building",
+          "form_factor": "Skill / Template",
+          "leverage": "Risk"
+        }
+      },
+      {
+        "id": "leg-04",
+        "drawer": "legal-finance",
+        "title": {
+          "zh": "独立报价单与收款防坑模版",
+          "en": "Solo Proposal & Payment Shield"
+        },
+        "metaphor": {
+          "zh": "把范围、修改次数和首付款写死在开工之前",
+          "en": "Locking scope, revision caps, and deposits before writing a single line"
+        },
+        "trigger": {
+          "zh": "当你接独立咨询、定制开发或设计单，怕遇到需求无限膨胀、反复免费返工或干完活被拖欠尾款时。",
+          "en": "When taking solo client work and wanting to prevent endless scope creep, free revisions, or ghosted invoices."
+        },
+        "mechanism": {
+          "zh": [
+            "在报价单里明确写出“包含项（In-Scope）”与“明确不包含项（Out-of-Scope）”",
+            "绑定免费修改次数上限（如 2 轮），超出部分按透明的按次或按天费率计费",
+            "强制执行里程碑付款（如 50% 预付款启动，尾款结清后再移交最终源码或源文件）"
+          ],
+          "en": [
+            "Explicitly list both In-Scope deliverables and Out-of-Scope exclusions in the proposal",
+            "Cap included revisions (e.g., 2 rounds) with a transparent rate for additional changes",
+            "Enforce milestone billing (e.g., 50% deposit to start, final source handoff only upon final payment)"
+          ]
+        },
+        "deliverable": {
+          "zh": "一份 1 页纸极简专业《独立项目报价与里程碑确认单》",
+          "en": "A crisp 1-page Solo Proposal & Milestone Agreement template"
+        },
+        "current_stack": {
+          "zh": "Markdown / PDF 报价单模板 + 范围边界生成 Prompt",
+          "en": "Markdown / PDF proposal template + scope-boundary Prompt"
+        },
+        "anti_pattern": {
+          "zh": "不要因为是熟人介绍就省去书面范围确认；越是熟人，口头模糊越容易最后伤感情。",
+          "en": "Never skip written scope confirmation for friends or referrals—vague verbal deals ruin relationships fastest."
+        },
+        "combos": [
+          "leg-01",
+          "leg-02"
+        ],
+        "tags": {
+          "layer": "Distribution",
+          "form_factor": "Skill / Template",
+          "leverage": "Risk"
+        }
+      }
+    ]
+  }
+}

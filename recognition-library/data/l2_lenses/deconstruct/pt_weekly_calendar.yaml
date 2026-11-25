@@ -1,0 +1,49 @@
+id: pt_weekly_calendar
+title: 把本周任务排进日历
+tagline: 把任务、截止时间与可用时段对齐，给出时长、依赖、缓冲与取舍建议。
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - create
+  clarity_fit:
+  - concrete
+  domains:
+  - planning
+  - time_management
+  - productivity
+  - scheduling
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Calendar
+  - Feishu
+  pain_point: 本周任务一堆但不知道怎么塞进实际空档，截止时间、注意力和留白顾此失彼，排完还是超载。
+  trigger_utterances:
+  - 这周任务这么多怎么排进日历
+  - 帮我把 deadline 和空档对齐
+  - 本周排期超载了该推哪些
+  - 给任务估时并安排时间块
+  - 日程太满留白不够怎么办
+  anti_triggers:
+  - 仅需生成周报总结而非排期
+  - 已有固定日程仅需提醒
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '把【本周任务和截止时间】排入【实际可用时间段】。给每项估计时长、开始前依赖、适合的时间块和缓冲。超出容量时指出应推迟、简化或委托的任务，并解释依据。
+
+
+    输入：
+
+    {{input}}'
+  variables: []
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#weekly-calendar
+  source_hash: 010b91c48ffaa871f0c6915510f66b8da0d0fd54c2f430c87566cd80a0389ca3
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

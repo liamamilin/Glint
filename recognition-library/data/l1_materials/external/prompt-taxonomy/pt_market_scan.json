@@ -1,0 +1,26 @@
+{
+  "id": "pt_market_scan",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#market-scan",
+  "title": "为产品方向盘点市场与替代方案",
+  "content": "围绕【用户任务和市场范围】做市场扫描。分别找直接产品、间接替代和用户自建办法，按受众、承诺、证据与缺点做表。标注信息日期，指出一个影响市场定位的未知。",
+  "content_hash": "9e0475185421aadf5d4cc960c47cddcb9b3a10b37a89c0f1ac730b775c08288a",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "product",
+    "市场调研",
+    "竞品",
+    "market scan"
+  ],
+  "problem_solved": "区分直接竞争、间接替代和自行完成。",
+  "when_to_use": "分类: 产品与业务",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "market-scan",
+    "category": "product",
+    "variables": [
+      "用户任务和市场范围"
+    ]
+  }
+}

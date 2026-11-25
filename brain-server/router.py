@@ -1,7 +1,8 @@
-"""Local inference client and top-level semantic router."""
+"""Local inference client (Ollama 2B router + bge-m3 embedder) and top-level semantic router."""
 
 from __future__ import annotations
 
+import asyncio
 import logging
 from typing import Any, Protocol
 
@@ -27,6 +28,9 @@ class InferenceClient(Protocol):
     ) -> str:
         """Send a low-latency chat completion request."""
 
+    async def embed(self, text: str) -> list[float] | None:
+        """Return a single embedding vector for `text`, or None if unavailable."""
+
     async def is_healthy(self) -> bool:
         """Check whether the local inference backend is reachable."""
 
@@ -38,11 +42,12 @@ class InferenceClient(Protocol):
 
 
 class OllamaClient:
-    """Async Ollama client tuned for persistent resident 2-3B routing models."""
+    """Async Ollama client tuned for dual resident models (qwen3.5:2b + bge-m3:latest)."""
 
     def __init__(self, cfg: Settings) -> None:
         self._cfg = cfg
         self.model_name = cfg.model_name
+        self.embed_model = cfg.embed_model
         self._client = httpx.AsyncClient(
             base_url=cfg.ollama_base_url,
             timeout=httpx.Timeout(cfg.ollama_timeout_s, connect=2.0),
@@ -77,6 +82,22 @@ class OllamaClient:
         data = resp.json()
         return str(data.get("message", {}).get("content", "")).strip()
 
+    async def embed(self, text: str) -> list[float] | None:
+        resp = await self._client.post(
+            "/api/embed",
+            json={
+                "model": self.embed_model,
+                "input": [text],
+                "keep_alive": self._cfg.keep_alive,
+            },
+        )
+        resp.raise_for_status()
+        data = resp.json()
+        embeddings = data.get("embeddings")
+        if isinstance(embeddings, list) and embeddings and isinstance(embeddings[0], list):
+            return [float(x) for x in embeddings[0]]
+        return None
+
     async def is_healthy(self) -> bool:
         try:
             resp = await self._client.get("/api/tags", timeout=1.5)
@@ -85,7 +106,7 @@ class OllamaClient:
             return False
 
     async def warmup(self, system_prompt: str) -> None:
-        try:
+        async def _warm_chat() -> None:
             await self._client.post(
                 "/api/chat",
                 json={
@@ -101,9 +122,24 @@ class OllamaClient:
                 },
                 timeout=30.0,
             )
-            logger.info("Warmed up Ollama model '%s' (keep_alive=%s)", self.model_name, self._cfg.keep_alive)
-        except Exception as exc:
-            logger.warning("Warmup skipped or failed for '%s': %s", self.model_name, exc)
+
+        async def _warm_embed() -> None:
+            await self._client.post(
+                "/api/embed",
+                json={
+                    "model": self.embed_model,
+                    "input": ["warmup"],
+                    "keep_alive": self._cfg.keep_alive,
+                },
+                timeout=30.0,
+            )
+
+        results = await asyncio.gather(_warm_chat(), _warm_embed(), return_exceptions=True)
+        for label, res in zip((self.model_name, self.embed_model), results):
+            if isinstance(res, Exception):
+                logger.warning("Warmup skipped or failed for '%s': %s", label, res)
+            else:
+                logger.info("Warmed up Ollama model '%s' (keep_alive=%s)", label, self._cfg.keep_alive)
 
     async def close(self) -> None:
         await self._client.aclose()

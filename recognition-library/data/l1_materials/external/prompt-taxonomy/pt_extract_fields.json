@@ -1,0 +1,28 @@
+{
+  "id": "pt_extract_fields",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#extract-fields",
+  "title": "从材料中提取字段",
+  "content": "从【原始材料】提取【目标字段、格式和每行粒度】。交付符合约定的 JSON 或 CSV，缺失字段填 null，从上下文推断的字段单独标注。提供两条原文到结果的对应样例，方便抽查。",
+  "content_hash": "aa746b3532a38a77ea5146d7b92d2850c420798428009382ac54a777f5e94ab8",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "data",
+    "提取",
+    "结构化",
+    "JSON",
+    "extraction"
+  ],
+  "problem_solved": "把文档或记录整理成结构化数据。",
+  "when_to_use": "分类: 数据与表格",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "extract-fields",
+    "category": "data",
+    "variables": [
+      "原始材料",
+      "目标字段、格式和每行粒度"
+    ]
+  }
+}

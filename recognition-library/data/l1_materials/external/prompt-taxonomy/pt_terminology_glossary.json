@@ -1,0 +1,27 @@
+{
+  "id": "pt_terminology_glossary",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#terminology-glossary",
+  "title": "从双语材料建立术语表",
+  "content": "对照【双语材料】为【行业和读者】提取术语表。逐项给原词、建议译法、解释、代表原句和适用范围。对关键冲突说明影响与待确认项，附三条示例用法。",
+  "content_hash": "726a1311ee405749d9f32510b05587cd799190da11694dc272b579f9177d200b",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "language",
+    "术语表",
+    "翻译记忆",
+    "glossary"
+  ],
+  "problem_solved": "规定首选译法、变体和使用范围。",
+  "when_to_use": "分类: 语言练习与本地化",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "terminology-glossary",
+    "category": "language",
+    "variables": [
+      "双语材料",
+      "行业和读者"
+    ]
+  }
+}

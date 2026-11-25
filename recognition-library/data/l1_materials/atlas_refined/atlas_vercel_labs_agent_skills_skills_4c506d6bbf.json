@@ -1,0 +1,42 @@
+{
+  "id": "atlas_vercel_labs_agent_skills_skills_4c506d6bbf",
+  "source": "atlas-methods",
+  "source_ref": "vercel-labs/agent-skills:skills/composition-patterns/SKILL.md",
+  "title": "React 组合模式：用显式变体与 Compound Components 取代布尔 Prop 蔓延",
+  "content": "React 组合模式方法论：以组合取代布尔 prop 蔓延。核心认知：组件定制行为应通过显式变体组件而非布尔 props 表达；复杂组件应拆为带共享 context 的 compound components；状态管理应上提至专用 provider，UI 仅消费 state/actions/meta 通用接口。优先级规则：Component Architecture (HIGH) > State Management (MEDIUM) > Implementation Patterns (MEDIUM) > React 19 APIs (MEDIUM，仅 React 19+ 适用)。React 18 及更早版本应跳过 React 19 章节。每个规则文件结构：重要性简述 + 错误代码示例 + 正确代码示例 + 背景引用。use() 可条件调用，与 useContext 不同。验收：组件中不再以布尔 props 定制行为；同一套组合 UI 可配合不同 provider 工作；provider 之外无 useEffect 同步/ref 读状态替代写法。",
+  "content_hash": "15c76380958784b9873e3638ac98337156811473da0b01f8ef819bd47cf89816",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "React",
+    "组件架构",
+    "组合模式",
+    "状态管理",
+    "Compound Components"
+  ],
+  "problem_solved": "解决 React 组件因大量布尔 props 定制行为而条件分支爆炸、状态管理分散、API 难以扩展的认知痛点",
+  "when_to_use": "当组件带有多个布尔 props 控制行为、构建可复用组件库、设计灵活组件 API、审查组件架构，或需要 compound components / context provider 时",
+  "procedural_steps": [
+    "识别用于定制行为的布尔 props（如 isThread、isEditing），及其造成的条件分支",
+    "将每个变体写成显式组件（如 ChannelComposer、ThreadComposer），各自组合所需子组件；共享内部子组件但不共享单一巨型父组件",
+    "将复杂组件组织为 compound components：创建 context，导出统一对象（如 Composer.Provider/Frame/Input/Submit/Footer），子组件从 context 读取 state/actions/meta",
+    "定义含 state、actions、meta 三部分的通用 context 接口，UI 组件只消费该接口，不直接调用具体状态 hook",
+    "将状态管理上提到专用 provider 组件，provider 为唯一知道状态如何管理的地方；把需要共享状态的兄弟组件放入同一 provider 内",
+    "避免用 useEffect 向上同步状态或用 ref 读状态再提交",
+    "用 children 做组合，优先于 renderX props；render props 仅用于父组件需向子组件提供数据/状态的场景"
+  ],
+  "anti_patterns": [
+    "为定制组件行为添加布尔 props",
+    "复杂组件不拆 compound components，子组件通过 props 访问共享状态",
+    "UI 组件直接调用 useState/Zustand 等具体状态 hook 而非消费 context 接口",
+    "provider 之外用 useEffect 同步状态上提或用 ref 读状态再提交",
+    "用 render props 替代 children 组合（除父需向子提供数据/状态外）"
+  ],
+  "metadata": {
+    "repository": "vercel-labs/agent-skills",
+    "skill_path": "skills/composition-patterns/SKILL.md",
+    "commit_sha": "1a2c79d4e6c4a2283dc2c614b6538cbe1ed5ca62",
+    "l0_content_hash": "e38e0eaa609316b10423a9a138ed95e35099accd3f735585295c8a8f165c28a3",
+    "l0_quality_score": 0.88,
+    "refined_by": "opencode-go/beam-free"
+  }
+}

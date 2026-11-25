@@ -1,0 +1,42 @@
+id: pt_recipe_scale
+title: 食谱按人数与设备改写
+tagline: 把现有食谱改成适合人数、设备与食材的可执行版本。
+routing:
+  primitive: translate
+  goals:
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - meal_planning
+  - cooking
+  - recipes
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  pain_point: 调整食谱份量时直接按比例换算会导致调味、温度和时间不对，需要能直接照做的版本。
+  trigger_utterances:
+  - 按 4 人份改这个菜谱
+  - 家里只有小锅这个食谱怎么缩
+  - 这个菜谱按比例缩放一下
+  - 食材不够按现有改一下
+  - 按我的设备调整食谱
+  anti_triggers:
+  - 只是想了解烹饪技巧而非换算份量
+  - 需要全新菜谱而非调整现有食谱
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: 把 {{input}} 改成适合 {{constraints}} 的版本。给改后用量、需要分批的步骤和用肉眼判断完成的信号。把不能简单按比例调整的调味、温度或烹饪时间单列。
+  variables:
+  - constraints
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#recipe-scale
+  source_hash: 1ec12bab03ceaeee64b2a8f84262c0259ced730b9494d5f7e8b97b4b36031162
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

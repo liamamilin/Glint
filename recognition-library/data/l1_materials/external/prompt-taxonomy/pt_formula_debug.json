@@ -1,0 +1,28 @@
+{
+  "id": "pt_formula_debug",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#formula-debug",
+  "title": "排查表格公式不正确",
+  "content": "帮我排查【公式和报错或错误结果】，环境和样例是【表格软件、列和值】。先用一到两行样本手算预期，检查数据类型、引用范围和空值处理。给修正后的公式、放置位置和回归样例。",
+  "content_hash": "f349a1a1ebd54c78800a678fad868d217c469a292588f3ac4581a1e5342f3e55",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "data",
+    "公式报错",
+    "Excel",
+    "Sheets",
+    "formula debug"
+  ],
+  "problem_solved": "用小样本复现错误并保留预期结果。",
+  "when_to_use": "分类: 数据与表格",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "formula-debug",
+    "category": "data",
+    "variables": [
+      "公式和报错或错误结果",
+      "表格软件、列和值"
+    ]
+  }
+}

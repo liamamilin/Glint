@@ -1,0 +1,54 @@
+id: pt_usability_test_plan
+title: 可用性测试方案设计
+tagline: 为功能设计3个真实任务、成功标准与观察追问
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - concrete
+  domains:
+  - product
+  - ux
+  - usability_testing
+  - user_research
+  app_affinity:
+  - Figma
+  - Notion
+  - Chrome
+  pain_point: 功能上线前不知用户能否独立完成关键任务，测试设计缺少结构化任务、成功标准与观察维度
+  trigger_utterances:
+  - 帮我设计个可用性测试
+  - 这个原型怎么测用户能不能用
+  - 给三个真实任务让用户完成
+  - usability test plan for this feature
+  - 想测一下功能好不好用
+  anti_triggers:
+  - 已上线产品做A/B实验
+  - 纯问卷调查设计
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '为{{prototype_or_feature}}设计由{{target_users}}完成的可用性测试。要求：
+
+    1. 给出3个贴近真实环境的任务（含场景背景、任务目标、禁止提示）。
+
+    2. 每个任务定义明确的成功标准（完成条件、时间/步骤上限）。
+
+    3. 列出观察项：操作路径、犹豫点、错误类型、求助信号。
+
+    4. 设计追问：任务后访谈问题，区分观察到的操作、用户口头反馈、主持人解释。
+
+    5. 输出表格：任务 | 成功标准 | 观察点 | 追问。'
+  variables:
+  - prototype_or_feature
+  - target_users
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#usability-test-plan
+  source_hash: bcbb512ffa79aafa4f4ca63ed8be0d8d32f485b2a32e3337d43f73cbc1005550
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

@@ -1,0 +1,67 @@
+id: disc_content_curated_curation_edge
+title: 反过载策展设计
+tagline: 把日更追热点换成每月一次的高密度精选专栏
+routing:
+  primitive: compress
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - content
+  - curation
+  - media_strategy
+  - niche_media
+  - signal
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  pain_point: 做内容总被日更追热点绑架，却没人替读者狠删 99% 噪音，只留实测过的 1% 精选
+  trigger_utterances:
+  - 日更太累了有别的内容打法吗
+  - 想做个策展号但不知道怎么结构化
+  - 读者信息过载怎么做出差异化
+  - 每月发一次能做号吗
+  - 怎么定入选和淘汰标准
+  anti_triggers:
+  - 只是想写一篇爆款文案或追热点
+  - 需要 SEO 批量生成文章
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '反过载策展专栏 checklist：
+
+    1. 锁定垂直领域，列出读者每天被轰炸的低质重复信息类型（至少 5 类）。
+
+    2. 定义专栏节奏：每月 1 期，每期 3~5 条，每条附实测验证证据（截图/数据/对比）。
+
+    3. 制定透明入选红线：来源可信度、可复现性、独特性、实用性四维度打分，低于阈值直接淘汰。
+
+    4. 设计淘汰标准：过时、不可复现、同质化、营销软文一律剔除，并公开落选理由。
+
+    5. 为每条精选写“为什么值得你花 3 分钟”一句话，拒绝空泛推荐。
+
+    6. 建立读者反馈回路：每期末收集“哪条最值/哪条踩雷”，迭代下期选题。
+
+    7. 用固定模板呈现：问题→证据→适用场景→局限，保持可扫读。
+
+    8. 定期复盘：季度回顾入选率与读者留存，调整红线松紧度。'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/content.json#content-curated-curation-edge
+  source_hash: 91c83a98d3958908e734072b2edb5ecf9b3861b46b0ea8c8b2885cc441a05011
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: writing_comms
+  subcategory: content_creation
+  collections: []
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

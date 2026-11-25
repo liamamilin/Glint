@@ -1,0 +1,28 @@
+{
+  "id": "pt_support_triage",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#support-triage",
+  "title": "把支持工单转成改进清单",
+  "content": "从【客服工单】提炼影响【产品结果】的主要问题。合并同类项，保留样本文本、出现次数、受影响用户、复现条件和影响程度。区分可以当天修的事项与需要先调查的事项。",
+  "content_hash": "5b6690c2251dcf21cfbab8fe5490627387eca4ac013d11e97c3a1c037683f2c8",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "product",
+    "工单",
+    "客服",
+    "分流",
+    "triage"
+  ],
+  "problem_solved": "用复现与影响证据分辨系统性问题。",
+  "when_to_use": "分类: 产品与业务",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "support-triage",
+    "category": "product",
+    "variables": [
+      "客服工单",
+      "产品结果"
+    ]
+  }
+}

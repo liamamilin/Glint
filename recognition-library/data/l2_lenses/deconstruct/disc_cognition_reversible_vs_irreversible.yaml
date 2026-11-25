@@ -1,0 +1,79 @@
+id: disc_cognition_reversible_vs_irreversible
+title: 可逆门 vs 单向门
+tagline: 把可逆小决定先跑起来，别反复内耗
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - cognition
+  - decision_making
+  - risk
+  - speed
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Linear
+  - ChatGPT
+  pain_point: 用户把大量低成本可逆的小决定当成不可逆大赌注，反复调研权衡，陷入内耗与时间黑洞
+  trigger_utterances:
+  - 这个决定要不要再调研一下
+  - 我怕做错了回不来
+  - 纠结选 A 还是 B 很久
+  - 先想清楚再动手吧
+  - 万一出问题怎么办
+  anti_triggers:
+  - 真正高代价不可逆的决策（如融资、架构迁移）
+  - 已确定不可逆的法律或合同事项
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '## 可逆门 vs 单向门 自检清单
+
+
+    ### 第一步：分类本周的纠结
+
+    把正在纠结的事填入 {{three_decisions}}，逐条判断：
+
+    - [ ] 这件事能否在 24h 内回滚或修复？
+
+    - [ ] 最坏情况的修复成本 < 1 天工作量？
+
+    - [ ] 是否只影响自己或小范围？
+
+    若以上多为"是" → 可逆门：先跑最小实验，再迭代。
+
+    若任一项为"否" → 单向门：做足调研再决策。
+
+
+    ### 第二步：给可逆事定最小行动
+
+    每件可逆事写一个 24h 内能完成的最小动作（原型/小范围试跑/可回滚提交）。
+
+
+    ### 第三步：压力测试风险
+
+    针对顾虑 {{risk_concern}}：
+
+    - [ ] 最坏情况具体是什么？
+
+    - [ ] 修复/回滚的实际成本（时间/金钱/声誉）？
+
+    - [ ] 是否存在低成本兜底（备份/灰度/可回滚）？
+
+    若修复成本低 → 先行动；若高 → 升级为单向门流程。'
+  variables:
+  - three_decisions
+  - risk_concern
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/cognition.json#cognition-reversible-vs-irreversible
+  source_hash: 9e381c774d50ada5ec0c1e0ba1042ec308f9feb3a84a9678e1d062cdcb76a2b3
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

@@ -1,0 +1,110 @@
+version: "2.0"
+
+# L2 草稿 -> L3 生产透镜 确定性清洗与转换规则（零 LLM 成本，随时秒级全量重跑）
+
+# 跨源语义查重时，高优先级来源保留，低优先级重复卡入隔离区
+source_priority:
+  glint-core: 100
+  discovery-taxonomy: 80
+  prompt-taxonomy: 70
+  super-individual-toolbox: 60
+  atlas-methods: 50
+
+# 质量门禁阈值
+semantic_dedup_threshold: 0.88
+min_confidence: 0.60
+min_trigger_utterances: 2
+title_max_chars: 18
+tagline_max_chars: 64
+
+# 标题首尾冗余标点/编号清洗
+title_strip_chars: " 。，、；：！？!?:;\"'“”‘’()（）[]【】-—·•"
+
+# 痛点/摘要中的元描述套话前缀（自动剥离，避免污染 bge-m3 向量空间）
+meta_boilerplate_prefixes:
+  - "^这是一[个套张份项条](?:用于|用来|针对)?(?:的)?(?:提示词|模板|工具|框架|卡片|方法)[，,：:。\\s]*"
+  - "^(?:该|本)(?:提示词|模板|工具|框架|卡片|方法)(?:用于|用来|旨在|可以帮[助你]?)[，,：:。\\s]*"
+
+# 中文方括号变量提取正则（如 Prompt-taxonomy 中的 【问题】【受众】）
+chinese_variable_pattern: "【([^【】\\n]{1,24})】"
+
+# 执行面人称与衔接语境清洗（消除第三人称 System Prompt 拼接割裂感）
+execution_person_replacements:
+  "请把用户提供的问题与范围": "请基于我上面提到的主题与范围"
+  "请把用户提供的": "请基于我上面提供的"
+  "把用户提供的": "把我上面提供的"
+  "根据用户输入": "根据我上面的内容"
+  "针对用户输入": "针对我上面的内容"
+  "用户提供的": "我上面提供的"
+
+# 领域标签归一化映射（去中英混杂与同义词漂移）
+domain_aliases:
+  系统架构: architecture
+  架构: architecture
+  架构设计: architecture
+  arch: architecture
+  后端: backend
+  前端: frontend
+  编程: engineering
+  代码: engineering
+  开发: engineering
+  coding: engineering
+  dev: engineering
+  software_engineering: engineering
+  调试: debugging
+  排障: debugging
+  debug: debugging
+  产品: product
+  产品设计: product
+  product_management: product
+  写作: writing
+  文案: copywriting
+  内容创作: content
+  沟通: communication
+  邮件: communication
+  决策: decision_making
+  战略: strategy
+  规划: planning
+  研究: research
+  学习: learning
+  效率: productivity
+  自动化: automation
+  营销: marketing
+  增长: growth
+  商业: business
+  职业: career
+  求职: career
+  数据: data
+  设计: design
+  法律: legal
+  财务: finance
+
+# macOS App 亲和度标准名称归一化
+app_aliases:
+  vscode: "VS Code"
+  "vs code": "VS Code"
+  code: "VS Code"
+  cursor: "Cursor"
+  xcode: "Xcode"
+  terminal: "Terminal"
+  终端: "Terminal"
+  iterm: "iTerm2"
+  iterm2: "iTerm2"
+  warp: "Warp"
+  notion: "Notion"
+  obsidian: "Obsidian"
+  slack: "Slack"
+  feishu: "Feishu"
+  飞书: "Feishu"
+  wechat: "WeChat"
+  微信: "WeChat"
+  mail: "Mail"
+  邮件: "Mail"
+  chrome: "Chrome"
+  "google chrome": "Chrome"
+  chatgpt: "ChatGPT"
+  claude: "Claude"
+  linear: "Linear"
+  figma: "Figma"
+  notes: "Notes"
+  备忘录: "Notes"

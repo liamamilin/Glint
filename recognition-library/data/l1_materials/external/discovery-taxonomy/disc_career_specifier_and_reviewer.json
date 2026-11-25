@@ -1,0 +1,33 @@
+{
+  "id": "disc_career_specifier_and_reviewer",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/career.json#career-specifier-and-reviewer",
+  "title": "从“技能执行者”转向“问题定义与验收者”",
+  "content": "旧共识（盲区）：个人职业护城河取决于自己亲手把活干得多快、工具用得多熟练。\n\n新现实（破盲视角）：纯执行正在被 AI 快速廉价化，真正稀缺且高薪的能力正迅速向两端集中：精准写清需求规格（Spec）与一眼揪出隐蔽缺陷（Review）。\n\n破冰追问母题：\n- 针对 [你的职业/岗位]，列出 5 个正在被 AI 迅速贬值的纯执行技能，以及 5 个因此变得更值钱的“定义问题/质量验收/责任兜底”类高杠杆能力。\n- 帮我为 [你日常交付的一类核心产出，如 PRD/代码/营销方案] 设计一份“资深专家级验收清单（Review Rubric）”，让我从自己埋头写变成高效把关。",
+  "content_hash": "a156c563d926c6af219caafb3c1ae042023f363232d2e8a698935091b13b5041",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "career",
+    "role-inversion",
+    "cost-collapse",
+    "ai-era",
+    "skills",
+    "spec",
+    "review"
+  ],
+  "problem_solved": "个人职业护城河取决于自己亲手把活干得多快、工具用得多熟练。",
+  "when_to_use": "纯执行正在被 AI 快速廉价化，真正稀缺且高薪的能力正迅速向两端集中：精准写清需求规格（Spec）与一眼揪出隐蔽缺陷（Review）。",
+  "procedural_steps": [
+    "针对 [你的职业/岗位]，列出 5 个正在被 AI 迅速贬值的纯执行技能，以及 5 个因此变得更值钱的“定义问题/质量验收/责任兜底”类高杠杆能力。",
+    "帮我为 [你日常交付的一类核心产出，如 PRD/代码/营销方案] 设计一份“资深专家级验收清单（Review Rubric）”，让我从自己埋头写变成高效把关。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "career-specifier-and-reviewer",
+    "arena": "career",
+    "lenses": [
+      "role-inversion",
+      "cost-collapse"
+    ]
+  }
+}

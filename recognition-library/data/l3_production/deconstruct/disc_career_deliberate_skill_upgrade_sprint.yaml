@@ -1,0 +1,71 @@
+id: disc_career_deliberate_skill_upgrade_sprint
+title: 两周冲刺练出真实作品
+tagline: 用两周小作品冲刺替代刷课，快速上手一项技能。
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - career
+  - learning
+  - skill_development
+  - practice
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 用户想学新技能，却只会刷课产生学会的错觉，缺乏可落地的两周执行计划与真实作品产出。
+  trigger_utterances:
+  - 我想学点新技能但不知道从哪开始
+  - 刷课刷完了还是不会做
+  - 帮我设计一个两周学习冲刺计划
+  - 快速上手 Python/Rust 有什么捷径
+  - 想做一个小作品来练手
+  anti_triggers:
+  - 用户只是想系统性刷完整门课程或备考
+  - 用户需要长期职业规划而非两周冲刺
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '两周刻意冲刺清单：
+
+    1. 明确技能与目标：写出要学的具体技能、现有基础、两周终点作品。
+
+    2. 提炼 20% 核心知识：列出最小可用知识点，跳过冗余章节。
+
+    3. 列出 3 个新手坑：提前规避常见错误。
+
+    4. 定义真实小作品：一个可交付的小任务/原型。
+
+    5. 拆成每日微任务：每天 30-60 分钟动手 + 查资料。
+
+    6. 边做边查边改：遇到问题先搜/问 AI，记录解法。
+
+    7. 第 7 天做中途复盘：调整范围，确保可完成。
+
+    8. 第 10-12 天完成作品并自测。
+
+    9. 第 13-14 天润色、写 README/总结、发布或分享。
+
+    10. 复盘：记录学会的、踩的坑、下一步。'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/career.json#career-deliberate-skill-upgrade-sprint
+  source_hash: bf7cb09f0d32df2489f04c1d48e449c59ee48443044d41d9b38c5debc6249d3e
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: personal_career
+  subcategory: career
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

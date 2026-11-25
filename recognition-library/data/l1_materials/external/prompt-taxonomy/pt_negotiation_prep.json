@@ -1,0 +1,28 @@
+{
+  "id": "pt_negotiation_prep",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#negotiation-prep",
+  "title": "准备一次协商",
+  "content": "我将就【事项】与【对方角色】协商，客观约束为【期限、资源和边界】。给我准备优先事项、开放问题、可交换条件和无法达成时的备选方案。提供一句开场和一个能测试对方优先级的提问。",
+  "content_hash": "5805d50ee41203f08ba9d94113bfece89edd6a41af87143eb20350814711d88c",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "communication",
+    "谈判",
+    "协商",
+    "negotiation"
+  ],
+  "problem_solved": "明确双方利益、可交换条件和最低可接受结果。",
+  "when_to_use": "分类: 沟通与协商",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "negotiation-prep",
+    "category": "communication",
+    "variables": [
+      "事项",
+      "对方角色",
+      "期限、资源和边界"
+    ]
+  }
+}

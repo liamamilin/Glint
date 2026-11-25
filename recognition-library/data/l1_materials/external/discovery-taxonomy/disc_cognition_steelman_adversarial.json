@@ -1,0 +1,33 @@
+{
+  "id": "disc_cognition_steelman_adversarial",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/cognition.json#cognition-steelman-adversarial",
+  "title": "把 AI 当“红队死对头”而不是“顺从助手”",
+  "content": "旧共识（盲区）：遇到决策纠结时，让 AI 帮自己补充论据、优化方案、给点鼓励。\n\n新现实（破盲视角）：大模型默认讨好用户（Sycophancy），它最被低估的用法其实是强制它扮演冷酷的反对派，在投入时间前先做“事前验尸（Pre-mortem）”。\n\n破冰追问母题：\n- 我正打算做这个决定/项目：[描述你的想法]。请收起礼貌和鼓励，扮演最挑剔的行业老兵，给出 5 个最可能导致这件事在 3 个月内彻底失败的致命盲区。\n- 针对我的判断：[填入你的核心观点]，帮我构建一个最强版本的反方论证（Steelman），并指出只需要验证哪 1 个事实就能推翻我现在的假设。",
+  "content_hash": "1cf9785ff04f55d72f3aaf7a9efb0347bc332ecef5db90350da66cf9db72d87c",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "cognition",
+    "role-inversion",
+    "first-principles",
+    "decision",
+    "pre-mortem",
+    "critical-thinking",
+    "red-team"
+  ],
+  "problem_solved": "遇到决策纠结时，让 AI 帮自己补充论据、优化方案、给点鼓励。",
+  "when_to_use": "大模型默认讨好用户（Sycophancy），它最被低估的用法其实是强制它扮演冷酷的反对派，在投入时间前先做“事前验尸（Pre-mortem）”。",
+  "procedural_steps": [
+    "我正打算做这个决定/项目：[描述你的想法]。请收起礼貌和鼓励，扮演最挑剔的行业老兵，给出 5 个最可能导致这件事在 3 个月内彻底失败的致命盲区。",
+    "针对我的判断：[填入你的核心观点]，帮我构建一个最强版本的反方论证（Steelman），并指出只需要验证哪 1 个事实就能推翻我现在的假设。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "cognition-steelman-adversarial",
+    "arena": "cognition",
+    "lenses": [
+      "role-inversion",
+      "first-principles"
+    ]
+  }
+}

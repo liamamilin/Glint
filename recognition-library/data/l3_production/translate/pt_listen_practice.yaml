@@ -1,0 +1,51 @@
+id: pt_listen_practice
+title: 音频转听力训练
+tagline: 把音频/转录拆成大意-细节-跟读练习
+routing:
+  primitive: translate
+  goals:
+  - create
+  clarity_fit:
+  - concrete
+  domains:
+  - language
+  - listening
+  - dictation
+  - shadowing
+  app_affinity:
+  - ChatGPT
+  - Claude
+  - Notion
+  pain_point: 手上有音频或转录，却不知道如何把它变成有层次的听力练习（大意→细节→跟读），也缺少答案与关键原句对照。
+  trigger_utterances:
+  - 这段音频帮我做成听力练习
+  - 我只有转录文本想练听力
+  - 帮我把这段对话拆成跟读材料
+  - 从大意到细节帮我设计听力题
+  - 我英语听力弱想针对这段做练习
+  anti_triggers:
+  - 仅需全文翻译而非练习设计
+  - 已有现成题库只需批改
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: 用【{{input}}】为【{{level_and_goal}}】设计听力练习。依次给听大意、抓细节和跟读片段；把答案和关键原句放末尾。只有文字时给练习脚本，说明无法据此评估原音发音。
+  variables:
+  - level_and_goal
+  - '{{input}}'
+  - '{{level_and_goal}}'
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#listen-practice
+  source_hash: 3a481af85a2e44a1ec517138a649aa70d5acac2c050f2fce5c537c2a935d3f90
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: writing_comms
+  subcategory: writing_polish
+  collections: []
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

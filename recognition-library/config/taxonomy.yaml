@@ -1,0 +1,104 @@
+version: "2.3"
+
+# L3 生产透镜库存：二级领域分类树 (Category -> Subcategory)
+# 所有归类规则外置，L2 -> L3 确定性自动归类（零 LLM 成本），并可被 overrides.yaml 随时覆写
+
+categories:
+  general:
+    label: "通用思维与元认知"
+    subcategories:
+      research: "调研与信息溯源"
+      decision: "决策与权衡"
+      critical_thinking: "批判与排雷"
+      problem_solving: "拆解与破局"
+  engineering:
+    label: "软件工程与架构"
+    subcategories:
+      architecture: "架构与系统设计"
+      code_review: "代码审查与重构"
+      debugging: "排障与性能定位"
+      ai_workflow: "AI 提示与工作流"
+  product_business:
+    label: "产品、增长与商业"
+    subcategories:
+      product_design: "产品定义与 MVP"
+      indie_business: "独立开发与商业模式"
+      growth_marketing: "增长、营销与 SEO"
+      pricing_strategy: "定价与竞争策略"
+  writing_comms:
+    label: "写作、表达与沟通"
+    subcategories:
+      writing_polish: "润色、重写与风格"
+      workplace_comms: "邮件、会议与协作"
+      content_creation: "内容选题与传播"
+  personal_career:
+    label: "个人系统与职业"
+    subcategories:
+      personal_os: "精力、专注与知识库"
+      learning: "学习、阅读与概念理解"
+      career: "求职、面试与职业发展"
+  custom:
+    label: "自定义领域"
+    subcategories:
+      general_custom: "未细分专题"
+
+# 确定性关键词/领域标签归类规则（按优先级从上到下匹配，命中即确定主归属）
+classification_rules:
+  - category: engineering
+    subcategory: debugging
+    keywords: ["debug", "debugging", "报错", "故障", "排障", "日志", "timeout", "bug", "perf", "性能排查"]
+  - category: engineering
+    subcategory: code_review
+    keywords: ["code_review", "code", "代码审查", "重构", "pull_request", "diff", "测试", "test"]
+  - category: engineering
+    subcategory: architecture
+    keywords: ["architecture", "backend", "frontend", "system_design", "api", "sql", "database", "engineering", "微服务", "架构", "接口"]
+  - category: engineering
+    subcategory: ai_workflow
+    keywords: ["prompt", "ai_workflow", "agent", "llm", "automation", "ops-automation", "自动化"]
+
+  - category: product_business
+    subcategory: pricing_strategy
+    keywords: ["pricing", "定价", "报价", "收费", "毛利", "变现", "commercial", "unit_economics"]
+  - category: product_business
+    subcategory: growth_marketing
+    keywords: ["marketing", "growth", "seo", "geo", "增长", "营销", "获客", "漏斗", "销售", "转化"]
+  - category: product_business
+    subcategory: indie_business
+    keywords: ["business", "indie", "startup", "saas", "创业", "商业", "竞争", "市场", "客户"]
+  - category: product_business
+    subcategory: product_design
+    keywords: ["product", "mvp", "prd", "需求", "产品", "实验", "用户访谈", "问卷", "看板", "指标", "design"]
+
+  - category: writing_comms
+    subcategory: workplace_comms
+    keywords: ["email", "mail", "meeting", "communication", "邮件", "会议", "纪要", "汇报", "沟通", "交接", "投诉", "协商"]
+  - category: writing_comms
+    subcategory: content_creation
+    keywords: ["content", "editorial", "headline", "标题", "选题", "公众号", "文章", "叙事", "脚本", "创意", "creative"]
+  - category: writing_comms
+    subcategory: writing_polish
+    keywords: ["writing", "copywriting", "polish", "translate", "rewrite", "润色", "重写", "翻译", "去 ai 味", "本地化", "language"]
+
+  - category: personal_career
+    subcategory: career
+    keywords: ["career", "interview", "offer", "resume", "求职", "面试", "简历", "职业", "岗位"]
+  - category: personal_career
+    subcategory: learning
+    keywords: ["learning", "study", "paper", "论文", "学习", "概念", "辅导", "读书", "练习"]
+  - category: personal_career
+    subcategory: personal_os
+    keywords: ["personal-os", "life", "productivity", "focus", "habit", "精力", "时间", "专注", "生活", "计划", "planning"]
+
+  - category: general
+    subcategory: research
+    keywords: ["research", "调研", "研究", "证据", "信源", "fact", "核查", "弱信号"]
+  - category: general
+    subcategory: decision
+    keywords: ["decision", "converge", "compare", "对比", "决策", "取舍", "拍板", "选型", "矩阵"]
+  - category: general
+    subcategory: critical_thinking
+    keywords: ["critique", "premortem", "red_team", "验尸", "红队", "反证", "假设", "盲区", "泡沫"]
+  - category: general
+    subcategory: problem_solving
+    keywords: ["cognition", "deconstruct", "mece", "metacognize", "拆解", "框架", "第一性", "瓶颈", "追问"]

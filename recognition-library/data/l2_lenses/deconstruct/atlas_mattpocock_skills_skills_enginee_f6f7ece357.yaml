@@ -1,0 +1,68 @@
+id: atlas_mattpocock_skills_skills_enginee_f6f7ece357
+title: 规格工单实现提交流
+tagline: 拿规格/工单后按链路实现、验证、审查、提交，避免执行漂移。
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  - vague
+  domains:
+  - engineering
+  - implementation
+  - testing
+  - code_review
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Terminal
+  - Linear
+  pain_point: 拿到需求或工单就直接开写，最后才发现漏了测试、没跑全量、没审查就提交，返工多。
+  trigger_utterances:
+  - 按这个工单实现一下
+  - 规格都写好了帮我按步骤落地
+  - TICKET-123 帮我实现并跑测试提交
+  - 按 PRD 实现功能并自检
+  - 这个 issue 帮我实现完提交
+  anti_triggers:
+  - 只是调试一个报错，不用完整实现流程
+  - 只是问某个 API 怎么用
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: '你将按给定的规格/工单执行端到端实现，遵循受控链路，不要直接埋头编码。
+
+
+    输入规格/工单：
+
+    {{input}}
+
+
+    执行步骤：
+
+    1. 若输入含工单引用，先从 issue tracker 取回该工单，开始前明确复述其标题；引用歧义时先询问用户，不要猜测。
+
+    2. 按规格/工单描述实现；仅在预先约定的接缝处可选择性调用 tdd，不强制全局 TDD。
+
+    3. 开发中定期运行类型检查与单个测试文件，尽早暴露局部回归。
+
+    4. 全部实现完成后仅运行一次完整测试套件。
+
+    5. 调用 code-review 审查，确认通过后再提交到当前分支。
+
+    6. 提交目标限定为当前分支，不新建/切换分支。
+
+
+    反模式（避免）：未确认工单标题就编码；歧义时自行猜测；任意位置全面套用 TDD；过程中反复跑全量测试或结束前不跑全量。'
+  variables: []
+  workflow: null
+meta:
+  source: atlas-methods
+  source_ref: mattpocock/skills:skills/engineering/implement/SKILL.md
+  source_hash: 8bc9f4ee9acf7de1cb7694fc58f7a602259167761b16593d936c7a85e27c8907
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

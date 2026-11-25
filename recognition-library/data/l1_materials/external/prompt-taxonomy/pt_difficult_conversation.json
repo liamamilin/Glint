@@ -1,0 +1,27 @@
+{
+  "id": "pt_difficult_conversation",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#difficult-conversation",
+  "title": "练习一次难开口的对话",
+  "content": "帮我准备跟【对方及关系】讨论【问题】。按我感受到的影响、对方可能关心的点和希望达成的请求组织开场。扮演对方提出一个具体异议，等我回应后给可执行的反馈。",
+  "content_hash": "8126cc4a733bf1093f9f11ba43a847766da574b927bdd84ff36a60f73e249364",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "communication",
+    "困难对话",
+    "冲突",
+    "difficult conversation"
+  ],
+  "problem_solved": "带着目标和可调整边界进入讨论。",
+  "when_to_use": "分类: 沟通与协商",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "difficult-conversation",
+    "category": "communication",
+    "variables": [
+      "对方及关系",
+      "问题"
+    ]
+  }
+}

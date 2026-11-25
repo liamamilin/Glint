@@ -1,0 +1,27 @@
+{
+  "id": "pt_worked_example",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#worked-example",
+  "title": "生成一个带步骤的示例",
+  "content": "为【主题】生成一个适合【水平】的例题。给题目、解题步骤和每一步成立的依据，标注两个常见错误。最后出一题只改变一个条件的迁移练习，并把答案折在末尾。",
+  "content_hash": "8354e89857ec693b51ef2b1a12d2845412cd33a426a82c31390b14d16e0d56a5",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "learning",
+    "例题",
+    "演示",
+    "worked example"
+  ],
+  "problem_solved": "展示每一步如何从条件得到结论。",
+  "when_to_use": "分类: 学习与辅导",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "worked-example",
+    "category": "learning",
+    "variables": [
+      "主题",
+      "水平"
+    ]
+  }
+}

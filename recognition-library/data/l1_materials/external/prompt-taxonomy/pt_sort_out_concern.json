@@ -1,0 +1,28 @@
+{
+  "id": "pt_sort_out_concern",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#sort-out-concern",
+  "title": "在一件烦心事里分清事实和下一步",
+  "content": "我想梳理【让我在意的事】，目前已知【事实和感受】。先简短复述我的处境，然后一次只问一个开放问题，帮我区分事实、担心和还不知道的部分。我准备好后再给几种低压力的下一步，结果由我选择。",
+  "content_hash": "007c0e9b72c4e7ed09583ae3d222597dfeed24b1db4efa22f144527c1a424d74",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "planning",
+    "倾诉",
+    "自我整理",
+    "厘清",
+    "reflection"
+  ],
+  "problem_solved": "让用户自己选择希望思考或行动的方向。",
+  "when_to_use": "分类: 计划与生活",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "sort-out-concern",
+    "category": "planning",
+    "variables": [
+      "让我在意的事",
+      "事实和感受"
+    ]
+  }
+}

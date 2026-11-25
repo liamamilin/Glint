@@ -1,0 +1,48 @@
+id: pt_clean_table
+title: 制定表格清洗规则
+tagline: 为脏数据输出可复跑的清洗规则与校验信号
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - data
+  - data_cleaning
+  - tables
+  - data_quality
+  - etl
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  - ChatGPT
+  - Claude
+  pain_point: 面对脏数据/杂乱表格不知如何下手清洗，怕漏掉边界情况或产出不可复跑的临时操作
+  trigger_utterances:
+  - 这个表格太脏了帮我定清洗规则
+  - 数据有缺失和重复怎么处理
+  - 帮我写个数据清洗方案
+  - 脏数据清洗 checklist
+  - 怎么把这份 Excel 清干净可复跑
+  anti_triggers:
+  - 仅需快速删空行的简单操作
+  - 纯 SQL 查询不涉及清洗规则制定
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 检查 {{column_structure_and_samples}}，为 {{downstream_purpose}} 制定清洗规则。逐项写明缺失值、重复记录、日期与单位的处理，区分可自动修复和需要人工确认的情况。用小表展示输入、期望输出和校验信号。
+  variables:
+  - column_structure_and_samples
+  - downstream_purpose
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#clean-table
+  source_hash: e44b7d1521d2a72feb6978770989d3f730846839dde922678bedde3346b80079
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

@@ -1,0 +1,28 @@
+{
+  "id": "pt_human_checkpoints",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#human-checkpoints",
+  "title": "给多步 AI 工作流设计人工检查点",
+  "content": "把【重复任务及步骤】设计成半自动工作流，使用【允许的工具和材料】。逐步列交付物、完成信号、失败回退和恢复所需状态。指出提交、发送或覆盖前需要由人查看哪些信息。",
+  "content_hash": "b15aecd6b0c4385b35ffae8abfb34dde2c6c46cd54e603baad2c8b7bc0e1440a",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "prompt-workflows",
+    "人工审核",
+    "工作流",
+    "agent workflow",
+    "human in the loop"
+  ],
+  "problem_solved": "将关键输入和输出转成可审核节点。",
+  "when_to_use": "分类: 提示词与 AI 工作流",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "human-checkpoints",
+    "category": "prompt-workflows",
+    "variables": [
+      "重复任务及步骤",
+      "允许的工具和材料"
+    ]
+  }
+}

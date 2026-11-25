@@ -1,0 +1,62 @@
+id: disc_cognition_weak_signal_radar
+title: 弱信号源雷达
+tagline: 用一手弱信号替代滞后热搜，提前看见早期变化
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - digest
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - information_diet
+  - research
+  - weak_signals
+  - trend_radar
+  - cross_domain
+  app_affinity:
+  - Chrome
+  - Notion
+  - Obsidian
+  - Cursor
+  pain_point: 用户依赖热搜、科技媒体和公众号获取趋势，总在变化已经成共识后才看见，错过早期机会和真实用户抱怨
+  trigger_utterances:
+  - 这个热点是不是早就晚了，真正变化在哪里
+  - 帮我找点一手弱信号，别再刷媒体通稿
+  - 我刷到一个零散观察，它背后反映什么结构变化
+  - 每周 15 分钟怎么扫 GitHub 和小众论坛
+  - 这个领域早期变化藏在哪里
+  anti_triggers:
+  - 用户只是想总结一篇已发布的新闻报道
+  - 用户需要对某个单一产品做全面评测
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '弱信号雷达每周扫描清单：
+
+    - [ ] 写出要追踪的领域、3 个关键词和 1 个反向关键词
+
+    - [ ] 选择 5 类一手源：GitHub 提交/Release、小众论坛吐槽、产品更新日志、论文附录、创始人/运营者公开记录
+
+    - [ ] 每个源只扫最近 7 天，记录异常、新增、抱怨、删除或沉默变化
+
+    - [ ] 为每条观察写一句“它改变了谁的成本/摩擦/激励”
+
+    - [ ] 往上抽象一层：这是局部噪音，还是底层结构变化的早期表现
+
+    - [ ] 迁移检查：相邻领域是否可能出现同类机会或风险
+
+    - [ ] 每周只保留 3 条弱信号，并写成可验证假设
+
+    - [ ] 下周回看：哪些信号被证实、证伪或只是噪音'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/cognition.json#cognition-weak-signal-radar
+  source_hash: 94334df9ac67687b4d6a00b33e59f6c0c70d75912fa099f160e977eff8bb3a05
+  status: active
+  base_weight: 1.0
+  confidence: 0.86
+  version: 1

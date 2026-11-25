@@ -1,0 +1,28 @@
+{
+  "id": "pt_how_to",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#how-to",
+  "title": "拆解一个操作步骤",
+  "content": "我想完成【目标】，我的起点和资源是【现状】。按执行顺序给步骤，每一步写清要做的事、可观察的完成信号和一个常见失误。最后给一个我现在就能完成的最小步骤。",
+  "content_hash": "61ae6f31573e1e39ba1f989027395e654196cb2b441c282f784af5464efd85b6",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "planning",
+    "怎么做",
+    "教程",
+    "步骤",
+    "how-to"
+  ],
+  "problem_solved": "把目标、准备事项和检查点串起来。",
+  "when_to_use": "分类: 计划与生活",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "how-to",
+    "category": "planning",
+    "variables": [
+      "目标",
+      "现状"
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "pt_funnel_analysis",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#funnel-analysis",
+  "title": "分析转换漏斗在哪些阶段流失",
+  "content": "用【事件数据和字段说明】分析【目标漏斗】。先定义入口、顺序、去重和转化时间窗，再列每阶段人数、转化率和掉队人数。按【可比较分组】做一次分层，标出无法判定原因的流失。",
+  "content_hash": "31e7e902ede82d6ac05172ca41576b2d8cfab9011951ff40d0cf6d233c898373",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "data",
+    "漏斗",
+    "转化率",
+    "funnel analysis"
+  ],
+  "problem_solved": "检查分母、同一用户旅程和统计窗口。",
+  "when_to_use": "分类: 数据与表格",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "funnel-analysis",
+    "category": "data",
+    "variables": [
+      "事件数据和字段说明",
+      "目标漏斗",
+      "可比较分组"
+    ]
+  }
+}

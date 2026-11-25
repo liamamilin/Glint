@@ -1,0 +1,80 @@
+id: disc_build_malleable_web_patches
+title: 给网页打外挂补丁
+tagline: 5分钟用AI写油猴脚本，把别人的软件改成自己的形状
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - create
+  clarity_fit:
+  - concrete
+  domains:
+  - browser
+  - userscript
+  - malleable_software
+  - invisible_friction
+  - cost_collapse
+  app_affinity:
+  - Chrome
+  - Cursor
+  - ChatGPT
+  - Claude
+  pain_point: 每天高频使用的网站难用、信息杂乱或少个导出按钮，只能忍着等官方更新
+  trigger_utterances:
+  - 这个网站侧边栏太吵了能不能帮我藏掉
+  - GitHub 页面能不能加个一键复制按钮
+  - 写个油猴脚本帮我自动翻页
+  - 这个网页少个导出功能我好烦
+  - 能不能用 Tampermonkey 改一下这个网站的交互
+  anti_triggers:
+  - 需要开发完整浏览器扩展或上架商店的场景
+  - 涉及修改网站后端或突破权限限制的场景
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '## 用 AI 写油猴脚本给网页打外挂补丁
+
+
+    ### 步骤
+
+    1. 明确痛点：列出该网站最让你烦躁的 2 个问题（如侧边栏太吵/缺少一键复制/翻页麻烦）。
+
+    2. 选择工具：安装 Tampermonkey 扩展，新建空白脚本。
+
+    3. 让 AI 生成脚本：把痛点描述喂给 AI，要求输出极简 JS（<=50 行），包含 @match、@grant 等元信息。
+
+    4. 本地验证：在目标页面打开控制台，确认选择器命中、无报错。
+
+    5. 迭代微调：根据实际 DOM 调整选择器/快捷键，保存脚本。
+
+
+    ### 可复用 Prompt 母题
+
+    - 我每天都要用 [某个网站/Web 系统]，但它最让我烦躁的 2 个问题是：[描述痛点]。请帮我写一个极简 Tampermonkey 油猴脚本，直接在本地修复这些体验。
+
+    - 列出 5 个你在 [某高频网站，如 GitHub/B站/Notion/邮箱] 上最值得用 50 行 JS 脚本改造的“反人性交互”，并按提效幅度排序。
+
+
+    ### 验收标准
+
+    - 脚本 <= 50 行，仅在匹配域名运行
+
+    - 不破坏页面原有功能
+
+    - 痛点交互被隐藏/注入/导出'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/build.json#build-malleable-web-patches
+  source_hash: 6a23b03d3914e9b834f93cffcce57b453dd023d3eb81dedd47047cac45082270
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: writing_comms
+  subcategory: content_creation
+  collections: []
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

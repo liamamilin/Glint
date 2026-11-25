@@ -1,0 +1,59 @@
+id: disc_career_proof_of_work_portfolio
+title: 用前置作品证明替代简历
+tagline: 做2小时开源诊断发给目标团队，响应率高出一个数量级
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - career
+  - portfolio
+  - proof_of_work
+  - outbound
+  app_affinity:
+  - Notion
+  - Chrome
+  - Mail
+  - ChatGPT
+  pain_point: 投了大量简历却石沉大海，HR 被 AI 生成的完美简历淹没，想让目标团队在30秒内看到真实实力却不知从何下手
+  trigger_utterances:
+  - 简历投出去都没回应怎么办
+  - 怎么让 hiring manager 注意到我
+  - 想给目标公司做个项目但不知道做什么
+  - 把我的经历包装成作品集
+  - permissionless proof of work 怎么做
+  anti_triggers:
+  - 只是想润色简历 wording
+  - 需要完整的职业规划或面试题库
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '前置作品证明（Permissionless Proof-of-Work）执行清单：
+
+    1. 锁定目标：选 1 个目标公司/客户 + 其真实痛点（从产品、文档、公开 Issue 中找）。
+
+    2. 2 小时内做出最小可验证原型：开源诊断、bug 修复 PR、改进方案或 Demo。
+
+    3. 把过程与结论公开（GitHub/Notion/博客），确保陌生人 30 秒可看懂。
+
+    4. 写一封 ≤100 字触达邮件：指出痛点 + 你的发现 + 链接，不卑不亢。
+
+    5. 发给具体决策人（非 HR 门户），跟进 1 次。
+
+    6. 简历经历转公开案例：把一段普通经历改写为「问题-动作-可验证结果-链接」。
+
+    7. 复盘响应率，迭代原型选题。'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/career.json#career-proof-of-work-portfolio
+  source_hash: 60b94b8bebd20fa91d19de6b807e977b514a33a4d655d3b8e3d63e077802d600
+  status: active
+  base_weight: 1.0
+  confidence: 0.82
+  version: 1

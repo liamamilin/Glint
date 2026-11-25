@@ -1,0 +1,28 @@
+{
+  "id": "pt_text_game",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#text-game",
+  "title": "一起玩一局文字推理游戏",
+  "content": "主持一局【题材和难度】的文字推理游戏，时长约【回合数】。给清楚目标、已知线索和能尝试的行动，等我每轮回答再继续。记录我已经发现的证据。直到我请求揭晓或结束，才说明答案和推理过程。",
+  "content_hash": "b1b28c2d4a3a308c675fc247146ea63156173ae327c4245aa6a3029868dcfe28",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "creative",
+    "文字游戏",
+    "推理谜题",
+    "互动",
+    "text game"
+  ],
+  "problem_solved": "让线索可追踪、难度适当，按回合推进。",
+  "when_to_use": "分类: 创作与多媒体",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "text-game",
+    "category": "creative",
+    "variables": [
+      "题材和难度",
+      "回合数"
+    ]
+  }
+}

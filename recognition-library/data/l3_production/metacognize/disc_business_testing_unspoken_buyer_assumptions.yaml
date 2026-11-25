@@ -1,0 +1,63 @@
+id: disc_business_testing_unspoken_buyer_assumptions
+title: 先测买家的切换阻力
+tagline: 先测清用户宁愿忍受什么也不改，再打磨功能
+routing:
+  primitive: metacognize
+  goals:
+  - evaluate
+  - debug
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - business
+  - buyer_validation
+  - switching_friction
+  - product_strategy
+  - discovery
+  app_affinity:
+  - Notion
+  - Linear
+  - Chrome
+  pain_point: 团队默认“功能够全、界面够好用户就会切换”，却忽略了用户改变现有习惯、迁移历史数据与承担切换风险的真实阻力，导致产品做好了也推不动转化。
+  trigger_utterances:
+  - 功能都做好了用户怎么还不买
+  - 用户说好用但就是不切换
+  - 为什么用户不肯迁移过来
+  - 新功能上线了转化却没涨
+  - 是不是我们哪里没戳到痛点
+  anti_triggers:
+  - 已确认用户明确要切换，只差工程实现
+  - 纯功能 bug 排查或性能优化
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '验证买家默认不愿改变的习惯（切换阻力清单）
+
+
+    1. 现状盘点：针对 {{target_user}} 在 {{scenario}} 下的现状（{{current_workaround}}），列出 4 个可能导致他们“懒得切换”的习惯阻力或迁移顾虑，并为每项给出低成本验证方法（如访谈
+    5 人、落地页测试、Wizard-of-Oz）。
+
+    2. 转化卡点：在 {{product_idea}} 中，找出哪一个“需要用户改变原有习惯”的动作最容易卡住转化，并评估能否通过渐进式迁移/兼容旧流程降低阻力。
+
+    3. 判定：若阻力无法被低成本消除，则重新定义切口，而不是继续堆功能。'
+  variables:
+  - target_user
+  - scenario
+  - current_workaround
+  - product_idea
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-testing-unspoken-buyer-assumptions
+  source_hash: 0fa8fa3f1171e376de9917b5326c0e7a3cfe233121c30674c75556daff1c9ad9
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: product_business
+  subcategory: indie_business
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

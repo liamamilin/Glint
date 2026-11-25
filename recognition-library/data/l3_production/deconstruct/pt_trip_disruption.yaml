@@ -1,0 +1,61 @@
+id: pt_trip_disruption
+title: 行程变动替代方案
+tagline: 航班延误/天气突变时，快速重排两套可执行行程
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - create
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - travel
+  - planning
+  - itinerary
+  - logistics
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Mail
+  - Chrome
+  pain_point: 原定行程因天气、航班或突发状况无法照常进行，用户需要在有限时间、预算和同行人约束下快速重排出可执行的替代方案，并搞清哪些要取消、替换、重新核实
+  trigger_utterances:
+  - 航班取消了行程全乱了怎么办
+  - 天气不好原计划去不了怎么改
+  - 行程变动帮我重新排一下
+  - travel disruption need backup plan
+  - 原计划泡汤了给个 Plan B
+  anti_triggers:
+  - 仅想查询某景点开放时间或票价
+  - 日常无干扰的正常行程规划
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 【原行程】因【变化】无法照常进行。根据【剩余时间、预算和同行人】，给保守版和可扩展版两套安排。分别列需要取消、替换和重新核实的事项，提供票务或场馆的官方入口。请输出：1) 保守版行程（时间/费用/可达性优先）；2) 可扩展版行程（体验优先但可控）；3)
+    取消清单；4) 替换清单；5) 重新核实清单（含官方入口链接）；6) 风险与备选。
+  variables:
+  - 变化
+  - 剩余时间
+  - 预算
+  - 同行人
+  - 原行程
+  - 剩余时间、预算和同行人
+  workflow:
+    workflow_id: plan-travel
+    step: 4
+    next_lens_id: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#trip-disruption
+  source_hash: 49cc93ef0d31f7ee14a18a0dbfa49de3db8f9c5d9e12aca9f46e279c30286588
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: personal_career
+  subcategory: personal_os
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

@@ -1,0 +1,41 @@
+id: pt_event_plan
+title: 把聚会或活动拆成执行表
+tagline: 把聚会/活动拆成倒排时间表、当日流程、物资分工与备选预案
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - concrete
+  - vague
+  domains:
+  - event_planning
+  - planning
+  - logistics
+  app_affinity:
+  - Notion
+  - Feishu
+  pain_point: 活动策划散落在聊天和便签里，时间、人员、物资、联络没有统一表，临场容易混乱
+  trigger_utterances:
+  - 帮我把周六的生日派对拆成执行表
+  - 婚礼流程和分工帮我理一下
+  - 活动策划从时间人员物资到联络安排
+  - 帮我排个活动倒排表
+  - 聚会物资和分工怎么安排
+  anti_triggers:
+  - 纯创意头脑风暴无具体活动
+  - 已有完整SOP只需润色
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 策划【活动类型和目标】给【参与人数和需求】，限制是【地点、日期和资源】。交付倒排时间表、当日流程、物资与分工，以及天气或缺席的备选。标出凡需确认开放时间或预订的项目。
+  variables: []
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#event-plan
+  source_hash: b0fef79a4d7ea14467298726b54986163bd6e7d8b6b94e69b4b221c2f11b101c
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

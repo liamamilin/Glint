@@ -1,0 +1,29 @@
+{
+  "id": "pt_summarize",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#summarize",
+  "title": "总结长文或对话",
+  "content": "把【材料】总结给【受众】，用于【阅读目的】。先给一句主旨，再给最多五个要点。保留关键数字和前提，每条标注可回查的小节或发言位置。若材料提出相互矛盾的说法，另列出来。",
+  "content_hash": "7367aa00ff21dcaadc1aeabc358e688bcf34e7de67163fa7172af04808d5710e",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "writing",
+    "总结",
+    "摘要",
+    "提炼",
+    "summarize"
+  ],
+  "problem_solved": "用较短篇幅保留事实和关键细节。",
+  "when_to_use": "分类: 写作与语言",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "summarize",
+    "category": "writing",
+    "variables": [
+      "材料",
+      "受众",
+      "阅读目的"
+    ]
+  }
+}

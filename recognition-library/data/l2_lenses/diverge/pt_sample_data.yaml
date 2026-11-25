@@ -1,0 +1,44 @@
+id: pt_sample_data
+title: 生成代表性测试假数据
+tagline: 按字段约束生成含边界、空值、重复的样例数据
+routing:
+  primitive: diverge
+  goals:
+  - create
+  clarity_fit:
+  - concrete
+  domains:
+  - data
+  - testing
+  - synthetic_data
+  - qa
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Terminal
+  pain_point: 测试时缺少覆盖边界值、空值与重复的代表性样例，导致缺陷在真实数据下才暴露
+  trigger_utterances:
+  - 帮我生成一组测试数据
+  - 需要覆盖边界值和空值的样例
+  - 造点假数据做导入测试
+  - 给这些字段生成 mock 数据
+  - 测试数据要含重复和空值
+  anti_triggers:
+  - 生产环境真实数据迁移
+  - 真实用户数据脱敏
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 按【字段和约束】生成【用途和规模】的虚构数据。包含典型值、边界值、空值及一次可辨认的重复，用可导入格式输出。每类边界附预期校验结果，使用明显虚构的标识和信息。
+  variables:
+  - 字段和约束
+  - 用途和规模
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#sample-data
+  source_hash: a32067fac0cee9a1797fc3e584d5a9016dffb031c77b5f94c009676387edf2bf
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

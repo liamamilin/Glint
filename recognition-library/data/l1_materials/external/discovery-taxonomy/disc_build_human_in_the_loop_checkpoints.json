@@ -1,0 +1,33 @@
+{
+  "id": "disc_build_human_in_the_loop_checkpoints",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/build.json#build-human-in-the-loop-checkpoints",
+  "title": "让自动化只在“关键决策卡点”停下来等人确认",
+  "content": "旧共识（盲区）：自动化要么是“全自动无人值守”，要么是“每一步都弹窗问人”，两者都很别扭。\n\n新现实（破盲视角）：最顺手的人机协作是：前 90% 的搜集、清洗、草拟全自动跑完，只在涉及对外发送、花钱、删改或高风险判断时留一个清晰确认点。\n\n破冰追问母题：\n- 我想把 [某个半自动工作流，如整理信息/起草回复/生成方案] 交给 AI 或脚本跑。请帮我画出“自动执行段”和“必须停下来让我确认的 1～2 个关键卡点”。\n- 针对 [你最担心的自动化翻车场景]，设计一种“低打扰但足够安全”的确认与兜底机制，既不天天弹框烦人又能挡住致命错误。",
+  "content_hash": "bbaffc76f5d9c1203d782f4a7245358b0a222ccd65923bb3039b4c3e55a4e90c",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "build",
+    "role-inversion",
+    "invisible-friction",
+    "human-in-the-loop",
+    "approval",
+    "agents",
+    "safety"
+  ],
+  "problem_solved": "自动化要么是“全自动无人值守”，要么是“每一步都弹窗问人”，两者都很别扭。",
+  "when_to_use": "最顺手的人机协作是：前 90% 的搜集、清洗、草拟全自动跑完，只在涉及对外发送、花钱、删改或高风险判断时留一个清晰确认点。",
+  "procedural_steps": [
+    "我想把 [某个半自动工作流，如整理信息/起草回复/生成方案] 交给 AI 或脚本跑。请帮我画出“自动执行段”和“必须停下来让我确认的 1～2 个关键卡点”。",
+    "针对 [你最担心的自动化翻车场景]，设计一种“低打扰但足够安全”的确认与兜底机制，既不天天弹框烦人又能挡住致命错误。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "build-human-in-the-loop-checkpoints",
+    "arena": "build",
+    "lenses": [
+      "role-inversion",
+      "invisible-friction"
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "pt_resume_bullets",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#resume-bullets",
+  "title": "把真实项目经历压成简历要点",
+  "content": "把【经历与实际证据】写成面向【岗位】的简历要点。每项用动词开头，说明负责对象、关键做法和结果，区分个人贡献与团队结果。缺失数字写成待补位，列可核实的替代指标。",
+  "content_hash": "64bf911e11eeedf54c9519d433d1a7cb70f46be0bc5b7ab6544ed9e8cd923617",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "career",
+    "简历要点",
+    "成就",
+    "履历",
+    "resume bullet"
+  ],
+  "problem_solved": "写清贡献、做法与可核实结果。",
+  "when_to_use": "分类: 求职与职业",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "resume-bullets",
+    "category": "career",
+    "variables": [
+      "经历与实际证据",
+      "岗位"
+    ]
+  }
+}

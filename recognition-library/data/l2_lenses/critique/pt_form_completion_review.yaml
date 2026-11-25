@@ -1,0 +1,43 @@
+id: pt_form_completion_review
+title: 表单完整性检查
+tagline: 提交前查漏补缺：字段、格式、附件
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  clarity_fit:
+  - concrete
+  domains:
+  - forms
+  - documents
+  - compliance
+  - files
+  app_affinity:
+  - Chrome
+  - Mail
+  - Feishu
+  - Notion
+  pain_point: 用户填完表单准备提交，但不确定是否漏填字段、格式不对或附件不齐，担心被退回
+  trigger_utterances:
+  - 这个表单我填完了帮我检查一下
+  - 提交前再确认一遍有没有漏项
+  - 附件都齐了吗
+  - check if this form is complete
+  - 表单字段和附件对一下
+  anti_triggers:
+  - 需要从零起草一份新表单或文档
+  - 仅做文本润色或翻译
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 检查【空白要求、已填表单与附件】。按字段列是否已填、格式、与已知材料的一致性及附件是否齐全。引用页码或字段名，将提交前必须补齐的事项与可选项分开。
+  variables: []
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#form-completion-review
+  source_hash: b7c8709829a60e142729ac038c940f0f2fdb42b340e065f52b45b8aa58319e61
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

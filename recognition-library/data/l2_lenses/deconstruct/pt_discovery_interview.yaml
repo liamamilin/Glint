@@ -1,0 +1,68 @@
+id: pt_discovery_interview
+title: 设计用户访谈提纲
+tagline: 围绕真实产品问题，生成中性措辞的深度访谈提纲与记录模板
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - product_discovery
+  - user_research
+  - interview_design
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  pain_point: 要做用户访谈但不知道如何设计提纲，容易问出引导性或假设性问题，拿不到真实行为证据
+  trigger_utterances:
+  - 帮我设计一份用户访谈提纲
+  - discovery interview 怎么问
+  - 想做用户调研但不知道问什么
+  - 访谈时老是问出引导性问题
+  - 帮我列个访谈问题清单
+  anti_triggers:
+  - 直接生成用户画像而非访谈提纲
+  - 做问卷调查而非深度访谈
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '围绕【产品问题】访谈【用户群】，可用【时长】。请按以下结构设计一份深度访谈提纲：
+
+
+    1. 开场（2-3min）：自我介绍、说明目的、隐私与录音确认、热身。
+
+    2. 最近一次实际经历（10-15min）：让用户讲最近一次遇到该问题的具体事件，包含时间、场景、步骤、情绪。
+
+    3. 现有替代办法（8-10min）：他们现在怎么解决、用过哪些工具/流程、各有什么优缺点。
+
+    4. 影响与优先级（5-8min）：该问题造成的影响、发生频率、愿意付出的时间/成本。
+
+    5. 收尾（3-5min）：总结确认、开放性问题、后续跟进安排。
+
+
+    每题使用中性措辞（避免引导或预设答案），附一个适合事实追问的提示（如“能具体说说当时发生了什么吗？”），并提供访谈记录模板：时间戳｜原话引述｜观察｜标签。
+
+
+    输入：
+
+    - 产品问题：{{product_problem}}
+
+    - 用户群：{{user_segment}}
+
+    - 可用时长：{{duration}}'
+  variables:
+  - product_problem
+  - user_segment
+  - duration
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#discovery-interview
+  source_hash: 21564b532af1bf73c63f90aeb3d3a19fa33f7bb5adcda86e36daffb6da439e93
+  status: active
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

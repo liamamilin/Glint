@@ -1,0 +1,33 @@
+{
+  "id": "disc_life_protecting_morning_or_peak_window",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/life.json#life-protecting-morning-or-peak-window",
+  "title": "守住每天第一块黄金时段，别一醒来就被别人的消息接管",
+  "content": "旧共识（盲区）：早上醒来第一件事就该看手机、回消息、刷资讯，不然怕漏掉重要事。\n\n新现实（破盲视角）：一旦早起第一眼就陷入他人需求和信息流，整天的注意力主权就交出去了；哪怕先留出 30～60 分钟做一件自己的事，全天掌控感都会不一样。\n\n破冰追问母题：\n- 我每天早上容易一睁眼就看手机/回消息，导致真正想做的事被挤掉。请帮我设计一套“温和、不制造焦虑”的晨间前 45 分钟安排。\n- 针对 [你的日常作息，如早起党/夜猫子/轮班作息]，帮我划出每天最值得保护的一段“免打扰黄金时间”，并写出对应的防打扰小规则。",
+  "content_hash": "fba8d8e62d6b247ab82afa0724a138b625f17511087146c002c9268adb726a36",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "life",
+    "first-principles",
+    "invisible-friction",
+    "boundaries",
+    "deep-work",
+    "morning",
+    "attention"
+  ],
+  "problem_solved": "早上醒来第一件事就该看手机、回消息、刷资讯，不然怕漏掉重要事。",
+  "when_to_use": "一旦早起第一眼就陷入他人需求和信息流，整天的注意力主权就交出去了；哪怕先留出 30～60 分钟做一件自己的事，全天掌控感都会不一样。",
+  "procedural_steps": [
+    "我每天早上容易一睁眼就看手机/回消息，导致真正想做的事被挤掉。请帮我设计一套“温和、不制造焦虑”的晨间前 45 分钟安排。",
+    "针对 [你的日常作息，如早起党/夜猫子/轮班作息]，帮我划出每天最值得保护的一段“免打扰黄金时间”，并写出对应的防打扰小规则。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "life-protecting-morning-or-peak-window",
+    "arena": "life",
+    "lenses": [
+      "first-principles",
+      "invisible-friction"
+    ]
+  }
+}

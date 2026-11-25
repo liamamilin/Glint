@@ -1,0 +1,33 @@
+{
+  "id": "disc_cognition_cross_domain_analogy",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/cognition.json#cognition-cross-domain-analogy",
+  "title": "用“结构同构”做跨学科解法移植",
+  "content": "旧共识（盲区）：遇到难题时，只在自己所在行业的最佳实践里找答案。\n\n新现实（破盲视角）：你所在领域卡了十年的难题，往往在另一个毫不相干的学科（如航空、生态学、游戏设计、精益制造）里早就有成熟到烂大街的标准解法。\n\n破冰追问母题：\n- 我目前卡在一个难题上：[描述你的问题，去掉行业黑话]。请先把这个问题抽象成底层结构，再从 3 个完全不相关的领域（如游戏设计、急诊医学、航空管制、生态学）找出成熟解法并翻译回来。\n- 如果把 [你正在做的项目/习惯] 当作一款电子游戏的机制来重新设计，有哪些“即时反馈、难度曲线、防挫败”的设计可以直接照搬过来？",
+  "content_hash": "7275c6e92e13ec714c37fc6667b636352462d9c82c51a23118ff411109495bb2",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "cognition",
+    "cross-domain",
+    "first-principles",
+    "analogy",
+    "mental-models",
+    "innovation",
+    "跨学科"
+  ],
+  "problem_solved": "遇到难题时，只在自己所在行业的最佳实践里找答案。",
+  "when_to_use": "你所在领域卡了十年的难题，往往在另一个毫不相干的学科（如航空、生态学、游戏设计、精益制造）里早就有成熟到烂大街的标准解法。",
+  "procedural_steps": [
+    "我目前卡在一个难题上：[描述你的问题，去掉行业黑话]。请先把这个问题抽象成底层结构，再从 3 个完全不相关的领域（如游戏设计、急诊医学、航空管制、生态学）找出成熟解法并翻译回来。",
+    "如果把 [你正在做的项目/习惯] 当作一款电子游戏的机制来重新设计，有哪些“即时反馈、难度曲线、防挫败”的设计可以直接照搬过来？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "cognition-cross-domain-analogy",
+    "arena": "cognition",
+    "lenses": [
+      "cross-domain",
+      "first-principles"
+    ]
+  }
+}

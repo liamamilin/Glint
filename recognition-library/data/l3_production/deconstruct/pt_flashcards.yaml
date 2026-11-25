@@ -1,0 +1,50 @@
+id: pt_flashcards
+title: 笔记转闪卡
+tagline: 把笔记拆成一张一考点的可复习闪卡
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - concrete
+  domains:
+  - learning
+  - memory
+  - flashcards
+  - study
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  pain_point: 笔记堆成一团，复习时一张卡考好几个点，记不住也分不清
+  trigger_utterances:
+  - 帮我把笔记做成闪卡
+  - 这些笔记转成 Anki 卡
+  - 一卡只考一个点帮我拆一下
+  - 把这段内容做成可复习的 flashcard
+  - 帮我生成闪卡方便背诵
+  anti_triggers:
+  - 只想总结笔记要点
+  - 要做思维导图梳理结构
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 把【笔记】转换成面向【复习目标】的闪卡。每张包含一个自足问题、一条简短答案、所属知识点和适合的出处；将复合问题拆成小卡。最后挑三张容易混淆的卡说明辨别线索。
+  variables:
+  - 笔记
+  - 复习目标
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#flashcards
+  source_hash: 207705d826671f6e7e10ce86f626a34c34993cc90bd33fd2674ef7e1af265c37
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: personal_career
+  subcategory: learning
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

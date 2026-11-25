@@ -1,0 +1,90 @@
+id: disc_cognition_base_rates_and_outliers
+title: 先看基准率再押注
+tagline: 先看大样本真实概率与成本，再决定是否押注
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - cognition
+  - probability
+  - decision_making
+  - career
+  - side_hustle
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 看到某人靠捷径或风口一夜翻身，就以为这件事对大多数人也是常态，忽略了真实成功率、常见卡点与投入成本
+  trigger_utterances:
+  - 这个副业好赚钱，我也想试试
+  - 别人都靠这个翻身了，我是不是也能
+  - 这个方向成功率大概多少？
+  - 按理想剧本算时间够吗
+  - 别只看成功案例，帮我算真实概率
+  anti_triggers:
+  - 纯技术 Bug 排查
+  - 已经决定执行、只缺步骤清单
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '基准率与异常值检验清单
+
+
+    对象：{{direction}}（可选目标：{{goal}}）
+
+
+    1. 幸存者偏差检查
+
+    - 我看到的成功案例有多少？是否只展示头部/幸存者？
+
+    - 失败或放弃的人比例大概多少？
+
+    2. 真实基准率
+
+    - 大样本中达到目标结果的比例是多少？
+
+    - 中位数表现者的投入与产出是什么？
+
+    3. 常见卡点
+
+    - 前 3 个最常见的失败/停滞原因
+
+    - 哪些环节最耗时、最烧钱？
+
+    4. 时间与成本 realistic 估算
+
+    - 按中位数而非理想剧本，需要多久看到起色？
+
+    - 全链路投入（时间/金钱/机会成本）是多少？
+
+    5. 决策门槛
+
+    - 我能承受最坏情况吗？
+
+    - 是否先做低成本验证（最小实验）？
+
+
+    输出：给一个清醒的 go/no-go 建议与下一步最小验证动作。'
+  variables:
+  - direction
+  - goal
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/cognition.json#cognition-base-rates-and-outliers
+  source_hash: c48636bcb29c8dea6764545654da56c2d1ca9a40b2a884c36a2300207c574782
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: personal_career
+  subcategory: career
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

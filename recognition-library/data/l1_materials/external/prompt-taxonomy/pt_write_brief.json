@@ -1,0 +1,27 @@
+{
+  "id": "pt_write_brief",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#write-brief",
+  "title": "把需求写成写作任务简报",
+  "content": "把【零散要求和素材】整理为给【写作者】的任务简报。列目标受众、读后行动、主题、必须引用的事实、格式长度及交付时间。将待确认事项写成问题，并给一个可接受开头示例。",
+  "content_hash": "1553ca799a326eabe653dbe24bbcfde2437abc438150b6479daa45a73478419b",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "writing",
+    "写作需求",
+    "文章要求",
+    "creative brief"
+  ],
+  "problem_solved": "集中说明目标、事实、语气和交付格式。",
+  "when_to_use": "分类: 写作与语言",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "write-brief",
+    "category": "writing",
+    "variables": [
+      "零散要求和素材",
+      "写作者"
+    ]
+  }
+}

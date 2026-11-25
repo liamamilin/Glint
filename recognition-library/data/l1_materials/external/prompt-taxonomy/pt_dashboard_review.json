@@ -1,0 +1,28 @@
+{
+  "id": "pt_dashboard_review",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#dashboard-review",
+  "title": "评审现有数据看板是否能支持决策",
+  "content": "评审【看板或截图】能否让【受众】判断【决策】。逐项指出指标意义、更新频率、分母、异常显示和可执行动作的缺口。给最重要的三项修改并说明如何验证读者更易找到答案。",
+  "content_hash": "4ff66b095a1d58f4bcadced641e5c7cbc202a822e52151c0a3cfe4c9745f59ba",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "data",
+    "看板",
+    "仪表盘",
+    "dashboard review"
+  ],
+  "problem_solved": "从读者要做的决定审查指标与布局。",
+  "when_to_use": "分类: 数据与表格",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "dashboard-review",
+    "category": "data",
+    "variables": [
+      "看板或截图",
+      "受众",
+      "决策"
+    ]
+  }
+}

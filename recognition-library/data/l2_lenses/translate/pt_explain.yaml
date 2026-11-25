@@ -1,0 +1,45 @@
+id: pt_explain
+title: 用例子解释概念
+tagline: 先直观例子再给定义，附自查小题
+routing:
+  primitive: translate
+  goals:
+  - digest
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - learning
+  - education
+  - concept_explanation
+  - eli5
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 用户卡在某个概念上，直接看定义难懂，需要先建立直觉再补准确说法
+  trigger_utterances:
+  - 这个概念老是学不会，能不能用例子解释一下
+  - 像给5岁小孩解释一样讲讲这个
+  - 先给个直观例子再讲定义
+  - 这个术语什么意思，举个例子
+  anti_triggers:
+  - 用户只想直接拿结论做题，不关心概念理解
+  - 用户要求严格学术定义而非入门解释
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 请给{{current_level}}的人解释{{concept}}。先用一句话说明它解决什么问题，再给一个具体例子，接着介绍准确定义和类比的边界。最后出一道可自查的小题，把答案放到末尾。
+  variables:
+  - current_level
+  - concept
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#explain
+  source_hash: 0884fdb0aaa04704a9f5732fc8b4542db039b0670aee2ec549787a0f40c5d610
+  status: active
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

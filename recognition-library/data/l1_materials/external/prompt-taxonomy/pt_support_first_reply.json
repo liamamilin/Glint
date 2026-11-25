@@ -1,0 +1,26 @@
+{
+  "id": "pt_support_first_reply",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#support-first-reply",
+  "title": "给新工单写第一条有效回复",
+  "content": "根据【工单和已知情况】写一条首响。先复述用户希望恢复的结果，列已能确认的事实，问一到两个最能缩小范围的问题。给当前能兑现的下一次更新时间。",
+  "content_hash": "002c877b0882f4b1a58c439090fecbcde25ddbc0444fc48fe24ce602a594c332",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "support",
+    "首次响应",
+    "客服回复",
+    "first response"
+  ],
+  "problem_solved": "确认理解并请求最少的诊断信息。",
+  "when_to_use": "分类: 客服与服务运营",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "support-first-reply",
+    "category": "support",
+    "variables": [
+      "工单和已知情况"
+    ]
+  }
+}

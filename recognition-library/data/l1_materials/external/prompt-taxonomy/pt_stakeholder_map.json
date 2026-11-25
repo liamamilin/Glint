@@ -1,0 +1,26 @@
+{
+  "id": "pt_stakeholder_map",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#stakeholder-map",
+  "title": "找出计划中要通知和协调的人",
+  "content": "根据【项目计划与团队职责】梳理干系人。列负责决定、实际执行、提供信息和需知会的角色，写他们需要知道什么、何时联系、希望得到什么反馈。职责不明时给待确认问题。",
+  "content_hash": "1dd23e0fe398bb10054958225bd640ba8b83e874fa2e16d3058b02b85fb75d06",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "office",
+    "干系人",
+    "协作",
+    "stakeholder map"
+  ],
+  "problem_solved": "按职责、决定权与信息需要安排沟通。",
+  "when_to_use": "分类: 办公与协作",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "stakeholder-map",
+    "category": "office",
+    "variables": [
+      "项目计划与团队职责"
+    ]
+  }
+}

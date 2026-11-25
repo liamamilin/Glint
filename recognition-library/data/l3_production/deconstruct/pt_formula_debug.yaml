@@ -1,0 +1,49 @@
+id: pt_formula_debug
+title: 排查表格公式错误
+tagline: 用小样本复现公式错误并给出修正与回归样例
+routing:
+  primitive: deconstruct
+  goals:
+  - debug
+  clarity_fit:
+  - concrete
+  - vague
+  domains:
+  - data
+  - spreadsheet
+  - formula_debug
+  - excel
+  app_affinity:
+  - Chrome
+  pain_point: Excel 或 Sheets 中公式报错或结果异常，用户难以定位数据类型、引用范围或空值问题，并需要修正公式与回归样例。
+  trigger_utterances:
+  - Excel公式报#VALUE!了帮我查
+  - 这个SUMIF结果不对是不是引用范围有问题
+  - Sheets里公式算错了帮我复现一下
+  - 表格公式报错但不知道哪里错了
+  - 帮我排查公式并给修正版本
+  anti_triggers:
+  - 只是想查某个函数的语法说明
+  - 需要做图表可视化或 unrelated 数据分析
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 帮我排查【公式和报错或错误结果】，环境和样例是【表格软件、列和值】。先用一到两行样本手算预期，检查数据类型、引用范围和空值处理。给修正后的公式、放置位置和回归样例。
+  variables:
+  - 公式和报错或错误结果
+  - 表格软件、列和值
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#formula-debug
+  source_hash: f349a1a1ebd54c78800a678fad868d217c469a292588f3ac4581a1e5342f3e55
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: engineering
+  subcategory: debugging
+  collections: []
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

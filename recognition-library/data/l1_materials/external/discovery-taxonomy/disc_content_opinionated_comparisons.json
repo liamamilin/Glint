@@ -1,0 +1,33 @@
+{
+  "id": "disc_content_opinionated_comparisons",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/content.json#content-opinionated-comparisons",
+  "title": "写“带明确取舍立场”的对比测评，而不是骑墙水文",
+  "content": "旧共识（盲区）：做评测或对比要面面俱到、各方都不得罪，列出“各有优缺点”就算客观。\n\n新现实（破盲视角）：AI 能瞬间生成“各方面都差不多”的骑墙总结，读者真正需要的是：在明确场景下，“我选 A 放弃 B 的真实理由和踩坑边界”。\n\n破冰追问母题：\n- 针对 [两个你熟悉的工具/方案/方法，如 A vs B]，不要写水端平的优缺点列表。请按“什么人选 A、什么人选 B、各自最隐蔽的坑”帮我梳理一份立场鲜明的对比框架。\n- 针对 [某个热门工具或流行做法]，帮我列出 3 个“主流吹捧但实际有明显代价”的细节，写出诚实且有洞察的边界说明。",
+  "content_hash": "25aff517b08abdb8676cefa50d8d5457fcab9407dcf3321b4d89ec8d12df71d6",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "content",
+    "role-inversion",
+    "first-principles",
+    "comparison",
+    "tradeoffs",
+    "taste",
+    "decision-guide"
+  ],
+  "problem_solved": "做评测或对比要面面俱到、各方都不得罪，列出“各有优缺点”就算客观。",
+  "when_to_use": "AI 能瞬间生成“各方面都差不多”的骑墙总结，读者真正需要的是：在明确场景下，“我选 A 放弃 B 的真实理由和踩坑边界”。",
+  "procedural_steps": [
+    "针对 [两个你熟悉的工具/方案/方法，如 A vs B]，不要写水端平的优缺点列表。请按“什么人选 A、什么人选 B、各自最隐蔽的坑”帮我梳理一份立场鲜明的对比框架。",
+    "针对 [某个热门工具或流行做法]，帮我列出 3 个“主流吹捧但实际有明显代价”的细节，写出诚实且有洞察的边界说明。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "content-opinionated-comparisons",
+    "arena": "content",
+    "lenses": [
+      "role-inversion",
+      "first-principles"
+    ]
+  }
+}

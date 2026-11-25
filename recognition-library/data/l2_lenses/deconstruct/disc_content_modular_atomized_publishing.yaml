@@ -1,0 +1,97 @@
+id: disc_content_modular_atomized_publishing
+title: 原子知识块拼装
+tagline: 把零散洞察拆成可复用原子块，按需拼装成多种内容
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - content
+  - atomization
+  - repurposing
+  - knowledge_base
+  - workflow
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Cursor
+  - Chrome
+  pain_point: 每次写内容都要从空白文档重新开始，写完一篇再想下一篇，边际创作成本高
+  trigger_utterances:
+  - 每次写文章都从空白文档开始好累
+  - 帮我把这段零散内容拆成可复用的原子块
+  - 设计一套个人内容原子块分类方式
+  - 想发短动态和深度指南但没素材
+  - 这段内容怎么拆成几块可复用的知识
+  anti_triggers:
+  - 只需要润色一篇完整文章的语气
+  - 帮我从零生成一篇全新长文
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '## 原子知识块拆解与拼装清单
+
+
+    ### 1. 建立极简分类（4 类）
+
+    - 反常识对比：旧共识 vs 新现实
+
+    - 真实案例：具体场景 + 数据/结果
+
+    - 实用清单：步骤 / 检查项 / 模板
+
+    - 提问模板：可复用的追问 / 提示词
+
+
+    ### 2. 拆解已有内容为 3～4 个原子块
+
+    - 每块只含一个独立观点或事实
+
+    - 每块自带 1 句可直接引用的金句
+
+    - 每块标注适用场景（短动态 / 卡片 / 深度指南）
+
+    - 每块独立可读，不依赖上下文
+
+
+    ### 3. 存储与检索
+
+    - 统一命名：[类型]-[主题]-[日期]
+
+    - 打标签：领域 + 场景 + 复用次数
+
+    - 存入个人知识库（Notion/Obsidian）
+
+
+    ### 4. 按需拼装输出
+
+    - 短动态：1 块 + 1 句 hook
+
+    - 卡片库：1 块 + 1 图
+
+    - 深度指南：3～5 块串成叙事
+
+    - 每次拼装后记录组合，避免重复
+
+
+    ### 5. 降本验证
+
+    - 新内容创作时间是否下降
+
+    - 复用块占比是否提升
+
+    - 重复劳动是否减少'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/content.json#content-modular-atomized-publishing
+  source_hash: c2dd88441630013653995d8127939f1efb1958ad31e7e92f7ffb4e96bef4a548
+  status: active
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

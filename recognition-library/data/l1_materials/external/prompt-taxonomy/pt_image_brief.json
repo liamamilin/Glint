@@ -1,0 +1,29 @@
+{
+  "id": "pt_image_brief",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#image-brief",
+  "title": "生成一张指定风格的图",
+  "content": "为【使用场景】生成一张【主题和主体】的图。视觉方向是【媒介、风格或参考】。明确画幅、主体位置、景别、光线、配色和背景要求。先给可直接用于图像模型的一段描述，再给两个只有一个关键差异的版本。",
+  "content_hash": "9e72d680ad4529f8f2cd2ea7ae304347a0aa3fea03fc97169bb2515d1dd1a6b5",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "creative",
+    "图像",
+    "图片",
+    "出图",
+    "image prompt"
+  ],
+  "problem_solved": "把主体、构图、光线和比例说明白。",
+  "when_to_use": "分类: 创作与多媒体",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "image-brief",
+    "category": "creative",
+    "variables": [
+      "使用场景",
+      "主题和主体",
+      "媒介、风格或参考"
+    ]
+  }
+}

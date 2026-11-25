@@ -1,0 +1,52 @@
+id: pt_newsletter
+title: 更新素材写简报
+tagline: 把更新素材编成面向读者的简报，含主题行与条目
+routing:
+  primitive: translate
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - writing
+  - newsletter
+  - email
+  - content
+  app_affinity:
+  - Notion
+  - Mail
+  - Slack
+  - Obsidian
+  pain_point: 手头一堆更新素材，不知道怎么组织成读者愿意读的简报，主题行和条目难以下笔
+  trigger_utterances:
+  - 帮我把这堆更新写成newsletter
+  - 把release notes整理成邮件简报
+  - 这周更新很多帮我写个简报
+  - 把 changelog 转成给用户的 newsletter
+  - 帮我写个 weekly digest
+  anti_triggers:
+  - 只是想写一封普通商务邮件
+  - 需要深度长文报道而非简报
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 将以下更新素材编成面向 {{audience}} 的 {{length_and_frequency}} 简报。给主题行、开头、一组按重要性排列的条目和下一步。每条说明对读者有什么影响，并把数字或承诺与原材料对齐。
+  variables:
+  - audience
+  - length_and_frequency
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#newsletter
+  source_hash: 5c4337c1dd8a00e5f14bf1d30be3f2b1569a227c9471b18f5be0732d4e7b01af
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: writing_comms
+  subcategory: workplace_comms
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

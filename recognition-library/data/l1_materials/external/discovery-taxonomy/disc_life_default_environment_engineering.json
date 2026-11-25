@@ -1,0 +1,33 @@
+{
+  "id": "disc_life_default_environment_engineering",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/life.json#life-default-environment-engineering",
+  "title": "用“工程摩擦力设计”替代消耗意志力",
+  "content": "旧共识（盲区）：戒掉坏习惯、养成好习惯，靠的是每天逼自己咬牙坚持和打卡。\n\n新现实（破盲视角）：人的默认行为高度服从“最小阻力路径”；给坏习惯人为增加 20 秒操作摩擦、给好习惯减掉 2 个前置步骤，效果远胜过任何励志鸡汤。\n\n破冰追问母题：\n- 我想减少 [某个坏习惯，如睡前刷手机]，并增加 [某个好习惯，如每天运动/阅读 20 分钟]。不要给我鸡汤，请从物理空间和手机设置两个维度，设计 5 个“加摩擦/减摩擦”的硬核环境改造方案。\n- 审视我每天下班后的固定动线：[描述你回家后的前 30 分钟]，找出导致我滑向低质量娱乐的“默认触发点”，设计一个几乎不费脑子的替换动线。",
+  "content_hash": "78ba39cb8040d9bd17492fe7cb2b5f23487dec6bbbb92828327ccf4943218159",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "life",
+    "cross-domain",
+    "invisible-friction",
+    "habits",
+    "environment",
+    "friction",
+    "systems"
+  ],
+  "problem_solved": "戒掉坏习惯、养成好习惯，靠的是每天逼自己咬牙坚持和打卡。",
+  "when_to_use": "人的默认行为高度服从“最小阻力路径”；给坏习惯人为增加 20 秒操作摩擦、给好习惯减掉 2 个前置步骤，效果远胜过任何励志鸡汤。",
+  "procedural_steps": [
+    "我想减少 [某个坏习惯，如睡前刷手机]，并增加 [某个好习惯，如每天运动/阅读 20 分钟]。不要给我鸡汤，请从物理空间和手机设置两个维度，设计 5 个“加摩擦/减摩擦”的硬核环境改造方案。",
+    "审视我每天下班后的固定动线：[描述你回家后的前 30 分钟]，找出导致我滑向低质量娱乐的“默认触发点”，设计一个几乎不费脑子的替换动线。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "life-default-environment-engineering",
+    "arena": "life",
+    "lenses": [
+      "cross-domain",
+      "invisible-friction"
+    ]
+  }
+}

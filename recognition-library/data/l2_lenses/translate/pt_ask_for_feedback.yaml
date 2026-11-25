@@ -1,0 +1,46 @@
+id: pt_ask_for_feedback
+title: 请求聚焦反馈
+tagline: 把模糊要意见变成可答的三项问题
+routing:
+  primitive: translate
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - communication
+  - feedback_request
+  - review
+  app_affinity:
+  - Slack
+  - Feishu
+  - Mail
+  - Notion
+  pain_point: 向他人要反馈时问题散、对象与范围不清，对方难以给出具体可执行的意见
+  trigger_utterances:
+  - 帮我写消息向同事要反馈
+  - 怎么请老板 review 这份方案
+  - 向客户要意见怎么问才具体
+  - feedback request 怎么写
+  - 帮我起草一段请求审阅的话
+  anti_triggers:
+  - 只是自己内部评审代码或文档，不需要他人回复
+  - 想要开放式的头脑风暴而非聚焦反馈
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 为{{material_or_decision}}向{{reviewer}}请求反馈。交代材料现在的状态和可改范围，只问三项可具体回应的问题。给期望反馈形式、期限 {{deadline}} 和最重要的一项。
+  variables:
+  - material_or_decision
+  - reviewer
+  - deadline
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#ask-for-feedback
+  source_hash: 677318f5bc82601a9dc72ff685891017dbe32e28f7849f9e9a2657c7067b1a4d
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

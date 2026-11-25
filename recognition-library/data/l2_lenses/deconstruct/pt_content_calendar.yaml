@@ -1,0 +1,68 @@
+id: pt_content_calendar
+title: 内容日历编排
+tagline: 围绕目标与渠道安排内容日历，拆解任务/受众/素材/负责人/交付/衡量
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - marketing
+  - content_ops
+  - content_calendar
+  - planning
+  app_affinity:
+  - Notion
+  - Feishu
+  - Chrome
+  - Obsidian
+  pain_point: 要做内容运营但选题散乱、渠道与日期无系统安排，每篇谁做、何时交、拿什么素材、如何衡量都不清楚
+  trigger_utterances:
+  - 帮我安排一下下个月的内容日历
+  - marketing content calendar 怎么排
+  - 选题覆盖不过来，帮我理一下渠道和日期
+  - 内容运营任务拆解，每篇谁负责
+  - make a content calendar for Q3
+  anti_triggers:
+  - 只是想写一篇文案或单篇推文
+  - purely SEO keyword research without scheduling
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请基于以下信息，为我生成一份可执行的内容日历。
+
+
+    目标受众与传播目标：{{audience_goal}}
+
+    渠道与日期范围：{{channels_dates}}
+
+
+    要求：
+
+    1. 按日期/渠道列出每一篇内容，确保选题覆盖目标受众的核心需求与传播目标。
+
+    2. 每篇必须包含字段：任务标题、受众问题/用户痛点、原始素材来源、负责人、交付日期、衡量标准（KPI）。
+
+    3. 优先安排可直接复用现有材料完成的内容；对缺素材项标注“需新建”。
+
+    4. 输出为表格或清晰分组列表，便于导入 Notion/飞书/Excel。
+
+    5. 末尾附：风险与缓冲建议（如延期预案、复用策略）。
+
+
+    请先确认理解，再输出日历。'
+  variables:
+  - audience_goal
+  - channels_dates
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#content-calendar
+  source_hash: 2c154f5a8a1a7854e3604ab73984f34b45d3ca2082ac9c73af42a04bae297c77
+  status: active
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

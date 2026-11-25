@@ -1,0 +1,27 @@
+{
+  "id": "pt_company_interview_research",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#company-interview-research",
+  "title": "准备面试前的公司调研",
+  "content": "为【目标公司与岗位】做面试前调研，关注【我需要弄清的事】。从公司公告、产品资料、岗位说明提取事实，列时间与来源。给三个基于证据的问题和两项面试中才能确认的假设。",
+  "content_hash": "7ff999e2be2686c6fb995fea13b2925d0e631248ab43e08d7f425da2621c9b74",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "career",
+    "公司调研",
+    "面试准备",
+    "company research"
+  ],
+  "problem_solved": "了解产品、市场与岗位可能解决的问题。",
+  "when_to_use": "分类: 求职与职业",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "company-interview-research",
+    "category": "career",
+    "variables": [
+      "目标公司与岗位",
+      "我需要弄清的事"
+    ]
+  }
+}

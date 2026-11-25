@@ -1,0 +1,33 @@
+{
+  "id": "disc_cognition_feedback_loop_design",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/cognition.json#cognition-feedback-loop-design",
+  "title": "用“缩短反馈回路”替代单纯“拉长努力时长”",
+  "content": "旧共识（盲区）：一件事没起色，是因为投入的时间还不够长、还不够拼。\n\n新现实（破盲视角）：反馈回路太长（比如做几个月才看到一次真实用户/结果反馈）会导致盲目偏航；把验证周期缩短到几天甚至几小时，学习速度会快好几倍。\n\n破冰追问母题：\n- 我正在推进的这件事：[描述你的目标或项目]，目前要等很久才能看到真实结果反馈。请帮我设计 3 个“把反馈回路缩短到 48 小时内”的微型验证方法。\n- 审视我目前的 [学习/创作/做项目] 习惯，找出哪个环节的反馈延迟最高，并给出一个立刻能落地的观测指标。",
+  "content_hash": "f25d836290e449546b1e0202dcb1029a999c00230ddc5ae8026466311ecd7b40",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "cognition",
+    "cross-domain",
+    "invisible-friction",
+    "feedback-loops",
+    "systems",
+    "learning",
+    "iteration"
+  ],
+  "problem_solved": "一件事没起色，是因为投入的时间还不够长、还不够拼。",
+  "when_to_use": "反馈回路太长（比如做几个月才看到一次真实用户/结果反馈）会导致盲目偏航；把验证周期缩短到几天甚至几小时，学习速度会快好几倍。",
+  "procedural_steps": [
+    "我正在推进的这件事：[描述你的目标或项目]，目前要等很久才能看到真实结果反馈。请帮我设计 3 个“把反馈回路缩短到 48 小时内”的微型验证方法。",
+    "审视我目前的 [学习/创作/做项目] 习惯，找出哪个环节的反馈延迟最高，并给出一个立刻能落地的观测指标。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "cognition-feedback-loop-design",
+    "arena": "cognition",
+    "lenses": [
+      "cross-domain",
+      "invisible-friction"
+    ]
+  }
+}

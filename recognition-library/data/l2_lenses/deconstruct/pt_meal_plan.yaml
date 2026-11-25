@@ -1,0 +1,44 @@
+id: pt_meal_plan
+title: 现有食材规划餐食
+tagline: 用现有食材按人数和时间安排菜单，优先消耗易坏食材减少浪费。
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - meal_planning
+  - recipes
+  - cooking
+  - household
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  pain_point: 手头食材零散、不知道能搭配出什么菜，担心过期浪费，又要在有限时间和人数内安排出完整餐食。
+  trigger_utterances:
+  - 冰箱里这些菜不知道怎么搭配
+  - 有这些食材能做什么菜
+  - 按3个人做两顿饭怎么安排
+  - 食材快过期了别浪费
+  - 用现有食材 tonight 做饭
+  anti_triggers:
+  - 仅查询某道菜的固定食谱、不涉及现有食材
+  - 餐厅点餐或外卖选择场景
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 我有【食材和大致用量】，要做【人数和餐次】的餐，限制是【忌口、设备和用时】。给一份菜单、用量、步骤与总耗时。优先消耗保质期短的食材，再列真正需要补买的东西。
+  variables: []
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#meal-plan
+  source_hash: 80dccf40db3dfc05092457074bc06ccad89e69be8368fc71962b9358f7ca3387
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

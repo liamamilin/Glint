@@ -1,0 +1,30 @@
+{
+  "id": "pt_campaign_copy",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#campaign-copy",
+  "title": "给同一目标写不同方向的文案",
+  "content": "给【产品或活动】写三组面向【受众和渠道】的文案，目标是【希望读者采取的行动】，可使用的证据是【事实与卖点】。每组采用不同说服角度，给标题、正文、行动提示和适用情境。所有量化承诺需来自素材。",
+  "content_hash": "72461643bdd315fe5be64512832eeabf2d1db65f403e7f63a74695b3cec05ad9",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "creative",
+    "营销",
+    "广告",
+    "标题",
+    "copywriting"
+  ],
+  "problem_solved": "比较卖点与表达角度，而非同义改写。",
+  "when_to_use": "分类: 创作与多媒体",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "campaign-copy",
+    "category": "creative",
+    "variables": [
+      "产品或活动",
+      "受众和渠道",
+      "希望读者采取的行动",
+      "事实与卖点"
+    ]
+  }
+}

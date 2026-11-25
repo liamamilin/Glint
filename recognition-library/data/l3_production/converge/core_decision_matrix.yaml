@@ -1,0 +1,49 @@
+id: core_decision_matrix
+title: 多维对比决策表
+tagline: 面对多方案取舍，输出对比表与明确推荐
+routing:
+  primitive: converge
+  goals:
+  - evaluate
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - decision_making
+  - architecture
+  - product_strategy
+  app_affinity:
+  - Notion
+  - Cursor
+  - Linear
+  - Chrome
+  pain_point: 用户面对多个技术方案或选项难以取舍，缺乏结构化对比与明确推荐
+  trigger_utterances:
+  - A 方案和 B 方案哪个好
+  - 这几个框架怎么选
+  - 帮我对比一下这几个选项
+  - 纠结选 React 还是 Vue
+  - 这几个方案各有什么优劣
+  anti_triggers:
+  - 已经决定好方案只需执行
+  - 只需要单一方案的优缺点分析
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 请提取最关键的 4-5 个评估维度，输出一份 Markdown 对比表格，并在最后给出明确的推荐结论与取舍理由。
+  variables: []
+  workflow: null
+meta:
+  source: glint-core
+  source_ref: cards.yaml#decision_matrix
+  source_hash: 6ec9cb79a5692d7d3c90df5d95151a22ff4a2d1ab6b3a43fd09aee1686253ef0
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  category: engineering
+  subcategory: architecture
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

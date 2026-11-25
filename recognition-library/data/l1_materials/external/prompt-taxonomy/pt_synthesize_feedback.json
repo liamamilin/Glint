@@ -1,0 +1,28 @@
+{
+  "id": "pt_synthesize_feedback",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#synthesize-feedback",
+  "title": "归纳用户反馈",
+  "content": "分析【反馈原文或访谈记录】，目标是【要改进的问题】。归纳主题，统计每类在已给样本中的提及数并说明同一条能否多标签，给代表性引文和影响。对优先级最高的主题提出可验证的下一步。",
+  "content_hash": "1179e862138222beeeff2fa4104fa92f8dcb32c1b7c25d37937f4ea4f0418e58",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "office",
+    "用户研究",
+    "访谈",
+    "反馈",
+    "feedback"
+  ],
+  "problem_solved": "提取模式，并保留能解释问题的原话。",
+  "when_to_use": "分类: 办公与协作",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "synthesize-feedback",
+    "category": "office",
+    "variables": [
+      "反馈原文或访谈记录",
+      "要改进的问题"
+    ]
+  }
+}

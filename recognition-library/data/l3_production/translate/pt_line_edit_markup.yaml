@@ -1,0 +1,52 @@
+id: pt_line_edit_markup
+title: 逐句润色列变动
+tagline: 按句润色并记录改动理由，方便复核
+routing:
+  primitive: translate
+  goals:
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - writing
+  - editing
+  - copywriting
+  - proofreading
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Mail
+  - ChatGPT
+  pain_point: 写完或收到一段文字后，需要逐句润色并逐项交代措辞变化，避免语义被悄悄改变且便于复核确认。
+  trigger_utterances:
+  - 帮我按句润色这段文案并列出每处改动
+  - 这段话帮我改得更正式，把改动理由写出来
+  - line edit this paragraph and show changes
+  - 校订一下这篇，语义变化处要我确认
+  anti_triggers:
+  - 整篇重写且不保留原文结构
+  - 只给最终版本不要改动记录
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: 给{{input}}做逐句编辑，目标是{{style}}。先给清稿，再用「原句 / 修订 / 理由」记录会影响含义或语气的变动。保留术语、数据、引用和责任范围，语义可能变化处请我确认。
+  variables:
+  - style
+  workflow:
+    workflow_id: draft-to-publish
+    step: 3
+    next_lens_id: pt_headlines
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#line-edit-markup
+  source_hash: 4d4bd0abcb3af51bc182b5347a428ff8fb3210f054da4555a73eb6ab4507d51f
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: writing_comms
+  subcategory: writing_polish
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

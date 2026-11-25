@@ -1,0 +1,73 @@
+id: disc_career_building_durable_work_samples
+title: 20分钟项目复盘样本
+tagline: 做完项目顺手留脱敏案例，避免半年后细节丢失。
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - career
+  - case_studies
+  - work_samples
+  - craft
+  app_affinity:
+  - Notion
+  - Obsidian
+  pain_point: 项目做完后不及时记录，半年后关键判断、取舍和结果细节丢失，跳槽、接单或分享时只能临时翻旧文件拼凑案例。
+  trigger_utterances:
+  - 刚做完一个项目，帮我留个脱敏复盘样本
+  - 半年后再写案例细节都忘了
+  - 帮我设计20分钟结项复盘模板
+  - 这个项目怎么整理成可复用的履历素材
+  - 做完任务顺手记背景、卡点、做法和结果
+  anti_triggers:
+  - 项目还没开始，需要从零规划方案
+  - 只是润色简历 wording，不整理项目过程
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '## 20 分钟项目结项复盘清单
+
+    - [ ] 一句话背景：目标、角色、时间、范围
+
+    - [ ] 卡点：最难的 1-3 个问题与约束
+
+    - [ ] 做法与取舍：做了什么、放弃了什么、为什么
+
+    - [ ] 结果与证据：指标、交付物、反馈
+
+    - [ ] 反思：下次重复 / 避免 / 自动化什么
+
+    - [ ] 脱敏：删除客户与内部数据，保留方法与判断
+
+    - [ ] 归档：命名、标签、链接到简历或作品集
+
+
+    ## 四段式案例模板
+
+    背景：
+
+    卡点：
+
+    做法与取舍：
+
+    结果与复盘：'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/career.json#career-building-durable-work-samples
+  source_hash: d565c1f891826f0954aa638715e969fa31de0cf96330c561528b7795e56b958c
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: personal_career
+  subcategory: career
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

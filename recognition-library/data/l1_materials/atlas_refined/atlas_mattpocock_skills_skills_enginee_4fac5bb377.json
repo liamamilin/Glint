@@ -1,0 +1,45 @@
+{
+  "id": "atlas_mattpocock_skills_skills_enginee_4fac5bb377",
+  "source": "atlas-methods",
+  "source_ref": "mattpocock/skills:skills/engineering/grill-with-docs/SKILL.md",
+  "title": "拷问式方案打磨与过程内文档沉淀",
+  "content": "用于锐化计划或设计并同步沉淀文档的方法：将计划映射为设计树，计算当前可提问的 frontier，一轮提出所有 frontier 问题并附推荐答案，等待回答后再进入下一轮；直到 frontier 为空且用户确认共享理解，才允许基于设计行动。过程中主动构建领域模型：挑战冲突或含糊术语，用具体场景压力测试概念边界，并在术语与决策成型时惰性写入术语表与决策记录。术语表必须不含实现细节；决策记录仅在决策同时满足难以逆转、脱离上下文令人费解、真实权衡结果时提议创建。查找事实是助手职责，决策归属用户。",
+  "content_hash": "2b70d67bfc00b0073d7d2bf8a0c2ba7f872fb172539a88acd1da04bb150a0e32",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "design review",
+    "domain modeling",
+    "decision records",
+    "requirements elicitation"
+  ],
+  "problem_solved": "把模糊计划或设计通过结构化追问收敛为共享理解，并在过程中同步沉淀术语与关键决策。",
+  "when_to_use": "需要压力测试一个计划、设计或想法，并希望在澄清过程中同步产出术语表与决策记录时。",
+  "procedural_steps": [
+    "把计划映射为设计树，每个决策分叉出其下属决策。",
+    "计算当前 frontier：前置条件已确定、现在可提问且无需猜测未听答案的决策。",
+    "一轮提出整个 frontier，每个问题编号并附推荐答案，措辞使回答 yes 即接受推荐。",
+    "只问前置条件已确定的决策；依赖未闭合问题的提问留到后续轮次。",
+    "每轮后等待用户回答，frontier 为空且用户确认共享理解前不执行基于设计的行动。",
+    "在设计过程中主动挑战用词、构造边缘场景，锐化领域模型。",
+    "仅在确有内容写入时惰性创建术语表或决策记录文件。",
+    "用户术语与既有术语冲突时立即指出并要求澄清；含糊或过载词要提出精确规范术语。",
+    "术语表只记录术语，不放规格、草稿或实现决策。",
+    "仅当决策同时满足难以逆转、脱离上下文会令人费解、是真实权衡结果时才提议创建决策记录。"
+  ],
+  "anti_patterns": [
+    "把术语表当作规格、草稿本或实现决策仓库。",
+    "向用户询问助手自己能查到的事实。",
+    "在用户确认共享理解前基于设计采取行动。",
+    "把答案依赖未闭合问题的提问放入当前轮次。",
+    "对不满足三条标准的决策创建决策记录。",
+    "仅消费术语而不挑战或锐化领域模型。"
+  ],
+  "metadata": {
+    "repository": "mattpocock/skills",
+    "skill_path": "skills/engineering/grill-with-docs/SKILL.md",
+    "commit_sha": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+    "l0_content_hash": "7de372c13488f1ee96cc11cd8907b56b6809cc93eef776eeddd37de6b6cbe3fe",
+    "l0_quality_score": 0.88,
+    "refined_by": "opencode-go/beam-free"
+  }
+}

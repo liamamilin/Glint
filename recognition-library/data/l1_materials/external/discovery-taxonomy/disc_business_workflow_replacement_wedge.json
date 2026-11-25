@@ -1,0 +1,33 @@
+{
+  "id": "disc_business_workflow_replacement_wedge",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-workflow-replacement-wedge",
+  "title": "用“单点高频卡点”做楔子切入慢热行业",
+  "content": "旧共识（盲区）：切入传统行业必须先做一整套全流程系统，否则客户觉得不完整。\n\n新现实（破盲视角）：传统行业最抗拒推翻整套旧系统，但非常乐意先用一个小工具解决“每天最烦的那一步”；一旦卡住关键数据流，再顺理成章往上下游延伸。\n\n破冰追问母题：\n- 挑选 [某个传统/慢热行业]，找出一个“高频、痛感强、且不涉及核心 ERP 替换”的单点切入楔子，画出“楔子工具 → 沉淀数据 → 扩展工作流”的三步演进路线。\n- 在 [你的目标客户群体] 中，哪些环节一旦自动化就能立刻帮他们省出 3 小时/周或挽回明显损失，最适合作为冷启动的第一个收费切口？",
+  "content_hash": "596df634a26bcab9349d22db147cdac60f8d7ac382ee43028d4ac5545f5bfc59",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "business",
+    "role-inversion",
+    "invisible-friction",
+    "wedge",
+    "vertical-ai",
+    "b2b",
+    "retention"
+  ],
+  "problem_solved": "切入传统行业必须先做一整套全流程系统，否则客户觉得不完整。",
+  "when_to_use": "传统行业最抗拒推翻整套旧系统，但非常乐意先用一个小工具解决“每天最烦的那一步”；一旦卡住关键数据流，再顺理成章往上下游延伸。",
+  "procedural_steps": [
+    "挑选 [某个传统/慢热行业]，找出一个“高频、痛感强、且不涉及核心 ERP 替换”的单点切入楔子，画出“楔子工具 → 沉淀数据 → 扩展工作流”的三步演进路线。",
+    "在 [你的目标客户群体] 中，哪些环节一旦自动化就能立刻帮他们省出 3 小时/周或挽回明显损失，最适合作为冷启动的第一个收费切口？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "business-workflow-replacement-wedge",
+    "arena": "business",
+    "lenses": [
+      "role-inversion",
+      "invisible-friction"
+    ]
+  }
+}

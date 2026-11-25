@@ -1,0 +1,33 @@
+{
+  "id": "disc_build_local_optimization_deadlocks",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/build.json#build-local-optimization-deadlocks",
+  "title": "排查“局部合理却拼出全局僵局”的系统死锁",
+  "content": "旧共识（盲区）：只要每个步骤、每个规则单独看都合理安全，拼在一起的系统就不会卡死。\n\n新现实（破盲视角）：每一步都加缓冲、加审批、加特判，单独看都很聪明，合在一起却可能让整条链路变得迟钝、脆弱甚至无人敢动；要看全局流转而不是单点合理。\n\n破冰追问母题：\n- 梳理我目前常用的 [工作流 / 工具链 / 协作机制]：[简述各环节与规则]。帮我找出哪些“单独看很合理”的规则，合在一起反而制造了等待、绕路或僵局。\n- 如果把 [你觉得有点卡顿或繁琐的流程] 当作一条流转管道来检查，最容易产生“堵车或死锁”的节点在哪里？",
+  "content_hash": "02c48850474007cba6dacc873fac1e1156b560c66d859110e232eea6dc442024",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "build",
+    "invisible-friction",
+    "first-principles",
+    "systems",
+    "bottlenecks",
+    "deadlock",
+    "architecture"
+  ],
+  "problem_solved": "只要每个步骤、每个规则单独看都合理安全，拼在一起的系统就不会卡死。",
+  "when_to_use": "每一步都加缓冲、加审批、加特判，单独看都很聪明，合在一起却可能让整条链路变得迟钝、脆弱甚至无人敢动；要看全局流转而不是单点合理。",
+  "procedural_steps": [
+    "梳理我目前常用的 [工作流 / 工具链 / 协作机制]：[简述各环节与规则]。帮我找出哪些“单独看很合理”的规则，合在一起反而制造了等待、绕路或僵局。",
+    "如果把 [你觉得有点卡顿或繁琐的流程] 当作一条流转管道来检查，最容易产生“堵车或死锁”的节点在哪里？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "build-local-optimization-deadlocks",
+    "arena": "build",
+    "lenses": [
+      "invisible-friction",
+      "first-principles"
+    ]
+  }
+}

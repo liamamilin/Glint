@@ -1,0 +1,29 @@
+{
+  "id": "pt_debug_error",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#debug-error",
+  "title": "定位报错并做最小修复",
+  "content": "帮我定位【报错或异常行为】，期望是【预期结果】，环境和复现是【版本、命令或最短示例】。按证据排列可能原因，为首选原因给一个验证动作。确认后给最小修复和回归检查，并说明剩余不确定性。",
+  "content_hash": "5d17ee35c6338cb00f246fdd2d2eb10f43291f5bcaf111ef91fcaa1f090b5c8a",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "coding",
+    "报错",
+    "排查",
+    "debug",
+    "bug"
+  ],
+  "problem_solved": "用复现和验证缩小问题范围。",
+  "when_to_use": "分类: 开发与调试",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "debug-error",
+    "category": "coding",
+    "variables": [
+      "报错或异常行为",
+      "预期结果",
+      "版本、命令或最短示例"
+    ]
+  }
+}

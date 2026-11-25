@@ -1,0 +1,33 @@
+{
+  "id": "disc_business_testing_unspoken_buyer_assumptions",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-testing-unspoken-buyer-assumptions",
+  "title": "先验证“买家默认不愿意改变的习惯”，再打磨功能",
+  "content": "旧共识（盲区）：只要产品功能够全、界面够好，解决痛点后用户自然会切换过来。\n\n新现实（破盲视角）：人们最抗拒的往往不是“没好工具”，而是“改变现有习惯、迁移历史数据或承担切换风险”；先测清他们宁愿忍受什么也不改，才能找准真正能落地的切口。\n\n破冰追问母题：\n- 针对 [你的目标用户/客户群体] 在 [某场景] 下的现状：[简述他们现在怎么凑合做]。帮我列出 4 个可能导致他们“懒得切换”的习惯阻力或迁移顾虑，以及低成本验证方法。\n- 在 [你的产品或服务设想] 中，哪一个“需要用户改变原有习惯”的动作最容易卡住转化？",
+  "content_hash": "0fa8fa3f1171e376de9917b5326c0e7a3cfe233121c30674c75556daff1c9ad9",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "business",
+    "role-inversion",
+    "invisible-friction",
+    "discovery",
+    "assumptions",
+    "buyers",
+    "validation"
+  ],
+  "problem_solved": "只要产品功能够全、界面够好，解决痛点后用户自然会切换过来。",
+  "when_to_use": "人们最抗拒的往往不是“没好工具”，而是“改变现有习惯、迁移历史数据或承担切换风险”；先测清他们宁愿忍受什么也不改，才能找准真正能落地的切口。",
+  "procedural_steps": [
+    "针对 [你的目标用户/客户群体] 在 [某场景] 下的现状：[简述他们现在怎么凑合做]。帮我列出 4 个可能导致他们“懒得切换”的习惯阻力或迁移顾虑，以及低成本验证方法。",
+    "在 [你的产品或服务设想] 中，哪一个“需要用户改变原有习惯”的动作最容易卡住转化？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "business-testing-unspoken-buyer-assumptions",
+    "arena": "business",
+    "lenses": [
+      "role-inversion",
+      "invisible-friction"
+    ]
+  }
+}

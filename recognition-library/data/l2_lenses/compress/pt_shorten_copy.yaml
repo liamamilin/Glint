@@ -1,0 +1,46 @@
+id: pt_shorten_copy
+title: 把一段话压到限定长度
+tagline: 在字数限制内保留关键事实与行动项
+routing:
+  primitive: compress
+  goals:
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - writing
+  - copywriting
+  - editing
+  - communication
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Slack
+  - Mail
+  pain_point: 用户需要把一段长文本压到指定字数/字符限制内，又不能丢失关键事实、限定条件和行动时间
+  trigger_utterances:
+  - 帮我把这段话缩到200字以内
+  - 这段太长了压成一句话
+  - 缩短文案但别丢关键信息
+  - 帮我精简这段内容
+  - trim this down to 100 chars
+  anti_triggers:
+  - 用户希望扩写或丰富内容而非压缩
+  - 用户需要翻译或改写语气而非缩短
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 把【原文】压缩到【字数或字符限制】以内，必须保留【不可丢失的事实】。先给成稿，再指出为缩短而删除的内容。保留原文的事实强度、限定条件和行动时间。
+  variables:
+  - 原文
+  - 字数或字符限制
+  - 不可丢失的事实
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#shorten-copy
+  source_hash: 65fed2890ed96b15df1e4bd5a2062930e101020e590fe22fc427b45a11826f5a
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

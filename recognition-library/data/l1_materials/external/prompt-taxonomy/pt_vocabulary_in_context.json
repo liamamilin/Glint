@@ -1,0 +1,28 @@
+{
+  "id": "pt_vocabulary_in_context",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#vocabulary-in-context",
+  "title": "在真实语境里学高频词组",
+  "content": "从【材料或主题】为【水平】挑十个可马上使用的词组。每个给语义、自然搭配、真实场景、混淆项和一句填空。把答案集中在结尾，并指出哪些表达偏口语或正式。",
+  "content_hash": "4f8d11b2e49d4cec16ab4f5bf032a4c8617b31905800ebc0b155b0a74fe3c3fb",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "language",
+    "背单词",
+    "词汇",
+    "搭配",
+    "vocabulary"
+  ],
+  "problem_solved": "用搭配、反例和自测掌握用法。",
+  "when_to_use": "分类: 语言练习与本地化",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "vocabulary-in-context",
+    "category": "language",
+    "variables": [
+      "材料或主题",
+      "水平"
+    ]
+  }
+}

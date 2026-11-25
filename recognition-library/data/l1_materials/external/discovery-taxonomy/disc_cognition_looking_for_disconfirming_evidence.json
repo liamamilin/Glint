@@ -1,0 +1,33 @@
+{
+  "id": "disc_cognition_looking_for_disconfirming_evidence",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/cognition.json#cognition-looking-for-disconfirming-evidence",
+  "title": "刻意找“能推翻自己看法的证据”，而不只搜集赞同理由",
+  "content": "旧共识（盲区）：看准了一件事后，找更多支持自己的案例和观点，心里就更有底了。\n\n新现实（破盲视角）：确认偏误会让人只看到想看的东西；主动问“什么情况下我的判断会错、有哪些反例”，才能在押注前看清盲区。\n\n破冰追问母题：\n- 我目前倾向于认为：[填入你的看法或计划]。请帮我列出 4 个可能推翻或削弱这个看法的反例、潜在风险或反面视角。\n- 如果我要验证 [某个重要假设] 到底靠不靠谱，最值得优先去查的 2 个反面证据是什么？",
+  "content_hash": "bf322d1d35b06f7a11724b7c7e743c0700f1923941f0cb6ef9b231fcc34765d9",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "cognition",
+    "role-inversion",
+    "first-principles",
+    "confirmation-bias",
+    "evidence",
+    "critical-thinking",
+    "反证思维"
+  ],
+  "problem_solved": "看准了一件事后，找更多支持自己的案例和观点，心里就更有底了。",
+  "when_to_use": "确认偏误会让人只看到想看的东西；主动问“什么情况下我的判断会错、有哪些反例”，才能在押注前看清盲区。",
+  "procedural_steps": [
+    "我目前倾向于认为：[填入你的看法或计划]。请帮我列出 4 个可能推翻或削弱这个看法的反例、潜在风险或反面视角。",
+    "如果我要验证 [某个重要假设] 到底靠不靠谱，最值得优先去查的 2 个反面证据是什么？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "cognition-looking-for-disconfirming-evidence",
+    "arena": "cognition",
+    "lenses": [
+      "role-inversion",
+      "first-principles"
+    ]
+  }
+}

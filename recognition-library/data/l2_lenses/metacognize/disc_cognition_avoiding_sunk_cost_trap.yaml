@@ -1,0 +1,88 @@
+id: disc_cognition_avoiding_sunk_cost_trap
+title: 别被沉没成本绑架
+tagline: 只看未来投入与回报，决定继续还是止损
+routing:
+  primitive: metacognize
+  goals:
+  - evaluate
+  - optimize
+  clarity_fit:
+  - conflicted
+  domains:
+  - decision_making
+  - career
+  - project_management
+  - first_principles
+  - cognition
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 已经投入了大量时间、金钱或心血，现在停下来或改方向就像全盘亏光，难以冷静判断是否该继续
+  trigger_utterances:
+  - 这个项目搞了半年了放弃太可惜了
+  - 已经交了钱不想浪费 sunk cost
+  - 再坚持一下吧别前功尽弃
+  - sunk cost trap 怎么破
+  - should I quit or keep going after all this effort
+  anti_triggers:
+  - 单纯想做新项目规划或 brainstorming
+  - 需要具体执行步骤拆解而非决策判断
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '## 沉没成本抽离清单
+
+
+    ### Step 1：确认沉没事实（不可逆）
+
+    - 已花费的时间/金钱/精力：______
+
+    - 这部分是否能回收：否（已沉没）
+
+
+    ### Step 2：只看未来
+
+    - 若今天才刚知道这件事，我是否愿意从头选它？（是/否）
+
+    - 继续推进还需投入：时间 ____ / 金钱 ____ / 机会成本 ____
+
+    - 预期未来收益（可量化）：______
+
+    - 调整/停手的未来收益/止损：______
+
+
+    ### Step 3：对照现实信号
+
+    - 当前“不对劲”的具体证据：______
+
+    - 是否存在可验证的改善路径：______
+
+
+    ### Step 4：决策拍板
+
+    - [ ] 继续推进（理由：______）
+
+    - [ ] 调整方向（新方向：______）
+
+    - [ ] 停手止损（止损边界：______）
+
+
+    ### 犀利追问（嵌入日常）
+
+    1. 如果把已投入清零，这个选择还有吸引力吗？
+
+    2. 我是在为未来下注，还是在为过去买单？
+
+    3. 一年后回看，我希望自己当时做了什么决定？'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/cognition.json#cognition-avoiding-sunk-cost-trap
+  source_hash: 3e16bc63c132ef4d29a92ced2aca608c6765e050643e74ed3fdf15283ef90297
+  status: active
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

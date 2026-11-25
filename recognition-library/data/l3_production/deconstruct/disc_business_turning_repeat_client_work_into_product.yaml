@@ -1,0 +1,70 @@
+id: disc_business_turning_repeat_client_work_into_product
+title: 重复定制变标准产品
+tagline: 把重复做过的客户方案拆成标准流程与可复用模板
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - business
+  - services
+  - productization
+  - scale
+  app_affinity:
+  - Notion
+  - Linear
+  - Slack
+  pain_point: 同类客户方案每次从头定制，重复步骤没有被识别出来，导致交付慢、毛利低
+  trigger_utterances:
+  - 这个需求每次都不一样只能重新做
+  - 我们做了很多次同类交付但还没有模板
+  - 怎么把客户方案产品化
+  - 重复劳动太多想标准化
+  - 把定制服务变成固定流程
+  anti_triggers:
+  - 一次性全新项目没有历史同类交付
+  - 只是想写单次营销文案而非服务产品化
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '## 把重复定制抽成标准产品
+
+
+    - [ ] 盘点过去 3-5 次同类交付，记录每次的目标、输入、步骤、输出和耗时
+
+    - [ ] 标出每次都会重复出现的 70% 骨架：调研、方案结构、交付清单、验收标准、跟进节奏
+
+    - [ ] 单独列出 30% 可定制项：客户行业、数据源、品牌语气、特殊约束、额外模块
+
+    - [ ] 为标准部分编写固定 SOP：负责人、输入要求、执行步骤、输出格式、检查点
+
+    - [ ] 制作可复用资产：提案模板、报价表、 kickoff 问卷、交付清单、验收表
+
+    - [ ] 定义固定周期与边界：开始条件、里程碑、交付日期、修改次数、超范围处理
+
+    - [ ] 设计分层报价：标准包、定制增强包、长期维护包
+
+    - [ ] 用下一次真实客户试跑标准流程，记录偏差和额外沟通成本
+
+    - [ ] 根据试跑结果更新模板与 SOP，移除仍需人工判断的模糊步骤
+
+    - [ ] 建立产品目录与版本号，避免每次重新发明流程'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-turning-repeat-client-work-into-product
+  source_hash: 7aef61a7e799573621893cc10ac6fa17baad8c0ce2b5750435dff664e397a838
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: product_business
+  subcategory: indie_business
+  collections: []
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

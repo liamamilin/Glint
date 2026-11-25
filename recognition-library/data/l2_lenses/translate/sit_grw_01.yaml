@@ -1,0 +1,46 @@
+id: sit_grw_01
+title: 一鱼多吃分发矩阵
+tagline: 一篇母本拆成 3–4 个平台的原生分发文案包
+routing:
+  primitive: translate
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - content_repurposing
+  - social_media
+  - growth_marketing
+  - content_strategy
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  pain_point: 花好几天写完一篇深度长文或做完一个项目，发一次就沉底，没精力每个平台重写一遍。
+  trigger_utterances:
+  - 这篇长文发完就沉底了，帮我拆成多平台版本
+  - 一鱼多吃，把这篇母本适配微博/小红书/推特
+  - 没精力每个平台重写，帮我生成分发文案包
+  - content repurposing 把设计文档拆成社区帖
+  - 把项目复盘拆成图文卡片和推文串
+  anti_triggers:
+  - 从零开始写一篇全新长文
+  - 只在一个平台发布，不需要改写
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: "你是一个多平台内容分发编译器。基于提供的「母本」唯一信源，产出 3–4 个平台的原生分发文案包，严禁直接复制粘贴同一段文字。\n\n步骤：\n1. 锁定母本：将输入文本视为唯一信源，提炼核心观点与金句。\n2. 平台适配拆解：\n\
+    \   - 长推文串：钩子开头 + 反转/展开 + 金句结尾，threaded。\n   - 图文卡片：3 条可独立传播的金句，每条 ≤ 20 字。\n   - 极简社区帖：纯干货、无推广味、可直接发 V2EX/即刻/Reddit。\n\
+    \   - （可选）摘要：3 句话 TL;DR。\n3. 每个渠道附独立观察标签（如 #渠道-日期），1 周后只保留转化最高的前 2 个渠道持续投入。\n4. 避免：同一段文字直接复制粘贴；不同社区语境与反感点不同。\n\n输出：按平台分组，每组含「标题/正文/标签」。"
+  variables: []
+  workflow: null
+meta:
+  source: super-individual-toolbox
+  source_ref: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/growth-commercial.json#grw-01
+  source_hash: f308d72d15819023fd0224aae5d472d36aaeb1f9970587ccdb3e1421d34068fb
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

@@ -1,0 +1,27 @@
+{
+  "id": "pt_retrieval_practice",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#retrieval-practice",
+  "title": "用闭卷回忆练习一组知识",
+  "content": "用【学习材料】帮我复习【主题】。每次只出一道闭卷回忆题，等我作答后按关键点判定漏项，给出处和一句提示。把答错的概念延后再问，最后列下次复习清单。",
+  "content_hash": "750e389ded502d223b65a070c42ca7a21bc5f1af2159f7e4d422460cb88711e7",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "learning",
+    "主动回忆",
+    "自测",
+    "retrieval practice"
+  ],
+  "problem_solved": "先作答，再回看最需要复习的部分。",
+  "when_to_use": "分类: 学习与辅导",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "retrieval-practice",
+    "category": "learning",
+    "variables": [
+      "学习材料",
+      "主题"
+    ]
+  }
+}

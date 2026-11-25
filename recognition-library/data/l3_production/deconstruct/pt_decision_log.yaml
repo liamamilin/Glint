@@ -1,0 +1,69 @@
+id: pt_decision_log
+title: 把讨论整理成决策记录
+tagline: 从讨论记录提取决策、理由、负责人与复审条件，形成可追溯决策日志。
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - digest
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - office
+  - decision_making
+  - meeting_notes
+  - project_management
+  - adr
+  app_affinity:
+  - Notion
+  - Feishu
+  - Slack
+  - Obsidian
+  pain_point: 会后讨论散落在聊天、会议纪要和文档里，结论、理由、负责人与复审条件没有被结构化记录，后续难以追溯、复盘或追责。
+  trigger_utterances:
+  - 把刚才会上的讨论整理成决策记录
+  - 会议纪要里结论和理由混在一起，帮我拆成决策日志
+  - 这个 ADR 要记下为什么选 A 不选 B
+  - 把 Slack 里的决定和负责人列出来
+  - 决策记录里要写清楚什么时候重新评估
+  anti_triggers:
+  - 不用于生成新方案或做多方案对比
+  - 不用于单个技术问题的根因排查
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请从以下【讨论记录】中提取关于【决策范围】的决策，并生成结构化决策日志。每条决策记录包含：日期、选择、备选项、理由、负责人、触发复审的条件。明确区分“决策”与“工作假设”；缺失信息保留空缺，不要臆测或补全。
+
+
+    【讨论记录】
+
+    {{discussion_record}}
+
+
+    【决策范围】
+
+    {{decision_scope}}'
+  variables:
+  - discussion_record
+  - decision_scope
+  - 讨论记录
+  - 决策范围
+  workflow:
+    workflow_id: notes-to-decision
+    step: 3
+    next_lens_id: pt_async_update
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#decision-log
+  source_hash: 30a75f42e57885474904bbb0013b9b52a36fde3517dec6df7779f95deccf60ab
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: writing_comms
+  subcategory: workplace_comms
+  collections: []
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

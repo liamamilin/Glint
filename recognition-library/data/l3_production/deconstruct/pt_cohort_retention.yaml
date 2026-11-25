@@ -1,0 +1,53 @@
+id: pt_cohort_retention
+title: 建立分群留存表
+tagline: 按首日事件与回访事件计算分群留存，空缺未成熟周期
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - data
+  - analytics
+  - retention
+  - sql
+  app_affinity:
+  - Notion
+  - Chrome
+  pain_point: 用户需要根据事件表计算留存矩阵，但不清楚如何定义首日事件、回访事件、粒度与去重规则，容易把未成熟群组算成 0
+  trigger_utterances:
+  - 帮我算一下留存表 cohort retention
+  - 留存率怎么算 按周分群
+  - 这个事件表帮我出一个留存矩阵
+  - retention cohort table from event log
+  - 留存曲线不对 未成熟周期怎么办
+  anti_triggers:
+  - 用户只是想看DAU/MAU总趋势而非分群留存
+  - 用户在做用户画像聚类而非留存计算
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 根据【事件表与日期范围】计算【目标留存】。先写入群事件、返回事件、计算粒度和去重规则，再输出分群表。对观测窗口不完整的周期保留空白，提供两条用于手算核对的样本。
+  variables:
+  - event_table
+  - date_range
+  - target_retention
+  - 事件表与日期范围
+  - 目标留存
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#cohort-retention
+  source_hash: 9d764c17e745c29a58de29fc59221f17c1a68ad1df41180afebc18335da534f0
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: engineering
+  subcategory: architecture
+  collections: []
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

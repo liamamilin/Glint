@@ -1,0 +1,67 @@
+id: pt_decompose_ai_task
+title: 复杂任务拆解
+tagline: 把复杂请求拆成可验证的子任务链
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - create
+  clarity_fit:
+  - concrete
+  - vague
+  domains:
+  - prompt_workflows
+  - task_decomposition
+  - prompt_chain
+  - ai_workflow
+  app_affinity:
+  - ChatGPT
+  - Claude
+  - Cursor
+  - Notion
+  pain_point: 面对一个复杂请求时，不知道怎么拆成可执行、可验收的小步骤，容易一步到位导致输出不可控
+  trigger_utterances:
+  - 这个任务太复杂了帮我拆一下
+  - 帮我把需求拆成步骤
+  - 这个需求拆成子任务
+  - 复杂任务怎么拆解
+  - 拆成可验证的步骤
+  anti_triggers:
+  - 只是想快速得到一个最终答案
+  - 已有清晰的步骤清单只需润色
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '把【复杂任务】拆成若干可以单独验收的步骤，已知约束是【上下文、工具与时间】。为每步列输入、输出、依赖、验收和错误处理，标出可以并行的部分和应由人决定的分岔。
+
+
+    请按以下结构输出：
+
+    1. 子任务列表（含编号）
+
+    2. 每个子任务：输入 / 输出 / 依赖 / 验收标准 / 错误处理
+
+    3. 可并行执行的子任务分组
+
+    4. 需要人工决策的分岔点'
+  variables:
+  - 复杂任务
+  - 上下文、工具与时间
+  workflow:
+    workflow_id: operate-ai-workflow
+    step: 1
+    next_lens_id: pt_tool_selection
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#decompose-ai-task
+  source_hash: affd681b125e428c0e7910ba0f63904dd1d8bf4701b2d6e9158a81fe941ebd0b
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: engineering
+  subcategory: ai_workflow
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

@@ -1,13 +1,36 @@
-"""SQLite usage logger for the Glint feedback data flywheel."""
+"""SQLite usage logger with pre-persist PII/secret redaction for the Glint feedback flywheel."""
 
 from __future__ import annotations
 
 import json
+import re
 import sqlite3
 from datetime import datetime, timezone
 from pathlib import Path
 
 from models import FeedbackRequest
+
+# Privacy redaction patterns (design.md Section IV.E: never persist secrets/tokens/phones)
+REDACT_RULES: list[tuple[re.Pattern[str], str]] = [
+    (re.compile(r"\b(sk-[a-zA-Z0-9_-]{16,}|gh[pousr]_[a-zA-Z0-9]{20,}|AKIA[0-9A-Z]{16})\b"), "[REDACTED_KEY]"),
+    (re.compile(r"(?i)\b(Bearer\s+)[a-zA-Z0-9._\-]{16,}"), r"\1[REDACTED_TOKEN]"),
+    (
+        re.compile(r"(?i)\b((?:api[_-]?key|access[_-]?token|secret|password|passwd|pwd)\s*[:=]\s*['\"]?)([^\s'\",;]{4,})"),
+        r"\1[REDACTED]",
+    ),
+    (re.compile(r"(?<!\d)(1[3-9]\d)\d{4}(\d{4})(?!\d)"), r"\1****\2"),
+]
+
+
+def redact_sensitive_text(text: str | None) -> str | None:
+    """Scrub API keys, bearer tokens, passwords, and mobile numbers before writing to disk."""
+    if text is None:
+        return None
+    cleaned = text
+    for pattern, repl in REDACT_RULES:
+        cleaned = pattern.sub(repl, cleaned)
+    return cleaned
+
 
 CREATE_TABLE_SQL = """
 CREATE TABLE IF NOT EXISTS usage_logs (
@@ -20,11 +43,23 @@ CREATE TABLE IF NOT EXISTS usage_logs (
     selected_id TEXT,
     inject_mode TEXT,
     latency_ms REAL,
-    custom_intent TEXT
+    custom_intent TEXT,
+    predicted_primitive TEXT,
+    predicted_goal TEXT,
+    predicted_clarity TEXT,
+    release_version TEXT
 );
 CREATE INDEX IF NOT EXISTS idx_usage_logs_timestamp ON usage_logs(timestamp);
 CREATE INDEX IF NOT EXISTS idx_usage_logs_skill_type ON usage_logs(skill_type);
 """
+
+MIGRATION_COLUMNS = (
+    ("custom_intent", "TEXT"),
+    ("predicted_primitive", "TEXT"),
+    ("predicted_goal", "TEXT"),
+    ("predicted_clarity", "TEXT"),
+    ("release_version", "TEXT"),
+)
 
 
 class UsageLogger:
@@ -44,15 +79,20 @@ class UsageLogger:
     def _init_db(self) -> None:
         with self._connect() as conn:
             conn.executescript(CREATE_TABLE_SQL)
-            # Safe forward migration for existing usage.db files created before custom_intent existed.
             cols = {row[1] for row in conn.execute("PRAGMA table_info(usage_logs)").fetchall()}
-            if "custom_intent" not in cols:
-                conn.execute("ALTER TABLE usage_logs ADD COLUMN custom_intent TEXT")
+            altered = False
+            for col_name, col_type in MIGRATION_COLUMNS:
+                if col_name not in cols:
+                    conn.execute(f"ALTER TABLE usage_logs ADD COLUMN {col_name} {col_type}")
+                    altered = True
+            if altered:
                 conn.commit()
 
     def log_feedback(self, req: FeedbackRequest) -> int:
         ts = datetime.now(timezone.utc).isoformat()
         recommended_json = json.dumps(req.recommended_ids, ensure_ascii=False)
+        safe_input = redact_sensitive_text(req.input_text) or ""
+        safe_custom = redact_sensitive_text(req.custom_intent)
         with self._connect() as conn:
             cursor = conn.execute(
                 """
@@ -65,19 +105,27 @@ class UsageLogger:
                     selected_id,
                     inject_mode,
                     latency_ms,
-                    custom_intent
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    custom_intent,
+                    predicted_primitive,
+                    predicted_goal,
+                    predicted_clarity,
+                    release_version
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 (
                     ts,
                     req.app_name,
                     req.skill_type,
-                    req.input_text,
+                    safe_input,
                     recommended_json,
                     req.selected_id,
                     req.inject_mode,
                     req.latency_ms,
-                    req.custom_intent,
+                    safe_custom,
+                    req.predicted_primitive,
+                    req.predicted_goal,
+                    req.predicted_clarity,
+                    req.release_version,
                 ),
             )
             conn.commit()

@@ -1,0 +1,50 @@
+id: pt_turn_voice_to_text
+title: 口述稿整理成文章
+tagline: 把录音/口述转录整理成可发表的文稿，保留事实与说话人声音。
+routing:
+  primitive: translate
+  goals:
+  - create
+  clarity_fit:
+  - concrete
+  domains:
+  - writing
+  - transcription
+  - editing
+  - content_creation
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 手上是一段充满口头禅、重复和语序混乱的口述转录，需要整理成结构清晰、可发表的文稿，同时保留原话中的事实、数据与说话人声音。
+  trigger_utterances:
+  - 把这段录音转录整理成文章
+  - 语音转文字后怎么改成可发表的稿子
+  - 口述稿太口语化帮我润成文章
+  - transcript 太乱了整理一下
+  - 把采访录音整理成发布稿
+  anti_triggers:
+  - 只是把外文翻译成中文或把中文翻译成英文
+  - 只需要几句话摘要，不保留原话细节与署名
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: 把{{input}}整理为面向{{audience}}的文稿。去除口头重复，按观点重排，保留原话中的事实与署名。听不清或指代不明的片段标记时间和待核对项，结尾列可能需本人确认的改动。
+  variables:
+  - audience
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#turn-voice-to-text
+  source_hash: dceb96f407e2a43b8775054eb6e3595dd79e862a54f12d6a8d547cba5a88898d
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: writing_comms
+  subcategory: content_creation
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

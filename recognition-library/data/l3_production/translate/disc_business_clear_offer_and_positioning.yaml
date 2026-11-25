@@ -1,0 +1,63 @@
+id: disc_business_clear_offer_and_positioning
+title: 一句话说清价值主张
+tagline: 把空话行话改写成用户一看就懂的价值主张
+routing:
+  primitive: translate
+  goals:
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - business
+  - positioning
+  - value_proposition
+  - copywriting
+  app_affinity:
+  - Notion
+  - Chrome
+  - ChatGPT
+  - Claude
+  pain_point: 产品或服务介绍充满形容词、行话和空话，目标用户无法快速判断这是不是为他解决具体问题。
+  trigger_utterances:
+  - 我的产品介绍太虚了帮我改写成一句话价值主张
+  - 这句话用户第一眼就能懂吗
+  - 帮我把行话变成用户能懂的话
+  - landing page 开头太空怎么写
+  - 怎么一句话说清帮谁解决什么
+  anti_triggers:
+  - 需要写完整品牌故事或长篇营销文案
+  - 只需要润色语法但不改变定位
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '1. 粘贴当前简介：{{intro}}
+
+    2. 标出其中的空话、形容词和行业行话。
+
+    3. 为 {{product_or_service}} 生成 3 个不同侧重点的一句话价值主张：省时、省钱、降险。
+
+    4. 针对 {{target_user}} 写出“他们看到第一眼就会觉得‘这说的就是我’”的开场痛点句式。
+
+    5. 从以上候选中选最具体、最少形容词、最容易被目标用户复述的一句作为主介绍。
+
+    6. 检查最终句子是否明确包含：目标人群 + 具体痛点/结果 + 与现有方案的不同点。'
+  variables:
+  - product_or_service
+  - intro
+  - target_user
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-clear-offer-and-positioning
+  source_hash: 369b81c33f6f1537fdc7269bb60be1705798066da21e58d6111f1a6024bcfa7e
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: product_business
+  subcategory: indie_business
+  collections: []
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

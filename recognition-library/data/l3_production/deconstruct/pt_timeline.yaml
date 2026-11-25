@@ -1,0 +1,49 @@
+id: pt_timeline
+title: 还原事件时间线
+tagline: 从材料重建事件时间线，区分发生时间与披露时间
+routing:
+  primitive: deconstruct
+  goals:
+  - digest
+  clarity_fit:
+  - concrete
+  domains:
+  - research
+  - chronology
+  - timeline
+  - events
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  pain_point: 手里一堆材料里事件时间混在一起，分不清发生时间、披露时间和待确认事件，理不出清晰时间线
+  trigger_utterances:
+  - 帮我从这些材料里理出事件时间线
+  - 这个事件是什么时候发生的什么时候披露的
+  - 材料里时间线太乱了帮我按发生时间排序
+  - timeline organize from these docs
+  anti_triggers:
+  - 只是想写一篇新闻稿而不需要时间排序
+  - 想要的是人物 biography 而非事件 chronology
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 用【材料】重建【事件范围】的时间线。按发生时间排列，每条标记发生时间、披露时间、事件、出处和日期精度。来源只给区间时保留区间，冲突日期并列。最后标出造成理解断点的未知事件。
+  variables:
+  - 材料
+  - 事件范围
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#timeline
+  source_hash: 6b559b96c40e375f1213212bd844025d6fd04803005e1431b5860a37afa58023
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: general
+  subcategory: research
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

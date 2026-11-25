@@ -1,0 +1,30 @@
+{
+  "id": "pt_draft_email",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#draft-email",
+  "title": "起草一封邮件",
+  "content": "根据【背景和事实】写一封给【收件人及关系】的邮件，目的是【希望对方做什么】。给主题和一封可发送的正文，首段直接提出请求，结尾写清下一步和期限。未提供的日期或承诺用占位符，语气采用【期望语气】。",
+  "content_hash": "cae51fbbfa44625e3a1f1c5de474dbf83b0704165a7efd5d72eab5661e0d2319",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "writing",
+    "邮件",
+    "沟通",
+    "email",
+    "reply"
+  ],
+  "problem_solved": "让收件人迅速看懂背景和要做的事。",
+  "when_to_use": "分类: 写作与语言",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "draft-email",
+    "category": "writing",
+    "variables": [
+      "背景和事实",
+      "收件人及关系",
+      "希望对方做什么",
+      "期望语气"
+    ]
+  }
+}

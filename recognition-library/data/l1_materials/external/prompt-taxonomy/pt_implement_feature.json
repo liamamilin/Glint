@@ -1,0 +1,29 @@
+{
+  "id": "pt_implement_feature",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#implement-feature",
+  "title": "实现一个具体功能",
+  "content": "在【代码或仓库】里实现【用户行为】，验收条件是【正常场景和边界场景】。先找到现有入口和可复用逻辑，再实现。运行最相关的验证，最后说明变更文件、已验证行为和仍待确认的情况。",
+  "content_hash": "b63e95a40f9fbad2fde6363fbe47d1f3b86cee644cb4bd9fd9a9d792c35f6790",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "coding",
+    "开发",
+    "功能",
+    "实现",
+    "feature"
+  ],
+  "problem_solved": "让需求与验收条件对应到正常入口。",
+  "when_to_use": "分类: 开发与调试",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "implement-feature",
+    "category": "coding",
+    "variables": [
+      "代码或仓库",
+      "用户行为",
+      "正常场景和边界场景"
+    ]
+  }
+}

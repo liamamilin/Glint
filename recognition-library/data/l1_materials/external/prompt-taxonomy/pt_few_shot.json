@@ -1,0 +1,28 @@
+{
+  "id": "pt_few_shot",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#few-shot",
+  "title": "选择少量典型示例",
+  "content": "我需要模型完成【任务】，期望格式是【格式】。从【样本或已知边界】制定三到五个输入输出示例，覆盖正常、缺失和模糊情况。说明每个示例约束的具体行为。",
+  "content_hash": "fe4f1afcfe7cc95c3373120c003be8741d72a793ceaae26a62166283ca7c6c5a",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "prompt-workflows",
+    "示例",
+    "少样本",
+    "few shot"
+  ],
+  "problem_solved": "让模型从示例理解格式和边界。",
+  "when_to_use": "分类: 提示词与 AI 工作流",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "few-shot",
+    "category": "prompt-workflows",
+    "variables": [
+      "任务",
+      "格式",
+      "样本或已知边界"
+    ]
+  }
+}

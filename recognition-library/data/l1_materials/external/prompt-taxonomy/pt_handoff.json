@@ -1,0 +1,28 @@
+{
+  "id": "pt_handoff",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#handoff",
+  "title": "做可接手的交接文档",
+  "content": "将【项目资料】整理成给【接手人】的交接文档。说明目标、当前状态、关键入口、已作出的决定、未完成事项和未来一周优先动作。写出对方应先打开或运行什么，以及如何判断接手成功。",
+  "content_hash": "d76ea5348a827d21450c8a14d5a9f188b96b692deb6a7532651d9feb6cdb1406",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "office",
+    "交接",
+    "协作",
+    "移交",
+    "handoff"
+  ],
+  "problem_solved": "把当前状态、入口和未决事项交清楚。",
+  "when_to_use": "分类: 办公与协作",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "handoff",
+    "category": "office",
+    "variables": [
+      "项目资料",
+      "接手人"
+    ]
+  }
+}

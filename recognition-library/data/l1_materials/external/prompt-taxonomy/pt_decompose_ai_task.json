@@ -1,0 +1,27 @@
+{
+  "id": "pt_decompose_ai_task",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#decompose-ai-task",
+  "title": "将复杂请求拆成可验证的子任务",
+  "content": "把【复杂任务】拆成若干可以单独验收的步骤，已知约束是【上下文、工具与时间】。为每步列输入、输出、依赖、验收和错误处理，标出可以并行的部分和应由人决定的分岔。",
+  "content_hash": "affd681b125e428c0e7910ba0f63904dd1d8bf4701b2d6e9158a81fe941ebd0b",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "prompt-workflows",
+    "任务分解",
+    "提示链",
+    "prompt chain"
+  ],
+  "problem_solved": "明确各步输入、输出和顺序依赖。",
+  "when_to_use": "分类: 提示词与 AI 工作流",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "decompose-ai-task",
+    "category": "prompt-workflows",
+    "variables": [
+      "复杂任务",
+      "上下文、工具与时间"
+    ]
+  }
+}

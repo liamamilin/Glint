@@ -1,0 +1,33 @@
+{
+  "id": "disc_cognition_reversible_vs_irreversible",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/cognition.json#cognition-reversible-vs-irreversible",
+  "title": "区分“可逆门”与“单向门”，该快的地方别慢",
+  "content": "旧共识（盲区）：所有决定都要反复权衡、做足调研再行动，犹豫不决等于稳健。\n\n新现实（破盲视角）：在试错成本极低的今天，把大量“可逆小决定（Two-Way Door）”当成“不可逆大赌注”反复内耗，才是最大的隐形时间黑洞；可逆的事先跑起来再改。\n\n破冰追问母题：\n- 列出我本周正在纠结的 3 件事：[填入 3 件事]。帮我判断哪些属于“低成本可逆实验”，哪些属于“高代价不可逆决策”，并给每件可逆的事定一个 24 小时内的最小行动。\n- 针对我担心的这个风险：[描述你的顾虑]，如果最坏情况真的发生了，修复或回滚它的实际成本到底有多大？",
+  "content_hash": "9e381c774d50ada5ec0c1e0ba1042ec308f9feb3a84a9678e1d062cdcb76a2b3",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "cognition",
+    "cost-collapse",
+    "first-principles",
+    "decisions",
+    "two-way-door",
+    "speed",
+    "risk"
+  ],
+  "problem_solved": "所有决定都要反复权衡、做足调研再行动，犹豫不决等于稳健。",
+  "when_to_use": "在试错成本极低的今天，把大量“可逆小决定（Two-Way Door）”当成“不可逆大赌注”反复内耗，才是最大的隐形时间黑洞；可逆的事先跑起来再改。",
+  "procedural_steps": [
+    "列出我本周正在纠结的 3 件事：[填入 3 件事]。帮我判断哪些属于“低成本可逆实验”，哪些属于“高代价不可逆决策”，并给每件可逆的事定一个 24 小时内的最小行动。",
+    "针对我担心的这个风险：[描述你的顾虑]，如果最坏情况真的发生了，修复或回滚它的实际成本到底有多大？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "cognition-reversible-vs-irreversible",
+    "arena": "cognition",
+    "lenses": [
+      "cost-collapse",
+      "first-principles"
+    ]
+  }
+}

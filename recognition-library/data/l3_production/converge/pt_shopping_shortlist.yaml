@@ -1,0 +1,55 @@
+id: pt_shopping_shortlist
+title: 购物候选清单筛选
+tagline: 按硬约束筛选候选，核算总成本与售后风险
+routing:
+  primitive: converge
+  goals:
+  - evaluate
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - shopping
+  - purchasing
+  - product_selection
+  - planning
+  app_affinity:
+  - Chrome
+  - ChatGPT
+  - Claude
+  pain_point: 想买东西但选项太多，不知道哪个真正划算，怕踩坑买错或漏掉隐藏成本、兼容性和售后风险。
+  trigger_utterances:
+  - 帮我挑个键盘买哪个好
+  - 预算2000想买显示器怎么选
+  - 这几个型号哪个划算
+  - 买笔记本怕踩坑帮我筛选
+  - A和B选哪个更值
+  anti_triggers:
+  - 纯浏览种草没有明确购买需求
+  - 已有明确品牌型号只需查最低价
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 为 {{item_purpose}} 做购物清单，硬约束为 {{hard_constraints}}。先列淘汰条件，再比较三个可查候选的同版本价格、消耗品及保修成本。给查询日期、官方出处和下单前最后一个验证动作。
+  variables:
+  - item_purpose
+  - hard_constraints
+  workflow:
+    workflow_id: compare-purchase
+    step: 1
+    next_lens_id: pt_compare_reviews
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#shopping-shortlist
+  source_hash: b90eeb8004d0da29fad0eaae04e822eee5c7f845ed8a50f06418e452ef7e7d61
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: product_business
+  subcategory: product_design
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

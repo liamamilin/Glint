@@ -1,0 +1,13 @@
+{
+  "id": "atlas_googleworkspace_cli_skills_gws_d_f9dc6b9225",
+  "source": "atlas-methods",
+  "source_ref": "googleworkspace/cli:skills/gws-docs-write/SKILL.md",
+  "content_hash": "219028230078e0d14df314f2ae18b5918721fb5e298bba7d0a010937b2965045",
+  "title": "用 gws CLI 向 Google 文档末尾追加纯文本",
+  "quality_score": 0.2,
+  "reasons": [
+    "纯工具使用教程/陈述性知识：仅描述特定 CLI（gws）的命令语法、参数与认证路径，缺乏可跨场景复用的程序性/启发式认知方法；内容高度绑定具体工具，信息密度低。",
+    "quality_score_below_threshold:0.20<0.65"
+  ],
+  "model": "opencode-go/beam-free"
+}

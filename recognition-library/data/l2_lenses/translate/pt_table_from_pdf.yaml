@@ -1,0 +1,53 @@
+id: pt_table_from_pdf
+title: 表格还原为可计算数据
+tagline: 把PDF表格还原成可计算数据，核对表头单位合计并标出可疑单元格
+routing:
+  primitive: translate
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - files
+  - pdf_tables
+  - data_extraction
+  - csv
+  app_affinity:
+  - Chrome
+  - Notion
+  - Obsidian
+  - Cursor
+  pain_point: PDF 中的跨页表格表头、列单位与合计容易错位或漏掉脚注，需要把表格还原成可计算数据并标出可疑单元格
+  trigger_utterances:
+  - 这个PDF里的表格帮我转成CSV
+  - 跨页表格表头对不上，帮我核对一下
+  - 把这份PDF的表格提取出来做成可计算的数据
+  - PDF表格的列单位和合计帮我整理一下
+  anti_triggers:
+  - 不适用于普通文本摘要或无表格的PDF
+  - 不适用于图片OCR且无表格结构的场景
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请将 {{pdf_pages_and_tables}} 中的表格提取为 {{target_output_format}}。要求：
+
+    1. 保留列名、单位、小计和脚注；
+
+    2. 检查跨页表头及合计是否正确衔接；
+
+    3. 提供 3 条可对照源页的示例；
+
+    4. 标记可能错位、无法识别或误判的单元格。'
+  variables:
+  - pdf_pages_and_tables
+  - target_output_format
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#table-from-pdf
+  source_hash: c10d6236f3e05e686d19a2dd5479c0a0aab3a650b606eab9c7c9045009015735
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

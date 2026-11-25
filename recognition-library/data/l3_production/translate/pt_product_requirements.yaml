@@ -1,0 +1,55 @@
+id: pt_product_requirements
+title: 把问题写成PRD
+tagline: 把用户目标转成范围、验收与未解问题
+routing:
+  primitive: translate
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - product
+  - prd
+  - requirements
+  - specification
+  app_affinity:
+  - Notion
+  - Linear
+  - Figma
+  - Slack
+  pain_point: 用户手上有模糊的问题与证据，却不知道如何落成有范围、可验收的产品需求文档
+  trigger_utterances:
+  - 帮我把这个问题写成PRD
+  - 这个需求怎么写成产品需求
+  - 把用户反馈转成PRD
+  - 写个短PRD
+  - 需求文档帮我起草一下
+  anti_triggers:
+  - 已有完整PRD只需润色
+  - 纯技术实现方案而非产品需求
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 根据【用户问题和证据】写一份关于【产品变更】的短 PRD。包含目标用户、核心场景、范围、依赖、交付验收和未解问题。用至少一个正常场景和一个边界场景解释交付行为。
+  variables:
+  - 用户问题和证据
+  - 产品变更
+  workflow:
+    workflow_id: product-discovery
+    step: 3
+    next_lens_id: pt_experiment_plan
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#product-requirements
+  source_hash: d9f8e51263edb36e605f203e449f85873c381d83ca25298fd8aa3b93752293a2
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: product_business
+  subcategory: product_design
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

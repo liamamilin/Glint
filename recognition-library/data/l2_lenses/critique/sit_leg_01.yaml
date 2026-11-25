@@ -1,0 +1,42 @@
+id: sit_leg_01
+title: 合同条款排雷仪
+tagline: 签字前用X光照出霸王条款与隐形陷阱
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  clarity_fit:
+  - concrete
+  domains:
+  - legal
+  - contracts
+  - risk_review
+  - freelance
+  app_affinity:
+  - Mail
+  - Notion
+  - Chrome
+  pain_point: 接到外包单、平台协议或合作合同时，面对十几页法律术语头大，怕踩坑签到不利条款
+  trigger_utterances:
+  - 这份合同十几页看不懂帮我找风险
+  - 签外包单怕有霸王条款
+  - 平台协议里有什么坑
+  - 帮我审一下这份合同
+  - 合同里付款和解约条款有问题吗
+  anti_triggers:
+  - 需要起草全新合同或进行诉讼策略
+  - 涉及股权、大额资金或跨境纠纷的最终法律意见
+execution:
+  action_type: open_resource
+  inject_mode: null
+  content: 将脱敏后的合同全文喂给模型，重点扫描5大雷区：知识产权归属、无限连带赔偿、单方解约权、付款账期、竞业限制；用大白话标出“高危红灯条款”并解释最坏损失；针对每条红灯条款生成1段礼貌但坚定的修改替代措辞。大额资金、股权或跨境诉讼风险时最终需执业律师把关。
+  variables: []
+  workflow: null
+meta:
+  source: super-individual-toolbox
+  source_ref: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/legal-finance.json#leg-01
+  source_hash: d250fb7052fb0f6c3a9229772b09917e792240e10e29b1d32554f06a2498e8c1
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

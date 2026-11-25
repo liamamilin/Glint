@@ -1,0 +1,28 @@
+{
+  "id": "pt_explain",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#explain",
+  "title": "用例子解释一个概念",
+  "content": "请给【当前水平】的人解释【概念】。先用一句话说明它解决什么问题，再给一个具体例子，接着介绍准确定义和类比的边界。最后出一道可自查的小题，把答案放到末尾。",
+  "content_hash": "0884fdb0aaa04704a9f5732fc8b4542db039b0670aee2ec549787a0f40c5d610",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "learning",
+    "通俗",
+    "讲解",
+    "概念",
+    "ELI5"
+  ],
+  "problem_solved": "先建立直觉，再补上准确说法。",
+  "when_to_use": "分类: 学习与辅导",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "explain",
+    "category": "learning",
+    "variables": [
+      "当前水平",
+      "概念"
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "disc_career_reusable_playbook_leverage",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/career.json#career-reusable-playbook-leverage",
+  "title": "把“做过一次的复杂事”沉淀成可复用手册，而不是每次重头干",
+  "content": "旧共识（盲区）：事情做完了就算翻篇，下次遇到类似任务再临时想办法、重新摸索。\n\n新现实（破盲视角）：把踩坑经验、检查清单和 AI 提示词固化成一份结构化 Playbook 后，下次同类任务启动速度会快 5 倍，还能直接复用给他人或 Agent。\n\n破冰追问母题：\n- 我最近刚完成一件比较复杂的任务：[描述任务与踩过的坑]。请帮我把它整理成一份可复用的标准操作手册（Playbook），包含前置准备、执行步骤、常见陷阱和验收标准。\n- 盘点我过去一个月里重复做过至少两次的 [某类工作任务]，挑出最值得沉淀成模板/清单的 2 项，给出最小骨架。",
+  "content_hash": "817cc7acc7c3cbc98a43d2e633e29dbb270d095c121c8bdab8d2d2beab6b9d7d",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "career",
+    "invisible-friction",
+    "cost-collapse",
+    "playbooks",
+    "templates",
+    "leverage",
+    "scale"
+  ],
+  "problem_solved": "事情做完了就算翻篇，下次遇到类似任务再临时想办法、重新摸索。",
+  "when_to_use": "把踩坑经验、检查清单和 AI 提示词固化成一份结构化 Playbook 后，下次同类任务启动速度会快 5 倍，还能直接复用给他人或 Agent。",
+  "procedural_steps": [
+    "我最近刚完成一件比较复杂的任务：[描述任务与踩过的坑]。请帮我把它整理成一份可复用的标准操作手册（Playbook），包含前置准备、执行步骤、常见陷阱和验收标准。",
+    "盘点我过去一个月里重复做过至少两次的 [某类工作任务]，挑出最值得沉淀成模板/清单的 2 项，给出最小骨架。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "career-reusable-playbook-leverage",
+    "arena": "career",
+    "lenses": [
+      "invisible-friction",
+      "cost-collapse"
+    ]
+  }
+}

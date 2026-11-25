@@ -1,0 +1,33 @@
+{
+  "id": "disc_cognition_question_refinement_loop",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/cognition.json#cognition-question-refinement-loop",
+  "title": "先花 3 分钟“改写问题”，再让 AI 回答问题",
+  "content": "旧共识（盲区）：脑子里刚冒出一个模糊念头，就直接丢给 AI 要方案，拿到平庸答案再怪 AI 不够聪明。\n\n新现实（破盲视角）：80% 的平庸回答源于模糊提问；先让 AI 帮自己暴露前提假设、拆解隐藏变量、生成 3 个不同切角的精准母题，后续产出质量会呈阶梯式跃升。\n\n破冰追问母题：\n- 我现在的模糊想法是：[粘贴你的模糊念头]。先不要给我最终方案，请帮我找出这句话里的 3 个隐含前提，并把我的问题改写成 3 个角度完全不同的精准提问。\n- 针对 [你最近卡住的一个难题]，请用“五问法/反事实追问”帮我确认：我真正要解决的核心矛盾到底是什么，还是只是在修枝叶？",
+  "content_hash": "9d2dc8725db37ef8156221908c10acd231c535139b406c14212a3bc3237e5918",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "cognition",
+    "invisible-friction",
+    "first-principles",
+    "question-framing",
+    "unknown-unknown",
+    "thinking",
+    "problem-solving"
+  ],
+  "problem_solved": "脑子里刚冒出一个模糊念头，就直接丢给 AI 要方案，拿到平庸答案再怪 AI 不够聪明。",
+  "when_to_use": "80% 的平庸回答源于模糊提问；先让 AI 帮自己暴露前提假设、拆解隐藏变量、生成 3 个不同切角的精准母题，后续产出质量会呈阶梯式跃升。",
+  "procedural_steps": [
+    "我现在的模糊想法是：[粘贴你的模糊念头]。先不要给我最终方案，请帮我找出这句话里的 3 个隐含前提，并把我的问题改写成 3 个角度完全不同的精准提问。",
+    "针对 [你最近卡住的一个难题]，请用“五问法/反事实追问”帮我确认：我真正要解决的核心矛盾到底是什么，还是只是在修枝叶？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "cognition-question-refinement-loop",
+    "arena": "cognition",
+    "lenses": [
+      "invisible-friction",
+      "first-principles"
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "pt_onboarding_plan",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#onboarding-plan",
+  "title": "给新同事安排第一周上手计划",
+  "content": "为【岗位和背景】设计第一周上手计划，现有资源为【知识库、联系人、权限与环境】。按天列读什么、找谁、完成什么可检查成果。标出必须提前开通的权限和可以等的事项。",
+  "content_hash": "c8508bf6141899ae6023c4b847b714482eef9c71881f8b2c3311a71fcd06776d",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "office",
+    "入职",
+    "新人",
+    "岗位培训",
+    "onboarding"
+  ],
+  "problem_solved": "使权限、入口和第一个成果能依次完成。",
+  "when_to_use": "分类: 办公与协作",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "onboarding-plan",
+    "category": "office",
+    "variables": [
+      "岗位和背景",
+      "知识库、联系人、权限与环境"
+    ]
+  }
+}

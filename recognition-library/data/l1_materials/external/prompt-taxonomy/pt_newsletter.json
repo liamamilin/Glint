@@ -1,0 +1,28 @@
+{
+  "id": "pt_newsletter",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#newsletter",
+  "title": "把更新素材写成简报",
+  "content": "将【更新素材】编成面向【订阅读者】的【长度和频率】简报。给主题行、开头、一组按重要性排列的条目和下一步。每条说明对读者有什么影响，并把数字或承诺与原材料对齐。",
+  "content_hash": "5c4337c1dd8a00e5f14bf1d30be3f2b1569a227c9471b18f5be0732d4e7b01af",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "writing",
+    "通讯",
+    "邮件简报",
+    "newsletter"
+  ],
+  "problem_solved": "挑出值得读者花时间的信息。",
+  "when_to_use": "分类: 写作与语言",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "newsletter",
+    "category": "writing",
+    "variables": [
+      "更新素材",
+      "订阅读者",
+      "长度和频率"
+    ]
+  }
+}

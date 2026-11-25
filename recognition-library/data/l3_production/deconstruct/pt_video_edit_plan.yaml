@@ -1,0 +1,52 @@
+id: pt_video_edit_plan
+title: 素材剪辑节奏规划
+tagline: 把素材与时码编成成片剪辑方案
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - video_editing
+  - creative
+  - storytelling
+  - post_production
+  app_affinity:
+  - Notion
+  pain_point: 手头已有素材和时码，但不成片节奏，不知道每段该剪什么、留多久、怎么转场
+  trigger_utterances:
+  - 帮我把素材与时码排成剪辑方案
+  - 这段素材怎么剪节奏
+  - 成片时长定了但不会分配
+  - 帮我标出可删片段和补拍点
+  - 按故事目标安排视频节奏
+  anti_triggers:
+  - 我需要生成全新视频脚本
+  - 我想做画面特效设计
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 把【素材清单、时码和故事目标】整理成【成片时长】剪辑方案。逐段写取用素材、秒数、信息任务、声音和转场。标出剪掉不影响理解的片段及仍需补拍的动作。
+  variables:
+  - 素材清单、时码和故事目标
+  - 成片时长
+  workflow:
+    workflow_id: idea-to-video
+    step: 5
+    next_lens_id: pt_video_captions
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#video-edit-plan
+  source_hash: fcaf7502ee47b72cd6b0452596f036d91502441e98ec49939b95d8d0511cfc19
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: product_business
+  subcategory: product_design
+  collections: []
+  base_weight: 1.0
+  confidence: 0.86
+  version: 1

@@ -1,0 +1,28 @@
+{
+  "id": "pt_source_disagreement",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#source-disagreement",
+  "title": "解释两个来源为什么不一致",
+  "content": "对照【来源 A】和【来源 B】关于【问题】的结论。先找两者实际在回答的对象、时间、定义、样本和统计量，再区分可由口径解释的差异和真实矛盾。给可复查位置，以及能区分两种解释的证据。",
+  "content_hash": "052c44760fbb36452bacce7bbf613aa4da4a05b50b86aeec0864248bcb3b1775",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "research",
+    "分歧",
+    "数据口径",
+    "disagreement"
+  ],
+  "problem_solved": "核对定义、样本、时期和统计口径。",
+  "when_to_use": "分类: 查找与研究",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "source-disagreement",
+    "category": "research",
+    "variables": [
+      "来源 A",
+      "来源 B",
+      "问题"
+    ]
+  }
+}

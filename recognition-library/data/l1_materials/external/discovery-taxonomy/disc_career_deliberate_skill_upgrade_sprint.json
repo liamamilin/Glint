@@ -1,0 +1,33 @@
+{
+  "id": "disc_career_deliberate_skill_upgrade_sprint",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/career.json#career-deliberate-skill-upgrade-sprint",
+  "title": "用“两周刻意冲刺 + 真实作品”练技能，而不是漫无目的看课",
+  "content": "旧共识（盲区）：学一项新技能应该先把整套课程、长教程或厚书刷完，再考虑动手做东西。\n\n新现实（破盲视角）：光看课很容易产生“学会了”的错觉；定一个两周小目标，围绕一个真实小作品边做边查、边改边练，掌握速度通常会快得多。\n\n破冰追问母题：\n- 我想在接下来两周里快速上手 [某项具体技能/工具]：[简述你的基础与目标]。请帮我设计一个“以做出 1 个小作品/完成 1 个真实任务为终点”的两周冲刺计划。\n- 针对 [你想练的技能]，帮我列出最核心的 20% 基础知识和最容易踩的 3 个新手坑，让我跳过冗余内容直接动手。",
+  "content_hash": "bf7cb09f0d32df2489f04c1d48e449c59ee48443044d41d9b38c5debc6249d3e",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "career",
+    "cost-collapse",
+    "first-principles",
+    "skill-sprint",
+    "learning",
+    "practice",
+    "growth"
+  ],
+  "problem_solved": "学一项新技能应该先把整套课程、长教程或厚书刷完，再考虑动手做东西。",
+  "when_to_use": "光看课很容易产生“学会了”的错觉；定一个两周小目标，围绕一个真实小作品边做边查、边改边练，掌握速度通常会快得多。",
+  "procedural_steps": [
+    "我想在接下来两周里快速上手 [某项具体技能/工具]：[简述你的基础与目标]。请帮我设计一个“以做出 1 个小作品/完成 1 个真实任务为终点”的两周冲刺计划。",
+    "针对 [你想练的技能]，帮我列出最核心的 20% 基础知识和最容易踩的 3 个新手坑，让我跳过冗余内容直接动手。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "career-deliberate-skill-upgrade-sprint",
+    "arena": "career",
+    "lenses": [
+      "cost-collapse",
+      "first-principles"
+    ]
+  }
+}

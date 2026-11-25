@@ -1,0 +1,45 @@
+id: pt_profile_summary
+title: 基于事实的职业简介
+tagline: 用真实经历写短长版职业简介，不编造
+routing:
+  primitive: translate
+  goals:
+  - create
+  clarity_fit:
+  - concrete
+  domains:
+  - career
+  - professional_bio
+  - linkedin
+  - self_introduction
+  app_affinity:
+  - Notion
+  - Chrome
+  - ChatGPT
+  - Claude
+  pain_point: 用户需要在 LinkedIn、简历或个人主页介绍自己，但不知道如何把经历组织成一段让读者快速理解其价值的简介，又担心编造虚假信息
+  trigger_utterances:
+  - 帮我写一段 LinkedIn 简介
+  - 我经历很多但不知道怎么介绍自己
+  - 写个专业 bio 不要编造
+  - 简历自我介绍怎么写
+  - 帮我把经历整理成职业简介
+  anti_triggers:
+  - 只是润色语法或语气、不涉及经历整合的场景
+  - 需要编造或夸大经历、资质的场景
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 根据【经历和成果】为【发布处及读者】写职业简介。第一句说擅长解决的实际问题，再给两个能支撑定位的具体例子。生成短版和长版，避免补造职位、项目或资质。
+  variables:
+  - experiences_and_achievements
+  - platform_and_audience
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#profile-summary
+  source_hash: adff5f80e713b728a9b457cc92703c9fd9ad9fbf544391b121dfb3c8e9b09ae1
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

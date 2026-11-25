@@ -1,0 +1,82 @@
+id: atlas_obra_superpowers_skills_test_dri_5a1f863466
+title: TDD 红绿重构循环
+tagline: 先写失败测试再写最小实现，避免虚假信心与过度设计
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - debug
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - engineering
+  - testing
+  - tdd
+  - quality_assurance
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Terminal
+  pain_point: 先写生产代码后补测试，测试永远绿灯发现不了回归，重构和改行为时心里没底
+  trigger_utterances:
+  - 帮我用 TDD 实现这个功能
+  - 先写失败测试再写实现
+  - 这个 bug 要不要先写个失败测试
+  - 重构前先把测试加上
+  - 别让我先写实现再补测试
+  anti_triggers:
+  - 只是想快速写个 throwaway 原型脚本
+  - 只需改配置文件或生成代码
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 'TDD 循环（RED → GREEN → REFACTOR）
+
+
+    铁律：没有先失败的测试，就不写生产代码。若已先写代码，删除并从头开始。
+
+
+    RED：
+
+    - 写一个最小测试表达期望行为：名称描述行为、只测一件事（名称含 ''and'' 就拆分）、使用真实代码，mock 仅在不可避免时。
+
+    - 运行测试，确认以正确方式失败：失败信息符合预期、原因是功能缺失而非拼写错误。若直接通过，修改测试；若报错，修复后重跑。
+
+    - 写/改测试时先说出会使之失败的生产改动，只断言真实行为。
+
+
+    GREEN：
+
+    - 写刚好能让测试通过的最简代码，不添加测试之外的功能，不顺手重构，不做超出测试的“改进”（YAGNI）。
+
+    - 再次运行测试：本测试通过、其他测试仍通过、输出干净（无错误/警告）。本测试失败修改代码而非测试；其他测试失败立即修复。
+
+    - 运行项目的完整测试命令（如 pytest/npm test/cargo test），即使任务只点名单个文件；报告该次运行暴露的所有失败，包括非本次改动引起的。
+
+
+    REFACTOR：
+
+    - 仅在全部测试通过后消除重复、改进命名、抽取辅助函数，保持测试全部通过，不新增行为。
+
+
+    完成前核对：每个新函数/方法都有测试；亲眼看过每个测试先失败；每个按预期原因失败；为每个写了最小实现；全部测试通过；输出干净；使用真实代码；覆盖边界与错误。
+
+
+    例外：一次性原型、生成代码、配置文件改动需先征询人类搭档。'
+  variables: []
+  workflow: null
+meta:
+  source: atlas-methods
+  source_ref: obra/superpowers:skills/test-driven-development/SKILL.md
+  source_hash: 49e9f312dc351f58b6917b66303bb072e5c13b712be3cc5e17b4c88cce0c36fd
+  status: active
+  scope: domain_specific
+  shelf: off_shelf
+  tier: A
+  category: engineering
+  subcategory: code_review
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

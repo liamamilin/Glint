@@ -1,0 +1,21 @@
+{
+  "id": "core_decision_matrix",
+  "source": "glint-core",
+  "source_ref": "cards.yaml#decision_matrix",
+  "title": "多维对比决策表",
+  "content": "请提取最关键的 4-5 个评估维度，输出一份 Markdown 对比表格，并在最后给出明确的推荐结论与取舍理由。",
+  "content_hash": "6ec9cb79a5692d7d3c90df5d95151a22ff4a2d1ab6b3a43fd09aee1686253ef0",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "structure"
+  ],
+  "problem_solved": "技术选型 / 方案取舍",
+  "when_to_use": "",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "decision_matrix",
+    "legacy_dimension": "structure",
+    "legacy_mode": "append"
+  }
+}

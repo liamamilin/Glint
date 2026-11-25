@@ -1,0 +1,52 @@
+id: disc_career_personal_operating_manual
+title: 个人协作说明书
+tagline: 把沟通偏好与边界写清楚，减少团队猜忌与返工
+routing:
+  primitive: translate
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - career
+  - collaboration
+  - communication
+  - team_dynamics
+  app_affinity:
+  - Notion
+  - Slack
+  - Feishu
+  pain_point: teammates 只能靠相处慢慢猜彼此的沟通偏好和边界，协作中反复出现误会、返工和隐性摩擦。
+  trigger_utterances:
+  - 怎么写个人协作说明书
+  - teammates 总误会我的沟通方式
+  - 开工对齐时怎么定协作约定
+  - 把我的工作偏好写成不生硬的说明
+  - 团队协作总是猜来猜去很累
+  anti_triggers:
+  - 已有明确团队流程规范的场景
+  - 纯个人时间管理或日程规划
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '1. 梳理个人工作习惯：作息、响应时效、深度工作时段、擅长与短板。
+
+    2. 选择 2-3 个最高频协作场景，写出对方最容易误解的点。
+
+    3. 起草 300 字左右的个人协作说明书，包含高效沟通方式、深度工作时段、协作红线。
+
+    4. 把常见误会转成 2 条清晰、不生硬的协作约定。
+
+    5. 在开工对齐、自我介绍或团队文档中同步，并征求反馈迭代。'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/career.json#career-personal-operating-manual
+  source_hash: 7ce2570b767d5cf47b061fae434f489a1f4fc413e14c374186a260a25282a552
+  status: active
+  base_weight: 1.0
+  confidence: 0.86
+  version: 1

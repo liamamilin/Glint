@@ -1,0 +1,52 @@
+id: disc_cognition_looking_for_disconfirming_evidence
+title: 找反证推翻自己
+tagline: 主动搜反例看清盲区，别只听赞同声
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - cognition
+  - critical_thinking
+  - evidence
+  - decision_making
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 用户已经形成看法或计划，却只在搜集支持证据，确认偏误导致盲区未被暴露，押注前缺乏反面验证
+  trigger_utterances:
+  - 我觉得这个方案没问题帮我确认一下
+  - 我倾向于选A有啥风险
+  - 这个判断到底靠不靠谱
+  - 帮我找找反例和漏洞
+  - I'm pretty sure about this, any holes?
+  anti_triggers:
+  - 用户只想快速总结已有信息无需反面视角
+  - 用户要求列举支持观点或正面案例
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '刻意找能推翻自己看法的证据
+
+
+    1. 我目前倾向于认为：[填入你的看法或计划]。请帮我列出 4 个可能推翻或削弱这个看法的反例、潜在风险或反面视角。
+
+    2. 如果我要验证 [某个重要假设] 到底靠不靠谱，最值得优先去查的 2 个反面证据是什么？
+
+
+    使用方式：先填入看法/假设，再逐条对照反例，更新置信度后决定是否押注。'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/cognition.json#cognition-looking-for-disconfirming-evidence
+  source_hash: bf322d1d35b06f7a11724b7c7e743c0700f1923941f0cb6ef9b231fcc34765d9
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

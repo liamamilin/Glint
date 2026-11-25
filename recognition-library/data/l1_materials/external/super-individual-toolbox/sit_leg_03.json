@@ -1,0 +1,29 @@
+{
+  "id": "sit_leg_03",
+  "source": "super-individual-toolbox",
+  "source_ref": "https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/legal-finance.json#leg-03",
+  "title": "隐私与开源协议自查表",
+  "content": "定位：开源发布前守住版权与用户隐私的合规底线\n\n触发场景：当你准备把个人项目开源到 GitHub 或上线面向公众的静态站，不确定该选什么协议、有没有泄密风险时。\n\n核心机制：\n- 根据商业意图选定开源协议（MIT 宽松商用 / Apache 含专利保护 / AGPL 防闭源套壳）并核对第三方依赖兼容性\n- 扫描代码库与 Git 历史，确保零硬编码 API Key、个人邮箱或私有路径残留\n- 若站点使用本地存储或统计代码，在页脚补齐极简透明的隐私声明（如“数据仅存本地，零云端上传”）\n\n交付物：一份通过核验的《LICENSE + 密钥清零 + 隐私声明》发布前包\n\n推荐装配：开源协议自查清单 + 本地密钥扫描命令（git grep / gitleaks）\n\n误用警告：不要以为“删掉最新一次提交里的 API Key”就安全了；只要推过 Git 历史，Key 必须立刻作废重签。",
+  "content_hash": "ba5fa73a70462588bac1276bad2181b73636f895bb446635ea6f518630bc427c",
+  "suggested_action_type": "open_resource",
+  "domain_hints": [
+    "legal-finance",
+    "法务与财务官"
+  ],
+  "problem_solved": "当你准备把个人项目开源到 GitHub 或上线面向公众的静态站，不确定该选什么协议、有没有泄密风险时。",
+  "when_to_use": "当你准备把个人项目开源到 GitHub 或上线面向公众的静态站，不确定该选什么协议、有没有泄密风险时。",
+  "procedural_steps": [
+    "根据商业意图选定开源协议（MIT 宽松商用 / Apache 含专利保护 / AGPL 防闭源套壳）并核对第三方依赖兼容性",
+    "扫描代码库与 Git 历史，确保零硬编码 API Key、个人邮箱或私有路径残留",
+    "若站点使用本地存储或统计代码，在页脚补齐极简透明的隐私声明（如“数据仅存本地，零云端上传”）"
+  ],
+  "anti_patterns": [
+    "不要以为“删掉最新一次提交里的 API Key”就安全了；只要推过 Git 历史，Key 必须立刻作废重签。"
+  ],
+  "metadata": {
+    "original_id": "leg-03",
+    "drawer": "legal-finance",
+    "drawer_zh": "法务与财务官",
+    "deliverable": "一份通过核验的《LICENSE + 密钥清零 + 隐私声明》发布前包"
+  }
+}

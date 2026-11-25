@@ -1,0 +1,69 @@
+id: pt_stakeholder_map
+title: 梳理干系人
+tagline: 按职责与决定权安排谁通知、谁协调、何时联系
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - create
+  clarity_fit:
+  - concrete
+  - vague
+  domains:
+  - office
+  - stakeholder_map
+  - collaboration
+  - project_management
+  - communication
+  app_affinity:
+  - Notion
+  - Feishu
+  - Slack
+  - Linear
+  pain_point: 项目推进时不清楚该通知谁、谁有决定权、谁只需知会，沟通安排混乱、遗漏关键干系人
+  trigger_utterances:
+  - 这个项目要通知哪些人啊
+  - 谁有决定权谁要知会帮我理一下
+  - 干系人列表帮我梳理一下
+  - stakeholder map 帮我画一下
+  - 这个计划要协调哪些角色
+  anti_triggers:
+  - 用户只是想写一份通用会议纪要模板，而非按职责拆解干系人
+  - 用户在做市场用户画像/客户分层，而非内部项目干系人沟通安排
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '根据【项目计划与团队职责】梳理干系人。列负责决定、实际执行、提供信息和需知会的角色，写他们需要知道什么、何时联系、希望得到什么反馈。职责不明时给待确认问题。
+
+
+    请按以下结构输出：
+
+    1. 决策者（Decider）：谁、需要知道什么、何时联系、期望反馈
+
+    2. 执行者（Executor）：谁、需要知道什么、何时联系、期望反馈
+
+    3. 信息提供者（Informant）：谁、需要知道什么、何时联系、期望反馈
+
+    4. 知会者（Informed）：谁、需要知道什么、何时联系、期望反馈
+
+    5. 待确认问题：职责/角色不明时列出需澄清的问题
+
+
+    输入：'
+  variables:
+  - 项目计划与团队职责
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#stakeholder-map
+  source_hash: 1dd23e0fe398bb10054958225bd640ba8b83e874fa2e16d3058b02b85fb75d06
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: writing_comms
+  subcategory: workplace_comms
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

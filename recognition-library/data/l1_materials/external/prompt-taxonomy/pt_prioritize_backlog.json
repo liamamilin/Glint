@@ -1,0 +1,27 @@
+{
+  "id": "pt_prioritize_backlog",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#prioritize-backlog",
+  "title": "比较需求优先级",
+  "content": "按【目标和已有约束】评估【候选事项】。用影响、证据、成本和依赖做表，注明依据、未知项和排序敏感点。给前两项里可先交付的最小增量以及验证结果。",
+  "content_hash": "1e6ec1cb5bca436dea5c7e2738e203526df8f030a4eec1895b80bb5e7477c70a",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "product",
+    "需求优先级",
+    "排期",
+    "backlog"
+  ],
+  "problem_solved": "让评分、理由和不确定性可讨论。",
+  "when_to_use": "分类: 产品与业务",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "prioritize-backlog",
+    "category": "product",
+    "variables": [
+      "目标和已有约束",
+      "候选事项"
+    ]
+  }
+}

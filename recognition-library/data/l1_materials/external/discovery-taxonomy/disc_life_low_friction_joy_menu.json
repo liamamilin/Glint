@@ -1,0 +1,33 @@
+{
+  "id": "disc_life_low_friction_joy_menu",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/life.json#life-low-friction-joy-menu",
+  "title": "备一份“低门槛恢复清单”，别等耗尽才想起来充电",
+  "content": "旧共识（盲区）：休息就是躺着刷短视频，或者等假期攒够了再一次性大放松。\n\n新现实（破盲视角）：高消耗刷屏往往越刷越空，而提前准备好的“15 分钟低门槛恢复动作”（散步、听一张专辑、做顿简单饭、见一位老友）能在疲惫早期就把电量拉回来。\n\n破冰追问母题：\n- 帮我建一份分档的“个人恢复菜单”：15 分钟快充档、半天放松档、周末深度充电档，要求尽量不依赖高刺激屏幕刷屏且门槛低。\n- 当我发现自己开始烦躁、拖延、对什么都提不起劲时，帮我写 3 个“立刻能做的微小止损动作”，帮我及时踩刹车。",
+  "content_hash": "045d7564900859570b2db1042209a75adf12064258b7837097b75f514a1c50a2",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "life",
+    "invisible-friction",
+    "role-inversion",
+    "joy",
+    "rest",
+    "burnout",
+    "recovery"
+  ],
+  "problem_solved": "休息就是躺着刷短视频，或者等假期攒够了再一次性大放松。",
+  "when_to_use": "高消耗刷屏往往越刷越空，而提前准备好的“15 分钟低门槛恢复动作”（散步、听一张专辑、做顿简单饭、见一位老友）能在疲惫早期就把电量拉回来。",
+  "procedural_steps": [
+    "帮我建一份分档的“个人恢复菜单”：15 分钟快充档、半天放松档、周末深度充电档，要求尽量不依赖高刺激屏幕刷屏且门槛低。",
+    "当我发现自己开始烦躁、拖延、对什么都提不起劲时，帮我写 3 个“立刻能做的微小止损动作”，帮我及时踩刹车。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "life-low-friction-joy-menu",
+    "arena": "life",
+    "lenses": [
+      "invisible-friction",
+      "role-inversion"
+    ]
+  }
+}

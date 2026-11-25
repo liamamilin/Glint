@@ -1,0 +1,28 @@
+{
+  "id": "pt_news_context",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#news-context",
+  "title": "解释一条新闻的背景",
+  "content": "我刚看到【新闻或链接】，只了解【已知背景】。用简短时间线解释前因，再写本次新增事实、各方说法和待核实信息。区分事件时间与报道时间，优先引用当事机构的一手材料；没有联网能力时标记待核实。",
+  "content_hash": "310bc5656b8747f9ecee5a393b02c20766ae63410715538040d565acd1e57404",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "research",
+    "新闻",
+    "背景",
+    "跟进",
+    "news context"
+  ],
+  "problem_solved": "让读者看懂已知事实、前因和待确认项。",
+  "when_to_use": "分类: 查找与研究",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "news-context",
+    "category": "research",
+    "variables": [
+      "新闻或链接",
+      "已知背景"
+    ]
+  }
+}

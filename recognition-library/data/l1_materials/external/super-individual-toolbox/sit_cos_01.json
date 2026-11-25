@@ -1,0 +1,29 @@
+{
+  "id": "sit_cos_01",
+  "source": "super-individual-toolbox",
+  "source_ref": "https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/chief-of-staff.json#cos-01",
+  "title": "红队拷问器",
+  "content": "定位：雇一个专门唱反调的毒舌合伙人\n\n触发场景：当你对一个新点子极度兴奋、准备立刻熬夜开工，但身边没人给你泼冷水时。\n\n核心机制：\n- 把你的方案压缩成 3 句话的核心假设\n- 强制 AI 站在“做空者/竞争对手”立场，列出 3 个最致命的死法\n- 对每个死法追问：有没有低成本的证伪实验（48 小时内可验证）\n\n交付物：一份含 3 个致命死法与对应 48 小时证伪实验的《排雷清单》\n\n推荐装配：高推理模型对话 + 禁用顺从偏好的 System Prompt\n\n误用警告：不要在灵感刚萌芽、还没成形时使用，否则容易把好苗子过早扼杀。",
+  "content_hash": "e08615fd8b18ffe95586a9f2b4a308f04fd5bb05593936df54055af615064db0",
+  "suggested_action_type": "open_resource",
+  "domain_hints": [
+    "chief-of-staff",
+    "参谋与战略官"
+  ],
+  "problem_solved": "当你对一个新点子极度兴奋、准备立刻熬夜开工，但身边没人给你泼冷水时。",
+  "when_to_use": "当你对一个新点子极度兴奋、准备立刻熬夜开工，但身边没人给你泼冷水时。",
+  "procedural_steps": [
+    "把你的方案压缩成 3 句话的核心假设",
+    "强制 AI 站在“做空者/竞争对手”立场，列出 3 个最致命的死法",
+    "对每个死法追问：有没有低成本的证伪实验（48 小时内可验证）"
+  ],
+  "anti_patterns": [
+    "不要在灵感刚萌芽、还没成形时使用，否则容易把好苗子过早扼杀。"
+  ],
+  "metadata": {
+    "original_id": "cos-01",
+    "drawer": "chief-of-staff",
+    "drawer_zh": "参谋与战略官",
+    "deliverable": "一份含 3 个致命死法与对应 48 小时证伪实验的《排雷清单》"
+  }
+}

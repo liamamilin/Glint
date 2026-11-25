@@ -1,0 +1,28 @@
+{
+  "id": "pt_timeline",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#timeline",
+  "title": "从材料还原事件时间线",
+  "content": "用【材料】重建【事件范围】的时间线。按发生时间排列，每条标记发生时间、披露时间、事件、出处和日期精度。来源只给区间时保留区间，冲突日期并列。最后标出造成理解断点的未知事件。",
+  "content_hash": "6b559b96c40e375f1213212bd844025d6fd04803005e1431b5860a37afa58023",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "research",
+    "时间线",
+    "事件",
+    "chronology",
+    "timeline"
+  ],
+  "problem_solved": "区分发生时间、披露时间和时间待定的事件。",
+  "when_to_use": "分类: 查找与研究",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "timeline",
+    "category": "research",
+    "variables": [
+      "材料",
+      "事件范围"
+    ]
+  }
+}

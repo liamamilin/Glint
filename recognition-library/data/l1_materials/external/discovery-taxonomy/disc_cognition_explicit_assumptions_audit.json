@@ -1,0 +1,32 @@
+{
+  "id": "disc_cognition_explicit_assumptions_audit",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/cognition.json#cognition-explicit-assumptions-audit",
+  "title": "先把“默认假设”列出来，再决定要不要打破它",
+  "content": "旧共识（盲区）：很多前提条件是“天经地义”的，不用专门拿出来检视。\n\n新现实（破盲视角）：最大的认知盲区往往藏在“连自己都没意识到的默认假设”里；一旦把前提写到纸上，立刻就能看清哪些是铁律、哪些只是过时习惯。\n\n破冰追问母题：\n- 针对我目前正在做的这件事：[描述你的计划或现状]，帮我列出它背后依赖的 6 条“默认假设”，并标出哪些最可能已经不再成立。\n- 用“如果反过来会怎样”的思维，帮我挑战 [某个你一直深信不疑的行业/个人规则]，看看打破后会发生什么。",
+  "content_hash": "b219250255bb360e63128d5eb3c39e798e32e82eed967571629a5d4cee061c12",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "cognition",
+    "first-principles",
+    "role-inversion",
+    "assumptions",
+    "blindspots",
+    "reasoning"
+  ],
+  "problem_solved": "很多前提条件是“天经地义”的，不用专门拿出来检视。",
+  "when_to_use": "最大的认知盲区往往藏在“连自己都没意识到的默认假设”里；一旦把前提写到纸上，立刻就能看清哪些是铁律、哪些只是过时习惯。",
+  "procedural_steps": [
+    "针对我目前正在做的这件事：[描述你的计划或现状]，帮我列出它背后依赖的 6 条“默认假设”，并标出哪些最可能已经不再成立。",
+    "用“如果反过来会怎样”的思维，帮我挑战 [某个你一直深信不疑的行业/个人规则]，看看打破后会发生什么。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "cognition-explicit-assumptions-audit",
+    "arena": "cognition",
+    "lenses": [
+      "first-principles",
+      "role-inversion"
+    ]
+  }
+}

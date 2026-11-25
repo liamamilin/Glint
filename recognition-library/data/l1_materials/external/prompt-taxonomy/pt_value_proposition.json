@@ -1,0 +1,28 @@
+{
+  "id": "pt_value_proposition",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#value-proposition",
+  "title": "为一个受众写出可验证的价值主张",
+  "content": "根据【产品事实和现有证据】为【目标受众与场景】制定价值主张。写用户当前做法、主要障碍、承诺结果与证据。给两种可区分的定位和一个能验证区分度的测试。",
+  "content_hash": "70a441c0ce5ff77c677e5b22c7aa87cab8ac45b95a268452d536aa5b69c4be02",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "marketing",
+    "价值主张",
+    "定位",
+    "positioning",
+    "value proposition"
+  ],
+  "problem_solved": "用可证明的差异和结果解释为何选择。",
+  "when_to_use": "分类: 营销与销售",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "value-proposition",
+    "category": "marketing",
+    "variables": [
+      "产品事实和现有证据",
+      "目标受众与场景"
+    ]
+  }
+}

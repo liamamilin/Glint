@@ -1,0 +1,29 @@
+{
+  "id": "pt_language_roleplay",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#language-roleplay",
+  "title": "角色扮演练对话",
+  "content": "请用【目标语言】和我模拟【具体场景】。我的水平是【语言水平】。从一句自然开场开始，每轮等我回答再继续。每三轮用简短反馈归纳一个关键语言问题，给一个更自然的说法让我重试。",
+  "content_hash": "2aa609564f87b0afd005c5df3aeb4043278af359de33ad7dc8fc63937e97efa2",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "learning",
+    "口语",
+    "外语",
+    "角色扮演",
+    "language"
+  ],
+  "problem_solved": "在真实语境中练理解和表达。",
+  "when_to_use": "分类: 学习与辅导",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "language-roleplay",
+    "category": "learning",
+    "variables": [
+      "目标语言",
+      "具体场景",
+      "语言水平"
+    ]
+  }
+}

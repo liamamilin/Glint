@@ -1,0 +1,28 @@
+{
+  "id": "pt_support_escalation",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#support-escalation",
+  "title": "把问题转交给能解决的团队",
+  "content": "把【问题和排查记录】整理为给【升级团队】的交接。写影响、开始时间、账号或版本范围、复现、已试与结果、最需要的决定和下一次客户更新。将任何不必要的身份信息移除。",
+  "content_hash": "5dec88f97e982bc836a46c0d4c09757883f8bf5a994c2b4bbfa2dd4f3ce7b74c",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "support",
+    "客服升级",
+    "转单",
+    "支持交接",
+    "support escalation"
+  ],
+  "problem_solved": "交代已排查情况与需要响应的动作。",
+  "when_to_use": "分类: 客服与服务运营",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "support-escalation",
+    "category": "support",
+    "variables": [
+      "问题和排查记录",
+      "升级团队"
+    ]
+  }
+}

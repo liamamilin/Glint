@@ -1,0 +1,27 @@
+{
+  "id": "pt_opportunity_map",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#opportunity-map",
+  "title": "用证据找出可做的产品机会",
+  "content": "整理【访谈、反馈或数据】以改善【目标结果】。输出机会表，逐项写用户问题、何时影响、证据、潜在用户范围和可逆试验。将解决方案作为候选另列，明确哪类证据能推翻假设。",
+  "content_hash": "cf39ce474542ee51886d094e6799492027d6164821e64d9dabda1d8d9a5f6c6b",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "product",
+    "机会",
+    "产品发现",
+    "opportunity"
+  ],
+  "problem_solved": "分清用户问题和预选解决方案。",
+  "when_to_use": "分类: 产品与业务",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "opportunity-map",
+    "category": "product",
+    "variables": [
+      "访谈、反馈或数据",
+      "目标结果"
+    ]
+  }
+}

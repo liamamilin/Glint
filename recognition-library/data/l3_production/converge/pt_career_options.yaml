@@ -1,0 +1,54 @@
+id: pt_career_options
+title: 比较职业方向
+tagline: 用可试验的小项目检验长期职业选择
+routing:
+  primitive: converge
+  goals:
+  - evaluate
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - career
+  - career_planning
+  - job_transition
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 用户在多个职业方向间难以取舍，希望用可执行的小实验而非空想来验证长期选择
+  trigger_utterances:
+  - 这几个职业方向怎么选
+  - 转行该往哪走
+  - 职业规划很纠结
+  - Compare career options
+  - 帮我比较几条职业路径
+  anti_triggers:
+  - 已有明确目标只需优化简历
+  - 与职业选择无关的日常决策
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 根据【经验、兴趣和现实约束】比较【方向】。对每个方向给可迁移技能、主要缺口、日常工作假设和查证办法。选一个两周内能试的小项目或访谈，用结果决定是否继续。
+  variables:
+  - experience_interests_constraints
+  - directions
+  - 经验、兴趣和现实约束
+  - 方向
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#career-options
+  source_hash: 8279bdc86da8378edb8981a91b493ec91da8cf8d8469c70fe2cd682d8dba2171
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: personal_career
+  subcategory: career
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

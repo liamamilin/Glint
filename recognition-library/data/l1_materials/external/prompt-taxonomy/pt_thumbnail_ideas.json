@@ -1,0 +1,27 @@
+{
+  "id": "pt_thumbnail_ideas",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#thumbnail-ideas",
+  "title": "设计三个缩略图方向",
+  "content": "给【视频主题和受众】设计三个缩略图方向。每个给主体、构图、可读文字和可验证的内容承诺。说明缩小到手机预览时先看见什么，以及可用于 A/B 测试的主要变量。",
+  "content_hash": "8fdf75a77a220ebe5f1bf727aa9c35e90b2a8e0017c23e210f71796d87ffa915",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "creative",
+    "封面",
+    "缩略图",
+    "thumbnail",
+    "YouTube"
+  ],
+  "problem_solved": "让小尺寸也能看懂内容承诺。",
+  "when_to_use": "分类: 创作与多媒体",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "thumbnail-ideas",
+    "category": "creative",
+    "variables": [
+      "视频主题和受众"
+    ]
+  }
+}

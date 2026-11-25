@@ -1,0 +1,33 @@
+{
+  "id": "disc_content_modular_atomized_publishing",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/content.json#content-modular-atomized-publishing",
+  "title": "先沉淀“原子知识块”，再按需组装成不同形态输出",
+  "content": "旧共识（盲区）：每次输出都要从空白文档开始写起，写完这篇再想下一篇写什么。\n\n新现实（破盲视角）：把洞察、案例、对比和 Prompt 拆成独立的“原子块”存好，需要发短动态、做卡片库或写深度指南时直接拼装，边际创作成本大幅下降。\n\n破冰追问母题：\n- 帮我设计一套极简的“个人内容原子块”分类方式（如：反常识对比 / 真实案例 / 实用清单 / 提问模板），让我平时随手记一条，以后能快速拼装成多种内容。\n- 把这段我已经写好的零散内容：[粘贴内容]，拆解成 3～4 个可独立复用的“原子知识块”。",
+  "content_hash": "c2dd88441630013653995d8127939f1efb1958ad31e7e92f7ffb4e96bef4a548",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "content",
+    "cost-collapse",
+    "invisible-friction",
+    "atomization",
+    "repurposing",
+    "knowledge-base",
+    "workflow"
+  ],
+  "problem_solved": "每次输出都要从空白文档开始写起，写完这篇再想下一篇写什么。",
+  "when_to_use": "把洞察、案例、对比和 Prompt 拆成独立的“原子块”存好，需要发短动态、做卡片库或写深度指南时直接拼装，边际创作成本大幅下降。",
+  "procedural_steps": [
+    "帮我设计一套极简的“个人内容原子块”分类方式（如：反常识对比 / 真实案例 / 实用清单 / 提问模板），让我平时随手记一条，以后能快速拼装成多种内容。",
+    "把这段我已经写好的零散内容：[粘贴内容]，拆解成 3～4 个可独立复用的“原子知识块”。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "content-modular-atomized-publishing",
+    "arena": "content",
+    "lenses": [
+      "cost-collapse",
+      "invisible-friction"
+    ]
+  }
+}

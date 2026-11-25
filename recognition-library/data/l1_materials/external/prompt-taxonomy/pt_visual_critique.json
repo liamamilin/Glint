@@ -1,0 +1,29 @@
+{
+  "id": "pt_visual_critique",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#visual-critique",
+  "title": "按传播目标评审一张设计稿",
+  "content": "评审【稿件或截图】是否传递【信息与行动】，主要受众和设备是【使用环境】。先复述第一眼看到的信息，再指出三处最影响读懂或行动的问题。每项给位置、改法、可比较用例。",
+  "content_hash": "0604cfeb37ce947370407edd2f436ee3074903e95ab7c6678a39b936997b8daf",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "creative",
+    "设计评审",
+    "海报",
+    "产品截图",
+    "design critique"
+  ],
+  "problem_solved": "从阅读路径、层级和具体改动给反馈。",
+  "when_to_use": "分类: 创作与多媒体",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "visual-critique",
+    "category": "creative",
+    "variables": [
+      "稿件或截图",
+      "信息与行动",
+      "使用环境"
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "disc_build_malleable_web_patches",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/build.json#build-malleable-web-patches",
+  "title": "用私人脚本给大厂网页打“外挂补丁”",
+  "content": "旧共识（盲区）：每天高频使用的网站难用、信息杂乱或少个导出按钮，只能忍着等官方更新。\n\n新现实（破盲视角）：AI 写浏览器脚本的成本趋近于零，任何人都能花 5 分钟在本地隐藏噪音、注入快捷键或一键导出数据，把别人的软件改成自己的形状。\n\n破冰追问母题：\n- 我每天都要用 [某个网站/Web 系统]，但它最让我烦躁的 2 个问题是：[描述痛点，如侧边栏太吵/缺少一键复制/翻页麻烦]。请帮我写一个极简 Tampermonkey 油猴脚本，直接在本地修复这些体验。\n- 列出 5 个你在 [某高频网站，如 GitHub/B站/Notion/邮箱] 上最值得用 50 行 JS 脚本改造的“反人性交互”，并按提效幅度排序。",
+  "content_hash": "6a23b03d3914e9b834f93cffcce57b453dd023d3eb81dedd47047cac45082270",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "build",
+    "invisible-friction",
+    "cost-collapse",
+    "userscript",
+    "extension",
+    "malleable-software",
+    "browser"
+  ],
+  "problem_solved": "每天高频使用的网站难用、信息杂乱或少个导出按钮，只能忍着等官方更新。",
+  "when_to_use": "AI 写浏览器脚本的成本趋近于零，任何人都能花 5 分钟在本地隐藏噪音、注入快捷键或一键导出数据，把别人的软件改成自己的形状。",
+  "procedural_steps": [
+    "我每天都要用 [某个网站/Web 系统]，但它最让我烦躁的 2 个问题是：[描述痛点，如侧边栏太吵/缺少一键复制/翻页麻烦]。请帮我写一个极简 Tampermonkey 油猴脚本，直接在本地修复这些体验。",
+    "列出 5 个你在 [某高频网站，如 GitHub/B站/Notion/邮箱] 上最值得用 50 行 JS 脚本改造的“反人性交互”，并按提效幅度排序。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "build-malleable-web-patches",
+    "arena": "build",
+    "lenses": [
+      "invisible-friction",
+      "cost-collapse"
+    ]
+  }
+}

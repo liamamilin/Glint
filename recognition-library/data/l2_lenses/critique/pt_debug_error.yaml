@@ -1,0 +1,46 @@
+id: pt_debug_error
+title: 定位报错最小修复
+tagline: 按证据排序根因，给最小修复与回归检查
+routing:
+  primitive: critique
+  goals:
+  - debug
+  clarity_fit:
+  - concrete
+  domains:
+  - coding
+  - debugging
+  - software_engineering
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Terminal
+  - ChatGPT
+  - Claude
+  pain_point: 代码或命令运行报错/行为异常，根因不明，需要快速定位并做最小修复
+  trigger_utterances:
+  - 这个报错怎么修
+  - 运行时报错帮我定位
+  - 帮我排查这个 bug
+  - 这段代码有问题 debug 一下
+  - 为什么这里会报错
+  anti_triggers:
+  - 从零设计新功能
+  - 纯代码风格 review
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 帮我定位【报错或异常行为】，期望是【预期结果】，环境和复现是【版本、命令或最短示例】。按证据排列可能原因，为首选原因给一个验证动作。确认后给最小修复和回归检查，并说明剩余不确定性。
+  variables:
+  - 报错或异常行为
+  - 预期结果
+  - 版本、命令或最短示例
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#debug-error
+  source_hash: 5d17ee35c6338cb00f246fdd2d2eb10f43291f5bcaf111ef91fcaa1f090b5c8a
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

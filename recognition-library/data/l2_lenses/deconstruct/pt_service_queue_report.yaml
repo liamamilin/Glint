@@ -1,0 +1,58 @@
+id: pt_service_queue_report
+title: 队列积压与重复问题报告
+tagline: 按时效与影响分清服务队列处理重点
+routing:
+  primitive: deconstruct
+  goals:
+  - digest
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - support
+  - service_operations
+  - sla
+  - queue_analytics
+  app_affinity:
+  - Notion
+  - Slack
+  - Feishu
+  - Linear
+  pain_point: 服务队列里工单越积越多却分不清先处理谁，重复问题反复出现但没人系统梳理，SLA 是否达标也说不清
+  trigger_utterances:
+  - 队列里积压了好多工单不知道先处理哪个
+  - 帮我写个服务报告看下积压和重复问题
+  - SLA 达标情况帮我汇总一下
+  - 这个 queue report 怎么看
+  - 工单重复主题帮我归类
+  anti_triggers:
+  - 单纯想回复工单内容
+  - 技术 bug 根因排查
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '根据【队列数据和时间窗口】写服务报告。请严格按以下结构输出：
+
+    1. 口径定义：等待、首次响应、结案的统计口径与时间窗口。
+
+    2. 总量与分布：工单数量、处理时长分布、按队列/渠道/优先级拆分。
+
+    3. 积压分析：当前积压量、超时占比、最需先处理的队列及理由。
+
+    4. 重复主题：高频问题类别、根因假设、可复用的解决模板。
+
+    5. 异常与数据质量：哪些异常可能源于记录不完整（缺失字段、时间戳倒置、重复记录），以及补录建议。
+
+    6. 行动清单：按影响×紧急度排序的下一步。
+
+    要求：数据不足处明确标注“数据缺失”，不编造数字。'
+  variables: []
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#service-queue-report
+  source_hash: c5e4f2f1cd73cb64198f7ccdb6906631d0d534b07793a6945291bb9c45428420
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

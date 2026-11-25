@@ -1,0 +1,64 @@
+id: disc_business_workflow_replacement_wedge
+title: 单点楔子切入慢热行业
+tagline: 先用小工具解决最烦一步，再顺延上下游
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - business
+  - vertical_saas
+  - b2b
+  - product_strategy
+  - go_to_market
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Linear
+  - Chrome
+  pain_point: 传统行业客户抗拒推翻整套旧系统，团队却试图一次性卖全流程方案，导致冷启动难、销售周期长、试错成本高。
+  trigger_utterances:
+  - 传统行业客户总说现有系统够用，怎么切入
+  - 做垂直 SaaS 一定先做全流程吗
+  - 想先卖一个小工具打开市场
+  - 客户不肯替换 ERP，先从哪一步切入
+  - 怎么找到第一个收费切口
+  anti_triggers:
+  - 已经明确要做完整 ERP 替换并进入实施阶段
+  - 只需要写通用 SaaS 定价页或营销文案
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '单点楔子切入清单：
+
+    1. 选择一个传统/慢热行业，列出日常高频且痛感强的步骤。
+
+    2. 排除任何需要替换核心 ERP/主系统的步骤，只保留可独立运行的单点。
+
+    3. 评估该步骤能否在 1 周内上线小工具，并立刻省出 3 小时/周或挽回明显损失。
+
+    4. 画出三步演进路线：楔子工具 → 沉淀数据 → 扩展上下游工作流。
+
+    5. 明确第一个收费切口：客户愿意为“减少重复劳动/避免损失”付费，而不是为“系统完整性”付费。
+
+    6. 设计数据沉淀点：工具使用过程中自然积累的记录、模板、规则或审批流。
+
+    7. 只有当楔子稳定使用并卡住关键数据流后，再提议延伸到相邻环节。
+
+    8. 每次扩展都绑定可量化收益，避免回到“大而全系统”叙事。'
+  variables:
+  - industry
+  - target_customer
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-workflow-replacement-wedge
+  source_hash: 596df634a26bcab9349d22db147cdac60f8d7ac382ee43028d4ac5545f5bfc59
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

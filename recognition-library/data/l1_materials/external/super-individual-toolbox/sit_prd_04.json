@@ -1,0 +1,29 @@
+{
+  "id": "sit_prd_04",
+  "source": "super-individual-toolbox",
+  "source_ref": "https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/product-architect.json#prd-04",
+  "title": "核心路径走查表",
+  "content": "定位：强迫自己失忆，以完全陌生人的眼睛看前 30 秒\n\n触发场景：当你对自己的产品太熟悉，已经看不出新用户进来第一眼会卡在哪里时。\n\n核心机制：\n- 截下首屏到完成首次核心动作的 3–5 步连续截图\n- 让 AI 扮演“毫无背景、只有 30 秒耐心的陌生访客”，逐屏说出困惑点\n- 砍掉首次体验前的所有非必要弹窗、注册墙或术语解释\n\n交付物：一份标注了 3 个最大流失摩擦点的《首屏体验改造单》\n\n推荐装配：多模态视觉模型 + 连续截图走查\n\n误用警告：不要用“加一段更长的新手引导文字”来解决界面本身不直观的问题。",
+  "content_hash": "ffcb529764942d018f32f71957fd86e3bdfeb6abc2986675d15e3fb8dbe993f1",
+  "suggested_action_type": "open_resource",
+  "domain_hints": [
+    "product-architect",
+    "产品与架构师"
+  ],
+  "problem_solved": "当你对自己的产品太熟悉，已经看不出新用户进来第一眼会卡在哪里时。",
+  "when_to_use": "当你对自己的产品太熟悉，已经看不出新用户进来第一眼会卡在哪里时。",
+  "procedural_steps": [
+    "截下首屏到完成首次核心动作的 3–5 步连续截图",
+    "让 AI 扮演“毫无背景、只有 30 秒耐心的陌生访客”，逐屏说出困惑点",
+    "砍掉首次体验前的所有非必要弹窗、注册墙或术语解释"
+  ],
+  "anti_patterns": [
+    "不要用“加一段更长的新手引导文字”来解决界面本身不直观的问题。"
+  ],
+  "metadata": {
+    "original_id": "prd-04",
+    "drawer": "product-architect",
+    "drawer_zh": "产品与架构师",
+    "deliverable": "一份标注了 3 个最大流失摩擦点的《首屏体验改造单》"
+  }
+}

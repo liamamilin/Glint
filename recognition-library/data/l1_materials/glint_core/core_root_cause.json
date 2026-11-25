@@ -1,0 +1,21 @@
+{
+  "id": "core_root_cause",
+  "source": "glint-core",
+  "source_ref": "cards.yaml#root_cause",
+  "title": "根因定位与排障",
+  "content": "请按发生概率从高到低，先列出最可能的 3 个根因，并针对每个根因给出一条最小验证命令或排查步骤。",
+  "content_hash": "751f5a99ef97d405dc387d8eae609c6bfb1810e5bdab84fd98e6b21f1dd28c16",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "engineering"
+  ],
+  "problem_solved": "报错调试 / 故障排查",
+  "when_to_use": "",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "root_cause",
+    "legacy_dimension": "engineering",
+    "legacy_mode": "append"
+  }
+}

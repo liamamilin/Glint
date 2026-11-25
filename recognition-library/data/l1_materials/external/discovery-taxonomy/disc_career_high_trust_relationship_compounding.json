@@ -1,0 +1,33 @@
+{
+  "id": "disc_career_high_trust_relationship_compounding",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/career.json#career-high-trust-relationship-compounding",
+  "title": "靠“说话算话与靠谱交付”积累信任复利，而不是刷存在感",
+  "content": "旧共识（盲区）：拓展人脉和职业机会，靠的是多加好友、多参加社交场合或频繁客套。\n\n新现实（破盲视角）：在信息噪音越来越大的环境里，“答应的事按时做到、遇到坑提前说清、不制造额外麻烦”的稀缺度极高，会带来长期、低摩擦的回头合作。\n\n破冰追问母题：\n- 审视我目前正在推进的几项合作或承诺：[简述现状]，帮我检查有没有哪件事进度滞后却还没主动同步，设计一句真诚、不推卸的提前沟通话术。\n- 结合 [你的工作或合作场景]，列出 3 个看似很小、但最能让合作方觉得“这人特别靠谱、愿意长期合作”的日常细节。",
+  "content_hash": "341e8b1ff5799550b59aa6f040bc2c81c5549ef10f8413be37828ed9e6f68eae",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "career",
+    "invisible-friction",
+    "cross-domain",
+    "relationships",
+    "reputation",
+    "trust",
+    "compounding"
+  ],
+  "problem_solved": "拓展人脉和职业机会，靠的是多加好友、多参加社交场合或频繁客套。",
+  "when_to_use": "在信息噪音越来越大的环境里，“答应的事按时做到、遇到坑提前说清、不制造额外麻烦”的稀缺度极高，会带来长期、低摩擦的回头合作。",
+  "procedural_steps": [
+    "审视我目前正在推进的几项合作或承诺：[简述现状]，帮我检查有没有哪件事进度滞后却还没主动同步，设计一句真诚、不推卸的提前沟通话术。",
+    "结合 [你的工作或合作场景]，列出 3 个看似很小、但最能让合作方觉得“这人特别靠谱、愿意长期合作”的日常细节。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "career-high-trust-relationship-compounding",
+    "arena": "career",
+    "lenses": [
+      "invisible-friction",
+      "cross-domain"
+    ]
+  }
+}

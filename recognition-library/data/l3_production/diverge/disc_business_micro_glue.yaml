@@ -1,0 +1,62 @@
+id: disc_business_micro_glue
+title: 微垂直胶水服务发现
+tagline: 找到两个软件间的手动搬运断层，做成高毛利微工具
+routing:
+  primitive: diverge
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - business
+  - micro_saas
+  - b2b
+  - workflow
+  - integration
+  app_affinity:
+  - Notion
+  - Feishu
+  - Slack
+  pain_point: 总觉得必须做出大而全的平台或冲海量C端流量才能赚钱，却忽略了两个现有软件之间的手动搬运断层本身就能高毛利变现
+  trigger_utterances:
+  - 我每天都在手动把数据从A软件复制到B软件，能不能做成小工具卖钱
+  - 想做微SaaS但不知道从哪找 niche
+  - Shopify和Notion之间差最后一公里，有人会付钱吗
+  - B端小工具真的能高毛利吗
+  - 开发成本都塌了，我该做什么样的小产品
+  anti_triggers:
+  - 已经明确要做大平台战略或融资叙事
+  - 只关心C端流量增长黑客
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '【微垂直胶水服务发现清单】
+
+    1. 列出 5 个在 {{industry}} 中，人们目前必须手动把数据从软件 A 复制粘贴到软件 B 的高频痛点，并评估做成自动化微工具的付费意愿。
+
+    2. 针对 {{software_ecosystem}}（如 Shopify/Notion/飞书），有哪些官方懒得做、但专业用户愿意每月付 20 美元解决的“最后一公里”断层？
+
+    3. 为每个断层估算：潜在客户数、每月节省时间、可接受月费、技术实现复杂度。
+
+    4. 选出 1 个“无聊但高频”的断层，先做最小可用集成（MVP），验证付费意愿后再扩展。'
+  variables:
+  - industry
+  - software_ecosystem
+  - 微垂直胶水服务发现清单
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-micro-glue
+  source_hash: d4e08ae9b32f483c2fb76f7f6947256bb67e05fed9c6c32f295b7aea1d3cf841
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: product_business
+  subcategory: indie_business
+  collections: []
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

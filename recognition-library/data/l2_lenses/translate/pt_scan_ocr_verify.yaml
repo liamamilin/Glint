@@ -1,0 +1,44 @@
+id: pt_scan_ocr_verify
+title: 扫描件OCR可核对提取
+tagline: 从扫描件提取文字并标出不确定字符与疑点
+routing:
+  primitive: translate
+  goals:
+  - digest
+  - evaluate
+  clarity_fit:
+  - concrete
+  domains:
+  - ocr
+  - text_extraction
+  - document_processing
+  - files
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Mail
+  - Chrome
+  pain_point: 扫描件或图片里的文字提取后无法确认哪些字猜的、哪些页漏了、哪些字符看不清，导致后续使用出错
+  trigger_utterances:
+  - 帮我把这份扫描件里的文字提取出来
+  - OCR识别一下这个图片里的字
+  - 这个pdf扫描件转成文字
+  - 把扫描件转文字并标出不确定的地方
+  - extract text from this scanned document
+  anti_triggers:
+  - 把这段文字翻译成英文
+  - 帮我总结这篇文章的主要内容
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 从【扫描件或图片】提取【范围与需要保留的格式】。按页和段落输出，保留数字、单位、姓名与原图顺序。把看不清的字符标为待核对；列可能影响后续使用的疑点、页码和位置。
+  variables: []
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#scan-ocr-verify
+  source_hash: e27a1051237a82401036108b8104baa07fdfbe046b4ea40c431d0471281f4861
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

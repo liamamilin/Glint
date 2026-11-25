@@ -1,0 +1,29 @@
+{
+  "id": "sit_eng_04",
+  "source": "super-individual-toolbox",
+  "source_ref": "https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/engineer.json#eng-04",
+  "title": "本地优先隐私架构模版",
+  "content": "定位：敏感数据锁死在自己硬盘里，绝不上传云端\n\n触发场景：当你处理日记、财务账单、医疗记录或未公开商业源码等高度敏感内容，不放心喂给云端 API 时。\n\n核心机制：\n- 强制数据存储与索引完全留在本地文件系统（SQLite / Markdown / IndexedDB）\n- 接入端侧小模型（如 Ollama / WebGPU）处理脱敏、摘要与检索，物理断网亦可运行\n- 若确需调用云端大模型，先经本地脚本完成实体脱敏（替换人名、金额、账号）再出网\n\n交付物：一份《离线隐私架构方案》与本地脱敏预处理脚本\n\n推荐装配：Ollama / 本地小模型 + 浏览器 IndexedDB / 本地 CLI\n\n误用警告：不要拿端侧小模型去硬扛超长上下文复杂推理，合理拆分“本地脱敏/检索 + 云端重推理”的边界。",
+  "content_hash": "db1d43e348489068c8c7e72d192a80e2c6ecdf518d914c23d0ba5ab78e38c4fb",
+  "suggested_action_type": "open_resource",
+  "domain_hints": [
+    "engineer",
+    "工程师"
+  ],
+  "problem_solved": "当你处理日记、财务账单、医疗记录或未公开商业源码等高度敏感内容，不放心喂给云端 API 时。",
+  "when_to_use": "当你处理日记、财务账单、医疗记录或未公开商业源码等高度敏感内容，不放心喂给云端 API 时。",
+  "procedural_steps": [
+    "强制数据存储与索引完全留在本地文件系统（SQLite / Markdown / IndexedDB）",
+    "接入端侧小模型（如 Ollama / WebGPU）处理脱敏、摘要与检索，物理断网亦可运行",
+    "若确需调用云端大模型，先经本地脚本完成实体脱敏（替换人名、金额、账号）再出网"
+  ],
+  "anti_patterns": [
+    "不要拿端侧小模型去硬扛超长上下文复杂推理，合理拆分“本地脱敏/检索 + 云端重推理”的边界。"
+  ],
+  "metadata": {
+    "original_id": "eng-04",
+    "drawer": "engineer",
+    "drawer_zh": "工程师",
+    "deliverable": "一份《离线隐私架构方案》与本地脱敏预处理脚本"
+  }
+}

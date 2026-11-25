@@ -1,0 +1,28 @@
+{
+  "id": "pt_bilingual_qa",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#bilingual-qa",
+  "title": "逐段核对译文和原文",
+  "content": "按段对照【原文】与【译文】，目标为【语言和使用场景】。记录漏译、误译、数字及术语差异，逐一附原句、现译、建议和严重度。语气喜好与事实问题分开归类。",
+  "content_hash": "023acde39056edc004a9f7ce575ac570dd2bad9701c3dc242268f9e18484fb5d",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "language",
+    "译文校对",
+    "校验",
+    "translation QA"
+  ],
+  "problem_solved": "找出漏译、增译和术语不一致。",
+  "when_to_use": "分类: 语言练习与本地化",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "bilingual-qa",
+    "category": "language",
+    "variables": [
+      "原文",
+      "译文",
+      "语言和使用场景"
+    ]
+  }
+}

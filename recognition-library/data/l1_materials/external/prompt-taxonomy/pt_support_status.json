@@ -1,0 +1,27 @@
+{
+  "id": "pt_support_status",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#support-status",
+  "title": "起草一条服务中断状态更新",
+  "content": "根据【已核实的中断情况】向【用户群】起草状态更新。先写影响范围、何时开始和用户可以做什么，再给目前进度及下次更新时间。对根因或恢复时间缺少证据时保持待确认。",
+  "content_hash": "95738827ba4002a8449d48d71ed89da263eb03bbbbde18a9f8fdb6f27771e7c6",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "support",
+    "服务状态",
+    "事故通知",
+    "incident update"
+  ],
+  "problem_solved": "给已知影响、处理进度和下次更新时间。",
+  "when_to_use": "分类: 客服与服务运营",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "support-status",
+    "category": "support",
+    "variables": [
+      "已核实的中断情况",
+      "用户群"
+    ]
+  }
+}

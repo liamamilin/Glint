@@ -1,0 +1,53 @@
+id: pt_sql_query
+title: 从需求写 SQL
+tagline: 把业务问题转成可运行的 SQL 查询
+routing:
+  primitive: translate
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - data
+  - sql
+  - database
+  - text_to_sql
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Terminal
+  - Notion
+  pain_point: 有业务问题和表结构，但不知道怎么写正确、可运行的 SQL，容易在粒度、去重、连接和日期条件上出错
+  trigger_utterances:
+  - 帮我写个 SQL 查一下用户留存
+  - 这个需求怎么转成 SQL 啊
+  - 表结构给你了帮我查数据
+  - write sql for this business question
+  - sql query with joins and dedup
+  anti_triggers:
+  - 只是想优化已有 SQL 性能
+  - 只想解释一段 SQL 的含义
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 用 【SQL 方言】 查询【业务问题】，表结构是【字段、主键及关系】。先确认结果粒度和时间窗，再给可运行的查询。解释连接和去重逻辑，补一个核对总量的查询；字段不足处先列待确认项。
+  variables:
+  - SQL 方言
+  - 业务问题
+  - 字段、主键及关系
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#sql-query
+  source_hash: a169bb889a7618db2403fc6d7f0fc9848582dafe515b7d5e550337cf783ec964
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: engineering
+  subcategory: architecture
+  collections: []
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

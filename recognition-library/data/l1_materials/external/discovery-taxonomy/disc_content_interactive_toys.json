@@ -1,0 +1,33 @@
+{
+  "id": "disc_content_interactive_toys",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/content.json#content-interactive-toys",
+  "title": "反算法推荐的“交互式网页玩具”内容",
+  "content": "旧共识（盲区）：传播观点和获取流量只能靠图文、短视频和播客去卷平台算法。\n\n新现实（破盲视角）：AI 让单人做出精巧的交互式小网页门槛骤降，一个能让用户亲手点 3 分钟的“可玩概念”，传播穿透力远超一万字长文。\n\n破冰追问母题：\n- 我想向大众解释一个复杂概念：[填入你想讲的概念]。请帮我设计 3 个“可交互网页玩具/小游戏”的玩法原型，让用户玩 2 分钟就能彻底悟懂。\n- 针对 [你的目标受众，如程序员/理财新手/英语学习者]，设计一个带有反差幽默感、用户玩完会忍不住截图发朋友圈的极简网页小测试。",
+  "content_hash": "1fbaec982f4e8891456be68c63ff93f685ad4aa7e86dcc6fdad9be3bb4766cac",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "content",
+    "cross-domain",
+    "cost-collapse",
+    "interactive",
+    "viral",
+    "web-toy",
+    "explorable"
+  ],
+  "problem_solved": "传播观点和获取流量只能靠图文、短视频和播客去卷平台算法。",
+  "when_to_use": "AI 让单人做出精巧的交互式小网页门槛骤降，一个能让用户亲手点 3 分钟的“可玩概念”，传播穿透力远超一万字长文。",
+  "procedural_steps": [
+    "我想向大众解释一个复杂概念：[填入你想讲的概念]。请帮我设计 3 个“可交互网页玩具/小游戏”的玩法原型，让用户玩 2 分钟就能彻底悟懂。",
+    "针对 [你的目标受众，如程序员/理财新手/英语学习者]，设计一个带有反差幽默感、用户玩完会忍不住截图发朋友圈的极简网页小测试。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "content-interactive-toys",
+    "arena": "content",
+    "lenses": [
+      "cross-domain",
+      "cost-collapse"
+    ]
+  }
+}

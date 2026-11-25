@@ -1,0 +1,29 @@
+{
+  "id": "sit_grw_04",
+  "source": "super-individual-toolbox",
+  "source_ref": "https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/growth-commercial.json#grw-04",
+  "title": "冷启动种子用户话术库",
+  "content": "定位：不群发、不卑微，精准敲开前 20 个用户的门\n\n触发场景：当你的 V1 产品刚上线，需要找到前 20 个真实种子用户收集反馈，但不好意思开口推广时。\n\n核心机制：\n- 在社区/评论区锁定正在吐槽该痛点的具体人，绝不盲目群发\n- 采用“具体观察 + 免费解法 + 零压力退路”三段式短消息（控制在 100 字以内）\n- 把每一次回复里的真实措辞记录下来，直接反哺成你的着陆页文案\n\n交付物：3 套不同场景（评论区、私信、老友内测）的极简触达话术模板\n\n推荐装配：个性化触达 Prompt + 简易种子用户反馈表（Markdown）\n\n误用警告：不要一上来就发长达三屏的产品介绍和收费链接；先提供价值、建立对话，再谈转化。",
+  "content_hash": "1a3db3b62f04b8ba43bcf0d7068bcc04d3c99138c16aa77d81352b7b7a8d94eb",
+  "suggested_action_type": "open_resource",
+  "domain_hints": [
+    "growth-commercial",
+    "增长与商业官"
+  ],
+  "problem_solved": "当你的 V1 产品刚上线，需要找到前 20 个真实种子用户收集反馈，但不好意思开口推广时。",
+  "when_to_use": "当你的 V1 产品刚上线，需要找到前 20 个真实种子用户收集反馈，但不好意思开口推广时。",
+  "procedural_steps": [
+    "在社区/评论区锁定正在吐槽该痛点的具体人，绝不盲目群发",
+    "采用“具体观察 + 免费解法 + 零压力退路”三段式短消息（控制在 100 字以内）",
+    "把每一次回复里的真实措辞记录下来，直接反哺成你的着陆页文案"
+  ],
+  "anti_patterns": [
+    "不要一上来就发长达三屏的产品介绍和收费链接；先提供价值、建立对话，再谈转化。"
+  ],
+  "metadata": {
+    "original_id": "grw-04",
+    "drawer": "growth-commercial",
+    "drawer_zh": "增长与商业官",
+    "deliverable": "3 套不同场景（评论区、私信、老友内测）的极简触达话术模板"
+  }
+}

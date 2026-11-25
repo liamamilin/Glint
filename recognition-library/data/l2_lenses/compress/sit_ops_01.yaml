@@ -1,0 +1,59 @@
+id: sit_ops_01
+title: 定时情报简报 Agent
+tagline: 每天3分钟看5条高信噪比情报，告别刷屏焦虑
+routing:
+  primitive: compress
+  goals:
+  - optimize
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - ops_automation
+  - information_management
+  - automation
+  - productivity
+  app_affinity:
+  - Chrome
+  - Notion
+  - Terminal
+  pain_point: 每天在 X、GitHub、Hacker News 和公众号之间反复刷屏，耗掉两小时却只记住一堆焦虑，拿不到真正有用的情报
+  trigger_utterances:
+  - 每天刷信息流两小时啥也没记住
+  - X 和 HN 刷到焦虑想停
+  - 帮我把每天的情报自动汇总一下
+  - 不想每天手动刷 GitHub release
+  - 信息过载想自动筛选高信噪比内容
+  anti_triggers:
+  - 需要对单篇深度调研或写长文
+  - 需要实时交易/告警信号
+execution:
+  action_type: open_resource
+  inject_mode: null
+  content: '推荐装配：GitHub Actions Cron / n8n + RSS + 轻量模型摘要
+
+
+    步骤：
+
+    1. 锁定不超过 10 个高信噪比信息源（RSS、特定仓库 Release、核心行业关键词）
+
+    2. 通过定时任务自动抓取，用大模型按“与我当前项目相关度”打分并剔除标题党与重复新闻
+
+    3. 每天固定时间推送一份不超过 5 条的极简摘要，附带原始链接供深度阅读
+
+
+    交付物：每日自动送达的《5 条高信噪比情报简报》
+
+
+    避坑：不要贪多订阅上百个源；简报超过 1 屏没人会看，最终只会变成新的未读焦虑。'
+  variables: []
+  workflow: null
+meta:
+  source: super-individual-toolbox
+  source_ref: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/ops-automation.json#ops-01
+  source_hash: 9e583d7f9f4b829209fe39617bd02af47a1ba65b372bddcaa5a9d2c99b671dc3
+  status: active
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

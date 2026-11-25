@@ -1,0 +1,63 @@
+id: pt_terminology_glossary
+title: 双语术语表提取
+tagline: 从双语材料提取术语与首选译法
+routing:
+  primitive: translate
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - language
+  - localization
+  - translation
+  - glossary
+  - terminology
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 双语材料中术语译法不统一，需要建立首选译法、变体和适用范围
+  trigger_utterances:
+  - 帮我从这两份中英对照材料里提取术语表
+  - 这个术语翻译不统一，帮我规定首选译法
+  - 建立 glossary 规定变体和适用范围
+  - 双语材料里术语太多，帮我整理译法
+  anti_triggers:
+  - 单句翻译润色
+  - 纯英文写作或无对照材料
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: '请对照以下双语材料，为【{{audience}}】提取术语表：
+
+    {{input}}
+
+
+    要求：
+
+    1. 逐项给出原词、建议译法、解释、代表原句和适用范围；
+
+    2. 对关键冲突说明影响与待确认项；
+
+    3. 附三条示例用法。'
+  variables:
+  - audience
+  - '{{audience}}'
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#terminology-glossary
+  source_hash: 726a1311ee405749d9f32510b05587cd799190da11694dc272b579f9177d200b
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: writing_comms
+  subcategory: writing_polish
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

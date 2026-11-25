@@ -1,0 +1,28 @@
+{
+  "id": "pt_explore_data",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#explore-data",
+  "title": "探索一份数据",
+  "content": "检查【数据文件和字段说明】，回答【业务问题】。先列数据范围、缺失、重复和可能影响结论的口径，再用具体数值给主要发现。对每个关键结论给可复算的分子、分母或查询逻辑，并标出原因仍待验证的问题。",
+  "content_hash": "34cd0e2b878191da34b43a84bb6019942e7369430fcf96d7dc2820c87c45f0b4",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "data",
+    "分析",
+    "EDA",
+    "统计",
+    "CSV"
+  ],
+  "problem_solved": "先检查质量和口径，再找解释得通的现象。",
+  "when_to_use": "分类: 数据与表格",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "explore-data",
+    "category": "data",
+    "variables": [
+      "数据文件和字段说明",
+      "业务问题"
+    ]
+  }
+}

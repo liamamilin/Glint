@@ -1,0 +1,33 @@
+{
+  "id": "disc_cognition_base_rates_and_outliers",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/cognition.json#cognition-base-rates-and-outliers",
+  "title": "先看“基准率（Base Rate）”，再看吸睛的极端个案",
+  "content": "旧共识（盲区）：看到一个人靠某个捷径或风口一夜翻身，就以为这件事对大多数人也是常态。\n\n新现实（破盲视角）：幸存者偏差会放大极端个案；先看大样本下的真实概率、时间和投入成本，再决定要不要押注，心态会清醒很多。\n\n破冰追问母题：\n- 我最近对 [某个方向/路径/副业/赛道] 很心动，但只看到了一些成功案例。请帮我客观分析它的“真实基准率”、常见卡点以及通常需要多久才能看到起色。\n- 在评估 [某个目标或计划] 的时间与精力投入时，如何避免只按最顺利的“理想剧本”算账？",
+  "content_hash": "c48636bcb29c8dea6764545654da56c2d1ca9a40b2a884c36a2300207c574782",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "cognition",
+    "first-principles",
+    "cross-domain",
+    "base-rate",
+    "probability",
+    "expectations",
+    "realism"
+  ],
+  "problem_solved": "看到一个人靠某个捷径或风口一夜翻身，就以为这件事对大多数人也是常态。",
+  "when_to_use": "幸存者偏差会放大极端个案；先看大样本下的真实概率、时间和投入成本，再决定要不要押注，心态会清醒很多。",
+  "procedural_steps": [
+    "我最近对 [某个方向/路径/副业/赛道] 很心动，但只看到了一些成功案例。请帮我客观分析它的“真实基准率”、常见卡点以及通常需要多久才能看到起色。",
+    "在评估 [某个目标或计划] 的时间与精力投入时，如何避免只按最顺利的“理想剧本”算账？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "cognition-base-rates-and-outliers",
+    "arena": "cognition",
+    "lenses": [
+      "first-principles",
+      "cross-domain"
+    ]
+  }
+}

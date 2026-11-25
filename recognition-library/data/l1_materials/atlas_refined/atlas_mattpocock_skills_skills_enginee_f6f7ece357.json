@@ -1,0 +1,40 @@
+{
+  "id": "atlas_mattpocock_skills_skills_enginee_f6f7ece357",
+  "source": "atlas-methods",
+  "source_ref": "mattpocock/skills:skills/engineering/implement/SKILL.md",
+  "title": "按规格/工单实现并自检提交的工作流",
+  "content": "本方法是一条面向规格/工单实现的端到端执行框架。核心认知：实现不是一次性编码，而是'取回需求→局部验证→全量验证→审查→提交'的受控链路。触发时，若输入含工单引用，必须先拉取并复述标题以对齐上下文，歧义时询问而非假设。编码阶段允许在预先约定的接缝处选择性调用 tdd，但不强制全局 TDD。验证分层：开发中用类型检查与单文件测试做高频局部反馈，收尾时只跑一次完整套件以控制成本。最终经 code-review 审查后提交到当前分支，不引入额外分支策略。该框架的复用价值在于把'何时验证、验证到什么粒度、何时审查、提交到哪里'显式化，降低遗漏与过度验证。",
+  "content_hash": "8bc9f4ee9acf7de1cb7694fc58f7a602259167761b16593d936c7a85e27c8907",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "engineering",
+    "implementation",
+    "testing",
+    "code-review"
+  ],
+  "problem_solved": "避免拿到规格/工单后直接埋头编码、遗漏验证与审查的执行漂移，提供一条可重复的实现-验证-审查-提交链路。",
+  "when_to_use": "当用户给出需要实现的规格或工单（含工单引用）时，作为端到端执行框架调用。",
+  "procedural_steps": [
+    "若用户提供工单引用，先从 issue tracker 取回该工单并在开始前明确说明其标题；引用含糊时先询问用户而非猜测。",
+    "按规格/工单描述实现工作；在可能且仅在预先约定的接缝处调用 tdd skill，不要求全面采用。",
+    "实现过程中定期运行类型检查，定期运行单个测试文件，尽早暴露局部回归。",
+    "全部实现完成后仅运行一次完整测试套件，避免过程中反复全量执行。",
+    "调用 code-review 进行审查，确认通过后再提交到当前分支。",
+    "提交目标限定为当前分支，不默认新建或切换分支。"
+  ],
+  "anti_patterns": [
+    "未确认工单标题就直接开始编码。",
+    "工单引用歧义时自行猜测而非询问。",
+    "在任意位置全面套用 tdd，而非仅在约定接缝处。",
+    "过程中反复运行完整测试套件，或结束前从不运行全量测试。",
+    "跳过类型检查/单测或 code-review 直接提交。"
+  ],
+  "metadata": {
+    "repository": "mattpocock/skills",
+    "skill_path": "skills/engineering/implement/SKILL.md",
+    "commit_sha": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+    "l0_content_hash": "483bdc4ccf4ac31d86ac7beeaa0d0db80313e71e120bb8c59b3196ae5decd53d",
+    "l0_quality_score": 0.78,
+    "refined_by": "opencode-go/beam-free"
+  }
+}

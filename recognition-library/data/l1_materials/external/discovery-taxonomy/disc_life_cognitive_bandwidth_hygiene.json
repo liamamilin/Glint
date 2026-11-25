@@ -1,0 +1,33 @@
+{
+  "id": "disc_life_cognitive_bandwidth_hygiene",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/life.json#life-cognitive-bandwidth-hygiene",
+  "title": "把“现代焦虑”当作后台耗电进程来清理",
+  "content": "旧共识（盲区）：下班累到连游戏都不想打、书也看不进，是因为自己懒或不够自律。\n\n新现实（破盲视角）：大脑的焦虑警报系统会像死循环进程一样在后台吃光全部心理带宽；先做“进程排查”关掉虚假生存警报，行动力和松弛感会自然恢复。\n\n破冰追问母题：\n- 我最近感觉精力被掏空，脑子里一直在后台转着这些事：[列出让你隐隐焦虑的 3 件事]。请帮我做一次“心理带宽审计”：区分哪些是真实迫近的威胁，哪些是大脑误报的虚假警报，并给每项配一个 5 分钟内的物理收尾动作。\n- 用“原始人视角”重新审视我当下的生活状态：[简述你的现状]，帮我把现代社会制造的虚拟压力翻译成底层现实，写一段 50 字以内的冷静重置口诀。",
+  "content_hash": "9fa659a296125d114e02a006ae17d5b4b9ddd0384a105805d87eef5d6ab01c9a",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "life",
+    "first-principles",
+    "invisible-friction",
+    "anxiety",
+    "bandwidth",
+    "focus",
+    "energy"
+  ],
+  "problem_solved": "下班累到连游戏都不想打、书也看不进，是因为自己懒或不够自律。",
+  "when_to_use": "大脑的焦虑警报系统会像死循环进程一样在后台吃光全部心理带宽；先做“进程排查”关掉虚假生存警报，行动力和松弛感会自然恢复。",
+  "procedural_steps": [
+    "我最近感觉精力被掏空，脑子里一直在后台转着这些事：[列出让你隐隐焦虑的 3 件事]。请帮我做一次“心理带宽审计”：区分哪些是真实迫近的威胁，哪些是大脑误报的虚假警报，并给每项配一个 5 分钟内的物理收尾动作。",
+    "用“原始人视角”重新审视我当下的生活状态：[简述你的现状]，帮我把现代社会制造的虚拟压力翻译成底层现实，写一段 50 字以内的冷静重置口诀。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "life-cognitive-bandwidth-hygiene",
+    "arena": "life",
+    "lenses": [
+      "first-principles",
+      "invisible-friction"
+    ]
+  }
+}

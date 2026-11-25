@@ -1,0 +1,65 @@
+id: disc_build_local_sandbox_rehearsal
+title: 危险操作沙盒预演
+tagline: 批量改文件或跑脚本前先 dry-run 预演与回滚，降低误操作风险。
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - create
+  clarity_fit:
+  - concrete
+  domains:
+  - build
+  - automation
+  - testing
+  - risk_management
+  app_affinity:
+  - Terminal
+  - Cursor
+  - VS Code
+  pain_point: 批量改文件、群发消息、调外部接口或跑自动化脚本时怕误删改崩，出事了才后悔，缺乏低成本的预演与回滚手段。
+  trigger_utterances:
+  - 帮我给脚本加个 dry-run 预览
+  - 我怕批量改文件把东西删了
+  - 跑自动化前先预演一下
+  - 手滑点错怎么办
+  - 先打印计划不执行确认无误再放行
+  anti_triggers:
+  - 只是想编写新功能代码，不涉及批量危险操作
+  - 单文件小改动，无需预演与回滚机制
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '危险操作沙盒预演清单：
+
+    1. 明确操作范围：列出将被读/写/删除/发送的目标（文件、记录、接口），确认无歧义。
+
+    2. 设计 --dry-run 模式：只打印计划（将执行的动作与差异），不落盘、不发送、不调用外部副作用。
+
+    3. 生成差异预览：对文件用 diff，对数据用 before/after 对比，对外部调用用模拟响应。
+
+    4. 本地沙盒 rehearsal：在临时目录或副本中真实跑一遍，验证路径、权限、编码与边界条件。
+
+    5. 备份与回滚：操作前自动快照/备份；提供一键回滚命令与回滚验证步骤。
+
+    6. 确认闸门：dry-run 与沙盒均通过后，需显式确认（如 --confirm / 二次输入）才执行真实操作。
+
+    7. 审计留痕：记录操作计划、执行结果与回滚点，便于事后复盘。
+
+    8. 高风险兜底：批量删除/群发/外部调用必须分批 + 限流 + 可中断。'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/build.json#build-local-sandbox-rehearsal
+  source_hash: 67394e91351dd18bfac8192a65f577947c2fdf1181af8098c816dd1f2cb95074
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: engineering
+  subcategory: code_review
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

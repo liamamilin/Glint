@@ -1,0 +1,26 @@
+{
+  "id": "pt_support_macro",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#support-macro",
+  "title": "为反复出现的请求写标准回复",
+  "content": "为【常见请求和服务政策】编写标准回复。标出可替换的背景字段、允许承诺和必须升级的条件。给正常适用例及一个不该使用同一回复的反例。",
+  "content_hash": "9bb707a8eb97209c1f790022a95c055a6d66a394d49ab22e18e26e94299ca88d",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "support",
+    "客服话术",
+    "标准回复",
+    "macro"
+  ],
+  "problem_solved": "既保留统一承诺，也给必要的个性化字段。",
+  "when_to_use": "分类: 客服与服务运营",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "support-macro",
+    "category": "support",
+    "variables": [
+      "常见请求和服务政策"
+    ]
+  }
+}

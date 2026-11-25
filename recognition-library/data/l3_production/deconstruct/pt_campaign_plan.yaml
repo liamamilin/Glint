@@ -1,0 +1,53 @@
+id: pt_campaign_plan
+title: 营销活动执行计划
+tagline: 从目标到渠道动作与复盘的营销计划
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - marketing
+  - campaign_planning
+  - growth
+  app_affinity:
+  - Notion
+  - Feishu
+  - Slack
+  pain_point: 手里有产品和目标，但不知道怎么把渠道、时间、预算拆成可执行的动作、材料和责任人，也不知道何时缩减。
+  trigger_utterances:
+  - 帮我从目标做出个营销 campaign 计划
+  - 这个活动要跑哪些渠道动作和复盘
+  - 把产品推广计划按前期验证发布复盘拆一下
+  - 预算和时间有限怎么安排营销动作
+  - 需要一份带衡量指标的活动执行清单
+  anti_triggers:
+  - 已有完整营销方案只需润色文案
+  - 只要求单条广告创意
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 请基于 {{product_and_goal}} 与约束 {{channels_time_budget}}，制定一份受限的营销活动执行计划。按「前期验证 / 发布 / 复盘」三阶段列出：具体动作、所需材料、负责人、衡量指标。明确已知的受众证据与待验证假设，并说明触发缩减或调整的条件。
+  variables:
+  - product_and_goal
+  - channels_time_budget
+  workflow:
+    workflow_id: launch-campaign
+    step: 2
+    next_lens_id: pt_landing_page_outline
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#campaign-plan
+  source_hash: f8a1d06f49985e8b8be79bf7be1a80b2d344edd853f2e49341cc6b8cb4ba09b9
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: product_business
+  subcategory: growth_marketing
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

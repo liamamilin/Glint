@@ -1,0 +1,48 @@
+id: pt_apology_repair
+title: 为失误准备道歉
+tagline: 承认责任与修复动作，生成一句具体道歉
+routing:
+  primitive: translate
+  goals:
+  - create
+  clarity_fit:
+  - concrete
+  - vague
+  domains:
+  - communication
+  - apology
+  - relationships
+  - workplace
+  app_affinity:
+  - Slack
+  - Mail
+  - Feishu
+  - WeChat
+  pain_point: 做错了事却不知如何开口道歉，既想承担该承担的责任、把修复动作讲清楚，又怕措辞不当把关系搞僵
+  trigger_utterances:
+  - 我搞砸了怎么道歉
+  - 帮我写个道歉消息
+  - 做错了事想道歉但不知道怎么说
+  - 给同事写封道歉邮件
+  - apology message for messing up
+  anti_triggers:
+  - 只想抱怨对方或推卸责任的场景
+  - 需要法律/正式赔偿函的场景
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 我在【情境】做了【具体动作】，对方受到【已知影响】。请拟一段适合【沟通渠道】的道歉，要求：1) 承认事实与自身责任，不推诿；2) 提出可执行的修复动作与时间节点；3) 将尚不清楚的影响写成愿意了解的问题；4) 语气诚恳、具体，避免空泛套话。输出最终可直接发送的文本。
+  variables:
+  - 情境
+  - 具体动作
+  - 已知影响
+  - 沟通渠道
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#apology-repair
+  source_hash: 1ecb3a983b8aa664c6608771a15f10d9383820897a4cde87df1737f67a15af11
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

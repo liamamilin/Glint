@@ -1,0 +1,44 @@
+id: pt_study_plan
+title: 安排学习计划
+tagline: 把目标拆成每周可执行任务与里程碑
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - learning
+  - education
+  - study_plan
+  - roadmap
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 有学习目标但不知道如何拆解成每周可执行任务，时间分散且缺少验收标准与补救策略
+  trigger_utterances:
+  - 帮我安排一个学习计划
+  - 我想学XX但不知道怎么开始
+  - 给我一个学习路线图
+  - 每周该学什么怎么安排
+  - study plan for learning X
+  anti_triggers:
+  - 已有明确课程表只需答疑
+  - 纯知识问答不需规划
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 我的目标是【可观察的学习成果】，当前水平是【水平】，可投入【每周时间和截止日期】。给首周具体安排和后续里程碑。每阶段包含一个动手任务、验收方式和补救策略，优先选无需付费的资源。
+  variables: []
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#study-plan
+  source_hash: f7e2c8ae06de5c21864a75b97e5991f1ac5dce6241aa408bd54ffb885a2cbf94
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

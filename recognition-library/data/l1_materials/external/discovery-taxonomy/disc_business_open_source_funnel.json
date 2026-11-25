@@ -1,0 +1,33 @@
+{
+  "id": "disc_business_open_source_funnel",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-open-source-funnel",
+  "title": "用免费开源/公开工具做“信任漏斗”而非直接卖代码",
+  "content": "旧共识（盲区）：写了有用的工具或体系就该藏起来收钱，免费公开等于白白送人、没法变现。\n\n新现实（破盲视角）：在软件同质化极高的当下，公开免费工具/知识库是最强的“免许可信任证明”，能把陌生流量自然引向高客单托管、定制服务或进阶工作流。\n\n破冰追问母题：\n- 如果我想在 [你的目标领域] 做一个免费开源的小工具或公开知识库来建立行业信任，设计 3 个“免费层足够好用、付费层省掉麻烦或交付结果”的商业衔接路径。\n- 分析 [某个知名的免费开源/免费工具项目]，拆解它是如何把零散开发者/用户转化为稳定付费客户的，并映射到 [你的场景]。",
+  "content_hash": "8cf4ba0533b1da8aa1361bb59dbb7cad1adc0f5c51fce12983e4cae88d83b699",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "business",
+    "role-inversion",
+    "cross-domain",
+    "open-source",
+    "distribution",
+    "trust",
+    "monetization"
+  ],
+  "problem_solved": "写了有用的工具或体系就该藏起来收钱，免费公开等于白白送人、没法变现。",
+  "when_to_use": "在软件同质化极高的当下，公开免费工具/知识库是最强的“免许可信任证明”，能把陌生流量自然引向高客单托管、定制服务或进阶工作流。",
+  "procedural_steps": [
+    "如果我想在 [你的目标领域] 做一个免费开源的小工具或公开知识库来建立行业信任，设计 3 个“免费层足够好用、付费层省掉麻烦或交付结果”的商业衔接路径。",
+    "分析 [某个知名的免费开源/免费工具项目]，拆解它是如何把零散开发者/用户转化为稳定付费客户的，并映射到 [你的场景]。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "business-open-source-funnel",
+    "arena": "business",
+    "lenses": [
+      "role-inversion",
+      "cross-domain"
+    ]
+  }
+}

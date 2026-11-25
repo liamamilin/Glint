@@ -1,0 +1,72 @@
+id: pt_image_brief
+title: 图像生成 Brief
+tagline: 把主体、构图、光线、比例说清楚，直接拿到可用的图像提示词
+routing:
+  primitive: translate
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - image_generation
+  - creative
+  - prompt_engineering
+  - visual_design
+  app_affinity:
+  - ChatGPT
+  - Claude
+  - Figma
+  - Notion
+  pain_point: 用户想生成一张图但描述不清，AI 出图跑偏或反复重试
+  trigger_utterances:
+  - 帮我写个画图的 prompt
+  - 出一张赛博朋克风格的海报
+  - 图片 prompt 怎么写才准
+  - 帮我生成一张图的描述
+  - 画个图但不知道怎么描述
+  anti_triggers:
+  - 用户只是想修图或抠图
+  - 用户需要 3D 建模或视频生成而非静态图像
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '为【使用场景】生成一张【主题和主体】的图。视觉方向是【媒介、风格或参考】。明确画幅、主体位置、景别、光线、配色和背景要求。先给可直接用于图像模型的一段描述，再给两个只有一个关键差异的版本。
+
+
+    使用场景：{{scene}}
+
+    主题和主体：{{subject}}
+
+    媒介/风格/参考：{{style}}
+
+    画幅：{{aspect_ratio}}
+
+    主体位置：{{composition}}
+
+    景别：{{shot_type}}
+
+    光线：{{lighting}}
+
+    配色：{{palette}}
+
+    背景：{{background}}'
+  variables:
+  - scene
+  - subject
+  - style
+  - aspect_ratio
+  - composition
+  - shot_type
+  - lighting
+  - palette
+  - background
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#image-brief
+  source_hash: 9e72d680ad4529f8f2cd2ea7ae304347a0aa3fea03fc97169bb2515d1dd1a6b5
+  status: active
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

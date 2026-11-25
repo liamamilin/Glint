@@ -1,0 +1,29 @@
+{
+  "id": "pt_creative_draft",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#creative-draft",
+  "title": "起草一个短故事",
+  "content": "写一个约【字数】的短故事。主角和冲突是【角色与困境】，希望产生【读者感受】。开头用可观察的动作进入场景，中段让角色做一个有代价的选择，结尾用一个细节回应开头。另给一个不同方向的结尾提纲。",
+  "content_hash": "7fe18493f43fe70954b5bbc19f572f6593e8c21ee3f6ba6ed8af6d47338b777a",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "creative",
+    "故事",
+    "小说",
+    "创作",
+    "fiction"
+  ],
+  "problem_solved": "把叙事冲突、细节和转折落到文字中。",
+  "when_to_use": "分类: 创作与多媒体",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "creative-draft",
+    "category": "creative",
+    "variables": [
+      "字数",
+      "角色与困境",
+      "读者感受"
+    ]
+  }
+}

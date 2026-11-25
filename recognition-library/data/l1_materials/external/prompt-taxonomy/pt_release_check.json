@@ -1,0 +1,27 @@
+{
+  "id": "pt_release_check",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#release-check",
+  "title": "做一次发布前检查",
+  "content": "根据【版本变更和目标环境】做发布检查表。列可执行前置条件、从用户入口验收的主要路径、异常信号和回退动作。每项写可检查的证据，未运行的步骤保留待验证。",
+  "content_hash": "57420719ea4800ab9db45966e5659d4e1490cd84c427e24d7c7f6dec6f594453",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "coding",
+    "发版",
+    "上线",
+    "部署检查",
+    "release check"
+  ],
+  "problem_solved": "明确版本、主要变化、验证及回退条件。",
+  "when_to_use": "分类: 开发与调试",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "release-check",
+    "category": "coding",
+    "variables": [
+      "版本变更和目标环境"
+    ]
+  }
+}

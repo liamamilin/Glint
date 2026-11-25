@@ -1,0 +1,27 @@
+{
+  "id": "pt_refine_error_state",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#refine-error-state",
+  "title": "设计一个可恢复的错误状态",
+  "content": "为【功能和失败场景】设计错误处理。逐项写用户看到什么、哪些内容保留、可重试条件、何时转人工和需记的诊断信息。给离线、中断及部分成功的预期行为。",
+  "content_hash": "c1fc86b4019b0e3c5a0f542d83d5d6954e22742e4d0ba266d8fe0b170bb8f3d6",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "coding",
+    "错误提示",
+    "重试",
+    "UI error",
+    "error state"
+  ],
+  "problem_solved": "帮用户理解结果、保留输入并采取下一步。",
+  "when_to_use": "分类: 开发与调试",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "refine-error-state",
+    "category": "coding",
+    "variables": [
+      "功能和失败场景"
+    ]
+  }
+}

@@ -1,0 +1,66 @@
+id: sit_ops_04
+title: 高频任务 Skill 封装器
+tagline: 把重复 3 遍的指令铸成一键可复用 Skill
+routing:
+  primitive: compress
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - ops_automation
+  - automation
+  - productivity
+  - ai_skills
+  app_affinity:
+  - ChatGPT
+  - Claude
+  - Notion
+  - Obsidian
+  pain_point: 每次用 AI 干同类活都要重新交代一遍背景、格式和避坑点，重复到想吐，时间全耗在重复劳动上
+  trigger_utterances:
+  - 这个需求我上周也做过，又要重新给 AI 讲一遍背景
+  - 每次生成报告格式都不对，得反复强调
+  - 同样的 prompt 又要敲第三遍了
+  - 我是不是该把这套流程固定下来
+  - 能不能做成一个可复用的 skill
+  anti_triggers:
+  - 只做一次的临时任务，不值得封装
+  - 只是想随手写一段 prompt，还没重复三次
+execution:
+  action_type: open_resource
+  inject_mode: null
+  content: '资源：高频任务 Skill 封装指南（SKILL.md 规范 + 版本化托管）
+
+    来源: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/ops-automation.json#ops-04
+
+
+    操作步骤：
+
+    1. 回溯最近 3 次最满意的同类对话，提取共性输入参数、执行步骤与输出格式
+
+    2. 把隐性默契写成显性 SKILL.md，明确触发条件与禁止事项
+
+    3. 存入个人 Skills/Gems 仓库，实战发现新边缘情况就迭代版本号
+
+
+    推荐装配：自定义 AI Skills / Gems + GitHub 版本化托管
+
+    误用警告：严格遵守“事不过三”，第 3 次重复再动手封装'
+  variables: []
+  workflow: null
+meta:
+  source: super-individual-toolbox
+  source_ref: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/ops-automation.json#ops-04
+  source_hash: d9347a026b59d02d6ac91943743cc1a76e88edc73c20dba7a7df34096c87bb82
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: engineering
+  subcategory: ai_workflow
+  collections: []
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

@@ -1,0 +1,29 @@
+{
+  "id": "pt_headlines",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#headlines",
+  "title": "为同一内容写多种标题",
+  "content": "为【内容】写【渠道和长度】可用的标题，读者是【人群】。给事实型、问题型、结果型三种方向，各写两个。每个都应能对应正文中的证据，并注明适用情况下的首选项。",
+  "content_hash": "2aec5f2cc817b748979f56cdd8f20154f6551dc96209224fa281b819f20cad59",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "writing",
+    "标题",
+    "副标题",
+    "headline",
+    "title"
+  ],
+  "problem_solved": "使标题与证据、渠道和读者匹配。",
+  "when_to_use": "分类: 写作与语言",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "headlines",
+    "category": "writing",
+    "variables": [
+      "内容",
+      "渠道和长度",
+      "人群"
+    ]
+  }
+}

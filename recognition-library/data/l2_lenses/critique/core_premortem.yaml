@@ -1,0 +1,44 @@
+id: core_premortem
+title: 事前验尸排雷
+tagline: 假设方案半年后失败，反推 3 个致命漏洞与低成本验证法
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - product_strategy
+  - engineering
+  - decision_making
+  - project_management
+  app_affinity:
+  - Cursor
+  - Notion
+  - Linear
+  - ChatGPT
+  pain_point: 手里有个方案/设计看起来能跑，但怕上线后踩坑炸锅，想在投入资源前提前揪出致命漏洞并用最低成本验证
+  trigger_utterances:
+  - 这个方案半年后要是失败了会是因为什么
+  - 帮我给这个设计挑挑刺找漏洞
+  - 上线前先做一次事前验尸
+  - 这个架构有什么致命隐患吗
+  - pre-mortem 一下这个计划
+  anti_triggers:
+  - 需要把一个混乱的需求拆解成步骤清单
+  - 在多个选项中做权衡拍板选一个
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 请用事前验尸（Pre-mortem）视角：假设这个方案半年后彻底失败了，反推最致命的 3 个漏洞，并给出最低成本的验证方法。
+  variables: []
+  workflow: null
+meta:
+  source: glint-core
+  source_ref: cards.yaml#premortem
+  source_hash: b87dd3000b9428f66bd0f9eab71356b1c9b160a1e8e27f7221b4582ba684db18
+  status: active
+  base_weight: 1.0
+  confidence: 0.95
+  version: 1

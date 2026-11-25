@@ -1,0 +1,42 @@
+id: pt_video_captions
+title: 口播转字幕
+tagline: 把带时间戳的口播转录整理成符合阅读限制的字幕并校对时间码
+routing:
+  primitive: translate
+  goals:
+  - create
+  clarity_fit:
+  - concrete
+  domains:
+  - video_production
+  - captions
+  - transcription
+  app_affinity:
+  - ChatGPT
+  - Claude
+  - Notion
+  pain_point: 口播转录冗长断句混乱、时间码重叠，直接当字幕读起来费劲且容易错过关键信息
+  trigger_utterances:
+  - 帮我把这段口播转成字幕
+  - SRT 时间码重叠了怎么修
+  - 字幕一行太长读不过来
+  - 把转录按语义断句成 captions
+  - 给视频出一份可读字幕
+  anti_triggers:
+  - 把字幕翻译成英文
+  - 给视频生成配音文案
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: 把{{input}}整理成字幕格式和阅读限制：{{format_limits}}。按意群断句，保留姓名、术语和数字；不能确认的词标记待核对。检查时间码重叠，补一份需要回听的片段表。
+  variables:
+  - format_limits
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#video-captions
+  source_hash: b802822519dffe14573c8ec63b24516b6989b318881deb1a055c18ffed7d9320
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

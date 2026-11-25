@@ -1,0 +1,28 @@
+{
+  "id": "pt_flashcards",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#flashcards",
+  "title": "把笔记做成可复习的闪卡",
+  "content": "把【笔记】转换成面向【复习目标】的闪卡。每张包含一个自足问题、一条简短答案、所属知识点和适合的出处；将复合问题拆成小卡。最后挑三张容易混淆的卡说明辨别线索。",
+  "content_hash": "207705d826671f6e7e10ce86f626a34c34993cc90bd33fd2674ef7e1af265c37",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "learning",
+    "闪卡",
+    "记忆",
+    "Anki",
+    "flashcards"
+  ],
+  "problem_solved": "一张卡只测试一个知识点。",
+  "when_to_use": "分类: 学习与辅导",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "flashcards",
+    "category": "learning",
+    "variables": [
+      "笔记",
+      "复习目标"
+    ]
+  }
+}

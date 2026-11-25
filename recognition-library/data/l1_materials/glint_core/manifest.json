@@ -1,0 +1,13 @@
+{
+  "count": 8,
+  "ids": [
+    "core_premortem",
+    "core_clarify_first",
+    "core_de_ai_rewrite",
+    "core_mece_breakdown",
+    "core_red_team",
+    "core_decision_matrix",
+    "core_code_review",
+    "core_root_cause"
+  ]
+}

@@ -1,0 +1,49 @@
+id: pt_data_reconcile
+title: 对账两张表
+tagline: 定位缺项、重复键、取整与时期差异
+routing:
+  primitive: deconstruct
+  goals:
+  - debug
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - data
+  - reconciliation
+  - data_quality
+  app_affinity:
+  - Notion
+  - VS Code
+  - Cursor
+  - Chrome
+  pain_point: 两份表格数字对不上，不知道是缺记录、重复键、取整误差还是口径/时期差异导致
+  trigger_utterances:
+  - 这两张表对不上帮我查差异
+  - A表和B表数据不一致
+  - 对账找出缺项和重复
+  - reconcile these two sheets
+  - 数字对不上是取整还是口径问题
+  anti_triggers:
+  - 单表清洗去重
+  - 基于一张表生成新报表
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 对账【表 A】和【表 B】，匹配依据是【主键、期间和可接受误差】。先检查键是否唯一和日期单位是否一致，再把差异分为缺失、重复、金额差和口径差。交付汇总、可复核明细和计算逻辑。
+  variables:
+  - 表 A
+  - 表 B
+  - 主键
+  - 期间
+  - 可接受误差
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#data-reconcile
+  source_hash: 7102070b9cdbb6c28997bd463d6114bd5e32d5d13531073c0cf80ea85ae74b76
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

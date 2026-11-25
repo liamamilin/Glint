@@ -1,0 +1,57 @@
+id: sit_ops_03
+title: API额度与服务熔断哨兵
+tagline: 给自动化流装上防刷爆账单的保险丝
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - debug
+  clarity_fit:
+  - concrete
+  domains:
+  - ops_automation
+  - api_cost
+  - monitoring
+  - devops
+  app_affinity:
+  - Cursor
+  - Terminal
+  - Chrome
+  - Notion
+  pain_point: 跑定时脚本、Agent 或公开小工具时，怕死循环一夜刷爆信用卡，或线上页面静默挂掉却没人知道。
+  trigger_utterances:
+  - 定时脚本别一夜刷爆我信用卡
+  - Agent 死循环了账单爆了怎么办
+  - 线上页面静默挂掉没人通知
+  - 怎么给 API 设硬性消费上限
+  - 有没有免费的 uptime 监控方案
+  anti_triggers:
+  - 仅在代码里写软限制而不开平台级硬限的场景
+  - 与业务增长策略或营销投放相关的问题
+execution:
+  action_type: open_resource
+  inject_mode: null
+  content: '《API 预算硬限清单》+ 自动化存活拨测告警流
+
+
+    1. 在所有大模型 API 后台强制设死「硬性月度消费上限（Hard Limit）」与 50%/80% 告警线。
+
+    2. 在自动化脚本里写入最大重试次数（Max Retries）与单次 Token 熔断阈值。
+
+    3. 配置免费定时拨测（Uptime Check），静态站或关键接口返回非 200 状态时立即发通知。
+
+
+    推荐装配：API 平台预算硬限 + GitHub Actions 拨测 / 免费 Uptime 监控。
+
+
+    误用警告：不要只在代码里写软限制而不开平台级硬限；代码本身可能出 Bug，平台账单锁才是最后底线。'
+  variables: []
+  workflow: null
+meta:
+  source: super-individual-toolbox
+  source_ref: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/ops-automation.json#ops-03
+  source_hash: cd95ef4ae9bbb21383009b6db12a95b8b57beb88e4510144a49ba64d197d6bfa
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

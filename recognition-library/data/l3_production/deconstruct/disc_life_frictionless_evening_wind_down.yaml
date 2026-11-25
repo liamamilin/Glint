@@ -1,0 +1,79 @@
+id: disc_life_frictionless_evening_wind_down
+title: 睡前30分钟关机缓冲
+tagline: 留 20-30 分钟低刺激收尾，把白天刺激挡在床外
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - life
+  - sleep
+  - wind_down
+  - evening
+  - recovery
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  pain_point: 晚上躺下后脑子还在转工作或刷手机停不下来，睡不沉、晚睡，第二天没精神
+  trigger_utterances:
+  - 晚上老是睡不着脑子还转着工作
+  - 睡前刷手机停不下来怎么办
+  - 帮我设计个睡前放松流程
+  - 睡不沉第二天没精神
+  - 脑子放不下杂事怎么安心睡
+  anti_triggers:
+  - 只是偶尔累到秒睡、不需要缓冲
+  - 需要失眠症的医学诊断或药物建议
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '睡前 30 分钟关机缓冲清单（25 分钟内完成）
+
+
+    T-30min 降噪收尾
+
+    - [ ] 关闭工作/消息通知，手机切勿扰或放到别处
+
+    - [ ] 停止刷短视频/刺激内容，切换到低光、低音量环境
+
+
+    T-20min 脑内清空（Brain Dump）
+
+    - [ ] 今天没做完但明天必须做的 1-2 件事是什么？
+
+    - [ ] 有什么悬而未决的杂事需要先记下来？
+
+    - [ ] 明天第一件要做的事是什么？写成一句话
+
+
+    T-10min 放松降速
+
+    - [ ] 5 分钟轻度拉伸/深呼吸/热水洗漱
+
+    - [ ] 5 分钟低刺激阅读或白噪音，不看屏幕
+
+
+    入睡
+
+    - [ ] 灯光调暗，上床只做睡觉的事'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/life.json#life-frictionless-evening-wind-down
+  source_hash: 0626bc36d45b800aa7044e346418fdb0a79ba4a7283d8d7091de1edcec0ad73a
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: personal_career
+  subcategory: personal_os
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

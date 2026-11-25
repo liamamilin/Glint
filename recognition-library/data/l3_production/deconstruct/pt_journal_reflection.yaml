@@ -1,0 +1,52 @@
+id: pt_journal_reflection
+title: 零散日记一周观察
+tagline: 把碎片日记整理成一周观察与小调整
+routing:
+  primitive: deconstruct
+  goals:
+  - digest
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - journaling
+  - reflection
+  - planning
+  - life_review
+  app_affinity:
+  - Notion
+  - Obsidian
+  pain_point: 日记写得很碎，无法看清一周里反复出现的情境、感受与做法，也分不清事实、主观感受和想调整的事
+  trigger_utterances:
+  - 这周日记好碎帮我理一下
+  - 帮我把零散记录整理成一周观察
+  - 日记里反复出现什么我都没注意
+  - 区分事实和感受帮我复盘一下
+  anti_triggers:
+  - 需要写一篇正式周报给老板
+  - 帮我生成日记模板
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 根据【日记片段或一周记录】，围绕【我想弄清的问题】找反复出现的情境、感受和做法。用具体片段支持观察，保留可能的其他解释。最后给两道写给自己的问题和一个可以下周试的小调整。
+  variables:
+  - 日记片段或一周记录
+  - 我想弄清的问题
+  workflow:
+    workflow_id: reflect-and-adjust
+    step: 1
+    next_lens_id: pt_sort_out_concern
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#journal-reflection
+  source_hash: ce08c90a5ca752471027722dceb45ac26af61f868e66d45809e1a6995885f2bd
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: personal_career
+  subcategory: personal_os
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

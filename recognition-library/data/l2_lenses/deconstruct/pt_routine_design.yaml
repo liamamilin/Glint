@@ -1,0 +1,47 @@
+id: pt_routine_design
+title: 把目标变习惯
+tagline: 设计触发点、最低版本与失败恢复
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - planning
+  - habit
+  - routine
+  - personal_productivity
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 想培养习惯却难以长期坚持，不知道何时触发、忙时最低做到什么、失败后怎么恢复
+  trigger_utterances:
+  - 我想养成早起习惯但总坚持不下去
+  - 帮我把目标拆成每天可执行的习惯
+  - 忙的时候至少做点什么别断掉
+  - habit routine 设计一下
+  - 想培养阅读习惯触发点和最低版本
+  anti_triggers:
+  - 只是想列待办清单或安排单日行程
+  - 需要批判已有计划漏洞而非从零设计习惯
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 我想培养【习惯】，目前在【时间和环境】最容易坚持。设计触发信号、正常版本、忙时最低版本和一次失败后的恢复方式。用【可观察指标】安排一周试行，并给一个复盘问题。
+  variables:
+  - 习惯
+  - 时间和环境
+  - 可观察指标
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#routine-design
+  source_hash: f92b6999f60b38fcddc35bc247623f559486750e85dc3565f5e08b0a58bad363
+  status: active
+  base_weight: 1.0
+  confidence: 0.91
+  version: 1

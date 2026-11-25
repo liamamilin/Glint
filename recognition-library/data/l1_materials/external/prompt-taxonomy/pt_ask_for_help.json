@@ -1,0 +1,27 @@
+{
+  "id": "pt_ask_for_help",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#ask-for-help",
+  "title": "把卡住的事写成别人能回答的问题",
+  "content": "将【问题、已试动作和证据】整理成给【可协助的人】的一则求助。首句写希望得到的具体帮助，再给最小背景、已排除的原因、所需时间与能同步提供的资料。",
+  "content_hash": "fe760294e87a8503fdb00e559445506ed31b3ac3d107cecde9e9587b1fbdfd09",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "communication",
+    "求助",
+    "提问",
+    "ask for help"
+  ],
+  "problem_solved": "说明已试动作、证据和希望对方帮什么。",
+  "when_to_use": "分类: 沟通与协商",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "ask-for-help",
+    "category": "communication",
+    "variables": [
+      "问题、已试动作和证据",
+      "可协助的人"
+    ]
+  }
+}

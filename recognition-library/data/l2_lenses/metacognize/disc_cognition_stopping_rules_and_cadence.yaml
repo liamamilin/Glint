@@ -1,0 +1,90 @@
+id: disc_cognition_stopping_rules_and_cadence
+title: 停手规则与节奏
+tagline: 提前设好止损线，别在边际收益归零处死磕
+routing:
+  primitive: metacognize
+  goals:
+  - optimize
+  - debug
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - cognition
+  - focus
+  - productivity
+  - decision_making
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Cursor
+  - Linear
+  pain_point: 总觉得自己还没做完、没调到完美就不该停，越往后改越精细却越耗精力，无法及时收尾把精力留给下一局
+  trigger_utterances:
+  - 这资料我查了好久了还在查停不下来
+  - 稿子改了八版了还要不要继续改
+  - 参数调到 99% 就是上不去怎么办
+  - 帮我定个停手规则别让我死磕
+  - 什么叫已经足够好了可以发布了
+  anti_triggers:
+  - 需要从零开始规划一个全新项目
+  - 完全不知道目标是什么需要重新定义问题
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '## 停手规则设计清单（Stopping Rule）
+
+
+    ### 1. 识别死磕场景
+
+    - 我常陷进去停不下来的 task 类型：[查资料 / 改稿 / 调参数 / 挑方案 / 其他]
+
+    - 典型信号：连续 N 轮改动后提升 < X%
+
+
+    ### 2. 定义 Good Enough to Ship
+
+    - 最低可接受标准（must-have）：____
+
+    - 可延后项（nice-to-have）：____
+
+    - 明确“不做也不影响核心价值”的范围
+
+
+    ### 3. 设定时间盒 / 止损线
+
+    - 时间盒：最多投入 ____ 小时/天
+
+    - 迭代轮次上限：最多 ____ 版
+
+    - 边际收益阈值：单次改动提升 < ____% 即停
+
+
+    ### 4. 收尾动作
+
+    - 记录“未完成项 + 下次触发条件”
+
+    - 把剩余精力预算分配给下一局
+
+    - 设定复盘时间点（如 1 周后）
+
+
+    ### 本周事项应用
+
+    针对：[描述事项]
+
+    - Good Enough 标准：____
+
+    - 止损线：____
+
+    - 下一局精力分配：____'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/cognition.json#cognition-stopping-rules-and-cadence
+  source_hash: 50c115db921bce940a97bb2ae7992a2f940d561f37be5e77239f52609b686f67
+  status: active
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

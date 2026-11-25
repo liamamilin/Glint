@@ -1,0 +1,47 @@
+id: sit_os_02
+title: 概念记忆编码器
+tagline: 给抽象概念焊上画面挂钩，钉进长期记忆
+routing:
+  primitive: translate
+  goals:
+  - digest
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - learning
+  - memory
+  - personal_os
+  - knowledge_management
+  app_affinity:
+  - Obsidian
+  - Notion
+  pain_point: 跨界学习陌生硬核领域时当下看懂原理，过两天就忘，临场调用不出来
+  trigger_utterances:
+  - 这个概念我看了就忘，帮我焊个记忆挂钩
+  - 学新领域总是临场想不起来
+  - 帮我把抽象概念变成画面记下来
+  - 过两天就忘了原理怎么调用
+  anti_triggers:
+  - 只是查一下就能用的 API 参数不用记
+  - 琐碎日期死记硬背
+execution:
+  action_type: open_resource
+  inject_mode: null
+  content: 自定义记忆编码 Skill + 间隔重复工具（Anki / 本地 Markdown）
+  variables: []
+  workflow: null
+meta:
+  source: super-individual-toolbox
+  source_ref: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/personal-os.json#os-02
+  source_hash: c7af0db4336c48817f4d8fdf0ac62cc82ccf1bad66124270a8c4127e79c24bd0
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: personal_career
+  subcategory: learning
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

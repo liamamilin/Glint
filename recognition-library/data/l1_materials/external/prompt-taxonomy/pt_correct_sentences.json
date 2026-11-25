@@ -1,0 +1,28 @@
+{
+  "id": "pt_correct_sentences",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#correct-sentences",
+  "title": "解释外语句子的常见错误",
+  "content": "评阅【我的外语句子】用于【具体情境】的表达。先说读者能理解的意思，指出两项最重要的问题，各给规则、修正版和可接受变体。最后让同一条规则出现在一个新练习里。",
+  "content_hash": "c6cee6e9817845e062a278c3938dead02154cd8de671658823b884b2b3feaf12",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "language",
+    "语法",
+    "纠错",
+    "外语句子",
+    "grammar correction"
+  ],
+  "problem_solved": "优先修正影响理解的项目，再给练习。",
+  "when_to_use": "分类: 语言练习与本地化",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "correct-sentences",
+    "category": "language",
+    "variables": [
+      "我的外语句子",
+      "具体情境"
+    ]
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "pt_critique_draft",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#critique-draft",
+  "title": "评审一篇初稿",
+  "content": "评审【初稿】能否实现【传播目标】，读者是【读者】。优先找三处影响理解或可信度的问题，逐条给原句、问题、读者会怎样理解及改法。最后指出值得保留的一处，并重写影响最大的一小段。",
+  "content_hash": "cbc258ad42606bc843dd4674e8f52fe8b6cc922c52202f7e3cec9ce00159cddc",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "writing",
+    "审稿",
+    "批注",
+    "文案",
+    "critique"
+  ],
+  "problem_solved": "把编辑反馈变成可实施的修改清单。",
+  "when_to_use": "分类: 写作与语言",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "critique-draft",
+    "category": "writing",
+    "variables": [
+      "初稿",
+      "传播目标",
+      "读者"
+    ]
+  }
+}

@@ -1,0 +1,53 @@
+id: pt_opportunity_map
+title: 证据驱动产品机会地图
+tagline: 把访谈反馈转成可验证的产品机会表，区分问题与方案
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - product_discovery
+  - user_research
+  - product_strategy
+  app_affinity:
+  - Notion
+  - Linear
+  - Obsidian
+  pain_point: 手头有大量访谈、反馈或数据，但难以分辨哪些是真实用户问题、哪些只是预选方案，导致机会判断失焦
+  trigger_utterances:
+  - 访谈记了一堆但不知道该做哪个功能
+  - 用户说想要XX功能，真需求到底是什么
+  - 这些反馈能整理成可做的机会吗
+  - 需求和方案混在一起理不清
+  - 机会很多但不知道先验证哪个
+  anti_triggers:
+  - 已有明确需求只做技术实现
+  - 纯代码重构与性能优化无用户数据
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: 请基于以下研究资料 {{input}}，围绕目标结果「{{target_outcome}}」进行产品机会发现。输出一张机会表，每行包含：用户问题（以用户视角描述，不写解决方案）、触发时机/影响场景、支持证据（引用或摘要）、潜在用户范围、可逆试验（最小验证方式）。将所有预选解决方案单独列为候选方案，并注明每条假设会被哪类证据推翻。严格区分问题与方案，避免把功能请求误当真实问题。
+  variables:
+  - target_outcome
+  workflow:
+    workflow_id: product-discovery
+    step: 2
+    next_lens_id: pt_product_requirements
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#opportunity-map
+  source_hash: cf39ce474542ee51886d094e6799492027d6164821e64d9dabda1d8d9a5f6c6b
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: product_business
+  subcategory: product_design
+  collections: []
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

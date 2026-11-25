@@ -1,0 +1,44 @@
+id: pt_performance_profile
+title: 设计一次性能排查
+tagline: 先量化瓶颈与基线，再决定改动，附实验表与复测口径。
+routing:
+  primitive: deconstruct
+  goals:
+  - debug
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - performance
+  - profiling
+  - backend
+  - debugging
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Terminal
+  pain_point: 接口或链路偏慢但不知瓶颈在哪，盲目改代码可能白忙，需要先量化基线并定位耗时部分。
+  trigger_utterances:
+  - 接口响应太慢帮我设计一次性能排查
+  - 这个慢查询先量化瓶颈再决定改哪里
+  - profiling 怎么做实验表和复测
+  - 链路偏慢先测基线定位耗时部分
+  - 性能问题先别改代码帮我排个查方案
+  anti_triggers:
+  - 已定位到明确 bug 只需直接修复
+  - 纯算法题求最优复杂度
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 【代码或链路】在【可复现负载】下偏慢，目标为【体验或资源目标】。定义当前基线和观察指标，安排最少的测量来定位耗时部分。给实验表、可能干扰项和改动后的相同口径复测方式。
+  variables: []
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#performance-profile
+  source_hash: ab3b91ef1eba89cc1a5b38b5025d5a1444aeeb835b8571078212ad761c0d9b81
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

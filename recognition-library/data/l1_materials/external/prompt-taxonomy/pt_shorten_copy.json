@@ -1,0 +1,29 @@
+{
+  "id": "pt_shorten_copy",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#shorten-copy",
+  "title": "把一段话压到限定长度",
+  "content": "把【原文】压缩到【字数或字符限制】以内，必须保留【不可丢失的事实】。先给成稿，再指出为缩短而删除的内容。保留原文的事实强度、限定条件和行动时间。",
+  "content_hash": "65fed2890ed96b15df1e4bd5a2062930e101020e590fe22fc427b45a11826f5a",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "writing",
+    "缩写",
+    "精简",
+    "字数",
+    "shorten"
+  ],
+  "problem_solved": "保留必须保留的信息和行动项。",
+  "when_to_use": "分类: 写作与语言",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "shorten-copy",
+    "category": "writing",
+    "variables": [
+      "原文",
+      "字数或字符限制",
+      "不可丢失的事实"
+    ]
+  }
+}

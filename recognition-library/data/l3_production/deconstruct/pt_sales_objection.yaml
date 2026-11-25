@@ -1,0 +1,59 @@
+id: pt_sales_objection
+title: 客户异议回应练习
+tagline: 先澄清顾虑再给可核实答复，附可口述版本
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - marketing
+  - sales
+  - objection_handling
+  app_affinity:
+  - Mail
+  - Slack
+  - Feishu
+  - Chrome
+  pain_point: 客户提出购买顾虑时不知道怎么回应，容易承诺过头或答非所问，需要先澄清真实顾虑再给可核实的证据与替代方案
+  trigger_utterances:
+  - 客户说太贵了怎么回
+  - 这个功能我们没有客户会跑
+  - 客户问能不能保证效果
+  - 竞品比我们便宜怎么应对
+  - 帮我准备一个应对客户异议的话术
+  anti_triggers:
+  - 单纯写营销文案或广告语
+  - 内部产品缺陷排查与修复
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请根据【客户异议和可用事实】准备回复。
+
+    1. 先提出一个澄清问题，确认客户的真实顾虑（预算/适用范围/风险等）。
+
+    2. 按预算、适用范围、风险等维度给出可能回答与可核实证据。
+
+    3. 对不能承诺的点，提出替代验证方案或后续跟进计划。
+
+    4. 输出一个可口述版本（口语化、简短、不夸大、不虚假承诺）。'
+  variables:
+  - 客户异议和可用事实
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#sales-objection
+  source_hash: 041fbfa845dc4e5115865d3c0c65e245e9e0816c2d5abb3b71ce24a7ad160035
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: product_business
+  subcategory: growth_marketing
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

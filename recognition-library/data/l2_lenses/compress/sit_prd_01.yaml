@@ -1,0 +1,60 @@
+id: sit_prd_01
+title: MVP 极简裁剪刀
+tagline: 把三个月蓝图砍成48小时能上线的核心切片
+routing:
+  primitive: compress
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - product_strategy
+  - mvp
+  - scope_management
+  - startup
+  app_affinity:
+  - Notion
+  - Linear
+  - Figma
+  - Cursor
+  pain_point: 想做的功能越来越多，登录权限后台社区都想一起做，项目迟迟无法上线
+  trigger_utterances:
+  - 功能越想越多做不完
+  - MVP 怎么砍范围
+  - 想全部做完再上线
+  - scope 太大了砍一刀
+  - 先做哪些功能上线
+  anti_triggers:
+  - 已经上线后做功能迭代优先级排序
+  - 纯技术架构重构与性能优化
+execution:
+  action_type: open_resource
+  inject_mode: null
+  content: '资源：MVP 极简裁剪刀（sit_prd_01）
+
+
+    步骤：
+
+    1. 写出脑中完整的理想功能清单
+
+    2. 强制划红线：删掉它后核心价值是否依然成立？能删的全进 V2 冰柜
+
+    3. 把留下的最小闭环压成 1 条主路径，确保 1 个周末内能跑通交付
+
+
+    交付物：《V1 必做清单（限 3 项）》与《V2 冰柜清单》
+
+
+    误用警告：裁剪的是锦上添花的功能，不是核心体验的完成度；别把 MVP 做成无法使用的残次品。'
+  variables: []
+  workflow: null
+meta:
+  source: super-individual-toolbox
+  source_ref: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/product-architect.json#prd-01
+  source_hash: caf7fe29fe3d4f7b792299f67d0d9a379eda4ccb23ba51cf68684c434666240d
+  status: active
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

@@ -1,0 +1,45 @@
+id: pt_faq_from_material
+title: 材料转常见问题
+tagline: 把现有材料整理成读者导向的FAQ，缺漏标待补充。
+routing:
+  primitive: translate
+  goals:
+  - create
+  clarity_fit:
+  - concrete
+  domains:
+  - documentation
+  - knowledge_base
+  - writing
+  - support
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  - Slack
+  pain_point: 手上有大量材料或文档，但读者找不到答案，需要把内容转成按读者操作顺序组织的 FAQ。
+  trigger_utterances:
+  - 帮我把这份文档整理成 FAQ
+  - 把材料转成常见问题
+  - 读者会问什么问题帮我列一下
+  - 整理帮助中心问答
+  - 把 spec 写成 FAQ 给用户看
+  anti_triggers:
+  - 从零写一篇新文章
+  - 总结材料的 TL;DR 摘要
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 将 {{material}} 整理成供 {{reader}} 使用的 FAQ。按读者最可能的操作顺序组织问题；答案先给结论或步骤，再附材料出处。材料未说明的内容用「待补充」标记，并列出需要向谁核对。
+  variables:
+  - material
+  - reader
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#faq-from-material
+  source_hash: 0a82fd3e8960d9ed1968641a6768218337e20cc5cd521f99ec7b2416a950a7f8
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

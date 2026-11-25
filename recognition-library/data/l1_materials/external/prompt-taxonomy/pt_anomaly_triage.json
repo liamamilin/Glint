@@ -1,0 +1,29 @@
+{
+  "id": "pt_anomaly_triage",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#anomaly-triage",
+  "title": "排查图表突然变化的原因",
+  "content": "【指标】在【日期与幅度】发生突变，已知有【事件、发布与数据情况】。先检查口径、采集完整性和对照维度，按可验证性排序候选原因。给最小查询和下一步判断规则。",
+  "content_hash": "8be2ee771f736c5188da9e86f2a5fe9304e23a2e3a82aad741449ba65441e3c2",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "data",
+    "异常",
+    "监控",
+    "指标波动",
+    "anomaly"
+  ],
+  "problem_solved": "先区分真实变化与仪表或采集故障。",
+  "when_to_use": "分类: 数据与表格",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "anomaly-triage",
+    "category": "data",
+    "variables": [
+      "指标",
+      "日期与幅度",
+      "事件、发布与数据情况"
+    ]
+  }
+}

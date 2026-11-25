@@ -1,0 +1,61 @@
+id: disc_cognition_second_order_consequences
+title: 多问一层：二阶效应
+tagline: 新工具或新规则普及后，追问 Then what，找到隐藏机会与拥堵
+routing:
+  primitive: metacognize
+  goals:
+  - evaluate
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - cognition
+  - systems
+  - incentives
+  - strategy
+  app_affinity:
+  - Chrome
+  - ChatGPT
+  - Claude
+  - Notion
+  pain_point: 看到一个新工具或新规则，只盯眼前直接好处就下结论，没想过大家都能用之后激励结构和竞争生态会怎么变
+  trigger_utterances:
+  - 这个新工具大家都说好用，我是不是也该上
+  - 新规则出来了，直接决定用不用吧
+  - AI 生成内容普及了，优势是不是就没了
+  - 这个趋势能帮我提效，先冲再说
+  - 选 A 还是选 B，只看第一层好处
+  anti_triggers:
+  - 只是想快速摘要一篇长文
+  - 明确的代码报错排查或语法修复
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '二阶效应追问清单：
+
+    1. 先写清「一阶直接好处」：这个新工具/新规则/新趋势最直接带来什么？
+
+    2. 假设所有人都能用它，列出 3 个可能的「二阶副作用或新机会」（拥堵、贬值、新瓶颈、新分工）。
+
+    3. 原本的优势会变成什么？哪里会出现新稀缺？
+
+    4. 如果我采取某个行动/习惯改变并持续半年，除了预期结果，还会悄悄改变哪些作息、精力或人际节奏？
+
+    5. 基于以上，重新决定：现在做、延后做、还是只做最小验证？'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/cognition.json#cognition-second-order-consequences
+  source_hash: 1d0650e1f0ffc51ebea4c50a6ea7fc6115a1ae55a9028fbfe80d3dddce6f217a
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: general
+  subcategory: problem_solving
+  collections: []
+  base_weight: 1.0
+  confidence: 0.86
+  version: 1

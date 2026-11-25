@@ -1,0 +1,57 @@
+id: pt_support_first_reply
+title: 首响工单回复
+tagline: 给新工单写第一条有效回复，确认理解并索要最少诊断信息
+routing:
+  primitive: translate
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - support
+  - customer_service
+  - ticketing
+  - first_response
+  app_affinity:
+  - Zendesk
+  - Slack
+  - Feishu
+  - Mail
+  pain_point: 收到新工单时不知道如何写出既确认理解用户问题又不追问冗余信息的首响，容易卡在模板化寒暄或过度追问
+  trigger_utterances:
+  - 新工单来了第一句怎么写
+  - 帮我写个客服首响
+  - first reply 怎么写
+  - 用户报障了我回什么
+  - 工单首响模板
+  anti_triggers:
+  - 用户要求完整解决方案或最终答复而非首响
+  - 需要升级/转交工单而非首次回复
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '根据【工单和已知情况】写一条首响。先复述用户希望恢复的结果，列已能确认的事实，问一到两个最能缩小范围的问题。给当前能兑现的下一次更新时间。
+
+
+    工单和已知情况：'
+  variables:
+  - 工单和已知情况
+  workflow:
+    workflow_id: handle-support-case
+    step: 2
+    next_lens_id: pt_support_troubleshoot
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#support-first-reply
+  source_hash: 002c877b0882f4b1a58c439090fecbcde25ddbc0444fc48fe24ce602a594c332
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: general
+  subcategory: problem_solving
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

@@ -1,0 +1,29 @@
+{
+  "id": "sit_eng_02",
+  "source": "super-individual-toolbox",
+  "source_ref": "https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/engineer.json#eng-02",
+  "title": "报错根因二分排查法",
+  "content": "定位：别让 AI 瞎猜改代码，先用二分法把 Bug 逼进死角\n\n触发场景：当代码报错，你把整段报错甩给 AI 却越改越乱、陷入“修一个坏两个”的死循环时。\n\n核心机制：\n- 禁止 AI 直接重写代码，先要求它基于报错日志列出 3 个最可能的根因假设\n- 在数据流中点插入最小化日志探针，用二分法一刀切掉一半嫌疑范围\n- 拿到实测输出锁定唯一根因后，再执行最小侵入式修复并补充回归用例\n\n交付物：一份《根因定位记录》与最小侵入式代码补丁\n\n推荐装配：Cursor / 代码模型 + 强制“先诊断后动刀”的 Debug 协议\n\n误用警告：不要在还没复现稳定报错路径之前，就急着让 AI 大面积重构无关模块。",
+  "content_hash": "96dffb2f66d864c4b3832a7f9346312cc20b2a8f7a2322479f35e723bb48941b",
+  "suggested_action_type": "open_resource",
+  "domain_hints": [
+    "engineer",
+    "工程师"
+  ],
+  "problem_solved": "当代码报错，你把整段报错甩给 AI 却越改越乱、陷入“修一个坏两个”的死循环时。",
+  "when_to_use": "当代码报错，你把整段报错甩给 AI 却越改越乱、陷入“修一个坏两个”的死循环时。",
+  "procedural_steps": [
+    "禁止 AI 直接重写代码，先要求它基于报错日志列出 3 个最可能的根因假设",
+    "在数据流中点插入最小化日志探针，用二分法一刀切掉一半嫌疑范围",
+    "拿到实测输出锁定唯一根因后，再执行最小侵入式修复并补充回归用例"
+  ],
+  "anti_patterns": [
+    "不要在还没复现稳定报错路径之前，就急着让 AI 大面积重构无关模块。"
+  ],
+  "metadata": {
+    "original_id": "eng-02",
+    "drawer": "engineer",
+    "drawer_zh": "工程师",
+    "deliverable": "一份《根因定位记录》与最小侵入式代码补丁"
+  }
+}

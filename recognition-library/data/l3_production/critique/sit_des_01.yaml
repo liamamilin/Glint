@@ -1,0 +1,61 @@
+id: sit_des_01
+title: 截图级 UI 毒舌诊断器
+tagline: 喂截图给多模态模型，按 4 维度挑毛病并给具体 CSS 修改值
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - design
+  - ui_ux
+  - frontend
+  - visual_design
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Chrome
+  - Figma
+  pain_point: 自己写完前端页面总觉得哪里土、像程序员写的，却说不清具体该改哪几个像素
+  trigger_utterances:
+  - 这页面总感觉哪里怪怪的
+  - UI 像程序员写的怎么改
+  - 帮我看看这个界面哪里土
+  - 截图帮我诊断一下设计
+  - 这个前端页面怎么改好看点
+  anti_triggers:
+  - 帮我从零设计一个全新的页面
+  - 纯后端逻辑 bug 排查
+execution:
+  action_type: open_resource
+  inject_mode: null
+  content: '请按设计总监毒舌评审模式执行：
+
+    1) 输入：完整首屏截图 + 移动端窄屏截图（两张）。
+
+    2) 仅按 4 个维度挑毛病，禁止夸奖：视觉层级、留白呼吸感、对比度、对齐精度。
+
+    3) 每条批评必须附带具体 CSS 修改数值（字号、行高、padding、margin、色值等）。
+
+    4) 产出《界面整容清单》，按影响大小排序。
+
+    5) 误用警告：每次只改影响最大的前 3 条（通常是留白与层级），改完重新截图复查，不要一次性改完所有建议。'
+  variables: []
+  workflow: null
+meta:
+  source: super-individual-toolbox
+  source_ref: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/design-creative.json#des-01
+  source_hash: 232ceca481d18643b4a1d0dd393c02006f90e2983b5cd9d7da22ffc5256f65fc
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: engineering
+  subcategory: architecture
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

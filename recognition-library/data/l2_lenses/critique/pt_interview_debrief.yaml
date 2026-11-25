@@ -1,0 +1,57 @@
+id: pt_interview_debrief
+title: 面试复盘
+tagline: 从记忆里提炼改进点与跟进事项
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - career
+  - interview
+  - job_search
+  - follow_up
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Mail
+  pain_point: 刚面完试，记忆模糊，分不清哪些回答具体、哪些含糊，也想不起跟进邮件该补什么。
+  trigger_utterances:
+  - 刚面完试帮我复盘一下
+  - 这个回答说得太虚了怎么改
+  - 跟进邮件里要补哪些材料
+  - interview debrief 我答得含糊的地方
+  anti_triggers:
+  - 面试前的模拟问答准备
+  - 与求职无关的日常复盘
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: '请复盘以下面试记录，目标岗位：{{role}}。
+
+
+    面试记录：
+
+    {{input}}
+
+
+    任务：
+
+    1. 标出回答具体 vs 模糊的地方；
+
+    2. 给出两个可复用的修改版回答；
+
+    3. 列出跟进邮件中需补充的材料或问题。'
+  variables:
+  - role
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#interview-debrief
+  source_hash: dac5c5d627c38fb913ba1ac6f3921ab4fc7b5e9c8209015dfd7fb2cfb61e5fe6
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

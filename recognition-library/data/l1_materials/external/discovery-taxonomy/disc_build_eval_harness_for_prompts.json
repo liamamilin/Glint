@@ -1,0 +1,33 @@
+{
+  "id": "disc_build_eval_harness_for_prompts",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/build.json#build-eval-harness-for-prompts",
+  "title": "给高频 Prompt / 工作流建一份“5 条样例评测集”",
+  "content": "旧共识（盲区）：改完提示词或工作流，顺手拿手头这一条测一下顺眼就行。\n\n新现实（破盲视角）：单条样例很容易陷入“修好 A 搞坏 B”；固定 3～5 条典型+刁钻样例做对照，每次改动都能一眼看出是真变强还是只是偏科。\n\n破冰追问母题：\n- 我有一个高频使用的 [Prompt/工作流/自动化规则]：[简述用途]。请帮我设计 4 条覆盖常规、边界与刁钻情况的测试样例，以及一条客观的评分标准。\n- 在 [你的 AI 使用场景] 中，哪些“改了之后偶尔抽风”的提示词最值得先建一套最小评测集再做优化？",
+  "content_hash": "a53ca521446f8411d26c1c8a60cf3ee77efb90db77fdaf7a7399276f1b727bc5",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "build",
+    "first-principles",
+    "cost-collapse",
+    "evals",
+    "prompts",
+    "regression",
+    "testing"
+  ],
+  "problem_solved": "改完提示词或工作流，顺手拿手头这一条测一下顺眼就行。",
+  "when_to_use": "单条样例很容易陷入“修好 A 搞坏 B”；固定 3～5 条典型+刁钻样例做对照，每次改动都能一眼看出是真变强还是只是偏科。",
+  "procedural_steps": [
+    "我有一个高频使用的 [Prompt/工作流/自动化规则]：[简述用途]。请帮我设计 4 条覆盖常规、边界与刁钻情况的测试样例，以及一条客观的评分标准。",
+    "在 [你的 AI 使用场景] 中，哪些“改了之后偶尔抽风”的提示词最值得先建一套最小评测集再做优化？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "build-eval-harness-for-prompts",
+    "arena": "build",
+    "lenses": [
+      "first-principles",
+      "cost-collapse"
+    ]
+  }
+}

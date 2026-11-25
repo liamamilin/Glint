@@ -1,0 +1,33 @@
+{
+  "id": "disc_business_free_high_value_lead_magnet",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-free-high-value-lead-magnet",
+  "title": "用“能算账/能诊断的互动小工具”替代 PDF 白皮书引流",
+  "content": "旧共识（盲区）：做获客或建立专业影响力，要么靠硬广，要么写一份长篇 PDF 资料包让人下载。\n\n新现实（破盲视角）：一个输入几个自家参数就能算出“省多少钱/还差哪一步/存在什么隐患”的极简互动小工具，参与感和转发率远高于静态长文。\n\n破冰追问母题：\n- 结合 [你的产品/服务/专业方向]，设计一个“用户只需填 3 个数字或选 4 道题就能拿到定制诊断结果”的极简网页小工具，给出核心公式或打分逻辑。\n- 在 [你的目标客户群体] 中，他们最关心但算不清楚的一笔账或一个风险评估是什么？如何把它做成 1 分钟就能玩出结果的互动页面？",
+  "content_hash": "537c84e154ba1cf9666bdb51e8e6dbf33c495dcf20c3f4b557b7fd07e60143fd",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "business",
+    "cost-collapse",
+    "role-inversion",
+    "lead-magnet",
+    "calculator",
+    "interactive",
+    "conversion"
+  ],
+  "problem_solved": "做获客或建立专业影响力，要么靠硬广，要么写一份长篇 PDF 资料包让人下载。",
+  "when_to_use": "一个输入几个自家参数就能算出“省多少钱/还差哪一步/存在什么隐患”的极简互动小工具，参与感和转发率远高于静态长文。",
+  "procedural_steps": [
+    "结合 [你的产品/服务/专业方向]，设计一个“用户只需填 3 个数字或选 4 道题就能拿到定制诊断结果”的极简网页小工具，给出核心公式或打分逻辑。",
+    "在 [你的目标客户群体] 中，他们最关心但算不清楚的一笔账或一个风险评估是什么？如何把它做成 1 分钟就能玩出结果的互动页面？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "business-free-high-value-lead-magnet",
+    "arena": "business",
+    "lenses": [
+      "cost-collapse",
+      "role-inversion"
+    ]
+  }
+}

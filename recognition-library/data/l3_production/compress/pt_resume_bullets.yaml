@@ -1,0 +1,53 @@
+id: pt_resume_bullets
+title: 项目经历压成简历要点
+tagline: 把真实项目经历压成面向岗位的简历要点
+routing:
+  primitive: compress
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - career
+  - resume
+  - achievement
+  - job_application
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 手头有一堆项目经历和证据，却不知道怎么写成有说服力的简历要点，贡献和成果混在一起，数字缺失没法量化
+  trigger_utterances:
+  - 帮我把这些项目经历写成简历bullet
+  - 简历怎么写 contribution 和 result
+  - 我做了很多事但简历写不出亮点
+  - 把这段经历压成 3 条 resume bullet
+  - resume bullets 怎么区分个人贡献和团队成果
+  anti_triggers:
+  - 用户只是想润色已有简历的语法或语气
+  - 用户在写求职信或自我介绍而非简历要点
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 把【经历与实际证据】写成面向【岗位】的简历要点。每项用动词开头，说明负责对象、关键做法和结果，区分个人贡献与团队结果。缺失数字写成待补位，列可核实的替代指标。变量： （经历与实际证据）、{{audience}}（目标岗位）。
+  variables:
+  - audience
+  - 经历与实际证据
+  - 岗位
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#resume-bullets
+  source_hash: 64bf911e11eeedf54c9519d433d1a7cb70f46be0bc5b7ab6544ed9e8cd923617
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: personal_career
+  subcategory: career
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

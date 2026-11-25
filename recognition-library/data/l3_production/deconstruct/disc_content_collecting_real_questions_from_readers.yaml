@@ -1,0 +1,56 @@
+id: disc_content_collecting_real_questions_from_readers
+title: 从真问题找选题
+tagline: 用评论区/群聊真实困惑整理成解答，天然共鸣
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  domains:
+  - content
+  - audience
+  - copywriting
+  - feedback
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  pain_point: 想写内容时坐在电脑前硬想选题，或翻别人爆款标题跟写，缺乏真实需求 grounding
+  trigger_utterances:
+  - 写公众号不知道写什么
+  - 想做内容但没选题
+  - 翻别人爆款跟着写没流量
+  - 评论区好多问题不知道怎么答
+  - 选题枯竭怎么办
+  anti_triggers:
+  - 已确定选题只差写作 polishing
+  - 纯 SEO 关键词堆砌
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '1. 收集 3-5 条真实提问：来自评论区/群聊/私信/日常交流里用户实际卡住的问题。
+
+    2. 归类：按主题/难度/受众分组，找出重复出现的困惑。
+
+    3. 提炼 2-3 个值得写透的内容切口。
+
+    4. 补充：针对你的专业方向，列出新手与进阶者不好意思开口问的 5 个问题。
+
+    5. 选定 1 个切口写成解答/指南，并用真实提问验证共鸣。'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/content.json#content-collecting-real-questions-from-readers
+  source_hash: 1e33f48146dc2822937f046abe5e896f0579abde74376f3f25ef68ea2f657fa9
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: writing_comms
+  subcategory: content_creation
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

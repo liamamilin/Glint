@@ -1,0 +1,28 @@
+{
+  "id": "pt_explain_code",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#explain-code",
+  "title": "解释一段代码或数据流",
+  "content": "解释【代码或模块】在【目标或问题】中的作用。从输入到输出走一遍正常路径，指出关键状态、外部依赖和常见失败路径；有仓库上下文时引用具体文件或函数。最后给一个适合验证理解的小例子。",
+  "content_hash": "40d3dc10704e0c17d2aa01a2009cca98d963851fa3009a6d6ced41b759a540d4",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "coding",
+    "读代码",
+    "理解源码",
+    "explain code",
+    "codebase"
+  ],
+  "problem_solved": "快速建立能用于修改和调试的理解。",
+  "when_to_use": "分类: 开发与调试",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "explain-code",
+    "category": "coding",
+    "variables": [
+      "代码或模块",
+      "目标或问题"
+    ]
+  }
+}

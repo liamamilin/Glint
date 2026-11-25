@@ -1,0 +1,51 @@
+id: sit_edt_02
+title: 长文逻辑骨架师
+tagline: 把碎片洞察搭成论证链，动笔前先焊死逻辑骨架
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - editorial
+  - writing
+  - content_strategy
+  - long_form
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 脑子里有很多零散洞察，想写深度长文时动笔就跑偏、写到一半逻辑散架
+  trigger_utterances:
+  - 我有很多碎片想法但长文逻辑散了
+  - 帮我把零散洞察排成论证链
+  - 这篇深度文章动笔就跑偏
+  - 先帮我搭个长文逻辑骨架
+  - 长文写到一半逻辑断了
+  anti_triggers:
+  - 只需要润色一句话或短文案
+  - 直接让 AI 生成全文草稿
+execution:
+  action_type: open_resource
+  inject_mode: null
+  content: 资源：长文逻辑骨架构建 Prompt。使用方式：把所有碎片想法语音转文字或无序倒出，让 AI 找出 1 个核心论点 Thesis，并重排为“反常识钩子 → 痛点拆解 → 底层机制 → 落地解法”的论证链；检查相邻段落逻辑断层或循环论证，确认骨架无误后再展开写正文。来源：https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/editorial.json#edt-02
+  variables: []
+  workflow: null
+meta:
+  source: super-individual-toolbox
+  source_ref: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/editorial.json#edt-02
+  source_hash: ea16cc08b63c46d6015cd8544aceb5d5d2e31bbe5702692e82e3b75d2fcbcab9
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: writing_comms
+  subcategory: content_creation
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

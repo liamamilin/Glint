@@ -1,0 +1,33 @@
+{
+  "id": "disc_career_proof_of_work_portfolio",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/career.json#career-proof-of-work-portfolio",
+  "title": "用“前置作品证明”替代投递千篇一律的简历",
+  "content": "旧共识（盲区）：找好机会、好客户或好工作，必须把简历投进招聘网站排队等 HR 筛选。\n\n新现实（破盲视角）：AI 让投递成本归零后，HR 和甲方被海量完美简历淹没；直接针对目标团队的真实痛点做一个 2 小时的开源诊断或微型原型发过去，响应率高出一个数量级。\n\n破冰追问母题：\n- 我想争取 [目标公司/目标客户类型] 的合作或岗位机会，我的强项是 [你的专长]。请帮我设计一个只需花半天时间就能做出的“免许可前置作品（Permissionless Proof-of-Work）”，以及一封 100 字以内不卑不亢的触达邮件。\n- 把我的这段普通工作经历：[粘贴一段简历描述]，改造成一个让陌生人点开链接 30 秒就能看懂我实力的“可验证公开案例”。",
+  "content_hash": "60b94b8bebd20fa91d19de6b807e977b514a33a4d655d3b8e3d63e077802d600",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "career",
+    "role-inversion",
+    "invisible-friction",
+    "portfolio",
+    "proof-of-work",
+    "outbound",
+    "作品集"
+  ],
+  "problem_solved": "找好机会、好客户或好工作，必须把简历投进招聘网站排队等 HR 筛选。",
+  "when_to_use": "AI 让投递成本归零后，HR 和甲方被海量完美简历淹没；直接针对目标团队的真实痛点做一个 2 小时的开源诊断或微型原型发过去，响应率高出一个数量级。",
+  "procedural_steps": [
+    "我想争取 [目标公司/目标客户类型] 的合作或岗位机会，我的强项是 [你的专长]。请帮我设计一个只需花半天时间就能做出的“免许可前置作品（Permissionless Proof-of-Work）”，以及一封 100 字以内不卑不亢的触达邮件。",
+    "把我的这段普通工作经历：[粘贴一段简历描述]，改造成一个让陌生人点开链接 30 秒就能看懂我实力的“可验证公开案例”。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "career-proof-of-work-portfolio",
+    "arena": "career",
+    "lenses": [
+      "role-inversion",
+      "invisible-friction"
+    ]
+  }
+}

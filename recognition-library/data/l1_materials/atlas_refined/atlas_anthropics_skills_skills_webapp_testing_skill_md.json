@@ -1,0 +1,38 @@
+{
+  "id": "atlas_anthropics_skills_skills_webapp_testing_skill_md",
+  "source": "atlas-methods",
+  "source_ref": "anthropics/skills:skills/webapp-testing/SKILL.md",
+  "title": "本地 Web 应用的 Playwright 侦察—行动测试方法",
+  "content": "本地 Web 应用测试应采用「先判定、后侦察、再行动」的方法。静态页面可直接读取 HTML 提取选择器并驱动脚本；动态页面必须等待 networkidle 后，从渲染后的状态（截图、DOM 内容、元素枚举）中识别选择器，再执行动作，避免基于未渲染 DOM 误操作。服务器生命周期应黑盒化管理：先查看 helper 用法，自动化脚本只含 Playwright 逻辑，多服务器通过重复参数声明。全程使用 headless Chromium 的同步 API，并在任务结束时关闭浏览器。",
+  "content_hash": "19972c98a35a73df06e4fb47f1b2e65a3218c3f1259d9e8beab3a4f1fc4ac914",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "web-testing",
+    "playwright",
+    "ui-automation",
+    "debugging"
+  ],
+  "problem_solved": "避免在动态页面未渲染完成时基于过时 DOM 盲目操作，以及避免手动管理本地服务器生命周期。",
+  "when_to_use": "对本地 Web 应用做功能验证、UI 调试、截图或控制台日志采集时。",
+  "procedural_steps": [
+    "先判定页面类型：静态 HTML 直接读取文件提取选择器；动态应用转入侦察—行动流程。",
+    "动态应用以 headless Chromium 启动，page.goto 后先 wait_for_load_state('networkidle')，再进行截图、读取 page.content()、枚举元素等侦察。",
+    "仅从侦察结果中识别选择器（text=/role=/CSS/ID），再执行具体动作；必要时加 wait_for_selector 或 wait_for_timeout。",
+    "服务器生命周期交由黑盒 helper 管理：先运行 helper --help，自动化脚本只保留 Playwright 逻辑；多服务器重复 --server/--port。",
+    "任务完成后始终关闭浏览器。"
+  ],
+  "anti_patterns": [
+    "在 networkidle 之前检查动态应用的 DOM。",
+    "未读取静态 HTML 就假设选择器。",
+    "在确认需要定制前就阅读捆绑 helper 的源码。",
+    "以非 headless 模式运行 Chromium。"
+  ],
+  "metadata": {
+    "repository": "anthropics/skills",
+    "skill_path": "skills/webapp-testing/SKILL.md",
+    "commit_sha": "ca45fc496a3436251f191354091d557da31c15b5",
+    "l0_content_hash": "51b7349e77ec63b7744a6f63647e7566a0b4d2e301121cc10e8c2113af6556a2",
+    "l0_quality_score": 0.78,
+    "refined_by": "opencode-go/beam-free"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "pt_compare_prompts",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#compare-prompts",
+  "title": "用同一组样本比较两个 Prompt",
+  "content": "对照【Prompt A】和【Prompt B】在【代表输入和边界样本】上的结果。预先写同一判定规则和预期，逐项记录成功、错误和失效原因。总结哪种失败被修复、哪种新出现，以及仍需增加的样本。",
+  "content_hash": "7280772442e783dbda5f96c44bdbbc729521d85b0af183ebdd58567bb92e8f23",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "prompt-workflows",
+    "对比",
+    "实验",
+    "A/B",
+    "prompt eval"
+  ],
+  "problem_solved": "关注真实错误和回归，而非少数漂亮答案。",
+  "when_to_use": "分类: 提示词与 AI 工作流",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "compare-prompts",
+    "category": "prompt-workflows",
+    "variables": [
+      "Prompt A",
+      "Prompt B",
+      "代表输入和边界样本"
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "id": "pt_classify_ticket",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#classify-ticket",
+  "title": "给客服工单分类和分派",
+  "content": "根据【工单和分类字典】逐条标任务、主要问题、影响对象、优先级依据与建议队列。允许多标签，证据不足时给待补信息。保留原工单编号，并标出需要人工先看的请求。",
+  "content_hash": "d9aeb5d3c1ea2604a2535b8560cc59e417cdde6f9c711322b6c7a2ebe47153df",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "support",
+    "工单分类",
+    "服务台",
+    "ticket routing"
+  ],
+  "problem_solved": "根据内容、风险与服务范围安排去向。",
+  "when_to_use": "分类: 客服与服务运营",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "classify-ticket",
+    "category": "support",
+    "variables": [
+      "工单和分类字典"
+    ]
+  }
+}

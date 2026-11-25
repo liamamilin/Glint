@@ -1,0 +1,59 @@
+id: disc_content_concrete_examples_over_abstract_claims
+title: 道理配前后对比案例
+tagline: 把抽象道理改写成读者能照做的前后对比
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - create
+  clarity_fit:
+  - concrete
+  - vague
+  domains:
+  - content
+  - copywriting
+  - writing
+  - clarity
+  - first_principles
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  - Cursor
+  pain_point: 写内容时道理讲得很深刻，但读者看完记不住、也不知道怎么用，缺乏可照做的具体例子
+  trigger_utterances:
+  - 这篇道理讲得空泛，帮我配个前后对比的例子
+  - 这段像空话，改写成带具体动作的表达
+  - 读者看完不知道怎么用，帮我加具体案例
+  - 给这个观点设计两个贴近场景的前后对比案例
+  - show don't tell，帮我把抽象道理落地
+  anti_triggers:
+  - 只是想润色语法或格式，不涉及抽象道理落地
+  - 需要批判某段内容的漏洞而非补充例子
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: "## 抽象道理 → 具体前后对比案例 检查清单\n\n### 步骤 1：锁定抽象句子\n- 通读草稿，标出所有“像空话”的句子（如“要注重用户体验”“保持长期主义”）。\n- 每句只保留一个核心动作动词。\n\n###\
+    \ 步骤 2：设计 2 个前后对比案例\n- 案例 A/B 各需：\n  - 改前（Bad）：一段真实但低效/错误的原文、截图描述或 Prompt。\n  - 改后（Good）：对应的改进版本，改动点用粗体或注释标出。\n  - 一句话说明“为什么改后更好”。\n\
+    - 案例必须贴近 [目标读者] 的日常场景，避免虚构脱离实际的场景。\n\n### 步骤 3：自检\n- [ ] 每个抽象道理后面是否紧跟至少一个“改前 vs 改后”对比？\n- [ ] 对比是否包含具体动作/样例（文字、截图描述、Prompt）而非又一段道理？\n\
+    - [ ] 读者能否直接照着“改后”版本操作？\n- [ ] 是否删除了冗余的元描述（如“这是一个例子”）？\n\n### 快速模板（可直接套用）\n> **道理**：[一句话抽象观点]\n> **改前**：[真实低效/错误样例]\n\
+    > **改后**：[改进样例，改动点加粗]\n> **要点**：[一句话点明差异]\n\n### 追问母题\n1. 围绕 [你的核心观点]，为 [目标读者] 设计 2 个贴近日常场景的“前后对比案例”。\n2. 检查草稿：[粘贴草稿]，指出最抽象的句子，并改写成带具体动作或样例的表达。"
+  variables:
+  - '{''name'': ''core_viewpoint'', ''description'': ''你的核心观点''}'
+  - '{''name'': ''target_reader'', ''description'': ''目标读者''}'
+  - '{''name'': ''draft'', ''description'': ''粘贴草稿''}'
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/content.json#content-concrete-examples-over-abstract-claims
+  source_hash: 632ce091b4d159e4693dc37fbbe1e284438a3c38a3f8c2a619a87c71acbf2e67
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: writing_comms
+  subcategory: content_creation
+  collections: []
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

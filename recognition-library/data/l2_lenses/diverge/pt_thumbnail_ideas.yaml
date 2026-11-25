@@ -1,0 +1,44 @@
+id: pt_thumbnail_ideas
+title: 设计三个缩略图方向
+tagline: 生成3个可A/B测试的缩略图方案，小尺寸也能看懂承诺
+routing:
+  primitive: diverge
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - youtube
+  - thumbnail_design
+  - video_production
+  - creative
+  app_affinity:
+  - Chrome
+  - Figma
+  pain_point: 缩略图在手机小尺寸下看不清、无法快速传达内容承诺，需要可测试的多方案
+  trigger_utterances:
+  - 帮我设计几个YouTube缩略图方案
+  - 缩略图在手机上根本看不清
+  - thumbnail ideas for my video
+  - 封面怎么设计让人一眼看懂
+  - 想做A/B测试的封面方案
+  anti_triggers:
+  - 需要完整视频脚本或分镜
+  - 只需要Logo或品牌视觉识别设计
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 给 {{video_theme}}（受众：{{audience}}）设计三个缩略图方向。每个方向包含：主体、构图、可读文字（≤6字）、可验证的内容承诺。说明在手机预览尺寸下第一眼看到什么，并列出可用于 A/B 测试的主要变量（如文字、配色、人物表情）。
+  variables:
+  - video_theme
+  - audience
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#thumbnail-ideas
+  source_hash: 8fdf75a77a220ebe5f1bf727aa9c35e90b2a8e0017c23e210f71796d87ffa915
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

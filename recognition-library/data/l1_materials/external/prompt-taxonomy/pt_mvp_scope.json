@@ -1,0 +1,28 @@
+{
+  "id": "pt_mvp_scope",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#mvp-scope",
+  "title": "把设想收敛到首个可验证版本",
+  "content": "根据【想法、目标用户和证据】提议一个最小可用版本，现实约束为【时间、数据和渠道】。写主要路径、必要交付、可暂缓功能和三条验收条件。给最能推翻该方案的快速测试。",
+  "content_hash": "901a2f2e2fa78c3f776cf3c3d88bc9057e02fdb45b4c90c00f046584cd4f2e5e",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "product",
+    "MVP",
+    "范围",
+    "优先",
+    "scope"
+  ],
+  "problem_solved": "用最小范围判断用户是否会用。",
+  "when_to_use": "分类: 产品与业务",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "mvp-scope",
+    "category": "product",
+    "variables": [
+      "想法、目标用户和证据",
+      "时间、数据和渠道"
+    ]
+  }
+}

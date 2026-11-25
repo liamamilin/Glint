@@ -1,0 +1,29 @@
+{
+  "id": "pt_slides_outline",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#slides-outline",
+  "title": "做演示文稿大纲",
+  "content": "把【材料】整理成一场面向【受众】、时长【时长】的演示。先给一句核心主张，再逐页写标题、唯一要传达的观点、支撑证据或图示、口播提示。末页给行动建议或需要确认的决定。",
+  "content_hash": "d3982ee7c7e588fb8f5d640c92de70426287a23fd03ce9d87d73896f2cf9c153",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "office",
+    "PPT",
+    "幻灯片",
+    "演示",
+    "slides"
+  ],
+  "problem_solved": "让每页都承担一个清楚的信息任务。",
+  "when_to_use": "分类: 办公与协作",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "slides-outline",
+    "category": "office",
+    "variables": [
+      "材料",
+      "受众",
+      "时长"
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "pt_step_tutor",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#step-tutor",
+  "title": "逐步引导解题",
+  "content": "我正在做【题目】，已经尝试【思路或步骤】。先判断我卡在哪一步，每次只给一个能推进的提示，等待我尝试后再给下一步。最后用一个相似题检查我能否独立复用方法。",
+  "content_hash": "c5d59b804ea6d2046c8e74ce3f8fdf43824ceed979e2977179b1efb15f2740e8",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "learning",
+    "解题",
+    "作业",
+    "提示",
+    "tutoring"
+  ],
+  "problem_solved": "通过提示发现卡点和错误。",
+  "when_to_use": "分类: 学习与辅导",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "step-tutor",
+    "category": "learning",
+    "variables": [
+      "题目",
+      "思路或步骤"
+    ]
+  }
+}

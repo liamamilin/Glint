@@ -1,0 +1,29 @@
+{
+  "id": "pt_choose_chart",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#choose-chart",
+  "title": "选择并设计一张图",
+  "content": "用【数据或字段】向【读者】回答【要比较的问题】。推荐一张主图，给横纵轴、分组、单位、标题和注释。说明缺失值和异常值如何呈现；提供一条读者能用图验证的结论。",
+  "content_hash": "38b0b933684fa3f83d86763f4616f04224d67326babd3879caa98d4b91331e91",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "data",
+    "可视化",
+    "图表",
+    "趋势",
+    "chart"
+  ],
+  "problem_solved": "用合适的图形回答一个具体问题。",
+  "when_to_use": "分类: 数据与表格",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "choose-chart",
+    "category": "data",
+    "variables": [
+      "数据或字段",
+      "读者",
+      "要比较的问题"
+    ]
+  }
+}

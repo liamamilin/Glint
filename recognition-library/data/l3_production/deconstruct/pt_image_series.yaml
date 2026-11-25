@@ -1,0 +1,52 @@
+id: pt_image_series
+title: 用同一视觉规则设计一组图
+tagline: 规划系列图：先定共同视觉，再逐张变化并列出一致性检查项。
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - creative
+  - image_series
+  - visual_consistency
+  - branding
+  app_affinity:
+  - Figma
+  - ChatGPT
+  - Claude
+  - Chrome
+  pain_point: 做系列图时主角、光线、色彩容易每张跑偏，需要一套可复用的视觉规则和逐张变化方案。
+  trigger_utterances:
+  - 帮我设计一套风格统一的系列图
+  - 同一个人物做 5 张不同场景的图
+  - 品牌系列配图要保持视觉调性
+  - series of images with consistent character
+  - same visual style multiple posters
+  anti_triggers:
+  - 只生成单张图且不关心系列一致性
+  - 只做图片尺寸裁剪或格式转换
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 为【系列主题】规划【张数和用途】张图。先写共同的主体特征、光线、色彩和画幅，再给每张唯一变化和完整出图描述。最后列必须保持一致并可目视检查的三项。
+  variables:
+  - 系列主题
+  - 张数和用途
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#image-series
+  source_hash: 2dbdfe711034a78745d23f6c1a5024a96bd2cff849d9d351afce2ae85a920efc
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: writing_comms
+  subcategory: content_creation
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

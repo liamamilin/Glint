@@ -1,0 +1,45 @@
+id: pt_correct_sentences
+title: 外语句子纠错
+tagline: 先理解原意，再给两项关键语法修正与练习
+routing:
+  primitive: critique
+  goals:
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - language
+  - grammar
+  - writing
+  - localization
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  - ChatGPT
+  pain_point: 外语句子表达别扭或有语法问题，不知道哪里错了、怎么修正，以及如何举一反三。
+  trigger_utterances:
+  - 帮我看看这句话英语哪里错了
+  - 这句话语法有问题吗
+  - 帮我把这句话改自然一点
+  - 这句话在邮件里这样说对吗
+  - 帮我纠错并给个练习
+  anti_triggers:
+  - 仅想翻译整段文章
+  - 只想要单词释义
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 评阅【我的外语句子】用于【具体情境】的表达。先说读者能理解的意思，指出两项最重要的问题，各给规则、修正版和可接受变体。最后让同一条规则出现在一个新练习里。
+  variables:
+  - 我的外语句子
+  - 具体情境
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#correct-sentences
+  source_hash: c6cee6e9817845e062a278c3938dead02154cd8de671658823b884b2b3feaf12
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

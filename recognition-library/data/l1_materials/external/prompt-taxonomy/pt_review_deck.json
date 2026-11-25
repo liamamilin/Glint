@@ -1,0 +1,27 @@
+{
+  "id": "pt_review_deck",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#review-deck",
+  "title": "复查演示文稿的叙事和可读性",
+  "content": "评审【演示文稿】用于【受众与目的】的完成度。逐页记录主张、证据、读者疑问及布局问题。优先修正跳页、图表单位、文字溢出和结尾行动项，为最重要的两页提出改法。",
+  "content_hash": "6269cb05d392662977bc3ce22d10e478eda936932feea625ae9253f131118ff6",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "files",
+    "演示审阅",
+    "PPT评审",
+    "slide QA"
+  ],
+  "problem_solved": "逐页检查主旨、图表信息和文字布局。",
+  "when_to_use": "分类: 文档与文件",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "review-deck",
+    "category": "files",
+    "variables": [
+      "演示文稿",
+      "受众与目的"
+    ]
+  }
+}

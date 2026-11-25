@@ -1,0 +1,61 @@
+id: pt_change_announcement
+title: 变更公告生成器
+tagline: 把变更内容写成清晰公告，含影响范围、时间、迁移动作
+routing:
+  primitive: translate
+  goals:
+  - create
+  clarity_fit:
+  - concrete
+  domains:
+  - office
+  - announcements
+  - change_management
+  - communication
+  app_affinity:
+  - Slack
+  - Feishu
+  - Notion
+  - Mail
+  pain_point: 产品或系统变更时，不知道怎么写公告，影响范围、生效时间、用户要做什么说不清楚，导致用户困惑或投诉
+  trigger_utterances:
+  - 帮我写个变更公告
+  - 这个更新要通知用户怎么写
+  - migration notice 怎么写
+  - 系统升级公告模版
+  - 这个变更要发给用户看
+  anti_triggers:
+  - merely writing a release notes changelog for developers
+  - purely internal team standup update
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '把【变更内容和时间】写成给【受影响人群】的公告。写清发生了什么、谁需要做什么、何时完成，以及如何确认操作成功。按受众的不同动作分段，列已知影响与帮助入口。请按以下结构输出：
+
+    1. 标题与一句话摘要
+
+    2. 变更详情（发生了什么）
+
+    3. 影响范围（谁受影响）
+
+    4. 时间线（何时生效/截止）
+
+    5. 迁移动作（用户需要做什么，分受众）
+
+    6. 如何确认成功
+
+    7. 已知影响与限制
+
+    8. 帮助入口（联系人/文档/FAQ）'
+  variables:
+  - 变更内容和时间
+  - 受影响人群
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#change-announcement
+  source_hash: 433a1d4e5d471a24a0c162e91f887ed2ef41fe408749f3066e1285385d8852b0
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

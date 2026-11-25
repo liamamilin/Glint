@@ -1,0 +1,62 @@
+id: disc_build_structured_logs_for_debugging
+title: 脚本留结构化痕迹
+tagline: 出错时1分钟顺藤摸瓜定位根因
+routing:
+  primitive: deconstruct
+  goals:
+  - debug
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - build
+  - debugging
+  - observability
+  - scripts
+  - automation
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Terminal
+  pain_point: 日常脚本或自动化静默失败、结果异常时只能临时加打印或靠猜，无法快速定位根因
+  trigger_utterances:
+  - 这个脚本昨天跑通今天结果不对
+  - 自动化静默失败但没报错
+  - 帮我给脚本加轻量日志定位
+  - workflow 出错了怎么快速排查
+  - 小工具跑挂了只能靠猜
+  anti_triggers:
+  - 需要完整企业级监控平台方案
+  - 单纯格式化现有日志文件
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '1. 记录运行开始/结束时间、总耗时与最终状态（success/partial/failed）。
+
+    2. 记录关键输入摘要（数量、来源、过滤条件），避免写入敏感原文。
+
+    3. 每个跳过项记录 skip_reason 与计数，区分“无数据”和“处理失败”。
+
+    4. 关键步骤记录 before/after 计数、失败样本 ID 与错误类型。
+
+    5. 静默失败自检：结果为空、数量异常、 checksum 不一致时发出 warning。
+
+    6. 日志保留最近 N 次或按大小轮转，避免占满磁盘。
+
+    7. 提供一键汇总最近失败运行的命令或视图。'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/build.json#build-structured-logs-for-debugging
+  source_hash: c32b7d7b2ddf93c0af2f57f4d1cc06512653158f564aa846ae5107249f6745b8
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: engineering
+  subcategory: debugging
+  collections: []
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

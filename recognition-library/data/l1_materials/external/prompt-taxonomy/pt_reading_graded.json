@@ -1,0 +1,27 @@
+{
+  "id": "pt_reading_graded",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#reading-graded",
+  "title": "把文章改成适合当前水平的阅读材料",
+  "content": "把【目标语言材料】改写到【学习水平】。保留主要信息，控制句长和词汇，给少量必要注释。最后给三个理解问题和一个需要引用原句才能回答的问题。",
+  "content_hash": "eb790f1ebea508d909084d419f02f881fef5358064cf8847c774770a8f5d8915",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "language",
+    "分级阅读",
+    "外语",
+    "graded reading"
+  ],
+  "problem_solved": "保留原文信息，控制词汇和句法难度。",
+  "when_to_use": "分类: 语言练习与本地化",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "reading-graded",
+    "category": "language",
+    "variables": [
+      "目标语言材料",
+      "学习水平"
+    ]
+  }
+}

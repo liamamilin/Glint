@@ -1,0 +1,28 @@
+{
+  "id": "pt_research_brief_for_others",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#research-brief-for-others",
+  "title": "把研究交付成可执行简报",
+  "content": "把【研究材料】写成给【受众】的简报，协助决定【问题】。结构为结论、关键证据、各方分歧、实际影响和需要继续查的三项。给主要主张对应的出处和日期，并在结尾说明哪些结论可能随新证据改变。",
+  "content_hash": "bd7448eb0a0b063272cacf3f5242e32cbd4f1323fb2e815019a72566052cd274",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "research",
+    "调研简报",
+    "研究交付",
+    "research memo"
+  ],
+  "problem_solved": "从长篇材料提炼结论、取舍和待查问题。",
+  "when_to_use": "分类: 查找与研究",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "research-brief-for-others",
+    "category": "research",
+    "variables": [
+      "研究材料",
+      "受众",
+      "问题"
+    ]
+  }
+}

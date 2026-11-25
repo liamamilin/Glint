@@ -1,0 +1,67 @@
+id: disc_life_default_environment_engineering
+title: 工程摩擦力设计
+tagline: 用环境改造替代意志力，给坏习惯加摩擦、给好习惯减步骤。
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - life
+  - habits
+  - environment_design
+  - behavior_change
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 用户总靠意志力硬抗坏习惯和新习惯，却忽视环境默认路径；希望把习惯改变转成可执行的摩擦力工程改造。
+  trigger_utterances:
+  - 睡前刷手机戒不掉，帮我设计环境改造
+  - 想养成运动习惯但总坚持不了，别给鸡汤
+  - 下班回家就瘫了，帮我找默认触发点换动线
+  - 给坏习惯增加摩擦，给好习惯减少步骤
+  - 别让我靠意志力，帮我工程化习惯
+  anti_triggers:
+  - 需要心理动机激励、情绪疏导或纯目标规划的场景
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '## 环境摩擦工程清单
+
+    - 目标：减少 {{bad_habit}}，增加 {{good_habit}}。
+
+    - 审视默认路径：记录 {{evening_routine}} 中滑向低质量娱乐的默认触发点。
+
+    - 坏习惯 +20 秒摩擦：移出首屏/增加解锁步骤/设备放远/开启使用限制。
+
+    - 好习惯 -2 步摩擦：装备前置到视线内，减少准备与启动步骤。
+
+    - 替换动线：设计回家后前 30 分钟的无脑替代路径，如换鞋 → 喝水 → 打开书。
+
+    - 验证：连续 7 天记录触发次数与完成次数，只调整摩擦，不调整意志力。
+
+    - 复盘：保留有效改造，删除无效的鸡汤式提醒。'
+  variables:
+  - bad_habit
+  - good_habit
+  - evening_routine
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/life.json#life-default-environment-engineering
+  source_hash: 78ba39cb8040d9bd17492fe7cb2b5f23487dec6bbbb92828327ccf4943218159
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: product_business
+  subcategory: product_design
+  collections: []
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

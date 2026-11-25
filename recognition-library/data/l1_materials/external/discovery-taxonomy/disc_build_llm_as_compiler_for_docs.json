@@ -1,0 +1,33 @@
+{
+  "id": "disc_build_llm_as_compiler_for_docs",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/build.json#build-llm-as-compiler-for-docs",
+  "title": "把非结构化文档当作“源码”编译成结构化系统",
+  "content": "旧共识（盲区）：长文档、会议纪要、PDF 规则书和邮件只能写给人看，改了之后靠人工通知同步。\n\n新现实（破盲视角）：把自然语言规则/文档当成“源码”，用 AI 流水线自动编译成 JSON 配置、测试断言、任务清单或日程变更，文档改了系统自动跟着变。\n\n破冰追问母题：\n- 我有一类经常更新的文本/规则文档：[描述文档类型，如项目需求/报销规则/读书笔记]。请帮我设计一个“文档 → 结构化数据/任务清单”的自动提取与校验流水线。\n- 在 [你的个人或团队工作流] 中，哪些“改了文档却忘了改配置/代码/待办”的同步断层，最适合用轻量脚本 + AI 校验来消除？",
+  "content_hash": "94bcaeb17e8422fcf503453dd429a6e443e3fa97f112bfe371509b022316241f",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "build",
+    "role-inversion",
+    "cost-collapse",
+    "compiler",
+    "docs",
+    "structured-data",
+    "pipeline"
+  ],
+  "problem_solved": "长文档、会议纪要、PDF 规则书和邮件只能写给人看，改了之后靠人工通知同步。",
+  "when_to_use": "把自然语言规则/文档当成“源码”，用 AI 流水线自动编译成 JSON 配置、测试断言、任务清单或日程变更，文档改了系统自动跟着变。",
+  "procedural_steps": [
+    "我有一类经常更新的文本/规则文档：[描述文档类型，如项目需求/报销规则/读书笔记]。请帮我设计一个“文档 → 结构化数据/任务清单”的自动提取与校验流水线。",
+    "在 [你的个人或团队工作流] 中，哪些“改了文档却忘了改配置/代码/待办”的同步断层，最适合用轻量脚本 + AI 校验来消除？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "build-llm-as-compiler-for-docs",
+    "arena": "build",
+    "lenses": [
+      "role-inversion",
+      "cost-collapse"
+    ]
+  }
+}

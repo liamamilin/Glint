@@ -1,0 +1,28 @@
+{
+  "id": "pt_retro_plan",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#retro-plan",
+  "title": "主持一场可落实的项目复盘",
+  "content": "为【项目和已知情况】设计一场【时长】复盘。安排事实时间线、有效做法、改进点和行动确认。给两道避免归因到个人的引导问题，并为每个行动留出负责人、截止日期和验证信号。",
+  "content_hash": "95c9501eed5c6f2ed8d8f1c258ebccd01ab977ef57e737cf2dfc8164a9a6e2ae",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "office",
+    "复盘",
+    "事后回顾",
+    "retrospective",
+    "postmortem"
+  ],
+  "problem_solved": "从事实和原因分析落实到下一步。",
+  "when_to_use": "分类: 办公与协作",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "retro-plan",
+    "category": "office",
+    "variables": [
+      "项目和已知情况",
+      "时长"
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "pt_paper_brief",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#paper-brief",
+  "title": "读懂一篇论文",
+  "content": "阅读【论文正文或链接】，回答它对【我的问题】有什么帮助。按研究问题、样本与方法、主要结果、局限、我的下一步组织；引用页码或章节，区分作者结论与推断。对效应量写明比较的双方和适用条件。",
+  "content_hash": "6fd0b006ea1a5e7dfb6a757f7e8bd211873faf73dc1a3e5ddc920624977b1452",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "research",
+    "论文",
+    "文献",
+    "paper",
+    "academic"
+  ],
+  "problem_solved": "提取方法、结果、局限和可用性。",
+  "when_to_use": "分类: 查找与研究",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "paper-brief",
+    "category": "research",
+    "variables": [
+      "论文正文或链接",
+      "我的问题"
+    ]
+  }
+}

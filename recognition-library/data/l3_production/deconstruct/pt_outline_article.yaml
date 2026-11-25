@@ -1,0 +1,57 @@
+id: pt_outline_article
+title: 从主题搭文章提纲
+tagline: 给定读者与目标，生成带主张与证据缺口的文章提纲
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - writing
+  - article_structure
+  - content_creation
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 想写文章但不知从何下笔，读者、主张与章节顺序都不清楚
+  trigger_utterances:
+  - 帮我搭个文章提纲
+  - 这篇要写给谁看、先说什么后说什么
+  - 主题定了但结构很乱
+  - 帮我列出每节要回答的问题
+  - 想写篇文但完全没头绪
+  anti_triggers:
+  - 只是润色或改写已有文章
+  - 只需要标题或金句建议
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: 为【{{input}}】拟一篇面向【{{读者}}】的文章提纲，目标是【{{目标}}】。给一句核心主张，列每节问题、支撑材料和承上启下的关系。证据缺口用待采访或待查资料标注。
+  variables:
+  - 读者
+  - 目标
+  - '{{input}}'
+  - '{{读者}}'
+  - '{{目标}}'
+  workflow:
+    workflow_id: draft-to-publish
+    step: 2
+    next_lens_id: pt_line_edit_markup
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#outline-article
+  source_hash: 8397a6e645cfc853fe249880592fa589bf481aa5cd14d63a24e45a9dae1f49ca
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: writing_comms
+  subcategory: content_creation
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

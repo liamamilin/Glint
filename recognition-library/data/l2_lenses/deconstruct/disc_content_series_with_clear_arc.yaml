@@ -1,0 +1,59 @@
+id: disc_content_series_with_clear_arc
+title: 系列化内容编排
+tagline: 把零散单篇编成有追更感的递进系列
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - content
+  - series
+  - arc
+  - community
+  - depth
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  pain_point: 内容彼此孤立、前后无关联，读者缺乏追更动力，也难以沉淀成合集资产
+  trigger_utterances:
+  - 我写了很多散篇怎么串成系列
+  - 帮我规划一个 5 篇递进系列大纲
+  - 这些零散文章怎么重新组织成合集
+  - 内容没有 continuity 读者不追更
+  - 把已有文章串成带导读的学习路径
+  anti_triggers:
+  - 单篇爆文标题优化或 SEO 关键词
+  - 单篇内容的语法润色与排版
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '系列化内容编排清单：
+
+    1. 确定一个核心深挖主题，明确读者旅程（破盲→拆解→动手→避坑→总结）。
+
+    2. 为每篇分配推进角色：①认知破盲 ②方案设计/拆解 ③实战动手 ④踩坑避坑 ⑤复盘迭代。
+
+    3. 标注篇间钩子：每篇结尾预告下一篇、开头回顾上一篇，形成 continuity。
+
+    4. 若已有零散内容：列出主题/链接，按递进关系重排，补写导读与学习路径。
+
+    5. 为系列命名与编号，统一视觉与命名规范，沉淀为合集资产。
+
+    6. 为每篇设定独立价值 + 系列追更 incentives（预告/彩蛋/读者作业）。
+
+    7. 复盘数据：追更率、完读率、合集收藏量，迭代下一篇的钩子强度。'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/content.json#content-series-with-clear-arc
+  source_hash: 0047fc12e9e5e6945938e62017be1be2a65df1897ecf78977716e38fa6332f61
+  status: active
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

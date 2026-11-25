@@ -1,0 +1,28 @@
+{
+  "id": "pt_check_understanding",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#check-understanding",
+  "title": "诊断我对一个概念的误解",
+  "content": "我用自己的话解释【概念】如下：【我的解释】。标出我已经理解的部分和最关键的误解。给一个能暴露这个误解的反例，让我重述后再判定是否纠正。",
+  "content_hash": "519c41a6e544870fce0583cc5c5cff28a60a2c980eeea174884eea6b15dd6887",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "learning",
+    "误解",
+    "教学",
+    "概念检测",
+    "teach back"
+  ],
+  "problem_solved": "从我的解释中抓住错误前提。",
+  "when_to_use": "分类: 学习与辅导",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "check-understanding",
+    "category": "learning",
+    "variables": [
+      "概念",
+      "我的解释"
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "id": "atlas_anthropics_skills_skills_internal_comms_skill_md",
+  "source": "atlas-methods",
+  "source_ref": "anthropics/skills:skills/internal-comms/SKILL.md",
+  "title": "内部沟通类型化写作方法：按类型选择指南并套用固定格式",
+  "content": "内部沟通应先判定类型再选对应指南并严格套用固定格式。3P 团队更新面向管理层与同事，30–60 秒可读，Progress/Plans/Problems 各 1–3 句、数据驱动、就事论事，时间范围通常一周；Progress 取上周、Plans 取下周、Problems 取上周。公司通讯覆盖全公司，约 20–25 条要点、每条 1–2 句、使用 we 人称、多链接，按板块聚合并聚焦全公司影响与领导层公告，避免细碎或重复内容。FAQ 汇总全公司共性困惑，Question 1 句、Answer 1–2 句，基于官方沟通，不确定时明确说明并链接权威来源，需高管输入时标注。不匹配标准格式时先确认受众、目的、语气与格式要求。团队规模越大，3P 任务颗粒度越粗。",
+  "content_hash": "0d500c0e0df7b35655b7fedb022494e3b9e74d36d04ee4670df81b85ec80d6c4",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "内部沟通",
+    "组织沟通",
+    "写作方法"
+  ],
+  "problem_solved": "避免内部沟通类型混淆与格式失控，提供按沟通类型选择指南并套用固定版式的认知方法。",
+  "when_to_use": "收到任何内部沟通写作请求（团队更新、全公司通讯、FAQ、状态/领导层/项目更新、事故报告等）时。",
+  "procedural_steps": [
+    "识别沟通类型：3P 更新、公司通讯、FAQ、状态/领导层/项目更新、事故报告或其他。",
+    "从对应指南文件载入格式、语气与信息采集要求；无匹配时向用户澄清期望格式。",
+    "按类型采集素材：优先高关注度渠道与官方信息，覆盖目标时段；无工具权限时询问用户期望覆盖内容。",
+    "套用固定版式起草：3P 为 emoji+团队名+日期 + Progress/Plans/Problems 各 1–3 句；通讯为 20–25 条要点按板块聚合；FAQ 为 Question 1 句 + Answer 1–2 句。",
+    "复查：3P 30–60 秒可读、数据驱动、就事论事；通讯使用 we 人称并多链接；FAQ 基于官方信息并标注不确定。",
+    "通用沟通：先确认受众、目的、语气与格式，再按清晰简明、主动语态、结论先行撰写。"
+  ],
+  "anti_patterns": [
+    "用 3P 格式承载非团队更新内容或改变其严格版式。",
+    "通讯中堆砌细碎团队更新、小群体信息或重复已沟通内容。",
+    "FAQ 只聚焦提问者或其团队，而非全公司共性困惑。",
+    "回答未基于官方信息却未标注不确定。",
+    "团队规模越大仍使用过细任务颗粒度。"
+  ],
+  "metadata": {
+    "repository": "anthropics/skills",
+    "skill_path": "skills/internal-comms/SKILL.md",
+    "commit_sha": "ca45fc496a3436251f191354091d557da31c15b5",
+    "l0_content_hash": "067b7587a344a928fc6534ef66b1bcd591fc7c26d207ea7ca3334aeb678d6475",
+    "l0_quality_score": 0.82,
+    "refined_by": "opencode-go/beam-free"
+  }
+}

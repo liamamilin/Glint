@@ -1,0 +1,74 @@
+id: disc_content_multimodal_micro_formats
+title: 图文声交互新体裁
+tagline: 单人30分钟做出短洞察+氛围音效的混合体裁
+routing:
+  primitive: diverge
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - content
+  - multimodal
+  - audio_visual
+  - creator
+  - format
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  pain_point: 想做音视频、配乐或动态演示但没设备没团队，只能死磕纯文字，内容同质化记不住
+  trigger_utterances:
+  - 想给深夜复盘配个氛围音效
+  - 如何做出有记忆点的图文声混合内容
+  - 一个人30分钟能做出什么新体裁
+  - 内容太同质化想搞点不一样的
+  - 想给科普短文加个微型演示
+  anti_triggers:
+  - 纯文字摘要提炼
+  - 专业视频剪辑流程
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '## 单人30分钟多模态微体裁生产清单
+
+
+    1. 定情绪与主题：用一句话写清「给谁、什么情绪、一个核心洞察」（3分钟）
+
+    2. 文字骨架：写出 3~5 句短洞察，每句可独立成卡片（5分钟）
+
+    3. 声音层：生成/挑选 10~30 秒氛围音频（环境音、轻音乐、语音旁白），与文字节奏对齐（8分钟）
+
+    4. 视觉动效：给每句洞察配一个微型动效/转场（粒子、淡入、高亮），避免复杂动画（8分钟）
+
+    5. 组合与节奏：把文字+声音+动效按「钩子-洞察-余韵」串成 30~60 秒微演示（4分钟）
+
+    6. 导出与复用：保存为模板（文本占位+音频槽+动效预设），下次换主题直接替换（2分钟）
+
+
+    ## 反常规混合表达形式（选2个试）
+
+    - A. 「静音字幕流」：全屏文字卡片 + 环境底噪，无旁白，靠节奏制造张力
+
+    - B. 「反向演示」：先给结论动效，再逐句拆解成文字洞察
+
+    - C. 「声音先行」：先播 5 秒氛围音，再淡入文字，最后给一行总结
+
+    - D. 「交互微测」：在文字末尾埋一个可点击/可滑动的小交互，让读者参与'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/content.json#content-multimodal-micro-formats
+  source_hash: f71913fd433fea1dff8d6c315e314b6fd956eb51a66aa94cd18168f364984ecf
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: writing_comms
+  subcategory: content_creation
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

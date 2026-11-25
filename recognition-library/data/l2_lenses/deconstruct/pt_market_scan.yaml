@@ -1,0 +1,43 @@
+id: pt_market_scan
+title: 市场扫描与替代方案盘点
+tagline: 区分直接竞争、间接替代与自建方案
+routing:
+  primitive: deconstruct
+  goals:
+  - evaluate
+  - digest
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - product_strategy
+  - market_research
+  - competitive_analysis
+  app_affinity:
+  - Notion
+  - Chrome
+  - Slack
+  pain_point: 做产品方向时不知道市场上有哪些直接竞品、间接替代和用户自建方案，难以界定市场定位
+  trigger_utterances:
+  - 帮我扫一下这个市场的竞品
+  - 这个方向有哪些替代方案
+  - 用户会自己做还是买现成的
+  - market scan 竞品分析
+  - 帮我理一下竞争格局
+  anti_triggers:
+  - 已有明确竞品名单只想做深度对比
+  - 只想写营销文案不涉及市场调研
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 围绕【用户任务和市场范围】做市场扫描。分别找直接产品、间接替代和用户自建办法，按受众、承诺、证据与缺点做表。标注信息日期，指出一个影响市场定位的未知。
+  variables: []
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#market-scan
+  source_hash: 9e0475185421aadf5d4cc960c47cddcb9b3a10b37a89c0f1ac730b775c08288a
+  status: active
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

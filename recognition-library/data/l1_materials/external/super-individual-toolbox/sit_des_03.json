@@ -1,0 +1,29 @@
+{
+  "id": "sit_des_03",
+  "source": "super-individual-toolbox",
+  "source_ref": "https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/design-creative.json#des-03",
+  "title": "多模态素材风格锁",
+  "content": "定位：给 AI 画师和作曲家发同一本美术设定集\n\n触发场景：当你用 AI 生成配图、封面或音视频素材时，每张单看不错，拼在一起却画风割裂像拼夕夕时。\n\n核心机制：\n- 确定 1 种极具辨识度的统一美学锚点（如特定插画流派、纸张质感、固定主色调）\n- 把风格描述词拆成“不可变底座（画风/光线/材质）”与“可变槽位（主体/动作）”\n- 每次生成新素材只替换可变槽位，并用参考图（Style Reference）锁死一致性\n\n交付物：一套可复用的《视觉/音视频风格锁定 Prompt 模板》与参考图包\n\n推荐装配：图像/音乐生成工具 + 固定 Style Prompt 片段库\n\n误用警告：不要往风格底座里堆砌互相冲突的修饰词（如同时写“极简扁平”和“超写实 8K 虚幻引擎”）。",
+  "content_hash": "966cc788dcb6d3c9860511428474a481aed0bb750a222229e62f742310c6b61a",
+  "suggested_action_type": "open_resource",
+  "domain_hints": [
+    "design-creative",
+    "设计师与美术"
+  ],
+  "problem_solved": "当你用 AI 生成配图、封面或音视频素材时，每张单看不错，拼在一起却画风割裂像拼夕夕时。",
+  "when_to_use": "当你用 AI 生成配图、封面或音视频素材时，每张单看不错，拼在一起却画风割裂像拼夕夕时。",
+  "procedural_steps": [
+    "确定 1 种极具辨识度的统一美学锚点（如特定插画流派、纸张质感、固定主色调）",
+    "把风格描述词拆成“不可变底座（画风/光线/材质）”与“可变槽位（主体/动作）”",
+    "每次生成新素材只替换可变槽位，并用参考图（Style Reference）锁死一致性"
+  ],
+  "anti_patterns": [
+    "不要往风格底座里堆砌互相冲突的修饰词（如同时写“极简扁平”和“超写实 8K 虚幻引擎”）。"
+  ],
+  "metadata": {
+    "original_id": "des-03",
+    "drawer": "design-creative",
+    "drawer_zh": "设计师与美术",
+    "deliverable": "一套可复用的《视觉/音视频风格锁定 Prompt 模板》与参考图包"
+  }
+}

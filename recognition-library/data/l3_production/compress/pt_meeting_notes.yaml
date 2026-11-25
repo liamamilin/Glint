@@ -1,0 +1,67 @@
+id: pt_meeting_notes
+title: 整理会议纪要
+tagline: 从转录中提炼结论、决策、行动项与未决问题
+routing:
+  primitive: compress
+  goals:
+  - digest
+  clarity_fit:
+  - concrete
+  domains:
+  - office
+  - meetings
+  - productivity
+  - collaboration
+  app_affinity:
+  - Notion
+  - Feishu
+  - Slack
+  - Obsidian
+  pain_point: 会议记录冗长混乱，关键决策、责任人和待办 buried 在转录里找不到
+  trigger_utterances:
+  - 帮我把这段会议记录整理成纪要
+  - 提取一下今天的会议决策和行动项
+  - meeting notes 太乱了帮我理一下
+  - 把 transcript 整理成 recap
+  - 谁负责什么截止什么时候 帮我列出来
+  anti_triggers:
+  - 只是想总结一篇文章而非会议记录
+  - 需要生成会议议程而非事后纪要
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请根据以下会议记录，为【目标读者】生成结构化会议纪要：
+
+    1) 结论摘要（3-5 条）
+
+    2) 已定决策（逐条，含依据）
+
+    3) 行动项表格：事项 / 负责人 / 截止 / 对应发言
+
+    4) 仍待讨论的问题（区分探讨中的提议 vs 已定事项）
+
+    缺失信息统一标为「待确认」，不要编造。
+
+
+    会议记录：'
+  variables:
+  - audience
+  - 目标读者
+  workflow:
+    workflow_id: notes-to-decision
+    step: 2
+    next_lens_id: pt_decision_log
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#meeting-notes
+  source_hash: 14053ce0e5d21d21e98263c69fabd578ab9ae762a783a891e87c3906e0733377
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  category: product_business
+  subcategory: product_design
+  collections: []
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

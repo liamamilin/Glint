@@ -1,0 +1,82 @@
+id: pt_shot_list
+title: 脚本转拍摄清单
+tagline: 把脚本拆成按场地与机位组织的可执行镜头表
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - creative
+  - filmmaking
+  - video_production
+  - cinematography
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  pain_point: 手上有脚本但不知道如何拆成可执行的拍摄清单，场地、机位顺序、镜头景别、道具与剪辑必需镜头都理不清
+  trigger_utterances:
+  - 帮我把脚本拆成拍摄清单
+  - 这个脚本怎么拍 怎么列镜头表
+  - 按场地整理一下机位和景别
+  - 缺什么镜头剪辑会断
+  - shot list 怎么做
+  anti_triggers:
+  - 只是想写剧本或润色文案
+  - 仅需视频剪辑技巧而非前期拍摄计划
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '你是一位经验丰富的副导演/拍摄策划。基于以下脚本与拍摄条件，生成可执行的镜头清单（Shot List）。
+
+
+    【脚本】
+
+    {{script}}
+
+
+    【设备、场地与拍摄时间】
+
+    {{equipment_location_time}}
+
+
+    输出要求：
+
+    1. 按「场地 → 机位/镜头序号」组织；每个镜头包含：景别（大全/中/近/特写等）、画面动作描述、台词与声音、所需道具与服装、预估时长、备注。
+
+    2. 标出剪辑必需镜头（转场、反应镜头、空镜、空镜）与缺失风险。
+
+    3. 对无法按原脚本拍摄的镜头，提供可替代拍法（替代景别/机位/道具）。
+
+    4. 给出拍摄顺序建议（按场地与光线/时间优化，减少机位移动）。
+
+    5. 最后附「道具与场地准备 Checklist」。
+
+
+    请用表格或清晰列表输出，确保场务、摄影、导演都能直接执行。'
+  variables:
+  - script
+  - equipment_location_time
+  - 脚本
+  - 设备、场地与拍摄时间
+  workflow:
+    workflow_id: idea-to-video
+    step: 3
+    next_lens_id: pt_script_voiceover
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#shot-list
+  source_hash: 0dd62f2f8c56725f705b57ce4b353dcc40782a32ced53fda1d314fda7b208ed4
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: product_business
+  subcategory: product_design
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

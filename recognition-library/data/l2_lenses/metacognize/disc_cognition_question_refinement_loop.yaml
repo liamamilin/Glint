@@ -1,0 +1,61 @@
+id: disc_cognition_question_refinement_loop
+title: 先改写问题再问AI
+tagline: 花3分钟暴露前提、拆解隐藏变量，把模糊念头改写成精准提问
+routing:
+  primitive: metacognize
+  goals:
+  - optimize
+  - debug
+  clarity_fit:
+  - vague
+  domains:
+  - cognition
+  - first_principles
+  - problem_solving
+  - question_framing
+  app_affinity:
+  - ChatGPT
+  - Claude
+  - Cursor
+  - Notion
+  pain_point: 刚冒出一个模糊念头就直接丢给 AI 要方案，拿到平庸答案后怪 AI 不够聪明
+  trigger_utterances:
+  - 这个需求有点模糊先帮我理清再答
+  - 我有个模糊想法帮我找出隐藏前提
+  - 别直接给方案先帮我把问题改写清楚
+  - AI 回答太平庸是不是我问法不对
+  - 帮我用五问法确认真正要解决的核心矛盾
+  anti_triggers:
+  - 已经明确具体需求只需执行方案
+  - 仅需快速摘要或翻译已有内容
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '## 问题改写清单
+
+    1. 粘贴模糊念头，先不求方案。
+
+    2. 让 AI 找出其中 3 个隐含前提。
+
+    3. 让 AI 生成 3 个角度完全不同的精准提问。
+
+    4. 对卡住难题用五问法/反事实追问确认核心矛盾。
+
+    5. 判断是在修枝叶还是解决根因；必要时重新定义问题。
+
+
+    可直接使用的母题：
+
+    - 我现在的模糊想法是：[粘贴你的模糊念头]。先不要给我最终方案，请帮我找出这句话里的 3 个隐含前提，并把我的问题改写成 3 个角度完全不同的精准提问。
+
+    - 针对 [你最近卡住的一个难题]，请用“五问法/反事实追问”帮我确认：我真正要解决的核心矛盾到底是什么，还是只是在修枝叶？'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/cognition.json#cognition-question-refinement-loop
+  source_hash: 9d2dc8725db37ef8156221908c10acd231c535139b406c14212a3bc3237e5918
+  status: active
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

@@ -1,0 +1,33 @@
+{
+  "id": "disc_life_designing_for_default_boredom_over_dopamine",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/life.json#life-designing-for-default-boredom-over-dopamine",
+  "title": "允许自己偶尔“无聊发呆”，别用高刺激内容填满每一秒缝隙",
+  "content": "旧共识（盲区）：排队、等车、睡前或放空时没事干就是无聊，赶紧掏出手机刷点东西才充实。\n\n新现实（破盲视角）：持续高刺激会让大脑对日常麻木、灵感也难以冒头；留出几分钟不带输入的发呆或散步，常是好想法和松弛感的起点。\n\n破冰追问母题：\n- 盘点我每天有哪些“本来可以轻松放空几分钟”的碎片空档（如等电梯/通勤/睡前/休息间隙），却习惯性拿手机填满：[简述你的习惯]。帮我设计 3 个不带屏幕输入的轻替代。\n- 如果我每天刻意留出 10 分钟“零信息输入”的安静时段，怎么安排才最自然、最不容易变成新的打卡负担？",
+  "content_hash": "9cf99951f197a1550f063c9159b39a87cfadce0262f5597672bad7f40af9d0c0",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "life",
+    "role-inversion",
+    "first-principles",
+    "boredom",
+    "dopamine",
+    "attention",
+    "reset"
+  ],
+  "problem_solved": "排队、等车、睡前或放空时没事干就是无聊，赶紧掏出手机刷点东西才充实。",
+  "when_to_use": "持续高刺激会让大脑对日常麻木、灵感也难以冒头；留出几分钟不带输入的发呆或散步，常是好想法和松弛感的起点。",
+  "procedural_steps": [
+    "盘点我每天有哪些“本来可以轻松放空几分钟”的碎片空档（如等电梯/通勤/睡前/休息间隙），却习惯性拿手机填满：[简述你的习惯]。帮我设计 3 个不带屏幕输入的轻替代。",
+    "如果我每天刻意留出 10 分钟“零信息输入”的安静时段，怎么安排才最自然、最不容易变成新的打卡负担？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "life-designing-for-default-boredom-over-dopamine",
+    "arena": "life",
+    "lenses": [
+      "role-inversion",
+      "first-principles"
+    ]
+  }
+}

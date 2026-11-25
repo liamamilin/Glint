@@ -1,0 +1,32 @@
+{
+  "id": "disc_career_building_durable_work_samples",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/career.json#career-building-durable-work-samples",
+  "title": "每做完一个拿得出手的项目，顺手留一份“脱敏复盘样本”",
+  "content": "旧共识（盲区）：等以后要跳槽、接单或做分享时，再临时翻旧文件、拼凑案例。\n\n新现实（破盲视角）：隔半年再回忆细节会丢掉很多关键判断；做完就花 20 分钟记下“背景、卡点、你的做法、结果与反思”，日积月累就是最硬的个人履历。\n\n破冰追问母题：\n- 我刚结束或阶段性完成了一件事：[简述项目、你的角色与结果]。请帮我套用“背景 → 卡点 → 做法与取舍 → 结果与复盘”四段式，整理成一份清晰的个人案例记录。\n- 帮我设计一套极简的“项目结项 20 分钟复盘模板”，让我以后每次做完重要任务都能顺手留档。",
+  "content_hash": "d565c1f891826f0954aa638715e969fa31de0cf96330c561528b7795e56b958c",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "career",
+    "cost-collapse",
+    "invisible-friction",
+    "work-samples",
+    "case-studies",
+    "craft"
+  ],
+  "problem_solved": "等以后要跳槽、接单或做分享时，再临时翻旧文件、拼凑案例。",
+  "when_to_use": "隔半年再回忆细节会丢掉很多关键判断；做完就花 20 分钟记下“背景、卡点、你的做法、结果与反思”，日积月累就是最硬的个人履历。",
+  "procedural_steps": [
+    "我刚结束或阶段性完成了一件事：[简述项目、你的角色与结果]。请帮我套用“背景 → 卡点 → 做法与取舍 → 结果与复盘”四段式，整理成一份清晰的个人案例记录。",
+    "帮我设计一套极简的“项目结项 20 分钟复盘模板”，让我以后每次做完重要任务都能顺手留档。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "career-building-durable-work-samples",
+    "arena": "career",
+    "lenses": [
+      "cost-collapse",
+      "invisible-friction"
+    ]
+  }
+}

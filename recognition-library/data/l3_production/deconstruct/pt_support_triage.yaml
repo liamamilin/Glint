@@ -1,0 +1,50 @@
+id: pt_support_triage
+title: 工单转改进清单
+tagline: 把客服工单聚类成可修与待查的改进清单
+routing:
+  primitive: deconstruct
+  goals:
+  - digest
+  clarity_fit:
+  - concrete
+  domains:
+  - product
+  - customer_support
+  - triage
+  - operations
+  app_affinity:
+  - Linear
+  - Notion
+  - Slack
+  pain_point: 客服工单堆积如山，分不清哪些是反复出现的系统性问题、哪些只是偶发个例，无法决定先修什么先查什么
+  trigger_utterances:
+  - 这些工单里到底哪些是系统性问题
+  - 客服反馈太多帮我归类一下
+  - 这个bug反复出现先修还是先查
+  - 把支持工单提炼成改进清单
+  - support tickets triage 一下
+  anti_triggers:
+  - 单个工单的一对一回复话术
+  - 纯代码层面的 bug 调试排查
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 从【客服工单】提炼影响【产品结果】的主要问题。合并同类项，保留样本文本、出现次数、受影响用户、复现条件和影响程度。区分可以当天修的事项与需要先调查的事项。
+  variables:
+  - 客服工单
+  - 产品结果
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#support-triage
+  source_hash: 5b6690c2251dcf21cfbab8fe5490627387eca4ac013d11e97c3a1c037683f2c8
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: product_business
+  subcategory: product_design
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

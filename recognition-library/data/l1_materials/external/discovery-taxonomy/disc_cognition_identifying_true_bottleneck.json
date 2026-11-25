@@ -1,0 +1,33 @@
+{
+  "id": "disc_cognition_identifying_true_bottleneck",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/cognition.json#cognition-identifying-true-bottleneck",
+  "title": "先找到“真正的唯一瓶颈”，别在非瓶颈环节拼命卷",
+  "content": "旧共识（盲区）：每个环节都一起优化、一起加把劲，整体效率就会跟着全面提升。\n\n新现实（破盲视角）：整条链路的上限往往卡在最窄的那一环；在瓶颈没解开前，给其他环节加再多马力也只是堆积半成品或浪费精力。\n\n破冰追问母题：\n- 我推进 [某个项目/工作流/学习或创作目标] 时感觉整体卡住了：[简述各环节现状]。请帮我诊断：目前真正的“最窄瓶颈”卡在哪一步？优先该先动哪一刀？\n- 在 [你的日常工作流] 中，哪些看起来很忙但其实不在主瓶颈上的动作，可以先放一放？",
+  "content_hash": "c8808dc9d126b5b7428b360e6e1a00b2ecb9ff025cdafe7983e2fd146b4432d5",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "cognition",
+    "first-principles",
+    "invisible-friction",
+    "bottleneck",
+    "constraints",
+    "leverage",
+    "prioritization"
+  ],
+  "problem_solved": "每个环节都一起优化、一起加把劲，整体效率就会跟着全面提升。",
+  "when_to_use": "整条链路的上限往往卡在最窄的那一环；在瓶颈没解开前，给其他环节加再多马力也只是堆积半成品或浪费精力。",
+  "procedural_steps": [
+    "我推进 [某个项目/工作流/学习或创作目标] 时感觉整体卡住了：[简述各环节现状]。请帮我诊断：目前真正的“最窄瓶颈”卡在哪一步？优先该先动哪一刀？",
+    "在 [你的日常工作流] 中，哪些看起来很忙但其实不在主瓶颈上的动作，可以先放一放？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "cognition-identifying-true-bottleneck",
+    "arena": "cognition",
+    "lenses": [
+      "first-principles",
+      "invisible-friction"
+    ]
+  }
+}

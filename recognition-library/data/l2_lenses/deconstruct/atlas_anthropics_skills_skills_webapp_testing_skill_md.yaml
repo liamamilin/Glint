@@ -1,0 +1,47 @@
+id: atlas_anthropics_skills_skills_webapp_testing_skill_md
+title: 动态页面侦察行动法
+tagline: 先判定页面类型，等渲染完成再侦察并执行动作。
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - debug
+  clarity_fit:
+  - concrete
+  domains:
+  - web_testing
+  - playwright
+  - ui_automation
+  - debugging
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Terminal
+  - Chrome
+  pain_point: 在动态页面还没渲染完成时就基于旧 DOM 操作，或手动折腾本地服务器启停，导致测试脚本反复失败。
+  trigger_utterances:
+  - 这个页面还没加载完我就点错了
+  - 帮我写 Playwright 测试先等 networkidle
+  - 本地 web 应用自动化测试脚本老失败
+  - 动态页面选择器怎么拿
+  - 服务器启动关闭太麻烦
+  anti_triggers:
+  - 纯静态 HTML 已知选择器的简单脚本
+  - 非浏览器端 API 或接口测试
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 按侦察—行动流程测试本地 Web 应用：1) 先判定页面类型：静态 HTML 直接读取文件提取选择器；动态应用进入侦察—行动流程。2) 动态应用以 headless Chromium 启动，page.goto 后先 wait_for_load_state('networkidle')。3)
+    侦察：截图、读取 page.content()、枚举元素，仅从渲染结果识别 text=/role=/CSS/ID 选择器。4) 再执行具体动作，必要时加 wait_for_selector 或 wait_for_timeout。5) 服务器生命周期交由黑盒
+    helper 管理：先运行 helper --help，脚本只保留 Playwright 逻辑；多服务器重复 --server/--port。6) 任务完成后始终关闭浏览器。避免在 networkidle 前检查 DOM、未读 HTML
+    就假设选择器、过早阅读 helper 源码、非 headless 运行。
+  variables: []
+  workflow: null
+meta:
+  source: atlas-methods
+  source_ref: anthropics/skills:skills/webapp-testing/SKILL.md
+  source_hash: 19972c98a35a73df06e4fb47f1b2e65a3218c3f1259d9e8beab3a4f1fc4ac914
+  status: active
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

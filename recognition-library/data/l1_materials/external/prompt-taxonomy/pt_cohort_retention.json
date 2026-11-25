@@ -1,0 +1,27 @@
+{
+  "id": "pt_cohort_retention",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#cohort-retention",
+  "title": "建立分群留存表",
+  "content": "根据【事件表与日期范围】计算【目标留存】。先写入群事件、返回事件、计算粒度和去重规则，再输出分群表。对观测窗口不完整的周期保留空白，提供两条用于手算核对的样本。",
+  "content_hash": "9d764c17e745c29a58de29fc59221f17c1a68ad1df41180afebc18335da534f0",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "data",
+    "留存",
+    "分群",
+    "cohort retention"
+  ],
+  "problem_solved": "明确首日事件、回访事件与未成熟群组。",
+  "when_to_use": "分类: 数据与表格",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "cohort-retention",
+    "category": "data",
+    "variables": [
+      "事件表与日期范围",
+      "目标留存"
+    ]
+  }
+}

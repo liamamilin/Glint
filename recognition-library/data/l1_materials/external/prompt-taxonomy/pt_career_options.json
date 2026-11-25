@@ -1,0 +1,27 @@
+{
+  "id": "pt_career_options",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#career-options",
+  "title": "比较几条职业方向",
+  "content": "根据【经验、兴趣和现实约束】比较【方向】。对每个方向给可迁移技能、主要缺口、日常工作假设和查证办法。选一个两周内能试的小项目或访谈，用结果决定是否继续。",
+  "content_hash": "8279bdc86da8378edb8981a91b493ec91da8cf8d8469c70fe2cd682d8dba2171",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "career",
+    "转行",
+    "职业规划",
+    "career planning"
+  ],
+  "problem_solved": "用可试验的步骤检验长期选择。",
+  "when_to_use": "分类: 求职与职业",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "career-options",
+    "category": "career",
+    "variables": [
+      "经验、兴趣和现实约束",
+      "方向"
+    ]
+  }
+}

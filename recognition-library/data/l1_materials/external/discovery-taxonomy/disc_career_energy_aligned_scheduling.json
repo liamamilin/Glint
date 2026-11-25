@@ -1,0 +1,33 @@
+{
+  "id": "disc_career_energy_aligned_scheduling",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/career.json#career-energy-aligned-scheduling",
+  "title": "按“精力曲线”排程，而不是按“日历格子”硬塞任务",
+  "content": "旧共识（盲区）：只要把待办事项塞进日历的空白时间段，一天就算安排好了。\n\n新现实（破盲视角）：不同时间段人的认知带宽与精力质量差异巨大；把高创造力/高决策任务放在精力峰值，把低认知琐事留给低谷，同样工时产出完全不同。\n\n破冰追问母题：\n- 我一天中精力最清醒、最适合深度思考的时段是：[填时段]，最容易犯困或走神的是：[填时段]。请帮我把 [你的核心任务与日常琐事] 按精力高低重新匹配排程。\n- 当我下午或晚上精力明显下滑时，有哪些“低脑力消耗但有推进感”的收尾任务可以替代硬啃难题？",
+  "content_hash": "c5831a345b7e8a77bc6db8b22bde5198a2373c2558dbb0b88f84b273204c4803",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "career",
+    "first-principles",
+    "role-inversion",
+    "energy",
+    "chronotype",
+    "deep-work",
+    "sustainability"
+  ],
+  "problem_solved": "只要把待办事项塞进日历的空白时间段，一天就算安排好了。",
+  "when_to_use": "不同时间段人的认知带宽与精力质量差异巨大；把高创造力/高决策任务放在精力峰值，把低认知琐事留给低谷，同样工时产出完全不同。",
+  "procedural_steps": [
+    "我一天中精力最清醒、最适合深度思考的时段是：[填时段]，最容易犯困或走神的是：[填时段]。请帮我把 [你的核心任务与日常琐事] 按精力高低重新匹配排程。",
+    "当我下午或晚上精力明显下滑时，有哪些“低脑力消耗但有推进感”的收尾任务可以替代硬啃难题？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "career-energy-aligned-scheduling",
+    "arena": "career",
+    "lenses": [
+      "first-principles",
+      "role-inversion"
+    ]
+  }
+}

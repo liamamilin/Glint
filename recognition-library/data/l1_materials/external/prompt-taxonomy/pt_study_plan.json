@@ -1,0 +1,28 @@
+{
+  "id": "pt_study_plan",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#study-plan",
+  "title": "安排一个学习计划",
+  "content": "我的目标是【可观察的学习成果】，当前水平是【水平】，可投入【每周时间和截止日期】。给首周具体安排和后续里程碑。每阶段包含一个动手任务、验收方式和补救策略，优先选无需付费的资源。",
+  "content_hash": "f7e2c8ae06de5c21864a75b97e5991f1ac5dce6241aa408bd54ffb885a2cbf94",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "learning",
+    "路线图",
+    "学习计划",
+    "study plan"
+  ],
+  "problem_solved": "让目标、可用时间和练习成果对应。",
+  "when_to_use": "分类: 学习与辅导",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "study-plan",
+    "category": "learning",
+    "variables": [
+      "可观察的学习成果",
+      "水平",
+      "每周时间和截止日期"
+    ]
+  }
+}

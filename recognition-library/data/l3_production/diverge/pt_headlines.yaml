@@ -1,0 +1,56 @@
+id: pt_headlines
+title: 多方向标题生成
+tagline: 为同一内容写事实/问题/结果型标题
+routing:
+  primitive: diverge
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - writing
+  - copywriting
+  - marketing
+  - content_strategy
+  app_affinity:
+  - Notion
+  - Chrome
+  - ChatGPT
+  - Claude
+  pain_point: 一个内容只能想出一种标题，不知道怎么针对不同渠道和读者调整角度
+  trigger_utterances:
+  - 帮我给这篇文章想几个标题
+  - 这个内容怎么起标题比较好
+  - need headline ideas for this post
+  - 标题太平淡了帮我换个角度
+  - 给这个视频起几个不同风格的标题
+  anti_triggers:
+  - 用户要写一篇完整文章而非标题
+  - 用户只想润色已有标题的语法
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 为【内容】写【渠道和长度】可用的标题，读者是【人群】。给事实型、问题型、结果型三种方向，各写两个。每个都应能对应正文中的证据，并注明适用情况下的首选项。
+  variables:
+  - 内容
+  - 渠道和长度
+  - 人群
+  workflow:
+    workflow_id: draft-to-publish
+    step: 4
+    next_lens_id: pt_repurpose_content
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#headlines
+  source_hash: 2aec5f2cc817b748979f56cdd8f20154f6551dc96209224fa281b819f20cad59
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  category: product_business
+  subcategory: growth_marketing
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

@@ -1,0 +1,56 @@
+id: pt_repair_prompt
+title: 诊断不稳定提示词
+tagline: 用失败样例定位缺失指令，给最小修订与验证输入
+routing:
+  primitive: critique
+  goals:
+  - debug
+  clarity_fit:
+  - concrete
+  domains:
+  - prompt_engineering
+  - prompt_workflows
+  - debugging
+  - llm
+  app_affinity:
+  - ChatGPT
+  - Claude
+  - Cursor
+  pain_point: 提示词时好时坏、输出不稳定，却找不到缺了什么指令或哪里冲突
+  trigger_utterances:
+  - 这个 prompt 有时候好有时候坏
+  - 帮我看看这个提示词哪里写得有问题
+  - 给几个失败样例定位缺失指令
+  - prompt 不稳定怎么最小修订
+  anti_triggers:
+  - 从零写一个新提示词
+  - 翻译或润色一段普通文案
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 评估【{{existing_prompt}}】，目标是【{{expected_behavior}}】，以下是【{{failure_examples}}】。逐例指出缺失或冲突的指令，选最小修订。给修订版和两个用于验证原问题是否消失的输入。
+  variables:
+  - existing_prompt
+  - expected_behavior
+  - failure_examples
+  - '{{existing_prompt}}'
+  - '{{expected_behavior}}'
+  - '{{failure_examples}}'
+  workflow:
+    workflow_id: evaluate-a-prompt
+    step: 1
+    next_lens_id: pt_design_regression_set
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#repair-prompt
+  source_hash: 56760b713d5896b0ea00d746b921f084cd3bd69d9fbc39b5cd721bef47952932
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: engineering
+  subcategory: debugging
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

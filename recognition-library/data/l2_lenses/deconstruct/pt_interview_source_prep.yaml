@@ -1,0 +1,44 @@
+id: pt_interview_source_prep
+title: 专家采访追问准备
+tagline: 帮你在采访专家前列出可验证的追问清单
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - research
+  - interview
+  - expert_interview
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  pain_point: 要采访专家却不知道该问什么，已有说法和背景无从验证，缺一份能落地的追问清单
+  trigger_utterances:
+  - 要采访专家但不知道问什么
+  - 帮我准备采访/访谈问题
+  - 验证这些说法需要问专家
+  - interview questions for expert
+  - 准备专家访谈追问
+  anti_triggers:
+  - 求职面试模拟题
+  - 通用闲聊破冰问题
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 要采访【专家与主题】，已知材料是【背景和待验证说法】。列五个能通过具体经历、数据或例子回答的问题，为每个给一个追问。标出相邻的引导性问法及应避免的前提，保留核对受访者回答的位置。
+  variables:
+  - 专家与主题
+  - 背景和待验证说法
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#interview-source-prep
+  source_hash: e09dcc3c106637ed1fe95e900d9416f9a0f0d1b6cc61d7b87a274bb8526895f1
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

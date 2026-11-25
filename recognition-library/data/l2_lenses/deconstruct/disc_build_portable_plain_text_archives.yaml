@@ -1,0 +1,61 @@
+id: disc_build_portable_plain_text_archives
+title: 核心资产纯文本归档
+tagline: 把笔记清单导出为 Markdown/JSON，避免被工具绑架
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - build
+  - portability
+  - plain_text
+  - markdown
+  - json
+  app_affinity:
+  - Notion
+  - Obsidian
+  - VS Code
+  - Terminal
+  pain_point: 重要笔记、清单和方案全锁在某个 App 的私有格式里，软件涨价、改版或关停时数据难以迁移和复用
+  trigger_utterances:
+  - 我的笔记全在 Notion 里，软件涨价了怎么办
+  - 怎么把清单导出成 Markdown
+  - 不想被某个 App 绑架数据
+  - 设计一个可迁移的笔记结构
+  - 把方案转成 JSON 方便脚本处理
+  anti_triggers:
+  - 只是想新建一篇笔记
+  - 仅需在原工具内做格式调整
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '便携纯文本归档清单：
+
+    - [ ] 盘点：列出所有 {{asset_type}} 与所在平台（如 {{source_tool}}）
+
+    - [ ] 导出：从 {{source_tool}} 导出为 Markdown/CSV/JSON，保留元数据（创建时间、标签）
+
+    - [ ] 结构：按「领域/项目/日期」分目录，文件名用 kebab-case，frontmatter 存元信息
+
+    - [ ] 双写：日常继续在工具里记，每周/每月跑一次导出脚本沉淀到纯文本库
+
+    - [ ] 校验：用脚本检查断链、重复与缺失字段；确认编辑器与 AI 可直接读写
+
+    - [ ] 备份：纯文本库纳入 git 或云盘版本控制，避免单点故障
+
+    - [ ] 演练：模拟工具关停，验证仅凭纯文本库能恢复 80% 以上工作流'
+  variables:
+  - asset_type
+  - source_tool
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/build.json#build-portable-plain-text-archives
+  source_hash: ff66249518694f017171eff1015829616fcf6cffc75c01c956e613bf98226351
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

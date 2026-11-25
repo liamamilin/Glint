@@ -1,0 +1,70 @@
+id: pt_meeting_agenda
+title: 会议议程生成
+tagline: 从会议目标一键生成带时间、负责人与决策项的议程
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - office
+  - meeting
+  - agenda
+  - collaboration
+  app_affinity:
+  - Notion
+  - Feishu
+  - Slack
+  - Mail
+  pain_point: 开会前没有结构化议程，讨论时间被跑题和无结论的扯皮占满，真正需要共同决定的事项反而没时间处理
+  trigger_utterances:
+  - 帮我拟个会议议程
+  - 这个会要讨论什么怎么安排时间
+  - 会议目的定了但不知道议程怎么拆
+  - 帮我把30分钟会议拆成议程
+  - make an agenda for this meeting
+  anti_triggers:
+  - 只是想记录会议纪要或总结会后结论
+  - 需要的是会后行动项追踪而非会前议程
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请为以下会议生成结构化议程：
+
+
+    会议目的：{{meeting_purpose}}
+
+    总时长：{{total_duration}}
+
+    参与者：{{roles}}
+
+
+    要求：
+
+    1. 每项议程包含：预计时间、准备材料、负责人、期望结果。
+
+    2. 明确标出需要做决定的事项（Decision Items）。
+
+    3. 标出适合会前异步阅读的材料（Pre-read），减少会中信息同步。
+
+    4. 时间分配向需要共同决定的内容倾斜，避免把时间花在可异步处理的信息同步上。
+
+    5. 输出为清晰的编号列表，可直接贴入 Notion/飞书/邮件。'
+  variables:
+  - '{''name'': ''meeting_purpose'', ''description'': ''会议目的/要达成的结果''}'
+  - '{''name'': ''total_duration'', ''description'': ''会议总时长（如 30 分钟）''}'
+  - '{''name'': ''roles'', ''description'': ''参与者角色列表''}'
+  - meeting_purpose
+  - total_duration
+  - roles
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#meeting-agenda
+  source_hash: bc9dc0e441af2bb88f8c63f76272a74f6613f01fdca9755ca344e790ff4fdf36
+  status: active
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

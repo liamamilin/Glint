@@ -1,0 +1,62 @@
+id: disc_life_curating_high_trust_social_circle
+title: 少而深的社交圈
+tagline: 把社交带宽留给真正同频、不消耗人的少数连接
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - evaluate
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - life
+  - relationships
+  - boundaries
+  - energy
+  - social
+  app_affinity:
+  - Notion
+  - Obsidian
+  - WeChat
+  - Feishu
+  pain_point: 用户把逢场作戏和应酬当成必要付出，社交圈子越大越好，却在维系客套关系中持续消耗时间和情绪。
+  trigger_utterances:
+  - 社交圈子越大越好吗，我有点累
+  - 和谁都不熟但总要应酬
+  - 帮我看看哪些关系是在消耗我
+  - 想和老朋友恢复联系但不知道怎么开口
+  - 我不想再勉强维持客套关系了
+  anti_triggers:
+  - 需要扩展职业人脉或参加大型社交活动的场景
+  - 需要处理明确冲突或断联决策的场景
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '1. 列出近期日常互动对象与场景。
+
+    2. 标记每次互动后的感受：轻松/启发/消耗/习惯。
+
+    3. 区分同频滋养关系与客套应酬关系。
+
+    4. 对消耗型关系设定边界或减少频次。
+
+    5. 为值得恢复的连接写 2 条自然、无压力的破冰消息。
+
+    6. 每周复盘一次社交带宽分配。'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/life.json#life-curating-high-trust-social-circle
+  source_hash: 574dc3c26216b3fae2bd3919a0544ea7a913a0a9da66ce868b449b575b882233
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: personal_career
+  subcategory: personal_os
+  collections: []
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

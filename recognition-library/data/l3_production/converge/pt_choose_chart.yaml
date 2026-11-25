@@ -1,0 +1,55 @@
+id: pt_choose_chart
+title: 选择并设计一张图
+tagline: 为具体问题选主图并给出轴、分组、单位与结论验证
+routing:
+  primitive: converge
+  goals:
+  - create
+  clarity_fit:
+  - concrete
+  domains:
+  - data_visualization
+  - analytics
+  - charting
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  - ChatGPT
+  - Claude
+  pain_point: 手头有数据和问题，却不知道该用哪种图、怎么设计才能让读者一眼看懂并自行验证结论。
+  trigger_utterances:
+  - 这个数据该用什么图展示
+  - 帮我选一种图来说明趋势
+  - 用图表回答这个问题
+  - 这个字段画什么图合适
+  - 推荐一张主图并给轴和单位
+  anti_triggers:
+  - 已有固定图表模板只需填数
+  - 纯数据清洗不涉及可视化
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 用 {{data_or_fields}} 向 {{audience}} 回答 {{question}}。推荐一张主图，给出横纵轴、分组、单位、标题和注释。说明缺失值和异常值如何呈现；提供一条读者能用图验证的结论。
+  variables:
+  - data_or_fields
+  - audience
+  - question
+  workflow:
+    workflow_id: analyze-and-report
+    step: 3
+    next_lens_id: pt_dashboard_review
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#choose-chart
+  source_hash: 38b0b933684fa3f83d86763f4616f04224d67326babd3879caa98d4b91331e91
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: general
+  subcategory: decision
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

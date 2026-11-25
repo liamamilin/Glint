@@ -1,0 +1,27 @@
+{
+  "id": "pt_usability_test_plan",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#usability-test-plan",
+  "title": "为一个功能设计可用性测试",
+  "content": "为【原型或功能】设计由【目标用户】完成的可用性测试。给三个贴近真实环境的任务、成功标准、观察项和追问。区分观察到的操作、访问反馈和主持人的解释。",
+  "content_hash": "bcbb512ffa79aafa4f4ca63ed8be0d8d32f485b2a32e3337d43f73cbc1005550",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "product",
+    "可用性",
+    "用户测试",
+    "UX test"
+  ],
+  "problem_solved": "让参与者完成任务而不靠提示。",
+  "when_to_use": "分类: 产品与业务",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "usability-test-plan",
+    "category": "product",
+    "variables": [
+      "原型或功能",
+      "目标用户"
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "pt_evidence_map",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#evidence-map",
+  "title": "做一张主张与证据对照表",
+  "content": "把【研究材料】与【待检验主张】做成证据矩阵。每行记录一个主张及来源、关键摘录、适用范围、支持方向和证据缺口。来自同一数据或上游报道的材料归在一起。最后指出最影响结论的一处缺口。",
+  "content_hash": "d4901db041922850cc713eaa72d4de377668fc1c13e56c832ecd309ed93edb0a",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "research",
+    "证据",
+    "引用",
+    "证据图谱",
+    "evidence map"
+  ],
+  "problem_solved": "看清每项结论由什么材料支持。",
+  "when_to_use": "分类: 查找与研究",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "evidence-map",
+    "category": "research",
+    "variables": [
+      "研究材料",
+      "待检验主张"
+    ]
+  }
+}

@@ -1,0 +1,60 @@
+id: disc_career_skill_stacking_monopoly
+title: 2+1技能组合微型垄断
+tagline: 把两项前20%技能加行业语境交叉成微型垄断生态位
+routing:
+  primitive: diverge
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - career
+  - cross_domain
+  - talent_stack
+  - positioning
+  - niche
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 在职业发展中总觉得必须在单一赛道卷到全球前1%才能胜出，却忽略了跨界组合可以形成几乎没有竞争对手的微型垄断生态位
+  trigger_utterances:
+  - 我技能很多但都不精，怎么找到自己的优势 niche
+  - 想转行但不知道怎么定位自己
+  - 如何构建个人垄断而不是和高手硬碰硬
+  - 把我现有技能交叉组合一下找出蓝海
+  - 只差一个跨界技能就能翻倍议价能力
+  anti_triggers:
+  - purely debugging a single technical bug or optimizing one algorithm
+  - negotiating salary with a single employer without repositioning
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '微型个人垄断构建清单：
+
+    - [ ] 列出 3-5 个你的技能、经历与兴趣标签
+
+    - [ ] 两两交叉组合，生成 5 个不与顶级专家硬碰硬的微型生态位
+
+    - [ ] 为每个生态位评估竞争程度与潜在议价能力
+
+    - [ ] 选定 1 个主攻微型生态位作为定位
+
+    - [ ] 找出 1 个低门槛跨界技能 B，规划 3 个月补齐
+
+    - [ ] 制定 3 个月学习 + 输出（作品/内容/案例）计划
+
+    - [ ] 用新定位更新简历/主页/自我介绍'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/career.json#career-skill-stacking-monopoly
+  source_hash: 68025816c11c9835af90c587a6037ffd8637a4163ea307fee975f4cc86c9dd0e
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

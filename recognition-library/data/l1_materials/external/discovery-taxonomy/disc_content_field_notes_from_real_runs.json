@@ -1,0 +1,33 @@
+{
+  "id": "disc_content_field_notes_from_real_runs",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/content.json#content-field-notes-from-real-runs",
+  "title": "写“亲手踩坑与真实实验日志”，而不是空洞方法论",
+  "content": "旧共识（盲区）：要把一个道理讲透，得先搭一套高大上的“三层模型/五步法则”再包装成金句。\n\n新现实（破盲视角）：AI 最擅长拼凑“看起来很对的五步法则”，却无法替代你亲手试错后的真实数据、失败截图和意外转折——真实实验日志自带稀缺感。\n\n破冰追问母题：\n- 我最近做了一次真实尝试或踩坑：[简述你试了什么、发生了什么意外]。帮我把它整理成一篇诚实、克制、有细节的“实验记录”，去掉空洞鸡汤。\n- 在 [你的领域] 里，有哪些“书本和教程里很少写、但实战中经常遇到”的真实细节，适合写成短小精悍的实战笔记？",
+  "content_hash": "3683484980d8a468f7f91c83278da865c64bbc06f5d47b56552e1cfc305b6378",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "content",
+    "first-principles",
+    "role-inversion",
+    "field-notes",
+    "case-study",
+    "experiments",
+    "authenticity"
+  ],
+  "problem_solved": "要把一个道理讲透，得先搭一套高大上的“三层模型/五步法则”再包装成金句。",
+  "when_to_use": "AI 最擅长拼凑“看起来很对的五步法则”，却无法替代你亲手试错后的真实数据、失败截图和意外转折——真实实验日志自带稀缺感。",
+  "procedural_steps": [
+    "我最近做了一次真实尝试或踩坑：[简述你试了什么、发生了什么意外]。帮我把它整理成一篇诚实、克制、有细节的“实验记录”，去掉空洞鸡汤。",
+    "在 [你的领域] 里，有哪些“书本和教程里很少写、但实战中经常遇到”的真实细节，适合写成短小精悍的实战笔记？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "content-field-notes-from-real-runs",
+    "arena": "content",
+    "lenses": [
+      "first-principles",
+      "role-inversion"
+    ]
+  }
+}

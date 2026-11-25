@@ -1,0 +1,66 @@
+id: disc_business_recurring_maintenance_retainer
+title: 持续托管包月方案
+tagline: 把一锤子交付变成可预测包月现金流
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - business
+  - maintenance
+  - retainer
+  - cashflow
+  - ops
+  app_affinity:
+  - Notion
+  - Slack
+  - Mail
+  pain_point: 外包或定制交付后，客户后续维护与小改动无处收费，要么免费扯皮要么丢单。
+  trigger_utterances:
+  - 交付完了客户还要改需求怎么办
+  - 维护怎么收费不尴尬
+  - 把接单变成稳定月收入
+  - 客户总找免费小改怎么办
+  - 怎么自然提包月服务
+  anti_triggers:
+  - 纯一次性交付无后续
+  - 客户明确拒绝长期合作
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '## 持续托管包月方案清单
+
+    - 明确托管范围：每月固定巡检项（接口/平台规则/关键流程）
+
+    - 明确不含项：新功能开发、大改版、第三方付费成本
+
+    - 响应时效：工作日 N 小时内响应，紧急 P1 X 小时
+
+    - 频率：每月 1 次巡检 + 优先微调配额 N 次
+
+    - 季度：1 次升级复盘与范围重估
+
+    - 定价：按月固定费 + 超出配额按次计费
+
+    - 提案话术：交付复盘时以“降低风险” framing 提出，附范围表
+
+    - 跟进：交付后 7 天内发总结 + 托管选项'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-recurring-maintenance-retainer
+  source_hash: 90d732c5e94c65e27b1915d39b67e6edc8d4e28f061fcabe797eea75e8097cad
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: product_business
+  subcategory: indie_business
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

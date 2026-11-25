@@ -1,0 +1,28 @@
+{
+  "id": "pt_trip_disruption",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#trip-disruption",
+  "title": "准备行程变动时的替代方案",
+  "content": "【原行程】因【变化】无法照常进行。根据【剩余时间、预算和同行人】，给保守版和可扩展版两套安排。分别列需要取消、替换和重新核实的事项，提供票务或场馆的官方入口。",
+  "content_hash": "49cc93ef0d31f7ee14a18a0dbfa49de3db8f9c5d9e12aca9f46e279c30286588",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "planning",
+    "航班改签",
+    "天气备选",
+    "travel disruption"
+  ],
+  "problem_solved": "按时间、费用和可达性重排。",
+  "when_to_use": "分类: 计划与生活",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "trip-disruption",
+    "category": "planning",
+    "variables": [
+      "原行程",
+      "变化",
+      "剩余时间、预算和同行人"
+    ]
+  }
+}

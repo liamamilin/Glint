@@ -1,0 +1,48 @@
+id: disc_business_transparent_simple_pricing
+title: 砍成1-2档明码标价
+tagline: 把复杂定价压成一眼看懂的1-2档，写清含什么/不适合谁
+routing:
+  primitive: compress
+  goals:
+  - optimize
+  - create
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - business
+  - pricing
+  - trust
+  - conversion
+  - simplicity
+  app_affinity:
+  - Notion
+  - Chrome
+  - Feishu
+  pain_point: 定价档位太多、隐藏条款让人猜，买家犹豫直接关页面，自己也说不清到底收什么
+  trigger_utterances:
+  - 这个定价表太复杂了帮我简化一下
+  - 客户总问还有没有隐藏收费
+  - 把价格方案砍成1-2档明码标价
+  - pricing page bounce rate high how to simplify
+  - 怎么让买家一眼看懂多少钱含什么
+  anti_triggers:
+  - 只想做成本核算或财务建模而非面向客户的定价展示
+  - 需要多层级企业合同/定制报价的B2B大单谈判
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: "【透明定价简化清单】\n\n1. 当前方案：[简述你的定价/收费想法]\n2. 压缩为 1～2 档，每档必须写清：\n   - 价格（含货币/计费周期）\n   - 包含什么（具体权益/交付物）\n   - 不含什么（明确排除项）\n\
+    \   - 适合谁（目标客户画像）\n   - 暂不适合谁（反向筛选）\n3. 隐性收费自检（在 [目标客户决策场景] 中）：\n   - 是否有额外税费/服务费/升级费？提前写明\n   - 是否有最低消费/锁定期？提前写明\n  \
+    \ - 退款/取消政策是否一眼可懂？\n4. 用直白话术提前说清：\n   - “本价格已含……，不额外收取……”\n   - “如果你需要……，建议选择……档/暂不适用”\n5. 最终交付：一页 pricing 卡片 + 一段 FAQ，\
+    \ buyer 30 秒内能回答“多少钱、含什么、不适合谁”。"
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-transparent-simple-pricing
+  source_hash: b47ee6cdb588259a02e80c0814143175be743b11270efa6a4508ca2710da92f5
+  status: active
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

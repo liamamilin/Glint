@@ -1,0 +1,29 @@
+{
+  "id": "pt_rewrite",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#rewrite",
+  "title": "润色并保留原意",
+  "content": "请把【原文】改得更清楚，读者是【受众】，语气是【语气】。保持事实、专有名词、承诺和原有立场，删去重复并把最重要的信息提前。先给可直接使用的版本，再列出最多三处改变原句结构的原因。",
+  "content_hash": "fcda32cc14b2a0d737073e7805510f10dae77c9ccce79a1dd68de0fb4e1e18f6",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "writing",
+    "润色",
+    "改写",
+    "编辑",
+    "rewrite"
+  ],
+  "problem_solved": "改善清晰度、结构和语气。",
+  "when_to_use": "分类: 写作与语言",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "rewrite",
+    "category": "writing",
+    "variables": [
+      "原文",
+      "受众",
+      "语气"
+    ]
+  }
+}

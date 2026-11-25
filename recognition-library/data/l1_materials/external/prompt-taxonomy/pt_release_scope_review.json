@@ -1,0 +1,27 @@
+{
+  "id": "pt_release_scope_review",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#release-scope-review",
+  "title": "检查发布范围能否满足用户目标",
+  "content": "审查【计划发布内容】与【目标和用户路径】。做需求、实现、可观察验收和证据的对照；标出路径断点及受影响用户。提出必须补齐、可按说明交付和应另做验证的事项。",
+  "content_hash": "960c332d48013054aec0b18a9dcb2cf4fa47c2c6f4795ef0f951a390698fa417",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "product",
+    "产品验收",
+    "发布范围",
+    "release scope"
+  ],
+  "problem_solved": "把未覆盖场景、用户影响和验收对应起来。",
+  "when_to_use": "分类: 产品与业务",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "release-scope-review",
+    "category": "product",
+    "variables": [
+      "计划发布内容",
+      "目标和用户路径"
+    ]
+  }
+}

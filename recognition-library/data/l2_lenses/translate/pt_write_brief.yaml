@@ -1,0 +1,46 @@
+id: pt_write_brief
+title: 需求转写作简报
+tagline: 把零散需求整理成写作者可执行的简报
+routing:
+  primitive: translate
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - writing
+  - content_strategy
+  - copywriting
+  - documentation
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Feishu
+  - Slack
+  pain_point: 写作需求散落在聊天、文档或口头沟通中，写作者不清楚目标受众、必须引用的事实、语气和交付要求，容易反复追问或写出偏题内容。
+  trigger_utterances:
+  - 帮我把这几个零散要求整理成写作简报
+  - 给写作者的brief怎么写
+  - 需求都说了但写出来不对
+  - 把聊天里的写作要求变成任务说明
+  - 文章要求太碎了帮我理成简报
+  anti_triggers:
+  - 只需要润色成文而非整理需求
+  - 已有完整brief只需校对
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 请将用户提供的零散要求和素材整理为给写作者的任务简报，明确：1) 目标受众；2) 读者读完后应采取的行动；3) 主题与核心论点；4) 必须引用的事实、数据或来源；5) 语气与风格；6) 格式、长度与交付时间；7) 待确认问题清单；8)
+    一个可接受的开头示例。输出应结构化、可执行，不编造未提供的信息，缺失内容标为待确认。
+  variables: []
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#write-brief
+  source_hash: 1553ca799a326eabe653dbe24bbcfde2437abc438150b6479daa45a73478419b
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

@@ -1,0 +1,29 @@
+{
+  "id": "pt_repair_prompt",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#repair-prompt",
+  "title": "诊断一个表现不稳定的提示词",
+  "content": "评估【现有 Prompt】，目标是【期望行为】，以下是【失败输出及对应输入】。逐例指出缺失或冲突的指令，选最小修订。给修订版和两个用于验证原问题是否消失的输入。",
+  "content_hash": "56760b713d5896b0ea00d746b921f084cd3bd69d9fbc39b5cd721bef47952932",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "prompt-workflows",
+    "提示工程",
+    "优化",
+    "prompt engineering",
+    "debug prompt"
+  ],
+  "problem_solved": "用失败样例定位缺失指令。",
+  "when_to_use": "分类: 提示词与 AI 工作流",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "repair-prompt",
+    "category": "prompt-workflows",
+    "variables": [
+      "现有 Prompt",
+      "期望行为",
+      "失败输出及对应输入"
+    ]
+  }
+}

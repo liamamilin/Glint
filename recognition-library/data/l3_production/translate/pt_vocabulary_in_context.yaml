@@ -1,0 +1,55 @@
+id: pt_vocabulary_in_context
+title: 真实语境学高频词组
+tagline: 从材料或主题挑10个词组，给搭配、场景、混淆项与填空自测。
+routing:
+  primitive: translate
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - language_learning
+  - vocabulary
+  - collocations
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  pain_point: 背了单词却不会用，想在真实语境里掌握高频词组的搭配、反例和自测。
+  trigger_utterances:
+  - 帮我从这篇文章里挑10个高频词组学
+  - 背单词没用，想学词组搭配
+  - give me collocations with examples and a cloze test
+  - 这些词怎么用在真实场景里
+  - 帮我做词汇自测题
+  anti_triggers:
+  - 纯语法纠错
+  - 翻译整段文章
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 从【材料或主题】为【水平】挑十个可马上使用的词组。每个给语义、自然搭配、真实场景、混淆项和一句填空。把答案集中在结尾，并指出哪些表达偏口语或正式。
+  variables:
+  - '{''name'': ''材料或主题'', ''description'': ''学习材料或主题''}'
+  - '{''name'': ''水平'', ''description'': ''学习者水平''}'
+  - 材料或主题
+  - 水平
+  workflow:
+    workflow_id: language-practice
+    step: 2
+    next_lens_id: pt_language_roleplay
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#vocabulary-in-context
+  source_hash: 4f8d11b2e49d4cec16ab4f5bf032a4c8617b31905800ebc0b155b0a74fe3c3fb
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: writing_comms
+  subcategory: writing_polish
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

@@ -1,0 +1,52 @@
+id: pt_one_on_one
+title: 准备一对一议程
+tagline: 把进展、阻塞与对方关切整理成一对一沟通议程
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - communication
+  - management
+  - one_on_one
+  app_affinity:
+  - Notion
+  - Feishu
+  - Slack
+  - Mail
+  pain_point: 和上级、导师或同事一对一沟通时不知道该聊什么，进展、阻塞与对方关切东一榔头西一棒子，容易遗漏关键事项
+  trigger_utterances:
+  - 帮我准备下周和老板的1on1议程
+  - 和mentor一对一要聊什么
+  - 把最近进展和阻塞整理成议程
+  - one on one meeting agenda
+  - 帮我列一下和同事一对一的讨论点
+  anti_triggers:
+  - 日常群聊消息润色或改写
+  - 公开演讲或全员大会发言稿撰写
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 为与【对象和关系】的一对一准备【时长】议程。根据【最近进展和待讨论问题】，排出对方可能关心的事项、一个开放问题、要请求的帮助和最后确认的动作。
+  variables:
+  - 对象和关系
+  - 时长
+  - 最近进展和待讨论问题
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#one-on-one
+  source_hash: f63acaea7f9e12f6a3585d8a8e21e79136bc225e5e6638b6bcfa000c011fd70b
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: writing_comms
+  subcategory: workplace_comms
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

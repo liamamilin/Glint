@@ -1,0 +1,53 @@
+id: pt_anomaly_triage
+title: 排查图表突变根因
+tagline: 快速区分真实业务变化与数据采集/口径故障
+routing:
+  primitive: deconstruct
+  goals:
+  - debug
+  clarity_fit:
+  - concrete
+  - vague
+  domains:
+  - data
+  - anomaly_detection
+  - monitoring
+  - metrics
+  - observability
+  app_affinity:
+  - Chrome
+  - Notion
+  - Slack
+  pain_point: 图表或指标突然跳变，用户分不清是真实业务变化还是数据采集、口径或仪表故障，需要按可验证性排序候选原因并给出最小查询
+  trigger_utterances:
+  - 这个曲线昨天突然跌了30% 是不是bug
+  - 图表数据突然异常波动帮我排查
+  - metric spike 是真实还是监控问题
+  - dashboard 数字不对劲帮我查
+  - KPI 突变先查数据还是业务
+  anti_triggers:
+  - 需要写新功能代码实现的场景
+  - 纯业务策略讨论且无数据异常
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 【指标】在【日期与幅度】发生突变，已知有【事件、发布与数据情况】。先检查口径、采集完整性和对照维度，按可验证性排序候选原因。给最小查询和下一步判断规则。
+  variables:
+  - 指标
+  - 日期与幅度
+  - 事件、发布与数据情况
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#anomaly-triage
+  source_hash: 8be2ee771f736c5188da9e86f2a5fe9304e23a2e3a82aad741449ba65441e3c2
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: engineering
+  subcategory: debugging
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

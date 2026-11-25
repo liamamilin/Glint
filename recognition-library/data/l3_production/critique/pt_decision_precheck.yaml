@@ -1,0 +1,52 @@
+id: pt_decision_precheck
+title: 提前检验一个计划
+tagline: 投入前找出计划最可能翻车的薄弱环节
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  clarity_fit:
+  - concrete
+  - vague
+  domains:
+  - planning
+  - risk
+  - decision_making
+  - project_management
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Linear
+  - ChatGPT
+  pain_point: 手上已经有一个计划，但不知道三个月后会从哪里翻车，想在投入资源前把最脆弱、最容易验证的环节挑出来。
+  trigger_utterances:
+  - 这个计划三个月后会不会翻车
+  - 帮我做个事前验尸
+  - 投入前先挑挑毛病
+  - 预演一下失败原因
+  - 这个方案哪里最脆弱
+  anti_triggers:
+  - 项目已经失败后的复盘
+  - 从零开始头脑风暴新方案
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: 评估 {{input}}（当前计划），目标是 {{success_criteria}}（成功标准），重要限制是 {{constraints}}（现实约束）。假设计划三个月后失败，从现有信息找出五个可能原因，并按影响和验证成本排序。为前三个原因各给一个早期信号和一个可以马上做的小验证。
+  variables:
+  - success_criteria
+  - constraints
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#decision-precheck
+  source_hash: da1eecc6fdc72df545132f26a821d49146f4b8904e2fefc2282d8deaf9716386
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: personal_career
+  subcategory: personal_os
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

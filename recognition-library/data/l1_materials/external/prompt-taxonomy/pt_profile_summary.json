@@ -1,0 +1,28 @@
+{
+  "id": "pt_profile_summary",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#profile-summary",
+  "title": "写一段基于事实的职业简介",
+  "content": "根据【经历和成果】为【发布处及读者】写职业简介。第一句说擅长解决的实际问题，再给两个能支撑定位的具体例子。生成短版和长版，避免补造职位、项目或资质。",
+  "content_hash": "adff5f80e713b728a9b457cc92703c9fd9ad9fbf544391b121dfb3c8e9b09ae1",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "career",
+    "职业简介",
+    "自我介绍",
+    "LinkedIn",
+    "professional bio"
+  ],
+  "problem_solved": "让读者迅速知道你能解决什么问题。",
+  "when_to_use": "分类: 求职与职业",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "profile-summary",
+    "category": "career",
+    "variables": [
+      "经历和成果",
+      "发布处及读者"
+    ]
+  }
+}

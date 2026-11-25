@@ -1,0 +1,69 @@
+id: disc_business_charging_for_speed_and_certainty
+title: 向省时确定性收溢价
+tagline: 把免费信息的隐藏时间与试错成本打包成省心付费方案
+routing:
+  primitive: metacognize
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - business
+  - value_pricing
+  - pricing
+  - monetization
+  - time_saving
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Mail
+  - Chrome
+  pain_point: 用户认为网上教程和开源方案都是免费的，所以没人会为同类东西付费，从而低估了时间与确定性的价值。
+  trigger_utterances:
+  - 免费的教程这么多谁会付费啊
+  - 我做的东西网上都有免费的
+  - 怎么给服务定价才能让人买单
+  - 用户总说能免费找到为什么付钱
+  - 别人总拿免费方案压价怎么办
+  anti_triggers:
+  - 已有明确付费模式只缺执行营销文案
+  - 仅需对比竞品功能清单而非价值重估
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '## 把「免费」重估为付费价值
+
+
+    - [ ] 列出 {{domain}} 领域新手/忙人自己动手最容易卡住的 3 步（环境搭建、排错、部署/集成等）
+
+    - [ ] 为每一步估算隐藏时间成本与试错风险（小时数、失败概率、回滚成本）
+
+    - [ ] 将这 3 步打包成「开箱即用」方案，明确交付物与边界
+
+    - [ ] 提炼对 {{buyer_segment}} 最有说服力的 3 个时间/风险价值点（省时、确定性、少踩坑）
+
+    - [ ] 用「免费 DIY vs 付费省心」对比表呈现给买家，突出非金钱成本
+
+    - [ ] 设定溢价锚点：按节省时间 × 时薪 × 风险系数估算可接受价格区间
+
+    - [ ] 设计最小验证：先卖 3 个试点，收集反馈再扩大'
+  variables:
+  - domain
+  - buyer_segment
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-charging-for-speed-and-certainty
+  source_hash: 204087b9febb6c1ac44c020d4b6f604193e6feeadb74cf0c8ea2c05772fdfc31
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: product_business
+  subcategory: pricing_strategy
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

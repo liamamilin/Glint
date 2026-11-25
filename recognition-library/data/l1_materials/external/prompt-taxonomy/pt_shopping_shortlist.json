@@ -1,0 +1,28 @@
+{
+  "id": "pt_shopping_shortlist",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#shopping-shortlist",
+  "title": "把购买需求转成可验证的候选清单",
+  "content": "为【物品或用途】做购物清单，硬约束为【预算、兼容性、尺寸和地区】。先列淘汰条件，再比较三个可查候选的同版本价格、消耗品及保修成本。给查询日期、官方出处和下单前最后一个验证动作。",
+  "content_hash": "b90eeb8004d0da29fad0eaae04e822eee5c7f845ed8a50f06418e452ef7e7d61",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "planning",
+    "购物",
+    "选购",
+    "购买",
+    "shopping shortlist"
+  ],
+  "problem_solved": "按硬约束、总成本和售后逐一筛选。",
+  "when_to_use": "分类: 计划与生活",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "shopping-shortlist",
+    "category": "planning",
+    "variables": [
+      "物品或用途",
+      "预算、兼容性、尺寸和地区"
+    ]
+  }
+}

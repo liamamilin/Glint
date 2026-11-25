@@ -1,0 +1,78 @@
+id: sit_prd_03
+title: 边缘案例审计清单
+tagline: 发版前最后1小时，把4类极端态与移动端/深色模式过一遍
+routing:
+  primitive: deconstruct
+  goals:
+  - evaluate
+  - debug
+  clarity_fit:
+  - concrete
+  domains:
+  - product
+  - qa
+  - frontend
+  - ux
+  - mobile
+  app_affinity:
+  - Cursor
+  - Chrome
+  - Notion
+  pain_point: 功能在自己电脑上跑得很完美，准备发给真实用户前缺乏系统性边缘态检查，担心弱网、空状态、超长文本等真实场景踩坑
+  trigger_utterances:
+  - 功能本地跑通了准备发版前检查一下
+  - 上线前帮我过一遍边缘情况
+  - 弱网空状态这些都测了吗
+  - 发版前最后检查清单
+  - 帮我列个上线前边缘态审计表
+  anti_triggers:
+  - 纯代码重构或架构设计讨论
+  - 已上线后的线上故障排查与复盘
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '上线前边缘态通关表（按项勾选修复）
+
+
+    一、4 类极端态逐一拷问
+
+    - [ ] 空状态（0 数据）：空列表/空搜索结果是否有友好占位与引导
+
+    - [ ] 超长文本/双语换行：标题、昵称、按钮文案在窄屏是否溢出或截断异常
+
+    - [ ] 弱网/断网：请求超时、重试、离线提示与数据一致性
+
+    - [ ] 非法或重复点击：按钮防抖、幂等、重复提交与并发冲突
+
+
+    二、视觉与设备适配
+
+    - [ ] 移动端窄屏：布局、弹窗、键盘遮挡与横向滚动
+
+    - [ ] 深色/浅色模式：对比度、图标可见性、阴影与边框
+
+
+    三、分级处理
+
+    - [ ] 高发致命边缘态：补上优雅降级提示并验证
+
+    - [ ] 低频项：记录在案，不阻塞首次发布
+
+
+    误用警告：不要为了修复发生概率万分之一的极端 Bug 而无限推迟首次发布。'
+  variables: []
+  workflow: null
+meta:
+  source: super-individual-toolbox
+  source_ref: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/product-architect.json#prd-03
+  source_hash: 3f1ad2d4d8775c06bb0ef734af00ea9de565da75589e30c73cdb50a425fe70c5
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: engineering
+  subcategory: architecture
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

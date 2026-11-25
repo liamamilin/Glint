@@ -1,0 +1,44 @@
+id: pt_explain_code
+title: 解释代码与数据流
+tagline: 把一段代码的输入输出、状态、依赖与失败路径讲清楚
+routing:
+  primitive: deconstruct
+  goals:
+  - debug
+  - digest
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - software_engineering
+  - codebase
+  - debugging
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Terminal
+  pain_point: 读到陌生代码或模块时，不清楚它在整体里扮演什么角色、数据怎么流动、哪里会出错，直接修改怕踩坑。
+  trigger_utterances:
+  - 这段代码是干嘛的
+  - 帮我理一下这个模块的数据流
+  - explain this function
+  - 这个函数干啥的
+  - 读不懂这段代码
+  anti_triggers:
+  - 只想修一个明确的报错或具体 bug，不关心整体理解
+  - 要求直接重写或优化代码实现
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: 解释 {{input}} 在 {{goal_or_problem}} 中的作用。从输入到输出走一遍正常路径，指出关键状态、外部依赖和常见失败路径；有仓库上下文时引用具体文件或函数。最后给一个适合验证理解的小例子。
+  variables:
+  - goal_or_problem
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#explain-code
+  source_hash: 40d3dc10704e0c17d2aa01a2009cca98d963851fa3009a6d6ced41b759a540d4
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

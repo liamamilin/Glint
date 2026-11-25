@@ -1,0 +1,65 @@
+id: disc_content_clear_takeaway_and_next_step
+title: 结尾给5分钟小动作
+tagline: 把空泛升华换成读者5分钟能试的小动作
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - content
+  - writing
+  - copywriting
+  - content_strategy
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  - ChatGPT
+  pain_point: 写文章或做分享时结尾习惯拔高立意、抒情总结或喊口号，读者看完只有短暂赞同却带不走实际改变。
+  trigger_utterances:
+  - 结尾总是想升华一下怎么办
+  - 文章结尾怎么写才不空
+  - 分享最后怎么收尾
+  - 别只留一句口号
+  - 结尾给个小动作读者能试
+  anti_triggers:
+  - 需要整体重写全文结构或论证逻辑时
+  - 学术论文结论章节的规范写作
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '结尾行动化自检清单：
+
+    1. 用一句话标出正文核心观点，确认结尾要服务它。
+
+    2. 问自己：读者在 5 分钟内能完成的最小动作是什么？写出具体步骤与完成标准。
+
+    3. 删除空泛升华/抒情/口号，改为「动作 + 一句自检问题」。
+
+    4. 验证动作可操作：有明确输入、步骤、产出，且不依赖额外资源。
+
+    5. 可选：针对该主题设计 3 种结尾钩子——自测题 / 小实验 / 反向思考，各写一句。
+
+
+    输入模板：
+
+    - 正文/核心要点：[粘贴]
+
+    - 常写主题：[填写]
+
+
+    输出：1 个不矫情的结尾 + 1 个 5 分钟小动作（或 3 种风格的结尾行动钩子）。'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/content.json#content-clear-takeaway-and-next-step
+  source_hash: d1e0520658f796ad887ca31e1c84f3a565e4d1778cce8e22305af2f695ab4234
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

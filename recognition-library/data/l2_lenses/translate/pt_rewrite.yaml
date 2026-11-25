@@ -1,0 +1,45 @@
+id: pt_rewrite
+title: 润色并保留原意
+tagline: 在不改变事实与立场的前提下，把文本改得更清晰有条理。
+routing:
+  primitive: translate
+  goals:
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - writing
+  - editing
+  - communication
+  app_affinity:
+  - Mail
+  - Notion
+  - Slack
+  - Feishu
+  pain_point: 用户有一段表达混乱、冗长或语气不当的文本，需要在不改变事实、专有名词、承诺和原有立场的前提下提升清晰度、结构与语气，但不知如何改写。
+  trigger_utterances:
+  - 这段话太绕了帮我润色一下
+  - 帮我改写一下这封邮件
+  - 这段文案读起来很乱帮我整理
+  - 把这段话改得更清楚一点
+  - rewrite this paragraph keeping the meaning
+  anti_triggers:
+  - 需要从零全新创作文案而非改写现有文本
+  - 需要把文本翻译成其他语言
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: 请把{{input}}改得更清楚，读者是{{audience}}，语气是{{tone}}。保持事实、专有名词、承诺和原有立场，删去重复并把最重要的信息提前。先给可直接使用的版本，再列出最多三处改变原句结构的原因。
+  variables:
+  - audience
+  - tone
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#rewrite
+  source_hash: fcda32cc14b2a0d737073e7805510f10dae77c9ccce79a1dd68de0fb4e1e18f6
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

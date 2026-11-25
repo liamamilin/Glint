@@ -1,0 +1,52 @@
+id: disc_cognition_separating_signal_from_hype
+title: 给热门概念挤泡沫
+tagline: 3问剥出概念真价值与真实局限
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - cognition
+  - hype_filter
+  - verification
+  - skepticism
+  - research
+  app_affinity:
+  - Notion
+  - Chrome
+  - ChatGPT
+  - Claude
+  pain_point: 新概念很火却分不清真价值和炒作，怕错过又怕踩坑
+  trigger_utterances:
+  - 这个新工具是不是又在炒概念？
+  - AI Agent 到底值不值得学？
+  - 这个框架吹得神乎其神，真能落地吗？
+  - 别人都在追，我该不该跟进？
+  anti_triggers:
+  - 只是想快速了解一个成熟工具的基本用法
+  - 需要完整技术选型报告而非快速判断
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '【3 问挤泡沫清单】
+
+    1. 它吹嘘的理想场景是什么？证据链在哪里（用户、数据、成本）？
+
+    2. 真实落地卡点是什么？成本 / 延迟 / 数据 / 留存 / 集成 / 维护各卡在哪？
+
+    3. 哪些场景用传统简单方案就够了？边界条件是什么？
+
+    输出：值得深入 / 先观察 / 不值得，并给一句理由。'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/cognition.json#cognition-separating-signal-from-hype
+  source_hash: 9bfb2153f2e9f3a8a04ee9cd7d7889aa29b080547290f91c7b930394b7133ad9
+  status: active
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

@@ -1,0 +1,28 @@
+{
+  "id": "pt_perspective_rehearsal",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#perspective-rehearsal",
+  "title": "从不同视角试读一条重要消息",
+  "content": "从【各读者角色与关切】分别解读【消息】，指出每个角色可能误解哪一句、为什么以及会采取什么动作。给最小改写，保留已经承诺的事，并推荐一个发送前核实问题。",
+  "content_hash": "102d42f6d03e00ebfa5c042a0b694e472d001f73eaffdece2f3e92cf735bdb09",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "communication",
+    "换位思考",
+    "误解",
+    "敏感沟通",
+    "perspective taking"
+  ],
+  "problem_solved": "提前发现可能被误解的承诺或语气。",
+  "when_to_use": "分类: 沟通与协商",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "perspective-rehearsal",
+    "category": "communication",
+    "variables": [
+      "各读者角色与关切",
+      "消息"
+    ]
+  }
+}

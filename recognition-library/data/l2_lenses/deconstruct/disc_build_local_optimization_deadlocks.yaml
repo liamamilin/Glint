@@ -1,0 +1,90 @@
+id: disc_build_local_optimization_deadlocks
+title: 排查局部合理却全局僵局
+tagline: 找出每步都合理但合在一起却卡死的流程死锁点
+routing:
+  primitive: deconstruct
+  goals:
+  - debug
+  - optimize
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - systems
+  - architecture
+  - workflow
+  - bottlenecks
+  - deadlock
+  app_affinity:
+  - Notion
+  - Linear
+  - Slack
+  - Feishu
+  pain_point: 每个步骤、规则单独看都合理安全，但拼在一起的系统却卡死、迟钝、无人敢动，却找不到具体死锁节点
+  trigger_utterances:
+  - 每个环节单独看都合理，合起来却卡死了
+  - 流程里全是缓冲和审批，整条链路却动不了
+  - 单点都聪明，全局却僵局
+  - 帮我找出这个工作流哪里死锁了
+  - 每一步都加特判，最后谁也不敢动
+  anti_triggers:
+  - 单个节点性能慢需要优化
+  - 需要新增一个功能或审批步骤
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '## 局部合理却全局僵局排查清单
+
+
+    ### 1. 梳理流转管道
+
+    - [ ] 列出 [工作流/工具链/协作机制] 的全部环节与规则
+
+    - [ ] 标注每个环节的输入、输出、等待条件
+
+    - [ ] 识别所有缓冲、审批、特判、重试、回滚节点
+
+
+    ### 2. 识别死锁节点
+
+    - [ ] 哪个节点需要上游产物才能动，但上游又依赖它？
+
+    - [ ] 哪里存在“先审批再执行，执行结果再审批”的循环？
+
+    - [ ] 哪里有“ everyone can veto, no one can decide” 的否决权堆叠？
+
+    - [ ] 哪里缓冲叠加导致延迟累积超过 SLA？
+
+    - [ ] 哪里特判过多导致路径分支爆炸、没人敢动？
+
+
+    ### 3. 全局流转验证
+
+    - [ ] 画出端到端最小流转路径（happy path）
+
+    - [ ] 标注每步等待时间与失败回退代价
+
+    - [ ] 检查是否存在“局部最优但全局阻塞”的规则
+
+    - [ ] 试跑一次完整流转，记录卡点与 workaround
+
+
+    ### 4. 修复建议
+
+    - [ ] 能合并的审批合并，能前置的校验前置
+
+    - [ ] 为死锁节点设超时与自动升级
+
+    - [ ] 明确单一决策 owner，消除否决权堆叠
+
+    - [ ] 删除“单独合理但全局无用”的特判'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/build.json#build-local-optimization-deadlocks
+  source_hash: 02c48850474007cba6dacc873fac1e1156b560c66d859110e232eea6dc442024
+  status: active
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

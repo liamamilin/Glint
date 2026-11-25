@@ -1,0 +1,28 @@
+{
+  "id": "pt_recipe_scale",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#recipe-scale",
+  "title": "按人数、容器和食材改写食谱",
+  "content": "把【原食谱】改成适合【人数、设备与食材约束】的版本。给改后用量、需要分批的步骤和用肉眼判断完成的信号。把不能简单按比例调整的调味、温度或烹饪时间单列。",
+  "content_hash": "1ec12bab03ceaeee64b2a8f84262c0259ced730b9494d5f7e8b97b4b36031162",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "planning",
+    "菜谱",
+    "食谱换算",
+    "换算",
+    "烹饪"
+  ],
+  "problem_solved": "让调整后的份量和时间能直接使用。",
+  "when_to_use": "分类: 计划与生活",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "recipe-scale",
+    "category": "planning",
+    "variables": [
+      "原食谱",
+      "人数、设备与食材约束"
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+id: pt_decline_request
+source: prompt-taxonomy
+source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#decline-request
+source_hash: 269767a92ab53d94ad39b9dc7bb9023dffb19c1d713fc6e83aa28a71d842028e
+reasons:
+- low_confidence:0.00<0.60
+- 'unknown_primitive:'
+- missing_goals
+- missing_clarity_fit
+- missing_pain_point
+- insufficient_trigger_utterances:0<2
+duplicate_of: null
+duplicate_score: null
+draft:
+  primitive: translate
+  goals:
+  - create
+  clarity_fit:
+  - concrete
+  domains:
+  - communication
+  - boundaries
+  - negotiation
+  - professional_writing
+  app_affinity:
+  - Mail
+  - Slack
+  - Feishu
+  - WeChat
+  pain_point: 用户需要拒绝对方请求但担心伤及关系，希望清楚说明实际限制并给出可行替代帮助与跟进
+  trigger_utterances:
+  - 帮我回绝这个请求但别太生硬
+  - 这个忙我做不了，怎么礼貌拒绝
+  - 帮我写个拒绝消息，说明限制和替代方案
+  - 我想拒绝但不想破坏关系
+  - 帮我回复说暂时不行并给其他帮助
+  anti_triggers:
+  - 需要接受并执行对方请求
+  - 需要强硬拒绝或拉黑对方
+  execution:
+    action_type: inject_prompt
+    inject_mode: append
+    content: 请根据以下信息，帮我起草回复【对方请求】的消息：关系：{{关系}}；实际限制：{{实际限制}}。输出两个版本：1）简短直接版；2）更体谅背景版。两个版本都必须明确：我能否提供其他帮助，以及是否会再次跟进。语气清楚、礼貌、不模糊。
+    variables:
+    - 对方请求
+    - 关系
+    - 实际限制

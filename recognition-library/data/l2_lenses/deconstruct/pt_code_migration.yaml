@@ -1,0 +1,45 @@
+id: pt_code_migration
+title: 规划兼容迁移
+tagline: 把中断风险、回退点和验证步骤讲清楚
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - concrete
+  domains:
+  - coding
+  - migration
+  - compatibility
+  - devops
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Terminal
+  pain_point: 做版本或接口升级迁移时不清楚影响范围、分批顺序、回退点和验证步骤，担心中断生产
+  trigger_utterances:
+  - 帮我规划从旧版本迁到新版本的方案
+  - 这个接口升级会影响哪些调用方
+  - 迁移失败了怎么回退
+  - 升级要分几批做，每批怎么验证
+  - plan a compatible migration with rollback
+  anti_triggers:
+  - 只是想写新功能代码
+  - 简单的 bug 修复排查
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 为【当前版本或接口】迁移到【目标版本】拟实施方案，约束为【调用者和停机限制】。列受影响入口、分批顺序、兼容策略、每阶段验证和回退条件。把需要先确认的假设写成检查项。
+  variables:
+  - current_version_or_api
+  - target_version
+  - caller_and_downtime_constraints
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#code-migration
+  source_hash: e93978a10750164b96af54efee433756feace9f2ecd896e49fccb4643951b3aa
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

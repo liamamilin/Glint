@@ -1,0 +1,33 @@
+{
+  "id": "disc_content_curated_curation_edge",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/content.json#content-curated-curation-edge",
+  "title": "极高密度的“反过载策展”替代泛资讯搬运",
+  "content": "旧共识（盲区）：做自媒体必须保持日更、追热点，靠更新频率维持存在感。\n\n新现实（破盲视角）：内容供给无限趋近于免费后，受众最稀缺的不是“多看一篇”，而是有人替他们狠心删掉 99% 噪音、只留 1% 经过实测验证的精选。\n\n破冰追问母题：\n- 在 [你关注的垂直领域] 里，大家每天都被哪些低质重复信息轰炸？帮我设计一份“每月只发一次、但每条都经过实测验证”的高密度策展专栏结构。\n- 如何为 [某垂直主题] 设计一套透明的“入选红线与淘汰标准”，让读者一眼看出我的推荐库和普通搬运号有本质区别？",
+  "content_hash": "91c83a98d3958908e734072b2edb5ecf9b3861b46b0ea8c8b2885cc441a05011",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "content",
+    "invisible-friction",
+    "role-inversion",
+    "curation",
+    "signal",
+    "anti-slop",
+    "niche-media"
+  ],
+  "problem_solved": "做自媒体必须保持日更、追热点，靠更新频率维持存在感。",
+  "when_to_use": "内容供给无限趋近于免费后，受众最稀缺的不是“多看一篇”，而是有人替他们狠心删掉 99% 噪音、只留 1% 经过实测验证的精选。",
+  "procedural_steps": [
+    "在 [你关注的垂直领域] 里，大家每天都被哪些低质重复信息轰炸？帮我设计一份“每月只发一次、但每条都经过实测验证”的高密度策展专栏结构。",
+    "如何为 [某垂直主题] 设计一套透明的“入选红线与淘汰标准”，让读者一眼看出我的推荐库和普通搬运号有本质区别？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "content-curated-curation-edge",
+    "arena": "content",
+    "lenses": [
+      "invisible-friction",
+      "role-inversion"
+    ]
+  }
+}

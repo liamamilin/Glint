@@ -1,0 +1,67 @@
+id: pt_structured_output
+title: 结构化输出设计
+tagline: 为重复调用设计稳定可解析的 JSON 输出结构
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - create
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - prompt_workflows
+  - structured_output
+  - json_schema
+  - prompt_schema
+  app_affinity:
+  - Cursor
+  - VS Code
+  - ChatGPT
+  - Claude
+  pain_point: AI 输出格式不稳定，下游程序解析失败或字段缺失，无法可靠自动化
+  trigger_utterances:
+  - 让模型稳定输出 JSON 不要乱格式
+  - 下游解析老报错怎么定字段
+  - 怎么给 AI 输出加 schema 校验
+  - JSON 字段老缺失怎么办
+  - structured output 怎么设计
+  anti_triggers:
+  - 只是想让 AI 写自由文本总结，不需要程序解析
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '为【任务】和【下游程序】设计 JSON 结构。定义字段名、类型、必填项、枚举和缺失或证据不足的表示。给一个正常示例和一个边界示例，再写用模式验证结果的步骤。
+
+
+    请按以下步骤输出：
+
+    1. 明确下游程序需要的字段与类型，标注必填/可选。
+
+    2. 为枚举字段列出允许值，为缺失/证据不足定义统一占位（如 null 或 "unknown"）。
+
+    3. 提供一个正常示例（happy path）和一个边界示例（缺失/冲突/证据不足）。
+
+    4. 写出用 JSON Schema（或等价模式）验证输出的步骤与失败处理。
+
+    5. 最终输出严格 JSON，不含多余解释。'
+  variables:
+  - '{''name'': ''任务'', ''description'': ''需要结构化输出的任务描述''}'
+  - '{''name'': ''下游程序'', ''description'': ''消费该 JSON 的程序或接口''}'
+  - 任务
+  - 下游程序
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#structured-output
+  source_hash: 18c6d19c061932b0e984030d87382dfbb3aa8fc11c6f0193ef698282696f0c58
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: engineering
+  subcategory: ai_workflow
+  collections: []
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

@@ -1,0 +1,52 @@
+id: disc_life_personal_knowledge_decay_pruning
+title: 20分钟断舍离三分法
+tagline: 20分钟把收藏/笔记/杂物分成保留、归档、清理三类，立刻清爽。
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - life
+  - declutter
+  - digital_hygiene
+  - minimalism
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  pain_point: 收藏夹、笔记、网盘和房间堆满东西，总觉得留着有用、删了怕浪费，越堆越多反而找不到真正需要的，心理负担重。
+  trigger_utterances:
+  - 收藏夹里全是没看过的文章帮我清理一下
+  - 笔记越积越多找不到重点
+  - 桌面乱糟糟的想断舍离
+  - 总舍不得删东西怎么办
+  - 帮我设计20分钟 declutter 规则
+  anti_triggers:
+  - 只是想快速摘要一篇文章
+  - 需要深度知识管理架构设计
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: "20 分钟极简归档与清理清单\n\n准备：打开目标库（收藏夹/笔记/桌面/衣柜），设 20 分钟计时。\n\n步骤：\n1. 快速扫描（3 分钟）：只看标题/缩略图，不打开详情。\n2. 三分法（12 分钟）：每项只能归入一类：\n\
+    \   - 保留（Keep）：近 30 天用过或明确会用 → 留在原位，加标签。\n   - 归档（Archive）：有价值但非活跃 → 移入「归档」文件夹/标签，不再占视线。\n   - 清理（Delete/Discard）：重复、过时、从未打开、心理安慰\
+    \ → 删除/丢弃。\n3. 兜底规则（3 分钟）：犹豫超过 10 秒的默认归档；无法归档的默认清理。\n4. 收尾（2 分钟）：记录清理数量，设定下次清理日期。\n\n3 个犀利追问（判断宝藏 vs 心理安慰剂）：\n- 过去 6 个月里，我是否因为拥有它而产生过一次真实行动？\n\
+    - 如果明天它消失，我是否会真的去重建/重找它？\n- 我留下它，是因为它有用，还是因为它代表「理想中的我」？"
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/life.json#life-personal-knowledge-decay-pruning
+  source_hash: 137e01e2ee243520dc24f632669c535a1e515f3125764fd8245e07e22fa385cb
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: personal_career
+  subcategory: personal_os
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

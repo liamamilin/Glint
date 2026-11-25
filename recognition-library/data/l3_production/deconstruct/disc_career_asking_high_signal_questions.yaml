@@ -1,0 +1,66 @@
+id: disc_career_asking_high_signal_questions
+title: 高信号提问清单
+tagline: 把背景、尝试和卡点说清，让回答直击干货
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - career
+  - mentorship
+  - communication
+  - problem_solving
+  app_affinity:
+  - ChatGPT
+  - Claude
+  - Slack
+  - Mail
+  pain_point: 向同事、导师或 AI 提问时只说“怎么办/帮我看看”，对方得反复追问背景，回答慢且泛。
+  trigger_utterances:
+  - 这个 bug 怎么办，帮我看看
+  - 想请教一下这个架构怎么设计
+  - 这个文案怎么改才好
+  - 帮我 review 一下这个方案
+  - 我卡住了，该怎么推进
+  anti_triggers:
+  - 用户已提供完整背景和尝试过程，只需直接给结论
+  - 需要系统教程或概念讲解，而非把提问改写得更清晰
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '高信号提问清单：
+
+    - 目标：我最终要解决/决定什么？
+
+    - 上下文：项目背景、约束、相关材料在哪里？
+
+    - 已尝试：试过哪些方法，结果如何？
+
+    - 卡点：具体停在哪一步，现象/报错是什么？
+
+    - 期望：希望对方给建议、方案、review 还是决策？
+
+    - 精简：消息控制在 120 字内，先结论后细节。
+
+    模板 1（请教专家）：我想向 [专家] 请教 [问题]：目标是…；背景是…；已尝试…；卡点是…；能否给 1-2 条建议？
+
+    模板 2（改写求助）：把原提问改成：背景/目标/已尝试/卡点/期望输出。'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/career.json#career-asking-high-signal-questions
+  source_hash: e3a3fd005466f9709aabed83778472a4fa445c9af2df1a1a71036952dc751189
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: writing_comms
+  subcategory: workplace_comms
+  collections: []
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

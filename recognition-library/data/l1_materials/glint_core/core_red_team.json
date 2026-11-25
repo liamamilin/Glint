@@ -1,0 +1,21 @@
+{
+  "id": "core_red_team",
+  "source": "glint-core",
+  "source_ref": "cards.yaml#red_team",
+  "title": "红队反方拷问",
+  "content": "请扮演最挑剔的反对者（红队），不要附和，直接逐条攻击我上述想法中最脆弱的 3 个核心假设。",
+  "content_hash": "505582e4371def725c053f8d0a51838529ec5d434f16ec627a02b010be5d2de8",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "critique"
+  ],
+  "problem_solved": "决策验证 / 寻找盲区",
+  "when_to_use": "",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "red_team",
+    "legacy_dimension": "critique",
+    "legacy_mode": "append"
+  }
+}

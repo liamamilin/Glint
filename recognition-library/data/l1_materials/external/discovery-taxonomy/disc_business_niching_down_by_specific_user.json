@@ -1,0 +1,33 @@
+{
+  "id": "disc_business_niching_down_by_specific_user",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-niching-down-by-specific-user",
+  "title": "把“给所有人用”收窄成“专为某类具体人解决某件事”",
+  "content": "旧共识（盲区）：受众写得越宽，潜在客户就越多，缩窄人群等于主动放弃市场。\n\n新现实（破盲视角）：泛泛而谈很难让人觉得“这东西是给我做的”；一旦切准某一类具体人群的特定场景，文案、功能和获客渠道都会变得异常清晰。\n\n破冰追问母题：\n- 我目前面向的受众/客户群有点宽：[简述你的产品、服务或内容方向]。请帮我拆出 3 个更具体的细分人群切口，并说明每个切口最突出的痛点。\n- 针对 [你选定的一个细分人群]，帮我写出他们日常最常抱怨的一句话，以及能直接回应这句话的产品/服务切入点。",
+  "content_hash": "830c76cafebfa85287b30e16034bbe507bf2165804b38e2a2d9c7926a4519b47",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "business",
+    "role-inversion",
+    "first-principles",
+    "niche-down",
+    "icp",
+    "positioning",
+    "indie"
+  ],
+  "problem_solved": "受众写得越宽，潜在客户就越多，缩窄人群等于主动放弃市场。",
+  "when_to_use": "泛泛而谈很难让人觉得“这东西是给我做的”；一旦切准某一类具体人群的特定场景，文案、功能和获客渠道都会变得异常清晰。",
+  "procedural_steps": [
+    "我目前面向的受众/客户群有点宽：[简述你的产品、服务或内容方向]。请帮我拆出 3 个更具体的细分人群切口，并说明每个切口最突出的痛点。",
+    "针对 [你选定的一个细分人群]，帮我写出他们日常最常抱怨的一句话，以及能直接回应这句话的产品/服务切入点。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "business-niching-down-by-specific-user",
+    "arena": "business",
+    "lenses": [
+      "role-inversion",
+      "first-principles"
+    ]
+  }
+}

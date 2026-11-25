@@ -1,0 +1,29 @@
+{
+  "id": "pt_routine_design",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#routine-design",
+  "title": "把目标变成一套可持续的习惯",
+  "content": "我想培养【习惯】，目前在【时间和环境】最容易坚持。设计触发信号、正常版本、忙时最低版本和一次失败后的恢复方式。用【可观察指标】安排一周试行，并给一个复盘问题。",
+  "content_hash": "f92b6999f60b38fcddc35bc247623f559486750e85dc3565f5e08b0a58bad363",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "planning",
+    "习惯",
+    "日常",
+    "habit",
+    "routine"
+  ],
+  "problem_solved": "设计触发点和忙时的最低版本。",
+  "when_to_use": "分类: 计划与生活",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "routine-design",
+    "category": "planning",
+    "variables": [
+      "习惯",
+      "时间和环境",
+      "可观察指标"
+    ]
+  }
+}

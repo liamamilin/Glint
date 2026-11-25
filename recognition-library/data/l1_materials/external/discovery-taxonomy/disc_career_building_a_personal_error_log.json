@@ -1,0 +1,33 @@
+{
+  "id": "disc_career_building_a_personal_error_log",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/career.json#career-building-a-personal-error-log",
+  "title": "建一份“个人踩坑与误判账本”，让同一类坑只踩一次",
+  "content": "旧共识（盲区）：犯错或判断失误后尽快翻篇、别老盯着不愉快的事看，下次自然会记住。\n\n新现实（破盲视角）：记性靠不住，相似的坑换个马甲还会再来；花 3 分钟记下“当时为什么这么判 + 信号是什么 + 下次前置检查点”，每次犯错都在升级你的过滤网。\n\n破冰追问母题：\n- 回想我过去半年在 [工作/项目/决策/表达] 中踩过的 3 个印象最深的坑：[简述 3 次经历]。帮我提炼出每一种坑的“早期预警信号”和一条“下次开工前自检问题”。\n- 帮我设计一份 3 分钟就能填完的“个人误判/踩坑记录模板”，重点留住教训而不是自我责备。",
+  "content_hash": "488605030d558f7a36c45f5843f9196e850cf35ae8f830ed87d913facdc66a30",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "career",
+    "first-principles",
+    "cross-domain",
+    "error-log",
+    "debugging",
+    "learning",
+    "craft"
+  ],
+  "problem_solved": "犯错或判断失误后尽快翻篇、别老盯着不愉快的事看，下次自然会记住。",
+  "when_to_use": "记性靠不住，相似的坑换个马甲还会再来；花 3 分钟记下“当时为什么这么判 + 信号是什么 + 下次前置检查点”，每次犯错都在升级你的过滤网。",
+  "procedural_steps": [
+    "回想我过去半年在 [工作/项目/决策/表达] 中踩过的 3 个印象最深的坑：[简述 3 次经历]。帮我提炼出每一种坑的“早期预警信号”和一条“下次开工前自检问题”。",
+    "帮我设计一份 3 分钟就能填完的“个人误判/踩坑记录模板”，重点留住教训而不是自我责备。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "career-building-a-personal-error-log",
+    "arena": "career",
+    "lenses": [
+      "first-principles",
+      "cross-domain"
+    ]
+  }
+}

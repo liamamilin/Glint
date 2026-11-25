@@ -1,0 +1,48 @@
+id: core_root_cause
+title: 根因定位与排障
+tagline: 报错时快速列出最可能根因与最小验证步骤
+routing:
+  primitive: critique
+  goals:
+  - debug
+  clarity_fit:
+  - concrete
+  domains:
+  - engineering
+  - debugging
+  - devops
+  - backend
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Terminal
+  pain_point: 服务报错或故障时不知道从哪下手，需要快速定位最可能的根因并用最小成本验证
+  trigger_utterances:
+  - 这个报错怎么排查
+  - 服务挂了帮我找原因
+  - debug 这个 error
+  - root cause 是什么
+  - 日志报错了但不知道哪出问题
+  anti_triggers:
+  - 只是想了解概念而非排查故障
+  - 代码 review 找风格问题
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 请按发生概率从高到低，先列出最可能的 3 个根因，并针对每个根因给出一条最小验证命令或排查步骤。
+  variables: []
+  workflow: null
+meta:
+  source: glint-core
+  source_ref: cards.yaml#root_cause
+  source_hash: 751f5a99ef97d405dc387d8eae609c6bfb1810e5bdab84fd98e6b21f1dd28c16
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  category: engineering
+  subcategory: debugging
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

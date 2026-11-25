@@ -1,0 +1,62 @@
+id: disc_life_protecting_morning_or_peak_window
+title: 守住每天第一块黄金时段
+tagline: 先留30-60分钟给自己，别被消息接管
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - life
+  - attention
+  - boundaries
+  - deep_work
+  - morning
+  app_affinity:
+  - Mail
+  - Slack
+  - WeChat
+  - Chrome
+  pain_point: 一醒来就回消息刷资讯，真正想做的事被挤掉，全天注意力主权被交出去
+  trigger_utterances:
+  - 早上一睁眼就看手机回消息，真正想做的事又被挤掉了
+  - 我每天醒来第一件事就是刷资讯回消息，很难留时间给自己
+  - 想给早晨留 30 分钟做自己的事，但总被别人消息打断
+  - 早起后注意力总被他人需求接管，怎么温和地守住黄金时间
+  anti_triggers:
+  - 需要完整 Pomodoro 工作法或番茄钟计时方案
+  - 需要处理紧急线上事故或值班响应流程
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '温和晨间黄金时段保护清单：
+
+    1. 起床后先不打开消息/资讯 App，给前 30-60 分钟留作自己的时间。
+
+    2. 只做一件最小、明确、能完成的小事（如写字、阅读、散步、整理当天重点），不追求完美。
+
+    3. 手机保持勿扰或仅允许紧急联系人；消息延后到黄金时段结束后统一处理。
+
+    4. 若被打断，只记录“稍后处理”，不立即进入他人需求。
+
+    5. 结束时用一句话记录：今天最想推进的一件事是什么。
+
+    6. 根据作息类型调整：早起党放晨间，夜猫子放起床后第一段清醒时间，轮班者放班前/班后固定窗口。'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/life.json#life-protecting-morning-or-peak-window
+  source_hash: fba8d8e62d6b247ab82afa0724a138b625f17511087146c002c9268adb726a36
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: personal_career
+  subcategory: personal_os
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

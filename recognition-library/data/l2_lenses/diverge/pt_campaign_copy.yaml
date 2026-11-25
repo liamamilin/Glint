@@ -1,0 +1,47 @@
+id: pt_campaign_copy
+title: 同一目标多角度文案
+tagline: 为同一产品/活动生成三组不同说服角度的文案
+routing:
+  primitive: diverge
+  goals:
+  - create
+  clarity_fit:
+  - concrete
+  domains:
+  - copywriting
+  - marketing
+  - advertising
+  - creative
+  app_affinity:
+  - Notion
+  - Feishu
+  - Chrome
+  - ChatGPT
+  pain_point: 只写出同义改写、卖点堆砌，缺乏不同说服角度与渠道适配，无法比较哪种表达更有效
+  trigger_utterances:
+  - 帮我写几版不同角度的文案
+  - 这个产品文案太单薄了多写几个方向
+  - 营销文案只会换词帮我换个思路
+  - 给这个活动写三组不同卖点的广告语
+  - write 3 different copy angles for this campaign
+  anti_triggers:
+  - 只是润色或语法修正现有文案
+  - 需要单一句子 slogans 而非完整文案组
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 给【产品或活动】写三组面向【受众和渠道】的文案，目标是【希望读者采取的行动】，可使用的证据是【事实与卖点】。每组采用不同说服角度，给标题、正文、行动提示和适用情境。所有量化承诺需来自素材。
+  variables:
+  - 产品或活动
+  - 受众和渠道
+  - 希望读者采取的行动
+  - 事实与卖点
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#campaign-copy
+  source_hash: 72461643bdd315fe5be64512832eeabf2d1db65f403e7f63a74695b3cec05ad9
+  status: active
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

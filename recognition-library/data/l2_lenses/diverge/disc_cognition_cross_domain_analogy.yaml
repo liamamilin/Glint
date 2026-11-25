@@ -1,0 +1,55 @@
+id: disc_cognition_cross_domain_analogy
+title: 跨学科解法移植
+tagline: 把别行业的成熟解法翻译到你的问题上
+routing:
+  primitive: diverge
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - cognition
+  - cross_domain
+  - analogy
+  - innovation
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 遇到难题时只在自己行业最佳实践里找答案，却忽略了其他学科早有成熟解法
+  trigger_utterances:
+  - 这个架构问题 stuck 了十年怎么办
+  - 换个角度看这个问题
+  - 其他行业怎么解决类似问题
+  - 用游戏设计思路重新设计流程
+  - 别行业有没有现成解法
+  anti_triggers:
+  - 已有明确方案只需执行落地
+  - 纯代码 bug 排查与修复
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '1. 用一句话描述你卡住的问题，去掉所有行业黑话。
+
+    2. 把问题抽象成底层结构（输入 / 输出 / 约束 / 反馈）。
+
+    3. 从 3 个毫不相关的领域（游戏设计、急诊医学、航空管制、生态学…）找出成熟解法。
+
+    4. 将每个解法翻译回你的领域，列出可直接照搬的机制。
+
+    5. 选 1 个最小改动做 7 天验证。
+
+    6. （可选）把项目/习惯当游戏机制重新设计：即时反馈、难度曲线、防挫败。'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/cognition.json#cognition-cross-domain-analogy
+  source_hash: 7275c6e92e13ec714c37fc6667b636352462d9c82c51a23118ff411109495bb2
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

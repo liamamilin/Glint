@@ -1,0 +1,29 @@
+{
+  "id": "pt_choose_learning_resource",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#choose-learning-resource",
+  "title": "在课程与资料中选出合适路径",
+  "content": "我想学【技能】，已有【基础、时间与预算】。比较【候选资源或可联网范围】中的适合项，按先修、时长、实际练习和能完成的作品列证据。给先试的第一节、选择另一资源的条件和核对入口。",
+  "content_hash": "e56534d92db51206a471d5edec84e539a87273533d63f166d5dd637886206a7c",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "learning",
+    "课程推荐",
+    "教材",
+    "学习资源",
+    "course selection"
+  ],
+  "problem_solved": "用先修要求、练习质量和可投入时间筛选。",
+  "when_to_use": "分类: 学习与辅导",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "choose-learning-resource",
+    "category": "learning",
+    "variables": [
+      "技能",
+      "基础、时间与预算",
+      "候选资源或可联网范围"
+    ]
+  }
+}

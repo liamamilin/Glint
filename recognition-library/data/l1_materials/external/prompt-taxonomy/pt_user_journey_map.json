@@ -1,0 +1,27 @@
+{
+  "id": "pt_user_journey_map",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#user-journey-map",
+  "title": "从观察材料还原用户旅程",
+  "content": "把【用户材料】整理成【目标任务】的旅程图。每步列用户目标、行动、工具、困难、证据及完成信号。突出对最终结果影响最大的断点，并给可观察的修复指标。",
+  "content_hash": "31f7ce42a28fce473d81582544aab8c0dd32db2762d841d0b7ec98ca3b549054",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "product",
+    "用户旅程",
+    "体验",
+    "journey map"
+  ],
+  "problem_solved": "找到实际入口、交接点和高摩擦步。",
+  "when_to_use": "分类: 产品与业务",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "user-journey-map",
+    "category": "product",
+    "variables": [
+      "用户材料",
+      "目标任务"
+    ]
+  }
+}

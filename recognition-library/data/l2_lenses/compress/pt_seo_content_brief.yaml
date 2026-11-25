@@ -1,0 +1,43 @@
+id: pt_seo_content_brief
+title: 按搜索需求写内容简报
+tagline: 把查询和搜索结果整理成可写作的内容简报
+routing:
+  primitive: compress
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - marketing
+  - seo
+  - search_intent
+  - content_strategy
+  app_affinity:
+  - Chrome
+  - Notion
+  pain_point: 手头有主题和搜索查询，但不知道用户真正要回答什么问题，也不知道文章结构、原创素材和引用该怎么组织。
+  trigger_utterances:
+  - 帮我根据这些搜索词写内容简报
+  - 这些关键词背后的用户问题是什么
+  - SEO 文章结构怎么排
+  - 把搜索结果整理成写作 brief
+  - 这个主题该回答哪些问题
+  anti_triggers:
+  - 只是想直接生成一篇完整 SEO 文章，而不是先做简报
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 请为【主题和读者】制作搜索内容简报。基于【可用查询或搜索结果】归纳用户想回答的问题，输出主问题、相关问题、建议结构、可提供的原创材料和需要引用的来源。若没有来源，不要估计搜索量或竞争度。
+  variables:
+  - 主题和读者
+  - 可用查询或搜索结果
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#seo-content-brief
+  source_hash: ec527690c7e1ec74aab3aa7c1036073a94d2ce1714af4c101c0fc10fdf42788e
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

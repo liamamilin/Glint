@@ -1,0 +1,33 @@
+{
+  "id": "disc_life_making_healthy_defaults_easier",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/life.json#life-making-healthy-defaults-easier",
+  "title": "把健康习惯做成“顺手就能做 5 分钟”的小动作，而不是高难度打卡",
+  "content": "旧共识（盲区）：运动、拉伸、喝水或早起要么一次练足一小时、严格执行，要么干脆算今天没练。\n\n新现实（破盲视角）：忙乱或疲惫时，高门槛计划最容易断掉；把“5 分钟活动/伸展/出门走走”设成底线，既保住节奏又不会因为偶尔偷懒而全盘放弃。\n\n破冰追问母题：\n- 我平时久坐或作息容易乱，想把 [某项健康习惯，如活动肩颈/快走/规律作息] 变成轻松的日常默认项。请帮我设计一个“忙时 5 分钟保底版 + 闲时正常版”。\n- 针对我最容易偷懒或中断的时段：[填时段]，设计 2 个几乎不需要换衣服或额外准备的微动作。",
+  "content_hash": "8bc1777a17fd955cb432842f844c1b2c69da9f4fa0f1e51bb02a2176844e46df",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "life",
+    "invisible-friction",
+    "cost-collapse",
+    "health",
+    "routines",
+    "simplicity",
+    "habits"
+  ],
+  "problem_solved": "运动、拉伸、喝水或早起要么一次练足一小时、严格执行，要么干脆算今天没练。",
+  "when_to_use": "忙乱或疲惫时，高门槛计划最容易断掉；把“5 分钟活动/伸展/出门走走”设成底线，既保住节奏又不会因为偶尔偷懒而全盘放弃。",
+  "procedural_steps": [
+    "我平时久坐或作息容易乱，想把 [某项健康习惯，如活动肩颈/快走/规律作息] 变成轻松的日常默认项。请帮我设计一个“忙时 5 分钟保底版 + 闲时正常版”。",
+    "针对我最容易偷懒或中断的时段：[填时段]，设计 2 个几乎不需要换衣服或额外准备的微动作。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "life-making-healthy-defaults-easier",
+    "arena": "life",
+    "lenses": [
+      "invisible-friction",
+      "cost-collapse"
+    ]
+  }
+}

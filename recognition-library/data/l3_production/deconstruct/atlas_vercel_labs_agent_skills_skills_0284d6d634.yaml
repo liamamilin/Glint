@@ -1,0 +1,77 @@
+id: atlas_vercel_labs_agent_skills_skills_0284d6d634
+title: Vercel 部署路径决策
+tagline: 部署前先查状态，再选正确 Vercel 部署路径
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - deployment
+  - vercel
+  - cli
+  - git
+  app_affinity:
+  - Terminal
+  - Cursor
+  - VS Code
+  pain_point: 每次部署到 Vercel 前不知道该先检查什么状态、选哪条路径，容易误触发交互、重复链接或部署失败
+  trigger_utterances:
+  - 帮我部署到 Vercel
+  - vercel 部署怎么走
+  - 项目还没链接怎么部署
+  - git push 部署还是 cli 部署
+  - vercel whoami 看下状态
+  anti_triggers:
+  - 仅修改 Vercel 项目设置或环境变量
+  - 非 Vercel 平台部署（如 Netlify、AWS）
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '部署前先做四步只读状态检查：
+
+    1. git remote -v（是否有 remote）
+
+    2. 检查 .vercel/project.json 或 .vercel/repo.json 是否存在（是否已链接）
+
+    3. vercel whoami（CLI 是否认证）
+
+    4. vercel teams ls（可用团队，仅已认证时）
+
+
+    根据「已链接/未链接 × 有无 git remote × CLI 是否认证」选路径：
+
+    - 理想：已链接 + 有 remote → 征得用户明确同意后 git add/commit/push，由 Vercel 自动构建；CLI 已认证时用 vercel ls 取最新 preview URL。
+
+    - 已链接但无 remote → vercel deploy -y --no-wait，再 vercel inspect 检查状态。
+
+    - 未链接且 CLI 已认证 → 先选团队，再 --repo 链接（有 remote）或普通 link（无 remote），随后按 git push 或 CLI 部署。
+
+    - 未认证且可交互 → 安装/登录 CLI，选团队，链接并部署。
+
+    - 无法登录 → 用 --temporary 临时部署，告知 claim 链接与过期时间。
+
+
+    默认 preview，仅用户明确要求 production；多团队时后续命令统一 --scope；最终目标是把项目推进到已链接且可通过 git push 部署的长期状态。
+
+
+    避坑：未链接目录不要用 vercel project inspect/ls/link 探测状态；未获明确批准不要 git push；CI 或已链接项目目录不要用 --temporary；不要把 CLI 可用性检查升级为权限提升。'
+  variables: []
+  workflow: null
+meta:
+  source: atlas-methods
+  source_ref: vercel-labs/agent-skills:skills/deploy-to-vercel/SKILL.md
+  source_hash: baa6f20381e4b62262ac53ccb1571985f5d16435afaf15af6181561819e2ab65
+  status: active
+  scope: domain_specific
+  shelf: off_shelf
+  tier: A
+  category: general
+  subcategory: decision
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

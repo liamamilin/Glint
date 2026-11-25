@@ -1,0 +1,72 @@
+id: pt_api_docs
+title: 给已有 API 写调用文档
+tagline: 从接口代码生成含参数、示例、错误与幂等说明的调用文档
+routing:
+  primitive: translate
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - api_docs
+  - backend
+  - http
+  - openapi
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Notion
+  - Chrome
+  pain_point: 已有接口代码或协议，需要快速给调用方一份可读的使用文档，但认证、边界、错误、幂等/分页等细节容易遗漏或 undocumented
+  trigger_utterances:
+  - 帮我给这个接口写调用文档
+  - 这个 API 没文档，调用方不知道怎么用
+  - 根据这段 controller 生成 API docs
+  - 把接口参数和响应结构整理成文档
+  - write api docs for this endpoint
+  anti_triggers:
+  - 从零设计全新 API 协议或 OpenAPI schema
+  - 单纯翻译已有英文文档成中文
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: '根据【接口代码或协议】为【调用者】写使用文档。
+
+
+    要求：
+
+    1. 请求参数：列出所有参数（路径/查询/请求体/请求头），含类型、必填、默认值、取值范围与约束。
+
+    2. 响应结构：成功响应与错误响应的字段、类型、含义；标注可空/可选。
+
+    3. 正常示例：至少 1 个最短可运行调用例（curl 或代码片段），覆盖认证方式。
+
+    4. 常见错误：列出高频错误码/状态码、触发条件、排查建议。
+
+    5. 幂等与分页：说明是否幂等、重试语义；分页参数与游标/偏移行为。
+
+    6. 未在实现中明确证明的行为，一律标「待确认」，不得臆断。
+
+
+    输出为 Markdown，结构清晰，可直接粘贴到 README / OpenAPI / Notion。
+
+
+    接口代码或协议：
+
+    {{input}}
+
+    调用者：
+
+    {{audience}}'
+  variables:
+  - audience
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#api-docs
+  source_hash: 6e5900bca950e6f3d3bdada180dfc38d515fee4e670d52e756ea18bae0b3b8fd
+  status: active
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

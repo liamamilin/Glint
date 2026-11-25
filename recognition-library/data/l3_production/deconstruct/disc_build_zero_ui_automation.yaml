@@ -1,0 +1,55 @@
+id: disc_build_zero_ui_automation
+title: 零界面自动化清单
+tagline: 把重复操作变成后台自动执行，异常时才提醒你
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - automation
+  - productivity
+  - scripting
+  - workflow
+  app_affinity:
+  - Terminal
+  - Cursor
+  - Notion
+  pain_point: 用户每天被重复机械操作和精美界面牵着走，时间浪费在点击与切换，却没有把流程变成后台自动执行
+  trigger_utterances:
+  - 每天都要手动整理下载文件夹好烦
+  - 这个操作我重复了十几次了
+  - 能不能后台自动跑不用我点
+  - 想把XX流程自动化
+  - 界面太多太 cluttered 了
+  anti_triggers:
+  - 需要从零设计新仪表盘或 GUI 时
+  - 一次性手动任务无需自动化时
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: "零界面自动化最小 checklist\n\n1. 盘点重复操作\n   - 列出每天重复 ≥3 次的机械动作：{{repetitive_actions}}\n   - 标注每次耗时与出错率\n\n2. 选定触发条件（只留一个）\n\
+    \   - 文件夹监听 / 全局快捷键 / 定时 cron / 事件钩子\n\n3. 设计自动执行链路\n   - 输入 → 处理脚本 → 输出落点\n   - 无 UI：全程后台运行，不弹窗\n\n4. 异常通知策略\n   - 仅失败/超时/异常时推送（通知中心/邮件/Slack）\n\
+    \   - 正常情况完全静默\n\n5. 最小实现\n   - 用 1 个脚本 + 1 个触发器先跑通\n   - 记录日志便于排查\n\n6. GUI 砍掉版重构（可选）\n   - 目标工具/流程：{{target_tool_or_workflow}}\n\
+    \   - 保留三步：触发条件 → 自动执行 → 异常通知\n   - 删除所有手动面板与确认弹窗\n\n7. 验证与迭代\n   - 连续运行 3 天无异常再扩展\n   - 失败时回退到手动流程"
+  variables:
+  - repetitive_actions
+  - target_tool_or_workflow
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/build.json#build-zero-ui-automation
+  source_hash: 33677e0f654e2980415205a703e17adad4a30cde3f2eff6a3e85556fffac7a63
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: engineering
+  subcategory: ai_workflow
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

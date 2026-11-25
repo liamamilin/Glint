@@ -1,0 +1,28 @@
+{
+  "id": "pt_compare_reviews",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#compare-reviews",
+  "title": "区分评论里的共同信号和个案",
+  "content": "从【评论或测评】比较【产品或服务】在【关注维度】上的体验。逐项记录相同反馈的样本数、代表原句、使用情境及例外。区分测量、主观判断和宣传内容，指出样本偏差。",
+  "content_hash": "99b58035b5e252f4324b5c3796d452ca2cedd96c190215c557500a3491009f8b",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "research",
+    "评价",
+    "评论评估",
+    "review synthesis"
+  ],
+  "problem_solved": "按体验维度和使用条件分析。",
+  "when_to_use": "分类: 查找与研究",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "compare-reviews",
+    "category": "research",
+    "variables": [
+      "评论或测评",
+      "产品或服务",
+      "关注维度"
+    ]
+  }
+}

@@ -1,0 +1,43 @@
+id: pt_language_level_check
+title: 语言水平速测
+tagline: 三任务粗估你的语言水平与缺口
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - language_learning
+  - cefr
+  - proficiency_assessment
+  app_affinity:
+  - ChatGPT
+  - Claude
+  pain_point: 不知道自己当前语言水平在哪，也说不清具体语法、词汇和理解缺口在哪里
+  trigger_utterances:
+  - 测测我的英语水平
+  - 帮我估一下日语能力
+  - I want to know my French level
+  - level check my Spanish
+  - 想知道自己英语到哪了
+  anti_triggers:
+  - 单纯翻译一句话
+  - 只纠正单句语法
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 用{{target_language}}评估我在{{scenario}}下目前的能力。给三段不同难度的理解与表达任务，等我答完再从流畅度、准确度和表达范围给粗略估计。举出每个判断对应的证据，并留一个下次可复查的小任务。
+  variables:
+  - target_language
+  - scenario
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#language-level-check
+  source_hash: 67ccf6ca2ce707881e5f2e8b8a36ebd707ba203f2becb482b6ac023806d308a8
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

@@ -1,0 +1,45 @@
+id: pt_follow_up
+title: 写跟进消息
+tagline: 根据往来记录生成简洁跟进消息，明确确认事项与期限。
+routing:
+  primitive: translate
+  goals:
+  - create
+  clarity_fit:
+  - concrete
+  domains:
+  - communication
+  - follow_up
+  - negotiation
+  - project_management
+  app_affinity:
+  - Mail
+  - Slack
+  - Feishu
+  pain_point: 用户需要催办或跟进事项，但难以写出简洁有力的跟进消息，容易冗长或被忽略。
+  trigger_utterances:
+  - 帮我写个跟进邮件
+  - 催一下对方
+  - follow up message 怎么写
+  - 写个消息推进这个事
+  - 帮我 drafted 个跟进
+  anti_triggers:
+  - 不适用于撰写长篇汇报或首次 outreach 邮件
+  - 不适用于需要复杂谈判的场景
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 根据【往来记录】为【收件人】写一条跟进消息。两三句交代背景，一个句子写清希望确认的事和【下一步时间】。若存在多种可能状态，给对方一个容易回复的选项。
+  variables:
+  - 往来记录
+  - 收件人
+  - 下一步时间
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#follow-up
+  source_hash: 4f5577a2ede100c09ce1826a23729939ff1cb7549b2d6d5668fc888d560c1968
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

@@ -1,0 +1,33 @@
+{
+  "id": "disc_career_protecting_deep_focus_blocks",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/career.json#career-protecting-deep-focus-blocks",
+  "title": "把碎片时间留给琐事，给难啃的硬活留整块安静时间",
+  "content": "旧共识（盲区）：只要有空档就随时插空做复杂任务，零碎时间也能把硬活一点点拼完。\n\n新现实（破盲视角）：复杂思考需要进入状态和上下文加载，频繁被打断会让脑子一直处于“重启加载”中；把整块时间留给硬活，零碎时间处理回消息、整理和收尾。\n\n破冰追问母题：\n- 我这周需要推进的硬活是：[填核心任务]，日常琐碎事务包括：[填零碎事务]。请帮我设计一种简单的日程安排方式，把整块时间留给核心任务。\n- 当我在做深度工作时，最容易被哪 2 种外部或内部干扰打断？给出简单可行的隔离办法。",
+  "content_hash": "397098c1f3bfb225a8d55be390fe235cb65e2df5052381cd1b6e45010be19f00",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "career",
+    "first-principles",
+    "invisible-friction",
+    "deep-work",
+    "focus",
+    "context-switching",
+    "craft"
+  ],
+  "problem_solved": "只要有空档就随时插空做复杂任务，零碎时间也能把硬活一点点拼完。",
+  "when_to_use": "复杂思考需要进入状态和上下文加载，频繁被打断会让脑子一直处于“重启加载”中；把整块时间留给硬活，零碎时间处理回消息、整理和收尾。",
+  "procedural_steps": [
+    "我这周需要推进的硬活是：[填核心任务]，日常琐碎事务包括：[填零碎事务]。请帮我设计一种简单的日程安排方式，把整块时间留给核心任务。",
+    "当我在做深度工作时，最容易被哪 2 种外部或内部干扰打断？给出简单可行的隔离办法。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "career-protecting-deep-focus-blocks",
+    "arena": "career",
+    "lenses": [
+      "first-principles",
+      "invisible-friction"
+    ]
+  }
+}

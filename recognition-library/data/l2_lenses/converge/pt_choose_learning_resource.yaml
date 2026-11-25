@@ -1,0 +1,48 @@
+id: pt_choose_learning_resource
+title: 课程资源路径筛选
+tagline: 按先修、时长与练习证据选最适合的学习资源
+routing:
+  primitive: converge
+  goals:
+  - evaluate
+  - optimize
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - learning
+  - course_selection
+  - education
+  - skill_acquisition
+  app_affinity:
+  - Chrome
+  - Notion
+  - Obsidian
+  pain_point: 面对一堆课程、教材或学习路径，不知道哪个性价比高、自己能否跟上，以及能否通过练习真正做出作品
+  trigger_utterances:
+  - 我想学 Python，这几个课程哪个更适合我
+  - 时间不多，帮我从这些教程里选一个
+  - 先修要求太高了，我该选哪个入门资源
+  - 想学设计，这些课哪个更实用
+  - 预算有限，比较一下这些学习资源
+  anti_triggers:
+  - 已经选定课程，只想生成每日学习计划
+  - 只是询问某个知识点的解释，不涉及资源比较
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 我想学 {{skill}}，已有 {{background_time_budget}}。请比较 {{candidate_resources}} 中的适合项，并按以下维度列证据：先修要求、预计时长、实际练习质量、能完成的作品/交付物。然后给出：1)
+    推荐先试的第一节；2) 选择另一资源的条件；3) 可核对的入口或试听/试读链接。避免只给结论，每个推荐都要说明依据与风险。
+  variables:
+  - skill
+  - background_time_budget
+  - candidate_resources
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#choose-learning-resource
+  source_hash: e56534d92db51206a471d5edec84e539a87273533d63f166d5dd637886206a7c
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

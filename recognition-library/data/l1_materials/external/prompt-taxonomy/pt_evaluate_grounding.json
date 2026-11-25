@@ -1,0 +1,26 @@
+{
+  "id": "pt_evaluate_grounding",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#evaluate-grounding",
+  "title": "评测材料问答有没有证据支撑",
+  "content": "对【模型回答及参考材料】逐条评测。拆出可验证主张并找支持、矛盾或无出处的片段，标记引用是否对版。统计有出处且被支持的条目，写影响最大的一处问题和修复后的验收样例。",
+  "content_hash": "828a7b592066dffa70657ea837f5f98942066232271fbf9ced29349434158c1a",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "prompt-workflows",
+    "有据回答",
+    "RAG评测",
+    "citation evaluation"
+  ],
+  "problem_solved": "检查生成内容的引用与材料相关性。",
+  "when_to_use": "分类: 提示词与 AI 工作流",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "evaluate-grounding",
+    "category": "prompt-workflows",
+    "variables": [
+      "模型回答及参考材料"
+    ]
+  }
+}

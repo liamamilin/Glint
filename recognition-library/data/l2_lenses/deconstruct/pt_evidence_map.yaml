@@ -1,0 +1,47 @@
+id: pt_evidence_map
+title: 主张-证据对照表
+tagline: 把研究材料与结论做成矩阵，看清每条结论被什么证据支持
+routing:
+  primitive: deconstruct
+  goals:
+  - evaluate
+  - digest
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - research
+  - evidence_analysis
+  - citation
+  - literature_review
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  - Cursor
+  pain_point: 手头一堆研究材料和待验证结论，分不清每条结论到底被哪些证据支持、支持到什么程度，容易把二手报道当一手证据，结论 shaky
+  trigger_utterances:
+  - 帮我把这篇综述里的结论和引用对一下
+  - 这些说法到底有证据吗
+  - 把证据和主张做成对照表
+  - 这个结论的证据链在哪
+  - 帮我梳理一下文献支持关系
+  anti_triggers:
+  - 单纯想写综述摘要或润色
+  - 做实验设计或数据分析 unrelated
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 把 {{research_materials}} 与 {{claims}} 做成证据矩阵。每行记录一个主张及来源、关键摘录、适用范围、支持方向（支持/部分支持/反驳/不相关）和证据缺口。来自同一数据或上游报道的材料归在一起（标注来源层级：一手数据/二手报道/观点）。最后指出最影响结论的一处缺口及下一步最小验证动作。
+  variables:
+  - research_materials
+  - claims
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#evidence-map
+  source_hash: d4901db041922850cc713eaa72d4de377668fc1c13e56c832ecd309ed93edb0a
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

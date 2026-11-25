@@ -1,0 +1,62 @@
+id: disc_build_small_composable_modules
+title: 拆解臃肿脚本为小模块
+tagline: 把抓取/清洗/判断/输出拆成可复用的单一职责小模块
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - build
+  - automation
+  - scripts
+  - modularity
+  - unix_philosophy
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Terminal
+  pain_point: 写自动化时把抓取、清洗、判断、输出全塞进一个几百行的庞大脚本里，换数据源或输出目标就要重写
+  trigger_utterances:
+  - 这个脚本太长了帮我拆一下
+  - 抓取清洗判断输出都写在一个文件里
+  - 想把自动化拆成小模块复用
+  - 脚本几百行想重构
+  - 这个 workflow 太臃肿了
+  anti_triggers:
+  - 只是想加一个新功能不拆分
+  - 单文件小脚本无需拆解
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '1. 列出当前脚本的完整流程步骤（抓取/清洗/判断/输出）。
+
+    2. 为每一步定义单一职责：只做一件事，不夹带其他逻辑。
+
+    3. 为相邻步骤约定极简数据格式（JSON/CSV/行文本），明确字段与类型。
+
+    4. 把每步抽成独立可执行的小工具，输入 stdin/文件，输出 stdout/文件。
+
+    5. 用管道/编排把小工具串起来，验证端到端输出一致。
+
+    6. 抽取最常用的过滤/转换小工具，单独保存以便复用。
+
+    7. 换数据源或输出目标时，只替换对应模块，其余模块不动。'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/build.json#build-small-composable-modules
+  source_hash: f57c2566c3315b1b5777444f69610b922c8ca6eeea0dbc92d8745d36fc922b4e
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: engineering
+  subcategory: ai_workflow
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

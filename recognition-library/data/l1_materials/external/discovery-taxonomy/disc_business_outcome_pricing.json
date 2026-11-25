@@ -1,0 +1,33 @@
+{
+  "id": "disc_business_outcome_pricing",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-outcome-pricing",
+  "title": "从“按人头卖软件”转向“按结果卖交付”",
+  "content": "旧共识（盲区）：B2B 软件的标准商业模式是 SaaS 按席位（per-seat）收费，把工具交给客户自己操作。\n\n新现实（破盲视角）：当 AI 工作流能端到端干完活，客户不再愿意为“多一个登录账号”付钱，而是愿意为“挽回一笔坏账/产出一份合规报告”按结果付费。\n\n破冰追问母题：\n- 针对 [某个传统服务行业，如财税/招聘/法务/跨境电商]，拆解一个目前按人工工时收费的环节，设计“AI 自动执行 + 人工兜底 + 按结果计费”的报价结构。\n- 如果我要把 [你的专业技能] 包装成一个“按单交付结果”的产品化服务（Productized Service），最小闭环的定价、交付 SLA 和防扯皮边界该怎么写？",
+  "content_hash": "1261904e36ec45809815a22aa64f82c3b92e00c6c7e9fc479eba30a3163a9942",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "business",
+    "role-inversion",
+    "first-principles",
+    "pricing",
+    "saas",
+    "agent",
+    "service-as-software"
+  ],
+  "problem_solved": "B2B 软件的标准商业模式是 SaaS 按席位（per-seat）收费，把工具交给客户自己操作。",
+  "when_to_use": "当 AI 工作流能端到端干完活，客户不再愿意为“多一个登录账号”付钱，而是愿意为“挽回一笔坏账/产出一份合规报告”按结果付费。",
+  "procedural_steps": [
+    "针对 [某个传统服务行业，如财税/招聘/法务/跨境电商]，拆解一个目前按人工工时收费的环节，设计“AI 自动执行 + 人工兜底 + 按结果计费”的报价结构。",
+    "如果我要把 [你的专业技能] 包装成一个“按单交付结果”的产品化服务（Productized Service），最小闭环的定价、交付 SLA 和防扯皮边界该怎么写？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "business-outcome-pricing",
+    "arena": "business",
+    "lenses": [
+      "role-inversion",
+      "first-principles"
+    ]
+  }
+}

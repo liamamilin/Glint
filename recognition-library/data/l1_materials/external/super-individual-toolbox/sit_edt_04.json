@@ -1,0 +1,29 @@
+{
+  "id": "sit_edt_04",
+  "source": "super-individual-toolbox",
+  "source_ref": "https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/editorial.json#edt-04",
+  "title": "金句与隐喻提炼炉",
+  "content": "定位：把干瘪的专业术语，压成一眼记住的具象画面\n\n触发场景：当你写完一个好产品或好观点，却发现标题平淡无奇、一句话说不清它到底牛在哪时。\n\n核心机制：\n- 输入核心机制或产品功能，找出读者最熟悉的 3 个日常物理隐喻（如工具箱、安检门、手术刀）\n- 强制用“反差对比”或“动作画面”重写成 15 字以内的短句（例如：从 X 变成 Y）\n- 做“陌生人 3 秒盲测”：删掉所有行业黑话，看外行能不能瞬间听懂\n\n交付物：5 个备选高传播度 Slogan / 隐喻钩子\n\n推荐装配：隐喻联想 Prompt + 个人金句灵感库\n\n误用警告：不要为了押韵或抖机灵而牺牲准确性；好的隐喻是降低理解成本，不是制造歧义。",
+  "content_hash": "36a53caee9aadcfe06d1bb33a01de6e2a36c4d104b35a362fb9ae50757a960b5",
+  "suggested_action_type": "open_resource",
+  "domain_hints": [
+    "editorial",
+    "内容与叙事官"
+  ],
+  "problem_solved": "当你写完一个好产品或好观点，却发现标题平淡无奇、一句话说不清它到底牛在哪时。",
+  "when_to_use": "当你写完一个好产品或好观点，却发现标题平淡无奇、一句话说不清它到底牛在哪时。",
+  "procedural_steps": [
+    "输入核心机制或产品功能，找出读者最熟悉的 3 个日常物理隐喻（如工具箱、安检门、手术刀）",
+    "强制用“反差对比”或“动作画面”重写成 15 字以内的短句（例如：从 X 变成 Y）",
+    "做“陌生人 3 秒盲测”：删掉所有行业黑话，看外行能不能瞬间听懂"
+  ],
+  "anti_patterns": [
+    "不要为了押韵或抖机灵而牺牲准确性；好的隐喻是降低理解成本，不是制造歧义。"
+  ],
+  "metadata": {
+    "original_id": "edt-04",
+    "drawer": "editorial",
+    "drawer_zh": "内容与叙事官",
+    "deliverable": "5 个备选高传播度 Slogan / 隐喻钩子"
+  }
+}

@@ -1,0 +1,52 @@
+id: disc_content_interactive_toys
+title: 交互式网页玩具内容
+tagline: 把复杂概念做成可玩网页，3分钟让用户悟懂并想分享
+routing:
+  primitive: diverge
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - content_strategy
+  - interactive_design
+  - web_toys
+  - viral_content
+  app_affinity:
+  - Chrome
+  - Figma
+  - Notion
+  pain_point: 想传播一个复杂观点，但图文短视频卷平台算法太累，想要一种让人亲手点几下就能悟懂、还愿意分享的可玩形式
+  trigger_utterances:
+  - 帮我设计一个能让人玩3分钟就懂的概念网页
+  - 想做个可交互的小玩具来传播这个观点
+  - 别再写长文了，给我3个网页小游戏原型
+  - 做一个用户玩完会截图发朋友圈的小测试
+  anti_triggers:
+  - 只是想写一篇普通公众号文章
+  - 需要完整的生产级网页应用
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '1. 明确你想传播的复杂概念：[填入你想讲的概念]
+
+    2. 明确目标受众：[如程序员/理财新手/英语学习者]
+
+    3. 设计 3 个“可交互网页玩具/小游戏”玩法原型，让用户玩 2 分钟就能彻底悟懂
+
+    4. 至少包含 1 个带反差幽默感、玩完忍不住截图分享的极简网页小测试
+
+    5. 原型需可由单人借助 AI 快速实现，避免重工程'
+  variables:
+  - concept
+  - audience
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/content.json#content-interactive-toys
+  source_hash: 1fbaec982f4e8891456be68c63ff93f685ad4aa7e86dcc6fdad9be3bb4766cac
+  status: active
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

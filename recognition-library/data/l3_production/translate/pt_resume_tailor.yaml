@@ -1,0 +1,66 @@
+id: pt_resume_tailor
+title: 按岗位调整简历
+tagline: 把通用简历按目标JD重写匹配经历
+routing:
+  primitive: translate
+  goals:
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - career
+  - resume
+  - job_search
+  - cv
+  app_affinity:
+  - Notion
+  - Chrome
+  - ChatGPT
+  - Claude
+  pain_point: 手上有通用简历和目标岗位JD，却不知道怎么把经历重新组织来突出匹配度，又不想编造数据
+  trigger_utterances:
+  - 帮我按这个岗位改一下简历
+  - 根据JD调整简历
+  - 把我的经历匹配到这个职位
+  - resume tailor to this job
+  - 按岗位要求重写简历经历
+  anti_triggers:
+  - 从零开始写一份新简历
+  - 与求职无关的文案润色
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '根据【已有简历】和【岗位说明】调整简历。提取岗位重点要求，为每项要求匹配对应经历与证据，重写最相关的三条经历。沿用实际职位、日期与数字；缺失的量化信息用「待补充」标出。
+
+
+    已有简历：
+
+    {{resume}}
+
+
+    岗位说明：
+
+    {{job_description}}'
+  variables:
+  - resume
+  - job_description
+  - 已有简历
+  - 岗位说明
+  workflow:
+    workflow_id: job-application
+    step: 2
+    next_lens_id: pt_star_stories
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#resume-tailor
+  source_hash: 490568a7ae59d678d2bbcc6b0c8b58e646d8d9d3905846c07330764e80b13228
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: personal_career
+  subcategory: career
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

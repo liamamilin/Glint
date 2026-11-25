@@ -1,0 +1,33 @@
+{
+  "id": "disc_business_micro_paid_diagnoses",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-micro-paid-diagnoses",
+  "title": "卖“24 小时高密度诊断报告”替代重型咨询",
+  "content": "旧共识（盲区）：提供专业建议或方案必须拉长战线做几周的大项目、开无数次会，否则显得不够专业。\n\n新现实（破盲视角）：AI 把信息收集与初稿梳理压缩到几分钟后，结合个人经验快速指出“哪 3 个卡点正在烧钱/拖慢效率”的固定价格快审，决策门槛极低、利润率极高。\n\n破冰追问母题：\n- 结合 [你的专业背景/经验]，设计一款“定价明确、48 小时内交付、聚焦解决 1 个痛点”的微诊断服务（如落地页转化诊断/AI 工作流体检/简历与定位诊断），写出交付物清单。\n- 在 [某垂直人群，如独立开发者/小商家/求职者] 决策花钱前，他们最害怕“花了大钱却没用”；如何用“低价快审 + 抵扣后续合作”降低首单顾虑？",
+  "content_hash": "012ca35962d2123ff50480e1341f08f1f708a1dc75601124ca26a4e8f7fffce0",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "business",
+    "invisible-friction",
+    "cost-collapse",
+    "audit",
+    "productized-service",
+    "high-margin",
+    "b2b"
+  ],
+  "problem_solved": "提供专业建议或方案必须拉长战线做几周的大项目、开无数次会，否则显得不够专业。",
+  "when_to_use": "AI 把信息收集与初稿梳理压缩到几分钟后，结合个人经验快速指出“哪 3 个卡点正在烧钱/拖慢效率”的固定价格快审，决策门槛极低、利润率极高。",
+  "procedural_steps": [
+    "结合 [你的专业背景/经验]，设计一款“定价明确、48 小时内交付、聚焦解决 1 个痛点”的微诊断服务（如落地页转化诊断/AI 工作流体检/简历与定位诊断），写出交付物清单。",
+    "在 [某垂直人群，如独立开发者/小商家/求职者] 决策花钱前，他们最害怕“花了大钱却没用”；如何用“低价快审 + 抵扣后续合作”降低首单顾虑？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "business-micro-paid-diagnoses",
+    "arena": "business",
+    "lenses": [
+      "invisible-friction",
+      "cost-collapse"
+    ]
+  }
+}

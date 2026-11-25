@@ -1,0 +1,33 @@
+{
+  "id": "disc_content_tightening_prose_by_cutting_fluff",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/content.json#content-tightening-prose-by-cutting-fluff",
+  "title": "写完初稿后狠心删掉 30% 废话，留下的往往更有力量",
+  "content": "旧共识（盲区）：内容越长、铺垫越多、解释越细，才越显得充实和认真。\n\n新现实（破盲视角）：把重复的过渡句、空洞修饰词和绕弯子的铺垫删掉之后，核心观点会更锋利，读者的阅读负担也轻了一大截。\n\n破冰追问母题：\n- 这是我刚写完的一段草稿：[粘贴草稿]。请帮我删掉重复和水分，保留原意与个人语气，给出一个更精炼、更有节奏感的版本。\n- 帮我检查这段文字：[粘贴文字]，标出哪些句子属于“可有可无的铺垫或重复”，并说明为什么可以删掉。",
+  "content_hash": "a093572533f29189714e60b328626bea9fd9060efe80dd05619ffe4beedb0c43",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "content",
+    "first-principles",
+    "cost-collapse",
+    "editing",
+    "clarity",
+    "conciseness",
+    "craft"
+  ],
+  "problem_solved": "内容越长、铺垫越多、解释越细，才越显得充实和认真。",
+  "when_to_use": "把重复的过渡句、空洞修饰词和绕弯子的铺垫删掉之后，核心观点会更锋利，读者的阅读负担也轻了一大截。",
+  "procedural_steps": [
+    "这是我刚写完的一段草稿：[粘贴草稿]。请帮我删掉重复和水分，保留原意与个人语气，给出一个更精炼、更有节奏感的版本。",
+    "帮我检查这段文字：[粘贴文字]，标出哪些句子属于“可有可无的铺垫或重复”，并说明为什么可以删掉。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "content-tightening-prose-by-cutting-fluff",
+    "arena": "content",
+    "lenses": [
+      "first-principles",
+      "cost-collapse"
+    ]
+  }
+}

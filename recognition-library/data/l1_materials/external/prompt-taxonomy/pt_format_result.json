@@ -1,0 +1,29 @@
+{
+  "id": "pt_format_result",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#format-result",
+  "title": "按既有模板制作交付文档",
+  "content": "使用【参考模板】和【内容素材】制作【交付文件】。沿用标题层级、日期和表格格式，归置各段信息。缺失内容先占位，末尾列模板中仍需补充的栏目，并核对输出在正常阅读视图是否完整。",
+  "content_hash": "9df42faff0351cb44d847e4fcb1e934beba740dd7851a7940824af1378fb00f1",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "files",
+    "文档模板",
+    "格式",
+    "报告",
+    "document template"
+  ],
+  "problem_solved": "把素材放入正确结构并保留样式约束。",
+  "when_to_use": "分类: 文档与文件",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "format-result",
+    "category": "files",
+    "variables": [
+      "参考模板",
+      "内容素材",
+      "交付文件"
+    ]
+  }
+}

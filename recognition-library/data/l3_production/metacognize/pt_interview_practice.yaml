@@ -1,0 +1,54 @@
+id: pt_interview_practice
+title: 模拟面试追问练习
+tagline: 用真实追问练出更具体、可信、匹配岗位的回答
+routing:
+  primitive: metacognize
+  goals:
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - interview
+  - career
+  - job_search
+  - learning
+  app_affinity:
+  - ChatGPT
+  - Claude
+  - Notion
+  pain_point: 面试回答空泛、细节不足，缺乏真实追问下的临场练习与反馈
+  trigger_utterances:
+  - 帮我模拟一次面试
+  - 按这个岗位 JD 练习面试
+  - 帮我追问细节看我的回答靠不靠谱
+  - 面完给我反馈哪里答得空
+  - practice interview for this role
+  anti_triggers:
+  - 只是想生成面试题清单
+  - 只想润色简历 wording
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 为【岗位】做模拟面试，招聘要求是【岗位说明】，我的背景是【相关经历】。每次问一题，依据回答追问细节。结束后从具体性、可信度和岗位匹配度给反馈，并指出一个我下次要重练的回答。
+  variables:
+  - 岗位
+  - 岗位说明
+  - 相关经历
+  workflow:
+    workflow_id: job-application
+    step: 4
+    next_lens_id: pt_interview_debrief
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#interview-practice
+  source_hash: 6a18ade96f2642824f98d85cbb555fe0ce6016a54111cdd4f3019dfadbef4dd1
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: personal_career
+  subcategory: career
+  collections: []
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

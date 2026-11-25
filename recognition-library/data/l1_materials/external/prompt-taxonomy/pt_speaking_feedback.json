@@ -1,0 +1,27 @@
+{
+  "id": "pt_speaking_feedback",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#speaking-feedback",
+  "title": "复盘一段外语口语表达",
+  "content": "根据【我的录音或逐字稿】和【目标听众】评估口语。先指出两个影响理解的问题，各给修正和重说练习。有音频时标注可听到的语音证据，只有文字时聚焦表达组织和用词。",
+  "content_hash": "3772159dd6cb14767777fb06943fdcfd233271955ec8565133edccfe30820d6d",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "language",
+    "口语反馈",
+    "发音",
+    "speaking feedback"
+  ],
+  "problem_solved": "分别处理表达、用词和能验证的语音问题。",
+  "when_to_use": "分类: 语言练习与本地化",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "speaking-feedback",
+    "category": "language",
+    "variables": [
+      "我的录音或逐字稿",
+      "目标听众"
+    ]
+  }
+}

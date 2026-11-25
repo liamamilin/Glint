@@ -1,0 +1,52 @@
+id: pt_troubleshoot_everyday
+title: 日常故障排查清单
+tagline: 从低成本可逆检查开始，一步步定位日常故障
+routing:
+  primitive: deconstruct
+  goals:
+  - debug
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - troubleshooting
+  - planning
+  - device
+  - everyday_life
+  app_affinity:
+  - Terminal
+  - Notion
+  - Obsidian
+  pain_point: 日常设备或流程出问题时，不知道从哪查起，怕一上来就做不可逆操作或白花钱求助
+  trigger_utterances:
+  - 家里 WiFi 又断了先从哪查
+  - 这台机器开不了机我该先试什么
+  - 流程跑不通但不知道卡在哪一步
+  - 先别让我重装系统，给个可逆的排查顺序
+  - troubleshoot everyday issue step by step
+  anti_triggers:
+  - 需要针对单一代码 bug 做深度根因分析或红队攻击
+  - 用户已明确要求直接给最终修复方案而非排查步骤
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 我遇到【故障表现】，设备或流程是【型号与环境】，已试【已有尝试】。请从低成本、可逆的检查开始，每项说明：(1) 具体操作步骤；(2) 预期正常结果 vs 异常结果；(3) 该结果能排除/指向哪些原因。按风险从低到高排序，并标出哪些进一步检查依赖官方说明或维修人员。不要建议不可逆或高成本操作，除非前面的可逆检查都无效。
+  variables:
+  - 故障表现
+  - 型号与环境
+  - 已有尝试
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#troubleshoot-everyday
+  source_hash: c20d9d7cc9af73b6aca4f82645a0b8bdd6fe38e5b4a1d1fecbef8a558b46c0e0
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: personal_career
+  subcategory: personal_os
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

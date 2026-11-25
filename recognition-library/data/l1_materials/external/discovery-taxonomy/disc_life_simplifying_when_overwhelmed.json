@@ -1,0 +1,33 @@
+{
+  "id": "disc_life_simplifying_when_overwhelmed",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/life.json#life-simplifying-when-overwhelmed",
+  "title": "一团乱麻时先做“减法”，砍掉 70% 暂时不致命的事",
+  "content": "旧共识（盲区）：事情堆得越多、越乱，越要咬牙把所有清单都排满、一起扛下来。\n\n新现实（破盲视角）：过载时硬扛只会越做越乱；先挑出今天真正必须推进的 1～2 件事，其余延后、砍掉或暂放，大脑立刻就能喘口气并重新动起来。\n\n破冰追问母题：\n- 我现在手头事情很多、有点乱或有点累：[列出你目前担心的 3-5 件事]。请帮我做一次“减法梳理”：挑出今天最值得先做的一件小事，其余先排出优先级或延后。\n- 当我感觉负荷拉满、什么都不想动时，帮我写一段简短的“降维重启步骤”，帮我先稳住节奏。",
+  "content_hash": "f1045659949a19f8ed304ebe48f3b4779de364c3591c79914274b7c2dee9e869",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "life",
+    "first-principles",
+    "cost-collapse",
+    "overwhelm",
+    "simplification",
+    "priorities",
+    "calm"
+  ],
+  "problem_solved": "事情堆得越多、越乱，越要咬牙把所有清单都排满、一起扛下来。",
+  "when_to_use": "过载时硬扛只会越做越乱；先挑出今天真正必须推进的 1～2 件事，其余延后、砍掉或暂放，大脑立刻就能喘口气并重新动起来。",
+  "procedural_steps": [
+    "我现在手头事情很多、有点乱或有点累：[列出你目前担心的 3-5 件事]。请帮我做一次“减法梳理”：挑出今天最值得先做的一件小事，其余先排出优先级或延后。",
+    "当我感觉负荷拉满、什么都不想动时，帮我写一段简短的“降维重启步骤”，帮我先稳住节奏。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "life-simplifying-when-overwhelmed",
+    "arena": "life",
+    "lenses": [
+      "first-principles",
+      "cost-collapse"
+    ]
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "pt_write_tests",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#write-tests",
+  "title": "为关键行为设计测试",
+  "content": "为【函数、接口或修复】补测试，行为约束是【契约或已知回归】。使用【现有测试框架】。选择能区分正确实现和常见错误实现的最少案例，包含一个关键边界；写清输入、预期结果和运行命令。",
+  "content_hash": "c6832edc9c3eb58d82f90dd54411e56acca827031c6b24b25c9ba32609c6e795",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "coding",
+    "测试",
+    "单测",
+    "回归",
+    "unit test"
+  ],
+  "problem_solved": "覆盖可能真的坏掉的边界。",
+  "when_to_use": "分类: 开发与调试",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "write-tests",
+    "category": "coding",
+    "variables": [
+      "函数、接口或修复",
+      "契约或已知回归",
+      "现有测试框架"
+    ]
+  }
+}

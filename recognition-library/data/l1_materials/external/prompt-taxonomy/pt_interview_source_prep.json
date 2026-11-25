@@ -1,0 +1,27 @@
+{
+  "id": "pt_interview_source_prep",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#interview-source-prep",
+  "title": "为专家采访准备追问",
+  "content": "要采访【专家与主题】，已知材料是【背景和待验证说法】。列五个能通过具体经历、数据或例子回答的问题，为每个给一个追问。标出相邻的引导性问法及应避免的前提，保留核对受访者回答的位置。",
+  "content_hash": "e09dcc3c106637ed1fe95e900d9416f9a0f0d1b6cc61d7b87a274bb8526895f1",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "research",
+    "专家",
+    "采访",
+    "interview research"
+  ],
+  "problem_solved": "验证已有事实并用具体问题解决缺口。",
+  "when_to_use": "分类: 查找与研究",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "interview-source-prep",
+    "category": "research",
+    "variables": [
+      "专家与主题",
+      "背景和待验证说法"
+    ]
+  }
+}

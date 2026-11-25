@@ -1,0 +1,81 @@
+id: disc_build_agent_native_infra
+title: Agent 原生基础设施设计
+tagline: 为 AI Agent 设计极简 API、沙盒与独立身份，而非 GUI
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - agent
+  - infra
+  - api
+  - sandbox
+  - product_strategy
+  app_affinity:
+  - Cursor
+  - Notion
+  - Chrome
+  - Terminal
+  pain_point: 现有邮箱、浏览器、支付、身份验证等基础设施全部围绕人类 GUI 设计，AI Agent 作为新一类软件用户无法高效使用，缺乏极简 API、沙盒与独立身份层
+  trigger_utterances:
+  - 给 AI Agent 用的基础设施该怎么设计
+  - agent 不需要 UI 需要 API
+  - 想做一个给 agent 用的沙盒和权限审计
+  - 现有支付身份验证都是给人类设计的 agent 用不了
+  - agent-native infra 最小 MVP 做哪 3 个接口
+  anti_triggers:
+  - 给人类用户设计更好看的 UI 或体验优化
+  - 普通后端 API 设计或微服务拆分
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '## Agent-Native 基础设施设计清单
+
+
+    ### 第一部分：识别人类中心摩擦点
+
+    列出 5 个目前完全为人类设计的互联网基础设施（如邮箱、日历、支付、客服），对每个分析：
+
+    - 原产品的最大摩擦点（当使用者变成 AI Agent 时）
+
+    - 对应的极简 API 替代品该如何设计（无 GUI、结构化输入输出、幂等、可审计）
+
+
+    ### 第二部分：最小 MVP 3 核心接口
+
+    在你的技术栈/熟悉领域中，为自主运行的 AI Agent 提供安全沙盒和权限审计层，最小独立开发者 MVP 只做哪 3 个核心接口？
+
+    - 接口 1：身份与权限声明（Agent 身份注册、scope 授权、token 颁发）
+
+    - 接口 2：沙盒执行与资源隔离（受限环境运行、资源配额、网络白名单）
+
+    - 接口 3：审计与回滚（操作日志、权限变更记录、一键撤销）
+
+
+    ### 验收标准
+
+    - 每个接口有明确的 request/response schema
+
+    - 无任何人类 GUI 依赖，纯 API 驱动
+
+    - 权限最小化，默认拒绝'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/build.json#build-agent-native-infra
+  source_hash: 638b0f6b80352d8a39333308cd785907878028457350bb2a68f3d2d4ab4cd343
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: engineering
+  subcategory: architecture
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

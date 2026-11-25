@@ -1,0 +1,53 @@
+id: pt_document_redline
+title: 按目标修订Word文档
+tagline: 按编辑要求修订Word，标位置/建议/理由并输出修订版与清稿
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  clarity_fit:
+  - concrete
+  - vague
+  domains:
+  - document_editing
+  - word
+  - revision
+  - redline
+  - files
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Mail
+  - Chrome
+  pain_point: 用户需要按指定编辑目标修改 Word 文档，但希望保留章节编号、可复核每处修改并区分需原作者判断的内容
+  trigger_utterances:
+  - 帮我按要求改这份Word文档，标出修改位置
+  - 这份合同要按编辑目标修订，保留章节编号
+  - 帮我redline这份文档，标修改建议和理由
+  - 给这个Word加批注，哪些地方需要原作者判断
+  - 帮我按要求编辑文档并输出修订版和清稿
+  anti_triggers:
+  - 只是想让AI直接重写整篇文档
+  - 只是想总结文档内容
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 在【文档和版本】中执行【限定编辑要求】。保持既有章节编号，在每个需改处给「位置 / 修改建议 / 理由」。若工具能标记修订，则交付修订版和清稿；需原作者判断的地方加简短批注。
+  variables:
+  - 文档和版本
+  - 限定编辑要求
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#document-redline
+  source_hash: bdca1f1a0c0f81257cf1d35102832e3a850c535d02c7d4f80b4fe9fb5383f180
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: general
+  subcategory: problem_solving
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

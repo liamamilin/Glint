@@ -1,0 +1,63 @@
+version: "2.0"
+
+# 本地模型配置（双路并发：2B 闭集路由 + bge-m3 向量召回）
+models:
+  router_model: "qwen3.5:2b"
+  embedding_model: "bge-m3:latest"
+  ollama_base_url: "http://127.0.0.1:11434"
+
+# 质量门禁阈值（L1 -> L2 编译期）
+gates:
+  l0_min_quality_score: 0.65
+  l2_min_confidence: 0.60
+  semantic_dedup_threshold: 0.88
+  min_trigger_utterances: 2
+  max_title_chars: 18
+
+# 全局融合打分权重（Global Recall + Intent Boost + 正交 Top-3）
+# 语义相关性主导，2B 主意图给强加权，其余元数据仅做平手决胜，彻底避免小桶“矮子里拔将军”
+scoring_weights:
+  embedding_cosine: 0.78
+  primitive_match: 0.06
+  goal_match: 0.05
+  clarity_match: 0.04
+  app_affinity: 0.04
+  base_weight: 0.03
+
+# 第 3 位探索策略（防马太效应）
+exploration:
+  enabled: true
+  slot3_explore_probability: 0.18
+  prefer_sources:
+    - "discovery-taxonomy"
+    - "glint-core"
+
+# clarity 驱动的三卡正交槽位模板
+# "__primary__" 表示 2B 预测的主 primitive，后续槽位按优先级顺延且强制与已选 primitive 正交
+clarity_slot_templates:
+  vague:
+    slot_1: ["__primary__"]
+    slot_2: ["metacognize", "diverge", "deconstruct"]
+    slot_3: ["deconstruct", "diverge", "critique"]
+    prefer_sources: ["discovery-taxonomy", "glint-core"]
+  conflicted:
+    slot_1: ["__primary__"]
+    slot_2: ["critique", "converge", "metacognize"]
+    slot_3: ["metacognize", "diverge", "deconstruct"]
+    prefer_sources: ["discovery-taxonomy", "prompt-taxonomy"]
+  concrete:
+    slot_1: ["__primary__"]
+    slot_2: ["critique", "deconstruct", "translate"]
+    slot_3: ["metacognize", "diverge", "converge"]
+    prefer_sources: ["prompt-taxonomy", "super-individual-toolbox"]
+
+# L3 断层领先穿透召回（L3 Breakthrough Gate）
+# 分差不大一律选 L4；仅当 L3 影子库候选同时满足双锚点底线与断层领先幅度时，允许最多 1 张穿透进入 Top-3
+l3_breakthrough:
+  enabled: true
+  max_candidates_to_rerank: 2
+  min_cosine: 0.45
+  min_rerank_logit: -1.0
+  margin_over_top1: 1.5
+  margin_over_top3: 2.0
+  exclude_manual_off_shelf: true

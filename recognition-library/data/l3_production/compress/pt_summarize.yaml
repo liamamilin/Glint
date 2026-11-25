@@ -1,0 +1,52 @@
+id: pt_summarize
+title: 长文对话摘要
+tagline: 用短篇幅保留事实与关键细节，先主旨再五要点
+routing:
+  primitive: compress
+  goals:
+  - digest
+  clarity_fit:
+  - concrete
+  - vague
+  domains:
+  - writing
+  - summarization
+  - editing
+  - research
+  app_affinity:
+  - Chrome
+  - Notion
+  - Obsidian
+  - ChatGPT
+  pain_point: 面对长文章、会议记录或聊天记录，需要快速拿到保留关键事实与数字的短摘要，但怕遗漏前提或矛盾点。
+  trigger_utterances:
+  - 把这篇长文总结一下
+  - 帮我提炼会议记录要点
+  - 这个对话太长了给个摘要
+  - 总结这篇文章保留关键数字
+  - TLDR 这段内容
+  anti_triggers:
+  - 需要逐字翻译或润色原文时
+  - 需要对观点进行批判或找漏洞时
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: 把{{input}}总结给{{audience}}，用于{{reading_purpose}}。先给一句主旨，再给最多五个要点。保留关键数字和前提，每条标注可回查的小节或发言位置。若材料提出相互矛盾的说法，另列出来。
+  variables:
+  - audience
+  - reading_purpose
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#summarize
+  source_hash: 7367aa00ff21dcaadc1aeabc358e688bcf34e7de67163fa7172af04808d5710e
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: writing_comms
+  subcategory: writing_polish
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

@@ -1,0 +1,21 @@
+{
+  "id": "core_clarify_first",
+  "source": "glint-core",
+  "source_ref": "cards.yaml#clarify_first",
+  "title": "先反问我 3 个问题",
+  "content": "先不要急着给完整方案。请先找出我描述中缺失的关键信息，向我提出 3 个最核心的澄清问题。",
+  "content_hash": "a895c81ca89c4d333d5d94e82ea590cc7c97415cf10a2b2f18cc913e6157accd",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "explore"
+  ],
+  "problem_solved": "需求模糊 / 思路发散",
+  "when_to_use": "",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "clarify_first",
+    "legacy_dimension": "explore",
+    "legacy_mode": "append"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "id": "pt_tool_selection",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#tool-selection",
+  "title": "判断任务应该用哪种 AI 能力",
+  "content": "对【任务和输入】选择【可用能力】中必要的工具。按必须拿到的证据、处理量、可验证输出和执行后果比较。给无需额外工具的最小路径，以及什么时候应升级到其他工具。",
+  "content_hash": "47df4bb65489f643df96c74fa85e1905df394d7f8e573df6c81d09801f254b73",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "prompt-workflows",
+    "工具选择",
+    "能力边界",
+    "tool selection"
+  ],
+  "problem_solved": "先决定是否需要搜索、文件读取、计算或直接回答。",
+  "when_to_use": "分类: 提示词与 AI 工作流",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "tool-selection",
+    "category": "prompt-workflows",
+    "variables": [
+      "任务和输入",
+      "可用能力"
+    ]
+  }
+}

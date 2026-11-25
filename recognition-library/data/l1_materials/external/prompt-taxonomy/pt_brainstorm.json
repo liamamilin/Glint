@@ -1,0 +1,29 @@
+{
+  "id": "pt_brainstorm",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#brainstorm",
+  "title": "用约束做有效头脑风暴",
+  "content": "围绕【需要解决的问题】想点子，服务【目标人群】，约束为【时间、成本或素材】。给六个机制各异的方案，每个写清它改变了什么、适合谁和最大弱点。选两个最容易验证的，给出一小时内能做的验证。",
+  "content_hash": "fa3676fdd331c8b5a456b66fcad813a07434751543f4f89d9d4e3b8e106d6d8c",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "planning",
+    "创意",
+    "点子",
+    "ideation",
+    "brainstorm"
+  ],
+  "problem_solved": "获得差异明显的点子和验证办法。",
+  "when_to_use": "分类: 计划与生活",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "brainstorm",
+    "category": "planning",
+    "variables": [
+      "需要解决的问题",
+      "目标人群",
+      "时间、成本或素材"
+    ]
+  }
+}

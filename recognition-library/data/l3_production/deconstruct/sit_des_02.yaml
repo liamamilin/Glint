@@ -1,0 +1,51 @@
+id: sit_des_02
+title: 视觉风格宪法
+tagline: 把色板、字体、间距写成 CSS 变量，告别页面越写越乱
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - design
+  - frontend
+  - css
+  - ui_system
+  app_affinity:
+  - VS Code
+  - Cursor
+  - Figma
+  - Chrome
+  pain_point: 页面越写越多，按钮颜色、圆角大小和字体层级各自为战，整体显得杂乱不统一
+  trigger_utterances:
+  - 页面颜色和间距越来越乱，帮我统一一下
+  - css 里魔法数值太多了，想抽成变量
+  - 这个项目没有 design token，帮我建一个 tokens.css
+  - 按钮圆角和字体层级不一致，怎么规范
+  - 想给个人项目定一套极简设计宪法
+  anti_triggers:
+  - 需要完整企业级 Design System 或组件库搭建
+  - 只是想挑一个现成的 UI 框架主题
+execution:
+  action_type: open_resource
+  inject_mode: null
+  content: tokens.css 视觉宪法模板：:root 中定义 1 个主背景、1 个卡片表面、2 级文字灰度、1 个强调色；4px/8px 间距阶梯；4 级字号标尺（标题/副标/正文/铭牌）；后续开发严禁写死魔法数值。仅保留约 15
+    个核心变量，不照搬大厂百级 Token。
+  variables: []
+  workflow: null
+meta:
+  source: super-individual-toolbox
+  source_ref: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/design-creative.json#des-02
+  source_hash: 36376e50c3a3baf18db74e8060abfe1004c2cca43150b3eee7da29b3f72d6c15
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: engineering
+  subcategory: architecture
+  collections: []
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

@@ -1,0 +1,68 @@
+id: pt_support_escalation
+title: 升级交接单
+tagline: 把排查记录整理成给升级团队的结构化交接
+routing:
+  primitive: translate
+  goals:
+  - debug
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - support
+  - escalation
+  - incident_management
+  app_affinity:
+  - Slack
+  - Feishu
+  - Linear
+  - Mail
+  pain_point: 排查卡住需要把问题连同上下文转给能解决的团队，信息不全导致反复沟通
+  trigger_utterances:
+  - 这个 bug 我查不下去了要转交
+  - 需要升级给后端团队
+  - 写个交接单给 escalation
+  - issue 要升级处理
+  - 把排查记录整理下转给 support team
+  anti_triggers:
+  - 单纯的客服回复话术
+  - 内部技术方案设计
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请将以下问题与排查记录整理为面向升级团队的交接单，字段如下：
+
+    - 影响范围与严重程度
+
+    - 开始时间 / 持续时长
+
+    - 账号或版本范围（移除不必要的身份信息）
+
+    - 复现步骤
+
+    - 已尝试的排查与结果
+
+    - 最需要升级团队做出的决定
+
+    - 下一次客户更新时间与负责人
+
+    输出为结构化 Markdown，避免冗余。'
+  variables: []
+  workflow:
+    workflow_id: handle-support-case
+    step: 4
+    next_lens_id: pt_support_close
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#support-escalation
+  source_hash: 5dec88f97e982bc836a46c0d4c09757883f8bf5a994c2b4bbfa2dd4f3ce7b74c
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: writing_comms
+  subcategory: workplace_comms
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

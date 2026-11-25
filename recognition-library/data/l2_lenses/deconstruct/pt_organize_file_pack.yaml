@@ -1,0 +1,44 @@
+id: pt_organize_file_pack
+title: 整理资料包成可查清单
+tagline: 为每份文件写版本用途与缺口，共享前核对权限
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - digest
+  clarity_fit:
+  - concrete
+  domains:
+  - files
+  - file_archiving
+  - manifest
+  - documentation
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Slack
+  - Feishu
+  pain_point: 用户拿到一堆文件资料包，分不清每份文件的版本和用途，不知道缺了哪些关键文件，共享前也拿不准权限和范围
+  trigger_utterances:
+  - 这个资料包太乱帮我理一下
+  - 把文件清单列出来
+  - 这些文件版本怎么对不上
+  - 共享前要核对权限
+  - manifest 怎么写
+  anti_triggers:
+  - 只是批量重命名文件
+  - 与文件无关的代码重构
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 根据【文件列表与项目目标】制作资料清单。每条写文件名、日期、版本、用途、是否重复和建议目录。标出关键文件缺失与同名不同版，给共享前需要核对的权限或范围。
+  variables: []
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#organize-file-pack
+  source_hash: b0ac831f2011ca827b9c3e480afcc2ce92add4dc32aa14e45af4202163320014
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

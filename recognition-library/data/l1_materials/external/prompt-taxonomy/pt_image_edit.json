@@ -1,0 +1,29 @@
+{
+  "id": "pt_image_edit",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#image-edit",
+  "title": "根据局部要求修图",
+  "content": "编辑【参考图片】的【目标区域和修改内容】。保留【需要维持的元素】及原图的机位、画幅、光线方向和主体比例。说明修改应如何与边缘、阴影和材质相接；交付编辑后的图片，或给能交给编辑模型的指令。",
+  "content_hash": "8269dc0d926dc79b5b213d62a1e8d03cde140c049adf55c09639848d17143c5e",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "creative",
+    "改图",
+    "修图",
+    "参考图",
+    "image edit"
+  ],
+  "problem_solved": "明确修改区域与其余视觉约束。",
+  "when_to_use": "分类: 创作与多媒体",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "image-edit",
+    "category": "creative",
+    "variables": [
+      "参考图片",
+      "目标区域和修改内容",
+      "需要维持的元素"
+    ]
+  }
+}

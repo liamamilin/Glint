@@ -1,0 +1,29 @@
+{
+  "id": "sit_des_02",
+  "source": "super-individual-toolbox",
+  "source_ref": "https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/design-creative.json#des-02",
+  "title": "视觉风格宪法（Design Token）",
+  "content": "定位：把色板、字体和间距写进宪法，告别随手乱配色\n\n触发场景：当你的页面越写越多，按钮颜色、圆角大小和字体层级开始各自为战、整体显得杂乱时。\n\n核心机制：\n- 锁定极简色板：1 个主背景、1 个卡片表面、2 级文字灰度、1 个高识别度强调色\n- 锁定 4px/8px 基准间距阶梯与 4 级字号标尺（标题、副标、正文、铭牌）\n- 将上述规则全部封装为 CSS `:root` 变量文件，后续开发严禁写死魔法数值\n\n交付物：一份可直接引用的 `tokens.css` 视觉宪法文件\n\n推荐装配：原生 CSS Custom Properties + AI 配色对比度校验\n\n误用警告：不要为个人项目照搬大厂上百个 Token 的设计系统，15 个核心变量足够撑起极高质感。",
+  "content_hash": "36376e50c3a3baf18db74e8060abfe1004c2cca43150b3eee7da29b3f72d6c15",
+  "suggested_action_type": "open_resource",
+  "domain_hints": [
+    "design-creative",
+    "设计师与美术"
+  ],
+  "problem_solved": "当你的页面越写越多，按钮颜色、圆角大小和字体层级开始各自为战、整体显得杂乱时。",
+  "when_to_use": "当你的页面越写越多，按钮颜色、圆角大小和字体层级开始各自为战、整体显得杂乱时。",
+  "procedural_steps": [
+    "锁定极简色板：1 个主背景、1 个卡片表面、2 级文字灰度、1 个高识别度强调色",
+    "锁定 4px/8px 基准间距阶梯与 4 级字号标尺（标题、副标、正文、铭牌）",
+    "将上述规则全部封装为 CSS `:root` 变量文件，后续开发严禁写死魔法数值"
+  ],
+  "anti_patterns": [
+    "不要为个人项目照搬大厂上百个 Token 的设计系统，15 个核心变量足够撑起极高质感。"
+  ],
+  "metadata": {
+    "original_id": "des-02",
+    "drawer": "design-creative",
+    "drawer_zh": "设计师与美术",
+    "deliverable": "一份可直接引用的 `tokens.css` 视觉宪法文件"
+  }
+}

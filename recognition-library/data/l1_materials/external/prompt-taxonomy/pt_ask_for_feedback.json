@@ -1,0 +1,27 @@
+{
+  "id": "pt_ask_for_feedback",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#ask-for-feedback",
+  "title": "向他人请求聚焦的反馈",
+  "content": "为【材料或决定】向【反馈人】请求反馈。交代材料现在的状态和可改范围，只问三项可具体回应的问题。给期望反馈形式、期限和最重要的一项。",
+  "content_hash": "677318f5bc82601a9dc72ff685891017dbe32e28f7849f9e9a2657c7067b1a4d",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "communication",
+    "征求反馈",
+    "审阅",
+    "feedback request"
+  ],
+  "problem_solved": "限定对象、类型和可回答的时间。",
+  "when_to_use": "分类: 沟通与协商",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "ask-for-feedback",
+    "category": "communication",
+    "variables": [
+      "材料或决定",
+      "反馈人"
+    ]
+  }
+}

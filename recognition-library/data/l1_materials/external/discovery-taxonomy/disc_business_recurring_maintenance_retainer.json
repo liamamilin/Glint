@@ -1,0 +1,33 @@
+{
+  "id": "disc_business_recurring_maintenance_retainer",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-recurring-maintenance-retainer",
+  "title": "卖“持续防崩与迭代托管”，而不只是“一锤子交付”",
+  "content": "旧共识（盲区）：做外包、定制工具或方案，交付完尾款就结束了，后续维护要么免费扯皮要么没法收钱。\n\n新现实（破盲视角）：外部接口、平台规则和业务需求都在持续变化，把“每月固定巡检 + 优先微调 + 季度升级”打包成轻量包月，能把波动的接单变成可预测现金流。\n\n破冰追问母题：\n- 结合 [你擅长的技术/设计/运营/自动化能力]，设计一份“低压力、边界清晰”的按月维护与持续优化方案，明确包含什么、不包含什么、多久响应一次。\n- 如何向已经合作过或刚交付完项目的客户，自然提出“后续每月轻量跟进与迭代”的合作选项而不显得推销感太强？",
+  "content_hash": "90d732c5e94c65e27b1915d39b67e6edc8d4e28f061fcabe797eea75e8097cad",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "business",
+    "invisible-friction",
+    "role-inversion",
+    "retainer",
+    "maintenance",
+    "cashflow",
+    "ops"
+  ],
+  "problem_solved": "做外包、定制工具或方案，交付完尾款就结束了，后续维护要么免费扯皮要么没法收钱。",
+  "when_to_use": "外部接口、平台规则和业务需求都在持续变化，把“每月固定巡检 + 优先微调 + 季度升级”打包成轻量包月，能把波动的接单变成可预测现金流。",
+  "procedural_steps": [
+    "结合 [你擅长的技术/设计/运营/自动化能力]，设计一份“低压力、边界清晰”的按月维护与持续优化方案，明确包含什么、不包含什么、多久响应一次。",
+    "如何向已经合作过或刚交付完项目的客户，自然提出“后续每月轻量跟进与迭代”的合作选项而不显得推销感太强？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "business-recurring-maintenance-retainer",
+    "arena": "business",
+    "lenses": [
+      "invisible-friction",
+      "role-inversion"
+    ]
+  }
+}

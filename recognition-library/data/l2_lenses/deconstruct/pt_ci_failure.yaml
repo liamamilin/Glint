@@ -1,0 +1,41 @@
+id: pt_ci_failure
+title: CI 失败定位与修复
+tagline: 从 CI 日志找首个真实错误，给出最小修复与验证命令
+routing:
+  primitive: deconstruct
+  goals:
+  - debug
+  clarity_fit:
+  - concrete
+  domains:
+  - coding
+  - ci
+  - github_actions
+  - build
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Terminal
+  pain_point: CI 红了但日志一堆报错，分不清哪个是真因，修完也不确定能不能过
+  trigger_utterances:
+  - CI 又红了，日志一堆错不知道从哪看
+  - GitHub Actions build failed 帮我定位
+  - 这个报错是真因还是连锁反应
+  - 给我最小修复和验证命令
+  anti_triggers:
+  - 单纯想写新功能代码
+  - 需要架构设计而非排查失败
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 分析【CI 日志、提交与命令】。找出第一个真实失败，判断后续错误是否由它引起。提供与 CI 尽量一致的本地复现方法、最小改动建议、验证命令，以及需检查的配置差异（环境变量、依赖版本、触发条件等）。
+  variables: []
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#ci-failure
+  source_hash: 06ceb0db966ccb926ea1c7c690e79028196dbea7d7244dc0d57fa4d8ec85a4fb
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

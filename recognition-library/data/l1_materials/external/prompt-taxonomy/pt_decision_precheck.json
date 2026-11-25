@@ -1,0 +1,29 @@
+{
+  "id": "pt_decision_precheck",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#decision-precheck",
+  "title": "提前检验一个计划",
+  "content": "评估【当前计划】，目标是【成功标准】，重要限制是【现实约束】。假设计划三个月后失败，从现有信息找出五个可能原因，并按影响和验证成本排序。为前三个原因各给一个早期信号和一个可以马上做的小验证。",
+  "content_hash": "da1eecc6fdc72df545132f26a821d49146f4b8904e2fefc2282d8deaf9716386",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "planning",
+    "风险",
+    "复盘",
+    "假设",
+    "premortem"
+  ],
+  "problem_solved": "在投入前找出最可验证的薄弱环节。",
+  "when_to_use": "分类: 计划与生活",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "decision-precheck",
+    "category": "planning",
+    "variables": [
+      "当前计划",
+      "成功标准",
+      "现实约束"
+    ]
+  }
+}

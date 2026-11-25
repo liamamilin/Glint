@@ -1,0 +1,57 @@
+id: pt_trip_itinerary
+title: 可调整行程规划
+tagline: 按地理位置排日程，留转场与天气备选
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - travel
+  - planning
+  - itinerary
+  - logistics
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 旅行计划散乱、同区未 grouping、转场时间不足、天气变化无备选，且预约价格开放时间未核实
+  trigger_utterances:
+  - 帮我做一份可调整的旅行行程
+  - 按地理位置安排每天活动留转场时间
+  - 给个天气备选和预约核对入口
+  - trip itinerary with buffer and backup
+  - 帮我规划行程考虑同区安排
+  anti_triggers:
+  - 仅查询单个景点开放时间
+  - 纯机票酒店比价预订
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 为【目的地和日期】安排行程，偏好和约束为【出发地、预算、兴趣、同行人】。按地理位置安排每天的活动，留转场时间，给一个天气备选。需要预约、价格或开放时间的地方附官方核对入口。
+  variables:
+  - destination_and_date
+  - origin_budget_interests_companions
+  - 目的地和日期
+  - 出发地、预算、兴趣、同行人
+  workflow:
+    workflow_id: plan-travel
+    step: 1
+    next_lens_id: pt_local_recommendations
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#trip-itinerary
+  source_hash: 8ac325e46400c4c8854866dbc94137ee5386c1488b4fb76293c2a4286825315a
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: personal_career
+  subcategory: personal_os
+  collections: []
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

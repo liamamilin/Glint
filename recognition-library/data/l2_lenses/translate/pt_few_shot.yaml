@@ -1,0 +1,44 @@
+id: pt_few_shot
+title: 生成 Few-shot 示例
+tagline: 把任务/格式/样本变成 3-5 个覆盖边界的输入输出示例
+routing:
+  primitive: translate
+  goals:
+  - create
+  clarity_fit:
+  - concrete
+  - vague
+  domains:
+  - prompt_engineering
+  - few_shot
+  - llm_prompting
+  - ai_workflows
+  app_affinity:
+  - ChatGPT
+  - Claude
+  - Cursor
+  - Notion
+  pain_point: 模型老是猜不对输出格式和边界，需要 concrete 示例来锚定行为
+  trigger_utterances:
+  - 模型老是输出格式不对，给几个示例
+  - few-shot examples 怎么写
+  - 帮我给 prompt 加几个示例覆盖边界
+  - 需要 covering 正常、缺失、模糊情况的示例
+  - 从样本里提炼输入输出对
+  anti_triggers:
+  - 单纯润色已有文字
+  - 完全零样本、无示例的任务
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 我需要模型完成【任务】，期望格式是【格式】。从【样本或已知边界】制定三到五个输入输出示例，覆盖正常、缺失和模糊情况。说明每个示例约束的具体行为。
+  variables: []
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#few-shot
+  source_hash: fe4f1afcfe7cc95c3373120c003be8741d72a793ceaae26a62166283ca7c6c5a
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

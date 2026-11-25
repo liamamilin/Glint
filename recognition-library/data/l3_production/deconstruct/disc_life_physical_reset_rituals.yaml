@@ -1,0 +1,88 @@
+id: disc_life_physical_reset_rituals
+title: 身体重启微清单
+tagline: 用5-10分钟身体切换打断脑力死循环
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - life
+  - recovery
+  - movement
+  - sleep
+  - cross_domain
+  app_affinity:
+  - Cursor
+  - Terminal
+  - Notion
+  - Chrome
+  pain_point: 用户久坐、缺光、浅呼吸导致大脑维持低效紧绷态，却继续盯着屏幕硬扛，反而更难突破卡点。
+  trigger_utterances:
+  - 脑子卡住了还继续盯屏幕
+  - 坐太久脑子发僵了想个重启办法
+  - 晚上睡前还焦躁睡不着
+  - 帮我列个5分钟身体重启清单
+  - 怎么把散步变成工作休息切换仪式
+  anti_triggers:
+  - 需要分析代码报错或调试具体技术问题
+  - 只是想润色文案或提高写作质量
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '身体状态切换微重启清单
+
+
+    白天版（5-10 分钟）：
+
+    - [ ] 站起来离开屏幕，快走 2-3 分钟或爬一层楼梯
+
+    - [ ] 到窗边晒光/看远物 1-2 分钟，让呼吸慢下来
+
+    - [ ] 做 30-60 秒拉伸：颈肩、胸椎、髋屈肌
+
+    - [ ] 用冷水洗脸或洗手 20-30 秒，再喝一口水
+
+    - [ ] 回到任务前只选一个最小下一步，避免重新陷入全盘思考
+
+
+    睡前版（5-10 分钟）：
+
+    - [ ] 关闭强光屏幕，调暗环境光
+
+    - [ ] 做 2-3 分钟轻柔拉伸或慢走，不追求出汗
+
+    - [ ] 4-6 次深呼吸，把注意力放在呼气延长上
+
+    - [ ] 用温水/冷水轻敷面部或洗手，降低身体紧绷
+
+    - [ ] 写下未完成事项和明天第一件事，停止脑内循环
+
+
+    状态切换仪式：
+
+    - [ ] 选择一个固定触发动作（如合上电脑、起身泡茶、出门散步）
+
+    - [ ] 用同一套简短动作标记“工作结束/休息开始”
+
+    - [ ] 休息时不做工作相关思考，必要时只记录灵感不展开
+
+    - [ ] 回到工作前重新定义一个明确的最小任务'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/life.json#life-physical-reset-rituals
+  source_hash: 8eeb1bd78ec5f3da68f26638c4926c5a31b5ec70568f4c1e5515a0e9f58f913b
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: personal_career
+  subcategory: personal_os
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

@@ -1,0 +1,29 @@
+{
+  "id": "pt_spreadsheet_formula",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#spreadsheet-formula",
+  "title": "写一条表格公式",
+  "content": "我用【Excel 或 Google Sheets】处理【列名和样例】。请写公式实现【预期结果】并说明放在哪个单元格。指出空值、重复项、未匹配项如何处理，再给两个手工可验算的小例子。",
+  "content_hash": "6c242f0bd38d23c2008fa3538128bf2c220074459dcfd96e33fb0aa26e5f8b62",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "data",
+    "Excel",
+    "Sheets",
+    "公式",
+    "VLOOKUP"
+  ],
+  "problem_solved": "按真实列名、边界和工具版本写公式。",
+  "when_to_use": "分类: 数据与表格",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "spreadsheet-formula",
+    "category": "data",
+    "variables": [
+      "Excel 或 Google Sheets",
+      "列名和样例",
+      "预期结果"
+    ]
+  }
+}

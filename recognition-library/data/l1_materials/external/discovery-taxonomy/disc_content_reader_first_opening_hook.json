@@ -1,0 +1,33 @@
+{
+  "id": "disc_content_reader_first_opening_hook",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/content.json#content-reader-first-opening-hook",
+  "title": "开头前三句直击“读者关心的切口”，而不是先交代背景流水账",
+  "content": "旧共识（盲区）：文章或分享开头应该先铺垫历史背景、个人心路或“最近我一直在想……”。\n\n新现实（破盲视角）：读者在信息流里只有几秒决定留不留；前三句就点出“什么反常识现象 / 什么痛点 / 能帮他们解决什么”，留存率会高出很多。\n\n破冰追问母题：\n- 这是我准备发的一篇内容/分享的开头：[粘贴开头]。请帮我砍掉慢热的背景铺垫，改写出 3 个直接切中要害、克制不浮夸的开头版本。\n- 围绕 [你想分享的主题]，帮我写出 3 个“直击痛点或反常识反差”的第一句话。",
+  "content_hash": "7730efbc86696a64adeb83daa5a34b72837b2e7fed142de45d66850f0c9b7e78",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "content",
+    "role-inversion",
+    "invisible-friction",
+    "opening",
+    "attention",
+    "clarity",
+    "storytelling"
+  ],
+  "problem_solved": "文章或分享开头应该先铺垫历史背景、个人心路或“最近我一直在想……”。",
+  "when_to_use": "读者在信息流里只有几秒决定留不留；前三句就点出“什么反常识现象 / 什么痛点 / 能帮他们解决什么”，留存率会高出很多。",
+  "procedural_steps": [
+    "这是我准备发的一篇内容/分享的开头：[粘贴开头]。请帮我砍掉慢热的背景铺垫，改写出 3 个直接切中要害、克制不浮夸的开头版本。",
+    "围绕 [你想分享的主题]，帮我写出 3 个“直击痛点或反常识反差”的第一句话。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "content-reader-first-opening-hook",
+    "arena": "content",
+    "lenses": [
+      "role-inversion",
+      "invisible-friction"
+    ]
+  }
+}

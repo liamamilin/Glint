@@ -1,0 +1,63 @@
+id: disc_build_graceful_fallback_when_ai_fails
+title: AI 能力的确定性兜底
+tagline: 先规则校验再降级兜底，避免 AI 抽风瘫痪流水线
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - build
+  - resilience
+  - reliability
+  - ai_engineering
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Terminal
+  - Notion
+  pain_point: AI 工作流把解析、分类、格式化全交给模型，偶发格式错误或超时就卡死整条流水线，需要一套先规则校验、不行再降级兜底的安全方案
+  trigger_utterances:
+  - AI 偶尔输出格式不对导致整个流程卡死怎么办
+  - 帮我给这个 AI 工作流加个兜底方案
+  - 这个脚本依赖模型输出，超时了就崩
+  - 哪几步其实可以用规则做不用 AI
+  - 设计一套 AI 失败时的 fallback
+  anti_triggers:
+  - 让 AI 帮我写一段文案
+  - 直接让模型从头包揽所有解析
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '- [ ] 列出工作流中每个环节的输入/输出契约与可接受格式
+
+    - [ ] 标出可由确定性规则完成的环节（解析、校验、格式化、路由），移出模型负担
+
+    - [ ] 为模型输出加结构化校验（JSON Schema / 正则 / 类型检查），失败即判定无效
+
+    - [ ] 设计降级路径：无效输出 → 规则兜底 → 跳过并留待人工
+
+    - [ ] 为模型调用加超时与重试上限，超时直接走兜底而非阻塞
+
+    - [ ] 记录每次降级事件与原因，便于后续复盘优化
+
+    - [ ] 验证端到端：正常/格式错误/超时/空输出四种场景均不瘫痪'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/build.json#build-graceful-fallback-when-ai-fails
+  source_hash: d9ac5a116514d46d86e6ddf7ad732bd1f87ac9bb2fb39c53362686a9ba5fae48
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: engineering
+  subcategory: architecture
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

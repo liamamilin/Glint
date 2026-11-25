@@ -1,0 +1,33 @@
+{
+  "id": "disc_content_workflow_as_asset",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/content.json#content-workflow-as-asset",
+  "title": "把私有工作流直接转化为公开内容资产",
+  "content": "旧共识（盲区）：做内容必须专门抽出额外时间“憋选题、写长文、剪视频”。\n\n新现实（破盲视角）：在 AI 垃圾文章泛滥的时代，把你日常解决问题沉淀下来的结构化清单、分类库、Prompt 和工具直接开源展示，才是最具传播力的硬通货。\n\n破冰追问母题：\n- 我平时在工作/生活中反复做的一件事是：[描述你的具体事情]。请帮我把它拆解成一个可复用的公开资产（模板/静态卡片库/清单），并设计 3 个能让同行主动转发的切入点。\n- 如何把 [你的某个日常研究/踩坑记录] 改造成一个可交互、可搜索的极简网页合集，让它从一次性文章变成长期带来自然流量的资产？",
+  "content_hash": "0730a3589646cdb9412e00725a2583a74b082c9fb674f3c715f39741b997cb21",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "content",
+    "first-principles",
+    "role-inversion",
+    "build-in-public",
+    "open-source",
+    "taxonomy",
+    "asset"
+  ],
+  "problem_solved": "做内容必须专门抽出额外时间“憋选题、写长文、剪视频”。",
+  "when_to_use": "在 AI 垃圾文章泛滥的时代，把你日常解决问题沉淀下来的结构化清单、分类库、Prompt 和工具直接开源展示，才是最具传播力的硬通货。",
+  "procedural_steps": [
+    "我平时在工作/生活中反复做的一件事是：[描述你的具体事情]。请帮我把它拆解成一个可复用的公开资产（模板/静态卡片库/清单），并设计 3 个能让同行主动转发的切入点。",
+    "如何把 [你的某个日常研究/踩坑记录] 改造成一个可交互、可搜索的极简网页合集，让它从一次性文章变成长期带来自然流量的资产？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "content-workflow-as-asset",
+    "arena": "content",
+    "lenses": [
+      "first-principles",
+      "role-inversion"
+    ]
+  }
+}

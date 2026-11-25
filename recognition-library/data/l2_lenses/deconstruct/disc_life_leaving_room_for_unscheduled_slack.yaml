@@ -1,0 +1,57 @@
+id: disc_life_leaving_room_for_unscheduled_slack
+title: 日程留白：别排死每分钟
+tagline: 把缓冲嵌进日程，突发不再全线崩盘
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - debug
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - life
+  - time_management
+  - wellbeing
+  - productivity
+  app_affinity:
+  - Notion
+  - Obsidian
+  pain_point: 日程排得太满，一有突发或状态起伏就全线崩盘，留白被当成浪费时间
+  trigger_utterances:
+  - 我日程排满了没一点空隙
+  - 一有突发整周计划全乱
+  - 留白是不是浪费时间
+  - 帮我把日程空出缓冲
+  - 排程太满了怎么留余地
+  anti_triggers:
+  - 只是想挑一个时间管理 App
+  - 想学番茄钟等具体技术细节
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '【给日程留出缓冲白·排程检查清单】
+
+    1. 盘点一周固定 обязатель（会议/接送/硬截止），标出不可挪动块。
+
+    2. 每天至少留 1 个 30–60 分钟「弹性白块」，不预填任何任务。
+
+    3. 高耗能任务后安排 15 分钟恢复/过渡，不连排。
+
+    4. 重要任务按「理想时长 ×1.5」预估，多出部分即缓冲。
+
+    5. 把突发/杂事统一收进「缓冲白块」处理，而非挤占主线。
+
+    6. 每周复盘：若缓冲总被吃光，下一周减少 1–2 个 commitments。
+
+    7. 预设「崩盘预案」：当日程延误 >30 分钟，自动砍掉最低优先级一项。'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/life.json#life-leaving-room-for-unscheduled-slack
+  source_hash: 8f081a803d5703088f6f14cb9349ace06ce5caba406f3d14b44969897ef97113
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

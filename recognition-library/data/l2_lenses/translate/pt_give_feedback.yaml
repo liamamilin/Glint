@@ -1,0 +1,55 @@
+id: pt_give_feedback
+title: 准备具体反馈对话
+tagline: 用观察、影响与请求替代笼统评价，组织一场可执行的反馈对话
+routing:
+  primitive: translate
+  goals:
+  - create
+  clarity_fit:
+  - concrete
+  domains:
+  - communication
+  - feedback
+  - management
+  - 1on1
+  app_affinity:
+  - Slack
+  - Feishu
+  - WeChat
+  - Mail
+  pain_point: 想给同事或下属反馈时只会说“你做得不好/很好”，说不出具体观察和影响，对方听完不知如何改进
+  trigger_utterances:
+  - 帮我准备一下给下属的反馈怎么说
+  - 怎么给同事提意见不伤和气
+  - 我只会说他做得不好，帮我具体化
+  - 1:1 反馈要怎么组织语言
+  - prepare feedback conversation for my report
+  anti_triggers:
+  - 用户只是想写一封通用表扬邮件，不涉及具体行为观察
+  - 用户在做绩效评分或打分表，而非对话脚本
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '为与【关系和场合】的对话准备反馈，事实是【可直接观察的行为及影响】。请输出：
+
+    1. 一句具体的开场（基于可观察事实，不带评判）；
+
+    2. 两个澄清问题（确认对方视角与意图）；
+
+    3. 一个可实行的请求（明确下一步行动）；
+
+    4. 当对方理解与你不同或有异议时的跟进问法（2~3 句）。
+
+    要求：全程使用“观察 + 影响 + 请求”结构，避免笼统评价词（如“态度不好”“不够努力”），保持尊重且具体。'
+  variables:
+  - 关系和场合
+  - 可直接观察的行为及影响
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#give-feedback
+  source_hash: 2c0dbe10c50af6cf5ee4d25f3339ffa455dd9e058be658698c9733cf9eb4f7c9
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

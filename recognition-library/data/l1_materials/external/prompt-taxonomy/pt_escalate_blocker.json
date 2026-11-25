@@ -1,0 +1,29 @@
+{
+  "id": "pt_escalate_blocker",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#escalate-blocker",
+  "title": "提交一条需要决定的升级说明",
+  "content": "向【决策人或团队】说明【阻塞及影响】，我们已尝试【动作和结果】。给需要决定的选项、最迟时间、各方案影响和我的建议。把事实与预测分别写明。",
+  "content_hash": "2f09b721c4f19f7ffcb3220dfbe1c74abdc1cead3961c10ecf2b687053d43808",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "communication",
+    "升级",
+    "阻塞",
+    "决策请求",
+    "escalation"
+  ],
+  "problem_solved": "说清影响、试过的操作与需要负责人决定什么。",
+  "when_to_use": "分类: 沟通与协商",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "escalate-blocker",
+    "category": "communication",
+    "variables": [
+      "决策人或团队",
+      "阻塞及影响",
+      "动作和结果"
+    ]
+  }
+}

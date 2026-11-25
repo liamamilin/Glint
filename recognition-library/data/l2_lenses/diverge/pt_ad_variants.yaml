@@ -1,0 +1,44 @@
+id: pt_ad_variants
+title: 设计可比广告版本
+tagline: 为同一产品生成多版广告，每版只改一个卖点便于 A/B 测试。
+routing:
+  primitive: diverge
+  goals:
+  - create
+  clarity_fit:
+  - concrete
+  domains:
+  - marketing
+  - advertising
+  - copywriting
+  - ab_testing
+  app_affinity:
+  - Notion
+  - Slack
+  - Chrome
+  pain_point: 需要为同一产品写出多版广告文案，每版只改变一个主要说服点以便 A/B 测试，但不知道如何结构化变量、卖点与测试指标。
+  trigger_utterances:
+  - 帮我想几版广告文案做A/B测试
+  - 这个产品要跑广告，出几个不同角度的版本
+  - 广告文案要测哪个卖点更有效
+  - 写几版广告只改一个卖点方便对比
+  - 帮我设计广告变体和测试指标
+  anti_triggers:
+  - 单纯润色单条广告文案
+  - 不涉及多版本对比的创意生成
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 为【产品和受众】写【渠道和字数】可用的广告版本。每版只改变一个主要说服点，写标题、正文、行动提示和支撑事实。提出对应测试指标，列任何需审核的声明。
+  variables:
+  - 产品和受众
+  - 渠道和字数
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#ad-variants
+  source_hash: 0ec10e7faea5137b1ac7f28e1b4f48e4863db0266f3b76f8254be7f846460704
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

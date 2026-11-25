@@ -1,0 +1,28 @@
+{
+  "id": "pt_design_regression_set",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#design-regression-set",
+  "title": "建立查提示词回归的样本集",
+  "content": "为【提示词或工作流】建立回归集，以【任务分布与历史失败】为线索。包含日常、边界、材料缺失和矛盾样本。每条写输入、最小可接受行为、关键失败及加入原因，留出未参与优化的验证样本。",
+  "content_hash": "9985d1046823039e0f4b1a11f6cde2ea360fe8f2cea3aa0478eacfad5e01c0f2",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "prompt-workflows",
+    "回归",
+    "回归样本",
+    "样本集",
+    "regression dataset"
+  ],
+  "problem_solved": "保留曾失败和高价值的代表用例。",
+  "when_to_use": "分类: 提示词与 AI 工作流",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "design-regression-set",
+    "category": "prompt-workflows",
+    "variables": [
+      "提示词或工作流",
+      "任务分布与历史失败"
+    ]
+  }
+}

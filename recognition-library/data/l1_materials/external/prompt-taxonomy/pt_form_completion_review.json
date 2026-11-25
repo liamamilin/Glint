@@ -1,0 +1,27 @@
+{
+  "id": "pt_form_completion_review",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#form-completion-review",
+  "title": "检查表单是否已填完整",
+  "content": "检查【空白要求、已填表单与附件】。按字段列是否已填、格式、与已知材料的一致性及附件是否齐全。引用页码或字段名，将提交前必须补齐的事项与可选项分开。",
+  "content_hash": "b7c8709829a60e142729ac038c940f0f2fdb42b340e065f52b45b8aa58319e61",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "files",
+    "表单",
+    "附件",
+    "填表",
+    "form review"
+  ],
+  "problem_solved": "识别漏项、格式问题和缺少附件的地方。",
+  "when_to_use": "分类: 文档与文件",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "form-completion-review",
+    "category": "files",
+    "variables": [
+      "空白要求、已填表单与附件"
+    ]
+  }
+}

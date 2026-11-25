@@ -1,0 +1,33 @@
+{
+  "id": "disc_life_ai_as_stress_tester_not_decision_crutch",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/life.json#life-ai-as-stress-tester-not-decision-crutch",
+  "title": "让 AI 帮你“压力测试选项”，而不是替你替自己做决定",
+  "content": "旧共识（盲区）：纠结或拿不定主意时，直接让 AI 替我选一个或给标准答案最省事。\n\n新现实（破盲视角）：生活与选择里的权重、代价和喜好只有你自己能承担；让 AI 帮拆盲区、列反方、算代价，但最终拍板和承担后果的权柄留在自己手里，才不会越用越虚。\n\n破冰追问母题：\n- 我正在 [A 选项 vs B 选项] 之间纠结：[简述两个选项与你的顾虑]。不要替我做决定，请帮我分别列出选 A 和选 B 最容易忽略的代价与前提。\n- 针对我目前的一个重要选择：[简述选择]，帮我提出 3 个直击内心真实偏好与底线的追问，帮我自己看清更想要什么。",
+  "content_hash": "814a01f90f24c81f9da6054e840d91a18f7d0de1731e43c60c5de271929b2388",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "life",
+    "role-inversion",
+    "first-principles",
+    "ai-boundaries",
+    "agency",
+    "decisions",
+    "判断边界"
+  ],
+  "problem_solved": "纠结或拿不定主意时，直接让 AI 替我选一个或给标准答案最省事。",
+  "when_to_use": "生活与选择里的权重、代价和喜好只有你自己能承担；让 AI 帮拆盲区、列反方、算代价，但最终拍板和承担后果的权柄留在自己手里，才不会越用越虚。",
+  "procedural_steps": [
+    "我正在 [A 选项 vs B 选项] 之间纠结：[简述两个选项与你的顾虑]。不要替我做决定，请帮我分别列出选 A 和选 B 最容易忽略的代价与前提。",
+    "针对我目前的一个重要选择：[简述选择]，帮我提出 3 个直击内心真实偏好与底线的追问，帮我自己看清更想要什么。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "life-ai-as-stress-tester-not-decision-crutch",
+    "arena": "life",
+    "lenses": [
+      "role-inversion",
+      "first-principles"
+    ]
+  }
+}

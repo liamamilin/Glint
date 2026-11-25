@@ -1,0 +1,29 @@
+{
+  "id": "sit_eng_01",
+  "source": "super-individual-toolbox",
+  "source_ref": "https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/engineer.json#eng-01",
+  "title": "零依赖静态站脚手架",
+  "content": "定位：甩掉构建工具包袱，原生三件套直接上线\n\n触发场景：当你只想快速上线一个工具站或展示库，却被 Webpack、npm 依赖冲突和服务器运维劝退时。\n\n核心机制：\n- 采用原生 HTML + CSS Variables + ES Modules，彻底跳过前端构建打包环节\n- 数据层全部抽离为纯静态 JSON，通过原生 fetch 加载与前端过滤\n- 直接托管至 GitHub Pages 或 Cloudflare Pages，实现零服务器账单与秒级全球分发\n\n交付物：一套零 npm 依赖、开箱即部署的静态站基础仓库模板\n\n推荐装配：原生 HTML/CSS/JS + GitHub Pages + GitHub Actions\n\n误用警告：不要强行用纯静态站去扛需要复杂后端鉴权、实时多人协作或高并发写入的业务。",
+  "content_hash": "ba0fa1c9509d05c9be7cca9d24d35bec3105bf3c49df3ab069d12fb7a77d0ec8",
+  "suggested_action_type": "open_resource",
+  "domain_hints": [
+    "engineer",
+    "工程师"
+  ],
+  "problem_solved": "当你只想快速上线一个工具站或展示库，却被 Webpack、npm 依赖冲突和服务器运维劝退时。",
+  "when_to_use": "当你只想快速上线一个工具站或展示库，却被 Webpack、npm 依赖冲突和服务器运维劝退时。",
+  "procedural_steps": [
+    "采用原生 HTML + CSS Variables + ES Modules，彻底跳过前端构建打包环节",
+    "数据层全部抽离为纯静态 JSON，通过原生 fetch 加载与前端过滤",
+    "直接托管至 GitHub Pages 或 Cloudflare Pages，实现零服务器账单与秒级全球分发"
+  ],
+  "anti_patterns": [
+    "不要强行用纯静态站去扛需要复杂后端鉴权、实时多人协作或高并发写入的业务。"
+  ],
+  "metadata": {
+    "original_id": "eng-01",
+    "drawer": "engineer",
+    "drawer_zh": "工程师",
+    "deliverable": "一套零 npm 依赖、开箱即部署的静态站基础仓库模板"
+  }
+}

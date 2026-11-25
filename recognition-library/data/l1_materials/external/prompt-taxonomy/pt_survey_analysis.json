@@ -1,0 +1,28 @@
+{
+  "id": "pt_survey_analysis",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#survey-analysis",
+  "title": "整理问卷结果",
+  "content": "分析【问卷题目与答卷】，回答【研究问题】。对每题注明有效分母、多选或缺失处理，再给比例及分组差异；对开放题写分类规则和代表例。样本过小时用人数并提示解释限制。",
+  "content_hash": "2748988d43dce167b32a0358f4eff61ba64104b6fb3396e929cf604a1ae4455f",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "data",
+    "调查",
+    "问卷",
+    "问卷分析",
+    "survey analysis"
+  ],
+  "problem_solved": "同时交付比例、分母和开放题主题。",
+  "when_to_use": "分类: 数据与表格",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "survey-analysis",
+    "category": "data",
+    "variables": [
+      "问卷题目与答卷",
+      "研究问题"
+    ]
+  }
+}

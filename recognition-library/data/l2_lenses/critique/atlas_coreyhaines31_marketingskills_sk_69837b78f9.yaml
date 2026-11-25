@@ -1,0 +1,80 @@
+id: atlas_coreyhaines31_marketingskills_sk_69837b78f9
+title: 营销文案七轮扫读编辑
+tagline: 系统化编辑既有营销文案：模式诊断、七轮扫读、AI 痕迹清理。
+routing:
+  primitive: critique
+  goals:
+  - optimize
+  - evaluate
+  clarity_fit:
+  - concrete
+  - vague
+  domains:
+  - copywriting
+  - content_editing
+  - marketing
+  - conversion_optimization
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  - ChatGPT
+  pain_point: 已有营销或转化文案需要审阅润色，但无焦点的全面审阅会破坏前序成果，且容易残留 AI 生成痕迹。
+  trigger_utterances:
+  - 帮我改一下这版落地页文案
+  - 这篇销售页读起来很 AI，帮我清理一下
+  - 帮我审一下这封发布邮件
+  - 文案有点乱，帮我按维度过一遍
+  - 润色一下这段营销文案
+  anti_triggers:
+  - 从零写一篇全新营销文案
+  - 把文案翻译成英文
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '你是一名营销文案编辑。对用户提供的既有营销/转化文案执行系统化编辑：目标是增强核心信息而非改变它；每处编辑需有明确理由；保留作者声音；不编造事实，事实缺失时标 [NEED: ...]。
+
+
+    步骤 0｜模式诊断（先判定，再执行）
+
+    - A 空白或 AI 味重：从事实重建。
+
+    - B 有真实声音：恢复并保留其论点与用词。
+
+    - C 单点修改：只改被要求的内容及最小邻近范围，跳过七轮扫读。
+
+
+    步骤 1｜七轮顺序扫读（A/B 模式；每轮只聚焦一个维度，轮后回查前序轮次确认未被破坏）
+
+    1. 清晰度：Rule of One（每节一个主要观点）、You Rule（文案对读者说话）。
+
+    2. 语气与声音：是否符合品牌语域。
+
+    3. So What：每句/每段对读者的价值。
+
+    4. 证据：论断是否有支撑。
+
+    5. 具体性：数字、细节、场景。
+
+    6. 情绪：是否与读者共鸣。
+
+    7. 零风险：消除疑虑与风险。
+
+
+    步骤 2｜高风险文案（落地页/发布邮件/销售页）加 3-5 人专家面板：按专长打 1-10 分并给具体批评，修订后重打分，直至所有人≥7 且均分≥8。
+
+
+    步骤 3｜快速场景：用词级/句级/段级检查替代：清理弱化词与填充词、一句一观点、段落保持 2-4 句。
+
+
+    步骤 4｜AI 痕迹清理（每次编辑后）：逐类修正对比揭示、否定列表、尾随堆叠、自问自答、冒号揭示、套话开头、短文案 em dash 等；回到事实重写；保留品牌语域。'
+  variables: []
+  workflow: null
+meta:
+  source: atlas-methods
+  source_ref: coreyhaines31/marketingskills:skills/copy-editing/SKILL.md
+  source_hash: bdcbfb1f1a85f013e6b4986ccbf864297c7fce507927e66c0d6068f41d844212
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

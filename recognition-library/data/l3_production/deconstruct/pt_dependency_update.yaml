@@ -1,0 +1,64 @@
+id: pt_dependency_update
+title: 依赖升级影响评估
+tagline: 标出升级必须改的接口、风险与回退
+routing:
+  primitive: deconstruct
+  goals:
+  - evaluate
+  clarity_fit:
+  - concrete
+  domains:
+  - engineering
+  - dependency_management
+  - api_migration
+  - package_upgrade
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Terminal
+  pain_point: 想升级某个依赖但不清楚实际影响范围，担心升级后调用点炸掉、漏改接口或无法回退
+  trigger_utterances:
+  - 这个包升级到新版会破坏哪些调用？
+  - 依赖升级后要改哪些接口
+  - 升级 xxx 版本影响范围有多大
+  - npm update 之后 build 报错怎么查
+  - 这个依赖要不要升，升了要动什么
+  anti_triggers:
+  - 只是想了解某个库的基本用法
+  - 新项目从零选择依赖方案
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '评估将 {{package}} 升级到 {{target_version}} 对 {{codebase_and_constraints}} 的影响。
+
+
+    请按以下结构输出：
+
+    1. 必须修改的接口：对照官方变更说明与代码库中的实际调用点，逐条列出需修改的 API/函数/类型及修改方式。
+
+    2. 兼容风险：列出破坏性变更、废弃 API、行为差异与潜在运行时风险。
+
+    3. 验证命令：给出升级后需执行的构建、测试、lint、类型检查等命令。
+
+    4. 回退办法：说明如何回退到原版本及数据/状态回滚注意事项。
+
+    5. 与本次无关的重构：明确列出不应在本次升级中顺手改动的内容，避免范围膨胀。'
+  variables:
+  - package
+  - target_version
+  - codebase_and_constraints
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#dependency-update
+  source_hash: 5dcb9c257e5c59715addec9cd226d0ed46f53f7861c0e1f15ebea595b8b11d55
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: engineering
+  subcategory: architecture
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

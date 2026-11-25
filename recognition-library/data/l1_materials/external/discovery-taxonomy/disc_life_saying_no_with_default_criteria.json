@@ -1,0 +1,33 @@
+{
+  "id": "disc_life_saying_no_with_default_criteria",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/life.json#life-saying-no-with-default-criteria",
+  "title": "用“预设筛选标准”来拒绝，而不是每次临时纠结人情",
+  "content": "旧共识（盲区）：每次有人找帮忙、约饭或塞任务，都要现场纠结半天“拒绝会不会伤感情”。\n\n新现实（破盲视角）：现场临时决定最容易心软答应、事后后悔；提前定好“忙什么 / 什么情况下接 / 什么情况下婉拒”，拒绝就成了顺理成章的规则而不是针对某个人。\n\n破冰追问母题：\n- 我经常在 [帮人忙/接临时任务/社交邀约] 上不好意思拒绝，最后把自己累垮。请帮我写 3 套不同语气（温和礼貌/真诚坦率/明确边界）的婉拒模板。\n- 帮我定一套“个人精力红绿灯规则”：什么情况绿灯答应、黄灯延后、红灯直接婉拒。",
+  "content_hash": "2b3b73e9c6df340faf8dc6191826f8503f8d5e5807ddf8c75e37895fb219ad49",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "life",
+    "role-inversion",
+    "first-principles",
+    "boundaries",
+    "saying-no",
+    "priorities",
+    "time"
+  ],
+  "problem_solved": "每次有人找帮忙、约饭或塞任务，都要现场纠结半天“拒绝会不会伤感情”。",
+  "when_to_use": "现场临时决定最容易心软答应、事后后悔；提前定好“忙什么 / 什么情况下接 / 什么情况下婉拒”，拒绝就成了顺理成章的规则而不是针对某个人。",
+  "procedural_steps": [
+    "我经常在 [帮人忙/接临时任务/社交邀约] 上不好意思拒绝，最后把自己累垮。请帮我写 3 套不同语气（温和礼貌/真诚坦率/明确边界）的婉拒模板。",
+    "帮我定一套“个人精力红绿灯规则”：什么情况绿灯答应、黄灯延后、红灯直接婉拒。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "life-saying-no-with-default-criteria",
+    "arena": "life",
+    "lenses": [
+      "role-inversion",
+      "first-principles"
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "disc_career_personal_operating_manual",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/career.json#career-personal-operating-manual",
+  "title": "写一份“个人协作说明书”，减少隐性沟通摩擦",
+  "content": "旧共识（盲区）：合作默契只能靠相处久了慢慢猜，把偏好和边界写出来显得生硬。\n\n新现实（破盲视角）：多数协作摩擦源于默认规则不同——一份坦诚、简洁的个人协作说明，能提前省掉大量猜忌与返工。\n\n破冰追问母题：\n- 根据我的工作习惯：[简述你的作息/沟通偏好/擅长与短板]，帮我起草一份 300 字左右的“个人协作说明书”，涵盖高效沟通方式、深度工作时段和协作红线。\n- 在我过往的团队或项目合作中，最常出现的误会是：[描述常见误会]。请帮我写 2 条清晰、不生硬的协作约定放进自我介绍或开工对齐里。",
+  "content_hash": "7ce2570b767d5cf47b061fae434f489a1f4fc413e14c374186a260a25282a552",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "career",
+    "first-principles",
+    "invisible-friction",
+    "user-manual",
+    "communication",
+    "collaboration",
+    "clarity"
+  ],
+  "problem_solved": "合作默契只能靠相处久了慢慢猜，把偏好和边界写出来显得生硬。",
+  "when_to_use": "多数协作摩擦源于默认规则不同——一份坦诚、简洁的个人协作说明，能提前省掉大量猜忌与返工。",
+  "procedural_steps": [
+    "根据我的工作习惯：[简述你的作息/沟通偏好/擅长与短板]，帮我起草一份 300 字左右的“个人协作说明书”，涵盖高效沟通方式、深度工作时段和协作红线。",
+    "在我过往的团队或项目合作中，最常出现的误会是：[描述常见误会]。请帮我写 2 条清晰、不生硬的协作约定放进自我介绍或开工对齐里。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "career-personal-operating-manual",
+    "arena": "career",
+    "lenses": [
+      "first-principles",
+      "invisible-friction"
+    ]
+  }
+}

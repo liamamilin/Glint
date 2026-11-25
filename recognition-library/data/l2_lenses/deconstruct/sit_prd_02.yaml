@@ -1,0 +1,46 @@
+id: sit_prd_02
+title: 分类骨架仪
+tagline: 先搭不重不漏的抽屉，再往里装东西
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - taxonomy
+  - knowledge_management
+  - data_modeling
+  - information_architecture
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Cursor
+  - Linear
+  pain_point: 做知识库、卡片库、产品目录或数据结构时，分类互相打架、越加越乱，找不到清晰边界
+  trigger_utterances:
+  - 我的分类总是互相打架怎么理
+  - 知识库标签越加越乱
+  - 这个字段该归 A 还是归 B
+  - taxonomy 设计得一团糟
+  - 帮我把分类体系搭清楚
+  anti_triggers:
+  - 只是想给几条笔记打标签或搜索已有内容
+  - 已有稳定分类只需新增一个条目
+execution:
+  action_type: open_resource
+  inject_mode: null
+  content: Taxonomy 分类骨架仪：先分离前台心智模型（用户怎么找）与后台正交标签（系统怎么筛）；对相邻分类强制写出裁决线（灰色内容明确归 A 不归 B）；锁定受控词表（Enum）与单条记录 Schema，先跑通 4 条样板数据再扩量。交付物：含分类边界裁决线与
+    JSON Schema 的 DESIGN.md。推荐装配：多轮架构对齐对话 + JSON Schema/校验脚本。误用警告：仅 5 条零散笔记时不要过度设计三层嵌套分类，体量上来再抽象。
+  variables: []
+  workflow: null
+meta:
+  source: super-individual-toolbox
+  source_ref: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/product-architect.json#prd-02
+  source_hash: 6d38742725cf68049d29b4698a40b970e1db6bac92782fa323e95615a4a871c4
+  status: active
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

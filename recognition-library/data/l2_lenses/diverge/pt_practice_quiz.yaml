@@ -1,0 +1,48 @@
+id: pt_practice_quiz
+title: 按难度出练习题
+tagline: 按识记理解迁移出题，暴露知识缺口
+routing:
+  primitive: diverge
+  goals:
+  - create
+  - evaluate
+  clarity_fit:
+  - concrete
+  - vague
+  domains:
+  - learning
+  - quiz
+  - exam
+  - revision
+  - knowledge_gaps
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  - ChatGPT
+  pain_point: 学完资料后不知道哪里没掌握，需要按认知层级出题并给解析定位知识缺口
+  trigger_utterances:
+  - 根据笔记帮我出几道练习题
+  - 按难度给我出题测一下
+  - 我想通过做题找知识盲区
+  - 帮我生成识记理解和迁移题
+  - 出题并给解析和常见错误
+  anti_triggers:
+  - 直接总结这份笔记
+  - 帮我写一篇学习心得
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 请根据用户提供的【教材、笔记或考点】与【当前水平】生成练习题。按识记、理解、迁移各给两题；先展示全部题目，再单列答案、解析和典型错误；每题注明它在测试哪个知识点。目标是通过答案和解析发现知识缺口。
+  variables:
+  - material
+  - current_level
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#practice-quiz
+  source_hash: 5908e43a3e57a59b450ce6dbf7c4e4a562b3cc7eadf1401ed48c53ab3200a151
+  status: active
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

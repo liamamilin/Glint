@@ -1,0 +1,33 @@
+{
+  "id": "disc_business_low_overhead_stack_first",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-low-overhead-stack-first",
+  "title": "早期死守“极低固定成本”，别还没验证需求就重装上阵",
+  "content": "旧共识（盲区）：做一件正经事就要先买齐全套高级订阅、折腾复杂架构和精美物料。\n\n新现实（破盲视角）：早期固定成本越低，试错容错率越高、心理压力越小；先用最轻量的方案跑通真实付费或真实使用，有正反馈后再逐步升级。\n\n破冰追问母题：\n- 我打算起步做 [你的项目/副业/服务]，目前列出的准备清单是：[列出你打算买的工具或花的时间]。请帮我砍掉非必要项，给出“零/极低固定成本冷启动清单”。\n- 在 [你的启动阶段] 里，哪些钱现在花属于“过早优化/烧钱”，哪些钱花在刀刃上能最快验证真实需求？",
+  "content_hash": "380cd5b147234113a343b66f9ad61382007c3104a1fa870cbf130d4a22e3e308",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "business",
+    "cost-collapse",
+    "invisible-friction",
+    "bootstrapping",
+    "lean-ops",
+    "margins",
+    "simplicity"
+  ],
+  "problem_solved": "做一件正经事就要先买齐全套高级订阅、折腾复杂架构和精美物料。",
+  "when_to_use": "早期固定成本越低，试错容错率越高、心理压力越小；先用最轻量的方案跑通真实付费或真实使用，有正反馈后再逐步升级。",
+  "procedural_steps": [
+    "我打算起步做 [你的项目/副业/服务]，目前列出的准备清单是：[列出你打算买的工具或花的时间]。请帮我砍掉非必要项，给出“零/极低固定成本冷启动清单”。",
+    "在 [你的启动阶段] 里，哪些钱现在花属于“过早优化/烧钱”，哪些钱花在刀刃上能最快验证真实需求？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "business-low-overhead-stack-first",
+    "arena": "business",
+    "lenses": [
+      "cost-collapse",
+      "invisible-friction"
+    ]
+  }
+}

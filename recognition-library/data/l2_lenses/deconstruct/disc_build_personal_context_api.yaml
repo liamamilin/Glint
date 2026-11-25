@@ -1,0 +1,61 @@
+id: disc_build_personal_context_api
+title: 个人数据私有上下文库
+tagline: 把散落各 App 的个人数据沉淀到本地，让 AI 安全读取辅助决策。
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - personal_data
+  - context
+  - sqlite
+  - markdown
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 笔记、账单、阅读、健康等个人数据散落在十几个商业 App 里，复盘时只能人工来回翻，无法让 AI 安全读取个人上下文辅助决策。
+  trigger_utterances:
+  - 我的笔记账单健康数据散落各处，怎么整理给 AI 用
+  - 想把个人数据同步到本地让 AI 辅助决策
+  - 帮我设计个人数据中台的目录结构
+  - 怎么把微信读书记账 Apple Health 数据本地化
+  - 把分散的个人记录沉淀成私有上下文库
+  anti_triggers:
+  - 企业级数据仓库或 ETL 管道设计
+  - 单个 App 的数据导出教程
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '个人私有上下文库搭建清单：
+
+    - [ ] 列出你常用的 3 个数据源 App（如微信读书/记账软件/Apple Health）
+
+    - [ ] 设计极简目录：/data/{source}/{YYYY-MM}.md 或 SQLite 表
+
+    - [ ] 选择同步频率与方式（手动导出 / 自动化脚本 / 快捷指令）
+
+    - [ ] 定义统一 schema（时间、类型、内容、标签）
+
+    - [ ] 为每个数据源写一条最小同步操作说明
+
+    - [ ] 挑一类记录（消费/日程/学习笔记）整理成结构化文本
+
+    - [ ] 用 AI 生成 5 个平时自己绝对看不出来的跨维度复盘提问并回答
+
+    - [ ] 设置每月复盘提醒，持续沉淀'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/build.json#build-personal-context-api
+  source_hash: 3a2a5bef2eeadb0365cd492b7ff09b01c9e77ef422a4b2cf4e52d8a91639172c
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

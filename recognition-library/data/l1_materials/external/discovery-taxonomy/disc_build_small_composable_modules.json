@@ -1,0 +1,33 @@
+{
+  "id": "disc_build_small_composable_modules",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/build.json#build-small-composable-modules",
+  "title": "把大脚本拆成“单一职责的小模块”，靠管道拼装而不是硬写巨石",
+  "content": "旧共识（盲区）：写自动化时习惯把抓取、清洗、判断、输出全塞进一个几百行的庞大脚本里。\n\n新现实（破盲视角）：每个小模块只干好一件事、输入输出格式清晰，换一个数据源或换一个输出目标时，直接像积木一样重新拼装即可。\n\n破冰追问母题：\n- 我有一个偏臃肿的 [脚本/工作流/自动化任务]：[简述流程]。请帮我拆成 3～4 个职责单一的独立步骤，并定好它们之间传递数据的极简格式。\n- 在 [你的日常自动化场景] 中，哪些“只做一件事的过滤/转换小工具”最值得单独抽出来，方便以后反复复用？",
+  "content_hash": "f57c2566c3315b1b5777444f69610b922c8ca6eeea0dbc92d8745d36fc922b4e",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "build",
+    "first-principles",
+    "cross-domain",
+    "modularity",
+    "unix-philosophy",
+    "composable",
+    "scripts"
+  ],
+  "problem_solved": "写自动化时习惯把抓取、清洗、判断、输出全塞进一个几百行的庞大脚本里。",
+  "when_to_use": "每个小模块只干好一件事、输入输出格式清晰，换一个数据源或换一个输出目标时，直接像积木一样重新拼装即可。",
+  "procedural_steps": [
+    "我有一个偏臃肿的 [脚本/工作流/自动化任务]：[简述流程]。请帮我拆成 3～4 个职责单一的独立步骤，并定好它们之间传递数据的极简格式。",
+    "在 [你的日常自动化场景] 中，哪些“只做一件事的过滤/转换小工具”最值得单独抽出来，方便以后反复复用？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "build-small-composable-modules",
+    "arena": "build",
+    "lenses": [
+      "first-principles",
+      "cross-domain"
+    ]
+  }
+}

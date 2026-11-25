@@ -1,0 +1,58 @@
+id: disc_business_micro_paid_diagnoses
+title: 微诊断服务设计
+tagline: 把重型咨询压成 24h 快审，低价高毛利的微诊断产品。
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  - vague
+  domains:
+  - business
+  - productized_service
+  - b2b
+  - audit
+  - high_margin
+  app_affinity:
+  - Notion
+  - Cursor
+  - Linear
+  - Feishu
+  pain_point: 提供专业建议总要拉几周大项目、开无数次会，显得不专业却拖慢交付与利润。
+  trigger_utterances:
+  - 我只会做重型咨询怎么把服务产品化
+  - 想卖个低价快审先拿客户
+  - 如何 48 小时交付一个诊断报告
+  - 客户怕花了大钱没用怎么降低首单顾虑
+  - AI 帮我做信息收集 怎么卖微诊断
+  anti_triggers:
+  - 用户只想写一篇营销文案或做品牌定位
+  - 用户在问如何做长期 retainers 长约咨询
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '微诊断服务设计清单：
+
+    1. 选定 1 个具体痛点（如落地页转化/简历定位/AI 工作流），定义交付物清单（3 个卡点 + 优先级 + 1 个最小验证动作）。
+
+    2. 定价：固定价格、24–48h 交付；写清不包含的内容边界。
+
+    3. 信息收集模板：让客户 10 分钟填完（链接/截图/数据），AI 先做初稿梳理。
+
+    4. 交付格式：1 页报告 + 15 分钟录屏/通话；附“抵扣后续合作”条款降低首单顾虑。
+
+    5. 首单获取：在垂直人群（独立开发者/小商家/求职者）社区以低价试单验证，收集 3 个案例。
+
+    6. 复盘：记录每个诊断耗时与毛利，迭代模板与定价。'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-micro-paid-diagnoses
+  source_hash: 012ca35962d2123ff50480e1341f08f1f708a1dc75601124ca26a4e8f7fffce0
+  status: active
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

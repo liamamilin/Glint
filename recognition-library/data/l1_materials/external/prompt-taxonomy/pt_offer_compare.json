@@ -1,0 +1,27 @@
+{
+  "id": "pt_offer_compare",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#offer-compare",
+  "title": "比较不同工作机会的条件",
+  "content": "比较【明确写出的机会条件】，我的优先级是【个人偏好与限制】。按职责、成长、工作地点、固定与不确定待遇、决策时限做表，注明假设和出处。把需招聘方书面确认的问题列为下一步。",
+  "content_hash": "ac2a8ac64d49c2dd2f9adf7733e47fde8d176f1ddba02f80246a816f8772171b",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "career",
+    "工作机会",
+    "Offer对比",
+    "offer comparison"
+  ],
+  "problem_solved": "让现金收入、工作内容和风险可以对照。",
+  "when_to_use": "分类: 求职与职业",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "offer-compare",
+    "category": "career",
+    "variables": [
+      "明确写出的机会条件",
+      "个人偏好与限制"
+    ]
+  }
+}

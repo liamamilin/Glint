@@ -1,0 +1,33 @@
+{
+  "id": "disc_content_concrete_examples_over_abstract_claims",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/content.json#content-concrete-examples-over-abstract-claims",
+  "title": "每讲一个抽象道理，立刻配一个“具体前后对比例子”",
+  "content": "旧共识（盲区）：道理讲得够深刻、够道理，读者自然会自己脑补怎么用。\n\n新现实（破盲视角）：抽象道理看完容易忘，但一个“改前 vs 改后”的真实例子（一段前后对比的文字、一个截图、一条具体 Prompt）能让读者立刻看懂并照着做。\n\n破冰追问母题：\n- 我打算写一篇围绕 [你的核心观点] 的内容，但目前有点偏空泛。请帮我为这个观点设计 2 个贴近 [目标读者] 日常场景的“前后对比案例”。\n- 检查下面这段草稿：[粘贴草稿]，指出哪几句最抽象、最像空话，并帮我改写成带具体动作或样例的表达。",
+  "content_hash": "632ce091b4d159e4693dc37fbbe1e284438a3c38a3f8c2a619a87c71acbf2e67",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "content",
+    "first-principles",
+    "invisible-friction",
+    "examples",
+    "show-dont-tell",
+    "clarity",
+    "writing"
+  ],
+  "problem_solved": "道理讲得够深刻、够道理，读者自然会自己脑补怎么用。",
+  "when_to_use": "抽象道理看完容易忘，但一个“改前 vs 改后”的真实例子（一段前后对比的文字、一个截图、一条具体 Prompt）能让读者立刻看懂并照着做。",
+  "procedural_steps": [
+    "我打算写一篇围绕 [你的核心观点] 的内容，但目前有点偏空泛。请帮我为这个观点设计 2 个贴近 [目标读者] 日常场景的“前后对比案例”。",
+    "检查下面这段草稿：[粘贴草稿]，指出哪几句最抽象、最像空话，并帮我改写成带具体动作或样例的表达。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "content-concrete-examples-over-abstract-claims",
+    "arena": "content",
+    "lenses": [
+      "first-principles",
+      "invisible-friction"
+    ]
+  }
+}

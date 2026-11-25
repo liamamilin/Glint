@@ -1,0 +1,54 @@
+id: pt_household_budget
+title: 家庭预算分类
+tagline: 把支出记录拆成固定、浮动、一次性与储备四类，看清钱花哪了
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - digest
+  clarity_fit:
+  - concrete
+  - vague
+  domains:
+  - personal_finance
+  - budgeting
+  - planning
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Excel
+  - Numbers
+  pain_point: 手头一堆支出记录却看不清固定、可调和一次性支出分别占多少，预算一团乱
+  trigger_utterances:
+  - 帮我把这月的支出分分类
+  - 固定支出和浮动支出怎么区分
+  - 预算太乱了帮我理一下
+  - organize my household expenses
+  - 把账单按固定/浮动/一次性拆一下
+  anti_triggers:
+  - 用户只想记录单笔支出或做记账流水
+  - 用户在做投资组合或税务筹划
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 用【收入和支出记录】规划【月份和目标】的家庭预算。按固定支出、浮动支出、一次性支出和储备列出金额与依据。给三个可由我选择的调整方向和对现金流的影响，把缺失或不确定金额单列。
+  variables:
+  - '{''name'': ''收入和支出记录'', ''description'': ''用户提供的收入来源与支出明细（可为表格/文本）''}'
+  - '{''name'': ''月份和目标'', ''description'': ''预算月份及财务目标（如储蓄率、减支目标）''}'
+  - 收入和支出记录
+  - 月份和目标
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#household-budget
+  source_hash: bcefaec32e0142ebef3a249bc47f34afea8b3bb88c0cef060209dbf65e51036f
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: personal_career
+  subcategory: personal_os
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

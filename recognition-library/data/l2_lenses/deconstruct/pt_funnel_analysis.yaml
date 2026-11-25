@@ -1,0 +1,47 @@
+id: pt_funnel_analysis
+title: 分析漏斗流失阶段
+tagline: 定义窗口与分母，定位各阶段流失
+routing:
+  primitive: deconstruct
+  goals:
+  - debug
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - data
+  - funnel_analysis
+  - conversion
+  - analytics
+  app_affinity:
+  - Chrome
+  - Notion
+  - ChatGPT
+  - Slack
+  pain_point: 用户有事件数据和漏斗定义，但不清楚在哪一阶段流失，也担心分母、同一用户旅程和统计窗口不可比。
+  trigger_utterances:
+  - 这个转化漏斗每阶段掉多少人
+  - 帮我按分母和时间窗分析漏斗流失
+  - 用户旅程漏斗哪一步流失严重
+  - funnel conversion rate 掉队原因
+  - 按渠道分组看转化漏斗
+  anti_triggers:
+  - 只想写 SQL 不分析漏斗
+  - 没有事件数据只想估算转化率
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 用【事件数据和字段说明】分析【目标漏斗】。先定义入口、顺序、去重和转化时间窗，再列每阶段人数、转化率和掉队人数。按【可比较分组】做一次分层，标出无法判定原因的流失。
+  variables:
+  - 事件数据和字段说明
+  - 目标漏斗
+  - 可比较分组
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#funnel-analysis
+  source_hash: 31e7e902ede82d6ac05172ca41576b2d8cfab9011951ff40d0cf6d233c898373
+  status: active
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

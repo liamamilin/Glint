@@ -1,0 +1,28 @@
+{
+  "id": "pt_resolve_disagreement",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#resolve-disagreement",
+  "title": "准备一次分歧调解",
+  "content": "从【双方陈述】整理【待解决的分歧】。分别归纳共同目标、各自关切、真实约束和有争议的事实。提出两个双方可先试的选项，给可验证标准和下一次沟通的议程。",
+  "content_hash": "460b7a48be5ce9062e2e57ab6b57523ff9379528d7848f9a7c3d5388bc2f228f",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "communication",
+    "调解",
+    "分歧",
+    "alignment",
+    "mediation"
+  ],
+  "problem_solved": "先复述双方能够认可的问题和约束。",
+  "when_to_use": "分类: 沟通与协商",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "resolve-disagreement",
+    "category": "communication",
+    "variables": [
+      "双方陈述",
+      "待解决的分歧"
+    ]
+  }
+}

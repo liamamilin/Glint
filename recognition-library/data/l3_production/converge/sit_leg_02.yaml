@@ -1,0 +1,52 @@
+id: sit_leg_02
+title: 定价盈亏模拟器
+tagline: 算清回本线与时薪底线，挑出最匹配产能的定价档位
+routing:
+  primitive: converge
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - pricing
+  - finance
+  - indie_hacker
+  - product_strategy
+  app_affinity:
+  - Notion
+  - Chrome
+  - ChatGPT
+  - Claude
+  pain_point: 准备给数字产品、订阅或咨询服务定价，在 9 块与 99 块之间举棋不定，算不清回本线和时薪底线
+  trigger_utterances:
+  - 数字产品卖9块还是99块好
+  - 定价总是定太低怎么办
+  - 怎么算盈亏平衡点
+  - 一人公司定价策略
+  - 订阅服务定价纠结
+  anti_triggers:
+  - 价格已定只差营销文案
+  - 大公司企业级合同谈判
+execution:
+  action_type: open_resource
+  inject_mode: null
+  content: 打开《3 档定价盈亏平衡与毛利测算表》（电子表格/极简计算器），按步骤填写：1) 成本清单：固定成本（工具/域名/订阅）、单用户变动成本（API/支付抽成）、时间机会成本（时薪×预估工时）；2) 定价假设：输入 3 档价格与对应转化率（悲观/基准/乐观），自动计算盈亏平衡所需付费人数=(固定+时间成本)/(价格-变动成本)；3)
+    对比毛利与一人产能：薄利多销 vs 高客单小而美，锁定最匹配产能的档位。交付：每档 BEP 人数、毛利率、月收入预测。
+  variables: []
+  workflow: null
+meta:
+  source: super-individual-toolbox
+  source_ref: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/legal-finance.json#leg-02
+  source_hash: 845707146256b630d11069096ffcd4527471d94515af2fa408d5e169a05a041a
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: product_business
+  subcategory: pricing_strategy
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

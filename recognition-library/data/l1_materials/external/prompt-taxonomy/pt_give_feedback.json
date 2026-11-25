@@ -1,0 +1,28 @@
+{
+  "id": "pt_give_feedback",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#give-feedback",
+  "title": "准备一场具体的反馈对话",
+  "content": "为与【关系和场合】的对话准备反馈，事实是【可直接观察的行为及影响】。组织一句具体开场、两个澄清问题和一个可实行的请求。给对方不同理解时的跟进问法。",
+  "content_hash": "2c0dbe10c50af6cf5ee4d25f3339ffa455dd9e058be658698c9733cf9eb4f7c9",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "communication",
+    "反馈",
+    "沟通",
+    "1:1",
+    "feedback"
+  ],
+  "problem_solved": "用观察、影响与请求替代笼统评价。",
+  "when_to_use": "分类: 沟通与协商",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "give-feedback",
+    "category": "communication",
+    "variables": [
+      "关系和场合",
+      "可直接观察的行为及影响"
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "disc_content_visual_diagrams_for_complexity",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/content.json#content-visual-diagrams-for-complexity",
+  "title": "用一张“结构图/流程图”讲清复杂关系，少写 800 字解释",
+  "content": "旧共识（盲区）：把一件复杂的事讲清楚，需要靠层层递进的长段落和严密的文字修辞。\n\n新现实（破盲视角）：因果回路、状态流转和层级关系用一张干净的示意图或对比图表达，往往 5 秒就能看懂全貌，转发率和收藏率也更高。\n\n破冰追问母题：\n- 我想把 [某个复杂机制/工作流/概念关系] 讲清楚。请帮我设计一张“信息图/流程图/象限图”的版面结构，标出核心节点、连线关系和一句点睛标题。\n- 把下面这段偏抽象的文字说明：[粘贴文字]，改写成适合画成示意图的“节点 + 关系 + 关键结论”结构。",
+  "content_hash": "3098cea23114ec43b531fd584f429c6392ad082ce223e8be0d7bc5956b8c5dc2",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "content",
+    "cross-domain",
+    "first-principles",
+    "diagrams",
+    "visual-thinking",
+    "explainers",
+    "clarity"
+  ],
+  "problem_solved": "把一件复杂的事讲清楚，需要靠层层递进的长段落和严密的文字修辞。",
+  "when_to_use": "因果回路、状态流转和层级关系用一张干净的示意图或对比图表达，往往 5 秒就能看懂全貌，转发率和收藏率也更高。",
+  "procedural_steps": [
+    "我想把 [某个复杂机制/工作流/概念关系] 讲清楚。请帮我设计一张“信息图/流程图/象限图”的版面结构，标出核心节点、连线关系和一句点睛标题。",
+    "把下面这段偏抽象的文字说明：[粘贴文字]，改写成适合画成示意图的“节点 + 关系 + 关键结论”结构。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "content-visual-diagrams-for-complexity",
+    "arena": "content",
+    "lenses": [
+      "cross-domain",
+      "first-principles"
+    ]
+  }
+}

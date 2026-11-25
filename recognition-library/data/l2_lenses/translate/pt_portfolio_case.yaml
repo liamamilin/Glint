@@ -1,0 +1,44 @@
+id: pt_portfolio_case
+title: 项目写进作品集
+tagline: 把项目材料整理成作品集案例，展示问题到结果的全过程
+routing:
+  primitive: translate
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - career
+  - portfolio
+  - project_review
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 手头有项目经历但不知道怎么写成作品集案例，无法向目标岗位展示从问题到决定与结果的完整过程
+  trigger_utterances:
+  - 这个项目怎么写进作品集
+  - 帮我把项目经历整理成 case study
+  - 作品集里项目部分怎么写
+  - 把项目材料写成 portfolio case
+  - 如何展示项目中的决策过程
+  anti_triggers:
+  - 只是想写简历 bullet point 而非完整案例
+  - 项目复盘只为自己团队内部总结
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: 把{{input}}整理为给{{target_role}}看的作品集案例。写问题、约束、我的职责、主要决定、替代方案和结果。给可附证据的位置，并指出仍可补做的验证。
+  variables:
+  - target_role
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#portfolio-case
+  source_hash: 9e189317d72c65b4e01ec527f055b63de43940527de61cf5ba1d2265207d1b91
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

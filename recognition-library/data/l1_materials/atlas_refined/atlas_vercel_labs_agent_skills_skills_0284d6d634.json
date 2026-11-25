@@ -1,0 +1,43 @@
+{
+  "id": "atlas_vercel_labs_agent_skills_skills_0284d6d634",
+  "source": "atlas-methods",
+  "source_ref": "vercel-labs/agent-skills:skills/deploy-to-vercel/SKILL.md",
+  "title": "Vercel 部署决策流程：状态检查与四条部署路径",
+  "content": "部署前先做四步只读状态检查：git remote、.vercel/project.json 或 .vercel/repo.json 是否存在、vercel whoami、teams list。根据“已链接/未链接 × 有无 git remote × CLI 是否认证”选择路径：理想路径是已链接 + 有 remote，征得同意后 git add/commit/push，让 Vercel 自动构建；无 remote 的已链接项目用 vercel deploy --no-wait；未链接项目先选团队再 link（有 remote 优先 --repo），随后按最佳方式部署；无法登录时用 --temporary 临时部署并告知 claim 链接与过期时间。默认 preview，仅用户明确要求 production；多团队时后续命令统一 --scope；最终目标是把项目推进到已链接且可通过 git push 部署的长期状态。",
+  "content_hash": "baa6f20381e4b62262ac53ccb1571985f5d16435afaf15af6181561819e2ab65",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "deployment",
+    "vercel",
+    "cli",
+    "git",
+    "decision-tree"
+  ],
+  "problem_solved": "在不同项目/账号/环境状态下避免盲目执行 Vercel 命令，通过先收集状态再选择正确部署路径，减少交互式误触与部署失败",
+  "when_to_use": "每次需要部署到 Vercel 前，或需要把项目推进到“已链接且可通过 git push 部署”的长期配置时",
+  "procedural_steps": [
+    "先收集四类状态：git remote、.vercel 链接文件、vercel whoami 认证、可用团队",
+    "仅用 vercel whoami 做无副作用探测；避免在未链接目录使用 project inspect/ls/link 探测",
+    "已链接且有 git remote：征得用户明确同意后提交推送，由 Vercel 自动构建；CLI 已认证时用 vercel ls 取最新 preview URL",
+    "已链接但无 git remote：运行 vercel deploy -y --no-wait，再用 vercel inspect 检查状态",
+    "未链接且 CLI 已认证：先选团队，再用 --repo 链接（有 remote）或普通 link（无 remote），随后按 git push 或 CLI 部署",
+    "未认证且可交互：安装/登录 CLI，选团队，链接并部署",
+    "无法登录的非交互环境：直接 npx vercel@latest deploy --temporary -y，告知 URL、过期时间与 claim 链接",
+    "默认 preview，仅用户明确要求时 --prod；多团队时所有后续命令带 --scope"
+  ],
+  "anti_patterns": [
+    "未链接目录用 vercel project inspect/ls/link 探测状态，可能触发交互或副作用链接",
+    "未获用户明确批准就 git push",
+    "在 CI 或已链接项目目录使用 --temporary 临时部署",
+    "把 CLI 可用性检查升级为权限提升",
+    "部署生产环境时未得到用户明确要求"
+  ],
+  "metadata": {
+    "repository": "vercel-labs/agent-skills",
+    "skill_path": "skills/deploy-to-vercel/SKILL.md",
+    "commit_sha": "1a2c79d4e6c4a2283dc2c614b6538cbe1ed5ca62",
+    "l0_content_hash": "418ca2a60d35c551e6cb645f4e82c1b704a8335486ffe74b1b3d0617a17504e5",
+    "l0_quality_score": 0.82,
+    "refined_by": "opencode-go/beam-free"
+  }
+}

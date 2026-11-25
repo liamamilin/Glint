@@ -1,0 +1,33 @@
+{
+  "id": "disc_life_physical_reset_rituals",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/life.json#life-physical-reset-rituals",
+  "title": "用“身体状态切换”打断脑力死循环，而不是靠硬扛",
+  "content": "旧共识（盲区）：脑子卡住或情绪紧绷时，应该继续坐在屏幕前盯着想通为止。\n\n新现实（破盲视角）：久坐、缺光和浅呼吸会让大脑维持在低效紧绷态；一次 10 分钟的快走、晒太阳、拉伸或冷水洗脸，往往比硬盯屏幕 1 小时更能打破死循环。\n\n破冰追问母题：\n- 当我连续盯着电脑/手机太久、脑子发僵或焦躁时，请帮我设计一套“5～10 分钟室内外微重启清单”，分出适合白天和睡前的不同版本。\n- 如何把 [你喜欢的简单身体活动，如散步/拉伸/力量训练/做饭] 变成工作与休息之间自然的“状态切换仪式”，让我不再把工作情绪带进休息时间？",
+  "content_hash": "8eeb1bd78ec5f3da68f26638c4926c5a31b5ec70568f4c1e5515a0e9f58f913b",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "life",
+    "cross-domain",
+    "invisible-friction",
+    "recovery",
+    "sleep",
+    "movement",
+    "reset"
+  ],
+  "problem_solved": "脑子卡住或情绪紧绷时，应该继续坐在屏幕前盯着想通为止。",
+  "when_to_use": "久坐、缺光和浅呼吸会让大脑维持在低效紧绷态；一次 10 分钟的快走、晒太阳、拉伸或冷水洗脸，往往比硬盯屏幕 1 小时更能打破死循环。",
+  "procedural_steps": [
+    "当我连续盯着电脑/手机太久、脑子发僵或焦躁时，请帮我设计一套“5～10 分钟室内外微重启清单”，分出适合白天和睡前的不同版本。",
+    "如何把 [你喜欢的简单身体活动，如散步/拉伸/力量训练/做饭] 变成工作与休息之间自然的“状态切换仪式”，让我不再把工作情绪带进休息时间？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "life-physical-reset-rituals",
+    "arena": "life",
+    "lenses": [
+      "cross-domain",
+      "invisible-friction"
+    ]
+  }
+}

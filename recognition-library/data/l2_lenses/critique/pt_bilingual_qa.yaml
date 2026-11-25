@@ -1,0 +1,57 @@
+id: pt_bilingual_qa
+title: 逐段核对译文原文
+tagline: 找出漏译、增译与术语不一致，输出对照表
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  clarity_fit:
+  - concrete
+  domains:
+  - translation
+  - localization
+  - language
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  - Mail
+  pain_point: 对照原文和译文时，漏译、增译、数字和术语不一致很难一眼发现，语气偏好和事实错误也混在一起
+  trigger_utterances:
+  - 帮我核对一下译文和原文
+  - 这段翻译漏了什么
+  - 术语前后不一致怎么查
+  - translation QA 对照原文
+  - 找出译文里的增译和误译
+  anti_triggers:
+  - 从零翻译一篇文章
+  - 润色英文原文语气
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '按段对照【原文】与【译文】，目标语言和使用场景为【语言和使用场景】。请记录以下差异，逐一附原句、现译、建议和严重度（高/中/低）：
+
+    1. 漏译（原文有、译文缺）
+
+    2. 增译（译文多出原文没有的内容）
+
+    3. 误译（语义偏差）
+
+    4. 数字/单位差异
+
+    5. 术语不一致
+
+    请将「语气喜好」与「事实性问题」分开归类，最终输出对照表。'
+  variables:
+  - 原文
+  - 译文
+  - 语言和使用场景
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#bilingual-qa
+  source_hash: 023acde39056edc004a9f7ce575ac570dd2bad9701c3dc242268f9e18484fb5d
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

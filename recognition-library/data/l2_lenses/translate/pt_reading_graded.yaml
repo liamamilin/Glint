@@ -1,0 +1,62 @@
+id: pt_reading_graded
+title: 分级阅读改写器
+tagline: 把原文改成匹配水平的分级阅读材料并附理解题
+routing:
+  primitive: translate
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - language_learning
+  - graded_reading
+  - reading_comprehension
+  - education
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 手头的外语文章太难，想保留主要信息但降低词汇和句法难度，生成可读的分级材料和练习题。
+  trigger_utterances:
+  - 这篇英文太难了帮我改成B1水平
+  - 把这篇文章改写成分级阅读材料
+  - 保留信息但降低难度的阅读材料
+  - 给这篇外文做个graded reading
+  - 把原文改成适合我水平的版本
+  anti_triggers:
+  - 仅把文章翻译成中文而不控制难度
+  - 纯语法纠错或润色原句
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请将以下【目标语言材料】改写为适合【学习水平】的分级阅读材料：
+
+    1. 保留主要信息与关键事实，不编造内容。
+
+    2. 控制句长、词汇和句法复杂度；必要时拆分长句；生僻词可加简短注释。
+
+    3. 输出改写后的材料。
+
+    4. 最后提供 3 个理解问题和 1 个必须引用原句才能回答的问题。
+
+
+    材料：
+
+    {{input}}
+
+
+    学习水平：{{target_level}}'
+  variables:
+  - target_level
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#reading-graded
+  source_hash: eb790f1ebea508d909084d419f02f881fef5358064cf8847c774770a8f5d8915
+  status: active
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

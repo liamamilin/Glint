@@ -1,0 +1,29 @@
+{
+  "id": "sit_prd_01",
+  "source": "super-individual-toolbox",
+  "source_ref": "https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/product-architect.json#prd-01",
+  "title": "MVP 极简裁剪刀",
+  "content": "定位：把三个月的宏大蓝图，砍成 48 小时能上线的核心切片\n\n触发场景：当你越想功能越多，登录、权限、后台、社区全想一起做，导致项目迟迟无法上线时。\n\n核心机制：\n- 写出你脑中完整的理想功能清单\n- 强制划出一条红线：删掉它，核心价值是否依然成立？（能删的全进 V2 冰柜）\n- 把留下的最小闭环压成 1 条主路径，确保 1 个周末内能跑通交付\n\n交付物：一份《V1 必做清单（限 3 项）》与一份《V2 冰柜清单》\n\n推荐装配：需求裁剪对话协议 + Markdown Scope 文档\n\n误用警告：裁剪的是“锦上添花的功能”，不是“核心体验的完成度”；别把 MVP 做成无法使用的残次品。",
+  "content_hash": "caf7fe29fe3d4f7b792299f67d0d9a379eda4ccb23ba51cf68684c434666240d",
+  "suggested_action_type": "open_resource",
+  "domain_hints": [
+    "product-architect",
+    "产品与架构师"
+  ],
+  "problem_solved": "当你越想功能越多，登录、权限、后台、社区全想一起做，导致项目迟迟无法上线时。",
+  "when_to_use": "当你越想功能越多，登录、权限、后台、社区全想一起做，导致项目迟迟无法上线时。",
+  "procedural_steps": [
+    "写出你脑中完整的理想功能清单",
+    "强制划出一条红线：删掉它，核心价值是否依然成立？（能删的全进 V2 冰柜）",
+    "把留下的最小闭环压成 1 条主路径，确保 1 个周末内能跑通交付"
+  ],
+  "anti_patterns": [
+    "裁剪的是“锦上添花的功能”，不是“核心体验的完成度”；别把 MVP 做成无法使用的残次品。"
+  ],
+  "metadata": {
+    "original_id": "prd-01",
+    "drawer": "product-architect",
+    "drawer_zh": "产品与架构师",
+    "deliverable": "一份《V1 必做清单（限 3 项）》与一份《V2 冰柜清单》"
+  }
+}

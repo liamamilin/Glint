@@ -1,0 +1,28 @@
+{
+  "id": "pt_faq_from_material",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#faq-from-material",
+  "title": "把材料整理成常见问题",
+  "content": "将【现有材料】写成供【读者】使用的 FAQ。按读者最可能的操作顺序组织问题，答案先给结论或步骤，再附材料出处。材料没有说明的内容用待补充标记，列出还需要向谁核对。",
+  "content_hash": "0a82fd3e8960d9ed1968641a6768218337e20cc5cd521f99ec7b2416a950a7f8",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "writing",
+    "FAQ",
+    "帮助中心",
+    "问答",
+    "knowledge base"
+  ],
+  "problem_solved": "把读者真正会问的问题放在前面。",
+  "when_to_use": "分类: 写作与语言",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "faq-from-material",
+    "category": "writing",
+    "variables": [
+      "现有材料",
+      "读者"
+    ]
+  }
+}

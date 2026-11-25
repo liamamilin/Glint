@@ -1,0 +1,33 @@
+{
+  "id": "disc_cognition_making_decisions_under_uncertainty",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/cognition.json#cognition-making-decisions-under-uncertainty",
+  "title": "信息永远不可能 100% 齐备，在“够用信息”下做决定",
+  "content": "旧共识（盲区）：等把所有资料都看完、所有变量都算准了，再做决定才算负责任。\n\n新现实（破盲视角）：现实中绝大多数决定都要在信息不完全时做出；等太久往往错过窗口或白耗精力，看清关键变量与底线后果后果断拍板更务实。\n\n破冰追问母题：\n- 我在 [某个决定/选择] 上一直等“再多看点资料再定”：[简述纠结点]。请帮我列出做这个决定真正关键的 3 个变量，以及我现在其实已经足够判断的依据。\n- 针对 [当前纠结的选择]，帮我对比“现在就定并边走边调”与“再等两周调研”各自的机会成本。",
+  "content_hash": "c70f0bf85609a6e24659033cef6cfd7374856386e39921360531a67ae21aa548",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "cognition",
+    "invisible-friction",
+    "cost-collapse",
+    "uncertainty",
+    "decision-making",
+    "clarity",
+    "tradeoffs"
+  ],
+  "problem_solved": "等把所有资料都看完、所有变量都算准了，再做决定才算负责任。",
+  "when_to_use": "现实中绝大多数决定都要在信息不完全时做出；等太久往往错过窗口或白耗精力，看清关键变量与底线后果后果断拍板更务实。",
+  "procedural_steps": [
+    "我在 [某个决定/选择] 上一直等“再多看点资料再定”：[简述纠结点]。请帮我列出做这个决定真正关键的 3 个变量，以及我现在其实已经足够判断的依据。",
+    "针对 [当前纠结的选择]，帮我对比“现在就定并边走边调”与“再等两周调研”各自的机会成本。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "cognition-making-decisions-under-uncertainty",
+    "arena": "cognition",
+    "lenses": [
+      "invisible-friction",
+      "cost-collapse"
+    ]
+  }
+}

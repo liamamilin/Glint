@@ -1,0 +1,28 @@
+{
+  "id": "pt_project_plan",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#project-plan",
+  "title": "把项目拆成行动计划",
+  "content": "把【项目目标】拆成可执行计划。资源和约束是【人员、时间和依赖】。交付分阶段里程碑、依赖顺序、待确认的风险和本周行动表。每项行动用动词开头，并写明交付物；未知负责人标为待分配。",
+  "content_hash": "4928ce902ba76cb81a8d2d1d1e8cf621f2b3fd86702c5ce01e13e10099865fa5",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "planning",
+    "计划",
+    "项目",
+    "里程碑",
+    "project plan"
+  ],
+  "problem_solved": "先厘清交付物、依赖和里程碑。",
+  "when_to_use": "分类: 计划与生活",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "project-plan",
+    "category": "planning",
+    "variables": [
+      "项目目标",
+      "人员、时间和依赖"
+    ]
+  }
+}

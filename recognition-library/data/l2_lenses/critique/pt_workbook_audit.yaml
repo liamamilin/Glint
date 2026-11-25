@@ -1,0 +1,50 @@
+id: pt_workbook_audit
+title: 交付前表格审计
+tagline: 核对输入、公式、引用与输出，交付前 spreadsheet QA
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  - debug
+  clarity_fit:
+  - concrete
+  domains:
+  - spreadsheet_qa
+  - excel_audit
+  - files
+  - data_validation
+  app_affinity:
+  - Chrome
+  - Notion
+  pain_point: 交付前 spreadsheet 可能存在公式错误、引用断链、手写覆盖和单位不一致，需要系统化核对避免翻车
+  trigger_utterances:
+  - 这个表格交付前帮我检查一下
+  - Excel 公式好像有引用错误
+  - spreadsheet QA 一下再发给客户
+  - 帮我审计下这个 xlsx 有没有断链
+  - 单位不一致帮我找出来
+  anti_triggers:
+  - 从零搭建新报表或新模型
+  - 仅做数据可视化图表美化
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请对【电子表格】按【使用目的】进行交付前审计：
+
+    1. 区分资料输入区、计算表与最终输出区，确认边界清晰。
+
+    2. 逐项检查：错误引用、手写覆盖公式、断链、单位不一致。
+
+    3. 抽查至少三项计算结果，与源资料手算核对，并记录对应单元格坐标。
+
+    4. 输出问题清单（位置/问题/风险/修正建议）与通过/不通过结论。'
+  variables: []
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#workbook-audit
+  source_hash: b8d9f4ce2e76e4a0abafb630f27066fc1719a1e67af6d749f197f80eddc711fa
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

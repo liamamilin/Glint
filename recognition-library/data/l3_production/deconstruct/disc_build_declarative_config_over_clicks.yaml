@@ -1,0 +1,63 @@
+id: disc_build_declarative_config_over_clicks
+title: 声明式配置替代点按
+tagline: 把环境与偏好写成可版本管理的配置/脚本，一键复现
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - config_as_code
+  - automation
+  - reproducibility
+  - dev_environment
+  app_affinity:
+  - Terminal
+  - VS Code
+  - Cursor
+  - Notion
+  pain_point: 换电脑或重装环境时，只能凭印象在设置面板一步步点回去，容易漏掉关键配置
+  trigger_utterances:
+  - 新电脑环境怎么迁移
+  - 重装系统后配置忘了怎么配
+  - 把我的开发环境写成脚本
+  - settings 太多记不住
+  - config as code 怎么做
+  anti_triggers:
+  - 只是想导出浏览器书签
+  - 只想备份单个文件
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '1) 列出每次换设备/重装最容易漏掉的 5 个环境/工具配置项。
+
+    2) 为每项明确：安装命令、配置文件路径、依赖版本、密钥/账号处理方式。
+
+    3) 选择声明式载体：dotfiles 仓库 / Brewfile / asdf / nix / setup 脚本。
+
+    4) 将偏好与组合写成可读配置，纳入版本管理，支持一键初始化。
+
+    5) 在目标环境 dry-run 验证，记录差异并迭代。
+
+    6) 为敏感信息使用模板 + 本地覆盖，不入库密钥。
+
+    7) 文档化恢复步骤与回滚方案。'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/build.json#build-declarative-config-over-clicks
+  source_hash: ac728046717c886ba3629dcbdb786085f29acebbfda603ff6ff44424da248ca6
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: engineering
+  subcategory: code_review
+  collections: []
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

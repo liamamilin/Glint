@@ -1,0 +1,27 @@
+{
+  "id": "pt_reply_with_constraints",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#reply-with-constraints",
+  "title": "根据往来材料写一封有约束的回信",
+  "content": "读【往来邮件】后，以【身份和答复边界】写一封回信。开头概括已经同意的事项，逐项回应对方问题，具体写能承诺的动作和时间。没有权限答复或信息不足的点写成明确的待确认项。",
+  "content_hash": "a50df4b5155216642b02ec9d6639beb28f2c84e6427d744c46348dd93c57570a",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "writing",
+    "回信",
+    "邮件串",
+    "reply to email"
+  ],
+  "problem_solved": "逐项回应对方的问题和承诺。",
+  "when_to_use": "分类: 写作与语言",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "reply-with-constraints",
+    "category": "writing",
+    "variables": [
+      "往来邮件",
+      "身份和答复边界"
+    ]
+  }
+}

@@ -1,0 +1,54 @@
+id: pt_register_variants
+title: 语域表达对比
+tagline: 按对象关系给出三种说法并标正式度
+routing:
+  primitive: translate
+  goals:
+  - create
+  - evaluate
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - language
+  - localization
+  - politeness
+  - register
+  app_affinity:
+  - ChatGPT
+  - Claude
+  - Notion
+  - Obsidian
+  pain_point: 用户知道想说什么但不确定在不同关系或场合下哪种说法自然、得体、不会踩雷
+  trigger_utterances:
+  - 这句话对老板怎么说更正式
+  - 英语里和朋友客户怎么说不一样
+  - 这个说法会不会太生硬
+  - 帮我按场景给几种表达
+  - 同一件事不同对象怎么讲
+  anti_triggers:
+  - 纯语法纠错或拼写检查
+  - 单一句子直译无需语域区分
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 将 {{meaning}} 转成 {{language_region}} 的三种表达，场景为 {{relationship}}。逐条说明正式度、自然度和可能被误解的地方，并给一句对方可能使用的自然回复。
+  variables:
+  - meaning
+  - language_region
+  - relationship
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#register-variants
+  source_hash: cc28c177fd872af3d10e0fef87d18edd795b23c9af9e5d805218b734bc32e518
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: writing_comms
+  subcategory: writing_polish
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

@@ -1,0 +1,66 @@
+id: atlas_vercel_labs_agent_skills_skills_4c506d6bbf
+title: React组合模式重构
+tagline: 用显式变体与 compound components 替代布尔 prop 蔓延
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - react
+  - component_architecture
+  - composition_patterns
+  - state_management
+  app_affinity:
+  - Cursor
+  - VS Code
+  - ChatGPT
+  - Claude
+  pain_point: React 组件里用一堆 isThread、isEditing 之类的布尔 props 控制行为，条件分支爆炸、状态散落各处，组件 API 越改越难扩展。
+  trigger_utterances:
+  - 这个组件布尔 props 太多了条件分支爆炸
+  - 帮我把 isThread 这种布尔 prop 拆成显式组件
+  - compound components 怎么拆 context provider
+  - 组件库 API 越来越难扩展怎么重构
+  - React 组件状态管理太散怎么上提
+  anti_triggers:
+  - 只是想加一个新功能不用重构组件架构
+  - 普通样式或文案微调
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请按 React 组合模式重构当前组件：
+
+    1. 识别所有用于定制行为的布尔 props（如 isThread、isEditing）及其条件分支。
+
+    2. 将每个变体写成显式组件（如 ChannelComposer、ThreadComposer），各自组合所需子组件；共享内部子组件，但不共享单一巨型父组件。
+
+    3. 将复杂组件组织为 compound components：创建 context，导出统一对象（如 Composer.Provider/Frame/Input/Submit/Footer），子组件从 context 读取 state/actions/meta。
+
+    4. 定义含 state、actions、meta 三部分的通用 context 接口，UI 组件只消费该接口，不直接调用具体状态 hook。
+
+    5. 将状态管理上提到专用 provider 组件，provider 为唯一知道状态如何管理的地方；把需要共享状态的兄弟组件放入同一 provider 内。
+
+    6. 避免用 useEffect 向上同步状态或用 ref 读状态再提交。
+
+    验收：组件中不再以布尔 props 定制行为；同一套组合 UI 可配合不同 provider 工作；provider 之外无 useEffect 同步/ref 读状态替代写法。
+
+    React 18 及更早版本跳过 React 19 章节；React 19+ 可使用 use() 条件调用。'
+  variables: []
+  workflow: null
+meta:
+  source: atlas-methods
+  source_ref: vercel-labs/agent-skills:skills/composition-patterns/SKILL.md
+  source_hash: 15c76380958784b9873e3638ac98337156811473da0b01f8ef819bd47cf89816
+  status: active
+  scope: domain_specific
+  shelf: off_shelf
+  tier: A
+  category: engineering
+  subcategory: architecture
+  collections: []
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

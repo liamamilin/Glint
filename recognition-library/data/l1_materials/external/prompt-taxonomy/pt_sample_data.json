@@ -1,0 +1,27 @@
+{
+  "id": "pt_sample_data",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#sample-data",
+  "title": "为测试生成一组代表性假数据",
+  "content": "按【字段和约束】生成【用途和规模】的虚构数据。包含典型值、边界值、空值及一次可辨认的重复，用可导入格式输出。每类边界附预期校验结果，使用明显虚构的标识和信息。",
+  "content_hash": "a32067fac0cee9a1797fc3e584d5a9016dffb031c77b5f94c009676387edf2bf",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "data",
+    "模拟数据",
+    "数据样例",
+    "synthetic data"
+  ],
+  "problem_solved": "覆盖格式正常、边界值、缺失与重复。",
+  "when_to_use": "分类: 数据与表格",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "sample-data",
+    "category": "data",
+    "variables": [
+      "字段和约束",
+      "用途和规模"
+    ]
+  }
+}

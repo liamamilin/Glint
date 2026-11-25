@@ -1,0 +1,33 @@
+{
+  "id": "disc_career_asking_for_timely_feedback",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/career.json#career-asking-for-timely-feedback",
+  "title": "在“粗糙草稿阶段”就要反馈，而不是等打磨到完美才拿出来",
+  "content": "旧共识（盲区）：东西做得够完整、够体面了再给人看，拿半成品出来显得不成熟。\n\n新现实（破盲视角）：方向偏了时，早期粗稿改起来几乎不疼；等全部做完再改，往往整块推倒重来。越早拿模糊草稿对准方向，越少走冤枉路。\n\n破冰追问母题：\n- 我刚搭了一个 [方案/草稿/原型/思路] 的雏形：[简述雏形与想确认的点]。请帮我写一段简短话术，向 [合作方/同事/同行] 请教“方向和结构有没有跑偏”，而不是扣字眼。\n- 在 [你的日常工作或创作流程] 中，哪一步最适合提前 30% 拿出来做一次快速对齐？",
+  "content_hash": "1c0d1aa9d89268095f57304e73196a86a18805eb3aa6d8484fae7575cd35aac0",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "career",
+    "invisible-friction",
+    "role-inversion",
+    "feedback",
+    "growth",
+    "iteration",
+    "collaboration"
+  ],
+  "problem_solved": "东西做得够完整、够体面了再给人看，拿半成品出来显得不成熟。",
+  "when_to_use": "方向偏了时，早期粗稿改起来几乎不疼；等全部做完再改，往往整块推倒重来。越早拿模糊草稿对准方向，越少走冤枉路。",
+  "procedural_steps": [
+    "我刚搭了一个 [方案/草稿/原型/思路] 的雏形：[简述雏形与想确认的点]。请帮我写一段简短话术，向 [合作方/同事/同行] 请教“方向和结构有没有跑偏”，而不是扣字眼。",
+    "在 [你的日常工作或创作流程] 中，哪一步最适合提前 30% 拿出来做一次快速对齐？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "career-asking-for-timely-feedback",
+    "arena": "career",
+    "lenses": [
+      "invisible-friction",
+      "role-inversion"
+    ]
+  }
+}

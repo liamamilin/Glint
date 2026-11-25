@@ -1,0 +1,53 @@
+id: sit_leg_03
+title: 开源发布合规自查
+tagline: 开源/上线前核对协议、密钥与隐私声明
+routing:
+  primitive: deconstruct
+  goals:
+  - evaluate
+  clarity_fit:
+  - concrete
+  domains:
+  - legal
+  - open_source
+  - privacy
+  - security
+  - compliance
+  app_affinity:
+  - Terminal
+  - VS Code
+  - Cursor
+  - Chrome
+  pain_point: 准备把个人项目开源到 GitHub 或上线静态站，但不确定该选什么协议、代码或 Git 历史里是否残留密钥与隐私信息。
+  trigger_utterances:
+  - 我要把项目开源到 GitHub 选 MIT 还是 Apache
+  - 代码里可能有 API Key 泄露 怎么查
+  - 上线静态站前要做哪些合规检查
+  - git history 里有没有密钥残留
+  - AGPL 和 MIT 有什么区别
+  anti_triggers:
+  - 日常代码开发中的功能调试
+  - 与开源无关的商业合同审查
+execution:
+  action_type: open_resource
+  inject_mode: null
+  content: '开源发布前核验清单：
+
+    1. 协议选型：按商业意图选 MIT / Apache-2.0 / AGPL-3.0，并核对第三方依赖许可证兼容性。
+
+    2. 密钥清零：git grep -nE "(api[_-]?key|secret|token|password)" -- . ；gitleaks detect --source . --log-opts="--all"。若密钥曾推过
+    Git 历史，立即作废重签，仅删最新提交不安全。
+
+    3. 隐私声明：若站点使用 localStorage 或统计代码，在页脚注明“数据仅存本地，零云端上传”。
+
+    交付物：LICENSE + 密钥清零 + 隐私声明发布前包。'
+  variables: []
+  workflow: null
+meta:
+  source: super-individual-toolbox
+  source_ref: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/legal-finance.json#leg-03
+  source_hash: ba5fa73a70462588bac1276bad2181b73636f895bb446635ea6f518630bc427c
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

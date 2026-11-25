@@ -1,0 +1,53 @@
+id: pt_mvp_scope
+title: 收敛到首个可验证MVP
+tagline: 把想法压成最小可用版本与三条验收条件
+routing:
+  primitive: converge
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - product_strategy
+  - mvp
+  - scope
+  - validation
+  app_affinity:
+  - Notion
+  - Linear
+  - Figma
+  - ChatGPT
+  pain_point: 用户有想法和目标用户，但不知道最小先做什么才能验证用户是否会用，范围容易膨胀
+  trigger_utterances:
+  - 这个想法先做MVP该砍到什么程度
+  - 怎么用最小范围验证用户会不会用
+  - 功能太多先做哪些必要交付
+  - 帮我收敛到首个可验证版本
+  - MVP范围怎么定验收条件
+  anti_triggers:
+  - 用户只是想头脑风暴新点子而非收敛范围
+  - 用户已明确MVP只问技术实现细节
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 根据【想法、目标用户和证据】提议一个最小可用版本，现实约束为【时间、数据和渠道】。写主要路径、必要交付、可暂缓功能和三条验收条件。给最能推翻该方案的快速测试。
+  variables:
+  - 想法、目标用户和证据
+  - 时间、数据和渠道
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#mvp-scope
+  source_hash: 901a2f2e2fa78c3f776cf3c3d88bc9057e02fdb45b4c90c00f046584cd4f2e5e
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  category: product_business
+  subcategory: product_design
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

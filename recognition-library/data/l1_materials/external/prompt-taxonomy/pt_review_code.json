@@ -1,0 +1,27 @@
+{
+  "id": "pt_review_code",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#review-code",
+  "title": "审查变更中的具体问题",
+  "content": "评审【变更或 diff】，预期行为是【预期和调用约束】。优先找行为错误、数据一致性、兼容性和测试缺口。每个问题附文件位置、可触发的场景、后果及最小修正；没有足够证据的点单列为疑问。",
+  "content_hash": "5b48d21a0eae6a0cc1f7e2494642277c6f0a69116bb82a0cfef5592041e26983",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "coding",
+    "代码评审",
+    "PR",
+    "code review"
+  ],
+  "problem_solved": "按影响排列有证据且能修改的问题。",
+  "when_to_use": "分类: 开发与调试",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "review-code",
+    "category": "coding",
+    "variables": [
+      "变更或 diff",
+      "预期和调用约束"
+    ]
+  }
+}

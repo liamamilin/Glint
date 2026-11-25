@@ -1,0 +1,27 @@
+{
+  "id": "pt_cover_letter",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#cover-letter",
+  "title": "写有岗位针对性的求职信",
+  "content": "为【目标岗位和公司】写求职信，依据【真实经历和成果】。开头解释岗位与自己的联系，中间用两项经历对应岗位要求，结尾写希望讨论的方向。留出待补证据位置。",
+  "content_hash": "b38c62e43958213a574ea062b2ce1afde2f8e54948daa2f2adb38c0bc08b7a3f",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "career",
+    "求职信",
+    "自荐信",
+    "cover letter"
+  ],
+  "problem_solved": "用两段证据解释想做这份工作的原因。",
+  "when_to_use": "分类: 求职与职业",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "cover-letter",
+    "category": "career",
+    "variables": [
+      "目标岗位和公司",
+      "真实经历和成果"
+    ]
+  }
+}

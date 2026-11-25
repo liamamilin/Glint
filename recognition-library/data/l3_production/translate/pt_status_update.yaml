@@ -1,0 +1,73 @@
+id: pt_status_update
+title: 写项目周报
+tagline: 把本周记录整理成给读者的项目周报，突出风险与决策点
+routing:
+  primitive: translate
+  goals:
+  - optimize
+  - create
+  clarity_fit:
+  - concrete
+  domains:
+  - project_management
+  - office
+  - reporting
+  - status_update
+  app_affinity:
+  - Notion
+  - Slack
+  - Feishu
+  - Mail
+  pain_point: 手上只有零散的本周记录，需要快速整理成让读者一眼看懂进展、风险和需要决策的事项的周报
+  trigger_utterances:
+  - 帮我把这周的记录整理成周报给老板看
+  - 把本周进展写成 status update 发给团队
+  - 周报怎么写，我只有几条零散笔记
+  - 需要给客户发一份项目周报，突出风险
+  - 把这堆记录转成给领导的汇报
+  anti_triggers:
+  - 只是想写日常日记或个人待办，不面向读者
+  - 需要写年终总结或长篇复盘报告
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '把【本周记录】整理成给【读者】的项目周报。先写整体状态及最需要关注的一点，再列本周交付、可量化的进展、风险和下周动作。需要对方决策的事项单列，标清截止日期及其影响。
+
+
+    请按以下结构输出：
+
+    1. 整体状态（一句话 + 最需关注的一点）
+
+    2. 本周交付（列表）
+
+    3. 可量化进展（指标/数字）
+
+    4. 风险（含影响与缓解）
+
+    5. 下周动作（Owner + 截止）
+
+    6. 待决策事项（选项 + 截止日期 + 不决策的影响）
+
+
+    【本周记录】 【读者】
+
+    {{reader}}'
+  variables:
+  - reader
+  - 本周记录
+  - 读者
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#status-update
+  source_hash: d5fe2322abbbe950af62e1a8754e2258dfac5f21d33dffd29fe72cd125044de9
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: general
+  subcategory: decision
+  collections: []
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

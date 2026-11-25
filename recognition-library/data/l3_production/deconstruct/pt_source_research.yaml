@@ -1,0 +1,52 @@
+id: pt_source_research
+title: 调研主题简报
+tagline: 拆解开放问题，用多来源证据输出一页简报
+routing:
+  primitive: deconstruct
+  goals:
+  - digest
+  - evaluate
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - research
+  - search
+  - information_retrieval
+  - source_verification
+  app_affinity:
+  - Chrome
+  - Notion
+  - Obsidian
+  - Cursor
+  pain_point: 面对开放问题，信息分散且来源混杂，需要把问题拆成可检索子问题，并用独立原始或官方来源形成带证据的结论、分歧与未解问题
+  trigger_utterances:
+  - 帮我调研一下这个主题，给个有来源的简报
+  - 这个问题开放性很强，帮我拆解并找官方来源
+  - 我想用多个原始来源回答这个问题
+  - 调研一下某主题，输出一页证据型简报
+  - 这个结论靠得住吗，帮我找来源和分歧
+  anti_triggers:
+  - 只想要一个简短定义或 TL;DR
+  - 已有现成报告，只需润色或改写
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 请基于我上面提到的主题与范围作为调研对象。先将其拆成 3–5 个可检索的子问题，再寻找独立的原始或官方来源。最终输出一页简报，至少包含：结论；每条结论对应的证据与来源链接；不同来源之间的分歧；仍未回答的问题。如果无法联网，请明确给出检索方案，并说明当前限制与缺口。
+  variables: []
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#source-research
+  source_hash: 6187074ee5e11ef0e552f1c979c471b9304b998b8b7b9b488ca9a0befdbf2ff5
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  category: general
+  subcategory: research
+  collections:
+  - sample_research_pack
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

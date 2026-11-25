@@ -1,0 +1,61 @@
+id: atlas_coreyhaines31_marketingskills_sk_4534b588cc
+title: 营销页文案情境诊断
+tagline: 先诊断空白/真实声/定点，再分块起草筛行
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - copywriting
+  - marketing
+  - content_strategy
+  - landing_page
+  app_affinity:
+  - Notion
+  - Chrome
+  - Cursor
+  - ChatGPT
+  pain_point: 营销页文案写出来像 AI 套话、头条和 CTA 弱、不知道从哪下手或该改哪里，最终不可信不可证
+  trigger_utterances:
+  - 首页文案像 AI 写的帮我重写
+  - 落地页 headline 太弱了
+  - 这个定价页文案帮我改改
+  - 产品页 copy 太套话
+  - about 页文案重写一下
+  anti_triggers:
+  - 只需要写代码或技术文档
+  - 只需翻译或润色已有文案语气
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '按此方法处理营销页文案：
+
+    1. 读取产品营销上下文（若存在）；先看 Learnings，避免重复已测角度/声明。仅问缺失或任务特有的信息。
+
+    2. 收集四类背景：页面类型与唯一首要行动；受众（理想客户、待解决问题、异议、客户原话）；产品/报价（卖什么、与替代差异、关键转变、证明点）；上下文（流量来源、访客已知）。
+
+    3. 诊断情境并一行写明证据：A 空白/泛泛（可自定角度，不得编造数据/客户/结果）；B 存在真实声音（恢复而非替换）；C 定点修改（只改被要求之处及最小衔接）。
+
+    4. B/C 中从输入读取品味：词汇是声音选择不升级；着墨多寡保留优先级；省略是范围不加章节；角度只能深化不能替换；有样本时匹配句长、标点、段落开头与避用词，样本优先于默认声音。
+
+    5. 分解并锁定：把页面拆为命名单元（头条、副标题、CTA、各节标题与正文、证明行），每单元写 2-3 候选，保留最佳并修复其最差缺陷后锁定，再组装通读；B 中已成立的行从一开始就锁定。
+
+    6. 三问门槛：可画面化、可证真伪、竞品不能照搬；按通过数决定保留/强化/重写。
+
+    7. 文体：清晰优先机巧、利益优先功能、具体优先含糊、客户语言优先公司语言；清除六类 AI 腔调与无实质流行词；事实缺失标 [NEED: ...]。
+
+    8. 交付：分版块文案、选择说明、头条/CTA 备选与元内容。'
+  variables: []
+  workflow: null
+meta:
+  source: atlas-methods
+  source_ref: coreyhaines31/marketingskills:skills/copywriting/SKILL.md
+  source_hash: 6b6eb6231b6fab4c7f96a277ee4685d6f77cf825739a7f0bc68698246ba149b6
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

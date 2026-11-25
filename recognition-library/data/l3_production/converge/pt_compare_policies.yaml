@@ -1,0 +1,52 @@
+id: pt_compare_policies
+title: 多机构规则对照表
+tagline: 把各机构规则的适用范围、生效时间和例外整理成一张对照表
+routing:
+  primitive: converge
+  goals:
+  - evaluate
+  - digest
+  clarity_fit:
+  - concrete
+  domains:
+  - research
+  - policy_comparison
+  - compliance
+  - governance
+  app_affinity:
+  - Chrome
+  - Notion
+  - Obsidian
+  - ChatGPT
+  pain_point: 用户需要对比多个机构或官方规则，但信息散落、版本不一，难以看清各自适用对象、生效时间和例外差异
+  trigger_utterances:
+  - 这几个机构的政策有什么区别
+  - 帮我对比一下不同平台的规则
+  - 把各官方文档的适用范围整理成表
+  - 这些政策哪个适用于我
+  - compare policies across institutions
+  anti_triggers:
+  - 只解读单个机构规则
+  - 不涉及跨机构对比的政策查询
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 对照【机构与官方规则】判断它们如何处理【问题】。表格列原文位置、适用对象、生效时间、主要要求、例外和未明确部分。规则版本可能变化时注明核对日期，对需要专业解释的部分保留原文。
+  variables:
+  - 机构与官方规则
+  - 问题
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#compare-policies
+  source_hash: 4b3d8efc5186a1ba0910c6224982c8ef23a594287e4831da2ba8fc57b43da6b3
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: general
+  subcategory: research
+  collections: []
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

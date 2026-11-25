@@ -1,0 +1,100 @@
+id: disc_business_workflow_embedded_distribution
+title: 嵌入式自带分发设计
+tagline: 把获客嵌进每次导出/分享/完成页，自然触达下一用户
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - business
+  - distribution
+  - embedded
+  - growth
+  - indie
+  app_affinity:
+  - Notion
+  - Linear
+  - Chrome
+  - Figma
+  pain_point: 用户把获客当成产品做完后的独立营销动作，每次都要发帖投流求转发，忽略了产品每次导出报告、生成分享链接、跑完检查时自带的自然触达机会。
+  trigger_utterances:
+  - 我的产品做完了但没人用，获客好累
+  - 报告导出页怎么加个来源水印不恶心
+  - 分享链接怎么自带增长
+  - 怎么让每次使用都帮我拉新
+  - 产品增长除了发帖还有啥办法
+  anti_triggers:
+  - 用户要设计付费广告投放策略或预算分配
+  - 用户要写营销文案、落地页或品牌 slogans
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '嵌入式分发自检清单（克制、不破坏体验）
+
+
+    A. 盘点所有「结果态」触点
+
+    - [ ] 导出报告/图片/PDF/CSV
+
+    - [ ] 分享链接/公开页/只读页
+
+    - [ ] 任务完成页/报错页/空状态页
+
+    - [ ] 邀请协作/复制模板入口
+
+
+    B. 为每个触点设计 1 个「克制的来源标识或可复现入口」
+
+    - [ ] 来源标识 ≤ 1 行、灰度小字、不遮挡核心内容
+
+    - [ ] 可复现入口：一键复用模板 /「用我的数据重跑」/「Fork this」/「复制为我的」
+
+    - [ ] 不强制注册、不弹窗、不自动发帖、不劫持剪贴板
+
+    - [ ] 标识可被用户一键隐藏或自定义（尊重品牌）
+
+
+    C. 反面测试（防恶心）
+
+    - [ ] 去掉标识后用户仍能完整完成任务（标识非阻断）
+
+    - [ ] 新访客 3 秒内能看懂「这是什么、怎么用」
+
+    - [ ] 不泄露任何用户隐私数据或业务数据
+
+    - [ ] 移动端/打印/PDF 中标识不破坏排版
+
+
+    D. 审计参考（拆解 3 款高增长工具）
+
+    - [ ] 记录其在「分享链接 / 导出结果 / 完成页」的：位置、文案、触发条件、转化路径
+
+    - [ ] 标注哪些细节可迁移到你的产品
+
+    - [ ] 排除「强制水印/弹窗求分享」等破坏体验的反例
+
+
+    E. 指标与迭代
+
+    - [ ] 嵌入触达带来的新用户占比
+
+    - [ ] 分享链接打开 → 注册/激活转化率
+
+    - [ ] 用户投诉或反感率（应≈0）
+
+    - [ ] 每月复盘：下线低效触点、强化高效触点'
+  variables:
+  - product_or_tool
+  - reference_tools
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-workflow-embedded-distribution
+  source_hash: 8a9c92c181cc2c471f3a6d5345f1f0ce32a7ea4de6d95063614a627b97c6b51c
+  status: active
+  base_weight: 1.0
+  confidence: 0.82
+  version: 1

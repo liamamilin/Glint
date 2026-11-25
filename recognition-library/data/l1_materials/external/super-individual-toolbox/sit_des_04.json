@@ -1,0 +1,29 @@
+{
+  "id": "sit_des_04",
+  "source": "super-individual-toolbox",
+  "source_ref": "https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/design-creative.json#des-04",
+  "title": "高审美界面逆向拆解器",
+  "content": "定位：把神仙网站的布局与留白规律，翻译成自己的 CSS\n\n触发场景：当你看到一个极度克制高级的网站，想学它的设计语言，却不知从何下手转化为代码时。\n\n核心机制：\n- 截取参考网站的 2–3 个关键区块，要求 AI 剥离具体业务内容，只提炼“栅格比例、留白节奏、边框与阴影克制度”\n- 将其抽象为 5 条可迁移的布局原则（而非照抄像素）\n- 直接生成基于该原则的极简 HTML/CSS 骨架 Demo 供自己二次改造\n\n交付物：一份《参考界面设计语言拆解单》+ 可运行的极简布局 Demo\n\n推荐装配：多模态模型 + 浏览器检查器（DevTools）\n\n误用警告：拆解的是“骨架规律与克制感”，绝不是直接扒别人的品牌色和文案做山寨克隆。",
+  "content_hash": "63362080e64e1f0e2e9c072d391a6b4c3f670d7d054d97612679faefd7219957",
+  "suggested_action_type": "open_resource",
+  "domain_hints": [
+    "design-creative",
+    "设计师与美术"
+  ],
+  "problem_solved": "当你看到一个极度克制高级的网站，想学它的设计语言，却不知从何下手转化为代码时。",
+  "when_to_use": "当你看到一个极度克制高级的网站，想学它的设计语言，却不知从何下手转化为代码时。",
+  "procedural_steps": [
+    "截取参考网站的 2–3 个关键区块，要求 AI 剥离具体业务内容，只提炼“栅格比例、留白节奏、边框与阴影克制度”",
+    "将其抽象为 5 条可迁移的布局原则（而非照抄像素）",
+    "直接生成基于该原则的极简 HTML/CSS 骨架 Demo 供自己二次改造"
+  ],
+  "anti_patterns": [
+    "拆解的是“骨架规律与克制感”，绝不是直接扒别人的品牌色和文案做山寨克隆。"
+  ],
+  "metadata": {
+    "original_id": "des-04",
+    "drawer": "design-creative",
+    "drawer_zh": "设计师与美术",
+    "deliverable": "一份《参考界面设计语言拆解单》+ 可运行的极简布局 Demo"
+  }
+}

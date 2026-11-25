@@ -1,0 +1,21 @@
+{
+  "id": "core_mece_breakdown",
+  "source": "glint-core",
+  "source_ref": "cards.yaml#mece_breakdown",
+  "title": "MECE 结构化拆解",
+  "content": "请按 MECE（不重不漏）原则将这件事拆解为 3-5 个核心模块，并为每个模块给出第一步最小可执行动作。",
+  "content_hash": "826b2db681e4ef0d8cd27f88f7b4c37b9325d044af3262b3351ae82a53669ff8",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "structure"
+  ],
+  "problem_solved": "分析拆解 / 制定计划",
+  "when_to_use": "",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "mece_breakdown",
+    "legacy_dimension": "structure",
+    "legacy_mode": "append"
+  }
+}

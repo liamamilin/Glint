@@ -1,0 +1,42 @@
+id: pt_cover_letter
+title: 岗位针对性求职信
+tagline: 用两段真实经历回应岗位要求，生成可投递的求职信初稿。
+routing:
+  primitive: translate
+  goals:
+  - create
+  clarity_fit:
+  - concrete
+  domains:
+  - career
+  - job_search
+  - cover_letter
+  - resume
+  app_affinity:
+  - Mail
+  - Notion
+  - Chrome
+  pain_point: 投递时不知道怎么把个人经历和岗位要求对应起来，求职信写成泛泛自夸，缺少针对性证据。
+  trigger_utterances:
+  - 帮我写一封求职信
+  - 这份 JD 我经历怎么匹配
+  - cover letter 怎么写
+  - 投递 XX 岗位自荐信
+  - 把我的经历写成求职信
+  anti_triggers:
+  - 仅润色已有简历不涉及求职信
+  - 把已有求职信翻译成英文
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 请为【目标岗位和公司】撰写一封岗位针对性的求职信，依据【真实经历和成果】。结构要求：1）开头说明该岗位与自己的联系及申请动机；2）中间用两项经历分别对应岗位要求，每项给出可验证的成果/数据；3）结尾写希望进一步讨论的方向。所有待补证据位置用【待补：...】明确标出，不编造事实。
+  variables: []
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#cover-letter
+  source_hash: b38c62e43958213a574ea062b2ce1afde2f8e54948daa2f2adb38c0bc08b7a3f
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

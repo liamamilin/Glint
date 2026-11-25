@@ -1,0 +1,54 @@
+id: pt_check_understanding
+title: 诊断概念误解
+tagline: 从你的复述里揪出误解并用反例检验
+routing:
+  primitive: metacognize
+  goals:
+  - evaluate
+  - debug
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - learning
+  - teaching
+  - misconception
+  - concept_check
+  - teach_back
+  app_affinity:
+  - ChatGPT
+  - Claude
+  - Notion
+  - Obsidian
+  pain_point: 学完一个概念后自己复述，却不知道哪里理解错了，希望 AI 从解释中 pinpoint 误解并用反例检验。
+  trigger_utterances:
+  - 我用自己的话解释一下XX，帮我看看哪里理解错了
+  - teach back 这个概念，挑出我的误解
+  - 我解释了XX，给个能暴露误解的反例
+  - 帮我诊断我对XX的误解
+  - check my understanding of this concept
+  anti_triggers:
+  - 直接让 AI 解释一个新概念
+  - 生成系统化学习计划
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 我用自己的话解释 {{concept}} 如下：{{explanation}}。请：1) 标出我已经正确理解的部分；2) 指出最关键的 1~2 个误解/错误前提；3) 给出一个能暴露该误解的反例或边界场景；4) 让我重新用自己的话解释，再判定是否已纠正。
+  variables:
+  - concept
+  - explanation
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#check-understanding
+  source_hash: 519c41a6e544870fce0583cc5c5cff28a60a2c980eeea174884eea6b15dd6887
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: personal_career
+  subcategory: learning
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

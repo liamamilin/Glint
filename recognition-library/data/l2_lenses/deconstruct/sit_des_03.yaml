@@ -1,0 +1,45 @@
+id: sit_des_03
+title: 多模态素材风格锁
+tagline: 用一套风格底座+槽位模板，让AI生成的图/音视频保持统一画风
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - design
+  - multimodal
+  - ai_generation
+  - branding
+  app_affinity:
+  - Figma
+  - Chrome
+  pain_point: 用AI生成的图片、封面或音视频单张看都不错，但拼在一起画风割裂、像拼夕夕，缺乏统一的视觉/听觉风格。
+  trigger_utterances:
+  - AI生成的图每张都不错但拼一起画风完全不一样
+  - 封面和配图风格不统一怎么办
+  - 用Midjourney生成一套图怎么保持风格一致
+  - 做视频封面和配图像拼夕夕
+  - 怎么锁住AI生成图片的风格
+  anti_triggers:
+  - 帮我画一张单独的插画
+  - 优化单张图片的画质或分辨率
+execution:
+  action_type: open_resource
+  inject_mode: null
+  content: 资源：super-individual-toolbox 设计创意条目 des-03（https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/design-creative.json#des-03）。使用方式：1）选定
+    1 种极具辨识度的统一美学锚点（插画流派/纸张质感/固定主色调）；2）把风格描述词拆成不可变底座（画风/光线/材质）与可变槽位（主体/动作）；3）每次生成新素材只替换可变槽位，并用 Style Reference 锁死一致性。交付物：可复用的《视觉/音视频风格锁定
+    Prompt 模板》与参考图包。避坑：不要在风格底座中堆砌互相冲突的修饰词（如同时写“极简扁平”和“超写实 8K 虚幻引擎”）。
+  variables: []
+  workflow: null
+meta:
+  source: super-individual-toolbox
+  source_ref: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/design-creative.json#des-03
+  source_hash: 966cc788dcb6d3c9860511428474a481aed0bb750a222229e62f742310c6b61a
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

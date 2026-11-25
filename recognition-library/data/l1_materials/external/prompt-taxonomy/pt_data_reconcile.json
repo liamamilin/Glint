@@ -1,0 +1,29 @@
+{
+  "id": "pt_data_reconcile",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#data-reconcile",
+  "title": "对账两张表",
+  "content": "对账【表 A】和【表 B】，匹配依据是【主键、期间和可接受误差】。先检查键是否唯一和日期单位是否一致，再把差异分为缺失、重复、金额差和口径差。交付汇总、可复核明细和计算逻辑。",
+  "content_hash": "7102070b9cdbb6c28997bd463d6114bd5e32d5d13531073c0cf80ea85ae74b76",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "data",
+    "对账",
+    "核对",
+    "差异",
+    "reconciliation"
+  ],
+  "problem_solved": "定位缺项、重复键、取整和时期差异。",
+  "when_to_use": "分类: 数据与表格",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "data-reconcile",
+    "category": "data",
+    "variables": [
+      "表 A",
+      "表 B",
+      "主键、期间和可接受误差"
+    ]
+  }
+}

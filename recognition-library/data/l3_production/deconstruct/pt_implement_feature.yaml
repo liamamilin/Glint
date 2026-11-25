@@ -1,0 +1,56 @@
+id: pt_implement_feature
+title: 实现具体功能
+tagline: 按验收条件在现有代码入口中实现功能并验证
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - engineering
+  - development
+  - feature
+  - implementation
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Terminal
+  pain_point: 需求和验收条件散落各处，不知道从哪里下手实现、改了哪些文件、哪些行为已验证
+  trigger_utterances:
+  - 帮我在仓库里实现这个功能
+  - 这个 feature 怎么落地，验收条件是这些
+  - 先找现有入口再实现并跑验证
+  - implement this feature in the codebase
+  - 按正常和边界场景把功能做出来
+  anti_triggers:
+  - 只是修一个明确的小 bug 而非新增功能
+  - 只做代码重构不改变行为
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 在【代码或仓库】里实现【用户行为】，验收条件是【正常场景和边界场景】。先找到现有入口和可复用逻辑，再实现。运行最相关的验证，最后说明变更文件、已验证行为和仍待确认的情况。
+  variables:
+  - code_or_repo
+  - user_behavior
+  - acceptance_criteria
+  - 代码或仓库
+  - 用户行为
+  - 正常场景和边界场景
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#implement-feature
+  source_hash: b63e95a40f9fbad2fde6363fbe47d1f3b86cee644cb4bd9fd9a9d792c35f6790
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: engineering
+  subcategory: architecture
+  collections: []
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

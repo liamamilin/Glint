@@ -1,0 +1,33 @@
+{
+  "id": "disc_content_multimodal_micro_formats",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/content.json#content-multimodal-micro-formats",
+  "title": "借多模态降本创造“图文+声音+交互”新体裁",
+  "content": "旧共识（盲区）：做音视频、配乐或动态演示需要专业设备和剪辑团队，个人创作者只能死磕纯文字。\n\n新现实（破盲视角）：文本、语音、音乐与可视化生成成本大幅下降后，把“短洞察 + 氛围音频/微型演示”组合在一起的混合体裁，更容易在信息流里形成独特记忆点。\n\n破冰追问母题：\n- 我想为 [某个主题/情绪，如深夜复盘/极客科普/放松解压] 创作内容。设计一种结合“文字 + 声音/音乐/视觉动效”的轻量混合体裁，给出单人 30 分钟内可复制的生产流程。\n- 分析目前 [你常刷的内容平台] 上同质化最严重的表达方式，设计 2 个反常规但能保留高信息密度的混合表达形式。",
+  "content_hash": "f71913fd433fea1dff8d6c315e314b6fd956eb51a66aa94cd18168f364984ecf",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "content",
+    "cost-collapse",
+    "cross-domain",
+    "multimodal",
+    "audio-visual",
+    "format",
+    "creator"
+  ],
+  "problem_solved": "做音视频、配乐或动态演示需要专业设备和剪辑团队，个人创作者只能死磕纯文字。",
+  "when_to_use": "文本、语音、音乐与可视化生成成本大幅下降后，把“短洞察 + 氛围音频/微型演示”组合在一起的混合体裁，更容易在信息流里形成独特记忆点。",
+  "procedural_steps": [
+    "我想为 [某个主题/情绪，如深夜复盘/极客科普/放松解压] 创作内容。设计一种结合“文字 + 声音/音乐/视觉动效”的轻量混合体裁，给出单人 30 分钟内可复制的生产流程。",
+    "分析目前 [你常刷的内容平台] 上同质化最严重的表达方式，设计 2 个反常规但能保留高信息密度的混合表达形式。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "content-multimodal-micro-formats",
+    "arena": "content",
+    "lenses": [
+      "cost-collapse",
+      "cross-domain"
+    ]
+  }
+}

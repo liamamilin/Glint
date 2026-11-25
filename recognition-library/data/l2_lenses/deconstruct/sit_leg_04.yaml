@@ -1,0 +1,45 @@
+id: sit_leg_04
+title: 独立报价单与收款防坑模版
+tagline: 接私活前锁定范围、修改次数与里程碑付款，防 scope creep 与拖款
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - freelance
+  - contract
+  - pricing
+  - scope_management
+  app_affinity:
+  - Notion
+  - Mail
+  - Slack
+  - Feishu
+  pain_point: 接独立咨询、定制开发或设计单时，怕客户无限加需求、反复免费改稿，或干完活被拖欠尾款
+  trigger_utterances:
+  - 接了个私活怕客户无限加需求
+  - 定制开发报价单怎么写
+  - 做设计被客户反复改稿免费
+  - 尾款收不回来怎么办
+  - scope creep 怎么防
+  anti_triggers:
+  - 已签正式合同的大型企业项目
+  - 全职雇佣合同与薪资谈判
+execution:
+  action_type: open_resource
+  inject_mode: null
+  content: 打开并填写《独立项目报价与里程碑确认单》模板（Markdown/PDF），依次锁定：1) In-Scope 与 Out-of-Scope 范围边界；2) 免费修改轮次上限（如 2 轮）及超额按次/按天费率；3) 里程碑付款（50%
+    预付启动，尾款结清后再移交源码/源文件）。来源：https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/legal-finance.json#leg-04
+  variables: []
+  workflow: null
+meta:
+  source: super-individual-toolbox
+  source_ref: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/legal-finance.json#leg-04
+  source_hash: 781c104dfe250b767fa2780c86bdd6e25427da6d0f15cdf79f5e44cae7d0a57d
+  status: active
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

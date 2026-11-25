@@ -1,0 +1,50 @@
+id: pt_translate
+title: 按场景翻译
+tagline: 兼顾含义、术语与目标读者的翻译
+routing:
+  primitive: translate
+  goals:
+  - create
+  clarity_fit:
+  - concrete
+  domains:
+  - writing
+  - translation
+  - localization
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Mail
+  - Chrome
+  pain_point: 需要把一段文字翻译成特定语言和地区版本，既要准确又要符合目标读者与使用场景，术语拿不准
+  trigger_utterances:
+  - 帮我把这段翻译成英文，面向美国用户
+  - 把这篇中文翻成日文，保留术语
+  - translate this paragraph to English for marketing
+  - 请把这段话译成法语，用于产品说明
+  - 把这段内容本地化成英文版
+  anti_triggers:
+  - 仅做语法纠错不涉及翻译
+  - 纯机器逐字直译无需场景适配
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: 把{{input}}翻译成{{target_language}}，用于{{usage_scenario}}。保留链接、数字和段落层级；专有名词优先采用场景通用译法。遇到两种合理解释时选一个并附简短译注。交付译文和需要确认的术语。
+  variables:
+  - target_language
+  - usage_scenario
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#translate
+  source_hash: b2fdb64ceb1c7c7ea9c68c6d23b9c374e0dc8a754c70a402b2000c315d5e1c26
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: writing_comms
+  subcategory: writing_polish
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

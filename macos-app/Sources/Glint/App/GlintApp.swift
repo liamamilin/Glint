@@ -49,8 +49,8 @@ struct GlintApp: App {
 
                 Divider()
 
-                Button("编辑认知卡片库 (cards.yaml)…") {
-                    coordinator.openCardsFile()
+                Button("Glint 管理…") {
+                    coordinator.openAdminConsole()
                 }
 
                 Button {

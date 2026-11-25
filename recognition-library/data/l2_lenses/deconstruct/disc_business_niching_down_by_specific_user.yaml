@@ -1,0 +1,56 @@
+id: disc_business_niching_down_by_specific_user
+title: 受众收窄切口
+tagline: 把“给所有人用”拆成 3 个具体人群与痛点
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - business
+  - positioning
+  - icp
+  - niche_down
+  - indie
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  - Slack
+  pain_point: 产品面向所有人时文案和功能都泛泛，无法让目标用户觉得“这是为我做的”，获客渠道也不聚焦
+  trigger_utterances:
+  - 我的产品谁都能用，但没人觉得是为自己做的
+  - 受众写得太宽了，帮我拆几个更具体的用户群
+  - niching down 一下，给个具体人群切口
+  - ICP 怎么定，现在目标用户太泛
+  - 帮我把“给所有人”收窄成一类具体人
+  anti_triggers:
+  - 用户已有明确细分人群，只想写营销文案
+  - purely 品牌 VI / 视觉设计调整场景
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '受众收窄切口清单：
+
+    1. 写下你当前的产品/服务/内容方向与面向的宽泛受众。
+
+    2. 从该宽泛受众中拆出 3 个更具体的细分人群切口，每个切口写清：人群标签、场景、最突出痛点。
+
+    3. 选出其中一个细分人群，写出他们日常最常抱怨的一句话。
+
+    4. 针对该抱怨，写出能直接回应的产品/服务切入点（功能/文案/渠道）。
+
+    5. 验证：该人群能否在 5 秒内判断“这是为我做的”；若不能，回到步骤 2 细化。'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-niching-down-by-specific-user
+  source_hash: 830c76cafebfa85287b30e16034bbe507bf2165804b38e2a2d9c7926a4519b47
+  status: active
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

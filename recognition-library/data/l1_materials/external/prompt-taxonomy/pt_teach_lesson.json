@@ -1,0 +1,29 @@
+{
+  "id": "pt_teach_lesson",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#teach-lesson",
+  "title": "设计可以直接用的微型课",
+  "content": "为【学员和已有基础】设计【时长】的【主题】微课。写可观察的学习目标、一个起始问题、示例、练习和出口小测。为可能卡住的人给补救方法，并给一项可供进阶学员尝试的任务。",
+  "content_hash": "07995a7f02b0487e89843d9b1e2ba04e29dbeea367439369a2d0530a885036b5",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "learning",
+    "教案",
+    "备课",
+    "教学",
+    "lesson plan"
+  ],
+  "problem_solved": "用活动和小测验证学习目标。",
+  "when_to_use": "分类: 学习与辅导",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "teach-lesson",
+    "category": "learning",
+    "variables": [
+      "学员和已有基础",
+      "时长",
+      "主题"
+    ]
+  }
+}

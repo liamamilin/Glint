@@ -1,0 +1,59 @@
+id: disc_cognition_identifying_true_bottleneck
+title: 找到真正的唯一瓶颈
+tagline: 别在非瓶颈环节拼命卷，先动最窄一环
+routing:
+  primitive: metacognize
+  goals:
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - cognition
+  - constraints
+  - workflow
+  - prioritization
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 每个环节都同时加把劲、一起优化，结果整体还是卡住，不知道真正的瓶颈在哪、该先动哪一刀。
+  trigger_utterances:
+  - 项目卡住了不知道先动哪一步
+  - 每个环节都优化了但整体还是慢
+  - 感觉哪里都是瓶颈
+  - workflow 卡住了先做哪件事
+  - everything is being pushed but nothing moves
+  anti_triggers:
+  - 单纯想拆解任务清单或排步骤时
+  - 明确的代码报错排查与修复时
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '## 找到真正的唯一瓶颈 — 诊断清单
+
+
+    - [ ] 列出整条链路的各环节与当前状态（产出/等待/阻塞）
+
+    - [ ] 标出每个环节的当前吞吐与等待时间
+
+    - [ ] 找出等待最长、吞吐最低的环节 = 真正的最窄瓶颈
+
+    - [ ] 确认：在该瓶颈解除前，其他环节暂不加马力（避免堆积半成品）
+
+    - [ ] 为瓶颈环节设计最小解除动作（一刀）
+
+    - [ ] 列出看起来很忙但不在主瓶颈上的动作，先放一放
+
+    - [ ] 解除后复盘：瓶颈是否转移，循环再诊断'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/cognition.json#cognition-identifying-true-bottleneck
+  source_hash: c8808dc9d126b5b7428b360e6e1a00b2ecb9ff025cdafe7983e2fd146b4432d5
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

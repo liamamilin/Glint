@@ -1,0 +1,29 @@
+{
+  "id": "pt_local_recommendations",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#local-recommendations",
+  "title": "查找符合条件的本地服务",
+  "content": "帮我在【地点和可到达范围】找【服务】。优先根据【约束和偏好】筛选，列服务范围、营业时间、费用资料和官方联系入口。标注核对日期，只保留可查证的候选，列出建议打电话确认的问题。",
+  "content_hash": "3cd9d94213c0de37efdc687ac80389a1e6b046f243f230d5e32f40d6b391d1a8",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "research",
+    "本地",
+    "商家",
+    "附近",
+    "local recommendations"
+  ],
+  "problem_solved": "逐个确认营业、范围、交通和联系方式。",
+  "when_to_use": "分类: 查找与研究",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "local-recommendations",
+    "category": "research",
+    "variables": [
+      "地点和可到达范围",
+      "服务",
+      "约束和偏好"
+    ]
+  }
+}

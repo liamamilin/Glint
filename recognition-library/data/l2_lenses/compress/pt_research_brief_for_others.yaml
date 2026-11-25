@@ -1,0 +1,46 @@
+id: pt_research_brief_for_others
+title: 研究转可执行简报
+tagline: 把长篇研究材料提炼成带证据与分歧的决策简报
+routing:
+  primitive: compress
+  goals:
+  - digest
+  - create
+  clarity_fit:
+  - concrete
+  - vague
+  domains:
+  - research
+  - research_memo
+  - decision_support
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  - ChatGPT
+  pain_point: 面对大量研究材料，难以提炼出支持决策的结论、证据与分歧，交付物散乱且不可执行
+  trigger_utterances:
+  - 帮我把这份调研材料整理成给老板看的简报
+  - 把这篇研究总结成结论证据和分歧
+  - 需要写个 research memo 帮决策
+  - 从这些材料里总结各方观点和待查问题
+  - 帮我做一份调研简报含出处和日期
+  anti_triggers:
+  - 纯学术文献综述不面向决策
+  - 需要完整翻译原文而非提炼
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: 把 {{input}} 写成给 {{audience}} 的简报，协助决定 {{decision_question}}。结构为：结论、关键证据、各方分歧、实际影响、需要继续查的三项。给主要主张对应的出处和日期，并在结尾说明哪些结论可能随新证据改变。
+  variables:
+  - audience
+  - decision_question
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#research-brief-for-others
+  source_hash: bd7448eb0a0b063272cacf3f5242e32cbd4f1323fb2e815019a72566052cd274
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

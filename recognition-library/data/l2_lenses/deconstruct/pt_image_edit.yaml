@@ -1,0 +1,47 @@
+id: pt_image_edit
+title: 根据局部要求修图
+tagline: 修改指定区域，其余光影机位比例全保留
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - creative
+  - image_editing
+  - photo_edit
+  - multimedia
+  app_affinity:
+  - ChatGPT
+  - Claude
+  - Figma
+  - Chrome
+  pain_point: 用户想只改图中局部区域，但生成结果常扭曲原图的光线、机位、画幅或主体比例，或修改区域与周围边缘、阴影、材质不衔接
+  trigger_utterances:
+  - 帮我把这张图的天空换成晚霞但别动建筑
+  - 修一下这张照片的背景，人物保持不变
+  - 局部修图别改其他地方
+  - edit this image but keep the lighting and framing
+  - 只改这里，其余都要保留
+  anti_triggers:
+  - 从零生成一张全新图片而非编辑现有图片
+  - 与图像无关的纯文本写作或代码任务
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 编辑 {{reference_image}} 的 {{target_region_and_modification}}。保留 {{preserve_elements}} 及原图的机位、画幅、光线方向和主体比例。说明修改应如何与边缘、阴影和材质相接；交付编辑后的图片，或给能交给编辑模型的指令。
+  variables:
+  - reference_image
+  - target_region_and_modification
+  - preserve_elements
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#image-edit
+  source_hash: 8269dc0d926dc79b5b213d62a1e8d03cde140c049adf55c09639848d17143c5e
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

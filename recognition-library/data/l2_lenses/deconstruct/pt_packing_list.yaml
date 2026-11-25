@@ -1,0 +1,78 @@
+id: pt_packing_list
+title: 按场景整理打包清单
+tagline: 根据目的地、季节、行程和活动生成分组打包清单
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - travel
+  - packing
+  - planning
+  - checklist
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  pain_point: 出行前清单混乱，容易漏带必需品或携带冗余物品，还要兼顾行李限制与当地可补给情况
+  trigger_utterances:
+  - 下周去东京5天帮我列个打包清单
+  - 出差只带登机箱，别让我带太多
+  - 去海边度假要带什么
+  - 按季节和活动整理行李
+  - 帮我做旅行 packing list
+  anti_triggers:
+  - 不是制定详细行程路线
+  - 不是推荐具体品牌或购物清单
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请基于以下信息生成打包清单：
+
+    - 目的地：{{destination}}
+
+    - 季节/天气：{{season}}
+
+    - 行程：{{itinerary}}
+
+    - 活动：{{activities}}
+
+    - 行李限制：{{luggage_limit}}
+
+    - 已有物品：{{existing_items}}
+
+
+    要求：
+
+    1. 按「必带 / 可选 / 当地可补」分组。
+
+    2. 每组列出物品、数量、理由或使用场景。
+
+    3. 为必须提前准备的项目标注截止日期。
+
+    4. 根据已有物品消除重复。
+
+    5. 标出依赖当前天气或限制的待确认项。
+
+    6. 控制总重量与体积，避免冗余。
+
+    输出为可勾选清单。'
+  variables:
+  - destination
+  - season
+  - itinerary
+  - activities
+  - luggage_limit
+  - existing_items
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#packing-list
+  source_hash: 2c11c2fcf6c8ab759167a04c03fe4d75ecefb5ed8a5e9d75cceab2beed04ce3e
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

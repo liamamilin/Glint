@@ -1,0 +1,50 @@
+version: "2.0"
+
+# L0 认知原料源（需先经 L0 -> L1 准入筛查与精炼）
+l0_sources:
+  atlas_methods:
+    enabled: true
+    adapter: "atlas_jsonl"
+    path: "/Users/milin/Documents/ChatGPT/ATLAS-METHODS/data/normalized/batch-001/records.jsonl"
+    fallback_glob: "/Users/milin/Documents/ChatGPT/ATLAS-METHODS/data/normalized/*/records.jsonl"
+    default_sample_size: 20
+    description: "ATLAS-METHODS 标准化 SkillRecord 原料库（先抽样 20 条验证 L0->L1->L2 闭环）"
+
+# L1 认知素材源（高优先级：直接通过薄适配器提取并编译为 L2 Glint 认知素材）
+l1_sources:
+  prompt_taxonomy:
+    enabled: true
+    priority: 1
+    adapter: "prompt_taxonomy_web"
+    base_url: "https://liamamilin.github.io/Prompt-taxonomy/"
+    catalog_url: "https://liamamilin.github.io/Prompt-taxonomy/catalog.json"
+    snapshot_dir: "data/l1_materials/external/prompt-taxonomy"
+    default_action_type: "inject_prompt"
+    description: "提示词图谱：224 条模板、16 类任务、19 条工作流"
+
+  discovery_taxonomy:
+    enabled: true
+    priority: 1
+    adapter: "discovery_taxonomy_web"
+    base_url: "https://liamamilin.github.io/DISCOVERY-TAXONOMY/"
+    snapshot_dir: "data/l1_materials/external/discovery-taxonomy"
+    default_action_type: "show_checklist"
+    description: "打破未知的未知：18 张破盲卡 / 认知透镜"
+
+  super_individual_toolbox:
+    enabled: true
+    priority: 2
+    adapter: "super_individual_toolbox_web"
+    base_url: "https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/"
+    snapshot_dir: "data/l1_materials/external/super-individual-toolbox"
+    default_action_type: "open_resource"
+    description: "超级个体工具箱：9 岗位、36 件兵器"
+
+  glint_core:
+    enabled: true
+    priority: 1
+    adapter: "glint_cards_yaml"
+    path: "../brain-server/data/cards.yaml"
+    snapshot_dir: "data/l1_materials/glint_core"
+    default_action_type: "inject_prompt"
+    description: "Glint 原生 8 张核心认知卡片"

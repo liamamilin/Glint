@@ -1,0 +1,52 @@
+id: pt_teach_lesson
+title: 设计可直接用的微型课
+tagline: 把主题拆成可观测目标+练习+出口小测的完整微课
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - concrete
+  domains:
+  - learning
+  - teaching
+  - lesson_plan
+  - instructional_design
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 备课时不知道如何把一个主题拆成可落地的微课结构，缺少练习与评估闭环
+  trigger_utterances:
+  - 帮我设计一节微课
+  - 这个主题怎么讲成20分钟课
+  - 备课没头绪，帮我拆成课时
+  - design a mini lesson on this topic
+  - 帮我写教案带练习和小测
+  anti_triggers:
+  - 用户只是想学某个知识点的解释，而非设计教学
+  - 用户要的是长篇课程大纲而非单节微课
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 为【学员和已有基础】设计【时长】的【主题】微课。写可观察的学习目标、一个起始问题、示例、练习和出口小测。为可能卡住的人给补救方法，并给一项可供进阶学员尝试的任务。
+  variables:
+  - 学员和已有基础
+  - 时长
+  - 主题
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#teach-lesson
+  source_hash: 07995a7f02b0487e89843d9b1e2ba04e29dbeea367439369a2d0530a885036b5
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: product_business
+  subcategory: product_design
+  collections: []
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

@@ -1,0 +1,53 @@
+id: pt_visual_critique
+title: 按传播目标评审设计稿
+tagline: 从阅读路径、层级与具体改动给出设计反馈
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  clarity_fit:
+  - concrete
+  - vague
+  domains:
+  - visual_design
+  - design_critique
+  - creative
+  - ux
+  app_affinity:
+  - Figma
+  - Notion
+  - Slack
+  - Chrome
+  pain_point: 拿到一张海报或产品截图却不知道从何下手给反馈，评审意见发散、只说好不好看
+  trigger_utterances:
+  - 帮我评审这张海报
+  - 这张截图哪里有问题
+  - 给设计稿提点修改意见
+  - review this design
+  - 从传播目标看这张图
+  anti_triggers:
+  - 写营销文案
+  - 生成新图片
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 评审【稿件或截图】是否传递【信息与行动】，主要受众和设备是【使用环境】。先复述第一眼看到的信息，再指出三处最影响读懂或行动的问题。每项给位置、改法、可比较用例。
+  variables:
+  - 稿件或截图
+  - 信息与行动
+  - 使用环境
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#visual-critique
+  source_hash: 0604cfeb37ce947370407edd2f436ee3074903e95ab7c6678a39b936997b8daf
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: product_business
+  subcategory: product_design
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

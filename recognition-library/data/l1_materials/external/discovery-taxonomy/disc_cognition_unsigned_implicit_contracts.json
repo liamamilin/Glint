@@ -1,0 +1,33 @@
+{
+  "id": "disc_cognition_unsigned_implicit_contracts",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/cognition.json#cognition-unsigned-implicit-contracts",
+  "title": "揪出你从未签字、却一直在履行的“隐性合约”",
+  "content": "旧共识（盲区）：很多做事规矩和人生步骤既然大家都在照做，说明那是客观条件或默认必选项。\n\n新现实（破盲视角）：许多卡点来自你顺手接受的“未签字合约”（比如做工具必须通用、产出必须公开发布、遇到问题先找现成方案）；一旦挑明，很多束缚当场失效。\n\n破冰追问母题：\n- 审视我目前正在推进的 [项目/工作流/生活安排]：[简述现状]。帮我列出 4 条我可能“默认签了字、但其实根本没必要遵守”的隐性合约，并指出哪一条最值得立刻打破。\n- 针对 [某个让你觉得被绑住或有负担的规矩或惯例]，帮我拆解：这是真实硬约束，还是只是习惯成自然的隐性预设？",
+  "content_hash": "718c4d72c0a6c299461d8823e3efecfb42f7b41a321972e2c8af678b171fe904",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "cognition",
+    "role-inversion",
+    "first-principles",
+    "implicit-contracts",
+    "assumptions",
+    "autonomy",
+    "盲区"
+  ],
+  "problem_solved": "很多做事规矩和人生步骤既然大家都在照做，说明那是客观条件或默认必选项。",
+  "when_to_use": "许多卡点来自你顺手接受的“未签字合约”（比如做工具必须通用、产出必须公开发布、遇到问题先找现成方案）；一旦挑明，很多束缚当场失效。",
+  "procedural_steps": [
+    "审视我目前正在推进的 [项目/工作流/生活安排]：[简述现状]。帮我列出 4 条我可能“默认签了字、但其实根本没必要遵守”的隐性合约，并指出哪一条最值得立刻打破。",
+    "针对 [某个让你觉得被绑住或有负担的规矩或惯例]，帮我拆解：这是真实硬约束，还是只是习惯成自然的隐性预设？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "cognition-unsigned-implicit-contracts",
+    "arena": "cognition",
+    "lenses": [
+      "role-inversion",
+      "first-principles"
+    ]
+  }
+}

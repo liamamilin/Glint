@@ -1,0 +1,55 @@
+id: pt_perspective_rehearsal
+title: 多视角试读消息
+tagline: 发送前从对方视角找出可能误解与最小改写
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  - optimize
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - communication
+  - perspective_taking
+  - sensitive_communication
+  - stakeholder_management
+  app_affinity:
+  - Mail
+  - Slack
+  - Feishu
+  - WeChat
+  pain_point: 要发出一条重要消息，担心不同读者误解其中的承诺或语气，想在发送前先模拟各角色的解读
+  trigger_utterances:
+  - 这条消息发出去会不会被误解
+  - 帮我从对方角度读一遍
+  - 担心客户误解我的承诺
+  - 帮我检查语气会不会得罪人
+  - read this from stakeholders' perspective
+  anti_triggers:
+  - 已发送后的复盘总结
+  - 纯技术文档的语法校对
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: '请分别以以下读者角色与关切：{{roles}}
+
+
+    解读下面这条消息：
+
+
+    {{input}}
+
+
+    对每个角色指出：可能误解哪一句、为什么、以及会采取什么动作。给出最小改写（保留已经承诺的事），并推荐一个发送前核实问题。'
+  variables:
+  - roles
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#perspective-rehearsal
+  source_hash: 102d42f6d03e00ebfa5c042a0b694e472d001f73eaffdece2f3e92cf735bdb09
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

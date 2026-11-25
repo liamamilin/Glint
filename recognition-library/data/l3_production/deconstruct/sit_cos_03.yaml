@@ -1,0 +1,51 @@
+id: sit_cos_03
+title: 竞品信号雷达
+tagline: 快速看清竞品真实软肋与未满足缺口
+routing:
+  primitive: deconstruct
+  goals:
+  - evaluate
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - competitive_intelligence
+  - market_research
+  - product_strategy
+  - niche_discovery
+  app_affinity:
+  - Chrome
+  - Notion
+  - ChatGPT
+  - Claude
+  pain_point: 想切入一个细分赛道，却看不清现有玩家真正的软肋和未被满足的缺口，怕盲选方向踩坑
+  trigger_utterances:
+  - 这个赛道都有哪些玩家
+  - 竞品用户都在抱怨什么
+  - 我想做XX niche但不知道对手软肋
+  - 帮我分析一下竞品差评和定价
+  - XX市场还有没有空隙
+  anti_triggers:
+  - 只想直接抄竞品功能
+  - 需要深度技术架构对比
+execution:
+  action_type: open_resource
+  inject_mode: null
+  content: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/chief-of-staff.json#cos-03
+  variables: []
+  workflow: null
+meta:
+  source: super-individual-toolbox
+  source_ref: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/chief-of-staff.json#cos-03
+  source_hash: 1134a7326b3756060c744b30cb07e678dbb151068f21ea755871eddff3463ff9
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: product_business
+  subcategory: product_design
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

@@ -1,0 +1,65 @@
+id: disc_life_designing_for_default_boredom_over_dopamine
+title: 允许自己偶尔无聊发呆
+tagline: 别用高刺激内容填满每一秒，留出无输入的发呆与松弛
+routing:
+  primitive: metacognize
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - life_design
+  - attention
+  - dopamine
+  - boredom
+  - habits
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  pain_point: 一有空档就下意识掏出手机刷内容，停不下来，反而更累更麻木，想要留出不被高刺激填满的空白时间却总做不到。
+  trigger_utterances:
+  - 我每天碎片时间都在刷手机停不下来
+  - 等车排队无聊就想看手机
+  - 想留点发呆时间但总觉得浪费
+  - 高刺激内容看多了日常都麻木了
+  - 怎么戒掉睡前刷手机
+  anti_triggers:
+  - 需要番茄钟/深度专注工作的任务管理
+  - 想提高手机使用效率的工具推荐
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '## 碎片空档审计与轻替代设计
+
+
+    - [ ] 列出你每天 3~5 个「本来可以放空」的空档（等电梯/通勤/睡前/休息间隙），并记录每个空档通常刷的内容：{{habit}}
+
+    - [ ] 为每个空档设计 1 个不带屏幕输入的轻替代（散步/发呆/观察/呼吸/听无歌词音乐），确保可随手做、不需准备
+
+    - [ ] 选出 3 个最容易落地的替代，写成「空档 → 替代动作」对照表
+
+    - [ ] 选定每天 10 分钟「零信息输入」时段，固定在已有过渡节点（如洗漱后/通勤中），避免新增打卡负担
+
+    - [ ] 为该时段设一条最小规则：不看屏、不记录、不复盘，只允许放空或轻度观察
+
+    - [ ] 一周后回看：是否更松弛/是否出现新想法；若成负担则缩短或换时段'
+  variables:
+  - habit
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/life.json#life-designing-for-default-boredom-over-dopamine
+  source_hash: 9cf99951f197a1550f063c9159b39a87cfadce0262f5597672bad7f40af9d0c0
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: product_business
+  subcategory: product_design
+  collections: []
+  base_weight: 1.0
+  confidence: 0.82
+  version: 1

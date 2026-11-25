@@ -1,0 +1,33 @@
+{
+  "id": "disc_career_translating_jargon_for_stakeholders",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/career.json#career-translating-jargon-for-stakeholders",
+  "title": "做“跨语言翻译器”，把技术/专业细节翻成对方关心的结果",
+  "content": "旧共识（盲区）：把底层实现细节、专业术语和复杂过程讲得越全，别人越能理解你的工作价值。\n\n新现实（破盲视角）：不同角色关心的语言完全不同——业务方看结果与风险，协作者看接口与节点；能把专业动作翻译成对方听得懂、用得上的表达，沟通效率会翻倍。\n\n破冰追问母题：\n- 我最近做了一项 [技术/分析/设计/运营] 工作：[简述你做了什么与核心价值]。请帮我分别写成给“业务/决策方看（重结果与影响）”和给“协作伙伴看（重配合与边界）”的两个简短版本。\n- 在 [你的工作场景] 中，哪些专业术语或内部细节最容易让非同背景的人听不懂？帮我改写成大白话。",
+  "content_hash": "9f68b2accca046fa000bdf8d2ce8a169bb46fc50d000597ccc6d8e8168cee874",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "career",
+    "cross-domain",
+    "role-inversion",
+    "communication",
+    "translation",
+    "stakeholders",
+    "impact"
+  ],
+  "problem_solved": "把底层实现细节、专业术语和复杂过程讲得越全，别人越能理解你的工作价值。",
+  "when_to_use": "不同角色关心的语言完全不同——业务方看结果与风险，协作者看接口与节点；能把专业动作翻译成对方听得懂、用得上的表达，沟通效率会翻倍。",
+  "procedural_steps": [
+    "我最近做了一项 [技术/分析/设计/运营] 工作：[简述你做了什么与核心价值]。请帮我分别写成给“业务/决策方看（重结果与影响）”和给“协作伙伴看（重配合与边界）”的两个简短版本。",
+    "在 [你的工作场景] 中，哪些专业术语或内部细节最容易让非同背景的人听不懂？帮我改写成大白话。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "career-translating-jargon-for-stakeholders",
+    "arena": "career",
+    "lenses": [
+      "cross-domain",
+      "role-inversion"
+    ]
+  }
+}

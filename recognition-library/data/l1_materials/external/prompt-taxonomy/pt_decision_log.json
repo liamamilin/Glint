@@ -1,0 +1,28 @@
+{
+  "id": "pt_decision_log",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#decision-log",
+  "title": "把讨论整理成决策记录",
+  "content": "从【讨论记录】提取关于【决策范围】的决策。逐条记录日期、选择、备选项、理由、负责人和触发复审的条件。区分决策与工作假设，缺失项保留空缺。",
+  "content_hash": "30a75f42e57885474904bbb0013b9b52a36fde3517dec6df7779f95deccf60ab",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "office",
+    "决策",
+    "记录",
+    "ADR",
+    "decision log"
+  ],
+  "problem_solved": "留下结论、理由、责任与重新评估的条件。",
+  "when_to_use": "分类: 办公与协作",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "decision-log",
+    "category": "office",
+    "variables": [
+      "讨论记录",
+      "决策范围"
+    ]
+  }
+}

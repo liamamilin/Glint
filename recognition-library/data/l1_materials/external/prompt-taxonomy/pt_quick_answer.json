@@ -1,0 +1,28 @@
+{
+  "id": "pt_quick_answer",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#quick-answer",
+  "title": "回答具体问题",
+  "content": "我想知道【问题】。背景是【地区、时间或适用对象】。先用两句话回答，再解释最多三个关键点和一个容易误解的例外。涉及近期事实时标注信息截至日期，并附可访问的原始来源；查不到的部分明确标为待核实。",
+  "content_hash": "a7b8cabfc23ec2ac651db7922a5ff87eebd615825e01b6c278353e11f62c2a86",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "research",
+    "问答",
+    "查询",
+    "answer",
+    "FAQ"
+  ],
+  "problem_solved": "先拿到直接答案，再看例外和证据。",
+  "when_to_use": "分类: 查找与研究",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "quick-answer",
+    "category": "research",
+    "variables": [
+      "问题",
+      "地区、时间或适用对象"
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "id": "core_code_review",
+  "source": "glint-core",
+  "source_ref": "cards.yaml#code_review",
+  "title": "架构师 Code Review",
+  "content": "请作为资深架构师审查以下代码。忽略代码风格和命名吹毛求疵，只指出潜在 Bug、边界/并发风险以及可简化的复杂度：\n\n{{input}}",
+  "content_hash": "9e13a651eaf677331b4588fcde8ec706bdceccb12f1ec17d225488097c3e4e84",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "engineering"
+  ],
+  "problem_solved": "代码审查 / 重构优化",
+  "when_to_use": "",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "code_review",
+    "legacy_dimension": "engineering",
+    "legacy_mode": "wrap"
+  }
+}

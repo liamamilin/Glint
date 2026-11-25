@@ -1,0 +1,66 @@
+id: disc_build_disposable_micro_software
+title: 一次性微软件速成规格
+tagline: 为一次性的繁琐任务生成单文件HTML微工具规格
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - build
+  - disposable_software
+  - first_principles
+  - productivity
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Terminal
+  - ChatGPT
+  pain_point: 用户手头有一件只做一次但很繁琐的任务，用 Excel 凑合痛苦，却因为觉得写软件成本太高而不敢动手，其实现在可以花 10 分钟生成一个用完即弃的本地微网页
+  trigger_utterances:
+  - 这个一次性数据清洗用 Excel 太痛苦了
+  - 帮我设计一个单文件 HTML 小工具用完即弃
+  - 搬家清单太乱了想做个本地网页
+  - 这个任务只做一次不值得写完整 app
+  - 10 分钟生成一个专属微工具规格
+  anti_triggers:
+  - 需要长期维护的通用产品或 SaaS 架构设计
+  - 多用户、权限与持久化存储的系统规划
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '一次性微软件速成规格清单：
+
+    - 明确一次性任务目标、输入数据与期望输出
+
+    - MECE 拆解需要的字段/步骤/校验规则
+
+    - 选定单文件 HTML/JS 技术栈（无依赖或 CDN）
+
+    - 设计极简 UI：输入区、处理按钮、结果区
+
+    - 实现本地运行，数据不上传、不持久化
+
+    - 放弃通用性：不做登录、不做多用户、不做长期维护
+
+    - 10 分钟内生成、运行并验证
+
+    - 用完即弃：任务完成后可直接删除文件'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/build.json#build-disposable-micro-software
+  source_hash: 9dac6d7d1aac6b8304a095e84315921eeb958ed5534004a08d21828b99ede990
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: product_business
+  subcategory: product_design
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

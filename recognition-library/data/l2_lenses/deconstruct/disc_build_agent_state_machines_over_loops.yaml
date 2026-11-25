@@ -1,0 +1,64 @@
+id: disc_build_agent_state_machines_over_loops
+title: 用状态机约束Agent循环
+tagline: 把Agent自由循环锁进显式状态转移与重试上限，避免死循环烧预算。
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - debug
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - agent_workflows
+  - state_machines
+  - reliability
+  - build
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Terminal
+  - Notion
+  pain_point: Agent 自由决定下一步、循环到满意为止，容易死循环、烧光预算或跑偏轨道，缺乏可控的状态边界。
+  trigger_utterances:
+  - 这个agent老是死循环帮我理一下状态
+  - agent workflow 怎么加状态机
+  - 自动流程跑偏了怎么控
+  - 帮我画出agent的状态节点和转移条件
+  - 重试上限怎么设才不会无限跑
+  anti_triggers:
+  - 只是润色单轮Prompt
+  - 无状态的单次问答任务
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '## Agent 有限状态机设计清单
+
+
+    - [ ] 列出工作流的输入、中间产物与最终期望结果
+
+    - [ ] 识别核心状态节点（如 草稿 → 校验 → 确认 → 执行）
+
+    - [ ] 为每个节点定义进入条件与允许的转移边
+
+    - [ ] 标出最容易卡死或越界的转移边
+
+    - [ ] 区分可自动重试的步骤与必须直接失败上报的步骤
+
+    - [ ] 为可重试步骤设置重试上限与退避策略
+
+    - [ ] 为不可恢复错误定义失败上报与回滚路径
+
+    - [ ] 增加预算/步数/时间的全局熔断条件
+
+    - [ ] 用样例输入走一遍状态转移，验证无死循环'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/build.json#build-agent-state-machines-over-loops
+  source_hash: e2404f5fa832c9200b4cd73a49e86608e0d9c28fa499ae8f233a6c97e28df8da
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

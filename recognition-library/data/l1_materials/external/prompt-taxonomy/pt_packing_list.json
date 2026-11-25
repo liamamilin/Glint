@@ -1,0 +1,29 @@
+{
+  "id": "pt_packing_list",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#packing-list",
+  "title": "按场景整理打包清单",
+  "content": "为【目的地、季节、行程和活动】做【行李限制】下的打包清单。按必带、可选、当地可补分组，并为必须提前准备的项目给日期。根据【已有物品】消除重复，标出依赖当前天气或限制的待确认项。",
+  "content_hash": "2c11c2fcf6c8ab759167a04c03fe4d75ecefb5ed8a5e9d75cceab2beed04ce3e",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "planning",
+    "打包",
+    "出行",
+    "清单",
+    "packing"
+  ],
+  "problem_solved": "只带目的地、时长和活动所需的东西。",
+  "when_to_use": "分类: 计划与生活",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "packing-list",
+    "category": "planning",
+    "variables": [
+      "目的地、季节、行程和活动",
+      "行李限制",
+      "已有物品"
+    ]
+  }
+}

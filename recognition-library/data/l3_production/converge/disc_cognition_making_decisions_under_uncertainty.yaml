@@ -1,0 +1,66 @@
+id: disc_cognition_making_decisions_under_uncertainty
+title: 在不完全信息下拍板
+tagline: 列出3个关键变量与底线后果，够用信息下果断拍板
+routing:
+  primitive: converge
+  goals:
+  - evaluate
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - decision_making
+  - uncertainty
+  - tradeoffs
+  - cognition
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 总觉得资料没看完、变量没算准就不敢拍板，结果错过窗口或白耗精力
+  trigger_utterances:
+  - 这个方案资料还没看完不敢定
+  - 选A还是选B一直纠结
+  - 再调研两周还是现在就定
+  - 信息不全不敢做决定
+  - 怕做错一直拖着
+  anti_triggers:
+  - 已经完全确定答案只需执行
+  - 纯信息检索不要决策
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '## 不完全信息下的拍板清单
+
+
+    - [ ] 写清当前决定一句话：我在 [决定] 上纠结，因为 [简述]
+
+    - [ ] 列出真正关键的 3 个变量（缺一不可的）
+
+    - [ ] 对每个变量判断：当前信息是否已足够（是/否 + 依据）
+
+    - [ ] 明确底线后果：最坏情况是什么，能否承受
+
+    - [ ] 对比「现在就定并边走边调」vs「再等两周调研」的机会成本
+
+    - [ ] 决定：拍板 / 再调研（仅限 1 个最小验证动作）
+
+    - [ ] 记录复盘触发条件：什么信号出现就重新评估'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/cognition.json#cognition-making-decisions-under-uncertainty
+  source_hash: c70f0bf85609a6e24659033cef6cfd7374856386e39921360531a67ae21aa548
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  category: general
+  subcategory: decision
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

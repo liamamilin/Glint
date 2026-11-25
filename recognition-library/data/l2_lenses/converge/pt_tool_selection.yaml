@@ -1,0 +1,46 @@
+id: pt_tool_selection
+title: 任务用哪种AI能力
+tagline: 先决定是否搜索/读文件/计算/直接回答，避免选错工具。
+routing:
+  primitive: converge
+  goals:
+  - evaluate
+  clarity_fit:
+  - concrete
+  - vague
+  domains:
+  - prompt_workflows
+  - tool_selection
+  - capability_boundary
+  - ai_workflow
+  app_affinity:
+  - Cursor
+  - VS Code
+  - ChatGPT
+  - Claude
+  pain_point: 面对一个任务时不确定该直接回答、搜索、读文件还是计算，容易选错工具导致多走弯路或过度调用。
+  trigger_utterances:
+  - 这个任务我该搜还是直接答
+  - 要不要先读文件
+  - 用哪个工具更合适
+  - 直接回答还是先查资料
+  - 选能力好纠结
+  anti_triggers:
+  - 用户明确要求直接回答且不需外部信息
+  - 纯创意发散 brainstorming
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 对{{task_and_input}}，从{{available_capabilities}}中选择完成任务所必需的工具。按必须拿到的证据、处理量、可验证输出和执行后果比较各选项，给出无需额外工具的最小路径，并说明在什么条件下应升级到其他工具。
+  variables:
+  - task_and_input
+  - available_capabilities
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#tool-selection
+  source_hash: 47df4bb65489f643df96c74fa85e1905df394d7f8e573df6c81d09801f254b73
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

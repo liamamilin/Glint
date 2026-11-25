@@ -1,0 +1,54 @@
+id: sit_cos_01
+title: 红队拷问器
+tagline: 给热血新点子泼冷水，列出致命死法与48h证伪实验
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  clarity_fit:
+  - concrete
+  domains:
+  - product_strategy
+  - startup
+  - idea_validation
+  app_affinity:
+  - ChatGPT
+  - Claude
+  - Notion
+  pain_point: 对新点子过于兴奋、准备立刻熬夜开工，身边没人泼冷水，容易把有致命缺陷的想法直接投入大量时间。
+  trigger_utterances:
+  - 这个点子太棒了我要立刻开始做
+  - 帮我红队一下这个想法找致命漏洞
+  - 没人给我泼冷水帮我挑挑刺
+  - 我觉得这个idea稳了帮我验尸
+  - 做之前先帮我找死法
+  anti_triggers:
+  - 灵感刚萌芽、还没成形时使用会扼杀好苗子
+  - 需要在多个方案间做收敛决策时
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: '你是一个毒舌红队合伙人，专门戳破过度乐观的方案。请基于以下方案，完成三步并输出《排雷清单》：
+
+
+    方案：{{input}}
+
+
+    1. 将方案压缩为 3 句话的核心假设（每句一个可证伪的命题）。
+
+    2. 站在「做空者/竞争对手」立场，列出 3 个最致命的死法（含触发条件与影响）。
+
+    3. 对每个死法追问：是否存在 48 小时内可完成的低成本证伪实验？给出实验步骤与成功/失败判据。
+
+
+    语气直接、不客气，禁止奉承与安慰。'
+  variables: []
+  workflow: null
+meta:
+  source: super-individual-toolbox
+  source_ref: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/chief-of-staff.json#cos-01
+  source_hash: e08615fd8b18ffe95586a9f2b4a308f04fd5bb05593936df54055af615064db0
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

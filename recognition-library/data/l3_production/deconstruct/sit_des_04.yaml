@@ -1,0 +1,68 @@
+id: sit_des_04
+title: 高审美界面逆向拆解
+tagline: 把神仙网站的布局与留白规律翻译成自己的 CSS
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - create
+  clarity_fit:
+  - concrete
+  domains:
+  - design_system
+  - frontend
+  - ui_design
+  - css
+  app_affinity:
+  - Chrome
+  - Cursor
+  - VS Code
+  - Figma
+  pain_point: 看到一个极度克制高级的网站，想学它的设计语言却不知从何下手转化为代码
+  trigger_utterances:
+  - 这个网站好高级，帮我拆一下它的布局
+  - 这个页面的留白和节奏怎么复刻
+  - 把这个神仙网站的 CSS 骨架拆出来
+  - 这个 landing page 的 grid 比例是什么
+  - reverse engineer this site's layout
+  anti_triggers:
+  - 直接扒别人的品牌色和文案做山寨克隆
+  - 只是想收藏网站截图而非转化为代码
+execution:
+  action_type: open_resource
+  inject_mode: null
+  content: '定位：把神仙网站的布局与留白规律，翻译成自己的 CSS。
+
+
+    步骤：
+
+    1. 截取参考网站的 2–3 个关键区块，要求 AI 剥离具体业务内容，只提炼「栅格比例、留白节奏、边框与阴影克制度」。
+
+    2. 将其抽象为 5 条可迁移的布局原则（而非照抄像素）。
+
+    3. 直接生成基于该原则的极简 HTML/CSS 骨架 Demo 供自己二次改造。
+
+
+    交付物：《参考界面设计语言拆解单》+ 可运行的极简布局 Demo。
+
+
+    推荐装配：多模态模型 + 浏览器 DevTools。
+
+
+    误用警告：拆解的是「骨架规律与克制感」，绝不是直接扒别人的品牌色和文案做山寨克隆。'
+  variables: []
+  workflow: null
+meta:
+  source: super-individual-toolbox
+  source_ref: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/design-creative.json#des-04
+  source_hash: 63362080e64e1f0e2e9c072d391a6b4c3f670d7d054d97612679faefd7219957
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: engineering
+  subcategory: architecture
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

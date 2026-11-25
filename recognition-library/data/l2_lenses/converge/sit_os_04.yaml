@@ -1,0 +1,44 @@
+id: sit_os_04
+title: 周度清仓复盘
+tagline: 把半成品和收藏夹做断舍离，每周只留3条主线
+routing:
+  primitive: converge
+  goals:
+  - optimize
+  - digest
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - personal_os
+  - productivity
+  - weekly_review
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Linear
+  pain_point: 手里攒了一堆改天再做的半成品和吃灰收藏夹，隐隐焦虑却说不清在忙什么
+  trigger_utterances:
+  - 这周又一堆半成品没做完好焦虑
+  - 收藏夹吃灰我到底在忙啥
+  - 周日了帮我清仓一下
+  - 改天再做越攒越多
+  - 帮我做减法别写流水账
+  anti_triggers:
+  - 只想写心情日记或自我检讨
+  - 需要拆解单个项目的详细步骤
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: "周度清仓报告（15分钟）\n\n1. 列出本周已完成交付物\n2. 列出所有卡住的半成品/吃灰收藏\n3. 三选一清仓（每项只能选一个）：\n   - 继续推进（最多3项，定下周最小动作）\n   - 明确归档放弃（写清放弃理由）\n\
+    \   - 降级为低优备忘（移出主视线）\n4. 提炼本周重复超过2次的摩擦点，指定1个下周要封装/自动化的目标\n\n交付物：3项主线 + 主动放弃清单 + 1个待自动化摩擦点"
+  variables: []
+  workflow: null
+meta:
+  source: super-individual-toolbox
+  source_ref: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/personal-os.json#os-04
+  source_hash: 6797d111f72f09b236ef634c33afd52e89abe2df1a9409aec19533c1cb8b1b47
+  status: active
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

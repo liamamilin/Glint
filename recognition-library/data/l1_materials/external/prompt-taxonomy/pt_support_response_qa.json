@@ -1,0 +1,27 @@
+{
+  "id": "pt_support_response_qa",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#support-response-qa",
+  "title": "抽查客服回复是否准确可执行",
+  "content": "按【服务规则和质检维度】评审【工单与答复】。给是否准确、是否解决关键问题、用户需要做什么及承诺是否能兑现。为最高优先级问题提供替换句和一条审核记录。",
+  "content_hash": "6a3ab108bd885fb523b7862fcd0c65732ef32250074de686b2c25d8e5c7e37f1",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "support",
+    "服务质检",
+    "客服QA",
+    "reply review"
+  ],
+  "problem_solved": "对照政策、证据、语气及后续行动。",
+  "when_to_use": "分类: 客服与服务运营",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "support-response-qa",
+    "category": "support",
+    "variables": [
+      "服务规则和质检维度",
+      "工单与答复"
+    ]
+  }
+}

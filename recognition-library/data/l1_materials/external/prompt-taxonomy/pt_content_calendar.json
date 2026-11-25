@@ -1,0 +1,27 @@
+{
+  "id": "pt_content_calendar",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#content-calendar",
+  "title": "围绕目标安排渠道内容日历",
+  "content": "为【目标受众和传播目标】安排【渠道与日期】的内容日历。每篇列任务、受众问题、原始素材、负责人、交付日和衡量标准。优先安排可用现有材料完成的内容。",
+  "content_hash": "2c154f5a8a1a7854e3604ab73984f34b45d3ca2082ac9c73af42a04bae297c77",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "marketing",
+    "内容运营",
+    "选题",
+    "content calendar"
+  ],
+  "problem_solved": "让选题覆盖需求，再分配产出和检验。",
+  "when_to_use": "分类: 营销与销售",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "content-calendar",
+    "category": "marketing",
+    "variables": [
+      "目标受众和传播目标",
+      "渠道与日期"
+    ]
+  }
+}

@@ -1,0 +1,45 @@
+id: pt_async_update
+title: 异步同步消息
+tagline: 把杂乱进展写成团队渠道的简洁异步更新
+routing:
+  primitive: translate
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - async_communication
+  - team_updates
+  - office
+  - slack
+  - project_management
+  app_affinity:
+  - Slack
+  - Feishu
+  - Notion
+  - Linear
+  pain_point: 团队渠道消息杂乱，大家看不清变化和需要谁在何时作什么决定
+  trigger_utterances:
+  - 帮我把这条消息整理成异步更新发到群里
+  - Slack 更新太乱了帮我理一下
+  - 把进展写成简洁的团队同步
+  - 异步更新怎么写
+  - 把讨论记录转成 channel 更新
+  anti_triggers:
+  - 需要实时会议讨论的复杂决策
+  - 个人私密消息或非团队通知
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: 把【{{input}}】写成给【团队渠道】的简洁异步更新。先给变化或阻碍，再给需要谁在什么时候作什么决定。将背景、证据和业务影响分开表达，用链接文本标明原始材料。
+  variables: []
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#async-update
+  source_hash: b2d6c24da9e6bef4f6af0c7f92fded1c3073dbbf625501d06219c8d15b3f46b7
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

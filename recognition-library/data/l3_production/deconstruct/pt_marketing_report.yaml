@@ -1,0 +1,74 @@
+id: pt_marketing_report
+title: 对照目标写效果报告
+tagline: 按渠道拆解覆盖转化成本，区分可证变化与归因推测，给出下轮行动建议。
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - evaluate
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - marketing
+  - campaign_analysis
+  - attribution
+  - reporting
+  app_affinity:
+  - Notion
+  - Feishu
+  - Slack
+  - Mail
+  pain_point: 用户手头有活动数据和目标，但不知道如何组织成可汇报的效果报告，分不清哪些变化是数据能证明的、哪些归因无法验证，也不知下一轮该继续、停掉还是补测什么。
+  trigger_utterances:
+  - 这个活动效果帮我写个报告
+  - 数据有了但不知道怎么汇报
+  - 帮我按渠道拆一下转化和成本
+  - 哪些是数据能证明的哪些是归因猜的
+  - 下一轮该继续投还是停掉
+  anti_triggers:
+  - 帮我写营销文案或广告语
+  - 分析竞品或市场趋势
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '你是一名营销分析师。请基于以下输入为指定受众撰写一份可读的效果报告。
+
+
+    要求：
+
+    1. 对照活动目标，按渠道拆解覆盖、转化、成本与口径（统一定义口径）。
+
+    2. 区分「数据能直接说明的变化」与「无法验证的归因假设」，对后者明确标注为推测/待验证。
+
+    3. 给出下一轮行动建议，各一项：应继续、应停掉、应补测。
+
+    4. 语言适配受众（高层/运营），结论先行，附关键数字与数据来源。
+
+
+    输入：
+
+    - 活动目标与数据：{{activity_goals_and_data}}
+
+    - 受众：{{audience}}'
+  variables:
+  - activity_goals_and_data
+  - audience
+  workflow:
+    workflow_id: launch-campaign
+    step: 5
+    next_lens_id: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#marketing-report
+  source_hash: b3454e1042af10621ee726f967d421f81bfc761609d71882649094f3fdb83bd7
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: product_business
+  subcategory: growth_marketing
+  collections: []
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

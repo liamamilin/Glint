@@ -1,0 +1,55 @@
+id: disc_career_asking_for_timely_feedback
+title: 粗糙草稿阶段就要反馈
+tagline: 别等完美再示人，早期粗稿对齐方向少返工。
+routing:
+  primitive: metacognize
+  goals:
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - career
+  - feedback
+  - iteration
+  - collaboration
+  app_affinity:
+  - Slack
+  - Feishu
+  - Notion
+  pain_point: 担心半成品不体面，总等作品打磨完美才敢给人看，结果方向早已偏了，返工代价巨大。
+  trigger_utterances:
+  - 这个方案我还没写完要不要先给同事看
+  - 怕拿半成品出来丢人
+  - 等做完美了再拿去评审
+  - 早期对齐方向
+  - rough draft feedback
+  anti_triggers:
+  - 已经定稿只求润色 wording
+  - 纯粹代码 review 找 bug
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '快速对齐清单（粗糙草稿阶段）：
+
+    - [ ] 明确这次只想确认「方向与结构」，不是字词细节
+
+    - [ ] 用一句话说明雏形：[方案/草稿/原型/思路] + 想确认的点
+
+    - [ ] 发送话术：「我刚搭了一个 [雏形] 的雏形：[简述]。想请教方向和结构有没有跑偏，不扣字眼。」
+
+    - [ ] 选定最适合提前 30% 对齐的步骤：[日常工作/创作流程]
+
+    - [ ] 约 15 分钟快速对齐，记录 3 条可调整点
+
+    - [ ] 只改方向性问题，暂不抛光细节'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/career.json#career-asking-for-timely-feedback
+  source_hash: 1c0d1aa9d89268095f57304e73196a86a18805eb3aa6d8484fae7575cd35aac0
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

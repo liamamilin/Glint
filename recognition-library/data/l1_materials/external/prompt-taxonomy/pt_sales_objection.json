@@ -1,0 +1,26 @@
+{
+  "id": "pt_sales_objection",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#sales-objection",
+  "title": "练习回应客户提出的购买顾虑",
+  "content": "根据【客户异议和可用事实】准备回复。先提出一个澄清问题，再按预算、适用范围或风险等给可能回答和证据。不能承诺的地方提出替代验证或后续跟进，写一个可口述版本。",
+  "content_hash": "041fbfa845dc4e5115865d3c0c65e245e9e0816c2d5abb3b71ce24a7ad160035",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "marketing",
+    "异议处理",
+    "销售",
+    "objection handling"
+  ],
+  "problem_solved": "先澄清具体顾虑，再给可核实答复。",
+  "when_to_use": "分类: 营销与销售",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "sales-objection",
+    "category": "marketing",
+    "variables": [
+      "客户异议和可用事实"
+    ]
+  }
+}

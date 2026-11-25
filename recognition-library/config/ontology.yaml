@@ -1,0 +1,108 @@
+schema_version: "2.0"
+
+primitives:
+  compress:
+    label: "降噪压缩"
+    transform: "多 -> 少（提取骨架、主因与关键事实）"
+    boundary: "目标是信息减法（摘要、提炼唯一主因、TL;DR），区别于 deconstruct 的建立结构。"
+  deconstruct:
+    label: "解构建模"
+    transform: "乱 -> 序（MECE 拆解、因果链、排查清单）"
+    boundary: "目标是建立结构与层次（拆模块、拆步骤、列清单），区别于 compress 的信息减法。"
+  critique:
+    label: "批判排雷"
+    transform: "单视角 -> 对立面（事前验尸、红队拷问、隐含假设审计）"
+    boundary: "针对单一对象/方案找漏洞与反例，区别于 converge 的多选项权衡取舍。"
+  diverge:
+    label: "发散联想"
+    transform: "1 -> N（跨界类比、破盲母题、逆向思维）"
+    boundary: "打破思维定势、拓展未知的未知与备选空间。"
+  converge:
+    label: "收敛决策"
+    transform: "N -> 1（权重对比矩阵、二阶后果、最小验证）"
+    boundary: "针对多个候选方案做取舍、排序与最小成本验证拍板。"
+  translate:
+    label: "转译重构"
+    transform: "语境 A -> 语境 B（口语转专业 Prompt、去 AI 味、技术转业务）"
+    boundary: "仅当转译/润色/格式重写本身是唯一主动作时判定为 translate；若附带在其他主动作之后则属于输出要求而非意图。"
+  metacognize:
+    label: "元认知追问"
+    transform: "给答案 -> 问前提（揪出缺失变量、重新定义问题）"
+    boundary: "描述极短、前提模糊、疑似在解决假问题时，先反问澄清而非急于给方案。"
+
+goals:
+  create: "创造（从 0 到 1 构思、起草、设计）"
+  optimize: "优化（重构、提质、降本、提效）"
+  debug: "排障（报错定位、根因分析、故障恢复）"
+  evaluate: "评估（评审、决策、风险审计、选型）"
+  digest: "消化（提炼、总结、吸收长文本与复杂材料）"
+
+clarities:
+  vague: "模糊态（想法碎片化、缺少关键变量或方向未定）"
+  concrete: "具体态（对象与目标清晰，需要高杠杆执行或深度加工）"
+  conflicted: "纠结态（多选项拉扯、不确定取舍或存在隐含矛盾）"
+
+action_types:
+  inject_prompt: "追加或包裹当前输入，生成发送给强 LLM 的高杠杆 Prompt"
+  show_checklist: "浮窗展示结构化诊断清单/破盲卡，不覆盖当前输入"
+  open_resource: "唤起高杠杆工具、命令或参考资源链接"
+  workflow_entry: "多步工作流入口，触发轻量会话态衔接下一步"
+
+inject_modes:
+  - append
+  - wrap
+
+statuses:
+  - active
+  - quarantine
+  - deprecated
+
+# 同义词与常见漂移值归一化映射（Gate 2 自动修复）
+aliases:
+  primitives:
+    summary: compress
+    summarize: compress
+    distill: compress
+    structure: deconstruct
+    breakdown: deconstruct
+    analyze: deconstruct
+    engineering: deconstruct
+    review: critique
+    audit: critique
+    premortem: critique
+    explore: diverge
+    brainstorm: diverge
+    decide: converge
+    decision: converge
+    prioritize: converge
+    polish: translate
+    rewrite: translate
+    reframe: translate
+    clarify: metacognize
+    question: metacognize
+    discover: metacognize
+  goals:
+    build: create
+    write: create
+    design: create
+    improve: optimize
+    refactor: optimize
+    fix: debug
+    troubleshoot: debug
+    assess: evaluate
+    judge: evaluate
+    summarize: digest
+    learn: digest
+  clarities:
+    unclear: vague
+    ambiguous: vague
+    clear: concrete
+    specific: concrete
+    uncertain: conflicted
+    undecided: conflicted
+  action_types:
+    prompt: inject_prompt
+    checklist: show_checklist
+    resource: open_resource
+    tool: open_resource
+    workflow: workflow_entry

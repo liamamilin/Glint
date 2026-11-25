@@ -1,0 +1,68 @@
+id: pt_pr_description
+title: 把提交差异写成 PR 说明
+tagline: 让评审者一眼看懂问题、改动影响与验证证据
+routing:
+  primitive: translate
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - engineering
+  - pull_request
+  - code_review
+  - git
+  app_affinity:
+  - Cursor
+  - VS Code
+  - GitHub
+  - Terminal
+  pain_point: 提交了很多改动，评审者不知道为什么改、影响哪里、怎么验证，PR 描述写得像流水账
+  trigger_utterances:
+  - 帮我把这次 diff 写成 PR 说明
+  - 这个 PR 描述太乱了评审看不懂
+  - 把提交差异整理成 reviewer 能快速理解的描述
+  - write PR description from my changes
+  - PR 说明要包含影响范围和测试
+  anti_triggers:
+  - 只是想生成 commit message 而非 PR 描述
+  - 需要从零设计功能而非描述已有改动
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '基于【变更差异和需求】为【评审人】写 PR 说明。要求：
+
+    1. 先说实际触发场景和修复后的结果（Before/After 一句话各一句）。
+
+    2. 再列影响范围（模块/文件/接口/数据）与测试证据（已有测试、手动验证步骤）。
+
+    3. 缺少的测试或迁移信息如实写“待验证”，不要编造。
+
+    4. 给一个有代表性的前后示例对比。
+
+    5. 语气简洁，面向 reviewer，避免流水账。
+
+
+    输入：'
+  variables:
+  - 变更差异和需求
+  - 评审人
+  workflow:
+    workflow_id: fix-and-release
+    step: 4
+    next_lens_id: pt_release_check
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#pr-description
+  source_hash: 483f22f769d932218de7707b5076a0c9a0cd0efcdceb3c323dcaa70e70303921
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: engineering
+  subcategory: code_review
+  collections: []
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

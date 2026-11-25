@@ -1,0 +1,62 @@
+id: pt_review_deck
+title: 复查演示文稿叙事与可读性
+tagline: 逐页检查主旨、图表与布局，优先修正跳页/溢出/行动项
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - presentation
+  - slide_qa
+  - document_review
+  - storytelling
+  app_affinity:
+  - PowerPoint
+  - Keynote
+  - Notion
+  - Figma
+  pain_point: 演示文稿做完后不知道哪里叙事断层、图表信息不清晰、文字溢出，缺乏逐页可执行的审阅清单
+  trigger_utterances:
+  - 帮我审一下这个 PPT 的叙事连贯性
+  - 这 deck 有没有跳页或者文字溢出
+  - review 这份演示文稿的每一页
+  - PPT 评审 checklist 能给一份吗
+  - 图表单位和布局问题帮我检查一下
+  anti_triggers:
+  - 用户只是想从零生成一份 PPT，而非审阅已有文稿
+  - 用户仅需将 PPT 转为 PDF 或导出文件
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '评审【演示文稿】用于【受众与目的】的完成度。逐页记录主张、证据、读者疑问及布局问题。优先修正跳页、图表单位、文字溢出和结尾行动项，为最重要的两页提出改法。
+
+
+    请按以下结构输出：
+
+    1. 逐页表：页码 | 主张 | 证据/图表 | 读者可能的疑问 | 布局问题
+
+    2. 优先修正项（跳页、图表单位、文字溢出、结尾行动项）
+
+    3. 最重要的两页的改法建议（含具体文案/布局调整）'
+  variables:
+  - '{''name'': ''audience'', ''description'': ''受众与目的，例如"给投资人看的融资路演"'', ''required'': True}'
+  - 演示文稿
+  - 受众与目的
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#review-deck
+  source_hash: 6269cb05d392662977bc3ce22d10e478eda936932feea625ae9253f131118ff6
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: writing_comms
+  subcategory: content_creation
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

@@ -1,0 +1,27 @@
+{
+  "id": "pt_exec_brief",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#exec-brief",
+  "title": "给决策者写一页简报",
+  "content": "把【材料】写成给【决策人】的一页简报。首段给所需决定、影响和截止日期；正文写关键事实、选项、推荐及取舍。把支持推荐的数字标出出处，并明确仍需要验证的假设。",
+  "content_hash": "c7c44699649fa7e3b0dac62cf85418d1902055a78b9243b62f76bcd3f02d85cf",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "office",
+    "简报",
+    "高层",
+    "executive brief"
+  ],
+  "problem_solved": "把背景压缩到足以决定下一步。",
+  "when_to_use": "分类: 办公与协作",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "exec-brief",
+    "category": "office",
+    "variables": [
+      "材料",
+      "决策人"
+    ]
+  }
+}

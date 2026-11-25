@@ -1,0 +1,74 @@
+id: pt_support_response_qa
+title: 客服回复准确可执行质检
+tagline: 对照政策与证据评审客服回复，给出替换句和质检记录
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - support
+  - service_quality
+  - customer_service
+  - reply_review
+  app_affinity:
+  - Slack
+  - Feishu
+  - WeChat
+  - Mail
+  pain_point: 客服或运营需要抽查回复是否准确、可执行，但缺少对照政策与证据的结构化质检，难以定位最高优先级问题并给出可替换的话术与审核记录。
+  trigger_utterances:
+  - 帮我检查这条客服回复准不准
+  - 这个工单答复用户能不能照做
+  - 对照政策评审一下客服回复
+  - 帮我找客服回复里最高优先级的问题
+  - 这条回复承诺能兑现吗
+  anti_triggers:
+  - 需要从零撰写全新客服话术而非质检已有回复
+  - 纯情绪安抚且无政策依据的场景
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '按【服务规则和质检维度】评审【工单与答复】。
+
+
+    输出要求：
+
+    1. 是否准确：对照政策与证据，指出回复中的准确/不准确之处。
+
+    2. 是否解决关键问题：判断是否真正回答了用户核心诉求。
+
+    3. 用户需要做什么：明确用户后续应执行的步骤。
+
+    4. 承诺是否能兑现：评估回复中的承诺是否可落地、有无风险。
+
+    5. 为最高优先级问题提供一条替换句。
+
+    6. 生成一条审核记录（含问题、影响、建议、结论）。
+
+
+    服务规则和质检维度：{{service_rules_and_qa_dimensions}}
+
+    工单与答复：{{ticket_and_reply}}'
+  variables:
+  - service_rules_and_qa_dimensions
+  - ticket_and_reply
+  - 服务规则和质检维度
+  - 工单与答复
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#support-response-qa
+  source_hash: 6a3ab108bd885fb523b7862fcd0c65732ef32250074de686b2c25d8e5c7e37f1
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: general
+  subcategory: research
+  collections: []
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

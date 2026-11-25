@@ -1,0 +1,29 @@
+{
+  "id": "pt_register_variants",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#register-variants",
+  "title": "按关系比较外语表达的语域",
+  "content": "将【要表达的含义】转成【语言和地区】的三种表达，场景为【不同对象或关系】。逐条说明正式度、自然度和可能被误解的地方，并给一句对方可能使用的自然回复。",
+  "content_hash": "cc28c177fd872af3d10e0fef87d18edd795b23c9af9e5d805218b734bc32e518",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "language",
+    "礼貌度",
+    "正式",
+    "口语",
+    "register"
+  ],
+  "problem_solved": "判断在不同场合用哪一种说法。",
+  "when_to_use": "分类: 语言练习与本地化",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "register-variants",
+    "category": "language",
+    "variables": [
+      "要表达的含义",
+      "语言和地区",
+      "不同对象或关系"
+    ]
+  }
+}

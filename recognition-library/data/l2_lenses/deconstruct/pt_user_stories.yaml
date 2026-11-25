@@ -1,0 +1,45 @@
+id: pt_user_stories
+title: 从流程生成用户故事
+tagline: 把目标和现有流程拆成带验收条件的可交付用户故事
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - product_strategy
+  - user_story
+  - requirements
+  app_affinity:
+  - Notion
+  - Linear
+  - Feishu
+  pain_point: 手头只有目标和流程描述，不知道怎么拆成可交付、可验收的用户故事，顺序也乱
+  trigger_utterances:
+  - 帮我把这个流程拆成用户故事
+  - 这个需求怎么写成 user story
+  - 按验收条件拆一下需求
+  - 把目标和流程转成 story 列表
+  - story 怎么排序才能先验证价值
+  anti_triggers:
+  - 只需要写一段产品介绍文案
+  - 只做技术架构 MECE 拆解不涉及用户故事
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '把【目标和现有流程】分成面向【用户角色】的可交付用户故事。每条写情景、动机、期望结果和可观察验收例子，标外部依赖。按能最早验证用户价值的顺序排列。
+
+
+    {{input}}'
+  variables: []
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#user-stories
+  source_hash: 7345a6d6d18752bef85fb71744e2966a5e6c27074f0a70505ace09b41c77e151
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

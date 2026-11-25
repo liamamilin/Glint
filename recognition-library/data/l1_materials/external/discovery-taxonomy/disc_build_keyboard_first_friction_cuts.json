@@ -1,0 +1,33 @@
+{
+  "id": "disc_build_keyboard_first_friction_cuts",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/build.json#build-keyboard-first-friction-cuts",
+  "title": "把每天高频切换的 3 个动作绑成顺手快捷键",
+  "content": "旧共识（盲区）：每次打开特定工具、查特定资料或切窗口，多点几下鼠标、多翻几层菜单也差不了几秒。\n\n新现实（破盲视角）：每天几十次的微摩擦加起来就是一整块专注力与时间；把最常用的 3 个入口绑成直达快捷键，动作变顺手后使用频率也会自然提高。\n\n破冰追问母题：\n- 盘点我每天在电脑上最常重复打开或切换的 5 个窗口/工具/动作：[填入你的高频操作]。帮我挑出最值得优先设快捷键的 3 个，并给出无冲突的按键组合建议。\n- 在 [你的常用编辑器/终端/浏览器/启动器] 中，有哪些能把“多步操作”压成“一键触发”的实用小配置？",
+  "content_hash": "ef8a25fd12f51fb1fece36b50588b66541c7fb2faf5ca7567df05ae426eed3ea",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "build",
+    "cost-collapse",
+    "invisible-friction",
+    "keyboard",
+    "hotkeys",
+    "ergonomics",
+    "speed"
+  ],
+  "problem_solved": "每次打开特定工具、查特定资料或切窗口，多点几下鼠标、多翻几层菜单也差不了几秒。",
+  "when_to_use": "每天几十次的微摩擦加起来就是一整块专注力与时间；把最常用的 3 个入口绑成直达快捷键，动作变顺手后使用频率也会自然提高。",
+  "procedural_steps": [
+    "盘点我每天在电脑上最常重复打开或切换的 5 个窗口/工具/动作：[填入你的高频操作]。帮我挑出最值得优先设快捷键的 3 个，并给出无冲突的按键组合建议。",
+    "在 [你的常用编辑器/终端/浏览器/启动器] 中，有哪些能把“多步操作”压成“一键触发”的实用小配置？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "build-keyboard-first-friction-cuts",
+    "arena": "build",
+    "lenses": [
+      "cost-collapse",
+      "invisible-friction"
+    ]
+  }
+}

@@ -1,0 +1,56 @@
+id: pt_star_stories
+title: 经历整理成面试故事
+tagline: 把零散经历编成 STAR 故事，附 90 秒口述与追问薄弱点
+routing:
+  primitive: translate
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - career
+  - behavioral_interview
+  - star
+  - interview_story
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 手里有真实项目经历但面试时讲不成结构化故事，责任边界和量化结果说不清，容易被追问卡住
+  trigger_utterances:
+  - 帮我把这段经历整理成面试能讲的 story
+  - STAR 框架怎么写我的项目经历
+  - behavioral interview 我该讲哪个故事
+  - 面试官老追问细节我答不上来
+  - 把我的项目经历变成 90 秒版本
+  anti_triggers:
+  - 帮我写简历 bullet
+  - 模拟技术算法面试题
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 将【经历原始记录】整理成可用于【面试能力主题】的情境、任务、行动、结果故事。明确团队与个人贡献，保留真实数字。给一个九十秒口述版本和两个会被追问的薄弱点。
+  variables:
+  - 经历原始记录
+  - 面试能力主题
+  workflow:
+    workflow_id: job-application
+    step: 3
+    next_lens_id: pt_interview_practice
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#star-stories
+  source_hash: 326bd9327927dd16939b998450b658820d6aef326a4b83cb664a25a72b75c59d
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: personal_career
+  subcategory: career
+  collections: []
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

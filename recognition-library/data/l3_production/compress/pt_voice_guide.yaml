@@ -1,0 +1,54 @@
+id: pt_voice_guide
+title: 样稿提炼写作风格
+tagline: 从样稿提炼可复用的写作风格指南
+routing:
+  primitive: compress
+  goals:
+  - create
+  clarity_fit:
+  - concrete
+  - vague
+  domains:
+  - writing
+  - style
+  - tone
+  - voice_guide
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Mail
+  - Chrome
+  pain_point: 用户有样稿或模糊语气要求，但无法说清具体风格规则，导致每次写作语气不稳定、难以复用。
+  trigger_utterances:
+  - 帮我从这篇样稿提炼写作风格
+  - 这篇语气不错，总结成可复用的风格指南
+  - 按这个样稿的语气写，但先说清楚规则
+  - 把模糊的语气要求变成具体观察
+  anti_triggers:
+  - 只是润色或翻译现成文案，不需要提炼风格
+  - 没有样稿，只想 brainstorm 一个新语气
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: "你是一个写作风格分析器。请基于 {{sample}} 提炼适合 {{audience}} 的风格指南。\n\n分析步骤：\n1. 从称呼/人称、句子长度与节奏、段落结构、术语密度、情绪强度、句式偏好、修辞与标点等方面观察。\n\
+    2. 每个维度输出：观察结论 + 短例（引用样稿 1-2 句）+ 适用条件/边界。\n3. 输出结构：\n   - 风格概览（3 句内）\n   - 维度观察表\n   - 可复用规则（编号，可直接作为写作约束）\n   - 反例/避免项\n\
+    4. 用这些规则改写 {{test_paragraph}}，并标注每处改动对应哪条规则。\n5. 如果样稿信息不足，明确列出缺失变量，不要编造。\n\n变量：sample=样稿原文；audience=渠道和读者；test_paragraph=测试段落。"
+  variables:
+  - sample
+  - audience
+  - test_paragraph
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#voice-guide
+  source_hash: fbbf97a06126eff9f7ebb96fae46e33db167b0ac37afe588b5d555b6834f5bd3
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: writing_comms
+  subcategory: writing_polish
+  collections: []
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

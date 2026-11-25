@@ -1,0 +1,44 @@
+id: pt_offer_compare
+title: 多 Offer 对比决策
+tagline: 把现金、职责、成长、地点与风险并排对照，帮你拍板。
+routing:
+  primitive: converge
+  goals:
+  - evaluate
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - career
+  - offer_comparison
+  - job_search
+  - decision_making
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Mail
+  - Chrome
+  pain_point: 同时拿到多个 offer，现金收入、工作内容、成长空间和风险散在各处难以对照，不知道该选哪个。
+  trigger_utterances:
+  - 这两个 offer 怎么选好纠结
+  - A 公司和 B 公司哪个更值得去
+  - offer 对比表帮我理一下
+  - 现金和成长哪个更重要帮我权衡
+  - deadline 快到了还没决定去哪家
+  anti_triggers:
+  - 只是想润色一封拒 offer 邮件
+  - 还没拿到任何 offer 只是刷题准备面试
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 比较【明确写出的机会条件】，我的优先级是【个人偏好与限制】。按职责、成长、工作地点、固定与不确定待遇、决策时限做表，注明假设和出处。把需招聘方书面确认的问题列为下一步。
+  variables: []
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#offer-compare
+  source_hash: ac2a8ac64d49c2dd2f9adf7733e47fde8d176f1ddba02f80246a816f8772171b
+  status: active
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

@@ -1,0 +1,66 @@
+id: disc_cognition_unsigned_implicit_contracts
+title: 揪出隐性合约
+tagline: 找出你默认遵守却不必遵守的规矩
+routing:
+  primitive: metacognize
+  goals:
+  - optimize
+  - debug
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - cognition
+  - assumptions
+  - autonomy
+  - implicit_contracts
+  - first_principles
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Claude
+  pain_point: 明明在推进项目却总觉得被各种'必须这样做'的规矩绑住，说不清哪里不对，想挑明哪些其实是不必遵守的默认设定。
+  trigger_utterances:
+  - 这个项目我总觉得哪里不对劲但说不清
+  - 是不是我默认接受了很多不该接受的规矩
+  - 帮我找出我一直在遵守却没意义的约定
+  - 为什么我做工具总想着要通用
+  - 拆一下这个规矩是真约束还是习惯
+  anti_triggers:
+  - 用户只是想快速摘要一篇文章
+  - 用户在调试具体的代码报错
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '## 揪出隐性合约
+
+
+    请按以下步骤自检：
+
+
+    1. 列出你当前推进的 [项目/工作流/生活安排] 现状：[简述现状]
+
+    2. 找出 4 条你默认''签了字''但其实不必遵守的隐性合约
+
+    3. 标出其中最值得立刻打破的一条，并给出打破后的替代做法
+
+    4. 对任一让你感到被绑住的规矩追问：这是真实硬约束，还是习惯成自然的隐性预设？
+
+
+    常见隐性合约示例：做工具必须通用；产出必须公开发布；遇到问题先找现成方案。'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/cognition.json#cognition-unsigned-implicit-contracts
+  source_hash: 718c4d72c0a6c299461d8823e3efecfb42f7b41a321972e2c8af678b171fe904
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: general
+  subcategory: problem_solving
+  collections: []
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

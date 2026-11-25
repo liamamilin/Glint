@@ -1,0 +1,52 @@
+id: pt_company_interview_research
+title: 面试前公司调研
+tagline: 基于公告产品岗位说明提炼事实、问题与假设
+routing:
+  primitive: deconstruct
+  goals:
+  - digest
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - career
+  - company_research
+  - interview_prep
+  - product_strategy
+  app_affinity:
+  - Chrome
+  - Notion
+  - Obsidian
+  pain_point: 面试前对目标公司、产品、市场与岗位真实问题了解不足，不知道该查什么、该问什么、该验证什么。
+  trigger_utterances:
+  - 帮我调研一下这家公司和岗位
+  - 面试前想了解公司产品和市场
+  - 这个岗位到底解决什么问题
+  - 给我基于证据的面试问题
+  - 准备面试时如何查公司资料
+  anti_triggers:
+  - 通用简历润色或求职信生成
+  - 与面试无关的日常聊天或闲聊
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 为 {{target_company_role}} 做面试前调研，重点关注 {{focus_questions}}。从公司公告、产品资料、岗位说明中提取事实，按时间列出来源。输出：1) 关键事实与时间线；2) 三个基于证据的面试问题；3)
+    两项只能在面试中确认的假设。区分事实与推断，避免臆测。
+  variables:
+  - target_company_role
+  - focus_questions
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#company-interview-research
+  source_hash: 7ff999e2be2686c6fb995fea13b2925d0e631248ab43e08d7f425da2621c9b74
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: product_business
+  subcategory: product_design
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

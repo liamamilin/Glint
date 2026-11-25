@@ -1,0 +1,33 @@
+{
+  "id": "disc_life_frictionless_capture_and_review",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/life.json#life-frictionless-capture-and-review",
+  "title": "“极简随手记 + 每周 15 分钟复盘”，赢过复杂的完美系统",
+  "content": "旧共识（盲区）：要管理好自己，必须先搭一套精巧复杂的多维看板、标签体系和每日长篇复盘。\n\n新现实（破盲视角）：系统越复杂，坚持成本越高，越容易在忙乱时断掉；只留一个随时能记的入口 + 每周 15 分钟扫一眼，反而能长期跑下去。\n\n破冰追问母题：\n- 我以前搭过复杂系统但总坚持不下来。请帮我设计一套“不超过 3 个动作、每周只需 15 分钟”的极简个人捕捉与复盘流程。\n- 帮我写一份每周五或周日 15 分钟就能走完的“轻复盘 4 问”，只看真正重要的进展、卡点和下周 1～2 件要事。",
+  "content_hash": "4bf31393e2f925caee842c779e288fa9d4f9f97fec5d22d2d175eff6507a0fc7",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "life",
+    "cost-collapse",
+    "first-principles",
+    "capture",
+    "weekly-review",
+    "simplicity",
+    "memory"
+  ],
+  "problem_solved": "要管理好自己，必须先搭一套精巧复杂的多维看板、标签体系和每日长篇复盘。",
+  "when_to_use": "系统越复杂，坚持成本越高，越容易在忙乱时断掉；只留一个随时能记的入口 + 每周 15 分钟扫一眼，反而能长期跑下去。",
+  "procedural_steps": [
+    "我以前搭过复杂系统但总坚持不下来。请帮我设计一套“不超过 3 个动作、每周只需 15 分钟”的极简个人捕捉与复盘流程。",
+    "帮我写一份每周五或周日 15 分钟就能走完的“轻复盘 4 问”，只看真正重要的进展、卡点和下周 1～2 件要事。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "life-frictionless-capture-and-review",
+    "arena": "life",
+    "lenses": [
+      "cost-collapse",
+      "first-principles"
+    ]
+  }
+}

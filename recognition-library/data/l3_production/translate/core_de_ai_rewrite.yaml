@@ -1,0 +1,52 @@
+id: core_de_ai_rewrite
+title: 去 AI 味极简重写
+tagline: 把套话-heavy 的文字压成自然、像真人日常沟通的版本
+routing:
+  primitive: translate
+  goals:
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - polish
+  - copywriting
+  - email
+  - communication
+  app_affinity:
+  - Mail
+  - Slack
+  - Feishu
+  - WeChat
+  pain_point: 消息或邮件写得像 AI 生成，套话多、语气不自然，需要压成真人日常沟通的版本
+  trigger_utterances:
+  - 这段话 AI 味太重帮我改自然点
+  - 邮件写得太官方了帮我润色
+  - 帮我把这段消息去 AI 味
+  - 这条消息太啰嗦了帮我缩写
+  - rewrite this email to sound human
+  anti_triggers:
+  - 需要扩写成正式长报告
+  - 需要保留原文所有修辞与套话
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: '请将以下内容重写得更自然、精炼、像真人在日常沟通，去掉所有套话和过度修饰，保留核心事实：
+
+
+    {{input}}'
+  variables: []
+  workflow: null
+meta:
+  source: glint-core
+  source_ref: cards.yaml#de_ai_rewrite
+  source_hash: 01a638e698410980a2c18a0abae8ceb9e248bbf4ba604ee8ad7b6b283560fcb6
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  category: writing_comms
+  subcategory: workplace_comms
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

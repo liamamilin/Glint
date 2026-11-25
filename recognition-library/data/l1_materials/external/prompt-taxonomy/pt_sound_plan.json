@@ -1,0 +1,28 @@
+{
+  "id": "pt_sound_plan",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#sound-plan",
+  "title": "为短片编出声音清单",
+  "content": "根据【分镜或粗剪说明】为【播放场景】设计声音表。逐场标注对白、环境、关键音效和音乐进入点，说明声音如何帮助理解。列录制、授权素材或仍需确认的来源。",
+  "content_hash": "eff71efcec0e91040603657f62d2d6e060b007e6ba5995c515d5432d94f13057",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "creative",
+    "声音设计",
+    "音效",
+    "配乐",
+    "sound design"
+  ],
+  "problem_solved": "把对白、环境、效果和音乐的任务说清。",
+  "when_to_use": "分类: 创作与多媒体",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "sound-plan",
+    "category": "creative",
+    "variables": [
+      "分镜或粗剪说明",
+      "播放场景"
+    ]
+  }
+}

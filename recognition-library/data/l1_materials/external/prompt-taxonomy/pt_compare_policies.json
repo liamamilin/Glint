@@ -1,0 +1,27 @@
+{
+  "id": "pt_compare_policies",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#compare-policies",
+  "title": "对照不同机构的规则",
+  "content": "对照【机构与官方规则】判断它们如何处理【问题】。表格列原文位置、适用对象、生效时间、主要要求、例外和未明确部分。规则版本可能变化时注明核对日期，对需要专业解释的部分保留原文。",
+  "content_hash": "4b3d8efc5186a1ba0910c6224982c8ef23a594287e4831da2ba8fc57b43da6b3",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "research",
+    "政策对比",
+    "条件",
+    "policy comparison"
+  ],
+  "problem_solved": "把定义、适用范围和有效期放在同一张表。",
+  "when_to_use": "分类: 查找与研究",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "compare-policies",
+    "category": "research",
+    "variables": [
+      "机构与官方规则",
+      "问题"
+    ]
+  }
+}

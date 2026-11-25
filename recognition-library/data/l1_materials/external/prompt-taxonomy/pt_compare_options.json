@@ -1,0 +1,29 @@
+{
+  "id": "pt_compare_options",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#compare-options",
+  "title": "对比选项并给建议",
+  "content": "我需要在【候选方案】中选择，使用情境是【场景】，最在乎【标准和优先级】。做一张同口径比较表，注明价格或版本的核对日期与来源。给出首选、适合选次选的条件和一个我今天能做的验证动作；资料缺失处留空并标明。",
+  "content_hash": "933444839582cdfbb5cb621859cfc260c3d36a58a6597e27395152c1811b709b",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "research",
+    "选型",
+    "购买",
+    "比较",
+    "compare"
+  ],
+  "problem_solved": "让推荐与实际约束、证据和取舍对应。",
+  "when_to_use": "分类: 查找与研究",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "compare-options",
+    "category": "research",
+    "variables": [
+      "候选方案",
+      "场景",
+      "标准和优先级"
+    ]
+  }
+}

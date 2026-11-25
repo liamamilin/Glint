@@ -1,0 +1,43 @@
+id: sit_edt_01
+title: 个人语调校准器
+tagline: 洗掉 AI 味，生成个人写作风格宪法
+routing:
+  primitive: translate
+  goals:
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - content_writing
+  - copywriting
+  - editorial
+  app_affinity:
+  - ChatGPT
+  - Claude
+  - Notion
+  - Obsidian
+  pain_point: AI 辅助写文章或产品文案时，读起来满屏“不仅如此、值得注意的是、赋能”等翻译腔和空洞形容词，完全不像人话
+  trigger_utterances:
+  - 这段 AI 写的文案太像机器了，帮我洗掉 AI 味
+  - 帮我把这篇稿子改成我的个人语气
+  - 读起来满屏‘不仅如此、值得注意的是’，完全不像人话
+  - 帮我建立一份个人写作风格宪法
+  - 校准一下这篇文案的语气，别再用翻译腔
+  anti_triggers:
+  - 只是观点还没想清楚，想用风格指南掩盖内容空洞
+  - 需要生成全新选题或事实核查，而不是语气校准
+execution:
+  action_type: open_resource
+  inject_mode: null
+  content: 个人语调校准器：喂入 3 篇满意的亲笔旧作，逆向提炼句式长短、用词偏好与情绪克制度；建立《禁用词黑名单》，拉黑翻译腔、播音腔和空洞形容词；每次成稿后校准，强制删掉铺垫废话，保留具象细节与个人判断。交付物：一份可常驻上下文的《个人写作风格宪法（Tone
+    Guide）》。误用警告：不要用风格指南掩盖观点不清的硬伤。
+  variables: []
+  workflow: null
+meta:
+  source: super-individual-toolbox
+  source_ref: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/editorial.json#edt-01
+  source_hash: a63a5ffdf84e9950ac97884b0602762931f453acc0c0ac0d41727d6b7591f775
+  status: active
+  base_weight: 1.0
+  confidence: 0.86
+  version: 1

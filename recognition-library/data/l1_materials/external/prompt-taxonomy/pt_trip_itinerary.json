@@ -1,0 +1,28 @@
+{
+  "id": "pt_trip_itinerary",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#trip-itinerary",
+  "title": "做一份可调整的行程",
+  "content": "为【目的地和日期】安排行程，偏好和约束为【出发地、预算、兴趣、同行人】。按地理位置安排每天的活动，留转场时间，给一个天气备选。需要预约、价格或开放时间的地方附官方核对入口。",
+  "content_hash": "8ac325e46400c4c8854866dbc94137ee5386c1488b4fb76293c2a4286825315a",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "planning",
+    "旅行",
+    "旅游",
+    "路线",
+    "travel"
+  ],
+  "problem_solved": "考虑同区安排、转场和备选。",
+  "when_to_use": "分类: 计划与生活",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "trip-itinerary",
+    "category": "planning",
+    "variables": [
+      "目的地和日期",
+      "出发地、预算、兴趣、同行人"
+    ]
+  }
+}

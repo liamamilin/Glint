@@ -1,0 +1,71 @@
+id: disc_life_frictionless_capture_and_review
+title: 极简随手记+周复盘
+tagline: 用一个入口记录，每周15分钟轻复盘。
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - life
+  - productivity
+  - simplicity
+  - weekly_review
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Linear
+  pain_point: 用户总想搭复杂个人管理系统，结果维护成本高、容易中断，反而无法长期坚持。
+  trigger_utterances:
+  - 我搭的 GTD/Notion 系统太复杂，根本坚持不下来
+  - 帮我设计一个每周15分钟就能复盘的极简流程
+  - 我想只用一个入口随手记，别搞多维看板
+  - 每周五花15分钟复盘一下进展和卡点
+  anti_triggers:
+  - 用户需要搭建完整项目管理或团队协作流程
+  - 用户要求每日长篇复盘或复杂标签体系
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '极简随手记 + 每周15分钟轻复盘
+
+
+    每日/随时（不超过3个动作）
+
+    - [ ] 只保留一个捕捉入口，所有想法先丢进去，不分类。
+
+    - [ ] 每条记录只写一句话：发生了什么 / 下一步是什么。
+
+    - [ ] 每周固定15分钟，扫一遍入口并清空。
+
+
+    每周轻复盘4问（15分钟）
+
+    - [ ] 1. 本周真正推进了什么？
+
+    - [ ] 2. 卡住我的最大障碍是什么？
+
+    - [ ] 3. 哪些事情其实不必做/可以延后？
+
+    - [ ] 4. 下周只选1~2件最重要要事。
+
+
+    清空规则
+
+    - [ ] 已完成：标记完成或删除。
+
+    - [ ] 可延后：移到下周。
+
+    - [ ] 无行动：直接删除，不保留无用记录。'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/life.json#life-frictionless-capture-and-review
+  source_hash: 4bf31393e2f925caee842c779e288fa9d4f9f97fec5d22d2d175eff6507a0fc7
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

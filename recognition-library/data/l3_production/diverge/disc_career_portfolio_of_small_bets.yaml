@@ -1,0 +1,60 @@
+id: disc_career_portfolio_of_small_bets
+title: 低成本小实验攒职业期权
+tagline: 用业余时间跑低成本小项目，悄悄攒备选路径与作品。
+routing:
+  primitive: diverge
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - career
+  - optionality
+  - side_projects
+  - career_resilience
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Linear
+  pain_point: 只押一条职业主线，环境一变就脆弱；想跑低成本小实验又怕被看作不务正业、分散注意力。
+  trigger_utterances:
+  - 我只能死守一条职业主线，想做点小实验又怕分散注意力
+  - 环境变化太快，单点押注让我很没安全感
+  - 每周只有几小时，想跑低成本小项目攒作品和备选路径
+  - 副业实验该继续加码还是止损关掉
+  - 如何设计低成本小实验反哺主业
+  anti_triggers:
+  - 需要立即决定是否跳槽或接受 offer 的场景
+  - 纯时间管理或番茄钟技巧咨询
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '1. 盘点主业与可投入时间：每周最多 X 小时，列出主业可迁移的技能/资产与不可动的核心交付。
+
+    2. 设计 2 个低成本微型实验：每个必须同时满足「反哺主业」与「积累长期资产（作品/网络/数据）」，时间预算不超过总可用时间的 30%。
+
+    3. 为每个实验设定 30-60 天验证周期与明确退出标准（如：无用户/无收入/无技能提升/持续超时）。
+
+    4. 每周固定时间盒推进并记录可复用产出，禁止挤占主业核心交付。
+
+    5. 到期按退出标准决定：加码 / 维持 / 止损归档；止损不等于失败，沉淀经验。
+
+    6. 每季度回顾实验组合，淘汰低效实验，保留高期权实验。'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/career.json#career-portfolio-of-small-bets
+  source_hash: 949db0aa1c96fe2c354e7951a071354bf9912542eed0e20d6741ff8522b838e4
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: personal_career
+  subcategory: career
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

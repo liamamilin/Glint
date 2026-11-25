@@ -1,0 +1,29 @@
+{
+  "id": "sit_cos_04",
+  "source": "super-individual-toolbox",
+  "source_ref": "https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/chief-of-staff.json#cos-04",
+  "title": "单向门决策矩阵",
+  "content": "定位：小事秒拍板，大事慢三拍\n\n触发场景：当你在技术选型、定价、合作或域名等决定上反复纠结，白白耗掉好几天时。\n\n核心机制：\n- 判定该决定属于“双向门”（错了 48 小时内可低成本撤回）还是“单向门”（不可逆）\n- 双向门直接设 15 分钟倒计时拍板，禁止继续调研\n- 单向门则列出“最坏结果 + 止损底线 + 必须满足的 3 个前提条件”后再做决定\n\n交付物：一份带止损线与复盘日期的《决策备忘录》\n\n推荐装配：极简决策判定 Prompt + 本地决策日志（Markdown）\n\n误用警告：不要把本可以随时改掉的小事（如按钮颜色、初期文案）当成单向门来开会研究。",
+  "content_hash": "7f2236340086d28c0dbd1eac55806b1dab1985ec7768f5ea2b7051561ee5525c",
+  "suggested_action_type": "open_resource",
+  "domain_hints": [
+    "chief-of-staff",
+    "参谋与战略官"
+  ],
+  "problem_solved": "当你在技术选型、定价、合作或域名等决定上反复纠结，白白耗掉好几天时。",
+  "when_to_use": "当你在技术选型、定价、合作或域名等决定上反复纠结，白白耗掉好几天时。",
+  "procedural_steps": [
+    "判定该决定属于“双向门”（错了 48 小时内可低成本撤回）还是“单向门”（不可逆）",
+    "双向门直接设 15 分钟倒计时拍板，禁止继续调研",
+    "单向门则列出“最坏结果 + 止损底线 + 必须满足的 3 个前提条件”后再做决定"
+  ],
+  "anti_patterns": [
+    "不要把本可以随时改掉的小事（如按钮颜色、初期文案）当成单向门来开会研究。"
+  ],
+  "metadata": {
+    "original_id": "cos-04",
+    "drawer": "chief-of-staff",
+    "drawer_zh": "参谋与战略官",
+    "deliverable": "一份带止损线与复盘日期的《决策备忘录》"
+  }
+}

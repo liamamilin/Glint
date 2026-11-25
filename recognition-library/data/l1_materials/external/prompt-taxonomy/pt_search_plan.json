@@ -1,0 +1,28 @@
+{
+  "id": "pt_search_plan",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#search-plan",
+  "title": "制定检索方案",
+  "content": "我在找【主题】的资料，用途是【输出或决策】。给 5 条可直接复制的搜索式，覆盖不同术语；列出优先查的数据库或网站、筛选条件和应排除的结果。指出一种容易遗漏的来源类型及它能补哪项证据。",
+  "content_hash": "9e74b9d964868e51a581c1ed17d05a2580cbb1a988dc215b655e3a5661afd1da",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "research",
+    "关键词",
+    "资料",
+    "文献检索",
+    "search"
+  ],
+  "problem_solved": "把难搜的问题转成能执行的搜索。",
+  "when_to_use": "分类: 查找与研究",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "search-plan",
+    "category": "research",
+    "variables": [
+      "主题",
+      "输出或决策"
+    ]
+  }
+}

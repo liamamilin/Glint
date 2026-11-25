@@ -1,0 +1,51 @@
+id: pt_support_status
+title: 起草服务中断状态更新
+tagline: 把已核实中断信息转成面向用户的清晰状态通报
+routing:
+  primitive: translate
+  goals:
+  - create
+  clarity_fit:
+  - concrete
+  domains:
+  - support
+  - incident_management
+  - customer_communication
+  - status_update
+  app_affinity:
+  - Slack
+  - Feishu
+  - Mail
+  - Notion
+  pain_point: 服务出故障时需要快速向用户群发通报，但不知道怎么组织影响范围、进度和下次更新时间，又不能瞎猜根因或恢复时间
+  trigger_utterances:
+  - 服务挂了要发状态更新
+  - outage 通知怎么写
+  - 给用户发一条中断通报
+  - status update draft
+  - 事故通知模板
+  anti_triggers:
+  - 用户只是问服务是否恢复，不需要起草通报
+  - 需要做事故根因分析而非对外沟通
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 根据【已核实的中断情况】向【用户群】起草一条服务中断状态更新。结构：1) 影响范围（哪些服务/用户受影响）；2) 开始时间；3) 用户当前可以做什么（workaround/建议）；4) 目前处理进度；5) 下次更新时间。对根因或恢复时间缺少证据时，明确标注「待确认」，不得编造。语气简洁、透明、避免过度承诺。
+  variables:
+  - 已核实的中断情况
+  - 用户群
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#support-status
+  source_hash: 95738827ba4002a8449d48d71ed89da263eb03bbbbde18a9f8fdb6f27771e7c6
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: writing_comms
+  subcategory: workplace_comms
+  collections: []
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

@@ -1,0 +1,47 @@
+id: pt_language_roleplay
+title: 角色扮演练对话
+tagline: 用目标语言模拟真实场景对话，边练边纠错。
+routing:
+  primitive: translate
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - language_learning
+  - spoken_practice
+  - roleplay
+  - foreign_language
+  app_affinity:
+  - ChatGPT
+  - Claude
+  - Notion
+  pain_point: 想练外语口语和听力，但缺乏真实对话环境，不知道如何开口和持续练习。
+  trigger_utterances:
+  - 帮我练一下日语对话
+  - 我想练习英语口语
+  - 模拟一个咖啡店点单场景
+  - 用法语陪我对话练习
+  - 我英语水平一般帮我练练
+  anti_triggers:
+  - 帮我翻译一篇文档
+  - 写一封正式的商务邮件
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 请用【目标语言】和我模拟【具体场景】。我的水平是【语言水平】。从一句自然开场开始，每轮等我回答再继续。每三轮用简短反馈归纳一个关键语言问题，给一个更自然的说法让我重试。
+  variables:
+  - 目标语言
+  - 具体场景
+  - 语言水平
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#language-roleplay
+  source_hash: 2aa609564f87b0afd005c5df3aeb4043278af359de33ad7dc8fc63937e97efa2
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

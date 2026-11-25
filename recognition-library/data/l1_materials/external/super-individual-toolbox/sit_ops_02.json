@@ -1,0 +1,29 @@
+{
+  "id": "sit_ops_02",
+  "source": "super-individual-toolbox",
+  "source_ref": "https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/ops-automation.json#ops-02",
+  "title": "私有知识库自动归档流",
+  "content": "定位：碎片灵感随手一扔，自动打标归位不吃灰\n\n触发场景：当你每天随手收藏了大量网页、对话金句和突发灵感，但过一周就再也找不到它们在哪时。\n\n核心机制：\n- 设立唯一的碎片收集入口（如本地 Inbox 文件、快捷指令或私有仓库 Issue）\n- 定期触发脚本调用模型，自动提取标题、3 个受控标签与 1 句话核心价值\n- 按统一命名规范归档为纯文本 Markdown，确保未来十年不依赖任何闭源笔记软件\n\n交付物：一套结构统一、可全文秒搜的本地 Markdown 知识库\n\n推荐装配：本地脚本 / Obsidian + AI 自动打标归档流\n\n误用警告：不要收藏“以后可能会看”的万字长文原文；只归档经过你大脑筛选的核心片段或自己的评注。",
+  "content_hash": "b73d7e24666e23640c01743c3b3fdbd55d0d8b406966be4e35437718aaf538a1",
+  "suggested_action_type": "open_resource",
+  "domain_hints": [
+    "ops-automation",
+    "运营与自动化官"
+  ],
+  "problem_solved": "当你每天随手收藏了大量网页、对话金句和突发灵感，但过一周就再也找不到它们在哪时。",
+  "when_to_use": "当你每天随手收藏了大量网页、对话金句和突发灵感，但过一周就再也找不到它们在哪时。",
+  "procedural_steps": [
+    "设立唯一的碎片收集入口（如本地 Inbox 文件、快捷指令或私有仓库 Issue）",
+    "定期触发脚本调用模型，自动提取标题、3 个受控标签与 1 句话核心价值",
+    "按统一命名规范归档为纯文本 Markdown，确保未来十年不依赖任何闭源笔记软件"
+  ],
+  "anti_patterns": [
+    "不要收藏“以后可能会看”的万字长文原文；只归档经过你大脑筛选的核心片段或自己的评注。"
+  ],
+  "metadata": {
+    "original_id": "ops-02",
+    "drawer": "ops-automation",
+    "drawer_zh": "运营与自动化官",
+    "deliverable": "一套结构统一、可全文秒搜的本地 Markdown 知识库"
+  }
+}

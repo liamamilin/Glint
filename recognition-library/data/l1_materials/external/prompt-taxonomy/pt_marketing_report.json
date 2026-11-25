@@ -1,0 +1,27 @@
+{
+  "id": "pt_marketing_report",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#marketing-report",
+  "title": "对照活动目标写效果报告",
+  "content": "以【活动目标和数据】写【受众】可读的效果报告。按渠道给覆盖、转化、成本与口径。区分数据能说明的变化和无法验证的归因，给下一轮应继续、停掉和补测的各一项。",
+  "content_hash": "b3454e1042af10621ee726f967d421f81bfc761609d71882649094f3fdb83bd7",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "marketing",
+    "营销复盘",
+    "投放报告",
+    "marketing report"
+  ],
+  "problem_solved": "汇报结果、归因限制和下一轮行动。",
+  "when_to_use": "分类: 营销与销售",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "marketing-report",
+    "category": "marketing",
+    "variables": [
+      "活动目标和数据",
+      "受众"
+    ]
+  }
+}

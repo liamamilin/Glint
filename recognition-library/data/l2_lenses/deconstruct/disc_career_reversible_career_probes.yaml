@@ -1,0 +1,78 @@
+id: disc_career_reversible_career_probes
+title: 可撤回的职业试探
+tagline: 把大跳水拆成几周能拿到体感的小试探，先试水再押注。
+routing:
+  primitive: deconstruct
+  goals:
+  - evaluate
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - career
+  - experiments
+  - optionality
+  - role_inversion
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Slack
+  - Chrome
+  pain_point: 想换方向却只能在辞职梭哈和继续原样之间二选一，没有低成本先试水的余地。
+  trigger_utterances:
+  - 想转行但不敢辞职
+  - 这个新方向真的适合我吗
+  - 想先试试看新赛道
+  - 职业转型太冒险了
+  - 能不能低成本试探一下
+  anti_triggers:
+  - 已经决定辞职全职转行
+  - 只是想优化简历
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '## 可撤回的职业试探清单
+
+
+    ### 1. 明确试探对象
+
+    - [ ] 写下想探索的新方向/角色/赛道：______
+
+    - [ ] 简述自己的背景与好奇点：______
+
+    - [ ] 设定试探周期（建议 2-4 周）与成功/失败判定标准
+
+
+    ### 2. 设计 2 个低成本试探动作（不用辞职）
+
+    - [ ] 动作 A：做个微型案例/作品（如写一篇分析、做一个小原型、复盘一个真实问题）
+
+    - [ ] 动作 B：聊 3-5 位一线从业者，问他们日常最耗时/最讨厌的事
+
+    - [ ] 动作 C（可选）：接一个低风险小任务/兼职/影子观察
+
+
+    ### 3. 祛魅滤镜
+
+    - [ ] 列出该方向最容易产生“滤镜/想象”的地方（如收入、自由、成就感）
+
+    - [ ] 用一次小试探去验证：实际体验 vs 想象差距
+
+    - [ ] 记录真实体感：精力、挫败感、是否想继续
+
+
+    ### 4. 决策拍板
+
+    - [ ] 试水后：继续押注 / 调整方向 / 放弃并保留原路径
+
+    - [ ] 把结论与下一步写成 1 页总结，避免反复摇摆'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/career.json#career-reversible-career-probes
+  source_hash: 0f235c0086400f105fb1b6a727adb69aec4fe4a38c7d7e036d2e0db8b45ba95c
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

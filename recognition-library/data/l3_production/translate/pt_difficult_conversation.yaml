@@ -1,0 +1,54 @@
+id: pt_difficult_conversation
+title: 难开口对话演练
+tagline: 把难说的话组织成开场白并模拟对方异议
+routing:
+  primitive: translate
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - communication
+  - conflict_resolution
+  - negotiation
+  app_affinity:
+  - Slack
+  - Feishu
+  - WeChat
+  - Mail
+  pain_point: 用户要跟某人谈一个敏感或冲突话题，但不知如何开口，担心升级或被误解
+  trigger_utterances:
+  - 怎么跟老板提涨薪
+  - 要跟同事谈他总迟到
+  - 和伴侣谈边界问题
+  - 怎么跟客户说方案要改
+  - 和室友谈噪音
+  anti_triggers:
+  - 日常闲聊或寒暄
+  - 写代码或修 bug
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 帮我准备跟【对方及关系】讨论【问题】。按我感受到的影响、对方可能关心的点和希望达成的请求组织开场。扮演对方提出一个具体异议，等我回应后给可执行的反馈。
+  variables:
+  - 对方及关系
+  - 问题
+  workflow:
+    workflow_id: difficult-talk
+    step: 1
+    next_lens_id: pt_negotiation_prep
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#difficult-conversation
+  source_hash: 8126cc4a733bf1093f9f11ba43a847766da574b927bdd84ff36a60f73e249364
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: writing_comms
+  subcategory: workplace_comms
+  collections: []
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

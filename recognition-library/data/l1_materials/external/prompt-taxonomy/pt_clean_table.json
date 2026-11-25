@@ -1,0 +1,28 @@
+{
+  "id": "pt_clean_table",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#clean-table",
+  "title": "制定表格清洗规则",
+  "content": "检查【列结构与代表样本】，为【后续用途】制定清洗规则。逐项写明缺失值、重复记录、日期与单位的处理，区分可自动修复和需要人工确认的情况。用小表展示输入、期望输出和校验信号。",
+  "content_hash": "e44b7d1521d2a72feb6978770989d3f730846839dde922678bedde3346b80079",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "data",
+    "去重",
+    "清洗",
+    "脏数据",
+    "cleaning"
+  ],
+  "problem_solved": "让清洗过程可检查、可复跑。",
+  "when_to_use": "分类: 数据与表格",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "clean-table",
+    "category": "data",
+    "variables": [
+      "列结构与代表样本",
+      "后续用途"
+    ]
+  }
+}

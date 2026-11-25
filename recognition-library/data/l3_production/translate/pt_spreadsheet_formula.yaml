@@ -1,0 +1,56 @@
+id: pt_spreadsheet_formula
+title: 写一条表格公式
+tagline: 按真实列名、边界和工具版本写出可落地的公式并验算。
+routing:
+  primitive: translate
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - data
+  - excel
+  - sheets
+  - formulas
+  - spreadsheet
+  app_affinity:
+  - Excel
+  - Google Sheets
+  - Notion
+  pain_point: 用户在 Excel/Google Sheets 里知道想要什么结果，但写不出正确公式，或公式在空值、重复、未匹配时出错，也不确定该放在哪个单元格。
+  trigger_utterances:
+  - 帮我写个 VLOOKUP 公式按真实列名
+  - Excel 这列怎么算出预期结果
+  - Google Sheets 公式空值和重复项怎么处理
+  - 把这需求转成公式放在哪个单元格
+  - spreadsheet formula with edge cases
+  anti_triggers:
+  - 用户只是想做数据可视化图表或透视表
+  - 用户要求直接生成整张表格而非单条公式
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 我用【Excel 或 Google Sheets】处理【列名和样例】。请写公式实现【预期结果】并说明放在哪个单元格。指出空值、重复项、未匹配项如何处理，再给两个手工可验算的小例子。
+  variables:
+  - '{''name'': ''Excel 或 Google Sheets'', ''description'': ''使用的表格工具及版本''}'
+  - '{''name'': ''列名和样例'', ''description'': ''真实列名与样例数据''}'
+  - '{''name'': ''预期结果'', ''description'': ''希望公式计算出的结果''}'
+  - Excel 或 Google Sheets
+  - 列名和样例
+  - 预期结果
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#spreadsheet-formula
+  source_hash: 6c242f0bd38d23c2008fa3538128bf2c220074459dcfd96e33fb0aa26e5f8b62
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: writing_comms
+  subcategory: writing_polish
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

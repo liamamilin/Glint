@@ -1,0 +1,56 @@
+id: pt_source_disagreement
+title: 解释来源不一致
+tagline: 对照两来源，定位定义/样本/时期/口径差异与真实矛盾
+routing:
+  primitive: deconstruct
+  goals:
+  - evaluate
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - research
+  - data_sources
+  - methodology
+  - statistics
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  - ChatGPT
+  pain_point: 两个来源对同一问题给出不同结论，用户分不清是统计口径/定义/样本/时期差异还是真正的矛盾
+  trigger_utterances:
+  - 这两个报告数据不一样哪个对
+  - 来源A和来源B结论矛盾
+  - 为什么两个网站数字不一样
+  - 帮我核对这两个来源的差异
+  - 这两个数据口径不一样吗
+  anti_triggers:
+  - 只是想总结单个来源的内容
+  - 需要生成新数据而非对比现有来源
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 对照【来源 A】和【来源 B】关于【问题】的结论。先找两者实际在回答的对象、时间、定义、样本和统计量，再区分可由口径解释的差异和真实矛盾。给可复查位置，以及能区分两种解释的证据。
+  variables:
+  - 来源 A
+  - 来源 B
+  - 问题
+  workflow:
+    workflow_id: source-to-brief
+    step: 4
+    next_lens_id: pt_research_brief_for_others
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#source-disagreement
+  source_hash: 052c44760fbb36452bacce7bbf613aa4da4a05b50b86aeec0864248bcb3b1775
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: general
+  subcategory: research
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

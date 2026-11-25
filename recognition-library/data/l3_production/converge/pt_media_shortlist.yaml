@@ -1,0 +1,53 @@
+id: pt_media_shortlist
+title: 按口味选下一本书或电影
+tagline: 基于你已有喜好，给 4 个可核实的无剧透推荐并说明匹配点
+routing:
+  primitive: converge
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - media_recommendation
+  - reading
+  - film
+  - taste_matching
+  app_affinity:
+  - ChatGPT
+  - Claude
+  - Notion
+  - Obsidian
+  pain_point: 用户想挑下一本书或电影，但不知道从何下手，容易被剧透或踩雷，希望基于个人口味得到少量可核实、无剧透的精准推荐
+  trigger_utterances:
+  - 喜欢《xxx》因为xxx，现在想找一本短篇科幻
+  - 我平时看推理，最近想看点轻的，避开暴力
+  - 帮我挑部电影看，别剧透，最好现在就能看
+  - 书荒了，按我的口味给几个推荐
+  - which book should I read next based on my taste
+  anti_triggers:
+  - 用户只是想搜某部作品的剧情简介或结局
+  - 用户要求生成原创小说或剧本
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 我喜欢【作品和喜欢的原因】，现在想要【时长、题材或情绪】，希望避开【主题或限制】。给四个可核实的推荐，每个说明匹配点和可能不合适之处。保持无剧透，当前可观看或借阅的渠道若无法核实就留空。
+  variables:
+  - 作品和喜欢的原因
+  - 时长、题材或情绪
+  - 主题或限制
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#media-shortlist
+  source_hash: c1175dc7e83ad55082d6392d23f405c42ae53008ae61f566fdbf7d71cd2f761b
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: general
+  subcategory: decision
+  collections: []
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

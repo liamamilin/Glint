@@ -1,0 +1,33 @@
+{
+  "id": "disc_life_personal_knowledge_decay_pruning",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/life.json#life-personal-knowledge-decay-pruning",
+  "title": "定期“修剪和归档”数字与物理杂物，而不是无休止囤积",
+  "content": "旧共识（盲区）：收藏夹、笔记、网盘和房间里的东西留着总有一天用得上，删掉或丢掉就是浪费。\n\n新现实（破盲视角）：囤积本身是有维护成本和心理噪音的；定期做“极简归档与清理”，让眼前只留下真正活跃、能产生动作的东西，清爽感会立竿见影。\n\n破冰追问母题：\n- 我的 [收藏夹/笔记库/桌面/衣柜] 已经堆积了不少东西但很少回头看。帮我设计一套 20 分钟就能完成的“保留 / 归档 / 清理”三分法规则，帮我快速瘦身。\n- 针对我总舍不得删掉的 [某类数字或实体物品]，帮我写 3 个犀利的问题，帮我判断它到底是“宝藏”还是“心理安慰剂”。",
+  "content_hash": "137e01e2ee243520dc24f632669c535a1e515f3125764fd8245e07e22fa385cb",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "life",
+    "first-principles",
+    "invisible-friction",
+    "declutter",
+    "notes",
+    "digital-hygiene",
+    "minimalism"
+  ],
+  "problem_solved": "收藏夹、笔记、网盘和房间里的东西留着总有一天用得上，删掉或丢掉就是浪费。",
+  "when_to_use": "囤积本身是有维护成本和心理噪音的；定期做“极简归档与清理”，让眼前只留下真正活跃、能产生动作的东西，清爽感会立竿见影。",
+  "procedural_steps": [
+    "我的 [收藏夹/笔记库/桌面/衣柜] 已经堆积了不少东西但很少回头看。帮我设计一套 20 分钟就能完成的“保留 / 归档 / 清理”三分法规则，帮我快速瘦身。",
+    "针对我总舍不得删掉的 [某类数字或实体物品]，帮我写 3 个犀利的问题，帮我判断它到底是“宝藏”还是“心理安慰剂”。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "life-personal-knowledge-decay-pruning",
+    "arena": "life",
+    "lenses": [
+      "first-principles",
+      "invisible-friction"
+    ]
+  }
+}

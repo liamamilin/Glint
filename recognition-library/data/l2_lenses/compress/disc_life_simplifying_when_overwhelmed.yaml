@@ -1,0 +1,54 @@
+id: disc_life_simplifying_when_overwhelmed
+title: 过载时先做减法
+tagline: 事情堆成山时，先挑 1-2 件必须做的，其余延后或砍掉。
+routing:
+  primitive: compress
+  goals:
+  - optimize
+  clarity_fit:
+  - vague
+  - conflicted
+  domains:
+  - life
+  - overwhelm
+  - priorities
+  - simplification
+  app_affinity:
+  - Notion
+  - Obsidian
+  pain_point: 事情一多就想把所有清单都排满一起扛，结果越做越乱、越累越想逃避。
+  trigger_utterances:
+  - 事情太多了根本动不了
+  - overwhelmed 一堆事要处理
+  - 今天事情太多了先帮我砍一下
+  - loads of tasks can't start
+  - 焦虑爆表先帮我理一下
+  anti_triggers:
+  - 不是项目管理甘特图排期
+  - 不是番茄钟时间管理技巧
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '过载减法清单：
+
+    1. 把脑中所有担心的事列出来（3-5 件即可）。
+
+    2. 标出今天真正必须推进的 1～2 件（不做会出问题的）。
+
+    3. 其余统一归入「延后 / 砍掉 / 暂放」三类，先不碰。
+
+    4. 只对那 1～2 件定一个最小下一步（≤15 分钟）。
+
+    5. 先完成最小下一步，再决定是否继续。
+
+    6. 若完全动不了，先做 2 分钟深呼吸/喝水，再回到步骤 4。'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/life.json#life-simplifying-when-overwhelmed
+  source_hash: f1045659949a19f8ed304ebe48f3b4779de364c3591c79914274b7c2dee9e869
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

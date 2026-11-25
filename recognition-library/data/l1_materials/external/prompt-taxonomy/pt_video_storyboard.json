@@ -1,0 +1,28 @@
+{
+  "id": "pt_video_storyboard",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#video-storyboard",
+  "title": "把故事分成短视频镜头",
+  "content": "把【故事梗概】改成【时长、比例和发布场景】的短视频分镜。逐镜给秒数、主体动作、场景、景别、镜头运动和声音；让角色和道具在镜头之间保持一致。标注最适合先试做的镜头及原因。",
+  "content_hash": "21d97f0babd5d791dc61d184cd4911c5b13eba86c6f2b11424fc165174bd2e15",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "creative",
+    "短视频",
+    "分镜",
+    "运镜",
+    "storyboard"
+  ],
+  "problem_solved": "为每个镜头安排动作、运镜与声音。",
+  "when_to_use": "分类: 创作与多媒体",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "video-storyboard",
+    "category": "creative",
+    "variables": [
+      "故事梗概",
+      "时长、比例和发布场景"
+    ]
+  }
+}

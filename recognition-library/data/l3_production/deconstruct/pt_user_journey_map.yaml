@@ -1,0 +1,52 @@
+id: pt_user_journey_map
+title: 从观察材料还原用户旅程
+tagline: 把零散观察还原成可定位断点的用户旅程图
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - product
+  - ux
+  - user_journey
+  - experience
+  app_affinity:
+  - Notion
+  - Figma
+  - Chrome
+  - Linear
+  pain_point: 手头有访谈、日志、截图等零散观察材料，却无法还原出真实用户旅程，找不到实际入口、交接点和高摩擦步骤
+  trigger_utterances:
+  - 这些用户访谈好散帮我理成旅程图
+  - 用户到底从哪进来的哪里卡住了
+  - 把观察材料还原成 user journey map
+  - 找出影响转化的断点和摩擦步骤
+  - journey map 里的交接点在哪
+  anti_triggers:
+  - 只是想写产品需求文档或PRD
+  - 想做纯视觉原型设计而非流程还原
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 请把【用户材料】整理成【目标任务】的用户旅程图。每一步列出：用户目标、具体行动、所用工具、遇到的困难、支撑证据、完成信号。突出对最终结果影响最大的断点，并给出可观察的修复指标（可量化、可追踪）。
+  variables:
+  - 用户材料
+  - 目标任务
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#user-journey-map
+  source_hash: 31f7ce42a28fce473d81582544aab8c0dd32db2762d841d0b7ec98ca3b549054
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: product_business
+  subcategory: product_design
+  collections: []
+  base_weight: 1.0
+  confidence: 0.86
+  version: 1

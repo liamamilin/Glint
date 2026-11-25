@@ -1,0 +1,42 @@
+id: pt_review_code
+title: 审查变更问题
+tagline: 按影响和证据定位可修的问题
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  - debug
+  clarity_fit:
+  - concrete
+  domains:
+  - coding
+  - code_review
+  - pull_request
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Terminal
+  pain_point: 改动后的代码可能存在行为错误、数据不一致、兼容性问题或测试缺口，但缺少按影响排序且有证据的可修改问题列表
+  trigger_utterances:
+  - 这个 PR 有没有 bug
+  - 帮我 review 这个 diff
+  - 按影响排序代码问题
+  - 这个改动哪里可能出错
+  - 帮我找测试缺口
+  anti_triggers:
+  - 只做代码风格检查或自动格式化
+  - 只希望生成提交信息
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 评审【变更或 diff】，预期行为是【预期和调用约束】。优先找行为错误、数据一致性、兼容性和测试缺口。每个问题附文件位置、可触发的场景、后果及最小修正；没有足够证据的点单列为疑问。
+  variables: []
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#review-code
+  source_hash: 5b48d21a0eae6a0cc1f7e2494642277c6f0a69116bb82a0cfef5592041e26983
+  status: active
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

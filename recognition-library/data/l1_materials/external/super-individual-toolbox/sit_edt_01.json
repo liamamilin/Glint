@@ -1,0 +1,29 @@
+{
+  "id": "sit_edt_01",
+  "source": "super-individual-toolbox",
+  "source_ref": "https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/editorial.json#edt-01",
+  "title": "个人语调校准器",
+  "content": "定位：一键洗掉“总而言之”的廉价 AI 味\n\n触发场景：当你让 AI 辅助写文章或产品文案，读起来却满屏“不仅如此、值得注意的是、赋能”，完全不像人话时。\n\n核心机制：\n- 喂入 3 篇你最满意的亲笔旧作，让 AI 逆向提炼你的句式长短、用词偏好与情绪克制度\n- 建立一份《禁用词黑名单》（拉黑所有翻译腔、播音腔和空洞形容词）\n- 每次成稿后过一遍校准器，强制删掉铺垫废话，保留具象细节与个人判断\n\n交付物：一份可常驻上下文的《个人写作风格宪法（Tone Guide）》\n\n推荐装配：个人风格 Prompt 文件 + 禁用词检查清单\n\n误用警告：不要试图用风格指南掩盖“本来就没想清楚观点”的硬伤；没干货的文章洗完还是空的。",
+  "content_hash": "a63a5ffdf84e9950ac97884b0602762931f453acc0c0ac0d41727d6b7591f775",
+  "suggested_action_type": "open_resource",
+  "domain_hints": [
+    "editorial",
+    "内容与叙事官"
+  ],
+  "problem_solved": "当你让 AI 辅助写文章或产品文案，读起来却满屏“不仅如此、值得注意的是、赋能”，完全不像人话时。",
+  "when_to_use": "当你让 AI 辅助写文章或产品文案，读起来却满屏“不仅如此、值得注意的是、赋能”，完全不像人话时。",
+  "procedural_steps": [
+    "喂入 3 篇你最满意的亲笔旧作，让 AI 逆向提炼你的句式长短、用词偏好与情绪克制度",
+    "建立一份《禁用词黑名单》（拉黑所有翻译腔、播音腔和空洞形容词）",
+    "每次成稿后过一遍校准器，强制删掉铺垫废话，保留具象细节与个人判断"
+  ],
+  "anti_patterns": [
+    "不要试图用风格指南掩盖“本来就没想清楚观点”的硬伤；没干货的文章洗完还是空的。"
+  ],
+  "metadata": {
+    "original_id": "edt-01",
+    "drawer": "editorial",
+    "drawer_zh": "内容与叙事官",
+    "deliverable": "一份可常驻上下文的《个人写作风格宪法（Tone Guide）》"
+  }
+}

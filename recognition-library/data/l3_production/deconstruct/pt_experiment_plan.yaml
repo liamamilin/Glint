@@ -1,0 +1,64 @@
+id: pt_experiment_plan
+title: 设计产品实验
+tagline: 把假设变成可检验实验方案
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - product
+  - experimentation
+  - ab_testing
+  - analytics
+  - user_research
+  app_affinity:
+  - Notion
+  - Linear
+  - Figma
+  - Chrome
+  pain_point: 有产品想法或假设，但不知道如何设计实验来验证，指标、样本、判断规则和风险边界都不清楚
+  trigger_utterances:
+  - 这个功能值不值得做，帮我设计个实验
+  - 我们想验证这个假设，实验方案怎么定
+  - A/B 测试主指标和保护指标怎么选
+  - 这个实验样本量和分流怎么考虑
+  - 实验做不了时还有别的验证方式吗
+  anti_triggers:
+  - 只是想写产品需求文档，不涉及实验验证
+  - 实验已经跑完，现在要分析结果
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请围绕以下实验设计要求输出完整实验方案：
+
+    1. 假设：{{hypothesis}}
+
+    2. 用户与场景：{{users_scenario}}
+
+
+    要求包含：可检验预测；比较方案（对照组/变体）；主指标与保护指标；样本量、曝光与分流方案；数据采集与质量要求；提前定义的判断规则（成功/失败/灰度）；样本偏差、并行变化与干扰因素；若实验不可行，给出替代验证路径（灰度发布、原型测试、问卷、数据分析等）。'
+  variables:
+  - hypothesis
+  - users_scenario
+  workflow:
+    workflow_id: product-discovery
+    step: 4
+    next_lens_id: pt_experiment_readout
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#experiment-plan
+  source_hash: 1c0fcba891927c3ee653876f8c48c3908661e5a33aaf71e73453a515f60348fe
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: engineering
+  subcategory: code_review
+  collections: []
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

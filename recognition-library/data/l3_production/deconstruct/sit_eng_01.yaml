@@ -1,0 +1,51 @@
+id: sit_eng_01
+title: 零依赖静态站脚手架
+tagline: 甩掉构建工具，原生三件套直接上线部署
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - static_site
+  - frontend
+  - deployment
+  - github_pages
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Terminal
+  - Chrome
+  pain_point: 只想快速上线一个工具站或展示库，却被 Webpack、npm 依赖冲突和服务器运维劝退
+  trigger_utterances:
+  - 想快速上线一个工具站但被 webpack 劝退
+  - 不想配 npm 依赖和构建工具
+  - 静态站怎么部署到 github pages
+  - 零依赖前端脚手架模板
+  - 原生 HTML CSS JS 直接上线
+  anti_triggers:
+  - 需要复杂后端鉴权或实时多人协作的业务
+  - 高并发写入场景
+execution:
+  action_type: open_resource
+  inject_mode: null
+  content: 一套零 npm 依赖、开箱即部署的静态站基础仓库模板：原生 HTML + CSS Variables + ES Modules，数据层抽离为纯静态 JSON 通过 fetch 加载与前端过滤，直接托管至 GitHub Pages
+    或 Cloudflare Pages 实现零服务器账单与秒级全球分发。推荐装配：原生 HTML/CSS/JS + GitHub Pages + GitHub Actions。误用警告：不要强行用纯静态站去扛需要复杂后端鉴权、实时多人协作或高并发写入的业务。
+  variables: []
+  workflow: null
+meta:
+  source: super-individual-toolbox
+  source_ref: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/engineer.json#eng-01
+  source_hash: ba0fa1c9509d05c9be7cca9d24d35bec3105bf3c49df3ab069d12fb7a77d0ec8
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: engineering
+  subcategory: architecture
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

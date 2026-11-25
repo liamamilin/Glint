@@ -1,0 +1,29 @@
+{
+  "id": "sit_eng_03",
+  "source": "super-individual-toolbox",
+  "source_ref": "https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/engineer.json#eng-03",
+  "title": "自动化校验 CI 门禁",
+  "content": "定位：在上线前装一道冷酷的自动安检门\n\n触发场景：当你一个人维护几十上百条数据或代码文件，生怕手滑改错一个逗号或拼错 ID 导致线上白屏时。\n\n核心机制：\n- 用原生脚本（如 Node .mjs）写出核心不变量检查：JSON 语法、必填字段、ID 唯一性与引用完整性\n- 在 GitHub Actions 配置 push 触发工作流，校验不通过直接阻断部署\n- 每次线上踩过一个新坑，就往校验脚本里补一条对应的防复发规则\n\n交付物：一套本地与云端双运行的校验脚本 + GitHub Actions 流水线文件\n\n推荐装配：Node.js 原生脚本 + GitHub Actions CI/CD\n\n误用警告：不要一开始就搭复杂的端到端测试集群，先守住“数据不坏、页面不挂”的 80/20 底线。",
+  "content_hash": "b9e1fbb5711c76d7982c14180ffeddb30292bbd62eacd60e1332090affe9f438",
+  "suggested_action_type": "open_resource",
+  "domain_hints": [
+    "engineer",
+    "工程师"
+  ],
+  "problem_solved": "当你一个人维护几十上百条数据或代码文件，生怕手滑改错一个逗号或拼错 ID 导致线上白屏时。",
+  "when_to_use": "当你一个人维护几十上百条数据或代码文件，生怕手滑改错一个逗号或拼错 ID 导致线上白屏时。",
+  "procedural_steps": [
+    "用原生脚本（如 Node .mjs）写出核心不变量检查：JSON 语法、必填字段、ID 唯一性与引用完整性",
+    "在 GitHub Actions 配置 push 触发工作流，校验不通过直接阻断部署",
+    "每次线上踩过一个新坑，就往校验脚本里补一条对应的防复发规则"
+  ],
+  "anti_patterns": [
+    "不要一开始就搭复杂的端到端测试集群，先守住“数据不坏、页面不挂”的 80/20 底线。"
+  ],
+  "metadata": {
+    "original_id": "eng-03",
+    "drawer": "engineer",
+    "drawer_zh": "工程师",
+    "deliverable": "一套本地与云端双运行的校验脚本 + GitHub Actions 流水线文件"
+  }
+}

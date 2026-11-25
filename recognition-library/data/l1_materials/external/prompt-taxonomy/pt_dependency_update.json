@@ -1,0 +1,29 @@
+{
+  "id": "pt_dependency_update",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#dependency-update",
+  "title": "检查依赖升级的实际影响",
+  "content": "评估将【包和版本】升级到【目标版本】对【代码库与约束】的影响。用官方变更说明和实际调用点标出必须修改的接口，列兼容风险、验证命令和回退办法。列出与本次无关的重构。",
+  "content_hash": "5dcb9c257e5c59715addec9cd226d0ed46f53f7861c0e1f15ebea595b8b11d55",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "coding",
+    "依赖升级",
+    "包版本",
+    "API变更",
+    "dependency update"
+  ],
+  "problem_solved": "连通版本说明、调用点和升级后检查。",
+  "when_to_use": "分类: 开发与调试",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "dependency-update",
+    "category": "coding",
+    "variables": [
+      "包和版本",
+      "目标版本",
+      "代码库与约束"
+    ]
+  }
+}

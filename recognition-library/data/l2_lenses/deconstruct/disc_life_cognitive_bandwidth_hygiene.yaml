@@ -1,0 +1,62 @@
+id: disc_life_cognitive_bandwidth_hygiene
+title: 心理带宽审计
+tagline: 把后台焦虑当死循环进程关掉，行动力自然恢复
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - debug
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - life
+  - focus
+  - energy
+  - anxiety
+  - first_principles
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 下班后累到连娱乐都不想做，误以为自己懒或不自律，其实是后台焦虑占满了全部心理带宽
+  trigger_utterances:
+  - 下班累到连游戏都不想打，是不是我太懒了
+  - 脑子一直在转停不下来，精力被掏空
+  - 列了三件烦心事帮我看看哪些是真威胁
+  - 现代焦虑太重了帮我做心理带宽审计
+  - 用原始人视角帮我冷静重置
+  anti_triggers:
+  - 我需要一个新的生产力系统来提升效率
+  - 帮我制定健身或作息计划
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '心理带宽审计清单：
+
+    - [ ] 写下最近让你隐隐焦虑的 3 件事：{{anxieties}}
+
+    - [ ] 逐项判断：真实迫近的威胁 vs 大脑误报的虚假警报
+
+    - [ ] 为每项配一个 5 分钟内的物理收尾动作（发消息/取消订阅/记一笔）
+
+    - [ ] 用原始人视角审视现状：{{status}}
+
+    - [ ] 把虚拟压力翻译成底层现实，生成 ≤50 字冷静重置口诀
+
+    - [ ] 关掉虚假警报后，安排 1 件低阻力的恢复性活动'
+  variables:
+  - '{''name'': ''anxieties'', ''description'': ''让你隐隐焦虑的 3 件事''}'
+  - '{''name'': ''status'', ''description'': ''你当下的生活状态简述''}'
+  - anxieties
+  - status
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/life.json#life-cognitive-bandwidth-hygiene
+  source_hash: 9fa659a296125d114e02a006ae17d5b4b9ddd0384a105805d87eef5d6ab01c9a
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

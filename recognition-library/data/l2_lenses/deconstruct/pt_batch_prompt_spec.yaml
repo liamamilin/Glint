@@ -1,0 +1,59 @@
+id: pt_batch_prompt_spec
+title: 批处理规范编译
+tagline: 把一次性 Prompt 编译成可复用的批处理规范与自检例
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - concrete
+  domains:
+  - prompt_engineering
+  - batch_processing
+  - workflow_automation
+  - llm_ops
+  app_affinity:
+  - Cursor
+  - Notion
+  - Obsidian
+  - ChatGPT
+  pain_point: 每次只写单次 Prompt，重复劳动多，缺少稳定字段、错误码和自检例，批跑时容易翻车
+  trigger_utterances:
+  - 把这个 prompt 改成能批量跑的规范
+  - 批处理时字段老是不统一
+  - 帮我给这个 prompt 加错误码和自检例
+  - 想把一次性指令复用成批量流程
+  - batch run 经常翻车帮我规范一下
+  anti_triggers:
+  - 只是想润色单条 prompt
+  - 不涉及批量或重复执行
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: '你是一个批处理规范编译器。请把下面的【单次 Prompt】（{{input}}）结合【输入样本与下游要求】（{{input_samples}} / {{downstream_requirements}}）编译成一份可复用的批处理规范，严格按以下结构输出：
+
+
+    1. 记录结构（Schema）：为每条输入定义稳定字段，含字段名、类型、是否必填、默认值、校验规则。
+
+    2. 输出模式（Output Mode）：每条输入的输出格式、字段与枚举取值。
+
+    3. 错误码（Error Codes）：至少包含 NORMAL、MISSING_INFO、FORMAT_INVALID 三类，附触发条件与处理动作。
+
+    4. 自检例（Self-check Examples）：给出 3 条预期结果——正常样例、缺资料样例、格式异常样例，每条含 输入→预期输出/错误码。
+
+    5. 人工抽检点（Manual Sampling Points）：列出需人工复核的节点与抽检比例。
+
+
+    约束：字段名使用 snake_case；错误码全大写；示例可直接用于回归测试。'
+  variables:
+  - input_samples
+  - downstream_requirements
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#batch-prompt-spec
+  source_hash: fcc935935bef7509eb28eb446ef94e49f9fb7cd0c0551631fce61f6b111700bc
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

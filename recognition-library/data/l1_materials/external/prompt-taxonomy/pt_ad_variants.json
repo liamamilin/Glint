@@ -1,0 +1,28 @@
+{
+  "id": "pt_ad_variants",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#ad-variants",
+  "title": "设计能比较效果的广告版本",
+  "content": "为【产品和受众】写【渠道和字数】可用的广告版本。每版只改变一个主要说服点，写标题、正文、行动提示和支撑事实。提出对应测试指标，列任何需审核的声明。",
+  "content_hash": "0ec10e7faea5137b1ac7f28e1b4f48e4863db0266f3b76f8254be7f846460704",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "marketing",
+    "广告",
+    "投放",
+    "A/B",
+    "ad variants"
+  ],
+  "problem_solved": "交代不同说服角度和需要独立检验的变量。",
+  "when_to_use": "分类: 营销与销售",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "ad-variants",
+    "category": "marketing",
+    "variables": [
+      "产品和受众",
+      "渠道和字数"
+    ]
+  }
+}

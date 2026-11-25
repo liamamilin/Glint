@@ -1,0 +1,28 @@
+{
+  "id": "pt_change_announcement",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#change-announcement",
+  "title": "写一份变更公告",
+  "content": "把【变更内容和时间】写成给【受影响人群】的公告。写清发生了什么、谁需要做什么、何时完成，以及如何确认操作成功。按受众的不同动作分段，列已知影响与帮助入口。",
+  "content_hash": "433a1d4e5d471a24a0c162e91f887ed2ef41fe408749f3066e1285385d8852b0",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "office",
+    "公告",
+    "更新",
+    "变更",
+    "announcement"
+  ],
+  "problem_solved": "说明影响范围、生效时间和迁移动作。",
+  "when_to_use": "分类: 办公与协作",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "change-announcement",
+    "category": "office",
+    "variables": [
+      "变更内容和时间",
+      "受影响人群"
+    ]
+  }
+}

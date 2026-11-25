@@ -1,0 +1,33 @@
+{
+  "id": "disc_cognition_weak_signal_radar",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/cognition.json#cognition-weak-signal-radar",
+  "title": "用“弱信号源”替代“算法新闻源”",
+  "content": "旧共识（盲区）：保持敏锐的方式是每天刷热搜、科技媒体和公众号推送。\n\n新现实（破盲视角）：媒体报道的永远是已经卷成红海的“滞后共识”；真正的早期变化藏在 GitHub 提交记录、小众论坛吐槽、产品更新日志和论文附录里。\n\n破冰追问母题：\n- 我想持续追踪 [某个具体领域] 最早期的真实变化，但不想看二手媒体通稿。请帮我列出 5 个高信噪比的一手弱信号来源，以及每周 15 分钟的扫描方法。\n- 把下面这段我刷到的零散观察：[粘贴你的观察或链接]，往上抽象一层：它背后反映的底层结构变化是什么？在哪些相邻领域可能出现类似机会？",
+  "content_hash": "94334df9ac67687b4d6a00b33e59f6c0c70d75912fa099f160e977eff8bb3a05",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "cognition",
+    "cross-domain",
+    "first-principles",
+    "weak-signals",
+    "information-diet",
+    "radar",
+    "research"
+  ],
+  "problem_solved": "保持敏锐的方式是每天刷热搜、科技媒体和公众号推送。",
+  "when_to_use": "媒体报道的永远是已经卷成红海的“滞后共识”；真正的早期变化藏在 GitHub 提交记录、小众论坛吐槽、产品更新日志和论文附录里。",
+  "procedural_steps": [
+    "我想持续追踪 [某个具体领域] 最早期的真实变化，但不想看二手媒体通稿。请帮我列出 5 个高信噪比的一手弱信号来源，以及每周 15 分钟的扫描方法。",
+    "把下面这段我刷到的零散观察：[粘贴你的观察或链接]，往上抽象一层：它背后反映的底层结构变化是什么？在哪些相邻领域可能出现类似机会？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "cognition-weak-signal-radar",
+    "arena": "cognition",
+    "lenses": [
+      "cross-domain",
+      "first-principles"
+    ]
+  }
+}

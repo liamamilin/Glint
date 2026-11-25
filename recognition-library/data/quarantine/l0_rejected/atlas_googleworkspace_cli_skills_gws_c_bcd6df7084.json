@@ -1,0 +1,13 @@
+{
+  "id": "atlas_googleworkspace_cli_skills_gws_c_bcd6df7084",
+  "source": "atlas-methods",
+  "source_ref": "googleworkspace/cli:skills/gws-calendar-insert/SKILL.md",
+  "content_hash": "5c54f18a615b9706a364815f9e3c0ef8c83bba8a67adf217e25dd7c829e2119e",
+  "title": "使用 gws CLI 创建 Google Calendar 事件",
+  "quality_score": 0.2,
+  "reasons": [
+    "Highly bound to a specific CLI/tool and reads as an API/usage tutorial rather than a reusable cross-scenario cognitive method.",
+    "quality_score_below_threshold:0.20<0.65"
+  ],
+  "model": "opencode-go/beam-free"
+}

@@ -1,0 +1,54 @@
+id: disc_business_unbundling_bloat
+title: 专拆巨头10%核心功能
+tagline: 从巨头臃肿软件里拆出高频微功能做轻量替代
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - evaluate
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - business
+  - first_principles
+  - unbundling
+  - indie
+  - pricing
+  app_affinity:
+  - Cursor
+  - Notion
+  - Chrome
+  - Linear
+  pain_point: 赛道被巨头占满，小团队做产品怕没活路
+  trigger_utterances:
+  - Jira太重了想做个轻量版
+  - 巨头软件功能用不到10%
+  - 想从大厂软件里拆一个微功能创业
+  - Salesforce太贵了有没有替代
+  - 独立开发者怎么切入红海市场
+  anti_triggers:
+  - 如何给现有大厂软件做全功能竞争
+  - 巨头收购策略分析
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '## 巨头拆解清单
+
+    1. 列出 5 款在 {{industry_or_workflow}} 中被用户吐槽“太重、太贵、功能用不到 10%”的巨头软件，每款指出最值得单独拆出的核心微功能。
+
+    2. 选 1 款臃肿巨头软件（如 {{bloated_software}}），分析其 Reddit/G2 一星差评，提炼 3 个独立开发者可切入的极简替代切口。
+
+    3. 为每个切口写出：目标用户、核心微功能、定价（巨头的 1/3）、MVP 验证方式。'
+  variables:
+  - industry_or_workflow
+  - bloated_software
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-unbundling-bloat
+  source_hash: 7ccb8eeb2e2df8a5e68f61665009f9f5fd6c34596c5f69551704e3df2ebca4ac
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

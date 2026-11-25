@@ -1,0 +1,33 @@
+{
+  "id": "disc_business_niche_community_distribution",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-niche-community-distribution",
+  "title": "先在“极小众垂直圈子”做深价值，而不是一开始买量铺开",
+  "content": "旧共识（盲区）：新产品或新服务上线就要想办法冲热榜、铺全渠道，用户太少说明没市场。\n\n新现实（破盲视角）：在 50～200 个重度痛点用户里成为“真正帮他们省了钱/时间的人”，口碑复利和付费转化率远高于一万个路过围观者。\n\n破冰追问母题：\n- 针对 [你的产品/服务/内容方向]，帮我锁定 3 个“痛点极深、人数不多但能直接触达”的垂直小圈子，并设计第一批 10 个种子用户的真诚触达方式。\n- 如果我只能服务好前 20 个付费用户，我会给他们提供哪些“手动高关怀 + 快速迭代”的专属体验来换取深度反馈和转介绍？",
+  "content_hash": "f068deda734d6cd13fb1ac4466d9332a5344f72402b36871d05403a8f929f401",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "business",
+    "invisible-friction",
+    "cross-domain",
+    "distribution",
+    "niche",
+    "community",
+    "indie-growth"
+  ],
+  "problem_solved": "新产品或新服务上线就要想办法冲热榜、铺全渠道，用户太少说明没市场。",
+  "when_to_use": "在 50～200 个重度痛点用户里成为“真正帮他们省了钱/时间的人”，口碑复利和付费转化率远高于一万个路过围观者。",
+  "procedural_steps": [
+    "针对 [你的产品/服务/内容方向]，帮我锁定 3 个“痛点极深、人数不多但能直接触达”的垂直小圈子，并设计第一批 10 个种子用户的真诚触达方式。",
+    "如果我只能服务好前 20 个付费用户，我会给他们提供哪些“手动高关怀 + 快速迭代”的专属体验来换取深度反馈和转介绍？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "business-niche-community-distribution",
+    "arena": "business",
+    "lenses": [
+      "invisible-friction",
+      "cross-domain"
+    ]
+  }
+}

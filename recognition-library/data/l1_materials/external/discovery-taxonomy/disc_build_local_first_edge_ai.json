@@ -1,0 +1,33 @@
+{
+  "id": "disc_build_local_first_edge_ai",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/build.json#build-local-first-edge-ai",
+  "title": "本地优先 + 端侧小模型的反云端软件",
+  "content": "旧共识（盲区）：智能应用必须把用户数据传到云端、调用昂贵的大模型 API 并收取月度订阅费。\n\n新现实（破盲视角）：轻量级端侧视觉/语音/文本模型已经小到能在普通笔记本离线流畅运行，隐私敏感场景迎来“零 API 成本”的一次性买断新机会。\n\n破冰追问母题：\n- 列出 5 个用户极度在意隐私、不敢上传云端的 [某领域，如医疗/财务/个人日记] 场景，设计一个完全离线运行、结合端侧小模型的本地优先工具。\n- 对比云端大模型 API 与本地小模型（如 Whisper/Moondream/Qwen 小参数版），在 [具体使用场景] 中，如何通过任务拆解让端侧小模型达到 90% 的可用效果？",
+  "content_hash": "f464b1cfc2627aaf10b780f138a5e803ddf01a440b8c012605042e9701026467",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "build",
+    "cost-collapse",
+    "first-principles",
+    "local-first",
+    "edge-ai",
+    "privacy",
+    "offline"
+  ],
+  "problem_solved": "智能应用必须把用户数据传到云端、调用昂贵的大模型 API 并收取月度订阅费。",
+  "when_to_use": "轻量级端侧视觉/语音/文本模型已经小到能在普通笔记本离线流畅运行，隐私敏感场景迎来“零 API 成本”的一次性买断新机会。",
+  "procedural_steps": [
+    "列出 5 个用户极度在意隐私、不敢上传云端的 [某领域，如医疗/财务/个人日记] 场景，设计一个完全离线运行、结合端侧小模型的本地优先工具。",
+    "对比云端大模型 API 与本地小模型（如 Whisper/Moondream/Qwen 小参数版），在 [具体使用场景] 中，如何通过任务拆解让端侧小模型达到 90% 的可用效果？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "build-local-first-edge-ai",
+    "arena": "build",
+    "lenses": [
+      "cost-collapse",
+      "first-principles"
+    ]
+  }
+}

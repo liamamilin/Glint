@@ -1,0 +1,45 @@
+id: pt_pivot_table_plan
+title: 设计透视表方案
+tagline: 把源字段变成可比较的分组汇总
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - data
+  - excel
+  - pivot_table
+  - reporting
+  app_affinity:
+  - Excel
+  - Notion
+  - Chrome
+  pain_point: 手里有一堆明细数据字段，不知道怎么把它们拆成行、列、值和筛选条件来汇总对比，也不知道空值和重复记录会怎么影响结果。
+  trigger_utterances:
+  - 帮我设计一个透视表
+  - 这些字段怎么做成透视表对比
+  - pivot table 行列值怎么设
+  - 数据太多想分组汇总一下
+  - 帮我理一下透视表方案
+  anti_triggers:
+  - 只是想画图表或做 dashboard 可视化
+  - 想直接写 SQL 做聚合查询
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 用【字段和样例】做一个回答【问题】的透视表方案。给行字段、列字段、值字段、聚合方式和筛选项。说明空值和重复记录对汇总的影响，并给一个应与源数据对账的合计值。
+  variables:
+  - 字段和样例
+  - 问题
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#pivot-table-plan
+  source_hash: 092fab2c3d917dd2bab7a7e9ca241cb7f3d5a69253f410fbb40dc4ae56b00616
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

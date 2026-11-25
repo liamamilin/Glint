@@ -1,0 +1,42 @@
+id: sit_grw_02
+title: 首屏5秒转化诊断
+tagline: 用陌生访客5秒耐心诊断首屏是否说清
+routing:
+  primitive: critique
+  goals:
+  - optimize
+  - debug
+  clarity_fit:
+  - concrete
+  domains:
+  - growth
+  - conversion
+  - landing_page
+  - ux_copy
+  app_affinity:
+  - Chrome
+  - Figma
+  - Notion
+  pain_point: 产品链接有人点进来，但几乎没人试用、收藏或留资
+  trigger_utterances:
+  - 链接发出去了但转化很低
+  - 首屏看了5秒还是不知道产品是啥
+  - 落地页有人点但没人试用
+  - 帮我诊断着陆页为什么没人注册
+  anti_triggers:
+  - 需要完整多页网站重设计
+  - 只需要SEO关键词优化
+execution:
+  action_type: open_resource
+  inject_mode: null
+  content: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/growth-commercial.json#grw-02
+  variables: []
+  workflow: null
+meta:
+  source: super-individual-toolbox
+  source_ref: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/growth-commercial.json#grw-02
+  source_hash: 3390c5a57afc882e9932afa1ede8c91707722414be77d9229004b776da16ff23
+  status: active
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

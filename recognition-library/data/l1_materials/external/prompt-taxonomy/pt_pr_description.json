@@ -1,0 +1,27 @@
+{
+  "id": "pt_pr_description",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#pr-description",
+  "title": "把提交差异写成 PR 说明",
+  "content": "基于【变更差异和需求】为【评审人】写 PR 说明。先说实际触发场景和修复后的结果，再列影响范围与测试证据。缺少的测试或迁移信息如实写待验证，给一个有代表性的前后示例。",
+  "content_hash": "483f22f769d932218de7707b5076a0c9a0cd0efcdceb3c323dcaa70e70303921",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "coding",
+    "拉取请求",
+    "合并",
+    "PR description"
+  ],
+  "problem_solved": "让评审者快速理解问题、行为与验证。",
+  "when_to_use": "分类: 开发与调试",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "pr-description",
+    "category": "coding",
+    "variables": [
+      "变更差异和需求",
+      "评审人"
+    ]
+  }
+}

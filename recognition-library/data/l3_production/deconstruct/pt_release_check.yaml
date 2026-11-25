@@ -1,0 +1,56 @@
+id: pt_release_check
+title: 发布前检查清单
+tagline: 生成可执行的发布检查表，覆盖前置条件、验收路径、异常信号与回退
+routing:
+  primitive: deconstruct
+  goals:
+  - evaluate
+  - debug
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - engineering
+  - release
+  - deployment
+  - devops
+  - qa
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Terminal
+  pain_point: 发版前需要确认版本、主要变化、验证路径与回退条件，但缺少可执行检查清单，容易漏项或上线后才发现问题
+  trigger_utterances:
+  - 准备发版了帮我做检查清单
+  - 上线前要确认版本和回退条件
+  - release check 做一下
+  - 这次发布有什么要验的
+  - 发版前帮我理一下 checklist
+  anti_triggers:
+  - 仅做代码 review 不涉及发布
+  - 需求评审或方案设计阶段
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 根据 {{version_change}} 和 {{target_env}} 生成发布检查表。列出可执行的前置条件、从用户入口验收的主要路径、异常信号和回退动作。每项写可检查的证据，未运行的步骤保留待验证。
+  variables:
+  - version_change
+  - target_env
+  workflow:
+    workflow_id: fix-and-release
+    step: 5
+    next_lens_id: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#release-check
+  source_hash: 57420719ea4800ab9db45966e5659d4e1490cd84c427e24d7c7f6dec6f594453
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: engineering
+  subcategory: architecture
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

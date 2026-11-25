@@ -1,0 +1,33 @@
+{
+  "id": "disc_life_frictionless_evening_wind_down",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/life.json#life-frictionless-evening-wind-down",
+  "title": "设一个“睡前 30 分钟关机缓冲”，别把白天刺激直接带进床上",
+  "content": "旧共识（盲区）：困了往床上一躺就能立刻睡着，睡前刷手机、想工作或看刺激内容无所谓。\n\n新现实（破盲视角）：大脑需要一个从“高速运转/高光刺激”降速到“放松准备入睡”的缓冲带；留出 20～30 分钟低刺激收尾，睡眠质量和第二天精神都会明显改善。\n\n破冰追问母题：\n- 我晚上经常因为 [刷手机/脑子还转着工作或杂事] 导致睡不沉或晚睡。请帮我设计一套 25 分钟以内的“睡前降噪收尾流程”，简单、可坚持。\n- 帮我写一份“睡前脑内清空清单（Brain Dump）”的 3 个小问题，把明天要做的事记下来，让自己安心放下。",
+  "content_hash": "0626bc36d45b800aa7044e346418fdb0a79ba4a7283d8d7091de1edcec0ad73a",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "life",
+    "invisible-friction",
+    "first-principles",
+    "sleep",
+    "wind-down",
+    "evening",
+    "recovery"
+  ],
+  "problem_solved": "困了往床上一躺就能立刻睡着，睡前刷手机、想工作或看刺激内容无所谓。",
+  "when_to_use": "大脑需要一个从“高速运转/高光刺激”降速到“放松准备入睡”的缓冲带；留出 20～30 分钟低刺激收尾，睡眠质量和第二天精神都会明显改善。",
+  "procedural_steps": [
+    "我晚上经常因为 [刷手机/脑子还转着工作或杂事] 导致睡不沉或晚睡。请帮我设计一套 25 分钟以内的“睡前降噪收尾流程”，简单、可坚持。",
+    "帮我写一份“睡前脑内清空清单（Brain Dump）”的 3 个小问题，把明天要做的事记下来，让自己安心放下。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "life-frictionless-evening-wind-down",
+    "arena": "life",
+    "lenses": [
+      "invisible-friction",
+      "first-principles"
+    ]
+  }
+}

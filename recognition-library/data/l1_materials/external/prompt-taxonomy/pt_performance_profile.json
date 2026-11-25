@@ -1,0 +1,29 @@
+{
+  "id": "pt_performance_profile",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#performance-profile",
+  "title": "设计一次性能排查",
+  "content": "【代码或链路】在【可复现负载】下偏慢，目标为【体验或资源目标】。定义当前基线和观察指标，安排最少的测量来定位耗时部分。给实验表、可能干扰项和改动后的相同口径复测方式。",
+  "content_hash": "ab3b91ef1eba89cc1a5b38b5025d5a1444aeeb835b8571078212ad761c0d9b81",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "coding",
+    "慢查询",
+    "性能",
+    "延迟",
+    "profiling"
+  ],
+  "problem_solved": "先量化瓶颈，再决定改动。",
+  "when_to_use": "分类: 开发与调试",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "performance-profile",
+    "category": "coding",
+    "variables": [
+      "代码或链路",
+      "可复现负载",
+      "体验或资源目标"
+    ]
+  }
+}

@@ -1,0 +1,41 @@
+id: core_clarify_first
+title: 先反问我3个问题
+tagline: 需求模糊时，先追问3个关键问题再给方案
+routing:
+  primitive: metacognize
+  goals:
+  - optimize
+  clarity_fit:
+  - vague
+  domains:
+  - requirements
+  - product_strategy
+  - planning
+  app_affinity:
+  - ChatGPT
+  - Claude
+  - Notion
+  pain_point: 用户需求描述模糊、思路发散，AI 直接给完整方案容易答偏或遗漏关键约束
+  trigger_utterances:
+  - 先别给方案，先问我几个问题
+  - 需求还没想清楚，帮我 clarify 一下
+  - 思路太散了，先帮我理清前提
+  - 先反问 3 个问题再回答
+  - 别急着给完整方案
+  anti_triggers:
+  - 用户已给出完整明确需求只需执行
+  - 用户只想快速得到最终答案
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 先不要急着给完整方案。请先找出我描述中缺失的关键信息，向我提出 3 个最核心的澄清问题。
+  variables: []
+  workflow: null
+meta:
+  source: glint-core
+  source_ref: cards.yaml#clarify_first
+  source_hash: a895c81ca89c4d333d5d94e82ea590cc7c97415cf10a2b2f18cc913e6157accd
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

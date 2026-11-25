@@ -1,0 +1,45 @@
+id: pt_paper_brief
+title: 读懂一篇论文
+tagline: 提取研究问题、方法、结果与局限，按页码引用。
+routing:
+  primitive: deconstruct
+  goals:
+  - digest
+  clarity_fit:
+  - concrete
+  domains:
+  - research
+  - academic
+  - literature_review
+  - paper
+  app_affinity:
+  - Chrome
+  - Notion
+  - Obsidian
+  - ChatGPT
+  pain_point: 读论文时难以快速抓住研究问题、方法和结论，且分不清作者结论与个人推断。
+  trigger_utterances:
+  - 这篇论文到底在说什么帮我理一下
+  - summarize this paper's method and results
+  - 论文结论可靠吗有什么局限
+  - extract findings with page citations
+  - 读论文卡在方法部分看不懂
+  anti_triggers:
+  - 写论文或生成学术文本
+  - 翻译论文全文
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 阅读【论文正文或链接】，回答它对【我的问题】有什么帮助。按研究问题、样本与方法、主要结果、局限、我的下一步组织；引用页码或章节，区分作者结论与推断。对效应量写明比较的双方和适用条件。
+  variables:
+  - 论文正文或链接
+  - 我的问题
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#paper-brief
+  source_hash: 6fd0b006ea1a5e7dfb6a757f7e8bd211873faf73dc1a3e5ddc920624977b1452
+  status: active
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

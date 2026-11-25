@@ -1,0 +1,53 @@
+id: pt_onboarding_plan
+title: 新同事首周上手计划
+tagline: 按天安排阅读、联系人与可检查成果
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - office
+  - onboarding
+  - hr
+  - operations
+  - training
+  app_affinity:
+  - Notion
+  - Feishu
+  - Slack
+  - Linear
+  pain_point: 新同事入职后不知道先做什么、权限和入口没配齐，第一周难以形成可检查成果
+  trigger_utterances:
+  - 给新同事安排第一周上手计划
+  - 新人入职第一周怎么带
+  - 新员工 onboarding checklist
+  - 帮我拆解新人第一周任务
+  - 新人权限和培训怎么排期
+  anti_triggers:
+  - 只是要写招聘 JD 或面试题
+  - 只想做长期职业发展路径规划
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 为{{role_and_background}}设计第一周上手计划，现有资源为{{resources}}。按天列出读什么、找谁、完成什么可检查成果。标出必须提前开通的权限和可以延后处理的事项。
+  variables:
+  - role_and_background
+  - resources
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#onboarding-plan
+  source_hash: c8508bf6141899ae6023c4b847b714482eef9c71881f8b2c3311a71fcd06776d
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: personal_career
+  subcategory: personal_os
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

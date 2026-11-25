@@ -1,0 +1,29 @@
+{
+  "id": "pt_media_shortlist",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#media-shortlist",
+  "title": "按个人口味选下一本书或一部电影",
+  "content": "我喜欢【作品和喜欢的原因】，现在想要【时长、题材或情绪】，希望避开【主题或限制】。给四个可核实的推荐，每个说明匹配点和可能不合适之处。保持无剧透，当前可观看或借阅的渠道若无法核实就留空。",
+  "content_hash": "c1175dc7e83ad55082d6392d23f405c42ae53008ae61f566fdbf7d71cd2f761b",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "research",
+    "书单",
+    "电影推荐",
+    "不剧透",
+    "book or film recommendations"
+  ],
+  "problem_solved": "解释匹配点，保留是否想看下去的判断。",
+  "when_to_use": "分类: 查找与研究",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "media-shortlist",
+    "category": "research",
+    "variables": [
+      "作品和喜欢的原因",
+      "时长、题材或情绪",
+      "主题或限制"
+    ]
+  }
+}

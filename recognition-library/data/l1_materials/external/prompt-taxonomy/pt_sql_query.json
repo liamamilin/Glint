@@ -1,0 +1,29 @@
+{
+  "id": "pt_sql_query",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#sql-query",
+  "title": "从需求写 SQL",
+  "content": "用 【SQL 方言】 查询【业务问题】，表结构是【字段、主键及关系】。先确认结果粒度和时间窗，再给可运行的查询。解释连接和去重逻辑，补一个核对总量的查询；字段不足处先列待确认项。",
+  "content_hash": "a169bb889a7618db2403fc6d7f0fc9848582dafe515b7d5e550337cf783ec964",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "data",
+    "SQL",
+    "查询",
+    "数据库",
+    "text-to-sql"
+  ],
+  "problem_solved": "明确粒度、去重、连接和日期条件。",
+  "when_to_use": "分类: 数据与表格",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "sql-query",
+    "category": "data",
+    "variables": [
+      "SQL 方言",
+      "业务问题",
+      "字段、主键及关系"
+    ]
+  }
+}

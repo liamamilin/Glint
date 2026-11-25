@@ -1,0 +1,45 @@
+id: core_code_review
+title: 架构师代码审查
+tagline: 揪出 Bug、并发风险与可简化的复杂度
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - engineering
+  - software_architecture
+  - code_review
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Terminal
+  pain_point: 代码写完拿不准有没有隐藏 Bug、边界/并发竞态或过度复杂，想让资深架构师只看实质风险
+  trigger_utterances:
+  - 帮我 review 这段代码
+  - 这段代码有什么 bug 吗
+  - 并发会不会有问题
+  - 这代码能简化吗
+  - code review 一下
+  anti_triggers:
+  - 只想调整命名或代码风格时
+  - 需要从零实现新功能而非审查现有代码时
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: '请作为资深架构师审查以下代码。忽略代码风格和命名吹毛求疵，只指出潜在 Bug、边界/并发风险以及可简化的复杂度：
+
+
+    {{input}}'
+  variables: []
+  workflow: null
+meta:
+  source: glint-core
+  source_ref: cards.yaml#code_review
+  source_hash: 9e13a651eaf677331b4588fcde8ec706bdceccb12f1ec17d225488097c3e4e84
+  status: active
+  base_weight: 1.0
+  confidence: 0.95
+  version: 1

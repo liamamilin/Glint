@@ -1,0 +1,29 @@
+{
+  "id": "pt_repurpose_content",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#repurpose-content",
+  "title": "把一份内容改成多种格式",
+  "content": "把【原素材】改成【目标渠道和长度】版本，面向【读者】。为每个渠道调整开头、内容顺序和行动提示，保留核心事实和品牌语气。输出各成品和一份事实核对清单。",
+  "content_hash": "9f9ecf2c24be07405aee59724b21f1d422c739873350f4eacf4a8c8eaef86807",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "writing",
+    "复用",
+    "社媒",
+    "帖子",
+    "repurpose"
+  ],
+  "problem_solved": "同一份素材适配不同渠道。",
+  "when_to_use": "分类: 写作与语言",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "repurpose-content",
+    "category": "writing",
+    "variables": [
+      "原素材",
+      "目标渠道和长度",
+      "读者"
+    ]
+  }
+}

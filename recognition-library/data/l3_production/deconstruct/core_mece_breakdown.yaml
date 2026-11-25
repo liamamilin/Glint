@@ -1,0 +1,49 @@
+id: core_mece_breakdown
+title: MECE结构拆解
+tagline: 把混乱的事拆成3-5个不重不漏的模块并给最小行动
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - structure
+  - planning
+  - project_management
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Cursor
+  - Linear
+  pain_point: 面对复杂任务时脑中一团乱麻，不知道从哪下手，容易遗漏或重复
+  trigger_utterances:
+  - 这事儿太乱了帮我理一下
+  - 帮我拆解一下这个需求
+  - 怎么把这事拆成几个模块
+  - MECE 拆一下这个项目
+  - thing is messy, break it down for me
+  anti_triggers:
+  - 只是想快速总结一段长文
+  - 只需要一个最终决策结论而不需要拆解过程
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 请按 MECE（不重不漏）原则将这件事拆解为 3-5 个核心模块，并为每个模块给出第一步最小可执行动作。
+  variables: []
+  workflow: null
+meta:
+  source: glint-core
+  source_ref: cards.yaml#mece_breakdown
+  source_hash: 826b2db681e4ef0d8cd27f88f7b4c37b9325d044af3262b3351ae82a53669ff8
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  category: personal_career
+  subcategory: personal_os
+  collections: []
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

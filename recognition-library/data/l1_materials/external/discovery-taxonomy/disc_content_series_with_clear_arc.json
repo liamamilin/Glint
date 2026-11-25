@@ -1,0 +1,33 @@
+{
+  "id": "disc_content_series_with_clear_arc",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/content.json#content-series-with-clear-arc",
+  "title": "做“有清晰演进弧线的系列”，而不是互不相关的单篇拼盘",
+  "content": "旧共识（盲区）：每篇内容都当成独立单篇来发，只要单篇爆了就行，前后有没有关联无所谓。\n\n新现实（破盲视角）：前后呼应、层层递进的系列（比如从“认知破盲 → 方案设计 → 实战踩坑 → 复盘迭代”）更容易让读者产生“追更”习惯并沉淀成合集资产。\n\n破冰追问母题：\n- 围绕 [你想深挖的一个核心主题]，帮我规划一个 5 篇左右的“递进式系列大纲”，每篇承担不同的推进作用（破盲/拆解/动手/避坑/总结）。\n- 如何把我已经写过的几篇零散内容：[列出主题或链接]，重新串联成一份带导读和学习路径的“主题合集”？",
+  "content_hash": "0047fc12e9e5e6945938e62017be1be2a65df1897ecf78977716e38fa6332f61",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "content",
+    "role-inversion",
+    "invisible-friction",
+    "series",
+    "arc",
+    "depth",
+    "community"
+  ],
+  "problem_solved": "每篇内容都当成独立单篇来发，只要单篇爆了就行，前后有没有关联无所谓。",
+  "when_to_use": "前后呼应、层层递进的系列（比如从“认知破盲 → 方案设计 → 实战踩坑 → 复盘迭代”）更容易让读者产生“追更”习惯并沉淀成合集资产。",
+  "procedural_steps": [
+    "围绕 [你想深挖的一个核心主题]，帮我规划一个 5 篇左右的“递进式系列大纲”，每篇承担不同的推进作用（破盲/拆解/动手/避坑/总结）。",
+    "如何把我已经写过的几篇零散内容：[列出主题或链接]，重新串联成一份带导读和学习路径的“主题合集”？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "content-series-with-clear-arc",
+    "arena": "content",
+    "lenses": [
+      "role-inversion",
+      "invisible-friction"
+    ]
+  }
+}

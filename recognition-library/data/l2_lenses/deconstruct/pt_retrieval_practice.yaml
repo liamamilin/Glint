@@ -1,0 +1,47 @@
+id: pt_retrieval_practice
+title: 闭卷回忆练习
+tagline: 先答再看，定位真正没记住的知识点。
+routing:
+  primitive: deconstruct
+  goals:
+  - evaluate
+  - digest
+  clarity_fit:
+  - concrete
+  - vague
+  domains:
+  - learning
+  - education
+  - memory
+  - study_skills
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 手里有学习材料但直接重读效率低，分不清哪些真正记住了，需要被先考再定位薄弱点。
+  trigger_utterances:
+  - 帮我用闭卷回忆复习一下这个章节
+  - 这个知识点我好像记不住，出题考我
+  - 帮我自测一下刚学的内容
+  - 用 retrieval practice 复习一下
+  - 先考我再看哪里漏了
+  anti_triggers:
+  - 帮我总结这篇文章
+  - 帮我制定学习计划
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 用{{learning_material}}帮我复习{{topic}}。每次只出一道闭卷回忆题，等我作答后按关键点判定漏项，给出处和一句提示。把答错的概念延后再问，最后列下次复习清单。
+  variables:
+  - learning_material
+  - topic
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#retrieval-practice
+  source_hash: 750e389ded502d223b65a070c42ca7a21bc5f1af2159f7e4d422460cb88711e7
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

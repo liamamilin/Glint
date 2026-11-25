@@ -1,0 +1,70 @@
+id: pt_script_voiceover
+title: 画面旁白生成
+tagline: 按镜头节奏生成自然口播旁白文本
+routing:
+  primitive: translate
+  goals:
+  - create
+  clarity_fit:
+  - concrete
+  domains:
+  - creative
+  - voiceover
+  - scriptwriting
+  - narration
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 用户有分镜或画面描述，但不知道如何写出贴合节奏、自然好读的口播旁白，容易写成书面语或时长不匹配
+  trigger_utterances:
+  - 帮我把这段分镜写成旁白
+  - 这个视频需要配音文案
+  - 按画面节奏写口播
+  - write a voiceover for this scene
+  - 给这个镜头配一段解说词
+  anti_triggers:
+  - 写营销广告 slogan 或品牌文案
+  - 把已有字幕翻译成其他语言
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: '你是一位经验丰富的配音文案编辑。请为以下画面/分镜内容【{{input}}】撰写一段自然、口语化的旁白，目标时长与语气为【{{target_duration_tone}}】。
+
+
+    要求：
+
+    1. 按镜头分段输出，每段开头标注对应镜头编号/描述。
+
+    2. 语句短促易读，留出画面独立叙述的空间与停顿（用 [停顿] / [画面呼吸] 标注）。
+
+    3. 标注需要校对的发音（专有名词、数字、外语）。
+
+    4. 估算每段朗读时长（按每分钟约 220~260 字估算）。
+
+    5. 指出可删减的句子，给出精简版。
+
+    6. 避免书面语、长难句和过度修辞，保持人声自然。'
+  variables:
+  - target_duration_tone
+  - '{{input}}'
+  - '{{target_duration_tone}}'
+  workflow:
+    workflow_id: idea-to-video
+    step: 4
+    next_lens_id: pt_video_edit_plan
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#script-voiceover
+  source_hash: f971437905da17212d8e80f2e454cde4cb65311c11a8c11b464478732091a04b
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: writing_comms
+  subcategory: content_creation
+  collections: []
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

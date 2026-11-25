@@ -1,0 +1,28 @@
+{
+  "id": "pt_meeting_notes",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#meeting-notes",
+  "title": "整理会议纪要",
+  "content": "根据【会议记录】给【目标读者】写纪要。按结论、已定决策、行动项和仍待讨论的问题组织。行动项用「事项 / 负责人 / 截止 / 对应发言」表格，缺失信息标为待确认，并区分探讨中的提议与已定事项。",
+  "content_hash": "14053ce0e5d21d21e98263c69fabd578ab9ae762a783a891e87c3906e0733377",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "office",
+    "会议",
+    "纪要",
+    "待办",
+    "meeting recap"
+  ],
+  "problem_solved": "从转录中提取决策、行动项和未决问题。",
+  "when_to_use": "分类: 办公与协作",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "meeting-notes",
+    "category": "office",
+    "variables": [
+      "会议记录",
+      "目标读者"
+    ]
+  }
+}

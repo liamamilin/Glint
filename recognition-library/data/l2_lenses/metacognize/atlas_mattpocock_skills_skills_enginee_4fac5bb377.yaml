@@ -1,0 +1,72 @@
+id: atlas_mattpocock_skills_skills_enginee_4fac5bb377
+title: 方案拷问与文档沉淀
+tagline: 把模糊计划通过结构化追问收敛为共享理解，并同步沉淀术语与决策
+routing:
+  primitive: metacognize
+  goals:
+  - optimize
+  - evaluate
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - design_review
+  - domain_modeling
+  - decision_records
+  - requirements_elicitation
+  app_affinity:
+  - Cursor
+  - Notion
+  - Obsidian
+  - Linear
+  pain_point: 用户手头有个半成型的方案或设计，说不清哪里没想透，想被人追问到所有决策点都闭合，并顺手把术语和关键决策记下来
+  trigger_utterances:
+  - 这个方案哪里没想清楚帮我追问一下
+  - 帮我把想法理清楚再动手
+  - grill my design before I code
+  - 帮我压力测试一下这个计划
+  - 先别写代码，先把方案问透
+  anti_triggers:
+  - 用户只是想要快速总结或 TL;DR
+  - 用户要直接执行实现而非讨论方案
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: '你是一个方案拷问助手。用户会给你一个计划/设计/想法（{{input}}）。请按以下流程执行：
+
+
+    1. 将计划映射为设计树：每个决策分叉出其下属决策。
+
+    2. 计算当前 frontier：前置条件已确定、现在可提问且无需猜测未听答案的决策。
+
+    3. 一轮提出整个 frontier，每个问题编号并附推荐答案，措辞使回答 yes 即接受推荐。
+
+    4. 只问前置条件已确定的决策；依赖未闭合问题的提问留到后续轮次。
+
+    5. 每轮后等待用户回答，frontier 为空且用户确认共享理解前不执行基于设计的行动。
+
+    6. 过程中主动挑战用词、构造边缘场景，锐化领域模型。
+
+
+    文档沉淀规则：
+
+    - 维护术语表：仅含领域术语与定义，不含实现细节；术语成型时惰性写入。
+
+    - 决策记录：仅当决策同时满足（难以逆转、脱离上下文令人费解、真实权衡结果）时提议创建。
+
+    - 查找事实是助手职责；决策归属用户。
+
+    - 术语表不是规格/草稿本/实现决策仓库。
+
+
+    开始：先复述你对 {{input}} 的理解，再列出第一轮 frontier 问题。'
+  variables: []
+  workflow: null
+meta:
+  source: atlas-methods
+  source_ref: mattpocock/skills:skills/engineering/grill-with-docs/SKILL.md
+  source_hash: 2b70d67bfc00b0073d7d2bf8a0c2ba7f872fb172539a88acd1da04bb150a0e32
+  status: active
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

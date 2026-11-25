@@ -1,0 +1,27 @@
+{
+  "id": "pt_brand_visual",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#brand-visual",
+  "title": "做一张可复用的视觉方向卡",
+  "content": "根据【品牌与受众】和【参考图或方向】制定可复用的视觉卡。描述调色、画面密度、光线、材质、留白和需要保持的特征。给一个合格示例的文字描述和两个常见跑偏及修正。",
+  "content_hash": "fed5fb5d7451216126e01f55458765969b67338dce042439944299877590abb7",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "creative",
+    "视觉风格",
+    "品牌",
+    "art direction"
+  ],
+  "problem_solved": "用规则统一色彩、材质、留白和摄影。",
+  "when_to_use": "分类: 创作与多媒体",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "brand-visual",
+    "category": "creative",
+    "variables": [
+      "品牌与受众",
+      "参考图或方向"
+    ]
+  }
+}

@@ -1,0 +1,60 @@
+id: disc_content_tightening_prose_by_cutting_fluff
+title: 删掉30%废话
+tagline: 删掉重复铺垫与空洞修饰，让核心观点更锋利
+routing:
+  primitive: compress
+  goals:
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - content
+  - editing
+  - clarity
+  - conciseness
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Mail
+  - Chrome
+  pain_point: 写完初稿后总舍不得删，觉得越长越显得认真，结果读起来累、重点不突出。
+  trigger_utterances:
+  - 这段草稿有点啰嗦帮我砍掉三分之一
+  - 帮我标出哪些句子是可有可无的铺垫
+  - 读起来太拖沓了怎么精简
+  - 这段文字重复太多怎么删
+  anti_triggers:
+  - 需要扩充内容而非精简时
+  - 学术论文需要保留详细论证时
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '精简文案自查清单：
+
+    1. 粘贴草稿，先标出所有过渡句与空洞修饰词。
+
+    2. 删除重复表达同一观点的句子，每段只留一句核心。
+
+    3. 将绕弯子的铺垫改为直接结论，必要时移至文末。
+
+    4. 朗读一遍，砍掉读起来拖沓的半句。
+
+    5. 确认原意与个人语气保留，字数减少约30%。
+
+    6. 再读一遍，若无信息损失即定稿。'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/content.json#content-tightening-prose-by-cutting-fluff
+  source_hash: a093572533f29189714e60b328626bea9fd9060efe80dd05619ffe4beedb0c43
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  category: writing_comms
+  subcategory: content_creation
+  collections: []
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

@@ -1,0 +1,60 @@
+id: disc_career_protecting_deep_focus_blocks
+title: 整块时间留给硬活
+tagline: 把复杂任务从碎片时间里解放出来，用整块安静时段推进。
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - career
+  - deep_work
+  - focus
+  - context_switching
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Slack
+  pain_point: 把复杂任务切碎插空做，上下文反复重启，硬活永远推不动。
+  trigger_utterances:
+  - 这周的硬活老做不完
+  - 被消息切碎没法深思
+  - 帮我安排一下深度工作时间
+  - 碎片时间做复杂任务效率低
+  - 怎么给难啃的任务留整块时间
+  anti_triggers:
+  - 只是想找番茄钟计时
+  - 单纯想列待办清单不涉及深度工作
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '- 本周硬活：____；日常琐事：____
+
+    - 为硬活预留 2-3 个 90 分钟整块时段并写入日历
+
+    - 将消息回复、整理、收尾集中到 2-3 个碎片窗口处理
+
+    - 列出深度工作中最常见的 2 种打断（外部/内部），各给 1 条隔离办法
+
+    - 开工前 5 分钟加载上下文（上次结论 / 下一步）
+
+    - 被打断后用 2 分钟恢复上下文再继续'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/career.json#career-protecting-deep-focus-blocks
+  source_hash: 397098c1f3bfb225a8d55be390fe235cb65e2df5052381cd1b6e45010be19f00
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: personal_career
+  subcategory: career
+  collections: []
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

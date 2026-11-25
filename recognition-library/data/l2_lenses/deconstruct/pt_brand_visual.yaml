@@ -1,0 +1,47 @@
+id: pt_brand_visual
+title: 可复用视觉方向卡
+tagline: 把品牌视觉规则固化成可复用卡片
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - creative
+  - visual_style
+  - brand
+  - art_direction
+  app_affinity:
+  - Figma
+  - Notion
+  - Chrome
+  pain_point: 品牌视觉每次重新想配色与风格，输出不统一，缺乏可复用的规则卡
+  trigger_utterances:
+  - 帮我做一张品牌视觉方向卡
+  - 统一一下配色和材质风格
+  - 每次做图风格都不一样怎么办
+  - 给品牌定一套视觉规则
+  - 参考图转成可复用的视觉规范
+  anti_triggers:
+  - 单纯修图调色
+  - 已有完整设计系统只做局部微调
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 请基于【品牌与受众】{{brand_audience}}和【参考图或方向】{{reference_direction}}，制定一张可复用的视觉方向卡。内容包括：1) 调色（主色/辅色/强调色及比例）；2) 画面密度（留白、元素密度）；3)
+    光线（方向、软硬、色温）；4) 材质（纹理、质感）；5) 留白规则；6) 需保持的特征与禁忌。并给出一个合格示例的文字描述，以及两个常见跑偏及修正。输出为结构化卡片，便于复用。
+  variables:
+  - brand_audience
+  - reference_direction
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#brand-visual
+  source_hash: fed5fb5d7451216126e01f55458765969b67338dce042439944299877590abb7
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

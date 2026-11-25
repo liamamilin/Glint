@@ -1,0 +1,28 @@
+{
+  "id": "pt_pivot_table_plan",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#pivot-table-plan",
+  "title": "设计一个透视表",
+  "content": "用【字段和样例】做一个回答【问题】的透视表方案。给行字段、列字段、值字段、聚合方式和筛选项。说明空值和重复记录对汇总的影响，并给一个应与源数据对账的合计值。",
+  "content_hash": "092fab2c3d917dd2bab7a7e9ca241cb7f3d5a69253f410fbb40dc4ae56b00616",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "data",
+    "透视表",
+    "Excel",
+    "分组",
+    "pivot table"
+  ],
+  "problem_solved": "把源字段变成可比较的分组汇总。",
+  "when_to_use": "分类: 数据与表格",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "pivot-table-plan",
+    "category": "data",
+    "variables": [
+      "字段和样例",
+      "问题"
+    ]
+  }
+}

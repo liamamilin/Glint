@@ -1,0 +1,58 @@
+id: pt_human_checkpoints
+title: 设计人工检查点
+tagline: 为多步 AI 工作流标出需人工把关的节点
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - prompt_workflows
+  - human_in_the_loop
+  - agent_workflow
+  - automation
+  app_affinity:
+  - Cursor
+  - ChatGPT
+  - Claude
+  - Notion
+  pain_point: 搭多步 AI 工作流时怕它自动提交、发送或覆盖东西，想明确哪些节点必须由人审核把关
+  trigger_utterances:
+  - 这个 agent 工作流能不能加个人工确认节点
+  - AI 自动发邮件前我想先审一眼
+  - 多步任务里哪几步需要我手动把关
+  - 帮我把重复流程拆成半自动并标出检查点
+  - 别让 AI 自动覆盖文件，先让我确认
+  anti_triggers:
+  - 只是单步问答或让 AI 写文案，不需要流程设计
+  - 只想优化一句提示词而非搭建整条工作流
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '把 {{task_steps}} 设计成半自动工作流，使用 {{allowed_tools_materials}}。
+
+
+    请按以下结构输出：
+
+    1. 节点拆解：列出每一步、输入与输出，标注可自动/需人工。
+
+    2. 交付物与完成信号：每节点的产出物及判定完成的标准。
+
+    3. 失败回退：每节点失败时的回退动作与恢复所需状态。
+
+    4. 人工检查点：在提交、发送或覆盖前，明确需要由人查看哪些信息及审核标准。'
+  variables:
+  - task_steps
+  - allowed_tools_materials
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#human-checkpoints
+  source_hash: b15aecd6b0c4385b35ffae8abfb34dde2c6c46cd54e603baad2c8b7bc0e1440a
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

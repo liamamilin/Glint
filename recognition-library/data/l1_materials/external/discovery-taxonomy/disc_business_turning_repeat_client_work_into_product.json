@@ -1,0 +1,33 @@
+{
+  "id": "disc_business_turning_repeat_client_work_into_product",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-turning-repeat-client-work-into-product",
+  "title": "把“每次帮客户/自己重复做”的方案，抽成可复用的标准化产品",
+  "content": "旧共识（盲区）：每次合作或每个需求情况都不一样，只能从头定制、一事一议。\n\n新现实（破盲视角）：做过 5 次以上的同类定制里，往往 70% 的步骤和骨架都是重复的；把这 70% 固化成标准流程与模板，交付更快、毛利更高。\n\n破冰追问母题：\n- 盘点我过去做过的 [咨询/开发/设计/分析/整理] 工作中，哪些类型出现了至少 3 次以上？帮我找出其中可标准化的 70% 骨架与 30% 可定制项。\n- 如何把一份原本靠“一对一沟通定制”的方案，改造成有清晰步骤、交付清单和固定周期的产品化服务？",
+  "content_hash": "7aef61a7e799573621893cc10ac6fa17baad8c0ce2b5750435dff664e397a838",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "business",
+    "cross-domain",
+    "cost-collapse",
+    "productization",
+    "leverage",
+    "services",
+    "scale"
+  ],
+  "problem_solved": "每次合作或每个需求情况都不一样，只能从头定制、一事一议。",
+  "when_to_use": "做过 5 次以上的同类定制里，往往 70% 的步骤和骨架都是重复的；把这 70% 固化成标准流程与模板，交付更快、毛利更高。",
+  "procedural_steps": [
+    "盘点我过去做过的 [咨询/开发/设计/分析/整理] 工作中，哪些类型出现了至少 3 次以上？帮我找出其中可标准化的 70% 骨架与 30% 可定制项。",
+    "如何把一份原本靠“一对一沟通定制”的方案，改造成有清晰步骤、交付清单和固定周期的产品化服务？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "business-turning-repeat-client-work-into-product",
+    "arena": "business",
+    "lenses": [
+      "cross-domain",
+      "cost-collapse"
+    ]
+  }
+}

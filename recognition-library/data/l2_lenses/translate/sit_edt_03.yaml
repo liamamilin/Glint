@@ -1,0 +1,61 @@
+id: sit_edt_03
+title: 双语地道本地化器
+tagline: 把僵硬机翻重写成地道双语文案并统一术语
+routing:
+  primitive: translate
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - editorial
+  - localization
+  - copywriting
+  - i18n
+  app_affinity:
+  - Notion
+  - Figma
+  - Chrome
+  pain_point: 做中英双语产品、文档或卡片库时，机翻英文僵硬别扭、丢失原本犀利感，且术语译名不统一。
+  trigger_utterances:
+  - 这个英文翻译太硬了帮我润色一下
+  - 中英双语文案怎么翻译得自然点
+  - 机翻的英文没内味
+  - 帮我把这段中文本地化成英文
+  - UI按钮英文翻译太长了
+  anti_triggers:
+  - 纯语法纠错或拼写检查
+  - 长篇学术文献逐字翻译
+execution:
+  action_type: open_resource
+  inject_mode: null
+  content: '双语地道本地化器
+
+
+    定位：不是逐字翻译，而是用另一种语言重新表达一遍。
+
+
+    使用流程：
+
+    1. 提炼意图与语气：让 AI 用一句话概括原句的真实意图与语气色彩（如冷峻、幽默、克制）。
+
+    2. 禁止逐词直译：按目标语言母语习惯重写 2 个版本——标准版 vs. 极简犀利版。
+
+    3. 术语一致性：对照《项目术语表》，确保产品术语与 UI 标签全站译名一致。
+
+
+    交付物：一组无翻译腔的双语对照文案 + 《项目术语表》（JSON/Markdown）。
+
+
+    避坑：UI 按钮/短卡片不追求字数对称；英文通常更宽，优先自然简洁。'
+  variables: []
+  workflow: null
+meta:
+  source: super-individual-toolbox
+  source_ref: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/editorial.json#edt-03
+  source_hash: 6199250f08605669d8db6e9be7930b9595fa2abe20ba7fe5755e0735e004b511
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

@@ -1,0 +1,53 @@
+id: pt_handoff
+title: 可接手交接文档
+tagline: 把项目状态、入口与未决事项整理成接手指南
+routing:
+  primitive: translate
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  - vague
+  domains:
+  - office
+  - handoff
+  - collaboration
+  - project_management
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Slack
+  - Linear
+  pain_point: 项目交接时接手人不清楚目标、现状、入口、已做决定和未决事项，容易重复摸索或踩坑。
+  trigger_utterances:
+  - 帮我把项目资料整理成交接文档
+  - 同事要接手这个项目，先打开什么
+  - 项目交接文档怎么写才可执行
+  - 把当前状态和未完成事项交清楚
+  - 新人接手这个项目要看哪些入口
+  anti_triggers:
+  - 只需要总结会议纪要
+  - 从零开始介绍项目背景
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 请基于我上面提供的项目资料，为{{recipient}}生成一份可直接接手的交接文档。文档必须包含：1. 项目目标与范围；2. 当前状态、已完成事项与未完成事项；3. 关键入口（仓库、文档、环境、账号、运行命令）；4. 已作出的关键决定及理由；5.
+    未决问题、风险与依赖；6. 未来一周优先动作；7. 接手成功验收标准。要求具体、可执行，避免空泛总结。
+  variables:
+  - recipient
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#handoff
+  source_hash: d76ea5348a827d21450c8a14d5a9f188b96b692deb6a7532651d9feb6cdb1406
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  category: writing_comms
+  subcategory: workplace_comms
+  collections: []
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

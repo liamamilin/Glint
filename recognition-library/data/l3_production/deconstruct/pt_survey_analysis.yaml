@@ -1,0 +1,61 @@
+id: pt_survey_analysis
+title: 整理问卷结果
+tagline: 把问卷答卷转成分母、比例与开放题主题的清晰分析
+routing:
+  primitive: deconstruct
+  goals:
+  - digest
+  - evaluate
+  clarity_fit:
+  - concrete
+  domains:
+  - data
+  - survey_analysis
+  - research
+  - analytics
+  app_affinity:
+  - Notion
+  - Chrome
+  - Slack
+  - Obsidian
+  pain_point: 手上有问卷题目和答卷，想按研究问题产出分析，却容易漏掉有效分母、多选/缺失处理和开放题主题归类
+  trigger_utterances:
+  - 帮我整理问卷结果
+  - survey data 怎么分析出比例
+  - 开放题主题怎么归类
+  - 问卷 respondents 的分母要怎么算
+  - 帮我把答卷按研究问题拆解一下
+  anti_triggers:
+  - 只需要一个总体满意度数字
+  - 没有原始答卷只有结论摘要
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请基于我提供的【问卷题目与答卷】，围绕【研究问题】输出结构化分析：
+
+    1. 每题注明有效分母、多选/缺失处理方式，再给出比例及分组差异。
+
+    2. 开放题给出分类规则与代表例。
+
+    3. 样本过小时用人数呈现并提示解释限制。
+
+    研究问题：{{research_question}}'
+  variables:
+  - research_question
+  - 问卷题目与答卷
+  - 研究问题
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#survey-analysis
+  source_hash: 2748988d43dce167b32a0358f4eff61ba64104b6fb3396e929cf604a1ae4455f
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: general
+  subcategory: research
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

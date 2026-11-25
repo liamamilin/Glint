@@ -1,0 +1,29 @@
+{
+  "id": "sit_prd_02",
+  "source": "super-individual-toolbox",
+  "source_ref": "https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/product-architect.json#prd-02",
+  "title": "Taxonomy 分类骨架仪",
+  "content": "定位：先搭好不重不漏的抽屉，再往里装东西\n\n触发场景：当你要做知识库、卡片库、产品目录或数据结构，但分类总是互相打架、越加越乱时。\n\n核心机制：\n- 分离“前台心智模型（用户怎么找）”与“后台正交标签（系统怎么筛）”\n- 对相邻分类强制写出“裁决线”（明确某类灰色内容归 A 不归 B）\n- 锁定受控词表（Enum）与单条记录 Schema，先跑通 4 条样板数据再扩量\n\n交付物：一份含分类边界裁决线与 JSON Schema 的《DESIGN.md》\n\n推荐装配：多轮架构对齐对话 + JSON Schema / 校验脚本\n\n误用警告：不要在只有 5 条零散笔记时过度设计三层嵌套分类，体量上来再抽象。",
+  "content_hash": "6d38742725cf68049d29b4698a40b970e1db6bac92782fa323e95615a4a871c4",
+  "suggested_action_type": "open_resource",
+  "domain_hints": [
+    "product-architect",
+    "产品与架构师"
+  ],
+  "problem_solved": "当你要做知识库、卡片库、产品目录或数据结构，但分类总是互相打架、越加越乱时。",
+  "when_to_use": "当你要做知识库、卡片库、产品目录或数据结构，但分类总是互相打架、越加越乱时。",
+  "procedural_steps": [
+    "分离“前台心智模型（用户怎么找）”与“后台正交标签（系统怎么筛）”",
+    "对相邻分类强制写出“裁决线”（明确某类灰色内容归 A 不归 B）",
+    "锁定受控词表（Enum）与单条记录 Schema，先跑通 4 条样板数据再扩量"
+  ],
+  "anti_patterns": [
+    "不要在只有 5 条零散笔记时过度设计三层嵌套分类，体量上来再抽象。"
+  ],
+  "metadata": {
+    "original_id": "prd-02",
+    "drawer": "product-architect",
+    "drawer_zh": "产品与架构师",
+    "deliverable": "一份含分类边界裁决线与 JSON Schema 的《DESIGN.md》"
+  }
+}

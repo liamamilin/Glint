@@ -1,0 +1,27 @@
+{
+  "id": "pt_weekly_calendar",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#weekly-calendar",
+  "title": "把本周任务排进日历",
+  "content": "把【本周任务和截止时间】排入【实际可用时间段】。给每项估计时长、开始前依赖、适合的时间块和缓冲。超出容量时指出应推迟、简化或委托的任务，并解释依据。",
+  "content_hash": "010b91c48ffaa871f0c6915510f66b8da0d0fd54c2f430c87566cd80a0389ca3",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "planning",
+    "时间安排",
+    "日历",
+    "weekly schedule"
+  ],
+  "problem_solved": "同时考虑截止时间、注意力和留白。",
+  "when_to_use": "分类: 计划与生活",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "weekly-calendar",
+    "category": "planning",
+    "variables": [
+      "本周任务和截止时间",
+      "实际可用时间段"
+    ]
+  }
+}

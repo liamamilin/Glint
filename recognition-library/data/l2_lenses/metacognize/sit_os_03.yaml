@@ -1,0 +1,45 @@
+id: sit_os_03
+title: 上下文切换熔断器
+tagline: 90分钟锁死一个岗位，杂念丢收件箱，切屏污染归零
+routing:
+  primitive: metacognize
+  goals:
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - personal_os
+  - deep_work
+  - focus
+  - productivity
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Notion
+  - Obsidian
+  pain_point: 一整天在写代码、改文案、调UI等不同岗位间反复切屏切窗口，精疲力竭却零交付
+  trigger_utterances:
+  - 今天切了五六个窗口一个都没做完
+  - 上午写代码下午改文案脑子好累
+  - 老在不同岗位间切屏零交付
+  - 深度工作总是被切屏打断
+  - 想锁90分钟只做一件事
+  anti_triggers:
+  - 等待外部紧急回复时强开熔断
+  - 单次熔断超过2小时的长时间专注
+execution:
+  action_type: open_resource
+  inject_mode: null
+  content: 上下文切换熔断器：开工前锁定当前90分钟的唯一虚拟岗位（如只当工程师）；过程中跨岗位灵感/杂念5秒内丢进「暂存收件箱」，绝不顺手切窗口；计时结束后统一分类暂存区，决定丢弃或排入下一个专场。交付：一段无切屏污染的深度产出 +
+    一份《暂存灵感队列》。推荐装配：本地极简倒计时 + 一键速记脚本/语音转文字收件箱。误用警告：单次熔断不超过2小时；等待外部紧急响应窗口期勿强行开启。
+  variables: []
+  workflow: null
+meta:
+  source: super-individual-toolbox
+  source_ref: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/personal-os.json#os-03
+  source_hash: b3a97251b7828807e563b5d941a9447415eebb58940c80afdd9d5a548396c24a
+  status: active
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

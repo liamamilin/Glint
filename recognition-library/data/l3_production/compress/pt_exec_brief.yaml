@@ -1,0 +1,69 @@
+id: pt_exec_brief
+title: 给决策者写一页简报
+tagline: 把背景压缩成老板能立刻拍板的一页简报
+routing:
+  primitive: compress
+  goals:
+  - digest
+  - evaluate
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - office
+  - executive_brief
+  - decision_making
+  - business_communication
+  app_affinity:
+  - Notion
+  - Mail
+  - Feishu
+  - Slack
+  pain_point: 手头一堆背景材料，需要给老板或决策者快速写出一页能拍板的简报，却不知道如何提炼决定、影响、截止日期、选项与取舍
+  trigger_utterances:
+  - 帮我把这份材料写成一页给老板看的简报
+  - 领导要看简报，把背景压缩成能决定下一步
+  - 给决策者写 executive brief，要含决定和截止日期
+  - 把这堆资料整理成一页纸简报给老板拍板
+  - 帮我写个 executive brief 给 VP 看
+  anti_triggers:
+  - 只是帮我写一封普通邮件
+  - 只是总结新闻，不是给决策者拍板
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: '把以下材料写成给{{decision_maker}}的一页简报：
+
+
+    {{input}}
+
+
+    要求：
+
+    - 首段给出所需决定、影响与截止日期；
+
+    - 正文写关键事实、选项、推荐及取舍；
+
+    - 支持推荐的数字标出出处；
+
+    - 明确仍需验证的假设。'
+  variables:
+  - decision_maker
+  workflow:
+    workflow_id: analyze-and-report
+    step: 5
+    next_lens_id: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#exec-brief
+  source_hash: c7c44699649fa7e3b0dac62cf85418d1902055a78b9243b62f76bcd3f02d85cf
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  category: product_business
+  subcategory: indie_business
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

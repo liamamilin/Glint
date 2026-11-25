@@ -1,0 +1,51 @@
+id: pt_pdf_key_points
+title: 按页定位 PDF 重点
+tagline: 按页码与图表证据回查 PDF 重点
+routing:
+  primitive: compress
+  goals:
+  - digest
+  clarity_fit:
+  - concrete
+  domains:
+  - files
+  - pdf
+  - document_qa
+  - pdf_review
+  app_affinity:
+  - Chrome
+  - Notion
+  - Obsidian
+  - ChatGPT
+  pain_point: 读长 PDF 时找不到结论对应哪一页，表格和图表证据难以回查，凭印象回答容易出错
+  trigger_utterances:
+  - 帮我从这个 PDF 里找出关键结论和页码
+  - 这个报告的结论在第几页
+  - PDF 里表格数据在哪一页
+  - 帮我按页定位这个文档的重点
+  - 核对一下这个 PDF 的说法有页码支持吗
+  anti_triggers:
+  - 需要对 PDF 做全文翻译或改写
+  - 只需要一句简短摘要不用页码
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 阅读【PDF 或页码范围】，针对【要核对的问题】给结论和支持页码。表格注明列名和表脚，图片单独说明可见证据。未找到的项列检查范围和未知，不用常识填入文档事实。
+  variables:
+  - PDF 或页码范围
+  - 要核对的问题
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#pdf-key-points
+  source_hash: d4b070683bf659b2e2dbf53f193ed06a4d0efec9c787678e9c30e835f027b803
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: general
+  subcategory: research
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

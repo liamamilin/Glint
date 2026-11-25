@@ -1,0 +1,45 @@
+id: pt_writing_feedback_student
+title: 给学习者可消化的写作反馈
+tagline: 按评分规则给学生作文两处关键修改和自评任务
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - writing_feedback
+  - education
+  - learning
+  - assessment
+  app_affinity:
+  - ChatGPT
+  - Claude
+  - Notion
+  - Obsidian
+  pain_point: 批改学生作文时反馈太多，学生难以消化；需要把修改聚焦到最关键的一两处，并给可执行练习和自评点。
+  trigger_utterances:
+  - 帮我按评分标准给学生作文反馈
+  - 学生作文哪里最需要改，给两处练习
+  - 按学习目标批改作文，别给太多意见
+  - 给学生可消化的写作反馈和自评点
+  anti_triggers:
+  - 直接帮我把作文重写一遍
+  - 学术论文语法润色和降重
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 按【学习目标或评分规则】评阅【学习者作品】。先指出一处成功表达，再找两处最影响目标的问题，给短例和修改任务。最后留一个可自评的检查点，让学习者自己完成下一稿。
+  variables:
+  - 学习目标或评分规则
+  - 学习者作品
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#writing-feedback-student
+  source_hash: 48686f0fc52022d334a526d01e1f0c87ced026b9341c7a78a9e7714d4fc6bd8a
+  status: active
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

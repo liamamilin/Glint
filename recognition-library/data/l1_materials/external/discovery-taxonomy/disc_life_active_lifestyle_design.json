@@ -1,0 +1,33 @@
+{
+  "id": "disc_life_active_lifestyle_design",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/life.json#life-active-lifestyle-design",
+  "title": "从“被动适应生活脚本”反转为“按核心诉求定制生活”",
+  "content": "旧共识（盲区）：上学、工作、买房、结婚、攒钱到退休是一条默认轨道，只能顺着往前走。\n\n新现实（破盲视角）：远程协作与数字工具让地域、节奏和收入来源有了更多组合空间；先想清楚自己真正看重什么、讨厌什么，再反推适合自己的生活结构。\n\n破冰追问母题：\n- 帮我做一次“生活脚本盘点”：列出 3 件我目前顺理成章在做的事，看看哪些是真正符合我价值观的，哪些只是惯性或外界期待。\n- 如果让我拥有一定程度的时间与地点自由，结合 [你的核心收入/技能方向]，设计 2 种完全不同但可行的理想生活原型。",
+  "content_hash": "85edfb8d704115b372e7d4094a083f36d9856c80b34b0670e6726166c37884d6",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "life",
+    "role-inversion",
+    "cross-domain",
+    "lifestyle-design",
+    "geographical-arbitrage",
+    "autonomy",
+    "生活设计"
+  ],
+  "problem_solved": "上学、工作、买房、结婚、攒钱到退休是一条默认轨道，只能顺着往前走。",
+  "when_to_use": "远程协作与数字工具让地域、节奏和收入来源有了更多组合空间；先想清楚自己真正看重什么、讨厌什么，再反推适合自己的生活结构。",
+  "procedural_steps": [
+    "帮我做一次“生活脚本盘点”：列出 3 件我目前顺理成章在做的事，看看哪些是真正符合我价值观的，哪些只是惯性或外界期待。",
+    "如果让我拥有一定程度的时间与地点自由，结合 [你的核心收入/技能方向]，设计 2 种完全不同但可行的理想生活原型。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "life-active-lifestyle-design",
+    "arena": "life",
+    "lenses": [
+      "role-inversion",
+      "cross-domain"
+    ]
+  }
+}

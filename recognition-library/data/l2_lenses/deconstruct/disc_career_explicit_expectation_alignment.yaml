@@ -1,0 +1,71 @@
+id: disc_career_explicit_expectation_alignment
+title: 开工前对齐验收标准
+tagline: 5 分钟把模糊要求变成可验收标准，避免返工
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - career
+  - alignment
+  - expectations
+  - feedback
+  - growth
+  app_affinity:
+  - Notion
+  - Slack
+  - Feishu
+  - Linear
+  pain_point: 接了任务就埋头干，交出来对方不满意反复修改，加班返工；其实一开始没把“做好的标准”说清楚。
+  trigger_utterances:
+  - 需求很模糊，我先做出来再看吧
+  - 老板说帮我改改，到底要改成什么样
+  - kickoff 前怎么确认验收标准
+  - 需求前后矛盾，怎么澄清不显得顶撞
+  - 做完了被返工，怎么避免
+  anti_triggers:
+  - 需求与验收标准已明确的标准化执行
+  - 纯技术故障排查与 bug 定位
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '开工 5 分钟对齐清单
+
+    1. 核心目标：一句话说清要解决什么问题、交付什么结果
+
+    2. 成功标准：用 1-3 条可验收的指标/样例描述“做好”长什么样
+
+    3. 边界/范围：明确做什么、不做什么，以及时间与资源限制
+
+    4. 关键假设与风险：列出不确定点与兜底方案
+
+    5. 确认方式：谁验收、何时验收、以什么形式验收
+
+
+    温和澄清与确认话术
+
+    - 复述理解：我理解目标是 X、范围是 Y，对吗？
+
+    - 提供选项：方案 A 或 B，你倾向哪种？
+
+    - 温和追问：为了不返工，能否给一个参考样例或反例？
+
+    - 边界确认：如果超出范围 X，是否调整排期？
+
+
+    占位：[项目/任务/合作] [简述任务]'
+  variables:
+  - task
+  - context
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/career.json#career-explicit-expectation-alignment
+  source_hash: 4824bc9d14e887cb997d4a1513df36fe7f96d5969cdba12f85b444d6456105be
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

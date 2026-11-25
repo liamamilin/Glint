@@ -1,0 +1,47 @@
+id: pt_project_plan
+title: 项目拆解为行动计划
+tagline: 把目标拆成里程碑、依赖与本周行动表
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - planning
+  - project_management
+  - milestones
+  - execution
+  - risk_management
+  app_affinity:
+  - Notion
+  - Linear
+  - Obsidian
+  - Feishu
+  pain_point: 项目目标有了但落不了地，不清楚先做什么、谁负责、依赖和风险在哪
+  trigger_utterances:
+  - 把这个项目拆成行动计划
+  - 项目目标有了但不知道怎么落地
+  - 帮我排里程碑和依赖
+  - 这周要做什么行动
+  - 项目计划太乱理一下
+  anti_triggers:
+  - 已有详细甘特图只需微调
+  - 纯头脑风暴不需执行计划
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 把【项目目标】拆成可执行计划。资源和约束是【人员、时间和依赖】。交付分阶段里程碑、依赖顺序、待确认的风险和本周行动表。每项行动用动词开头，并写明交付物；未知负责人标为待分配。
+  variables:
+  - 项目目标
+  - 人员、时间和依赖
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#project-plan
+  source_hash: 4928ce902ba76cb81a8d2d1d1e8cf621f2b3fd86702c5ce01e13e10099865fa5
+  status: active
+  base_weight: 1.0
+  confidence: 0.86
+  version: 1

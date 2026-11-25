@@ -1,0 +1,27 @@
+{
+  "id": "pt_ci_failure",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#ci-failure",
+  "title": "定位 CI 失败并整理可验证的修复",
+  "content": "分析【CI 日志、提交与命令】。找出第一个真实失败，区分后续错误是否由它引起。给与 CI 尽量一致的本地复现方法、最小改动建议、验证命令及需检查的配置差异。",
+  "content_hash": "06ceb0db966ccb926ea1c7c690e79028196dbea7d7244dc0d57fa4d8ec85a4fb",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "coding",
+    "CI",
+    "CI 失败",
+    "GitHub Actions",
+    "构建失败"
+  ],
+  "problem_solved": "从日志找到首个有效错误和最短验证。",
+  "when_to_use": "分类: 开发与调试",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "ci-failure",
+    "category": "coding",
+    "variables": [
+      "CI 日志、提交与命令"
+    ]
+  }
+}

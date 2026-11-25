@@ -1,0 +1,33 @@
+{
+  "id": "disc_content_evergreen_reference_hubs",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/content.json#content-evergreen-reference-hubs",
+  "title": "做“随手可查的常青手册”而非“保质期 48 小时的热点”",
+  "content": "旧共识（盲区）：内容要靠追当天热点和情绪共鸣才能拿到点击和关注。\n\n新现实（破盲视角）：热点 48 小时就凉，但一份结构清晰、边界明确的“避坑对照表 / 决策清单 / 术语词典”会在未来几年被反复收藏、搜索和引用。\n\n破冰追问母题：\n- 在 [你的专业或兴趣领域] 中，新手或从业者最容易反复查错、踩坑的 10 个概念或决策点是什么？帮我搭一份“常青速查手册”的目录大纲。\n- 把一篇我以前写过、但很快沉底的观点文章：[简述文章核心]，改写成一张“结构化决策矩阵/避坑清单”，提升它的长期复用价值。",
+  "content_hash": "0a166fcff68e352731316cf7b78ae3e4e1145f740ccbdd5231b71d086aae0ede",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "content",
+    "first-principles",
+    "invisible-friction",
+    "evergreen",
+    "reference",
+    "search",
+    "documentation"
+  ],
+  "problem_solved": "内容要靠追当天热点和情绪共鸣才能拿到点击和关注。",
+  "when_to_use": "热点 48 小时就凉，但一份结构清晰、边界明确的“避坑对照表 / 决策清单 / 术语词典”会在未来几年被反复收藏、搜索和引用。",
+  "procedural_steps": [
+    "在 [你的专业或兴趣领域] 中，新手或从业者最容易反复查错、踩坑的 10 个概念或决策点是什么？帮我搭一份“常青速查手册”的目录大纲。",
+    "把一篇我以前写过、但很快沉底的观点文章：[简述文章核心]，改写成一张“结构化决策矩阵/避坑清单”，提升它的长期复用价值。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "content-evergreen-reference-hubs",
+    "arena": "content",
+    "lenses": [
+      "first-principles",
+      "invisible-friction"
+    ]
+  }
+}

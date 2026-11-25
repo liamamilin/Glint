@@ -1,0 +1,56 @@
+id: pt_write_tests
+title: 关键行为测试设计
+tagline: 用最少用例覆盖关键边界与回归
+routing:
+  primitive: deconstruct
+  goals:
+  - debug
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - engineering
+  - testing
+  - unit_testing
+  - regression
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Terminal
+  pain_point: 写完功能或修完 bug 后，不知道该测哪些边界，容易漏掉真正会坏的场景，测试要么过多要么覆盖不到关键回归。
+  trigger_utterances:
+  - 帮我给这个函数补点测试，别漏边界
+  - 修完这个 bug 要加回归测试
+  - 这个接口的单测该怎么写
+  - 帮我挑最少的测试用例覆盖关键行为
+  - 给这个修复写 unit test，含边界 case
+  anti_triggers:
+  - 只想要整体代码评审，不写测试
+  - 需要重新设计产品功能，不是测现有行为
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 请为 {{target}} 补充最小但有区分力的测试。行为约束：{{behavior_constraint}}。测试框架：{{test_framework}}。要求：只选能区分正确实现与常见错误实现的最少案例；至少包含一个关键边界；每个案例写清输入、预期结果；最后给出运行命令。
+  variables:
+  - target
+  - behavior_constraint
+  - test_framework
+  workflow:
+    workflow_id: fix-and-release
+    step: 3
+    next_lens_id: pt_pr_description
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#write-tests
+  source_hash: c6832edc9c3eb58d82f90dd54411e56acca827031c6b24b25c9ba32609c6e795
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: engineering
+  subcategory: code_review
+  collections: []
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

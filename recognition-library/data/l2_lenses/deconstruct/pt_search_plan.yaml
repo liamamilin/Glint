@@ -1,0 +1,45 @@
+id: pt_search_plan
+title: 制定检索方案
+tagline: 把难搜的问题转成可执行的搜索方案
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - research
+  - search
+  - literature
+  - keywords
+  app_affinity:
+  - Chrome
+  - Notion
+  - Obsidian
+  pain_point: 用户面对某个主题不知道该搜什么词、去哪里查、如何筛选，搜索结果杂乱无用
+  trigger_utterances:
+  - 这个主题资料搜不到
+  - 帮我列几个搜索关键词
+  - 不知道去哪查文献
+  - 搜出来的东西太杂了
+  - 帮我制定检索方案
+  anti_triggers:
+  - 用户只是想总结已找到的资料
+  - 用户需要对单篇文献做批判性评读
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 我在找{{topic}}的资料，用途是{{purpose}}。给 5 条可直接复制的搜索式，覆盖不同术语；列出优先查的数据库或网站、筛选条件和应排除的结果。指出一种容易遗漏的来源类型及它能补哪项证据。
+  variables:
+  - topic
+  - purpose
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#search-plan
+  source_hash: 9e74b9d964868e51a581c1ed17d05a2580cbb1a988dc215b655e3a5661afd1da
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

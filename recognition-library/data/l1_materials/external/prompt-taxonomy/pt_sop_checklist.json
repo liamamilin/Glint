@@ -1,0 +1,28 @@
+{
+  "id": "pt_sop_checklist",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#sop-checklist",
+  "title": "把流程写成操作清单",
+  "content": "将【现有流程或录屏文字】写成供【操作人员】使用的清单。每一步列输入、操作、完成判据和异常处理；在会影响结果的分岔处注明何时升级。末尾给一个完整样例。",
+  "content_hash": "795e61a5a4d9fe823c5c749d9bc2537abcfd3aa29360ae2c60ec7baba835c7c9",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "office",
+    "流程",
+    "操作手册",
+    "清单",
+    "SOP"
+  ],
+  "problem_solved": "将知识沉淀为能按步骤复查的文档。",
+  "when_to_use": "分类: 办公与协作",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "sop-checklist",
+    "category": "office",
+    "variables": [
+      "现有流程或录屏文字",
+      "操作人员"
+    ]
+  }
+}

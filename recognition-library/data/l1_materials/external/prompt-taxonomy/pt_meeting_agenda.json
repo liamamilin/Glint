@@ -1,0 +1,28 @@
+{
+  "id": "pt_meeting_agenda",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#meeting-agenda",
+  "title": "从会议目标生成议程",
+  "content": "为【会议目的】拟一个【总时长】议程，参与者是【角色】。每项写预计时间、准备材料、负责人和期望结果。标出需要做决定的事项，以及适合会前异步阅读的材料。",
+  "content_hash": "bc9dc0e441af2bb88f8c63f76272a74f6613f01fdca9755ca344e790ff4fdf36",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "office",
+    "议程",
+    "会议",
+    "agenda"
+  ],
+  "problem_solved": "把讨论时间留给需要共同决定的内容。",
+  "when_to_use": "分类: 办公与协作",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "meeting-agenda",
+    "category": "office",
+    "variables": [
+      "会议目的",
+      "总时长",
+      "角色"
+    ]
+  }
+}

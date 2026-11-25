@@ -1,0 +1,28 @@
+{
+  "id": "pt_listen_practice",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#listen-practice",
+  "title": "把音频或转录变成听力训练",
+  "content": "用【音频或带时码转录】为【等级和目标】设计听力练习。依次给听大意、抓细节和跟读片段；把答案和关键原句放末尾。只有文字时给练习脚本，说明无法据此评估原音发音。",
+  "content_hash": "3a481af85a2e44a1ec517138a649aa70d5acac2c050f2fce5c537c2a935d3f90",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "language",
+    "听力",
+    "听写",
+    "跟读",
+    "listening"
+  ],
+  "problem_solved": "从大意到细节再到跟读。",
+  "when_to_use": "分类: 语言练习与本地化",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "listen-practice",
+    "category": "language",
+    "variables": [
+      "音频或带时码转录",
+      "等级和目标"
+    ]
+  }
+}

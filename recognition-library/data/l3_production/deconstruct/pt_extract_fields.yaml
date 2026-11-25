@@ -1,0 +1,67 @@
+id: pt_extract_fields
+title: 提取字段结构化
+tagline: 把文档记录整理成 JSON/CSV 字段表
+routing:
+  primitive: deconstruct
+  goals:
+  - digest
+  clarity_fit:
+  - concrete
+  domains:
+  - data_extraction
+  - structured_data
+  - json
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  pain_point: 手里一堆非结构化的文档或记录，想快速整理成字段表，手动复制粘贴容易漏字段、格式混乱
+  trigger_utterances:
+  - 帮我从这份会议纪要里把字段提取出来
+  - 把这个文档转成 JSON 表格
+  - 从这些记录里抽字段整理成 CSV
+  - 把这段文字结构化一下
+  - 提取字段生成 JSON
+  anti_triggers:
+  - 只是想摘要文章要点
+  - 需要重新组织段落语气
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: '请从以下原始材料中提取指定字段，输出符合约定的 JSON 或 CSV。缺失字段填 null；若字段值是从上下文推断而非原文直接出现，请在结果中标注 inferred: true。至少提供两条「原文→结果」对应样例供抽查。
+
+
+    原始材料：
+
+    {{input}}
+
+
+    提取要求：
+
+    - 目标字段：{{fields}}
+
+    - 输出格式：{{format}}
+
+    - 每行粒度：{{granularity}}
+
+
+    输出仅包含结构化结果与样例，不要额外解释。'
+  variables:
+  - fields
+  - format
+  - granularity
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#extract-fields
+  source_hash: aa746b3532a38a77ea5146d7b92d2850c420798428009382ac54a777f5e94ab8
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: general
+  subcategory: problem_solving
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

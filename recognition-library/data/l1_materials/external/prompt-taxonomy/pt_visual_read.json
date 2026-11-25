@@ -1,0 +1,28 @@
+{
+  "id": "pt_visual_read",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#visual-read",
+  "title": "读图并用证据说明",
+  "content": "观察【图片或截图】，重点回答【问题】。先描述可见证据并定位区域，再给解释。看不清的文字标成「无法辨认」，有多种解释时列出支持和反对证据。最后给一个可用于核对结论的动作。",
+  "content_hash": "0aef737198c0e6c4c13f3049910a9c855ee45d026aae7cfdeb91d75e614e3b83",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "creative",
+    "读图",
+    "截图",
+    "OCR",
+    "vision"
+  ],
+  "problem_solved": "把直接看见的东西和推测分别写清楚。",
+  "when_to_use": "分类: 创作与多媒体",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "visual-read",
+    "category": "creative",
+    "variables": [
+      "图片或截图",
+      "问题"
+    ]
+  }
+}

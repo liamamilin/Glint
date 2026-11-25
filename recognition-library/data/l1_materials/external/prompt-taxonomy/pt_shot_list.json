@@ -1,0 +1,27 @@
+{
+  "id": "pt_shot_list",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#shot-list",
+  "title": "从脚本列出拍摄清单",
+  "content": "从【脚本】为【设备、场地与拍摄时间】生成镜头清单。按场地和机位组织，列景别、动作、声音和要准备的道具。指出没拍到会影响剪辑的镜头，并给可替代拍法。",
+  "content_hash": "0dd62f2f8c56725f705b57ce4b353dcc40782a32ced53fda1d314fda7b208ed4",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "creative",
+    "拍摄",
+    "镜头表",
+    "shot list"
+  ],
+  "problem_solved": "让场地、镜头和制作顺序都可执行。",
+  "when_to_use": "分类: 创作与多媒体",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "shot-list",
+    "category": "creative",
+    "variables": [
+      "脚本",
+      "设备、场地与拍摄时间"
+    ]
+  }
+}

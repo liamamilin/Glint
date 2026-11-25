@@ -1,0 +1,33 @@
+{
+  "id": "disc_build_graceful_fallback_when_ai_fails",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/build.json#build-graceful-fallback-when-ai-fails",
+  "title": "给 AI 能力配“确定性兜底”，别让偶尔抽风卡死整条流程",
+  "content": "旧共识（盲区）：既然引入了 AI，就让模型从头包揽所有解析、分类和格式化。\n\n新现实（破盲视角）：确定性规则能搞定的事别交给概率模型；AI 拿不到预期格式或超时时，自动走规则兜底或跳过留待人工，整条流水线就不会轻易瘫痪。\n\n破冰追问母题：\n- 我有一个依赖 AI 输出的 [工作流/脚本/工具]：[简述用途]，偶尔会出现格式不对或结果偏差。请帮我设计一套“先规则/校验，不行再降级兜底”的安全方案。\n- 审视 [你的某个 AI 应用或工作流]，指出哪两个环节最适合用传统确定性逻辑分担，减少模型的负担与不确定性？",
+  "content_hash": "d9ac5a116514d46d86e6ddf7ad732bd1f87ac9bb2fb39c53362686a9ba5fae48",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "build",
+    "invisible-friction",
+    "first-principles",
+    "fallback",
+    "resilience",
+    "deterministic",
+    "reliability"
+  ],
+  "problem_solved": "既然引入了 AI，就让模型从头包揽所有解析、分类和格式化。",
+  "when_to_use": "确定性规则能搞定的事别交给概率模型；AI 拿不到预期格式或超时时，自动走规则兜底或跳过留待人工，整条流水线就不会轻易瘫痪。",
+  "procedural_steps": [
+    "我有一个依赖 AI 输出的 [工作流/脚本/工具]：[简述用途]，偶尔会出现格式不对或结果偏差。请帮我设计一套“先规则/校验，不行再降级兜底”的安全方案。",
+    "审视 [你的某个 AI 应用或工作流]，指出哪两个环节最适合用传统确定性逻辑分担，减少模型的负担与不确定性？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "build-graceful-fallback-when-ai-fails",
+    "arena": "build",
+    "lenses": [
+      "invisible-friction",
+      "first-principles"
+    ]
+  }
+}

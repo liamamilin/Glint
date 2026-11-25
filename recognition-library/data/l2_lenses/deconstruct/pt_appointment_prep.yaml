@@ -1,0 +1,47 @@
+id: pt_appointment_prep
+title: 预约前材料整理
+tagline: 把材料、时间线和问题整理成可带去的一页清单
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - appointment_prep
+  - personal_admin
+  - healthcare
+  - planning
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Mail
+  - Chrome
+  pain_point: 去就医、咨询或办理事务前，不知道该带什么材料、时间线混乱、问题没列好，到现场手忙脚乱。
+  trigger_utterances:
+  - 明天去看医生要带什么
+  - 预约咨询前帮我列清单
+  - 就诊前材料整理一下
+  - 我约了牙医要准备啥
+  - 帮我把问题和记录整理成一页
+  anti_triggers:
+  - 纯日程提醒或预约时间管理
+  - 与医疗或咨询无关的差旅打包清单
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 我准备去【预约类型和地点】，目前有【相关记录和问题】。帮我整理一页可带去的材料清单、按时间排列的客观记录，以及必须当面问的三个问题。分清已经准备、待确认与当天携带的项目。
+  variables:
+  - 预约类型和地点
+  - 相关记录和问题
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#appointment-prep
+  source_hash: 989bbdf33208c24d6cebb83bb83cfb5e74424c27313282e1053a1324aef26786
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

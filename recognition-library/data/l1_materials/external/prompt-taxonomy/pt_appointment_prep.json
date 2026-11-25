@@ -1,0 +1,28 @@
+{
+  "id": "pt_appointment_prep",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#appointment-prep",
+  "title": "整理预约前需要带的信息",
+  "content": "我准备去【预约类型和地点】，目前有【相关记录和问题】。帮我整理一页可带去的材料清单、按时间排列的客观记录，以及必须当面问的三个问题。分清已经准备、待确认与当天携带的项目。",
+  "content_hash": "989bbdf33208c24d6cebb83bb83cfb5e74424c27313282e1053a1324aef26786",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "planning",
+    "预约",
+    "咨询准备",
+    "就诊前",
+    "appointment checklist"
+  ],
+  "problem_solved": "把材料、变化时间线和问题写给服务人员。",
+  "when_to_use": "分类: 计划与生活",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "appointment-prep",
+    "category": "planning",
+    "variables": [
+      "预约类型和地点",
+      "相关记录和问题"
+    ]
+  }
+}

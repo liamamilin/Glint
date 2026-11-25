@@ -1,0 +1,46 @@
+id: pt_files_to_markdown
+title: 多源文件转 Markdown
+tagline: 把多文件转成可检索的 Markdown，保留边界与来源
+routing:
+  primitive: translate
+  goals:
+  - optimize
+  - digest
+  clarity_fit:
+  - concrete
+  domains:
+  - document_conversion
+  - markdown
+  - files
+  - format_conversion
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  - Cursor
+  pain_point: 用户手里一堆 PDF/Word/网页等异构文件，想统一成可搜索的 Markdown，却担心丢失标题层级、表格、图片说明和来源边界
+  trigger_utterances:
+  - 把这些文件转成 md
+  - 多文件转 Markdown 保留来源
+  - convert these files to markdown
+  - 把 PDF 转成 Markdown 方便检索
+  - 文件包转 md 保留边界
+  anti_triggers:
+  - 把单个网页总结成一段话
+  - 翻译整篇英文文章
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 将【文件包】转换为供【目标用途】使用的 Markdown。每个原文件独立成节，保留标题层级、表头、列表及图说明。未能转换的表格、图或格式单列并定位到来源。
+  variables:
+  - '{''name'': ''文件包'', ''description'': ''待转换的文件集合/路径/内容''}'
+  - '{''name'': ''目标用途'', ''description'': ''转换后的 Markdown 用途，如检索/归档/发布''}'
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#files-to-markdown
+  source_hash: 600170378ba1211c81e9ff8c2d5388213f9ec8b1b2192dc9a852b5d51ea6c4e3
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

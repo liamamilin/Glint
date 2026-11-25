@@ -1,0 +1,82 @@
+id: pt_prompt_rubric
+title: 可重复评测规则
+tagline: 把主观要求转成可判定评分条款
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - prompt_engineering
+  - evaluation
+  - rubric
+  - llm_workflows
+  app_affinity:
+  - ChatGPT
+  - Claude
+  - Notion
+  - Cursor
+  pain_point: 评审 AI 输出时标准含糊，不同评审者结论不一致，难以复现或定位失败原因。
+  trigger_utterances:
+  - 这个输出好不好帮我定个评分标准
+  - 评审标准太主观了怎么写 rubric
+  - 给模型输出设计可重复评测规则
+  - 不同人打分不一样帮我拆成检查项
+  - 这个 prompt 结果怎么打分更客观
+  anti_triggers:
+  - 单纯润色文案或总结文档，不涉及评分/评测。
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '为【{{model_task}}】的输出设计可重复使用的评测规则（Rubric）。
+
+
+    输入上下文：
+
+    - 模型任务：{{model_task}}
+
+    - 输出示例：{{output_example}}
+
+
+    请按以下结构产出：
+
+    1. 任务目标与边界：一句话定义成功；列出不评范围。
+
+    2. 评分维度：3-6 个互斥维度，每个维度含权重（总和 100%）。
+
+    3. 每条检查项：检查项 / 通过标准（可观察证据） / 失败例 / 允许证据类型。
+
+    4. 硬错误 vs 可容忍缺点：硬错误直接 0 分或失败；可容忍缺点扣分但不阻断。
+
+    5. 判定例：针对最容易分歧的 2 项，给 2-3 个边界样例及判定理由。
+
+    6. 评分流程：评审顺序、证据记录、复核规则、tie-break。
+
+    7. 输出格式：Markdown 表格 + JSON 示例。
+
+
+    要求：所有标准必须可观察、可判定、可复现；避免“质量高”“自然”等不可判定词；每条失败例必须可对应到证据。'
+  variables:
+  - model_task
+  - output_example
+  - '{{model_task}}'
+  workflow:
+    workflow_id: evaluate-a-prompt
+    step: 3
+    next_lens_id: pt_compare_prompts
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#prompt-rubric
+  source_hash: f21204bb7b777a64fe040f2632e097ff10db4db053e02907fb8bdc9855fb1eec
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: engineering
+  subcategory: architecture
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

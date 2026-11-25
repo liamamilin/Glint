@@ -1,0 +1,28 @@
+{
+  "id": "pt_job_description",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#job-description",
+  "title": "拆解岗位说明",
+  "content": "拆解【职位说明】，对照【我的经历】。表格列出要求、原句、优先级、我的证据和待核对点。最后给三个向招聘方问的具体问题，以及最值得准备的一段经历。",
+  "content_hash": "4094015fc608ff34206b6ded3cdd2e9edb4cbed25432147e7984d98608874e0e",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "career",
+    "招聘",
+    "职位",
+    "JD",
+    "job description"
+  ],
+  "problem_solved": "区分必备要求、加分项和待核对问题。",
+  "when_to_use": "分类: 求职与职业",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "job-description",
+    "category": "career",
+    "variables": [
+      "职位说明",
+      "我的经历"
+    ]
+  }
+}

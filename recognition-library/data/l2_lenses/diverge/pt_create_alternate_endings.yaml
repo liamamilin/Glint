@@ -1,0 +1,46 @@
+id: pt_create_alternate_endings
+title: 故事分歧结局设计
+tagline: 为同一故事生成3个动机一致的备选结局
+routing:
+  primitive: diverge
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - creative_writing
+  - storytelling
+  - fiction
+  - screenwriting
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 故事只有一个结局或结局靠巧合推进，想探索不同选择带来的合理分支和代价
+  trigger_utterances:
+  - 这个故事结局太单一了，帮我想几个不同结局
+  - 想让结局来自角色选择而不是巧合，怎么拆
+  - 同一个大纲能写出几种不同结局
+  - 帮我设计三个 alternate endings
+  - 这个剧情结尾不够好，想多试几种收束方式
+  anti_triggers:
+  - 只润色现有结局文字，不改变剧情分支
+  - 总结故事已有情节，不生成新结局
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 基于【现有故事或大纲】设计【希望变化的感觉】的三个结局。逐个写关键决定、代价、回收的伏笔，以及需要改动的前文细节。推荐一个与人物动机最一致的方向。
+  variables:
+  - story_or_outline
+  - desired_feeling
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#create-alternate-endings
+  source_hash: aad24a2c5eafdbefb2b750be83cb782784217e4b1d165e98f3af28f62f2dc8dd
+  status: active
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

@@ -1,0 +1,62 @@
+id: disc_content_field_notes_from_real_runs
+title: 亲手踩坑写实验日志
+tagline: 用真实试错与意外转折替代空洞的五步法则
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - content
+  - writing
+  - authenticity
+  - field_notes
+  - experiments
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 想把一个道理讲透却总先搭高大上的三层模型/五步法则再包装金句，内容空洞无稀缺感
+  trigger_utterances:
+  - 这架构太乱了帮我理一下
+  - 我想写点有干货的内容但总觉得在套模板
+  - 帮我把这次踩坑整理成实验记录
+  - AI生成的五步法则看着都一样怎么写出真实感
+  - 在后端实战里有哪些教程不会写但天天遇到的细节
+  anti_triggers:
+  - 需要把多篇资料压缩成摘要或TL;DR
+  - 对单一方案做红队挑刺找漏洞
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '实验记录写作清单：
+
+    1. 回顾最近一次真实尝试/踩坑，写下试了什么、发生了什么意外。
+
+    2. 提取书本与教程里很少写、但实战中经常遇到的真实细节（失败截图、数据、转折点）。
+
+    3. 去掉空洞鸡汤与高大上框架，只保留诚实、克制、有细节的叙述。
+
+    4. 按“旧共识 → 新现实 → 破冰追问”的结构组织，突出稀缺感。
+
+    5. 自检：是否包含至少一处亲手试错的证据与一次意外转折。
+
+
+    破冰追问模板：
+
+    - 我最近做了一次真实尝试或踩坑：[简述你试了什么、发生了什么意外]。帮我把它整理成一篇诚实、克制、有细节的“实验记录”，去掉空洞鸡汤。
+
+    - 在 [你的领域] 里，有哪些“书本和教程里很少写、但实战中经常遇到”的真实细节，适合写成短小精悍的实战笔记？'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/content.json#content-field-notes-from-real-runs
+  source_hash: 3683484980d8a468f7f91c83278da865c64bbc06f5d47b56552e1cfc305b6378
+  status: active
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

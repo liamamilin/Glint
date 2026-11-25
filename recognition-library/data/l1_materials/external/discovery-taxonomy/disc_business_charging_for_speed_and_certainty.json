@@ -1,0 +1,33 @@
+{
+  "id": "disc_business_charging_for_speed_and_certainty",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-charging-for-speed-and-certainty",
+  "title": "向愿意为“省时间与确定性”买单的人收溢价",
+  "content": "旧共识（盲区）：网上很多信息、教程和开源方案都是免费的，所以别人肯定不愿意为同类东西付钱。\n\n新现实（破盲视角）：免费意味着“自己花时间折腾、自己排错、自己承担试错风险”；对忙碌的个人或小团队来说，花钱买现成省下的时间与确定性本身就是高价值。\n\n破冰追问母题：\n- 在 [你熟悉的领域] 里，虽然网上有免费教程或开源方案，但新手或忙人自己动手最容易卡在哪 3 步？如何把这 3 步打包成省心的付费方案？\n- 对比“自己从零拼装免费工具”与“直接使用开箱即用的方案”，帮我提炼出对 [某类买家] 最有说服力的 3 个时间/风险价值点。",
+  "content_hash": "204087b9febb6c1ac44c020d4b6f604193e6feeadb74cf0c8ea2c05772fdfc31",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "business",
+    "invisible-friction",
+    "cost-collapse",
+    "speed",
+    "certainty",
+    "value-pricing",
+    "time-saving"
+  ],
+  "problem_solved": "网上很多信息、教程和开源方案都是免费的，所以别人肯定不愿意为同类东西付钱。",
+  "when_to_use": "免费意味着“自己花时间折腾、自己排错、自己承担试错风险”；对忙碌的个人或小团队来说，花钱买现成省下的时间与确定性本身就是高价值。",
+  "procedural_steps": [
+    "在 [你熟悉的领域] 里，虽然网上有免费教程或开源方案，但新手或忙人自己动手最容易卡在哪 3 步？如何把这 3 步打包成省心的付费方案？",
+    "对比“自己从零拼装免费工具”与“直接使用开箱即用的方案”，帮我提炼出对 [某类买家] 最有说服力的 3 个时间/风险价值点。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "business-charging-for-speed-and-certainty",
+    "arena": "business",
+    "lenses": [
+      "invisible-friction",
+      "cost-collapse"
+    ]
+  }
+}

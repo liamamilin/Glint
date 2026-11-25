@@ -1,0 +1,27 @@
+{
+  "id": "pt_product_requirements",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#product-requirements",
+  "title": "把问题写成产品需求",
+  "content": "根据【用户问题和证据】写一份关于【产品变更】的短 PRD。包含目标用户、核心场景、范围、依赖、交付验收和未解问题。用至少一个正常场景和一个边界场景解释交付行为。",
+  "content_hash": "d9f8e51263edb36e605f203e449f85873c381d83ca25298fd8aa3b93752293a2",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "product",
+    "PRD",
+    "产品需求",
+    "product specification"
+  ],
+  "problem_solved": "把用户目标变成范围和可验收行为。",
+  "when_to_use": "分类: 产品与业务",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "product-requirements",
+    "category": "product",
+    "variables": [
+      "用户问题和证据",
+      "产品变更"
+    ]
+  }
+}

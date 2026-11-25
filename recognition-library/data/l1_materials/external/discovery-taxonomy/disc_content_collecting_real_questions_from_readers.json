@@ -1,0 +1,33 @@
+{
+  "id": "disc_content_collecting_real_questions_from_readers",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/content.json#content-collecting-real-questions-from-readers",
+  "title": "从“别人真正在问的问题”里找选题，而不是闭门造车猜热门",
+  "content": "旧共识（盲区）：想写内容时坐在电脑前硬想选题，或者去翻别人爆了什么标题跟着写。\n\n新现实（破盲视角）：评论区、私信、群聊里的真实困惑和卡点，往往藏着最贴近现实的需求；把高频真问题整理成解答或指南，天然就有共鸣和实用价值。\n\n破冰追问母题：\n- 这是我最近在 [评论区/群聊/私信/日常交流] 听到的几个真实问题或困惑：[粘贴 3-5 条真实提问]。请帮我归类并提炼出 2～3 个值得写透的内容切口。\n- 针对 [你的专业或兴趣方向]，新手和进阶者最常卡住但不好意思开口问的 5 个问题是什么？",
+  "content_hash": "1e33f48146dc2822937f046abe5e896f0579abde74376f3f25ef68ea2f657fa9",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "content",
+    "role-inversion",
+    "invisible-friction",
+    "audience",
+    "questions",
+    "topics",
+    "feedback"
+  ],
+  "problem_solved": "想写内容时坐在电脑前硬想选题，或者去翻别人爆了什么标题跟着写。",
+  "when_to_use": "评论区、私信、群聊里的真实困惑和卡点，往往藏着最贴近现实的需求；把高频真问题整理成解答或指南，天然就有共鸣和实用价值。",
+  "procedural_steps": [
+    "这是我最近在 [评论区/群聊/私信/日常交流] 听到的几个真实问题或困惑：[粘贴 3-5 条真实提问]。请帮我归类并提炼出 2～3 个值得写透的内容切口。",
+    "针对 [你的专业或兴趣方向]，新手和进阶者最常卡住但不好意思开口问的 5 个问题是什么？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "content-collecting-real-questions-from-readers",
+    "arena": "content",
+    "lenses": [
+      "role-inversion",
+      "invisible-friction"
+    ]
+  }
+}

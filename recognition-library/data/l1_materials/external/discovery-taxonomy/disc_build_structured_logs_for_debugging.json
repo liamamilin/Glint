@@ -1,0 +1,33 @@
+{
+  "id": "disc_build_structured_logs_for_debugging",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/build.json#build-structured-logs-for-debugging",
+  "title": "给脚本和工作流留“结构化痕迹”，出事时 1 分钟定位",
+  "content": "旧共识（盲区）：小工具或自动化平时能跑通就行，出错了再临时加打印或靠猜。\n\n新现实（破盲视角）：记录关键输入摘要、耗时、跳过原因与最后成功状态，一旦哪天静默失效或结果异常，立刻能顺藤摸瓜找到根因。\n\n破冰追问母题：\n- 我有一个日常跑的 [脚本/自动化/工作流]：[简述流程]。帮我设计一套轻量日志与运行摘要格式，既不会把盘塞爆，又能让我在出错时快速定位原因。\n- 在 [你的个人工具或自动化场景] 中，哪些“静默失败（没报错但结果不对）”最隐蔽？如何加一个简单自检提示？",
+  "content_hash": "c32b7d7b2ddf93c0af2f57f4d1cc06512653158f564aa846ae5107249f6745b8",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "build",
+    "invisible-friction",
+    "first-principles",
+    "logging",
+    "debugging",
+    "observability",
+    "scripts"
+  ],
+  "problem_solved": "小工具或自动化平时能跑通就行，出错了再临时加打印或靠猜。",
+  "when_to_use": "记录关键输入摘要、耗时、跳过原因与最后成功状态，一旦哪天静默失效或结果异常，立刻能顺藤摸瓜找到根因。",
+  "procedural_steps": [
+    "我有一个日常跑的 [脚本/自动化/工作流]：[简述流程]。帮我设计一套轻量日志与运行摘要格式，既不会把盘塞爆，又能让我在出错时快速定位原因。",
+    "在 [你的个人工具或自动化场景] 中，哪些“静默失败（没报错但结果不对）”最隐蔽？如何加一个简单自检提示？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "build-structured-logs-for-debugging",
+    "arena": "build",
+    "lenses": [
+      "invisible-friction",
+      "first-principles"
+    ]
+  }
+}

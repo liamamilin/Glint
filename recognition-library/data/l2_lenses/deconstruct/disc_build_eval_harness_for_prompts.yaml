@@ -1,0 +1,64 @@
+id: disc_build_eval_harness_for_prompts
+title: 高频 Prompt 建 5 条样例
+tagline: 固定 3-5 条典型+刁钻样例，每次改动一眼看出是真强还是偏科
+routing:
+  primitive: deconstruct
+  goals:
+  - evaluate
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - build
+  - evals
+  - prompts
+  - regression
+  - testing
+  app_affinity:
+  - Cursor
+  - ChatGPT
+  - Claude
+  - Notion
+  pain_point: 改完提示词或工作流只拿手头一条测一下，容易修好 A 搞坏 B，不知道改动是真变强还是只是偏科
+  trigger_utterances:
+  - 这个 prompt 改了之后有点抽风，帮我建个最小评测集
+  - 我这个工作流每次改完只测一条，怕修好 A 搞坏 B
+  - 帮我给这个高频 prompt 设计几条测试样例和评分标准
+  - 想给提示词做回归测试，怎么挑典型和边界案例
+  anti_triggers:
+  - 从零写一个全新 prompt
+  - 只想润色一句话或一段文案
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '## 建 5 条样例评测集
+
+    - [ ] 明确被测对象：[Prompt/工作流/自动化规则] + 用途
+
+    - [ ] 设计 4 条样例：1 常规 + 1 边界 + 1 刁钻 + 1 反例
+
+    - [ ] 定义客观评分标准（通过/失败或 1-5 分 + 判定依据）
+
+    - [ ] 跑基线：记录改动前各样例结果
+
+    - [ ] 每次改动后对照同一组样例，确认是真变强而非偏科
+
+    - [ ] 把样例沉淀到固定文件，长期复用
+
+
+    破冰追问：
+
+    - 我有一个高频使用的 [Prompt/工作流/自动化规则]：[简述用途]。请帮我设计 4 条覆盖常规、边界与刁钻情况的测试样例，以及一条客观的评分标准。
+
+    - 在 [你的 AI 使用场景] 中，哪些“改了之后偶尔抽风”的提示词最值得先建一套最小评测集再做优化？'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/build.json#build-eval-harness-for-prompts
+  source_hash: a53ca521446f8411d26c1c8a60cf3ee77efb90db77fdaf7a7399276f1b727bc5
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

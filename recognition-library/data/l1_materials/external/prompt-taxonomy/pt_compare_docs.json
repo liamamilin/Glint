@@ -1,0 +1,29 @@
+{
+  "id": "pt_compare_docs",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#compare-docs",
+  "title": "比对两份文档",
+  "content": "对比【版本 A】与【版本 B】，关注【重点条款、范围或字段】。用表格列出位置、旧内容、新内容、变化类型和影响，合并语义相同的格式变化。对需要负责人确认的变化单列问题。",
+  "content_hash": "e753ce6935e63868f6d56ec9b3e98eda4c1ba1a760fce572d1bcce54f6ae8ce4",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "office",
+    "文档比对",
+    "版本",
+    "差异",
+    "document diff"
+  ],
+  "problem_solved": "看清增删变动及其实际影响。",
+  "when_to_use": "分类: 办公与协作",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "compare-docs",
+    "category": "office",
+    "variables": [
+      "版本 A",
+      "版本 B",
+      "重点条款、范围或字段"
+    ]
+  }
+}

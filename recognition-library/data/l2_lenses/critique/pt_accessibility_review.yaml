@@ -1,0 +1,59 @@
+id: pt_accessibility_review
+title: 页面无障碍问题排查
+tagline: 用可复现步骤检查键盘、焦点与对比度等无障碍问题
+routing:
+  primitive: critique
+  goals:
+  - debug
+  - evaluate
+  clarity_fit:
+  - concrete
+  domains:
+  - accessibility
+  - frontend
+  - testing
+  - web
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Chrome
+  - Figma
+  pain_point: 页面或组件在真实设备上存在无障碍缺陷（键盘无法操作、焦点顺序错乱、可读名称缺失、状态反馈不明确、对比度不足），但缺乏可复现步骤与明确修复标准
+  trigger_utterances:
+  - 这个页面键盘能操作吗帮我测一下无障碍
+  - screen reader 读不出来按钮名字
+  - 焦点跳转顺序不对怎么修
+  - 对比度不够过不了 WCAG
+  - 帮我列一下这个组件的 a11y 问题
+  anti_triggers:
+  - 纯后端接口性能或数据库查询优化
+  - 与无障碍无关的视觉美化或动画效果调整
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '评估【页面或组件】在【支持设备与场景】下的无障碍。检查键盘路径、焦点顺序、可读名称和状态反馈，记录每项复现与影响。为可修复项给最小改法和可手动复验的标准。
+
+
+    请按以下结构输出：
+
+    1. 复现步骤（设备/浏览器/辅助技术）
+
+    2. 问题清单（类别：键盘/焦点/名称/状态/对比度/语义）
+
+    3. 每项影响等级（阻断/严重/中等/轻微）
+
+    4. 最小修复建议（代码片段或属性修改）
+
+    5. 手动复验标准（如何验证已修复）'
+  variables:
+  - 页面或组件
+  - 支持设备与场景
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#accessibility-review
+  source_hash: 36db45162c030b735fc239038640c9bd285511a70ad2c3c981efb87cb47c3860
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

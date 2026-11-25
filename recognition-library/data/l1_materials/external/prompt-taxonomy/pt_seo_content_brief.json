@@ -1,0 +1,27 @@
+{
+  "id": "pt_seo_content_brief",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#seo-content-brief",
+  "title": "按搜索需求写内容简报",
+  "content": "为【主题和读者】制作搜索内容简报，基于【可用查询或搜索结果】归纳用户想回答的问题。给主问题、相关问题、结构、可提供的原创材料和引用。若没有来源，不估计搜索量或竞争度。",
+  "content_hash": "ec527690c7e1ec74aab3aa7c1036073a94d2ce1714af4c101c0fc10fdf42788e",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "marketing",
+    "SEO",
+    "搜索意图",
+    "SEO brief"
+  ],
+  "problem_solved": "选择真实问题和可核对内容结构。",
+  "when_to_use": "分类: 营销与销售",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "seo-content-brief",
+    "category": "marketing",
+    "variables": [
+      "主题和读者",
+      "可用查询或搜索结果"
+    ]
+  }
+}

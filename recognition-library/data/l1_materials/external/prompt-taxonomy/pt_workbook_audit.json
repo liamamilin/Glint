@@ -1,0 +1,27 @@
+{
+  "id": "pt_workbook_audit",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#workbook-audit",
+  "title": "检查交付前的电子表格",
+  "content": "检查【电子表格】是否满足【使用目的】。区分资料输入、计算表与最终输出，找错误引用、手写覆盖、断链和单位不一致。抽查三项结果，与源资料手算核对并记录对应单元格。",
+  "content_hash": "b8d9f4ce2e76e4a0abafb630f27066fc1719a1e67af6d749f197f80eddc711fa",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "files",
+    "表格验收",
+    "Excel审计",
+    "spreadsheet QA"
+  ],
+  "problem_solved": "把输入、公式、引用和输出沿线核对。",
+  "when_to_use": "分类: 文档与文件",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "workbook-audit",
+    "category": "files",
+    "variables": [
+      "电子表格",
+      "使用目的"
+    ]
+  }
+}

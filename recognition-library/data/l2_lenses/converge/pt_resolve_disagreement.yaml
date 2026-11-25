@@ -1,0 +1,60 @@
+id: pt_resolve_disagreement
+title: 分歧调解准备
+tagline: 把双方陈述整理成共同目标、关切、约束与可试选项
+routing:
+  primitive: converge
+  goals:
+  - optimize
+  - evaluate
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - communication
+  - mediation
+  - alignment
+  - negotiation
+  - conflict_resolution
+  app_affinity:
+  - Slack
+  - Feishu
+  - Notion
+  - Mail
+  pain_point: 双方各说各的，争执陷在情绪和细节里，没人把共同目标、真实约束和分歧点说清楚，导致沟通反复无效
+  trigger_utterances:
+  - 这俩人吵起来了帮我理一下
+  - 双方意见不一致怎么调解
+  - 帮我整理一下这个分歧的要点
+  - they disagree on approach, help me mediate
+  - 这个争执双方各执一词怎么办
+  anti_triggers:
+  - 单方 venting 或纯情绪宣泄，没有具体分歧点需要调解
+  - 已经达成共识只需写跟进纪要的场景
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请基于【双方陈述】整理【待解决的分歧】，按以下结构输出：
+
+    1. 共同目标：双方都能认可的目标是什么；
+
+    2. 各自关切：每方真正担心/在乎什么（区分表面立场与真实关切）；
+
+    3. 真实约束：时间、资源、权限、技术、组织等不可轻易改变的限制；
+
+    4. 有争议的事实：双方对事实认知不一致的点，及各自证据；
+
+    5. 两个可先试的选项：双方都愿意先试的小步方案，附可验证标准（如何判断有效/无效）；
+
+    6. 下一次沟通议程：建议的议题顺序与时间盒。
+
+    请保持中立，不预设谁对谁错，用结构化列表输出。'
+  variables: []
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#resolve-disagreement
+  source_hash: 460b7a48be5ce9062e2e57ab6b57523ff9379528d7848f9a7c3d5388bc2f228f
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

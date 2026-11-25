@@ -1,4 +1,4 @@
-"""Pydantic schemas for Glint brain-server HTTP API."""
+"""Pydantic schemas for Glint brain-server HTTP API (v2.0 backward-compatible with v0.1 macos-app)."""
 
 from __future__ import annotations
 
@@ -15,7 +15,15 @@ class RouteRequest(BaseModel):
     )
 
 
+class IntentPrediction(BaseModel):
+    primitive: str
+    goal: str
+    clarity: str
+    used_embed: bool = False
+
+
 class CardItem(BaseModel):
+    # v0.1 core fields (kept strictly compatible with macos-app)
     id: str
     title: str
     dimension: str
@@ -24,6 +32,18 @@ class CardItem(BaseModel):
     prompt: str
     preview: str = Field(default="", description="Single-line compact preview for the floating card UI")
 
+    # v2.0 optional metadata extensions
+    action_type: str = "inject_prompt"
+    primitive: str | None = None
+    source: str | None = None
+    score: float | None = None
+    is_exploration: bool = False
+    variables: list[str] = Field(default_factory=list)
+    workflow_id: str | None = None
+    workflow_step: int | None = None
+    is_workflow_next: bool = False
+    is_l3_breakthrough: bool = False
+
 
 class RouteResponse(BaseModel):
     skill_type: str = "cognitive_cards"
@@ -31,6 +51,8 @@ class RouteResponse(BaseModel):
     latency_ms: float
     model: str
     used_fallback: bool = False
+    intent: IntentPrediction | None = None
+    release_version: str | None = None
 
 
 class FeedbackRequest(BaseModel):
@@ -48,6 +70,10 @@ class FeedbackRequest(BaseModel):
         default=None,
         description="Free-text intent typed by the user when none of the 3 cards satisfied them",
     )
+    predicted_primitive: str | None = Field(default=None)
+    predicted_goal: str | None = Field(default=None)
+    predicted_clarity: str | None = Field(default=None)
+    release_version: str | None = Field(default=None)
 
 
 class FeedbackResponse(BaseModel):
@@ -58,5 +84,8 @@ class FeedbackResponse(BaseModel):
 class HealthResponse(BaseModel):
     status: str
     model: str
+    embed_model: str = "bge-m3:latest"
     cards_loaded: int
     ollama_reachable: bool
+    router_mode: str = "v2_dual_path"
+    release_version: str | None = None

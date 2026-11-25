@@ -1,0 +1,28 @@
+{
+  "id": "pt_document_redline",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#document-redline",
+  "title": "按编辑目标给 Word 文档做可复核修改",
+  "content": "在【文档和版本】中执行【限定编辑要求】。保持既有章节编号，在每个需改处给「位置 / 修改建议 / 理由」。若工具能标记修订，则交付修订版和清稿；需原作者判断的地方加简短批注。",
+  "content_hash": "bdca1f1a0c0f81257cf1d35102832e3a850c535d02c7d4f80b4fe9fb5383f180",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "files",
+    "Word",
+    "修订",
+    "批注",
+    "redline"
+  ],
+  "problem_solved": "标注修改位置、保留和待确认内容。",
+  "when_to_use": "分类: 文档与文件",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "document-redline",
+    "category": "files",
+    "variables": [
+      "文档和版本",
+      "限定编辑要求"
+    ]
+  }
+}

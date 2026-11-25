@@ -1,0 +1,28 @@
+{
+  "id": "pt_outline_article",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#outline-article",
+  "title": "从主题搭出文章提纲",
+  "content": "为【主题】拟一篇面向【读者】的文章提纲，目标是【读后应明白或做什么】。给一句核心主张，列每节问题、支撑材料和承上启下的关系。证据缺口用待采访或待查资料标注。",
+  "content_hash": "8397a6e645cfc853fe249880592fa589bf481aa5cd14d63a24e45a9dae1f49ca",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "writing",
+    "提纲",
+    "文章",
+    "outline"
+  ],
+  "problem_solved": "确定读者、主张与展开顺序。",
+  "when_to_use": "分类: 写作与语言",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "outline-article",
+    "category": "writing",
+    "variables": [
+      "主题",
+      "读者",
+      "读后应明白或做什么"
+    ]
+  }
+}

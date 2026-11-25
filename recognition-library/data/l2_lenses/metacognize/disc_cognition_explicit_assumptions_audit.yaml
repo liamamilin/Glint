@@ -1,0 +1,58 @@
+id: disc_cognition_explicit_assumptions_audit
+title: 先列默认假设再决定打破
+tagline: 把天经地义的前提写出来，看清哪些是铁律哪些是过时习惯
+routing:
+  primitive: metacognize
+  goals:
+  - evaluate
+  - debug
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - cognition
+  - first_principles
+  - assumptions
+  - blindspots
+  - reasoning
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 很多前提条件被视为天经地义，从不专门检视，导致计划背后藏着连自己都没意识到的过时假设与认知盲区
+  trigger_utterances:
+  - 帮我列出这个方案背后有哪些默认假设
+  - 我觉得这个规则理所当然但可能已经过时了
+  - 我的计划里有哪些没意识到的前提
+  - 如果反过来会怎样
+  - 这个行业惯例还成立吗
+  anti_triggers:
+  - 只是想总结一篇文章或提取要点
+  - 需要直接调试代码报错
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '默认假设审计清单：
+
+    1. 写下当前计划/现状：{{plan_or_status}}
+
+    2. 列出它背后依赖的 6 条“默认假设”，标出最可能已不再成立的
+
+    3. 对每条假设追问「如果反过来会怎样」，推演打破后的后果
+
+    4. 挑战规则：{{rule_to_challenge}}，区分铁律与过时习惯
+
+    5. 决定保留、修改或打破，并更新计划'
+  variables:
+  - plan_or_status
+  - rule_to_challenge
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/cognition.json#cognition-explicit-assumptions-audit
+  source_hash: b219250255bb360e63128d5eb3c39e798e32e82eed967571629a5d4cee061c12
+  status: active
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

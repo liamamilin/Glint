@@ -1,0 +1,28 @@
+{
+  "id": "pt_research_question",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#research-question",
+  "title": "把宽泛主题改成研究问题",
+  "content": "我关注【宽泛主题】，要支持【决定或文章】。给三个范围逐渐缩小的研究问题，分别说明比较对象、时间窗和能回答它的证据。选一个适合【时间预算】的问题，并写清研究边界。",
+  "content_hash": "6ad1fd4d22c2d24b34183ee55865ed9dae3046ec9e87982395a1264525d37edd",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "research",
+    "选题",
+    "研究问题",
+    "research question"
+  ],
+  "problem_solved": "限定对象、比较和证据范围。",
+  "when_to_use": "分类: 查找与研究",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "research-question",
+    "category": "research",
+    "variables": [
+      "宽泛主题",
+      "决定或文章",
+      "时间预算"
+    ]
+  }
+}

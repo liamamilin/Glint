@@ -1,0 +1,28 @@
+{
+  "id": "pt_one_on_one",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#one-on-one",
+  "title": "准备一次一对一沟通",
+  "content": "为与【对象和关系】的一对一准备【时长】议程。根据【最近进展和待讨论问题】，排出对方可能关心的事项、一个开放问题、要请求的帮助和最后确认的动作。",
+  "content_hash": "f63acaea7f9e12f6a3585d8a8e21e79136bc225e5e6638b6bcfa000c011fd70b",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "communication",
+    "一对一",
+    "管理",
+    "1-on-1"
+  ],
+  "problem_solved": "把进展、被阻塞的事和对方关切放到议程。",
+  "when_to_use": "分类: 沟通与协商",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "one-on-one",
+    "category": "communication",
+    "variables": [
+      "对象和关系",
+      "时长",
+      "最近进展和待讨论问题"
+    ]
+  }
+}

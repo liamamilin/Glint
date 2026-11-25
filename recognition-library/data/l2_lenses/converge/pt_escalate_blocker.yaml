@@ -1,0 +1,49 @@
+id: pt_escalate_blocker
+title: 升级阻塞决策说明
+tagline: 向负责人清晰呈现阻塞影响、已试操作与待决策事项
+routing:
+  primitive: converge
+  goals:
+  - create
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - communication
+  - escalation
+  - decision_making
+  - project_management
+  app_affinity:
+  - Slack
+  - Feishu
+  - Mail
+  - Linear
+  pain_point: 用户被阻塞无法推进，需要向上级或跨团队请求决策，却不知如何清晰呈现影响、已尝试的方案和待决策事项
+  trigger_utterances:
+  - 这个阻塞我搞不定，得让领导决定
+  - 帮我写个升级邮件说明影响和选项
+  - 卡住了，要向上 escalate
+  - 需要负责人拍板，怎么写清楚
+  - escalate blocker 说明怎么写
+  anti_triggers:
+  - 纯日常闲聊或非阻塞的常规进度汇报
+  - 已有明确方案只需执行的日常任务分配
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 向 {{decision_maker}} 说明 {{blocker_impact}}，我们已尝试 {{actions_tried}}。请给出需要决定的选项、最迟时间 {{deadline}}、各方案影响和我的建议 {{recommendation}}。把事实与预测分别写明。
+  variables:
+  - decision_maker
+  - blocker_impact
+  - actions_tried
+  - deadline
+  - recommendation
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#escalate-blocker
+  source_hash: 2f09b721c4f19f7ffcb3220dfbe1c74abdc1cead3961c10ecf2b687053d43808
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

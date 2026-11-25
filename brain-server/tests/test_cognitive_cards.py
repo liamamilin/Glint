@@ -57,6 +57,7 @@ def _make_settings(tmp_path: Path) -> Settings:
     cards_copy = tmp_path / "cards.yaml"
     cards_copy.write_text(src_cards.read_text(encoding="utf-8"), encoding="utf-8")
     return Settings(
+        dist_dir=None,
         cards_path=cards_copy,
         db_path=tmp_path / "usage.db",
         warmup_on_startup=False,

@@ -1,0 +1,21 @@
+{
+  "id": "core_de_ai_rewrite",
+  "source": "glint-core",
+  "source_ref": "cards.yaml#de_ai_rewrite",
+  "title": "去 AI 味极简重写",
+  "content": "请将以下内容重写得更自然、精炼、像真人在日常沟通，去掉所有套话和过度修饰，保留核心事实：\n\n{{input}}",
+  "content_hash": "01a638e698410980a2c18a0abae8ceb9e248bbf4ba604ee8ad7b6b283560fcb6",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "polish"
+  ],
+  "problem_solved": "文字润色 / 邮件消息",
+  "when_to_use": "",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "de_ai_rewrite",
+    "legacy_dimension": "polish",
+    "legacy_mode": "wrap"
+  }
+}

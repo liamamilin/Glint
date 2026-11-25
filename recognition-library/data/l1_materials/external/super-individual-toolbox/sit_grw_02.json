@@ -1,0 +1,29 @@
+{
+  "id": "sit_grw_02",
+  "source": "super-individual-toolbox",
+  "source_ref": "https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/growth-commercial.json#grw-02",
+  "title": "着陆页 5 秒转化诊断",
+  "content": "定位：用陌生访客的 5 秒耐心，拷问首屏说清了没\n\n触发场景：当你把产品链接发出去，有不少人点进来，但几乎没人试用、收藏或留资时。\n\n核心机制：\n- 只截取首屏（不滚动）喂给 AI，强制回答 3 个问题：这是什么、给谁用、我现在该点哪里\n- 删掉所有宏大叙事与自嗨口号（如“重新定义下一代……”），换成具象痛点与结果\n- 把核心行动按钮（CTA）和真实交互预览提到首屏视觉中心\n\n交付物：一份《首屏 5 秒诊断报告》及 3 组可直接替换的主副标题\n\n推荐装配：多模态视觉模型 + 首屏转化检查 Prompt\n\n误用警告：不要在首屏堆砌 5 个同样显眼的按钮；一次只引导访客做 1 个最关键的动作。",
+  "content_hash": "3390c5a57afc882e9932afa1ede8c91707722414be77d9229004b776da16ff23",
+  "suggested_action_type": "open_resource",
+  "domain_hints": [
+    "growth-commercial",
+    "增长与商业官"
+  ],
+  "problem_solved": "当你把产品链接发出去，有不少人点进来，但几乎没人试用、收藏或留资时。",
+  "when_to_use": "当你把产品链接发出去，有不少人点进来，但几乎没人试用、收藏或留资时。",
+  "procedural_steps": [
+    "只截取首屏（不滚动）喂给 AI，强制回答 3 个问题：这是什么、给谁用、我现在该点哪里",
+    "删掉所有宏大叙事与自嗨口号（如“重新定义下一代……”），换成具象痛点与结果",
+    "把核心行动按钮（CTA）和真实交互预览提到首屏视觉中心"
+  ],
+  "anti_patterns": [
+    "不要在首屏堆砌 5 个同样显眼的按钮；一次只引导访客做 1 个最关键的动作。"
+  ],
+  "metadata": {
+    "original_id": "grw-02",
+    "drawer": "growth-commercial",
+    "drawer_zh": "增长与商业官",
+    "deliverable": "一份《首屏 5 秒诊断报告》及 3 组可直接替换的主副标题"
+  }
+}

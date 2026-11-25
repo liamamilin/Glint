@@ -1,0 +1,67 @@
+id: pt_repurpose_content
+title: 一份素材多渠道改写
+tagline: 把同一份内容改成不同渠道版本，保留核心事实与品牌语气
+routing:
+  primitive: translate
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - content_writing
+  - social_media
+  - marketing
+  - repurposing
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Slack
+  - Chrome
+  pain_point: 同一份素材要发到不同渠道（博客、社媒、邮件等），每次手动改写开头、结构和行动提示太耗时，还容易丢失核心事实和品牌语气
+  trigger_utterances:
+  - 这篇博客帮我改成 Twitter 推文
+  - 这份内容要发到小红书和 LinkedIn
+  - 把这篇文章改成邮件 newsletter 版
+  - 同一份素材适配不同渠道
+  - repurpose this article for social media
+  anti_triggers:
+  - 用户只是想把长文缩短成摘要，不涉及多渠道适配
+  - 用户要求翻译成另一种语言而非改写格式
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: '请将以下【原素材】改写为【目标渠道和长度】版本，面向【读者】。
+
+
+    要求：
+
+    - 为每个目标渠道分别调整开头钩子、内容顺序和行动提示（CTA）
+
+    - 保留所有核心事实，不添加未经证实的信息
+
+    - 保持品牌语气一致
+
+    - 输出每个渠道的成品，以及一份事实核对清单（列出所有事实点及其在各版本中的保留情况）
+
+
+    原素材：
+
+    {{input}}
+
+
+    目标渠道和长度：{{target_channels}}
+
+    读者：{{audience}}'
+  variables:
+  - target_channels
+  - audience
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#repurpose-content
+  source_hash: 9f9ecf2c24be07405aee59724b21f1d422c739873350f4eacf4a8c8eaef86807
+  status: active
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

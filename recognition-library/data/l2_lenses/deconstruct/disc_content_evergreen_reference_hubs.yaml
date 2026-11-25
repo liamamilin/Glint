@@ -1,0 +1,57 @@
+id: disc_content_evergreen_reference_hubs
+title: 常青速查手册而非48小时热点
+tagline: 把 chase 热点改成可反复收藏搜索的常青参考手册
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - content
+  - evergreen
+  - reference
+  - documentation
+  - search
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  pain_point: 内容全靠追当天热点和情绪共鸣才能拿到点击关注，热点 48 小时就凉，文章很快沉底
+  trigger_utterances:
+  - 我每天追热点太累了
+  - 写的文章很快沉底没人看了
+  - 怎么做出长期被搜索和引用的内容
+  - 帮我把这篇观点文改成避坑清单
+  - 新手常错的 10 个概念整理成速查手册
+  anti_triggers:
+  - 帮我写一篇今天的爆款蹭流量
+  - 追这个热点怎么起标题
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '常青速查手册构建清单：
+
+    1. 列出 [你的专业/兴趣领域] 中新手或从业者最容易反复查错、踩坑的 10 个概念或决策点，搭出“常青速查手册”目录大纲。
+
+    2. 选一篇以前写过但很快沉底的观点文章，提炼其核心观点。
+
+    3. 将该观点文改写为“结构化决策矩阵 / 避坑对照表 / 术语词典”。
+
+    4. 为每条加清晰边界、适用条件与反例，确保可被搜索、收藏、引用。
+
+    5. 删除时效性强的热点表述，保留长期稳定的事实与判断。
+
+    6. 发布并持续迭代，把新增踩坑点追加到手册。'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/content.json#content-evergreen-reference-hubs
+  source_hash: 0a166fcff68e352731316cf7b78ae3e4e1145f740ccbdd5231b71d086aae0ede
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

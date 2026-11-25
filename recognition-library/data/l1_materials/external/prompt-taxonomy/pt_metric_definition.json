@@ -1,0 +1,28 @@
+{
+  "id": "pt_metric_definition",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#metric-definition",
+  "title": "定义一个可以复算的指标",
+  "content": "为【业务目标】定义【指标名称】。写清单位、计算粒度、分子、分母、时间窗、纳入和排除条件，并给一个符合和一个不符合的样例。指出要从哪里取数，以及有哪些情况下它会误导。",
+  "content_hash": "b5858b79f02c72084368cfe65234adb3aa3e409f882709d78687e8f9f54dde30",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "data",
+    "指标",
+    "KPI",
+    "分子分母",
+    "metric definition"
+  ],
+  "problem_solved": "明确口径、边界和典型反例。",
+  "when_to_use": "分类: 数据与表格",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "metric-definition",
+    "category": "data",
+    "variables": [
+      "业务目标",
+      "指标名称"
+    ]
+  }
+}

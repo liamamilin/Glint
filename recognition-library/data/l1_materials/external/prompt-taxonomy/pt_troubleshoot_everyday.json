@@ -1,0 +1,28 @@
+{
+  "id": "pt_troubleshoot_everyday",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#troubleshoot-everyday",
+  "title": "一步步排查日常故障",
+  "content": "我遇到【故障表现】，设备或流程是【型号与环境】，已试【已有尝试】。从低成本、可逆的检查开始，每项说明结果如何区分原因。标出哪些进一步检查依赖官方说明或维修人员。",
+  "content_hash": "c20d9d7cc9af73b6aca4f82645a0b8bdd6fe38e5b4a1d1fecbef8a558b46c0e0",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "planning",
+    "故障排查",
+    "设备",
+    "how to troubleshoot"
+  ],
+  "problem_solved": "先做可逆检查，再决定是否求助。",
+  "when_to_use": "分类: 计划与生活",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "troubleshoot-everyday",
+    "category": "planning",
+    "variables": [
+      "故障表现",
+      "型号与环境",
+      "已有尝试"
+    ]
+  }
+}

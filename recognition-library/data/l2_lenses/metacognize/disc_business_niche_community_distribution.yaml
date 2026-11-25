@@ -1,0 +1,57 @@
+id: disc_business_niche_community_distribution
+title: 极小众深价值获客
+tagline: 在50-200重度用户里做深价值，靠口碑复利而非买量
+routing:
+  primitive: metacognize
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - conflicted
+  domains:
+  - business
+  - distribution
+  - niche_community
+  - indie_growth
+  - community
+  app_affinity:
+  - Notion
+  - Linear
+  - Chrome
+  pain_point: 用户认为新产品上线必须冲热榜铺全渠道，用户少就等于没市场，忽略了在极小垂直圈子里做深价值带来的口碑复利与高转化
+  trigger_utterances:
+  - 新产品上线是不是得先冲热榜铺渠道
+  - 用户太少是不是说明没市场
+  - 怎么找到第一批种子用户
+  - niche 社区 distribution 怎么做
+  - 买量太贵，想靠口碑获客
+  anti_triggers:
+  - 已有成熟产品需要规模化投放增长
+  - 目标是泛大众市场品牌曝光
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '- [ ] 明确 [你的产品/服务/内容方向] 解决的单一核心痛点与可量化收益
+
+    - [ ] 锁定 3 个痛点极深、人数不多但可直接触达的垂直小圈子
+
+    - [ ] 为每个圈子写出可被验证的成员画像与触达渠道
+
+    - [ ] 设计第一批 10 个种子用户的真诚触达话术（非群发）
+
+    - [ ] 定义前 20 个付费用户的“手动高关怀 + 快速迭代”专属体验
+
+    - [ ] 用深度反馈与转介绍验证口碑复利假设
+
+    - [ ] 仅在 niche 验证通过后再考虑扩展渠道'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-niche-community-distribution
+  source_hash: f068deda734d6cd13fb1ac4466d9332a5344f72402b36871d05403a8f929f401
+  status: active
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

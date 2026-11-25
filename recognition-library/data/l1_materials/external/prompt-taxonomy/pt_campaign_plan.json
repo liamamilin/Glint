@@ -1,0 +1,28 @@
+{
+  "id": "pt_campaign_plan",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#campaign-plan",
+  "title": "从活动目标做营销执行计划",
+  "content": "为【产品和目标】制定受限于【渠道、时间和预算】的活动计划。按前期验证、发布和复盘列动作、材料、责任和衡量。把已知受众证据与待验证假设写清，说明何时需要缩减或调整。",
+  "content_hash": "f8a1d06f49985e8b8be79bf7be1a80b2d344edd853f2e49341cc6b8cb4ba09b9",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "marketing",
+    "营销方案",
+    "活动",
+    "推广",
+    "campaign plan"
+  ],
+  "problem_solved": "有渠道动作、有验证标准，也有证据缺口。",
+  "when_to_use": "分类: 营销与销售",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "campaign-plan",
+    "category": "marketing",
+    "variables": [
+      "产品和目标",
+      "渠道、时间和预算"
+    ]
+  }
+}

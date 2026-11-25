@@ -1,0 +1,46 @@
+id: sit_edt_04
+title: 金句与隐喻提炼炉
+tagline: 把干瘪的专业术语压成一眼记住的具象画面
+routing:
+  primitive: translate
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  - vague
+  domains:
+  - copywriting
+  - branding
+  - content_marketing
+  - product_strategy
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  - Slack
+  pain_point: 东西写完了但标题平淡、一句话说不清它到底牛在哪，需要把抽象术语变成 memorable 的具象画面或 slogan
+  trigger_utterances:
+  - 标题太平淡了怎么起个好标题
+  - 一句话说不清我们产品牛在哪
+  - 帮我把技术术语变成用户能懂的slogan
+  - 这个功能描述太干瘪了想个catchy口号
+  - 产品介绍写完了但毫无记忆点
+  anti_triggers:
+  - 需要搭建长篇文章结构或大纲
+  - 需要把口语润色成正式技术文档
+execution:
+  action_type: open_resource
+  inject_mode: null
+  content: 打开「金句与隐喻提炼炉」资源（来源：https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/editorial.json#edt-04）。流程：1) 输入核心机制/功能，找出读者最熟悉的3个日常物理隐喻；2)
+    用反差对比或动作画面重写为15字内短句；3) 做陌生人3秒盲测，删掉黑话看外行能否瞬间听懂。交付：5个备选高传播度 slogan/隐喻钩子。注意：不要为了押韵或抖机灵牺牲准确性。
+  variables: []
+  workflow: null
+meta:
+  source: super-individual-toolbox
+  source_ref: https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/editorial.json#edt-04
+  source_hash: 36a53caee9aadcfe06d1bb33a01de6e2a36c4d104b35a362fb9ae50757a960b5
+  status: active
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

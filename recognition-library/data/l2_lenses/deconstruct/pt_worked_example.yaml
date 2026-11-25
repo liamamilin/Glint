@@ -1,0 +1,63 @@
+id: pt_worked_example
+title: 生成带步骤的例题
+tagline: 给题目、推导步骤、常见错误与迁移练习
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - learning
+  - education
+  - worked_example
+  - tutoring
+  - pedagogy
+  app_affinity:
+  - ChatGPT
+  - Claude
+  - Notion
+  - Obsidian
+  pain_point: 学生或自学者看不懂抽象概念，需要一个能看见每一步如何从条件推出结论的示范例题，而不是只给最终答案
+  trigger_utterances:
+  - 给我一个例题，把每一步怎么推的写清楚
+  - 帮我出个带步骤的 worked example， beginner 水平
+  - show me a worked example with step-by-step reasoning
+  - 我想学这个概念，先给我个例题演示一下
+  - 出一道题并标出常见错误，附迁移练习
+  anti_triggers:
+  - 直接给我答案不用过程
+  - 只出题不讲解
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: '你是一位擅长教学的辅导老师。请为【主题】生成一个适合【水平】水平的学习者的 worked example（例题），要求：
+
+
+    1. 题目：给出一道清晰、自洽的例题，包含所有必要条件。
+
+    2. 解题步骤：分步骤写出每一步的推导，每一步必须说明“依据/理由”（即该步如何从条件推出结论），不要跳步。
+
+    3. 常见错误：标注 2 个学习者最容易犯的错误，说明错在哪里、正确做法是什么。
+
+    4. 迁移练习：出 1 道只改变一个条件的迁移题，用于检验理解；把答案折在末尾（先空一行，再写“【迁移练习答案】”并给出完整解答）。
+
+
+    请用清晰的编号与小标题组织输出，语言适合【水平】水平。
+
+
+    输入：{{input}}'
+  variables:
+  - '{''name'': ''主题'', ''description'': ''要生成例题的知识点/主题''}'
+  - '{''name'': ''水平'', ''description'': ''学习者水平，如 beginner / intermediate / advanced''}'
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#worked-example
+  source_hash: 8354e89857ec693b51ef2b1a12d2845412cd33a426a82c31390b14d16e0d56a5
+  status: active
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

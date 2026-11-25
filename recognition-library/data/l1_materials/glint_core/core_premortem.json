@@ -1,0 +1,21 @@
+{
+  "id": "core_premortem",
+  "source": "glint-core",
+  "source_ref": "cards.yaml#premortem",
+  "title": "事前验尸排雷",
+  "content": "请用事前验尸（Pre-mortem）视角：假设这个方案半年后彻底失败了，反推最致命的 3 个漏洞，并给出最低成本的验证方法。",
+  "content_hash": "b87dd3000b9428f66bd0f9eab71356b1c9b160a1e8e27f7221b4582ba684db18",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "critique"
+  ],
+  "problem_solved": "批判排雷 / 方案评估",
+  "when_to_use": "",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "premortem",
+    "legacy_dimension": "critique",
+    "legacy_mode": "append"
+  }
+}

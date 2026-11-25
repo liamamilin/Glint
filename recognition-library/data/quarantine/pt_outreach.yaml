@@ -1,0 +1,64 @@
+id: pt_outreach
+source: prompt-taxonomy
+source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#outreach
+source_hash: 354f6a299f858fd9d390b047228b2d730af9e9fb441e8300c66063b80a68a2e3
+reasons:
+- wrap_mode_missing_input_placeholder
+duplicate_of: null
+duplicate_score: null
+draft:
+  confidence: 0.88
+  title: 职业交流邀约
+  tagline: 帮你写一封低负担、有来意的 networking 邀约
+  routing:
+    primitive: translate
+    goals:
+    - create
+    clarity_fit:
+    - concrete
+    domains:
+    - career
+    - networking
+    - outreach
+    - communication
+    app_affinity:
+    - Mail
+    - Slack
+    - Feishu
+    - WeChat
+    pain_point: 想联系某位前辈/同行 networking，但不知道怎么开口，怕请求太重被拒或显得目的不纯
+    trigger_utterances:
+    - 帮我写一封 networking 邀约邮件
+    - 想约对方喝咖啡请教问题但不知道怎么开口
+    - 怎么写一封不会让对方觉得负担重的 outreach 邮件
+    - Cold email to ask for an informational interview
+    - 帮我 drafted 一个低 friction 的职业邀约
+    anti_triggers:
+    - 如果是销售推广、群发营销邮件或求职投递简历场景请勿使用
+    - 如果只是想寒暄问候、无具体问题要请教，不适用本卡
+  execution:
+    action_type: inject_prompt
+    inject_mode: wrap
+    content: '请帮我写一封职业交流邀约邮件/消息。收件人与关系：{{relationship}}。我希望了解的具体问题：{{specific_question}}。真实连接点/背景：{{connection_point}}。
+
+
+      要求：
+
+      1. 开头先说明来意，用 1-2 句点明为何找对方（基于真实连接点）。
+
+      2. 提出一个低负担的请求（例如 15 分钟线上聊天或 3 个简短问题）。
+
+      3. 给出两种时间安排或书面回复选项，让对方可选低成本回复方式。
+
+      4. 语气真诚、简洁、不卑不亢，避免过度 flattery 与空泛赞美。
+
+      5. 结尾明确“若不方便也完全理解”，降低拒绝压力。
+
+      6. 控制在 120-180 字内，可直接发送。
+
+
+      请基于以上信息生成邮件正文，并提供 2 个不同语气版本（正式/轻松）。'
+    variables:
+    - relationship
+    - specific_question
+    - connection_point

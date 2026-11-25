@@ -1,0 +1,27 @@
+{
+  "id": "pt_source_research",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#source-research",
+  "title": "调研一个主题",
+  "content": "调研【问题】，范围限定为【时间、地区、对象】。先拆成 3–5 个可检索的子问题，再找独立的原始或官方来源。交付一页简报，包含结论、证据对应链接、来源之间的分歧和仍未回答的问题。无法联网时给出检索方案并说明限制。",
+  "content_hash": "6187074ee5e11ef0e552f1c979c471b9304b998b8b7b9b488ca9a0befdbf2ff5",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "research",
+    "搜索",
+    "深度研究",
+    "deep research"
+  ],
+  "problem_solved": "用多个原始来源回答开放问题。",
+  "when_to_use": "分类: 查找与研究",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "source-research",
+    "category": "research",
+    "variables": [
+      "问题",
+      "时间、地区、对象"
+    ]
+  }
+}

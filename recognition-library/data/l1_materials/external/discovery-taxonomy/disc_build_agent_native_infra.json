@@ -1,0 +1,33 @@
+{
+  "id": "disc_build_agent_native_infra",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/build.json#build-agent-native-infra",
+  "title": "给 AI Agent 用的专属基础设施",
+  "content": "旧共识（盲区）：邮箱、浏览器、支付和身份验证都是围绕人类图形界面（GUI）设计的。\n\n新现实（破盲视角）：AI Agent 正在成为软件的新一类用户，它们不需要好看的 UI，需要的是极简 API、沙盒与独立身份。\n\n破冰追问母题：\n- 列出 5 个目前完全为人类设计的互联网基础设施（如邮箱、日历、支付、客服），分析当使用者变成 AI Agent 时，原产品的最大摩擦点是什么，以及对应的极简 API 替代品该如何设计。\n- 在 [你的技术栈/熟悉领域] 中，如果要为一个自主运行的 AI Agent 提供安全沙盒和权限审计层，最小的独立开发者 MVP 应该只做哪 3 个核心接口？",
+  "content_hash": "638b0f6b80352d8a39333308cd785907878028457350bb2a68f3d2d4ab4cd343",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "build",
+    "role-inversion",
+    "first-principles",
+    "agent",
+    "infra",
+    "api",
+    "sandbox"
+  ],
+  "problem_solved": "邮箱、浏览器、支付和身份验证都是围绕人类图形界面（GUI）设计的。",
+  "when_to_use": "AI Agent 正在成为软件的新一类用户，它们不需要好看的 UI，需要的是极简 API、沙盒与独立身份。",
+  "procedural_steps": [
+    "列出 5 个目前完全为人类设计的互联网基础设施（如邮箱、日历、支付、客服），分析当使用者变成 AI Agent 时，原产品的最大摩擦点是什么，以及对应的极简 API 替代品该如何设计。",
+    "在 [你的技术栈/熟悉领域] 中，如果要为一个自主运行的 AI Agent 提供安全沙盒和权限审计层，最小的独立开发者 MVP 应该只做哪 3 个核心接口？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "build-agent-native-infra",
+    "arena": "build",
+    "lenses": [
+      "role-inversion",
+      "first-principles"
+    ]
+  }
+}

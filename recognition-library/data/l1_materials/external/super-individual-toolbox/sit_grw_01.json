@@ -1,0 +1,29 @@
+{
+  "id": "sit_grw_01",
+  "source": "super-individual-toolbox",
+  "source_ref": "https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/growth-commercial.json#grw-01",
+  "title": "一鱼多吃分发矩阵",
+  "content": "定位：写透一篇母本，自动拆出全平台弹药\n\n触发场景：当你花三天写出一篇深度长文或做完一个项目，发完一次就沉底，没精力再挨个平台重写时。\n\n核心机制：\n- 锁定 1 份高密度母本（长文、设计文档或项目复盘）作为唯一信源\n- 按目标平台的原生语境拆解：长推文串（钩子+反转）、图文卡片（3 条金句）、极简社区帖（纯干货无推广味）\n- 为每个渠道保留独立观察标签，1 周后只保留转化最高的前 2 个渠道持续投入\n\n交付物：一套适配 3–4 个不同平台的原生分发文案包\n\n推荐装配：多平台改写 Skill + 个人语调校准器（edt-01）\n\n误用警告：不要把同一段文字直接复制粘贴到所有平台；不同社区的语境和反感点完全不同。",
+  "content_hash": "f308d72d15819023fd0224aae5d472d36aaeb1f9970587ccdb3e1421d34068fb",
+  "suggested_action_type": "open_resource",
+  "domain_hints": [
+    "growth-commercial",
+    "增长与商业官"
+  ],
+  "problem_solved": "当你花三天写出一篇深度长文或做完一个项目，发完一次就沉底，没精力再挨个平台重写时。",
+  "when_to_use": "当你花三天写出一篇深度长文或做完一个项目，发完一次就沉底，没精力再挨个平台重写时。",
+  "procedural_steps": [
+    "锁定 1 份高密度母本（长文、设计文档或项目复盘）作为唯一信源",
+    "按目标平台的原生语境拆解：长推文串（钩子+反转）、图文卡片（3 条金句）、极简社区帖（纯干货无推广味）",
+    "为每个渠道保留独立观察标签，1 周后只保留转化最高的前 2 个渠道持续投入"
+  ],
+  "anti_patterns": [
+    "不要把同一段文字直接复制粘贴到所有平台；不同社区的语境和反感点完全不同。"
+  ],
+  "metadata": {
+    "original_id": "grw-01",
+    "drawer": "growth-commercial",
+    "drawer_zh": "增长与商业官",
+    "deliverable": "一套适配 3–4 个不同平台的原生分发文案包"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "disc_life_leaving_room_for_unscheduled_slack",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/life.json#life-leaving-room-for-unscheduled-slack",
+  "title": "日程里故意留出“缓冲留白”，别把每一分钟都排死",
+  "content": "旧共识（盲区）：把时间表排得满满当当才算充实、高效，留白等于浪费时间。\n\n新现实（破盲视角）：现实总会有突发状况和状态起伏；没有留白的日程一旦延迟就会全线崩盘，留出一点缓冲空间，反而能从容应对变化、保持长期节奏。\n\n破冰追问母题：\n- 我平时容易把日程或待办排得太满，一有突发事就打乱节奏：[简述你的日常安排]。请帮我设计一种“留出缓冲白”的排程方式。\n- 在 [你的工作或生活节奏] 中，怎么自然地给突发情况或状态调整留出一点弹性空间？",
+  "content_hash": "8f081a803d5703088f6f14cb9349ace06ce5caba406f3d14b44969897ef97113",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "life",
+    "role-inversion",
+    "invisible-friction",
+    "slack",
+    "buffer",
+    "pace",
+    "wellbeing"
+  ],
+  "problem_solved": "把时间表排得满满当当才算充实、高效，留白等于浪费时间。",
+  "when_to_use": "现实总会有突发状况和状态起伏；没有留白的日程一旦延迟就会全线崩盘，留出一点缓冲空间，反而能从容应对变化、保持长期节奏。",
+  "procedural_steps": [
+    "我平时容易把日程或待办排得太满，一有突发事就打乱节奏：[简述你的日常安排]。请帮我设计一种“留出缓冲白”的排程方式。",
+    "在 [你的工作或生活节奏] 中，怎么自然地给突发情况或状态调整留出一点弹性空间？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "life-leaving-room-for-unscheduled-slack",
+    "arena": "life",
+    "lenses": [
+      "role-inversion",
+      "invisible-friction"
+    ]
+  }
+}

@@ -35,6 +35,7 @@ final class GlintCoordinator: ObservableObject {
 
     private var activeContext: CapturedContext?
     private var activeResponse: RouteResponse?
+    private var readingCard: CardItem?
     private var selectedIndex: Int = 0
     private var isPopupVisible: Bool = false
     private var isEditingCustomIntent: Bool = false
@@ -142,12 +143,11 @@ final class GlintCoordinator: ObservableObject {
         }
     }
 
-    func openCardsFile() {
-        let cardsURL = URL(fileURLWithPath: "/Volumes/个人资料/2026/开发项目/Glint/brain-server/data/cards.yaml")
-        if FileManager.default.fileExists(atPath: cardsURL.path) {
-            NSWorkspace.shared.open(cardsURL)
+    func openAdminConsole() {
+        if let url = URL(string: "http://127.0.0.1:18765/admin/") {
+            NSWorkspace.shared.open(url)
         } else {
-            panel.presentToast(message: "未找到 cards.yaml", symbol: "exclamationmark.triangle")
+            panel.presentToast(message: "无法打开 Glint 管理台", symbol: "exclamationmark.triangle")
         }
     }
 
@@ -293,6 +293,24 @@ final class GlintCoordinator: ObservableObject {
     private func handlePopupKeyCommand(_ command: PopupKeyCommand) {
         guard isPopupVisible, !isEditingCustomIntent,
               let response = activeResponse, let context = activeContext else { return }
+
+        // Reader overlay mode for show_checklist / open_resource (never overwrites user input)
+        if let card = readingCard {
+            switch command {
+            case .confirm(let forceWrap):
+                if forceWrap {
+                    injectReadingCard(card, context: context)
+                } else {
+                    copyReadingCard(card)
+                }
+            case .cancel, .dismissAndPassThrough:
+                dismissPopup(recordNegativeFeedback: false)
+            default:
+                break
+            }
+            return
+        }
+
         let cardCount = response.cards.count
         let totalOptions = cardCount + 1 // 3 cards + 4th custom intent option
         guard cardCount > 0 else { return }
@@ -368,7 +386,11 @@ final class GlintCoordinator: ObservableObject {
             selected_id: "__custom__",
             inject_mode: shouldInject ? InjectMode.append.rawValue : nil,
             latency_ms: response.latency_ms,
-            custom_intent: trimmed
+            custom_intent: trimmed,
+            predicted_primitive: response.intent?.primitive,
+            predicted_goal: response.intent?.goal,
+            predicted_clarity: response.intent?.clarity,
+            release_version: response.release_version
         )
         Task { await brainClient.sendFeedback(feedback) }
     }
@@ -384,6 +406,41 @@ final class GlintCoordinator: ObservableObject {
         let card = response.cards[index]
         let effectiveMode: InjectMode = forceWrap ? .wrap : card.mode
 
+        let feedback = FeedbackRequest(
+            app_name: context.appName,
+            skill_type: response.skill_type,
+            input_text: context.inputText,
+            recommended_ids: response.cards.map(\.id),
+            selected_id: card.id,
+            inject_mode: card.isReaderAction && !forceWrap ? nil : effectiveMode.rawValue,
+            latency_ms: response.latency_ms,
+            predicted_primitive: response.intent?.primitive,
+            predicted_goal: response.intent?.goal,
+            predicted_clarity: response.intent?.clarity,
+            release_version: response.release_version
+        )
+        Task { await brainClient.sendFeedback(feedback) }
+
+        // Multi-action protocol: show_checklist & open_resource open light reader without overwriting input
+        if card.isReaderAction && !forceWrap {
+            readingCard = card
+            lastStatusMessage = "正在阅读「\(card.title)」(不覆盖输入框)"
+            let readerView = LensReaderView(
+                card: card,
+                onCopy: { [weak self] in
+                    self?.copyReadingCard(card)
+                },
+                onInject: { [weak self] in
+                    self?.injectReadingCard(card, context: context)
+                },
+                onClose: { [weak self] in
+                    self?.dismissPopup(recordNegativeFeedback: false)
+                }
+            )
+            panel.present(rootView: readerView, anchorAXRect: context.anchorRect)
+            return
+        }
+
         // Close popup and release key interception before injecting text.
         dismissPopup(recordNegativeFeedback: false)
         let injectOutcome = textInjector.inject(card: card, mode: effectiveMode, context: context)
@@ -393,17 +450,24 @@ final class GlintCoordinator: ObservableObject {
         } else {
             lastStatusMessage = "已注入「\(card.title)」(\(effectiveMode.rawValue))"
         }
+    }
 
-        let feedback = FeedbackRequest(
-            app_name: context.appName,
-            skill_type: response.skill_type,
-            input_text: context.inputText,
-            recommended_ids: response.cards.map(\.id),
-            selected_id: card.id,
-            inject_mode: effectiveMode.rawValue,
-            latency_ms: response.latency_ms
-        )
-        Task { await brainClient.sendFeedback(feedback) }
+    private func copyReadingCard(_ card: CardItem) {
+        let text = card.prompt.trimmingCharacters(in: .whitespacesAndNewlines)
+        NSPasteboard.general.clearContents()
+        NSPasteboard.general.setString(text, forType: .string)
+        dismissPopup(recordNegativeFeedback: false)
+        lastStatusMessage = "已复制「\(card.title)」到剪贴板"
+        panel.presentToast(message: "已复制「\(card.title)」", symbol: "doc.on.clipboard")
+    }
+
+    private func injectReadingCard(_ card: CardItem, context: CapturedContext) {
+        dismissPopup(recordNegativeFeedback: false)
+        let outcome = textInjector.inject(card: card, mode: .append, context: context)
+        if outcome == .copiedToClipboard {
+            panel.presentToast(message: "已复制，可 ⌘V 粘贴", symbol: "doc.on.clipboard")
+        }
+        lastStatusMessage = "已追加注入「\(card.title)」"
     }
 
     private func dismissPopup(recordNegativeFeedback: Bool) {
@@ -413,6 +477,7 @@ final class GlintCoordinator: ObservableObject {
 
         isPopupVisible = false
         isEditingCustomIntent = false
+        readingCard = nil
         removeDismissMonitors()
         inputMonitor.setPopupInterceptionActive(false)
         panel.dismiss()
@@ -433,7 +498,11 @@ final class GlintCoordinator: ObservableObject {
                 recommended_ids: response.cards.map(\.id),
                 selected_id: nil,
                 inject_mode: nil,
-                latency_ms: response.latency_ms
+                latency_ms: response.latency_ms,
+                predicted_primitive: response.intent?.primitive,
+                predicted_goal: response.intent?.goal,
+                predicted_clarity: response.intent?.clarity,
+                release_version: response.release_version
             )
             Task { await brainClient.sendFeedback(feedback) }
         }

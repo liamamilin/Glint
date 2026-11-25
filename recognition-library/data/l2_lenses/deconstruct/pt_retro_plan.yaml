@@ -1,0 +1,47 @@
+id: pt_retro_plan
+title: 主持可落实的项目复盘
+tagline: 从事实与原因分析落地到下一步行动
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - debug
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - project_management
+  - retrospective
+  - postmortem
+  - team_collaboration
+  app_affinity:
+  - Notion
+  - Slack
+  - Feishu
+  - Linear
+  pain_point: 复盘会开完没有结论、问题容易归因到个人、行动项没人跟进，最终复盘流于形式
+  trigger_utterances:
+  - 这次复盘怎么开才不流于形式
+  - 项目翻车了要做个复盘
+  - 复盘总是变成甩锅会
+  - 帮我设计一个有行动项的retro
+  - 事后回顾怎么落地
+  anti_triggers:
+  - 日常站会或进度同步
+  - 单纯写项目总结报告
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 为【项目和已知情况】设计一场【时长】复盘。安排事实时间线、有效做法、改进点和行动确认。给两道避免归因到个人的引导问题，并为每个行动留出负责人、截止日期和验证信号。
+  variables:
+  - 项目和已知情况
+  - 时长
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#retro-plan
+  source_hash: 95c9501eed5c6f2ed8d8f1c258ebccd01ab977ef57e737cf2dfc8164a9a6e2ae
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

@@ -1,0 +1,29 @@
+{
+  "id": "sit_prd_03",
+  "source": "super-individual-toolbox",
+  "source_ref": "https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/product-architect.json#prd-03",
+  "title": "边缘案例审计清单",
+  "content": "定位：上线前先雇一群“手欠用户”把产品摔一遍\n\n触发场景：当你的功能在自己电脑上跑得很完美，准备发给真实用户前的最后 1 小时。\n\n核心机制：\n- 按 4 类极端态逐一拷问：空状态（0 数据）、超长文本/双语换行、弱网/断网、非法或重复点击\n- 检查移动端窄屏与深浅色模式下的遮挡与溢出\n- 把高发致命边缘态补上优雅降级提示，低频项记录在案\n\n交付物：一份已勾选修复的《上线前边缘态通关表》\n\n推荐装配：固定审计 Prompt + 浏览器设备模拟器\n\n误用警告：不要为了修复发生概率万分之一的极端 Bug 而无限推迟首次发布。",
+  "content_hash": "3f1ad2d4d8775c06bb0ef734af00ea9de565da75589e30c73cdb50a425fe70c5",
+  "suggested_action_type": "open_resource",
+  "domain_hints": [
+    "product-architect",
+    "产品与架构师"
+  ],
+  "problem_solved": "当你的功能在自己电脑上跑得很完美，准备发给真实用户前的最后 1 小时。",
+  "when_to_use": "当你的功能在自己电脑上跑得很完美，准备发给真实用户前的最后 1 小时。",
+  "procedural_steps": [
+    "按 4 类极端态逐一拷问：空状态（0 数据）、超长文本/双语换行、弱网/断网、非法或重复点击",
+    "检查移动端窄屏与深浅色模式下的遮挡与溢出",
+    "把高发致命边缘态补上优雅降级提示，低频项记录在案"
+  ],
+  "anti_patterns": [
+    "不要为了修复发生概率万分之一的极端 Bug 而无限推迟首次发布。"
+  ],
+  "metadata": {
+    "original_id": "prd-03",
+    "drawer": "product-architect",
+    "drawer_zh": "产品与架构师",
+    "deliverable": "一份已勾选修复的《上线前边缘态通关表》"
+  }
+}

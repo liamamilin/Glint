@@ -1,0 +1,33 @@
+{
+  "id": "disc_career_reversible_career_probes",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/career.json#career-reversible-career-probes",
+  "title": "把转行或新方向当成“可撤回的试探”，而不是孤注一掷的考试",
+  "content": "旧共识（盲区）：换方向、试新赛道要么辞职梭哈、要么继续原样，中间没有低代价试探的余地。\n\n新现实（破盲视角）：很多时候你并不缺勇气，缺的是把“大跳水”拆成几周就能拿到真实体感的小试探（做个微型案例、聊几位一线从业者、接一个低风险小任务）；先试水再决定是否押注。\n\n破冰追问母题：\n- 我正在考虑或好奇 [某个新方向/新角色/新赛道]：[简述你的背景与好奇点]。请帮我设计 2 个“不用辞职、几周内就能拿到真实体感”的低成本试探动作。\n- 在 [你想探索的新方向] 里，最容易让人产生“滤镜/想象”的地方是什么？怎么用一次小试探去祛魅？",
+  "content_hash": "0f235c0086400f105fb1b6a727adb69aec4fe4a38c7d7e036d2e0db8b45ba95c",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "career",
+    "cost-collapse",
+    "role-inversion",
+    "career-probes",
+    "experiments",
+    "optionality",
+    "职业试探"
+  ],
+  "problem_solved": "换方向、试新赛道要么辞职梭哈、要么继续原样，中间没有低代价试探的余地。",
+  "when_to_use": "很多时候你并不缺勇气，缺的是把“大跳水”拆成几周就能拿到真实体感的小试探（做个微型案例、聊几位一线从业者、接一个低风险小任务）；先试水再决定是否押注。",
+  "procedural_steps": [
+    "我正在考虑或好奇 [某个新方向/新角色/新赛道]：[简述你的背景与好奇点]。请帮我设计 2 个“不用辞职、几周内就能拿到真实体感”的低成本试探动作。",
+    "在 [你想探索的新方向] 里，最容易让人产生“滤镜/想象”的地方是什么？怎么用一次小试探去祛魅？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "career-reversible-career-probes",
+    "arena": "career",
+    "lenses": [
+      "cost-collapse",
+      "role-inversion"
+    ]
+  }
+}

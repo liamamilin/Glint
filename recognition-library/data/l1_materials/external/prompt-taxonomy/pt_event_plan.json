@@ -1,0 +1,29 @@
+{
+  "id": "pt_event_plan",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#event-plan",
+  "title": "把聚会或活动拆成执行表",
+  "content": "策划【活动类型和目标】给【参与人数和需求】，限制是【地点、日期和资源】。交付倒排时间表、当日流程、物资与分工，以及天气或缺席的备选。标出凡需确认开放时间或预订的项目。",
+  "content_hash": "b0fef79a4d7ea14467298726b54986163bd6e7d8b6b94e69b4b221c2f11b101c",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "planning",
+    "聚会",
+    "活动",
+    "婚礼",
+    "event planning"
+  ],
+  "problem_solved": "从时间、人员、物资到联络安排。",
+  "when_to_use": "分类: 计划与生活",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "event-plan",
+    "category": "planning",
+    "variables": [
+      "活动类型和目标",
+      "参与人数和需求",
+      "地点、日期和资源"
+    ]
+  }
+}

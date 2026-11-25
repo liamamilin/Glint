@@ -1,0 +1,55 @@
+id: pt_compare_reviews
+title: 区分评论共同信号与个案
+tagline: 从多条评论里筛出普遍体验与个例，标出样本偏差
+routing:
+  primitive: deconstruct
+  goals:
+  - evaluate
+  - digest
+  clarity_fit:
+  - concrete
+  - vague
+  domains:
+  - research
+  - review_synthesis
+  - product_evaluation
+  app_affinity:
+  - Chrome
+  - Notion
+  - ChatGPT
+  - Claude
+  pain_point: 读了很多评论但分不清哪些是普遍体验、哪些是个例，也混不清测量数据、主观感受和营销话术，还担心样本偏差
+  trigger_utterances:
+  - 这些评论里哪些是普遍问题
+  - 帮我把评论按维度整理一下
+  - 区分一下真实体验和广告
+  - 评论太多了帮我总结共同点
+  - 这些测评靠谱吗
+  anti_triggers:
+  - 帮我写一篇产品评测文章
+  - 对比两个产品的参数规格
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: 从{{input}}比较{{product}}在{{dimensions}}上的体验。逐项记录相同反馈的样本数、代表原句、使用情境及例外。区分测量、主观判断和宣传内容，指出样本偏差。
+  variables:
+  - product
+  - dimensions
+  workflow:
+    workflow_id: compare-purchase
+    step: 2
+    next_lens_id: pt_compare_options
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#compare-reviews
+  source_hash: 99b58035b5e252f4324b5c3796d452ca2cedd96c190215c557500a3491009f8b
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: product_business
+  subcategory: product_design
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

@@ -1,0 +1,55 @@
+id: pt_support_troubleshoot
+title: 客服逐步排障指引
+tagline: 从可逆检查开始，写出操作、信号与分支的排障步骤
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - debug
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - support
+  - customer_service
+  - troubleshooting
+  - technical_support
+  app_affinity:
+  - Slack
+  - Feishu
+  - Notion
+  - Chrome
+  pain_point: 客服在写排障指引时不知道从哪些低风险、可回退的检查开始，也怕步骤遗漏信号与分支，或在操作中丢失客户原始资料
+  trigger_utterances:
+  - 客户报错不知道从哪开始排查
+  - 帮我写个 step by step troubleshooting guide
+  - support ticket 需要逐步排障指引
+  - 写排障步骤怕把客户数据搞丢
+  - 客户不会操作太复杂要简单指引
+  anti_triggers:
+  - 已经确定根因只需写修复代码
+  - 纯产品功能文档编写
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 针对【故障表现、环境和客户熟练度】写一份排障指引。每一步写操作、预期信号和失败后的分支，从可逆检查看起。标出必须由支持人员做的动作，保留用户原资料。
+  variables:
+  - 故障表现、环境和客户熟练度
+  workflow:
+    workflow_id: handle-support-case
+    step: 3
+    next_lens_id: pt_support_escalation
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#support-troubleshoot
+  source_hash: febc9bb644c312f1824f75b46f6d4ec138dddaf781389204380266b991dd8456
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: engineering
+  subcategory: debugging
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

@@ -1,0 +1,27 @@
+{
+  "id": "pt_sales_proposal",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#sales-proposal",
+  "title": "整理一份可审阅的客户方案",
+  "content": "将【客户需求和已确认条件】写成给【客户角色】的方案草稿。包含目标、交付范围、时间、验证方式、计划外事项及待确认条款。每项能力回指实际证据，价格或日期缺失时明确待确认。",
+  "content_hash": "9fadeaeb49f779f70519564c4f931693ebfdee60f468083629e21bf9a86ba4a7",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "marketing",
+    "销售提案",
+    "商务方案",
+    "proposal"
+  ],
+  "problem_solved": "明确范围、交付和待确认条款。",
+  "when_to_use": "分类: 营销与销售",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "sales-proposal",
+    "category": "marketing",
+    "variables": [
+      "客户需求和已确认条件",
+      "客户角色"
+    ]
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "sit_edt_03",
+  "source": "super-individual-toolbox",
+  "source_ref": "https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/editorial.json#edt-03",
+  "title": "双语地道本地化器",
+  "content": "定位：不是逐字翻译，而是用另一种语言重新表达一遍\n\n触发场景：当你要做中英双语产品、文档或卡片库，机翻出来的英文僵硬别扭、丢失原本的犀利感时。\n\n核心机制：\n- 先要求 AI 用一句话提炼原句的“真实意图与语气色彩”（如冷峻、幽默、克制）\n- 严禁逐词直译，要求直接按目标语言的母语习惯重写 2 个版本（标准版 vs. 极简犀利版）\n- 检查产品术语与 UI 标签在全站范围内的译名一致性\n\n交付物：一组无翻译腔的双语对照文案与《项目术语表》\n\n推荐装配：双语本地化 Prompt + 项目术语对照表（JSON/Markdown）\n\n误用警告：不要在 UI 按钮或短卡片上追求字数完全对称；英文通常更占宽度，要优先保证自然简洁。",
+  "content_hash": "6199250f08605669d8db6e9be7930b9595fa2abe20ba7fe5755e0735e004b511",
+  "suggested_action_type": "open_resource",
+  "domain_hints": [
+    "editorial",
+    "内容与叙事官"
+  ],
+  "problem_solved": "当你要做中英双语产品、文档或卡片库，机翻出来的英文僵硬别扭、丢失原本的犀利感时。",
+  "when_to_use": "当你要做中英双语产品、文档或卡片库，机翻出来的英文僵硬别扭、丢失原本的犀利感时。",
+  "procedural_steps": [
+    "先要求 AI 用一句话提炼原句的“真实意图与语气色彩”（如冷峻、幽默、克制）",
+    "严禁逐词直译，要求直接按目标语言的母语习惯重写 2 个版本（标准版 vs. 极简犀利版）",
+    "检查产品术语与 UI 标签在全站范围内的译名一致性"
+  ],
+  "anti_patterns": [
+    "不要在 UI 按钮或短卡片上追求字数完全对称；英文通常更占宽度，要优先保证自然简洁。"
+  ],
+  "metadata": {
+    "original_id": "edt-03",
+    "drawer": "editorial",
+    "drawer_zh": "内容与叙事官",
+    "deliverable": "一组无翻译腔的双语对照文案与《项目术语表》"
+  }
+}

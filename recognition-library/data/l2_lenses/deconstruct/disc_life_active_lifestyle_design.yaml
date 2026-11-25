@@ -1,0 +1,48 @@
+id: disc_life_active_lifestyle_design
+title: 反转默认生活脚本
+tagline: 先盘点生活脚本，再反推适合自己的生活原型。
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - life
+  - lifestyle_design
+  - autonomy
+  - geographical_arbitrage
+  - remote_work
+  app_affinity:
+  - Notion
+  - Obsidian
+  pain_point: 我按上学、工作、买房、结婚、攒钱到退休的默认轨道活着，却没确认这些选择是不是自己真正想要的。
+  trigger_utterances:
+  - 我是不是一直在按默认人生轨道走
+  - 远程工作让我想重新设计生活
+  - 帮我盘点哪些事只是惯性
+  - 如果能自由安排时间和地点，我想设计两种生活方式
+  - 我对现在的生活结构不满意
+  anti_triggers:
+  - 只是想提高日常任务管理效率
+  - 只是短期旅行规划或搬家决策
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: "## 生活脚本盘点与生活原型设计\n\n### 1. 生活脚本盘点\n- [ ] 列出 3 件你目前顺理成章在做的事\n- [ ] 对每件事追问：它符合我的核心价值观吗？\n- [ ] 标记来源：自愿选择 / 惯性 /\
+    \ 外界期待 / 家庭压力\n- [ ] 写出 1 件最想保留、1 件最想退出、1 件想重新定义的内容\n\n### 2. 核心诉求澄清\n- [ ] 我最看重：时间 / 地点 / 收入 / 关系 / 成长 / 健康（最多选 3 项）\n\
+    - [ ] 我最讨厌：通勤 / 会议 / 不确定性 / 单调 / 高压 / 社交消耗（最多选 3 项）\n- [ ] 我的核心收入或可迁移技能：______\n\n### 3. 设计 2 种生活原型\n- [ ] 原型 A：更稳定 /\
+    \ 低成本 / 低摩擦的生活结构\n  - 居住地、节奏、收入来源、社交方式、风险\n- [ ] 原型 B：更自由 / 高探索 / 高变化的生活结构\n  - 居住地、节奏、收入来源、社交方式、风险\n- [ ] 对比两者对价值观、收入、关系和健康的满足程度\n\
+    \n### 4. 最小验证\n- [ ] 选择 1 个低成本实验（如远程周、换城市试住、减少一项义务）\n- [ ] 设定 2~4 周观察指标\n- [ ] 决定是否继续、调整或放弃"
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/life.json#life-active-lifestyle-design
+  source_hash: 85edfb8d704115b372e7d4094a083f36d9856c80b34b0670e6726166c37884d6
+  status: active
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

@@ -1,0 +1,28 @@
+{
+  "id": "pt_video_captions",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#video-captions",
+  "title": "把口播转成适合观看的字幕",
+  "content": "把【带时间戳的口播转录】整理成【字幕格式和阅读限制】。按意群断句，保留姓名、术语和数字；不能确认的词标记待核对。检查时间码重叠，补一份需要回听的片段表。",
+  "content_hash": "b802822519dffe14573c8ec63b24516b6989b318881deb1a055c18ffed7d9320",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "creative",
+    "字幕",
+    "时间码",
+    "SRT",
+    "captions"
+  ],
+  "problem_solved": "保持意思并在语义边界断句。",
+  "when_to_use": "分类: 创作与多媒体",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "video-captions",
+    "category": "creative",
+    "variables": [
+      "带时间戳的口播转录",
+      "字幕格式和阅读限制"
+    ]
+  }
+}

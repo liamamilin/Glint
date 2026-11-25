@@ -1,0 +1,28 @@
+{
+  "id": "pt_follow_up",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#follow-up",
+  "title": "写一条能推动事项的跟进",
+  "content": "根据【往来记录】为【收件人】写一条跟进消息。两三句交代背景，一个句子写清希望确认的事和【下一步时间】。若存在多种可能状态，给对方一个容易回复的选项。",
+  "content_hash": "4f5577a2ede100c09ce1826a23729939ff1cb7549b2d6d5668fc888d560c1968",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "communication",
+    "跟进",
+    "催办",
+    "follow up"
+  ],
+  "problem_solved": "附上基本背景、需要确认的动作与期限。",
+  "when_to_use": "分类: 沟通与协商",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "follow-up",
+    "category": "communication",
+    "variables": [
+      "往来记录",
+      "收件人",
+      "下一步时间"
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "disc_business_transparent_simple_pricing",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-transparent-simple-pricing",
+  "title": "把价格表砍到“1～2 档明码标价”，别让客户算半天",
+  "content": "旧共识（盲区）：定价档位分得越细、隐藏条款越多，越显得专业或能把每一分钱榨干。\n\n新现实（破盲视角）：复杂的定价表会让犹豫的买家直接关掉页面；一眼看懂“多少钱、包含什么、不适合谁”，反而更容易建立信任并促成下单。\n\n破冰追问母题：\n- 这是我目前对 [产品/服务/合作方案] 的定价或收费想法：[简述方案]。请帮我把它简化成 1～2 档一眼看懂的方案，并写清“适合谁 / 暂不适合谁”。\n- 在 [你的目标客户决策场景] 中，哪些定价细节最容易让人产生“是不是还有隐形收费”的顾虑？如何用直白的话提前说清？",
+  "content_hash": "b47ee6cdb588259a02e80c0814143175be743b11270efa6a4508ca2710da92f5",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "business",
+    "first-principles",
+    "invisible-friction",
+    "pricing",
+    "simplicity",
+    "trust",
+    "conversion"
+  ],
+  "problem_solved": "定价档位分得越细、隐藏条款越多，越显得专业或能把每一分钱榨干。",
+  "when_to_use": "复杂的定价表会让犹豫的买家直接关掉页面；一眼看懂“多少钱、包含什么、不适合谁”，反而更容易建立信任并促成下单。",
+  "procedural_steps": [
+    "这是我目前对 [产品/服务/合作方案] 的定价或收费想法：[简述方案]。请帮我把它简化成 1～2 档一眼看懂的方案，并写清“适合谁 / 暂不适合谁”。",
+    "在 [你的目标客户决策场景] 中，哪些定价细节最容易让人产生“是不是还有隐形收费”的顾虑？如何用直白的话提前说清？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "business-transparent-simple-pricing",
+    "arena": "business",
+    "lenses": [
+      "first-principles",
+      "invisible-friction"
+    ]
+  }
+}

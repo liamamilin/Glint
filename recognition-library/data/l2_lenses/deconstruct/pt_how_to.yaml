@@ -1,0 +1,47 @@
+id: pt_how_to
+title: 拆解操作步骤
+tagline: 把目标、准备事项与检查点串成可执行步骤清单
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - planning
+  - how_to
+  - tutorial
+  - workflow
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Cursor
+  - ChatGPT
+  pain_point: 用户想完成某个目标但不知道从哪开始、需要准备什么、每步做到什么算完成，容易卡在第一步或遗漏关键检查点
+  trigger_utterances:
+  - 帮我把这件事拆成步骤
+  - 我想做这个但不知道从哪开始
+  - how to 把这个流程写清楚
+  - 给我一个可执行的 checklist
+  - 现在就能做的最小一步是什么
+  anti_triggers:
+  - 只是想总结已有内容而不是规划步骤
+  - 需要的是单一决策而非分步执行
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 我想完成【目标】，我的起点和资源是【现状】。请按执行顺序输出步骤清单，每一步包含：1) 要做的事；2) 可观察的完成信号；3) 一个常见失误。最后给出一个我现在就能完成的最小步骤。
+  variables:
+  - 目标
+  - 现状
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#how-to
+  source_hash: 61ae6f31573e1e39ba1f989027395e654196cb2b441c282f784af5464efd85b6
+  status: active
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

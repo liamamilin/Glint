@@ -1,0 +1,28 @@
+{
+  "id": "pt_line_edit_markup",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#line-edit-markup",
+  "title": "逐句润色并列出变动",
+  "content": "给【原文】做逐句编辑，目标是【风格或规范】。先给清稿，再用「原句 / 修订 / 理由」记录会影响含义或语气的变动。保留术语、数据、引用和责任范围，语义可能变化处请我确认。",
+  "content_hash": "4d4bd0abcb3af51bc182b5347a428ff8fb3210f054da4555a73eb6ab4507d51f",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "writing",
+    "逐句润色",
+    "校订",
+    "修订痕迹",
+    "line editing"
+  ],
+  "problem_solved": "在需要复核时逐项交代措辞变化。",
+  "when_to_use": "分类: 写作与语言",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "line-edit-markup",
+    "category": "writing",
+    "variables": [
+      "原文",
+      "风格或规范"
+    ]
+  }
+}

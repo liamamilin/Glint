@@ -1,0 +1,28 @@
+{
+  "id": "pt_video_edit_plan",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#video-edit-plan",
+  "title": "从已有素材规划剪辑节奏",
+  "content": "把【素材清单、时码和故事目标】整理成【成片时长】剪辑方案。逐段写取用素材、秒数、信息任务、声音和转场。标出剪掉不影响理解的片段及仍需补拍的动作。",
+  "content_hash": "fcaf7502ee47b72cd6b0452596f036d91502441e98ec49939b95d8d0511cfc19",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "creative",
+    "剪辑",
+    "节奏",
+    "视频",
+    "video edit"
+  ],
+  "problem_solved": "用具体素材和时码安排信息与转场。",
+  "when_to_use": "分类: 创作与多媒体",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "video-edit-plan",
+    "category": "creative",
+    "variables": [
+      "素材清单、时码和故事目标",
+      "成片时长"
+    ]
+  }
+}

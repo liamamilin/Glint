@@ -1,0 +1,13 @@
+{
+  "id": "atlas_googleworkspace_cli_skills_gws_g_089fc86ec7",
+  "source": "atlas-methods",
+  "source_ref": "googleworkspace/cli:skills/gws-gmail-triage/SKILL.md",
+  "content_hash": "48b0512b3ffa718ab382c3d816d6945cbc9ec6139b50eff0427498a645580600",
+  "title": "Gmail 未读收件箱摘要（gws gmail +triage）",
+  "quality_score": 0.15,
+  "reasons": [
+    "纯陈述性 CLI 用法与参数说明，缺少可跨场景复用的认知方法、判据或检查清单；强依赖 gws 私有 CLI 与仓库上下文。",
+    "quality_score_below_threshold:0.15<0.65"
+  ],
+  "model": "opencode-go/beam-free"
+}

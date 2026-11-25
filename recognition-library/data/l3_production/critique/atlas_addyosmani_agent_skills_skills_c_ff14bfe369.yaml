@@ -1,0 +1,50 @@
+id: atlas_addyosmani_agent_skills_skills_c_ff14bfe369
+title: 多轴代码审查质量门禁
+tagline: 合并前做五轴代码审查并标严重度与结论
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  - debug
+  clarity_fit:
+  - concrete
+  domains:
+  - code_review
+  - engineering
+  - security
+  - performance
+  app_affinity:
+  - Cursor
+  - VS Code
+  pain_point: 合并 PR 前缺少系统化审查维度，容易只看测试通过就合并，把正确性、可读性、架构、安全、性能问题留到线上。
+  trigger_utterances:
+  - 这个 PR 能直接合并吗
+  - 帮我 review 一下这段代码
+  - 合并前再过一遍质量门禁
+  - AI 写的代码别急着 merge
+  - 这次改动安全吗
+  anti_triggers:
+  - 只想格式化或 lint 代码
+  - 需要从零设计新功能架构
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 在合并前对当前代码变更执行五轴审查：正确性、可读性与简洁性、架构、安全、性能。先理解变更意图与预期行为变化；先审测试（存在性、行为导向、边界覆盖、描述性命名，并用变异实验验证回归捕获能力）；逐文件按五轴走查；报告前对照调用方、守卫、测试排除误报，区分基线缺陷与本次回归；零发现合法，不编造。每条评论标严重度与行动：无前缀=必须修改，Critical=阻塞合并，Nit=次要可选，Optional/Consider=建议，FYI=仅信息。正确性检查规格符合、null/空/边界/错误路径、无
+    off-by-one/竞态/状态不一致。可读性检查命名、控制流、无过度工程、抽象不提前泛化、无 no-op/兼容垫片。架构检查现有模式、边界、无循环依赖；重构必须降低读者概念数并附具体重构动作。安全与性能检查输入校验、注入、权限、资源、复杂度。依赖先评估现有栈，审查
+    lockfile diff，升级前后绿测。规模控制约 100 行良好、约 300 行可接受、约 1000 行需拆分；单变更解决一件事并含相关测试。最终给出合并结论：Approve / Request changes / Block。
+  variables: []
+  workflow: null
+meta:
+  source: atlas-methods
+  source_ref: addyosmani/agent-skills:skills/code-review-and-quality/SKILL.md
+  source_hash: 4caa19708220d4f3ce175121f50f2f01a385bf43e301fb29305105cd006fb6d9
+  status: active
+  scope: domain_specific
+  shelf: off_shelf
+  tier: A
+  category: engineering
+  subcategory: debugging
+  collections: []
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

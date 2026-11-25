@@ -1,0 +1,87 @@
+id: disc_life_making_healthy_defaults_easier
+title: 5分钟健康保底习惯
+tagline: 把运动拉伸喝水早起拆成忙时也能完成的微动作
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - health
+  - habits
+  - routines
+  - life
+  - simplicity
+  app_affinity:
+  - Notion
+  - Obsidian
+  pain_point: 想养成运动、拉伸、喝水或早起习惯，但计划门槛太高，忙或累时就全盘放弃，缺少忙时也能完成的保底版。
+  trigger_utterances:
+  - 运动计划总是坚持不下去
+  - 想养成早起习惯但一忙就放弃
+  - 拉伸太花时间了能不能5分钟搞定
+  - 喝水运动总是断掉
+  - 给我设计一个忙时也能做的微习惯
+  anti_triggers:
+  - 需要制定完整训练计划或饮食方案的场景
+  - 医疗或康复级别的运动处方需求
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '## 健康习惯「忙时保底 + 闲时正常」设计清单
+
+
+    ### 1. 明确目标习惯
+
+    - [ ] 选择要养成的习惯：{{habit}}（如活动肩颈/快走/规律作息）
+
+    - [ ] 记录当前最容易中断的时段：{{lazy_period}}
+
+
+    ### 2. 设计双版本
+
+    - [ ] 忙时 5 分钟保底版：只做最小动作，不换衣服、不额外准备
+
+    - [ ] 闲时正常版：完整执行，作为加分而非必须
+
+
+    ### 3. 为中断时段设计 2 个微动作
+
+    - [ ] 微动作 1：几乎零准备、可在原地完成
+
+    - [ ] 微动作 2：利用现有环境/道具，不增加摩擦
+
+
+    ### 4. 降低摩擦
+
+    - [ ] 把保底动作固定到现有routine（如刷牙后、开会前）
+
+    - [ ] 移除触发放弃的高门槛步骤
+
+
+    ### 5. 兜底规则
+
+    - [ ] 今天没完成正常版，保底版也算“没断”
+
+    - [ ] 连续 3 天只做保底，重新评估门槛'
+  variables:
+  - habit
+  - lazy_period
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/life.json#life-making-healthy-defaults-easier
+  source_hash: 8bc1777a17fd955cb432842f844c1b2c69da9f4fa0f1e51bb02a2176844e46df
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: personal_career
+  subcategory: personal_os
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

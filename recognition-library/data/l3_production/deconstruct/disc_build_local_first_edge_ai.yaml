@@ -1,0 +1,61 @@
+id: disc_build_local_first_edge_ai
+title: 本地优先端侧AI设计
+tagline: 列出隐私场景并用端侧小模型替代云端 API 的设计清单
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - local_first
+  - edge_ai
+  - privacy
+  - offline
+  - product_strategy
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Notion
+  - Obsidian
+  pain_point: 做 AI 应用默认就得上云调大模型 API、付月费订阅，觉得隐私敏感场景没法低成本做
+  trigger_utterances:
+  - 这个 AI 功能非得走云端 API 吗，太贵了
+  - 用户数据不能上传，怎么在本地做 AI
+  - 有没有不用订阅费的离线 AI 工具思路
+  - 端侧小模型能干啥，帮我拆一下
+  - 医疗/财务数据不敢上云，AI 怎么落地
+  anti_triggers:
+  - 需要对比多家云厂商 API 价格做选型
+  - 已经是纯云端 SaaS 且不考虑离线
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '本地优先 + 端侧小模型 设计清单
+
+
+    □ 步骤 1：列出 5 个用户极度在意隐私、不敢上传云端的场景（如医疗/财务/个人日记），为每个场景设计一个完全离线运行、结合端侧小模型的工具。
+
+    □ 步骤 2：在具体场景中，对比云端大模型 API 与本地小模型（Whisper / Moondream / Qwen 小参数版），通过任务拆解让端侧模型达到 90% 可用效果。
+
+    □ 步骤 3：为每个工具标出「必须云端」vs「可端侧」的能力边界与降级策略。
+
+    □ 步骤 4：评估一次性买断定价、离线分发渠道与更新方式。'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/build.json#build-local-first-edge-ai
+  source_hash: f464b1cfc2627aaf10b780f138a5e803ddf01a440b8c012605042e9701026467
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: product_business
+  subcategory: product_design
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

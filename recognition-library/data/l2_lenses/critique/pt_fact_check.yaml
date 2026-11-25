@@ -1,0 +1,46 @@
+id: pt_fact_check
+title: 逐条核对说法
+tagline: 把笼统判断拆成可核验主张并标证据
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  clarity_fit:
+  - concrete
+  domains:
+  - research
+  - fact_check
+  - verification
+  - citations
+  - source_evaluation
+  app_affinity:
+  - ChatGPT
+  - Claude
+  - Chrome
+  - Notion
+  pain_point: 用户面对一段说法、文章或结论时，无法快速判断哪些部分可靠，需要逐条拆解主张并核验证据。
+  trigger_utterances:
+  - 帮我核对一下这段话是不是真的
+  - 这结论有证据吗帮我查查
+  - 把这篇文章里的主张逐条验证
+  - fact check this claim for me
+  - 这个说法有依据吗帮我标来源
+  anti_triggers:
+  - 用户只是想总结文章大意，不关心证据真伪
+  - 用户需要生成新内容，而不是验证已有说法
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 核对【原文或说法】，目标受众是【受众】。提取可验证的主张，对每条用「支持 / 有条件支持 / 证据不足 / 与证据矛盾」标记，并附最直接的证据链接、发布日期和一句判断理由。保留来源之间有意义的差异。
+  variables:
+  - 原文或说法
+  - 受众
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#fact-check
+  source_hash: 85dfbbaa08014026a2167af8620d002e027b65021bc9781b006ced6b7f0e3d8e
+  status: active
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

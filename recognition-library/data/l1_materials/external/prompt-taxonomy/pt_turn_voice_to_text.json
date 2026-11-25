@@ -1,0 +1,27 @@
+{
+  "id": "pt_turn_voice_to_text",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#turn-voice-to-text",
+  "title": "把口述稿整理成可发表文章",
+  "content": "把【口述转录】整理为面向【读者和用途】的文稿。去除口头重复，按观点重排，保留原话中的事实与署名。听不清或指代不明的片段标记时间和待核对项，结尾列可能需本人确认的改动。",
+  "content_hash": "dceb96f407e2a43b8775054eb6e3595dd79e862a54f12d6a8d547cba5a88898d",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "writing",
+    "口述",
+    "语音转文稿",
+    "transcribe editing"
+  ],
+  "problem_solved": "去除重复口语并保留说话者的事实和声音。",
+  "when_to_use": "分类: 写作与语言",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "turn-voice-to-text",
+    "category": "writing",
+    "variables": [
+      "口述转录",
+      "读者和用途"
+    ]
+  }
+}

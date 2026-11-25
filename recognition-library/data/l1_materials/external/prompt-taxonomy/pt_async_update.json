@@ -1,0 +1,28 @@
+{
+  "id": "pt_async_update",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#async-update",
+  "title": "把杂乱消息写成异步同步",
+  "content": "把【进展和讨论记录】写成给【团队渠道】的简洁更新。先给变化或阻碍，再给需要谁在什么时候作什么决定。将背景、证据和业务影响分开表达，用链接文本标明原始材料。",
+  "content_hash": "b2d6c24da9e6bef4f6af0c7f92fded1c3073dbbf625501d06219c8d15b3f46b7",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "office",
+    "异步",
+    "Slack",
+    "团队消息",
+    "async update"
+  ],
+  "problem_solved": "在聊天渠道让大家知道变化和需要回应的事。",
+  "when_to_use": "分类: 办公与协作",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "async-update",
+    "category": "office",
+    "variables": [
+      "进展和讨论记录",
+      "团队渠道"
+    ]
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "pt_translate",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#translate",
+  "title": "按场景翻译",
+  "content": "把【原文】翻译成【目标语言和地区】，用于【使用场景】。保留链接、数字和段落层级；专有名词优先采用场景通用译法。遇到两种合理解释时选一个并附简短译注。交付译文和需要确认的术语。",
+  "content_hash": "b2fdb64ceb1c7c7ea9c68c6d23b9c374e0dc8a754c70a402b2000c315d5e1c26",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "writing",
+    "翻译",
+    "本地化",
+    "translate",
+    "localization"
+  ],
+  "problem_solved": "兼顾含义、术语和目标语读者。",
+  "when_to_use": "分类: 写作与语言",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "translate",
+    "category": "writing",
+    "variables": [
+      "原文",
+      "目标语言和地区",
+      "使用场景"
+    ]
+  }
+}

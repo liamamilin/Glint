@@ -1,0 +1,20 @@
+{
+  "generated_at": "2026-11-25T15:07:02+0800",
+  "total_l2_input": 387,
+  "total_l3_active": 387,
+  "total_l3_deprecated": 0,
+  "total_quarantined_rules": 0,
+  "total_quarantined_dedup": 0,
+  "action_counts": {
+    "attached_workflow_step": 89,
+    "cleaned_title_punctuation": 1,
+    "normalized_domains": 22,
+    "normalized_person_context": 8,
+    "stripped_append_input_placeholder": 14,
+    "synced_variables": 94
+  },
+  "warnings_count": 0,
+  "warnings": [],
+  "dedup_conflicts": [],
+  "embedding_model": "bge-m3:latest"
+}

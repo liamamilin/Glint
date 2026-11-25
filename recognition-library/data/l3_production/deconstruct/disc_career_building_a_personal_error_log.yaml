@@ -1,0 +1,64 @@
+id: disc_career_building_a_personal_error_log
+title: 个人踩坑账本
+tagline: 3分钟记录误判与预警信号，少踩重复坑
+routing:
+  primitive: deconstruct
+  goals:
+  - debug
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - career
+  - learning
+  - debugging
+  - decision_making
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Cursor
+  pain_point: 犯错或判断失误后容易翻篇遗忘，相似问题换个场景又重复踩坑，没有把预警信号和前置检查沉淀下来。
+  trigger_utterances:
+  - 我老是在相似的问题上翻车，帮我把教训记下来
+  - 这次判断错了，下次怎么提前发现
+  - 帮我做个3分钟能填完的踩坑记录模板
+  - 我总忘记之前踩过的坑，换个场景又来
+  - 把这次误判的信号和前置检查提炼一下
+  anti_triggers:
+  - 只是想安慰自己翻篇、不想记录任何细节
+  - 需要完整事故复盘报告而非简短模板
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '个人踩坑与误判账本（3分钟版）
+
+    1. 事件与场景：发生了什么，我在什么情境下做了什么判断。
+
+    2. 当时为什么这么判：我依据了哪些假设、信息或直觉。
+
+    3. 早期预警信号：出现过哪些被忽略的信号。
+
+    4. 后果与代价：影响范围、损失或返工成本。
+
+    5. 下次前置检查点：开工前问自己的一句话。
+
+    6. 防复发动作：一个最小改变（检查项、模板或边界）。
+
+    记录原则：留教训，不自我责备；只沉淀可复用的信号与检查点。'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/career.json#career-building-a-personal-error-log
+  source_hash: 488605030d558f7a36c45f5843f9196e850cf35ae8f830ed87d913facdc66a30
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: engineering
+  subcategory: debugging
+  collections: []
+  base_weight: 1.0
+  confidence: 0.86
+  version: 1

@@ -1,0 +1,54 @@
+id: disc_content_workflow_as_asset
+title: 私有工作流转公开资产
+tagline: 把日常踩坑清单直接开源成高传播内容资产
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - content
+  - build_in_public
+  - open_source
+  - taxonomy
+  - asset
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  pain_point: 做内容总要额外抽出时间憋选题写长文剪视频，日常解决问题的结构化沉淀被浪费
+  trigger_utterances:
+  - 我每天重复做同一件事怎么变成内容
+  - 不想写长文但想做内容资产
+  - 把我的踩坑记录开源成网页
+  - build in public 怎么开始
+  - 把 checklist 变成可分享的资产
+  anti_triggers:
+  - 需要写一篇深度长文或视频脚本
+  - 单纯想润色已有文章的语气
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: "把私有工作流转化为公开内容资产 · 执行清单\n\n1. 锁定重复动作\n   - 写下你每周/每月反复做的一件事（排查、选型、踩坑、分类）\n   - 确认它有明确输入与输出，能被他人复用\n\n2. 结构化沉淀\n\
+    \   - 把过程拆成步骤/分支/判断条件，形成 MECE 清单\n   - 提炼其中的 Prompt、模板、分类库、工具链接\n\n3. 设计传播切入点（选 3 个）\n   - 反常识：指出行业旧共识的盲区\n   - 可复用：提供可直接复制的模板/清单\n\
+    \   - 可验证：给出最小可运行示例或 Before/After\n\n4. 选载体并发布\n   - 静态卡片库 / 极简可搜索网页 / GitHub 仓库 / Notion 公开页\n   - 加入搜索、标签、更新日期，便于长期\
+    \ SEO\n\n5. 持续迭代\n   - 每次新踩坑追加条目，保持资产活性\n   - 在社交平台只发“资产链接 + 一句话场景”，不重复写长文"
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/content.json#content-workflow-as-asset
+  source_hash: 0730a3589646cdb9412e00725a2583a74b082c9fb674f3c715f39741b997cb21
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: writing_comms
+  subcategory: content_creation
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

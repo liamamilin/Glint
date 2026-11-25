@@ -1,0 +1,44 @@
+{
+  "id": "atlas_obra_superpowers_skills_test_dri_5a1f863466",
+  "source": "atlas-methods",
+  "source_ref": "obra/superpowers:skills/test-driven-development/SKILL.md",
+  "title": "测试驱动开发（TDD）RED-GREEN-REFACTOR 循环",
+  "content": "TDD 以 RED→GREEN→REFACTOR 循环推进：先写一个会失败的最小测试并亲眼确认其失败原因（功能缺失而非拼写错误），再写让该测试通过的最简代码，确认本测试与项目整套测试全部通过且输出干净，最后在保持测试全部通过的前提下重构。适用于新功能、bug 修复、重构与行为变更；一次性原型、生成代码、配置文件属例外需先征询人类搭档。没有失败的测试就不写生产代码；若先写了代码必须删除并从头开始。测试只测一个行为、名称清晰、使用真实代码（mock 仅在不可避免时）；写或改测试时先说出会使之失败的生产改动，只断言真实行为。完整测试命令必须运行，报告所有失败。完成前逐项核对：每个新函数/方法都有测试、亲眼看过每个测试先失败、每个按预期原因失败、为每个写了最小实现、全部测试通过、输出干净、使用真实代码、覆盖边界与错误。",
+  "content_hash": "49e9f312dc351f58b6917b66303bb072e5c13b712be3cc5e17b4c88cce0c36fd",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "software-engineering",
+    "testing",
+    "TDD",
+    "quality-assurance"
+  ],
+  "problem_solved": "避免先写生产代码后补测试导致的虚假信心、回归盲区与过度设计，用失败测试作为行为规范驱动最小实现。",
+  "when_to_use": "实现新功能、修复 bug、重构或改变行为时；一次性原型、生成代码、配置文件属例外，需先征询人类搭档。",
+  "procedural_steps": [
+    "RED：写一个最小测试表达期望行为——名称描述行为、只测一件事（名称含 'and' 就拆分）、使用真实代码，mock 仅在不可避免时使用。",
+    "运行测试并确认它以正确方式失败：失败信息符合预期、原因是功能缺失而非拼写错误；若直接通过，修改测试；若报错，修复后重跑。",
+    "GREEN：写刚好能让测试通过的最简代码，不添加测试之外的功能，不顺手重构，不做超出测试的“改进”。",
+    "再次运行测试：本测试通过、其他测试仍通过、输出干净（无错误/警告）；本测试失败修改代码而非测试，其他测试失败立即修复。",
+    "运行项目的完整测试命令（如 pytest/npm test/cargo test），即使任务只点名单个文件；报告该次运行暴露的所有失败，包括非本次改动引起的。",
+    "REFACTOR：仅在全部测试通过后消除重复、改进命名、抽取辅助函数，保持测试全部通过，不新增行为。",
+    "卡住时：先写期望 API 与断言；测试太复杂说明设计太复杂，简化接口；必须 mock 一切说明耦合过高，使用依赖注入；准备代码过多则抽取辅助函数或简化设计。",
+    "发现 bug 先写复现该 bug 的失败测试，再按循环修复；不能把“测试难写”作为跳过理由。"
+  ],
+  "anti_patterns": [
+    "没有失败的测试就写生产代码（违反 Iron Law）。",
+    "测试之前写了代码后留作“参考”或“改造”它——必须删除并从头开始。",
+    "先写代码后补测试——后补测试立即通过，什么也证明不了且受已写代码影响。",
+    "在 GREEN 阶段过度设计（YAGNI），加入 maxRetries/backoff/选项等未被测试要求的能力。",
+    "断言 mock 行为而非真实行为；把测试专用代码放进生产类。",
+    "任务范围只界定交付物而非验证范围——仍须跑整套测试。",
+    "把“就这一次跳过 TDD”当作合理化；除人类搭档许可外没有例外。"
+  ],
+  "metadata": {
+    "repository": "obra/superpowers",
+    "skill_path": "skills/test-driven-development/SKILL.md",
+    "commit_sha": "22f0b463e7a5e579904dd6211a520321035526f7",
+    "l0_content_hash": "64b03fce4aee5a97a93160cea8111f3ba13a17b7c001db4bd5836d67fd10705d",
+    "l0_quality_score": 0.92,
+    "refined_by": "opencode-go/beam-free"
+  }
+}

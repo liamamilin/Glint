@@ -1,0 +1,65 @@
+id: disc_life_annual_or_quarterly_theme_o_2f9a0cddd8
+title: 阶段主题词替代死板计划
+tagline: 用2个阶段主题词指方向，留出调整空间，告别死板KPI压力
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - life
+  - planning
+  - goals
+  - reflection
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Claude
+  - ChatGPT
+  pain_point: 做计划时总想列出一长串 KPI 和打卡表，稍有未完成就觉得自己失败，导致中途放弃
+  trigger_utterances:
+  - 今年的目标又没完成，感觉好失败
+  - 帮我把这堆 KPI 计划改得更灵活一点
+  - 接下来半年我想先聚焦几件事，帮我提炼主题词
+  - 死板的打卡表让我想放弃
+  - 帮我做年度计划但别太死板
+  anti_triggers:
+  - 需要精确的 OKR/KPI 拆解与进度追踪
+  - 要的是具体执行清单而非方向主题
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: '阶段主题词规划清单：
+
+    1. 明确时间跨度：3个月 / 半年 / 一年
+
+    2. 简述当前现状与期望（生活 + 工作）
+
+    3. 提炼 2 个阶段主题词（如“精简与沉淀”“轻装试错”“专注交付”）
+
+    4. 为每个主题词写 1 句日常选择判断准则
+
+    5. 将原死板计划拆解为 2～3 个关键里程碑
+
+    6. 每个里程碑只保留最小必要 KPI，允许随现实调整
+
+    7. 每月/每阶段回顾：主题词是否仍贴合？需要微调吗？'
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/life.json#life-annual-or-quarterly-theme-over-rigid-resolutions
+  source_hash: 079222b047765f3c71200d069df515d4ad871266b448436d5d3273b9f287735b
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: personal_career
+  subcategory: personal_os
+  collections: []
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

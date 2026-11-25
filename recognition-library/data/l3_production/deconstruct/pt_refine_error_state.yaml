@@ -1,0 +1,63 @@
+id: pt_refine_error_state
+title: 设计可恢复错误状态
+tagline: 帮用户理解失败、保留输入并决定重试或转人工
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - engineering
+  - error_handling
+  - ui
+  - ux
+  app_affinity:
+  - Cursor
+  - VS Code
+  - Figma
+  - Notion
+  pain_point: 开发功能时错误态设计无章可循，不清楚用户该看到什么、输入是否保留、何时重试或转人工、要记哪些诊断信息
+  trigger_utterances:
+  - 这个功能失败时用户该看到什么
+  - 错误页怎么设计才不丢数据
+  - 重试逻辑和转人工条件怎么定
+  - 帮我把错误状态梳理清楚
+  - 离线和部分成功该怎么处理
+  anti_triggers:
+  - 仅做后端异常捕获与日志，不涉及用户可见错误态
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '为【{{feature_and_failure_scenario}}】设计可恢复的错误处理，逐项输出：
+
+    1. 用户看到什么（文案与视觉）
+
+    2. 哪些输入与状态被保留
+
+    3. 可重试条件与重试策略
+
+    4. 何时转人工或升级
+
+    5. 需记录的诊断信息
+
+    并给出离线、中断及部分成功的预期行为。'
+  variables:
+  - feature_and_failure_scenario
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#refine-error-state
+  source_hash: c1fc86b4019b0e3c5a0f542d83d5d6954e22742e4d0ba266d8fe0b170bb8f3d6
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: engineering
+  subcategory: architecture
+  collections: []
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

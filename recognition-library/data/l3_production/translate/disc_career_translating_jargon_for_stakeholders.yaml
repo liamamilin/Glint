@@ -1,0 +1,54 @@
+id: disc_career_translating_jargon_for_stakeholders
+title: 跨语言翻译器
+tagline: 把专业动作翻成业务方与协作者听得懂、用得上的表达
+routing:
+  primitive: translate
+  goals:
+  - optimize
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - career
+  - communication
+  - stakeholders
+  - translation
+  app_affinity:
+  - Notion
+  - Slack
+  - Feishu
+  - Mail
+  pain_point: 向业务方汇报时堆砌技术细节，对方听不懂也不关心；向协作者协作时又说得太业务化，接口与边界不清，沟通反复返工。
+  trigger_utterances:
+  - 帮我把这段技术描述翻成给老板看的版本
+  - 这个需求给产品和给开发各写一版
+  - 术语太多非技术同事听不懂怎么改
+  - 帮我把专业内容翻译成大白话
+  - 同一份工作要给不同人讲清楚
+  anti_triggers:
+  - 仅需写内部技术文档、不涉及跨角色沟通的场景
+  - 纯粹的日常闲聊、没有明确受众与目标
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: "跨语言翻译器 · 清单\n\n1. 明确受众与目标\n   - 受众是业务/决策方 → 重结果、影响、风险、收益\n   - 受众是协作伙伴 → 重接口、节点、边界、依赖\n\n2. 提炼核心价值一句话（不提实现细节）\n\
+    \   - 我做了什么 → 为谁解决了什么问题 → 带来什么可衡量变化\n\n3. 业务/决策方版本（<= 3 句）\n   - 结果：……\n   - 影响/收益：……\n   - 风险/取舍：……\n\n4. 协作伙伴版本（<= 5\
+    \ 条）\n   - 输入/输出接口：……\n   - 关键节点/时序：……\n   - 边界与假设：……\n   - 依赖与阻塞：……\n\n5. 术语大白话改写\n   - 列出 3~5 个最易误解的术语/内部细节\n   - 每个给出「一句话大白话\
+    \ + 类比」\n\n6. 自检\n   - 对方能否在 10 秒内复述核心价值？\n   - 是否删掉了对方不关心的实现细节？\n   - 两个版本是否互不矛盾？"
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/career.json#career-translating-jargon-for-stakeholders
+  source_hash: 9f68b2accca046fa000bdf8d2ce8a169bb46fc50d000597ccc6d8e8168cee874
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  category: writing_comms
+  subcategory: workplace_comms
+  collections: []
+  base_weight: 1.0
+  confidence: 0.88
+  version: 1

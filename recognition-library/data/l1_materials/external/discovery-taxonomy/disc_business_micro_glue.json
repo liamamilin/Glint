@@ -1,0 +1,33 @@
+{
+  "id": "disc_business_micro_glue",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-micro-glue",
+  "title": "“无聊但高客单”的微垂直胶水服务",
+  "content": "旧共识（盲区）：赚钱的软件必须做大而全的平台，或者追求海量 C 端流量。\n\n新现实（破盲视角）：开发成本坍塌后，专门打通两个传统软件数据断层的“小胶水”反而毛利极高、客户留存极稳。\n\n破冰追问母题：\n- 列出 5 个在 [你的行业/岗位] 中，人们目前必须手动把数据从软件 A 复制粘贴到软件 B 的高频痛点，并评估做成自动化微工具的付费意愿。\n- 针对 [某具体软件生态，如 Shopify/Notion/飞书]，有哪些官方懒得做、但专业用户愿意每月付 20 美元解决的“最后一公里”断层？",
+  "content_hash": "d4e08ae9b32f483c2fb76f7f6947256bb67e05fed9c6c32f295b7aea1d3cf841",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "business",
+    "invisible-friction",
+    "cost-collapse",
+    "micro-saas",
+    "b2b",
+    "workflow",
+    "glue"
+  ],
+  "problem_solved": "赚钱的软件必须做大而全的平台，或者追求海量 C 端流量。",
+  "when_to_use": "开发成本坍塌后，专门打通两个传统软件数据断层的“小胶水”反而毛利极高、客户留存极稳。",
+  "procedural_steps": [
+    "列出 5 个在 [你的行业/岗位] 中，人们目前必须手动把数据从软件 A 复制粘贴到软件 B 的高频痛点，并评估做成自动化微工具的付费意愿。",
+    "针对 [某具体软件生态，如 Shopify/Notion/飞书]，有哪些官方懒得做、但专业用户愿意每月付 20 美元解决的“最后一公里”断层？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "business-micro-glue",
+    "arena": "business",
+    "lenses": [
+      "invisible-friction",
+      "cost-collapse"
+    ]
+  }
+}

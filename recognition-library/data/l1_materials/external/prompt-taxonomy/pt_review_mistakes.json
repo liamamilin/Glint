@@ -1,0 +1,27 @@
+{
+  "id": "pt_review_mistakes",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#review-mistakes",
+  "title": "把错题归成可修正的模式",
+  "content": "根据【题目、我的解法与答案】复盘【目标知识】。逐题指出第一个离开正确路径的步骤，归因为概念、读题或执行，并给一个能针对该错误的小练习。最后告诉我先练哪个错误模式及如何判断改善。",
+  "content_hash": "917a2b64b99414bc59e2ccec8246fbf792b1d07e3f6f54e032064ccdb7103ef5",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "learning",
+    "错题本",
+    "错误模式",
+    "error analysis"
+  ],
+  "problem_solved": "区分概念不清、步骤失误和题意误读。",
+  "when_to_use": "分类: 学习与辅导",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "review-mistakes",
+    "category": "learning",
+    "variables": [
+      "题目、我的解法与答案",
+      "目标知识"
+    ]
+  }
+}

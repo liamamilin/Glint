@@ -1,0 +1,238 @@
+# Glint（微光）项目顶层蓝图与架构总纲 (v2.0)
+
+> **文档定位**：本文件为 Glint 项目的唯一真相源（SSOT），聚焦「定义清楚系统需要具备哪些能力（What）与核心边界」，已收口前期讨论中的所有概念冲突与架构盲区。
+
+---
+
+## 一、核心定位与人机协作范式
+
+* **产品定位**：Glint（微光）是人与个人电脑之间的**常驻认知路由器（OS-level Cognitive Router / 外接大脑）**。它不替代强 LLM 干重活，也不做静态知识库，而是利用本地常驻 2B 小模型的毫秒级响应，在用户产生想法的那一秒，将最趁手的认知能力（Lens）推到光标旁。
+* **阶段边界**：
+  * **Phase 1（当前唯一聚焦）**：**认知提词（写出去）**——在任意 App 输入碎片想法，秒出 3 张认知透镜卡片。
+  * **Phase 2+（架构预留）**：**信息降噪（读进来）**（划词秒速摘要/日志排障）与**本地资产路由（找出来）**（模糊意图唤醒笔记/命令/密码库）。
+* **极简人机分工**：
+  $$\text{人类（低负担三元信号）} \xrightarrow{\text{毫秒级路由}} \text{Glint（本地 2B 路由器 + 认知透镜）} \xrightarrow{\text{高杠杆执行}} \text{强 LLM（深度思考）}$$
+
+### 统一双层输入模型（已解决输入断层）
+将“人类认知减负”与“机器精准路由”解耦为上下两层映射：
+1. **人类表达层（三元认知信号）**：用户无需记忆提示词，只需自然表达三类主观信号：
+   * **表达偏好（Preference）**：风格、语气、深浅与输出要求（如“硬核实战、去 AI 味、只给表格”）。
+   * **表达期望状态（Desired State）**：想达到的终点或当下的模糊痛点（如“想做新产品但没头绪”）。
+   * **表达期望变化（Desired Transformation）**：想对眼前材料施加的动作（如“优化前端”、“排雷”、“压缩”）。
+2. **机器路由层（闭集单项预测 + 开集双路检索）**：
+   * **闭集（由本地 2B 模型单项预测，永远冻结，微调一次长期稳定）**：
+     * 预测原则：**永远只猜用户最偏好的唯一主意图**（单项预测，训练空间极度稳定，随实战数据沉淀越训越准）；其余 2 张正交卡片由外置策略层基于 `clarity` 槽位模板扩展补全。
+     * **核心边界（要求 $\neq$ 意图）**：风格/格式类要求（如“去 AI 味、只给表格”）属于附加约束，**不干扰主意图判定**（如“去 AI 味、只给表格，帮我分析这个架构”的主意图仍为 `Deconstruct`，要求仅作后置修饰或透传）；仅当输入无其他主动作时，“润色/去 AI 味重写”本身才判定为 `Translate`。
+     * `goal`（核心诉求，5 项）：`create`（创造） / `optimize`（优化） / `debug`（排障） / `evaluate`（评估） / `digest`（消化）。
+     * `clarity`（认知清晰度，3 项）：`vague`（模糊态） / `concrete`（具体态） / `conflicted`（纠结态）。
+     * `primitive`（认知元操作，7 项）：见第二节本体论（单选主元操作）。
+     * `preference_tags`（偏好修饰）：从“表达偏好”中提取的轻量风格/格式约束，作为执行期可组合修饰器（Modifier）。
+   * **开集（本地 Embedding 双路并发召回 + macOS 当前 App 上下文匹配，新增领域无需重训 2B 模型）**：
+     * 首选本地 Ollama 常驻 `bge-m3:latest`（中英混杂与跨语种对齐强，1.2 GB），与 `qwen3.5:2b` 并发调用，在目标元操作桶内精准定位具体 `domain` 与具象透镜（Concrete Lens）。
+
+---
+
+## 二、认知边界与核心本体论（Ontology SSOT）
+
+### 1. 认知边界测试（已修正“去事实”过死问题）
+每当考虑纳入新素材或新能力时，执行**「知识类型过滤测试」**：
+* **拒绝（放行给搜索引擎 / 笔记 / RAG）**：**陈述性知识（Declarative Knowledge，“是什么”）**——静态事实、百科定义、纯新闻资讯。
+* **放行（纳入 Glint 外接大脑）**：**程序性 & 启发式认知能力（Procedural & Heuristic Knowledge，“怎么查、怎么判、怎么拆、怎么避坑”）**——思维框架、诊断清单、反模式、决策启发式、以及高杠杆工具索引。
+
+### 2. 7 大冻结认知元操作（Cognitive Primitives）
+作为 2B 路由器的稳定地基与推荐多样性的锚点：
+1. **降噪压缩（Compress）**：多 $\rightarrow$ 少（提取骨架、主因与关键事实）。
+2. **解构建模（Deconstruct）**：乱 $\rightarrow$ 序（MECE 拆解、因果链、排查清单）。
+3. **批判排雷（Critique）**：单视角 $\rightarrow$ 对立面（事前验尸、红队拷问、隐含假设审计）。
+4. **发散联想（Diverge）**：1 $\rightarrow$ N（跨界类比、破盲母题、逆向思维）。
+5. **收敛决策（Converge）**：N $\rightarrow$ 1（权重对比矩阵、二阶后果、最小验证）。
+6. **转译重构（Translate）**：语境 A $\rightarrow$ 语境 B（口语转专业 Prompt、去 AI 味、技术转业务）。
+7. **元认知追问（Metacognize）**：给答案 $\rightarrow$ 问前提（揪出缺失变量、重新定义问题）。
+
+> **高频易混边界划界准则（2B 分类与标注 SSOT）**：
+> * **`Compress` vs `Deconstruct`**：`Compress` 做**信息减法**（多 $\rightarrow$ 少：摘要、提炼唯一主因/TL;DR）；`Deconstruct` 做**建立结构**（乱 $\rightarrow$ 序：拆模块、拆步骤、列排查清单）。
+> * **`Critique` vs `Converge`**：`Critique` 针对**单一对象找漏洞**（1 $\rightarrow$ 反例/盲区）；`Converge` 针对**多选项做取舍**（N $\rightarrow$ 1：权衡矩阵、最小验证拍板）。
+> * **两层挂载结构**：第一层（7 大元操作）作为“核心指令集”冻结稳定；第二层（具象思维透镜 Concrete Lenses）以**单 `primitive` 强归属**方式挂载其下，开放、有机生长。
+
+---
+
+## 三、五层认知供应链（L0 → L1 → L2 → L3 库存 → L4 上架）与现有资产整合
+
+### 1. 供应链分层与准入标准
+| 层级 | 定义与形态 | 消费对象 | 核心关卡与转化动作 |
+| :--- | :--- | :--- | :--- |
+| **L0 原始材料** | 书籍、行业长文、架构规范、复盘、`ATLAS-METHODS` 原始技能 | 人类阅读 | **Gate 1（L0 信噪比准入）**：评估信息密度与时效性，拒收水文、纯陈述与私有脚本 |
+| **L1 认知素材** | 人类可读的结构化方法论/模板库（保留异构形态，供人查阅） | 人类 & 通用 AI | **L0 $\rightarrow$ L1 精炼**：去陈述性事实，只保留诊断清单、反模式、启发式、追问与范式 |
+| **L2 透镜草稿 (Draft)** | LLM 从 L1 初步语义合成的原始原子透镜 YAML（只读存底，允许微脏） | **L2 $\rightarrow$ L3 清洗引擎** | **L1 $\rightarrow$ L2 语义合成**：原子化切分 + 闭集意图坐标标注 + 合成痛点与触发口语 |
+| **L3 生产透镜库存 (Inventory)** | 经确定性清洗、人称/占位符规范、跨源查重与校验后的**合格可用库存**（可无限扩充，不直接上架） | **货架调度器 & 管理台** | **Gate 2–3（L2 $\rightarrow$ L3 确定性清洗）**：枚举/词表归一化、人称语境清洗、占位符修复、可调阈值查重（零 LLM 成本，秒级全量重跑） |
+| **L4 生产上架透镜 (On-Shelf / `dist/current`)** | 真正上架供 `brain-server` 实时路由消费的精选货架（含向量索引与原子回滚） | **Glint 实时路由器** | **Gate 4（上下架调度 + 原子发布）**：**常青通用货架（`universal` 永不下架）+ 动态垂直货架（`domain_specific` 按热度/场景动态上下架）**，持续扩充 L3 库存绝不污染线上体验 |
+
+### 2. 现有 4 大 L1 资产的接入定位
+Glint 不替代原有仓库的策展，只做下游编译器与实时路由器（每个异构仓库配极薄的标准化提取适配器，避免把 YAML 写成复杂 DSL）：
+* **Prompt-taxonomy**（224 模板 / 16 任务 / 19 工作流）：主力执行与转译层，在 `concrete`（具体态）下优先路由。
+* **DISCOVERY-TAXONOMY**（18 张破盲卡 / 认知透镜）：元认知与破局层，在 `vague`（模糊态）与探索位优先路由。
+* **ATLAS-METHODS**（多批次标准化方法论/技能库）：方法论底座，同时复用其清洗标准化经验。
+* **SUPER-INDIVIDUAL-TOOLBOX**（9 岗位 / 36 兵器）：角色与杠杆工具索引层，通过资源唤起/清单形态提供支持。
+
+### 3. 新领域 10 分钟冷启动（Glint Forge）
+解决个人跨界学习与对外产品化的“大而全”难题：
+* **通道 A（自带 L0 原料投喂）**：丢入 3–5 篇高质量文档或笔记 $\rightarrow$ 强 LLM 按“去陈述、留程序/启发式”精炼 $\rightarrow$ 自动编译为 L2 领域包，依托开集检索即插即用（零重训）。
+* **通道 B（零原料逆向合成）**：用户仅输入三元信号（领域身份 + 期望状态/高频痛点 + 风格偏好） $\rightarrow$ 强 LLM 按 7 大元操作矩阵定向合成 15–20 张 **Starter Domain Pack**，后续靠实战摩擦淘汰进化。
+
+---
+
+## 四、系统核心能力全景（五大能力域）
+
+> **核心工程原则**：一切变化关进“配置与流水线”里，核心运行代码写稳后尽量不再动。
+
+### 域 A：生产与转化能力（Ingestion & Forge）
+1. **多源标准化接入**：支持本地目录、Git 仓库、JSON 源及薄提取插件，基于 Hash 增量同步。
+2. **L0 准入筛查与精炼**：过滤低质原料，执行 L0 $\rightarrow$ L1 程序性算子提取。
+3. **语义补全（Enrichment）**：读取唯一词表，自动为缺失意图标签的 L1 素材补齐闭集坐标与置信度。
+4. **日常摩擦捕获（Friction-to-Asset）**：自动记录 `Esc` 取消的“未满足意图”；支持快捷键一键将高光现场 Prompt 抽象为 L2 草稿。
+
+### 域 B：治理、清洗与发布能力（Governance & Build）
+5. **唯一真相源治理（Ontology SSOT）**：全局唯一 `ontology.yaml` 管理枚举、同义词映射（Alias Map）与 Schema 版本号。
+6. **确定性清洗与查重门禁**：自动归一化枚举、校验占位符语法；基于语义相似度拦截跨源重复/冲突卡片。
+7. **隔离区机制（Quarantine）**：未知枚举、低置信度或重复冲突条目自动入隔离区附带原因，不污染线上库。
+8. **不可变覆写层（Overlay）**：上游同步目录严格只读；本地调教（废弃标记、权重微调、标题修改）写入独立 `overrides.yaml`，编译时自动合并，彻底杜绝上游同步冲掉本地修改。
+9. **原子编译与回滚**：将激活态 L2 透镜编译为只读运行时索引库，软链接原子切换，支持一键回滚。
+
+### 域 C：实时路由与交互能力（Runtime & UX）
+10. **上下文感知与防误伤读取**：读取当前 App 与输入内容；遵循“已选中文本 $\rightarrow$ 当前段落 $\rightarrow$ 全框（仅限聊天 App）”三级降级，绝不在编辑器中误全选整篇文档。
+11. **外置策略路由与防马太效应**：所有排序权重外置至 `routing_policy.yaml`；3 张卡采用**「2 确定 + 1 探索」**机制（第 3 位保留 15%–20% 概率轮换曝光冷门好卡或破盲卡，避免曝光偏差饿死新卡）。
+12. **超时自动降级与常驻保活**：本地 2B 模型常驻内存（48GB Mac 仅占 ~2GB）；若单次推理超时或异常，无缝降级为纯规则 + 全文关键词召回，保证交互零卡顿。
+13. **多动作协议与路由后闭环（已补齐交互断点）**：
+    * 支持 4 类 `action_type`：`inject_prompt`（追加/包裹写入）、`show_checklist`（浮窗阅读不覆盖输入）、`open_resource`（唤起工具/链接）、`workflow_entry`（多步工作流入口）。
+    * **多步工作流衔接**：选中工作流第 1 步后记录轻量会话态，下次呼出自动置顶该工作流的下一步透镜。
+    * **零摩擦多变量处理**：`{{input}}` 自动承接当前文本；其余变量优先由上下文推断，无法推断时自动转为指令要求强 LLM 先反问澄清，彻底消灭手动逐个填空。
+
+### 域 D：评测与双环自进化能力（Eval & Flywheel）
+14. **黄金集离线回归门禁（Golden Eval）**：维护核心测试集，任何策略调整、新源接入或模型更新必须通过意图 F1、Hit@3 与 P95 延迟门禁方可发布。
+15. **内环——周级材料自进化**：自动区分**「高曝光零点击（真废卡 $\rightarrow$ 淘汰/重写）初期仅记录曝光、调用频率，不急于判定认知价值」**与**「零曝光（冷门好卡 $\rightarrow$ 进探索位）」**；对高频 `Esc` 取消日志聚类并提议生成新卡草稿。
+16. **外环——月级 2B 模型专精化**：日志攒满阈值后，导出正负反馈与难负样本，在 48GB Mac 上本地 MLX LoRA 微调闭集意图路由器，经黄金集评测达标后原子切换。
+
+### 域 E：隐私安全与对外生态边界（Safety & Ecosystem）
+17. **隐私脱敏与密码红线**：采用 App 白名单机制，跳过密码框，日志落盘前自动正则擦除 Key/Token/手机号。**严禁明文密码进入模型或日志**（未来密码场景严格遵循“模型管模糊意图，系统钥匙串/密码库管精确明文”）。
+18. **对外产品形态**：**Glint Core**（极简开源内核 + 15–20 张通用核心透镜） + **Glint Forge**（内置领域精炼引擎） + **Domain Packs**（去中心化 Git 领域包协议）。
+
+---
+
+## 五、防过度设计纪律：设计一步到位，实现按需开关
+
+为避免“蓝图太完美导致验证周期过长”，落地严格分三阶段按需点亮能力：
+* **Stage 1（最小闭环验证，优先跑通）**：仅点亮「`Prompt-taxonomy` + `DISCOVERY-TAXONOMY` 薄接入 $\rightarrow$ 基础清洗编译 $\rightarrow$ 现成 Ollama 2B/3B 闭集路由 $\rightarrow$ macOS 悬浮 3 卡交互」，验证核心假设（弹出 3 张认知卡是否真的显著降低思考负担）。
+* **Stage 2（治理与内环进化）**：点亮 Overlay 覆写层、隔离区、语义查重、摩擦捕获与周级体检。
+* **Stage 3（模型专精与对外精炼）**：点亮黄金集离线评测、本地 MLX 微调 2B 路由器与 `glint forge` 新领域冷启动引擎。
+
+---
+
+## 六、核心链路详细设计：输入 → 意图 → Glint 认知材料
+
+本节定义「输入 $\rightarrow$ 意图 $\rightarrow$ Glint 认知材料」运行期与数据面的核心技术规范，作为 Stage 1 开发的直接依据。
+
+### 1. 两阶段极速路由架构与模型选型（M1 已实机验证）
+
+```text
+用户输入 (input_text) + macOS 上下文 (app_name) + 可选工作流会话态
+   │
+   ▼ [预处理：风格修饰语剥离（「要求 ≠ 意图」），仅当剩余主诉求 ≥ 6 字时生效]
+   │
+   ▼ [Stage 1：Hybrid Recall 混合粗排（~25 ms）]
+     · 内存预索引 BM25（中文字面二元组 + 英文词，解决短查询动作词不敏感）
+     · Ollama bge-m3:latest (1.2 GB, keep_alive=-1) 计算 1024 维查询向量做全量余弦检索
+     · RRF 融合排序 → 产出 16 张多元操作高相关候选池（全局 Top-10 + 全元操作代表卡）
+   │
+   ▼ [Stage 2：Cross-Encoder 极速精排（~35–60 ms）]
+     · 进程内 Apple Silicon MPS 运行 FP16 BAAI/bge-reranker-v2-m3 (567M，HuggingFace 本地缓存)
+     · 在 raw logit 空间叠加常青通用货架 (evergreen) 稳定加权 (+0.45) + App 亲和度 (+0.15)
+     · 按总分贪心选出 3 张不同 primitive 的严格正交认知卡
+     · 若 Reranker 不可用，自动降级至 qwen3.5:2b 精排或 Hybrid RRF 兜底
+```
+
+* **本地模型分工与索引选型**：
+  * **Phase 1 选卡主力**：`bge-m3:latest`（Ollama 粗排）+ `BAAI/bge-reranker-v2-m3`（`torch` MPS 进程内精排，绕开当前 Ollama 暂不支持 `/api/rerank` 的限制）。实机 24 条 Golden Eval 达成 **`Hit@1 = 91.7%`、`Hit@3 = 100%`、`P95 = 352 ms`**。
+  * **`qwen3.5:2b` 定位**：Phase 1 作为降级兜底；Phase 2 承担需要文本生成的微技能（划词秒速摘要 `instant_summary`、超长日志压缩、动态改写）。
+  * 零重型向量库：L4 上架透镜在百卡量级下向量总大小不足 2 MB，构建阶段预计算并打包为轻量静态索引，服务启动时全量常驻内存做矩阵点积（耗时 < 0.5 ms）。
+
+### 2. L2 认知材料（Lens）统一 Schema 规范
+
+严格分离**「给路由器吃的索引面」**与**「给强 LLM / 人类吃的执行面」**。**Embedding 仅编码路由画像（`title + pain_point + trigger_utterances + domains`），严禁直接编码 `execution.content` 正文**，避免 Prompt 模板套话污染语义检索空间。
+
+```yaml
+# 1. 身份与展示面（UI 渲染）
+id: "arch_mece_deconstruct"         # 全局唯一不可变 ID（供日志与 Overlay 关联）
+title: "架构 MECE 拆解"              # 短标题（<= 12 字）
+tagline: "把一团麻的架构理出边界与模块"  # 悬浮窗单行预览
+
+# 2. 路由坐标与语义画像面（2B + Embedding 路由器消费）
+routing:
+  primitive: "deconstruct"          # 单 primitive 强归属（7 选 1，决定所属元操作桶）
+  goals: ["optimize", "create"]     # 适用诉求（1~2 项）
+  clarity_fit: ["vague", "concrete"]# 适用清晰度
+  domains: ["architecture", "backend", "system_design"]  # 开集领域标签
+  app_affinity: ["Cursor", "VS Code", "Notion", "Obsidian"]
+
+  # Embedding 编码核心语料（与用户真实碎片口语对齐）
+  pain_point: "系统/方案思路混乱、耦合严重、不知道从哪一层开始下手拆解"
+  trigger_utterances:               # 3~5 句典型用户口语触发例句
+    - "帮我分析一下这个架构，感觉太乱了"
+    - "这个需求好复杂，不知道怎么拆模块"
+    - "理一下这个系统的核心边界和依赖"
+  anti_triggers:                    # 可选：负向排除语境（防误召回）
+    - "单纯修一个语法报错"
+
+# 3. 执行协议面（交互层 & 强 LLM 消费）
+execution:
+  action_type: "inject_prompt"      # inject_prompt | show_checklist | open_resource | workflow_entry
+  inject_mode: "append"             # append | wrap（仅 inject_prompt 生效）
+  content: |
+    请按 MECE（不重不漏）原则将上述架构/问题拆解为 3-5 个核心模块，明确各模块职责与边界，并指出最脆弱的耦合点。
+  variables: []                     # 除 {{input}} 外的额外变量（非空时自动触发“先反问澄清”封装）
+  workflow: null                    # 多步工作流元数据：{ workflow_id, step, next_lens_id }
+
+# 4. 治理与溯源面（编译流水线 & 自进化消费）
+meta:
+  source: "Prompt-taxonomy"         # 来源仓库 / glint-core / user-friction
+  source_ref: "architecture/mece.md"# 上游相对路径（Hash 增量同步定位）
+  status: "active"                  # active | quarantine | deprecated
+  base_weight: 1.0                  # 基础权重（可由 overrides.yaml 无痛覆写）
+  version: 1
+```
+
+### 3. `clarity` 驱动的三卡槽位模板与桶内打分
+
+所有槽位模板与打分权重均外置至 `routing_policy.yaml`，核心认知节奏由 `clarity` 总控：
+
+| `clarity` 状态 | 槽位 1（主命中位） | 槽位 2（核心协同位） | 槽位 3（补充 / 探索位） |
+| :--- | :--- | :--- | :--- |
+| **`vague`（模糊态）** | 2B 预测的主 `primitive`（优先 `DISCOVERY-TAXONOMY` / `metacognize`） | 破盲发散或元认知追问（与槽位 1 正交） | 解构建模（收口起手式）或探索位 |
+| **`conflicted`（纠结态）** | 2B 预测的主 `primitive`（优先 `converge` 收敛决策） | `critique`（批判排雷 / 红队拷问） | `metacognize`（追问隐含前提）或探索位 |
+| **`concrete`（具体态）** | 2B 预测的主 `primitive`（优先 `Prompt-taxonomy` 高杠杆执行卡） | `critique` / 互补视角（与槽位 1 正交） | 15%–20% 概率轮换冷门好卡/破盲卡，其余取次优正交视角 |
+
+* **桶内综合得分（概念公式，权重全外置）**：
+  $$\text{Score}(c) = w_{\text{emb}} \cdot \cos(v_{\text{query}}, v_c) + w_{\text{goal}} \cdot \mathbb{I}(\text{goal} \in c.\text{goals}) + w_{\text{clarity}} \cdot \mathbb{I}(\text{clarity} \in c.\text{clarity\_fit}) + w_{\text{app}} \cdot \text{AppAffinity}(c) + w_{\text{base}} \cdot c.\text{base\_weight}$$
+* **偏好约束处理**：用户输入的格式/风格要求（`preference_tags`）不作为硬过滤条件；原文中已包含的要求自然透传，显式偏好可在注入执行期作为轻量化 Modifier 附加。
+
+---
+
+## 五、L3/L4 三维立体组织与统一管理台架构 (v2.3)
+
+为了避免数百张认知透镜平铺失控，并兼顾「切入新领域批量上架」与「非关注领域只留最高质量精华」两类需求，L3 库存与 L4 货架采用 **正交三维组织 + 声明式上架规则**：
+
+1. **质量层级（`meta.tier: S | A | B`）**：
+   - **`Tier S`（常青底座，约 45 张）**：跨领域最高频元认知与核心动作，**永不下架**，且受进化调度器硬豁免；
+   - **`Tier A`（领域精华）**：高置信度核心专业方法论；
+   - **`Tier B`（长尾储备）**：细分/实验性/待验证卡片。
+2. **二级领域分类树（[taxonomy.yaml](file:///Volumes/个人资料/2026/开发项目/Glint/recognition-library/config/taxonomy.yaml)）**：
+   - 5 大核心一级领域（通用思维 / 软件工程 / 产品增长与商业 / 写作与沟通 / 个人系统与职业）+ `custom` 自定义领域，下辖 19 个二级子分类；`L2 → L3` 按 `domains` 优先、文本次之的确定性规则自动归类（零 LLM 成本），可被 `overrides.yaml` 随时覆写。
+3. **自定义专题包（`Collections`）与声明式 L4 货架（[shelf_policy.yaml](file:///Volumes/个人资料/2026/开发项目/Glint/recognition-library/config/shelf_policy.yaml)）**：
+   - 每个一级领域独立配置上架模式：**`off`（关闭） / `tier_a`（仅 S+A 精华） / `all`（全部）**；
+   - 任意卡片可归入多个自定义专题包（如「独立开发冲刺包」「本周调研包」），**最终 L4 上架集合**由公式确定性算出：
+     $$\text{L4 On-Shelf} = \text{Tier S (Evergreen)} \;\cup\; \text{Active Collections} \;\cup\; \bigcup_{c} \text{Mode}(c) \;\cup\; \text{Manual Overrides}$$
+4. **统一后端管理台（`http://127.0.0.1:18765/admin/`）**：
+   - 直接挂载于 `brain-server`（零额外常驻进程），由 macOS 菜单栏 **`Glint 管理…`** 一键打开，集成 6 大模块：**总览与发布**、**L3 库存 & L4 货架**（左侧分类/专题树 + 顶部「🔍 全库召回排序诊断 & 一键校准 / 认知缺口标记」+ 右侧卡片网格与批量操作）、**进化飞轮（M3）**、**L0-L2 供给工坊（M4，含认知缺口清单）**、**路由沙盒 & Golden Eval**、**策略配置 & 隔离区/日志**。
+5. **L3 断层领先穿透召回（L3 Breakthrough Gate）**：
+   - 发布 `dist/current/` 时同步产出活跃 `off_shelf` 的 `l3_shadow_lenses.json + l3_shadow_embeddings.npz`；
+   - 路由阶段复用 Stage 1 查询向量零额外调用捞取 Top-2 策略性待命 L3 候选（默认排除人工显式下架卡，防诈尸），与 L4 候选同批进入 MPS `bge-reranker-v2-m3` 打分；
+   - 分差不大一律选 L4；仅当 L3 同时满足双锚点底线（`cos >= 0.45` 且 `logit >= -1.0`）与断层领先幅度（`ΔTop1 >= +1.5` 或 `ΔTop3 >= +2.0`）时，允许最多 1 张带 **`✦ L3 发现`** 角标穿透展示，被用户实际选用后自动在 M3 进化飞轮中最高优推荐晋升 L4。

@@ -6,6 +6,13 @@ enum InjectMode: String, Codable, Sendable {
     case wrap
 }
 
+struct IntentPrediction: Codable, Equatable, Sendable {
+    let primitive: String
+    let goal: String
+    let clarity: String
+    let used_embed: Bool?
+}
+
 struct CardItem: Codable, Identifiable, Equatable, Sendable {
     let id: String
     let title: String
@@ -14,6 +21,18 @@ struct CardItem: Codable, Identifiable, Equatable, Sendable {
     let mode: InjectMode
     let prompt: String
     let preview: String
+    let action_type: String?
+    let primitive: String?
+    let source: String?
+    let is_exploration: Bool?
+    let workflow_id: String?
+    let workflow_step: Int?
+    let is_workflow_next: Bool?
+    let is_l3_breakthrough: Bool?
+
+    var isReaderAction: Bool {
+        action_type == "show_checklist" || action_type == "open_resource"
+    }
 }
 
 struct RouteRequest: Codable, Sendable {
@@ -34,6 +53,8 @@ struct RouteResponse: Codable, Sendable {
     let latency_ms: Double
     let model: String
     let used_fallback: Bool
+    let intent: IntentPrediction?
+    let release_version: String?
 }
 
 struct FeedbackRequest: Codable, Sendable {
@@ -45,6 +66,10 @@ struct FeedbackRequest: Codable, Sendable {
     let inject_mode: String?
     let latency_ms: Double?
     let custom_intent: String?
+    let predicted_primitive: String?
+    let predicted_goal: String?
+    let predicted_clarity: String?
+    let release_version: String?
 
     init(
         app_name: String,
@@ -54,7 +79,11 @@ struct FeedbackRequest: Codable, Sendable {
         selected_id: String?,
         inject_mode: String?,
         latency_ms: Double?,
-        custom_intent: String? = nil
+        custom_intent: String? = nil,
+        predicted_primitive: String? = nil,
+        predicted_goal: String? = nil,
+        predicted_clarity: String? = nil,
+        release_version: String? = nil
     ) {
         self.app_name = app_name
         self.skill_type = skill_type
@@ -64,6 +93,10 @@ struct FeedbackRequest: Codable, Sendable {
         self.inject_mode = inject_mode
         self.latency_ms = latency_ms
         self.custom_intent = custom_intent
+        self.predicted_primitive = predicted_primitive
+        self.predicted_goal = predicted_goal
+        self.predicted_clarity = predicted_clarity
+        self.release_version = release_version
     }
 }
 

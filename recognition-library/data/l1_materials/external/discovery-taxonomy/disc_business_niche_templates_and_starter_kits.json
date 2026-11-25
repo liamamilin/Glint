@@ -1,0 +1,33 @@
+{
+  "id": "disc_business_niche_templates_and_starter_kits",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-niche-templates-and-starter-kits",
+  "title": "卖“省掉从零搭架子”的起步套件与现成骨架",
+  "content": "旧共识（盲区）：大家自己去搜零散教程拼凑也能搭出来，现成的模板或骨架卖不动。\n\n新现实（破盲视角）：对很多刚起步的人来说，最难的不是写完最后 10%，而是跨过“空白页与环境配置”的冷启动门槛；一套跑得通的骨架能帮他们省掉好几天折腾。\n\n破冰追问母题：\n- 结合 [你的技术/设计/运营/写作经验]，找出新手在 [某类项目或任务] 起步时最容易卡住的“空白页/配置环节”，设计一款能让他们 30 分钟跑通第一版的起步套件。\n- 如何让现成模板或起步套件不只是一堆静态文件，而是附带清晰的“10 分钟上手路径与常见坑提示”？",
+  "content_hash": "2519baa5c4b0191a36967135552f86660983313b151b412432b3fcbaebdc8eb7",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "business",
+    "cost-collapse",
+    "invisible-friction",
+    "starter-kits",
+    "templates",
+    "digital-products",
+    "indie"
+  ],
+  "problem_solved": "大家自己去搜零散教程拼凑也能搭出来，现成的模板或骨架卖不动。",
+  "when_to_use": "对很多刚起步的人来说，最难的不是写完最后 10%，而是跨过“空白页与环境配置”的冷启动门槛；一套跑得通的骨架能帮他们省掉好几天折腾。",
+  "procedural_steps": [
+    "结合 [你的技术/设计/运营/写作经验]，找出新手在 [某类项目或任务] 起步时最容易卡住的“空白页/配置环节”，设计一款能让他们 30 分钟跑通第一版的起步套件。",
+    "如何让现成模板或起步套件不只是一堆静态文件，而是附带清晰的“10 分钟上手路径与常见坑提示”？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "business-niche-templates-and-starter-kits",
+    "arena": "business",
+    "lenses": [
+      "cost-collapse",
+      "invisible-friction"
+    ]
+  }
+}

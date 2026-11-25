@@ -1,0 +1,27 @@
+{
+  "id": "pt_context_pack",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#context-pack",
+  "title": "把上下文整理成可交接的输入",
+  "content": "为【后续任务】整理【材料、已做动作和现状】。按目标、当前版本、相关文件、已确认事实、未解决问题和验证入口列出。标注时间与出处，指出新会话要先读哪些材料。",
+  "content_hash": "6f92e8ba4879e53fb12de1f99d295926cfe246403e1ac59add6ddb88fc4cd1da",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "prompt-workflows",
+    "上下文",
+    "交接",
+    "context pack"
+  ],
+  "problem_solved": "让新会话拿到完成任务所需的事实与来源。",
+  "when_to_use": "分类: 提示词与 AI 工作流",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "context-pack",
+    "category": "prompt-workflows",
+    "variables": [
+      "后续任务",
+      "材料、已做动作和现状"
+    ]
+  }
+}

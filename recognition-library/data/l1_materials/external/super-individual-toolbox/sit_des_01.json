@@ -1,0 +1,29 @@
+{
+  "id": "sit_des_01",
+  "source": "super-individual-toolbox",
+  "source_ref": "https://liamamilin.github.io/SUPER-INDIVIDUAL-TOOLBOX/data/design-creative.json#des-01",
+  "title": "截图级 UI 毒舌诊断器",
+  "content": "定位：请一位审美极高的设计总监盯着你的截图挑刺\n\n触发场景：当你自己写完前端页面，总觉得“哪里土土的、像程序员写的”，却说不出具体该改哪几个像素时。\n\n核心机制：\n- 截取完整首屏与移动端窄屏两张图，喂给多模态模型\n- 强制按“视觉层级、留白呼吸感、对比度、对齐精度”4 个维度只挑毛病、禁止夸奖\n- 要求每一条批评必须附带具体的 CSS 修改数值（如字号、行高、padding、色值）\n\n交付物：一份带具体 CSS 像素/色值修改建议的《界面整容清单》\n\n推荐装配：多模态视觉模型 + 固定 UI 评审 System Prompt\n\n误用警告：不要一次把 20 条建议全改完；每次只改影响最大的前 3 条（通常是留白和层级），再重新截图复查。",
+  "content_hash": "232ceca481d18643b4a1d0dd393c02006f90e2983b5cd9d7da22ffc5256f65fc",
+  "suggested_action_type": "open_resource",
+  "domain_hints": [
+    "design-creative",
+    "设计师与美术"
+  ],
+  "problem_solved": "当你自己写完前端页面，总觉得“哪里土土的、像程序员写的”，却说不出具体该改哪几个像素时。",
+  "when_to_use": "当你自己写完前端页面，总觉得“哪里土土的、像程序员写的”，却说不出具体该改哪几个像素时。",
+  "procedural_steps": [
+    "截取完整首屏与移动端窄屏两张图，喂给多模态模型",
+    "强制按“视觉层级、留白呼吸感、对比度、对齐精度”4 个维度只挑毛病、禁止夸奖",
+    "要求每一条批评必须附带具体的 CSS 修改数值（如字号、行高、padding、色值）"
+  ],
+  "anti_patterns": [
+    "不要一次把 20 条建议全改完；每次只改影响最大的前 3 条（通常是留白和层级），再重新截图复查。"
+  ],
+  "metadata": {
+    "original_id": "des-01",
+    "drawer": "design-creative",
+    "drawer_zh": "设计师与美术",
+    "deliverable": "一份带具体 CSS 像素/色值修改建议的《界面整容清单》"
+  }
+}

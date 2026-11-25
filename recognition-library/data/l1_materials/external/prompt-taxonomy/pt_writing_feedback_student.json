@@ -1,0 +1,28 @@
+{
+  "id": "pt_writing_feedback_student",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#writing-feedback-student",
+  "title": "给学习者可消化的写作反馈",
+  "content": "按【学习目标或评分规则】评阅【学习者作品】。先指出一处成功表达，再找两处最影响目标的问题，给短例和修改任务。最后留一个可自评的检查点，让学习者自己完成下一稿。",
+  "content_hash": "48686f0fc52022d334a526d01e1f0c87ced026b9341c7a78a9e7714d4fc6bd8a",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "learning",
+    "作文",
+    "批改",
+    "教学",
+    "writing feedback"
+  ],
+  "problem_solved": "用少量修改练习提高下一稿。",
+  "when_to_use": "分类: 学习与辅导",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "writing-feedback-student",
+    "category": "learning",
+    "variables": [
+      "学习目标或评分规则",
+      "学习者作品"
+    ]
+  }
+}

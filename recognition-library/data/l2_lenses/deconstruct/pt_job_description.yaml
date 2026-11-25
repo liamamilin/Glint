@@ -1,0 +1,64 @@
+id: pt_job_description
+title: 拆解岗位说明
+tagline: 对照JD与你的经历，分层要求并生成待核对问题与准备经历
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - evaluate
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - career
+  - recruiting
+  - job_description
+  - interview_prep
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Chrome
+  - Claude
+  pain_point: 面对冗长JD不知哪些是硬性门槛、哪些是加分项，也说不清自己哪里匹配、哪里有缺口，面试准备无从下手
+  trigger_utterances:
+  - 帮我拆一下这个JD我哪里符合哪里不
+  - 这个岗位要求这么多我到底够不够格
+  - 对照JD和我的简历做个对照表
+  - 这个职位必备和加分分别是什么
+  - 面试前帮我整理下要问HR什么
+  anti_triggers:
+  - 只是想写一封求职信或润色简历
+  - 在谈薪资或offer谈判
+execution:
+  action_type: inject_prompt
+  inject_mode: wrap
+  content: '请将【职位说明】拆解并对照【我的经历】，按以下结构输出：
+
+
+    1. 要求分层表：列「要求原文」「优先级（必备/加分/待核）」「我的证据」「匹配度（高/中/低/无）」「待核对点」。
+
+    2. 三个向招聘方提问的具体问题（基于待核对点，避免已明确的信息）。
+
+    3. 最值得准备的一段经历（含STAR要点与可量化成果）。
+
+
+    {{input}}
+
+
+    补充变量：
+
+    - {{audience}}：目标岗位/公司（可选）
+
+    - {{my_background}}：我的经历/简历要点（必填）'
+  variables:
+  - audience
+  - my_background
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#job-description
+  source_hash: 4094015fc608ff34206b6ded3cdd2e9edb4cbed25432147e7984d98608874e0e
+  status: active
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

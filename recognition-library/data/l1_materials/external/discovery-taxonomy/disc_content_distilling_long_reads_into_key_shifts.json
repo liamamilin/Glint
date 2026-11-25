@@ -1,0 +1,33 @@
+{
+  "id": "disc_content_distilling_long_reads_into_key_shifts",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/content.json#content-distilling-long-reads-into-key-shifts",
+  "title": "提炼“最颠覆你认知的 2～3 点”，而不是逐章流水账摘要",
+  "content": "旧共识（盲区）：写书评、读后感或长文拆解，要把每一章、每一段的核心要点都列全才算完整。\n\n新现实（破盲视角）：面面俱到的摘要既枯燥又容易变成 AI 就能生成的复述；挑出真正改变你视角或做法的 2～3 个点展开深聊，反而更有灵魂和辨识度。\n\n破冰追问母题：\n- 我刚看完 [一本书/一篇长文/一场分享]：[简述核心内容与你印象最深的点]。请帮我挑出最值得聊的 2 个切角，写成一篇克制、有个人视角的心得大纲。\n- 把下面这段偏流水账的阅读笔记：[粘贴笔记]，删掉重复概括，保留最反常识或最能指导行动的洞察。",
+  "content_hash": "7b56fbf149e930cc99400afe051e905f14b92254f6fe449472d028f68fb7b82f",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "content",
+    "cost-collapse",
+    "first-principles",
+    "synthesis",
+    "reading-notes",
+    "distillation",
+    "insight"
+  ],
+  "problem_solved": "写书评、读后感或长文拆解，要把每一章、每一段的核心要点都列全才算完整。",
+  "when_to_use": "面面俱到的摘要既枯燥又容易变成 AI 就能生成的复述；挑出真正改变你视角或做法的 2～3 个点展开深聊，反而更有灵魂和辨识度。",
+  "procedural_steps": [
+    "我刚看完 [一本书/一篇长文/一场分享]：[简述核心内容与你印象最深的点]。请帮我挑出最值得聊的 2 个切角，写成一篇克制、有个人视角的心得大纲。",
+    "把下面这段偏流水账的阅读笔记：[粘贴笔记]，删掉重复概括，保留最反常识或最能指导行动的洞察。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "content-distilling-long-reads-into-key-shifts",
+    "arena": "content",
+    "lenses": [
+      "cost-collapse",
+      "first-principles"
+    ]
+  }
+}

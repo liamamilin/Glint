@@ -1,0 +1,33 @@
+{
+  "id": "disc_build_agent_state_machines_over_loops",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/build.json#build-agent-state-machines-over-loops",
+  "title": "用“显式状态机”约束 Agent 流转，而不是放任自由循环",
+  "content": "旧共识（盲区）：让 Agent 自己决定下一步干什么、循环到满意为止，最接近“真正自主”。\n\n新现实（破盲视角）：无界循环容易死循环、烧光预算或偏离轨道；把关键阶段锁进明确状态转移（草稿 → 校验 → 确认 → 执行），自主性更高且可控性呈数量级提升。\n\n破冰追问母题：\n- 我有一个多步 [AI 工作流 / Agent 任务]：[简述输入、中间步骤与期望结果]。请帮我画出它的核心状态节点与允许跳转的条件，标出最容易卡死或越界的转移边。\n- 如果把 [你正在搭的某个自动化流程] 改造成带“显式状态与重试上限”的有限状态机，哪些步骤应该允许自动重试，哪些必须直接失败上报？",
+  "content_hash": "e2404f5fa832c9200b4cd73a49e86608e0d9c28fa499ae8f233a6c97e28df8da",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "build",
+    "first-principles",
+    "role-inversion",
+    "state-machine",
+    "agents",
+    "determinism",
+    "workflows"
+  ],
+  "problem_solved": "让 Agent 自己决定下一步干什么、循环到满意为止，最接近“真正自主”。",
+  "when_to_use": "无界循环容易死循环、烧光预算或偏离轨道；把关键阶段锁进明确状态转移（草稿 → 校验 → 确认 → 执行），自主性更高且可控性呈数量级提升。",
+  "procedural_steps": [
+    "我有一个多步 [AI 工作流 / Agent 任务]：[简述输入、中间步骤与期望结果]。请帮我画出它的核心状态节点与允许跳转的条件，标出最容易卡死或越界的转移边。",
+    "如果把 [你正在搭的某个自动化流程] 改造成带“显式状态与重试上限”的有限状态机，哪些步骤应该允许自动重试，哪些必须直接失败上报？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "build-agent-state-machines-over-loops",
+    "arena": "build",
+    "lenses": [
+      "first-principles",
+      "role-inversion"
+    ]
+  }
+}

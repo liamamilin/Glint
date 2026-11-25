@@ -1,0 +1,29 @@
+{
+  "id": "pt_skill_gap_plan",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#skill-gap-plan",
+  "title": "把岗位要求变成补技能计划",
+  "content": "比较【目标岗位要求】和【现有证据】。找出最影响面试的一到三个缺口，为每项给可在【时间预算】内练习的任务、可展示产物和自检方法。",
+  "content_hash": "1e165fb1597c669ab51fdec231a36c1c89d326c94e2fd1f33d7cf0c4e1d86603",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "career",
+    "能力差距",
+    "技能",
+    "转岗",
+    "skills gap"
+  ],
+  "problem_solved": "用小作品验证技能，并明确判断标准。",
+  "when_to_use": "分类: 求职与职业",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "skill-gap-plan",
+    "category": "career",
+    "variables": [
+      "目标岗位要求",
+      "现有证据",
+      "时间预算"
+    ]
+  }
+}

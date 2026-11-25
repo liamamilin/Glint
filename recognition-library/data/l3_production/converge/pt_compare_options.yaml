@@ -1,0 +1,55 @@
+id: pt_compare_options
+title: 对比选项给建议
+tagline: 同口径对比候选方案，给首选与验证动作
+routing:
+  primitive: converge
+  goals:
+  - evaluate
+  - optimize
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - research
+  - product_strategy
+  - procurement
+  - decision_making
+  app_affinity:
+  - Chrome
+  - Notion
+  - ChatGPT
+  pain_point: 需要在多个候选方案中做选择，但缺少同口径对比、证据来源和明确取舍，难以决定首选及下一步验证
+  trigger_utterances:
+  - A 和 B 哪个更适合我的场景
+  - 帮我做个选项对比表，给个建议
+  - 这几个方案怎么选，有取舍吗
+  - 选型纠结，帮我对比优劣
+  anti_triggers:
+  - 帮我直接写最终方案，不用对比
+  - 只是润色一段介绍文案
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 我需要在【候选方案】中选择，使用情境是【场景】，最在乎【标准和优先级】。做一张同口径比较表，注明价格或版本的核对日期与来源。给出首选、适合选次选的条件和一个我今天能做的验证动作；资料缺失处留空并标明。
+  variables:
+  - 候选方案
+  - 场景
+  - 标准和优先级
+  workflow:
+    workflow_id: compare-purchase
+    step: 3
+    next_lens_id: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#compare-options
+  source_hash: 933444839582cdfbb5cb621859cfc260c3d36a58a6597e27395152c1811b709b
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  category: product_business
+  subcategory: product_design
+  collections: []
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

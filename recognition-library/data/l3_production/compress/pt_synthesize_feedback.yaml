@@ -1,0 +1,51 @@
+id: pt_synthesize_feedback
+title: 归纳用户反馈
+tagline: 从反馈/访谈中提炼主题、引文与可验证下一步
+routing:
+  primitive: compress
+  goals:
+  - digest
+  clarity_fit:
+  - concrete
+  domains:
+  - user_research
+  - feedback
+  - interviews
+  - product_strategy
+  app_affinity:
+  - Notion
+  - Obsidian
+  - Slack
+  - Feishu
+  pain_point: 大量用户反馈/访谈记录散乱，难以看出 recurring 主题、影响与优先级，且容易丢失关键原话
+  trigger_utterances:
+  - 这些用户反馈帮我归纳一下主题
+  - 访谈里大家反复提到什么问题
+  - 把反馈按主题分类并统计 mentions
+  - extract patterns from user feedback
+  - summarize customer interviews with quotes
+  anti_triggers:
+  - 想直接写产品 PRD 或方案，而非提炼反馈
+  - 仅需单条反馈回复文案
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 分析【反馈原文或访谈记录】，目标是【要改进的问题】。归纳主题，统计每类在已给样本中的提及数并说明同一条能否多标签，给代表性引文和影响。对优先级最高的主题提出可验证的下一步。
+  variables:
+  - 反馈原文或访谈记录
+  - 要改进的问题
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#synthesize-feedback
+  source_hash: 1179e862138222beeeff2fa4104fa92f8dcb32c1b7c25d37937f4ea4f0418e58
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: product_business
+  subcategory: product_design
+  collections: []
+  base_weight: 1.0
+  confidence: 0.85
+  version: 1

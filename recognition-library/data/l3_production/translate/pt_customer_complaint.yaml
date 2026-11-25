@@ -1,0 +1,64 @@
+id: pt_customer_complaint
+title: 回应客户投诉
+tagline: 先确认事实与影响，再写出可兑现的下一步
+routing:
+  primitive: translate
+  goals:
+  - optimize
+  - create
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - customer_service
+  - communication
+  - complaint_handling
+  app_affinity:
+  - Mail
+  - Slack
+  - Feishu
+  - WeChat
+  pain_point: 客户投诉已收到但不知如何回复，担心说错话或承诺无法兑现，需要先确认事实和影响再给出可落地的下一步
+  trigger_utterances:
+  - 客户投诉了帮我写个回复
+  - 这个投诉怎么回比较好
+  - 用户投诉了我该怎么回
+  - need to reply to this angry customer
+  - 客户骂我们了怎么回应
+  anti_triggers:
+  - 客户表扬或感谢的回复
+  - 内部团队复盘投诉根因
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请根据【客户的投诉和已核实事实】拟写回复。团队当前能做的是【可承诺动作和时间】。
+
+
+    回复结构：
+
+    1. 先确认客户遇到的具体问题与影响（复述事实，不推诿）
+
+    2. 说明当前已做的处理与下一步可兑现的动作及时间
+
+    3. 缺少的信息用一个明确的问题补齐，避免追问堆叠
+
+
+    语气：真诚、具体、不空泛；只承诺能兑现的事。'
+  variables:
+  - 客户的投诉和已核实事实
+  - 可承诺动作和时间
+  workflow: null
+meta:
+  source: prompt-taxonomy
+  source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#customer-complaint
+  source_hash: e2bb1ddca00784dc403adbb5ba5390d9070e367861a1463f4c222bdd05c488e3
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: writing_comms
+  subcategory: workplace_comms
+  collections: []
+  base_weight: 1.0
+  confidence: 0.92
+  version: 1

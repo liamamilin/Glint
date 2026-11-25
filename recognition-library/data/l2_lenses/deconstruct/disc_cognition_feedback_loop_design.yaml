@@ -1,0 +1,48 @@
+id: disc_cognition_feedback_loop_design
+title: 缩短反馈回路设计
+tagline: 把验证周期从几个月缩到几天，避免盲目偏航
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - debug
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - cognition
+  - feedback_loops
+  - systems
+  - learning
+  - iteration
+  app_affinity:
+  - Cursor
+  - Notion
+  - Obsidian
+  - Linear
+  pain_point: 做一件事迟迟没起色，总以为是投入时间不够、不够拼，其实是反馈回路太长，几个月才见一次真实结果，导致方向盲目偏航。
+  trigger_utterances:
+  - 这个项目做了好久都没起色，是不是我还不够努力
+  - 学了很久还是没感觉，反馈太慢了
+  - 帮我把验证周期缩短到几天
+  - 哪里反馈延迟最高，怎么加个观测指标
+  - 别再盲目埋头苦干了
+  anti_triggers:
+  - 单纯想拉长工作时长或制定长期计划
+  - 已有明确短周期反馈、只需按部就班执行
+execution:
+  action_type: show_checklist
+  inject_mode: null
+  content: "## 缩短反馈回路检查清单\n1. 明确目标与当前周期：正在推进的事是____；从行动到看到真实结果需____天/月。\n2. 识别最高延迟环节：在 [学习/创作/做项目] 链路中，哪一步反馈最慢？\n3. 设计 3 个\
+    \ 48 小时内可验证的微型实验：\n   - 微验证 A：用最小样本/原型在 48h 内获得真实用户或结果信号\n   - 微验证 B：把大任务拆成可当日验证的小里程碑\n   - 微验证 C：用代理指标（点击/回复/完成率）替代最终结果\n\
+    4. 为最高延迟环节设定一个立刻可落地的观测指标（如每天记录 X）。\n5. 48h 后复盘：信号是否支持继续/调整/放弃，并缩短下一轮周期。"
+  variables: []
+  workflow: null
+meta:
+  source: discovery-taxonomy
+  source_ref: https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/cognition.json#cognition-feedback-loop-design
+  source_hash: f25d836290e449546b1e0202dcb1029a999c00230ddc5ae8026466311ecd7b40
+  status: active
+  base_weight: 1.0
+  confidence: 0.9
+  version: 1

@@ -1,0 +1,33 @@
+{
+  "id": "disc_business_workflow_embedded_distribution",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/business.json#business-workflow-embedded-distribution",
+  "title": "把产品/服务“嵌进别人每天必看的结果页”里自带分发",
+  "content": "旧共识（盲区）：获客是产品做完之后的独立营销动作，靠发帖、投流或到处求人转发。\n\n新现实（破盲视角）：当用户每次导出报告、生成分享链接、跑完检查或展示结果时，页面自带极克制的来源标识或可复现入口，每次使用都在替你做自然触达。\n\n破冰追问母题：\n- 针对 [你的工具/模板/分析服务/内容形式]，设计 2 个“用户正常使用时顺便把价值带给下一个潜在用户”的自然嵌入机制，要求不恶心、不破坏体验。\n- 盘点 [你熟悉的几款高增长独立工具]，它们在“分享链接 / 导出结果 / 报错或完成页”上藏了哪些聪明的分发细节？",
+  "content_hash": "8a9c92c181cc2c471f3a6d5345f1f0ce32a7ea4de6d95063614a627b97c6b51c",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "business",
+    "role-inversion",
+    "cross-domain",
+    "distribution",
+    "embedded",
+    "hooks",
+    "indie-growth"
+  ],
+  "problem_solved": "获客是产品做完之后的独立营销动作，靠发帖、投流或到处求人转发。",
+  "when_to_use": "当用户每次导出报告、生成分享链接、跑完检查或展示结果时，页面自带极克制的来源标识或可复现入口，每次使用都在替你做自然触达。",
+  "procedural_steps": [
+    "针对 [你的工具/模板/分析服务/内容形式]，设计 2 个“用户正常使用时顺便把价值带给下一个潜在用户”的自然嵌入机制，要求不恶心、不破坏体验。",
+    "盘点 [你熟悉的几款高增长独立工具]，它们在“分享链接 / 导出结果 / 报错或完成页”上藏了哪些聪明的分发细节？"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "business-workflow-embedded-distribution",
+    "arena": "business",
+    "lenses": [
+      "role-inversion",
+      "cross-domain"
+    ]
+  }
+}

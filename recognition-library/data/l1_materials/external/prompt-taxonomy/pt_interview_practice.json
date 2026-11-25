@@ -1,0 +1,29 @@
+{
+  "id": "pt_interview_practice",
+  "source": "prompt-taxonomy",
+  "source_ref": "https://liamamilin.github.io/Prompt-taxonomy/catalog.json#interview-practice",
+  "title": "模拟一次面试",
+  "content": "为【岗位】做模拟面试，招聘要求是【岗位说明】，我的背景是【相关经历】。每次问一题，依据回答追问细节。结束后从具体性、可信度和岗位匹配度给反馈，并指出一个我下次要重练的回答。",
+  "content_hash": "6a18ade96f2642824f98d85cbb555fe0ce6016a54111cdd4f3019dfadbef4dd1",
+  "suggested_action_type": "inject_prompt",
+  "domain_hints": [
+    "learning",
+    "面试",
+    "求职",
+    "工作",
+    "interview"
+  ],
+  "problem_solved": "用真实追问练习更具体的回答。",
+  "when_to_use": "分类: 学习与辅导",
+  "procedural_steps": [],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "interview-practice",
+    "category": "learning",
+    "variables": [
+      "岗位",
+      "岗位说明",
+      "相关经历"
+    ]
+  }
+}

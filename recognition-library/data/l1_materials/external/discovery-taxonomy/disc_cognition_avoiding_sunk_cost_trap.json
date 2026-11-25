@@ -1,0 +1,33 @@
+{
+  "id": "disc_cognition_avoiding_sunk_cost_trap",
+  "source": "discovery-taxonomy",
+  "source_ref": "https://liamamilin.github.io/DISCOVERY-TAXONOMY/data/cognition.json#cognition-avoiding-sunk-cost-trap",
+  "title": "只看“接下来投入什么、换来什么”，别被过去的沉没成本绑架",
+  "content": "旧共识（盲区）：已经花了好几个月、好几千块或很多心血了，现在停下来或改方向就等于全盘亏光。\n\n新现实（破盲视角）：过去花掉的时间和钱已经回不来了，继续硬撑只会多搭进未来的时间与机会；换个视角问自己：“如果今天才刚知道这件事，我还愿意从头选它吗？”\n\n破冰追问母题：\n- 我目前在 [某个项目/方向/订阅或投入] 上已经花了较多时间或精力，但隐约觉得不对劲：[简述情况]。请帮我抽离沉没成本，客观评估“继续推进 vs 调整/停手”的未来得失。\n- 帮我写 3 个犀利的问题，以后当我因为“舍不得前面投入”而犹豫是否转向时，能帮我冷静看清真实处境。",
+  "content_hash": "3e16bc63c132ef4d29a92ced2aca608c6765e050643e74ed3fdf15283ef90297",
+  "suggested_action_type": "show_checklist",
+  "domain_hints": [
+    "cognition",
+    "role-inversion",
+    "first-principles",
+    "sunk-cost",
+    "decisions",
+    "pivot",
+    "clarity"
+  ],
+  "problem_solved": "已经花了好几个月、好几千块或很多心血了，现在停下来或改方向就等于全盘亏光。",
+  "when_to_use": "过去花掉的时间和钱已经回不来了，继续硬撑只会多搭进未来的时间与机会；换个视角问自己：“如果今天才刚知道这件事，我还愿意从头选它吗？”",
+  "procedural_steps": [
+    "我目前在 [某个项目/方向/订阅或投入] 上已经花了较多时间或精力，但隐约觉得不对劲：[简述情况]。请帮我抽离沉没成本，客观评估“继续推进 vs 调整/停手”的未来得失。",
+    "帮我写 3 个犀利的问题，以后当我因为“舍不得前面投入”而犹豫是否转向时，能帮我冷静看清真实处境。"
+  ],
+  "anti_patterns": [],
+  "metadata": {
+    "original_id": "cognition-avoiding-sunk-cost-trap",
+    "arena": "cognition",
+    "lenses": [
+      "role-inversion",
+      "first-principles"
+    ]
+  }
+}
