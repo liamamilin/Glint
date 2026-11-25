@@ -49,20 +49,22 @@ final class SeedPanel: NSPanel {
 
     func mount<Content: View>(rootView: Content) {
         let hosting = NSHostingView(rootView: rootView)
-        hosting.translatesAutoresizingMaskIntoConstraints = false
+        hosting.frame = NSRect(x: 0, y: 0, width: 320, height: 112)
         contentView = hosting
-        resizeToFit(preserveOrigin: true)
+        resizeToFit(preserveOrigin: false)
     }
 
     func resizeToFit(preserveOrigin: Bool) {
         guard let hosting = contentView else { return }
+        hosting.frame = NSRect(x: 0, y: 0, width: 320, height: 240)
         hosting.layoutSubtreeIfNeeded()
         let fitting = hosting.fittingSize
         let size = CGSize(
-            width: max(320, ceil(fitting.width)),
-            height: max(88, ceil(fitting.height))
+            width: 320,
+            height: max(84, min(180, ceil(fitting.height)))
         )
         let currentOrigin = frame.origin
+        hosting.frame = NSRect(origin: .zero, size: size)
         setContentSize(size)
         if preserveOrigin && hasPersistedOrigin {
             setFrameOrigin(clampedOrigin(currentOrigin, size: size))

@@ -72,7 +72,9 @@ final class GlintCoordinator: ObservableObject {
     func start() {
         refreshPermissionsAndTaps()
         Task { await refreshBackendHealth() }
-        seedController.start()
+        DispatchQueue.main.async { [weak self] in
+            self?.seedController.start()
+        }
 
         permissionTimer?.invalidate()
         permissionTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] _ in
