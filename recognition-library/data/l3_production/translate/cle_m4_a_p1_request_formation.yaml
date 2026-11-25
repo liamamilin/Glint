@@ -1,0 +1,56 @@
+id: cle_m4_a_p1_request_formation
+title: 有效请求形成 (A-P1)
+tagline: 无有效请求 → 明确对象、行为、条件与响应方式的可响应请求
+routing:
+  primitive: translate
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  - vague
+  domains:
+  - action
+  - coordination
+  - general
+  app_affinity:
+  - Feishu
+  - Slack
+  - Cursor
+  pain_point: 把心里想法随口一说或含糊暗示，对方不知道具体要干什么、何时截止、怎么回复，结果消息发了却石沉大海
+  trigger_utterances:
+  - 帮我把这段想法写成一条清晰可响应的请求消息
+  - 我要请对方办件事，帮我把对象、具体行为、期限和回复方式写清楚
+  - 帮我起草一个明确请求，让对方能直接回复接受、拒绝还是调整条件
+  - 别写得像含糊暗示，帮我整理成规范可响应的行动请求
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我将以上意图整理成一条清晰、可响应的正式请求消息：
+
+    1. **明确请求四要素**：写清① **具体接收者**；② **要求完成的具体行为**；③ **必要前提条件或期限**；④ **期望对方通过什么渠道/方式响应**。
+
+    2. **显式给出响应选项**：在结尾明确请对方回复“接受 / 拒绝 / 需要调整哪些条件”。
+
+    3. **缺项提醒**：若以上草稿缺少关键条件或接收者，先标出待补项，不要替我编造。
+
+
+    **检查与边界**：消息发出只代表“尝试发送”，不等于对方已收到、理解或接受；请求本身不自动创造义务。'
+  variables: []
+  workflow: null
+meta:
+  source: cle-v0.7
+  source_ref: models/M4.md#a-p1
+  source_hash: cle_v0.7_cle_m4_a_p1_request_formation_v1
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  category: writing_comms
+  subcategory: workplace_comms
+  collections:
+  - cle_m4_action
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

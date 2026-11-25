@@ -67,6 +67,56 @@ final class BrainClient: Sendable {
         }
     }
 
+    func drawNextSeed(mode: SeedPoolMode, excludeIds: [String] = []) async throws -> SeedDrawResponse {
+        let url = baseURL.appendingPathComponent("seed/next")
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try JSONEncoder().encode(
+            SeedDrawRequest(mode: mode.rawValue, exclude_ids: excludeIds)
+        )
+        let (data, response) = try await session.data(for: request)
+        try validateHTTP(response)
+        return try JSONDecoder().decode(SeedDrawResponse.self, from: data)
+    }
+
+    func sendSeedFeedback(
+        id: String,
+        action: String,
+        snoozeDays: Int = 7,
+        category: String? = nil
+    ) async -> SeedFeedbackResponse? {
+        let url = baseURL.appendingPathComponent("seed/feedback")
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        do {
+            request.httpBody = try JSONEncoder().encode(
+                SeedFeedbackRequest(id: id, action: action, snoozeDays: snoozeDays, category: category)
+            )
+            let (data, response) = try await session.data(for: request)
+            try validateHTTP(response)
+            return try JSONDecoder().decode(SeedFeedbackResponse.self, from: data)
+        } catch {
+            NSLog("[Glint] Seed feedback post failed: \(error.localizedDescription)")
+            return nil
+        }
+    }
+
+    func resetSeedState() async -> SeedFeedbackResponse? {
+        let url = baseURL.appendingPathComponent("seed/reset")
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        do {
+            let (data, response) = try await session.data(for: request)
+            try validateHTTP(response)
+            return try JSONDecoder().decode(SeedFeedbackResponse.self, from: data)
+        } catch {
+            NSLog("[Glint] Seed reset failed: \(error.localizedDescription)")
+            return nil
+        }
+    }
+
     private func validateHTTP(_ response: URLResponse) throws {
         guard let http = response as? HTTPURLResponse else {
             throw URLError(.badServerResponse)

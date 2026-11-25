@@ -1,0 +1,51 @@
+id: cle_m4_a_p15_constraint_explication
+title: 任务约束显化 (A-P15)
+tagline: 任务约束隐含 → 明确允许行为、禁止红线、依赖条件与升级点
+routing:
+  primitive: critique
+  goals:
+  - optimize
+  - evaluate
+  clarity_fit:
+  - concrete
+  domains:
+  - action
+  - coordination
+  - general
+  app_affinity:
+  - Feishu
+  - Slack
+  - Cursor
+  pain_point: 任务里的安全红线、资源上限或禁止行为只藏在自己脑子里，没写进规格，导致执行方或 AI 踩雷越界
+  trigger_utterances:
+  - 帮我把这项任务的允许项、禁止红线、资源限制和依赖条件全显化出来
+  - 给 AI 或团队派活前，帮我列出哪些能直接做、哪些严禁做、哪些必须先请示
+  - 检查这份任务描述里有没有隐藏的约束和禁止项没写明
+  - 把安全红线和前置依赖整理成正式的任务约束清单
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我将以上任务中隐含的约束条件全部显化，整理成清晰的三态行动边界：
+
+    1. **资源与前置依赖**：列出可用资源上限、必须依赖的外部条件或前置输入及其依据。
+
+    2. **三态行为清单**：用具体情况清楚区分——① **允许自主执行**的事项；② **明确禁止（红线）**的事项；③ **遇到必须暂停并升级确认**的事项。
+
+    3. **确认生效**：标明哪些约束需由适用角色确认纳入正式任务规格。
+
+
+    **检查与边界**：执行者必须能对着这份清单一眼区分“能做 / 禁止 / 需升级”；发现约束是思考，写入版本并确认才构成正式规格。'
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M4.md#a-p15
+  source_hash: cle_v0.7_cle_m4_a_p15_constraint_explication_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: engineering
+  subcategory: architecture
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

@@ -1,0 +1,53 @@
+id: cle_m2_c_p19_evidence_linking
+title: 主张证据关联 (C-P19)
+tagline: 判断与材料脱节 → 逐条核对材料实际记录什么、支持到哪一步
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  - debug
+  clarity_fit:
+  - concrete
+  domains:
+  - cognition
+  - general
+  app_affinity: []
+  pain_point: 手里有材料也有结论，但没核对材料到底是不是真的支持这一步主张，容易把“有链接/有日志”错当成“已证实”
+  trigger_utterances:
+  - 帮我核对一下，这些材料实际支持我这项主张的哪一步、哪里缺依据
+  - 检查这段结论和所附材料是不是真的对应，对象和时间范围对得上吗
+  - 别只看有引用，帮我拆开看看材料实际记录了什么、什么还推不出来
+  - 把这段主张和材料一一连线，标出直接支持、需要额外推理和冲突的地方
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请对照以上主张与提供/可访问的材料，帮我逐条建立严谨的证据关联：
+
+    1. **拆解主张与材料实录**：先写清主张具体断言了什么，再客观陈述材料实际观察或记录了什么，核对两者的**对象、时间与适用范围**是否真正对应。
+
+    2. **分清支持层级**：明确分开列出——① 材料**直接支持**了主张的哪一步；② 哪些部分仍需要额外推理或其他材料；③ 材料与主张之间有哪些**冲突**。
+
+    3. **标出缺项与边界**：指出还缺什么材料、怎么获取，以及基于当前材料**暂时不能推出**什么结论（未读取到的内容保留未知）。
+
+
+    **检查与边界**：有引用/有日志真实存在，不等于它支持任意延伸结论；材料缺失时绝不补写支持关系。
+
+    *(向内自问备用句：“材料实际记录了什么，它支持这项主张的哪一步？”)*'
+  variables: []
+  workflow: null
+meta:
+  source: cle-v0.7
+  source_ref: models/M2.md#c-p19
+  source_hash: cle_v0.7_cle_m2_c_p19_evidence_linking_v1
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  category: general
+  subcategory: critical_thinking
+  collections:
+  - cle_m2_cognition
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

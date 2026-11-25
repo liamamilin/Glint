@@ -1,0 +1,49 @@
+id: cle_m2_c_c9_alternative_evaluation
+title: 候选依据评价 (C-C9)
+tagline: 候选集合 → 按同一规则逐项列出依据、代价、冲突与未知
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  clarity_fit:
+  - conflicted
+  - concrete
+  domains:
+  - cognition
+  - general
+  app_affinity: []
+  pain_point: 比较多个方案时容易靠主观偏好掩盖证据缺失、把缺失项当零分算，或者忽略不可抵消的硬约束
+  trigger_utterances:
+  - 按规则帮我客观评价这几个候选方案，把依据、代价和未知分开
+  - 对比一下这几个选项，先查硬条件再看取舍，缺数据的地方别瞎填
+  - 帮我做一份带证据和未知清单的方案对比评价
+  - 这些方案各有优缺点，帮我看看哪些可权衡、哪些不可抵消、缺什么材料
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请按同一套适用规则，帮我对以上候选方案做客观、可追溯的对比评价：
+
+    1. **先查硬条件**：首先核对各候选是否满足不可妥协的硬约束（硬条件缺失或未知不能靠其他优点抵消）。
+
+    2. **逐项列依据、代价与冲突**：在可补偿维度上，列出每个候选的已有材料依据、预期后果、代价及冲突点。
+
+    3. **显式保留未知与部分排序**：严格标出各候选哪些地方“未知/待查”（**绝不把缺失值填零或硬凑加权总分**），允许给出部分排序，并说明“取得什么新材料可能会改变评价”。
+
+
+    **检查与边界**：严格区分“我更偏好”与“有证据支持”；本步重在把牌面摊清，不强迫立刻做出最终选择。
+
+    *(向内自问备用句：“按这些规则，各候选的依据、代价和未知分别是什么？”)*'
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M2.md#c-c9
+  source_hash: cle_v0.7_cle_m2_c_c9_alternative_evaluation_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: general
+  subcategory: decision
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

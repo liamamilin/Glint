@@ -1,0 +1,56 @@
+id: cle_m4_a_c12_governance_formation
+title: 规则治理设计 (A-C12)
+tagline: 规则维护不明 → 明确争议接收、解释、执行、复核与修订权责
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - evaluate
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - action
+  - coordination
+  - general
+  app_affinity:
+  - Feishu
+  - Slack
+  - Cursor
+  pain_point: 规则写了一大堆文档发出去就没人管了，一旦出现擦边球争议或违规报告，不知道谁来解释、谁来判、谁能改规则
+  trigger_utterances:
+  - 这份规则发出去容易沦为一纸空文，帮我补齐争议处理、解释、复核和修订的治理结构
+  - 试走一个违规或争议案例，看看这套规则里谁接收、谁解释、谁复核、谁能改
+  - 帮我设计一套轻量的规则治理闭环，标出目前缺少职责来源的断点
+  - 规则有争议时到底听谁的，帮我把解释权、执行权和修订权理清楚
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请围绕以上规则，帮我设计一套能真正跑通争议与演进的“轻量治理结构”：
+
+    1. **试走争议/违规场景**：构造 1 个典型争议或违规报告情境，顺着路径追问——① 谁负责接收报告？② 谁有权解释规则灰区？③ 谁执行处理？④ 谁负责独立复核？⑤ 谁能按什么程序修订规则？
+
+    2. **定位治理断点**：标出上述链路中目前找不到负责角色或缺少授权来源的环节。
+
+    3. **提出补齐安排**：针对断点提出最小可行的角色与确认安排，避免繁琐官僚化。
+
+
+    **检查与边界**：文档发布不等于治理生效，有治理结构也不自动等于执行有效（实际效果需通过后续真实运行材料检验）。'
+  variables: []
+  workflow: null
+meta:
+  source: cle-v0.7
+  source_ref: models/M4.md#a-c12
+  source_hash: cle_v0.7_cle_m4_a_c12_governance_formation_v1
+  status: active
+  scope: domain_specific
+  shelf: off_shelf
+  tier: A
+  category: product_business
+  subcategory: product_design
+  collections:
+  - cle_m4_action
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

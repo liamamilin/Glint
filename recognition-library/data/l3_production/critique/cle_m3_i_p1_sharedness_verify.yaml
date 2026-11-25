@@ -1,0 +1,55 @@
+id: cle_m3_i_p1_sharedness_verify
+title: 共享理解核验 (I-P1)
+tagline: 假定共享 → 用复述、新例或边界测试确认真实理解范围
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - interaction
+  - communication
+  - general
+  app_affinity:
+  - Feishu
+  - Slack
+  - Mail
+  pain_point: 对方或 AI 随口说“明白了/收到”，但其实只是假定共享，一上手执行就发现理解完全错位
+  trigger_utterances:
+  - 帮我设计 1–2 个边界例子或核验问题，确认对方/AI 是真理解了而不是嘴上说懂
+  - 别只让我听一句“明白了”，帮我用自己的话复述或举新例检验理解
+  - 核对一下我们在哪些范围已经达成一致理解，哪里还有残余不确定性
+  - 帮我检查对方这段回复，看看它是不是只是逐字复述而没真懂边界条件
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我对以上需要共同理解的内容做一次“有范围的共享理解核验”：
+
+    1. **锁定必核重点**：提炼出最容易听错对象、条件或边界的 1–3 个关键点（写明对应版本）。
+
+    2. **给出适配的核验方式**：按当前任务选择最轻便有效的一种方式——让对方① 用自己的话复述核心区别；② 判断 1 个新例子/边界案例该怎么处理；或 ③ 给出下一步的具体操作预测。
+
+    3. **记录确认范围与残余未知**：明确标出哪一部分已经核对一致、哪一部分仍需澄清或尚未核验。
+
+
+    **检查与边界**：逐字背诵复述不等于真正理解，理解一致也不等于同意或事实正确；仅确认本次任务所需的范围即可。'
+  variables: []
+  workflow: null
+meta:
+  source: cle-v0.7
+  source_ref: models/M3.md#i-p1
+  source_hash: cle_v0.7_m3_i_p1_v1
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  category: writing_comms
+  subcategory: workplace_comms
+  collections:
+  - cle_m3_interaction
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

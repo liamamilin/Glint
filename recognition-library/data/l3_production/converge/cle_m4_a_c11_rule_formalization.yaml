@@ -1,0 +1,56 @@
+id: cle_m4_a_c11_rule_formalization
+title: 协作规则形式化 (A-C11)
+tagline: 规则含混/非正式 → 从具体案例提炼触发条件、允许/禁止、例外与生效依据
+routing:
+  primitive: converge
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - action
+  - coordination
+  - general
+  app_affinity:
+  - Feishu
+  - Slack
+  - Cursor
+  pain_point: 重复出现的问题一直靠口头约定或临场拍脑袋，想沉淀成正式规范，但写出来的条文要么太虚要么没写例外
+  trigger_utterances:
+  - 这种重复出现的情况我想定成正式规则，帮我写清触发、允许/禁止、范围和例外
+  - 把这些零散的口头约定整理成可判例的正式规范，并用边界案例试判
+  - 帮我起草一条清晰可执行的团队或系统规则，顺便核对制定权限和生效依据
+  - 检查这份规则草稿有没有写清例外情况，换个场景会不会太僵化
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请从以上具体处理情境出发，帮我把非正式约定提炼成清晰可判例的“形式化规则草稿”：
+
+    1. **明确触发与三态要求**：写清在什么触发条件与适用范围内，哪些行为被**要求 / 允许 / 禁止**，以及背后的理由。
+
+    2. **显化例外边界**：对比不同情境，明确写出允许破例的**例外条件**，避免规则过于僵化或例外泛滥失去约束。
+
+    3. **边界试判与生效核对**：用 1 个正常案例和 1 个边界案例试判规则是否明确；标明该规则的制定权限来源及确认生效程序（依据不足时保留为规则提案）。
+
+
+    **检查与边界**：条文写得再漂亮也不自动产生约束力，必须具备有效制定权限与正式生效程序。'
+  variables: []
+  workflow: null
+meta:
+  source: cle-v0.7
+  source_ref: models/M4.md#a-c11
+  source_hash: cle_v0.7_cle_m4_a_c11_rule_formalization_v1
+  status: active
+  scope: domain_specific
+  shelf: off_shelf
+  tier: A
+  category: product_business
+  subcategory: product_design
+  collections:
+  - cle_m4_action
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

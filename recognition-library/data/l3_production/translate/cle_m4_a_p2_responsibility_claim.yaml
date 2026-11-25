@@ -1,0 +1,54 @@
+id: cle_m4_a_p2_responsibility_claim
+title: 责任主张声明 (A-P2)
+tagline: 责任未明 → 清晰声明本人主张负责的事项、排除范围与依据
+routing:
+  primitive: translate
+  goals:
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - action
+  - coordination
+  - general
+  app_affinity:
+  - Feishu
+  - Slack
+  - Cursor
+  pain_point: 想主动站出来扛一块事，但没写清负责边界与排除项，容易事后被无限兜底或与其他人的既有职责撞车
+  trigger_utterances:
+  - 我想主动声明对这块事项负责，帮我把负责范围、排除项和依据写清楚
+  - 帮我写一段清晰的责任主张声明，既表达担当又不被无限甩锅
+  - 把我打算负责的边界和不包含的事项整理清楚，方便团队后续确认
+  - 起草一段责任范围声明，注明提出时间和依据来源
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我起草一段清晰、有边界的“责任主张声明”：
+
+    1. **明确负责范围**：写清我主张对哪项具体事项与范围负责，以及提出时间和所依据的来源。
+
+    2. **写明排除事项**：明确列出**不包含**在我负责范围内的相邻事项，防边界模糊。
+
+    3. **留出认可接口**：说明这份主张尚需哪些相关方或既有安排确认认可（以及是否需要配套权限）。
+
+
+    **检查与边界**：主动声明负责只是“主张”，可能与既有分工冲突，不自动代表团队已认可，也不自动代表已具备执行所需权限。'
+  variables: []
+  workflow: null
+meta:
+  source: cle-v0.7
+  source_ref: models/M4.md#a-p2
+  source_hash: cle_v0.7_cle_m4_a_p2_responsibility_claim_v1
+  status: active
+  scope: domain_specific
+  shelf: off_shelf
+  tier: A
+  category: writing_comms
+  subcategory: workplace_comms
+  collections:
+  - cle_m4_action
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

@@ -4,6 +4,7 @@ version: "2.0"
 
 # 跨源语义查重时，高优先级来源保留，低优先级重复卡入隔离区
 source_priority:
+  cle-v0.7: 110
   glint-core: 100
   discovery-taxonomy: 80
   prompt-taxonomy: 70
@@ -17,8 +18,8 @@ min_trigger_utterances: 2
 title_max_chars: 18
 tagline_max_chars: 64
 
-# 标题首尾冗余标点/编号清洗
-title_strip_chars: " 。，、；：！？!?:;\"'“”‘’()（）[]【】-—·•"
+# 标题首尾冗余标点/编号清洗（保留正常括号后缀，如 "(R-C2)"）
+title_strip_chars: " 。，、；：！？!?:;\"'“”‘’[]【】-—·•"
 
 # 痛点/摘要中的元描述套话前缀（自动剥离，避免污染 bge-m3 向量空间）
 meta_boilerplate_prefixes:

@@ -1,0 +1,56 @@
+id: cle_m3_i_c1_shared_info
+title: 共同信息对齐 (I-C1)
+tagline: 信息不对称 → 确认各方取得同版本材料、来源与关键缺项
+routing:
+  primitive: translate
+  goals:
+  - optimize
+  - digest
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - interaction
+  - communication
+  - general
+  app_affinity:
+  - Feishu
+  - Slack
+  - Mail
+  pain_point: 沟通前各自看的材料版本不同、或以为“发在群里大家就都知道了”，导致后续讨论建立在信息不对称上
+  trigger_utterances:
+  - 帮我整理一份同步消息，确认双方拿到的是同一版本材料并标出缺项
+  - 我们好像看的不是同一份材料，帮我梳理本次共同信息清单和来源
+  - 核对一下讨论前各方还缺什么必要背景材料
+  - 帮我起草一段话，把所需材料发给对方并确认对方能引用哪个版本
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我围绕以上内容整理一份“共同信息同步与确认”清单（或可直接发给协作者的简短同步话术）：
+
+    1. **锁定同版本材料**：列出本次讨论必需的核心材料清单、明确版本号与信息来源。
+
+    2. **标明关键缺项**：指出目前还缺少哪些材料、由谁或从哪里补充。
+
+    3. **设计接收确认问句**：附上一句简短清晰的确认问句，让对方反馈“实际收到的是哪个版本、能否直接引用、还有哪些缺项”。
+
+
+    **检查与边界**：文件已发送或存在共享目录，不等于对方已收到并可调用；必须以对方实际反馈的版本为准，且拿到同一材料不自动等于已经理解。'
+  variables: []
+  workflow: null
+meta:
+  source: cle-v0.7
+  source_ref: models/M3.md#i-c1
+  source_hash: cle_v0.7_m3_i_c1_v1
+  status: active
+  scope: domain_specific
+  shelf: off_shelf
+  tier: A
+  category: writing_comms
+  subcategory: workplace_comms
+  collections:
+  - cle_m3_interaction
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

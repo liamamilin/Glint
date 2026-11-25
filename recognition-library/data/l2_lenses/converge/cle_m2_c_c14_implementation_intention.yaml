@@ -1,0 +1,48 @@
+id: cle_m2_c_c14_implementation_intention
+title: 情境触发绑定 (C-C14)
+tagline: 目标/计划 → 设计“如果出现线索 X，就执行动作 Y”及例外
+routing:
+  primitive: converge
+  goals:
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - cognition
+  - general
+  app_affinity: []
+  pain_point: 计划写得很好但一忙就忘、总拖延起不来步，需要把具体可执行动作绑定到日常必然出现的可辨认情境线索上
+  trigger_utterances:
+  - 我总知道该做但一忙就忘了开始，帮我设计几个 If-Then 触发绑定
+  - 帮我给这个计划找一个具体的日常触发线索，并写明例外情况
+  - 怎么把这个好习惯或动作接到我每天肯定会遇到的情境线索上
+  - 帮我设计“如果出现某线索，我就立刻做某一步”的实施意图
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我把以上已采纳的计划动作，转化为具体可执行的“情境线索—行动绑定（If-Then）”方案：
+
+    1. **确认动作可执行**：先提取出计划中 1–2 个足够具体、无需临时思考就能启动的微小动作（若动作本身还太虚，先提示补齐计划）。
+
+    2. **匹配可辨认触发线索**：回看我日常会遇到的具体情境，挑出发生在动作之前、一眼就能辨认的触发线索，写成“如果【具体线索】出现，我就立刻做【具体第一步动作】”。
+
+    3. **写明例外与冲突处理**：列出 1–2 种“不应触发的例外情况”或冲突时的替代方案，并设一个小检查点供我确认是否采纳这项绑定。
+
+
+    **检查与边界**：触发线索不能含糊（如“有空时”），动作必须当下可执行；写下绑定由我确认采纳，后续是否真执行仍需看实际记录。
+
+    *(向内自问备用句：“什么线索适合提醒我开始这个动作，我是否采用这项绑定？”)*'
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M2.md#c-c14
+  source_hash: cle_v0.7_cle_m2_c_c14_implementation_intention_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: general
+  subcategory: personal_os
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

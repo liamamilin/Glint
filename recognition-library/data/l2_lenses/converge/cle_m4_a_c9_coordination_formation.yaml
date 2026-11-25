@@ -1,0 +1,44 @@
+id: cle_m4_a_c9_coordination_formation
+title: 多方协调方案 (A-C9)
+tagline: 行动未协调 → 把任务、角色、依赖、交接与阻塞升级接成可运作安排
+routing:
+  primitive: converge
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - action
+  - coordination
+  - general
+  app_affinity:
+  - Feishu
+  - Slack
+  - Cursor
+  pain_point: 大家虽然口头认同同一个大目标，但一进入实际配合就各干各的、交接掉球，需要一份可试走的整体协调安排
+  trigger_utterances:
+  - 大家目标一致但配合总掉链子，帮我把各方任务、角色、依赖和交接接成协调方案
+  - 帮我组织一份多方协作安排，并用正常和阻塞两个场景试走一遍
+  - 把这几个子任务和负责人的交接节奏、必要承诺和异常升级串起来
+  - 设计一个可落地的跨角色协调机制，方便各方共同确认
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: "请帮我将以上多方工作整合为一份可试走、可运作的“整体协调方案”：\n1. **串联核心要素**：把各方任务规格、角色责权、上下游依赖、交接点与必要承诺接成一张清晰协作图。\n2. **双场景试走检验**：\n   - **正常场景**：一步步试走，确认每棒交接顺畅；\n\
+    \   - **关键阻塞场景**：假设最脆弱的一环延误或失败，试走确认下一步立刻由谁接手、如何升级。\n3. **共同确认清单**：列出需要各参与方按规则确认生效的关键接口。\n\n**检查与边界**：大家共同理解大目标，绝不自动等于行动协调安排已经成立；必须经相关方确认并核验成立依据。"
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M4.md#a-c9
+  source_hash: cle_v0.7_cle_m4_a_c9_coordination_formation_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: product_business
+  subcategory: product_design
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

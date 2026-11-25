@@ -1,0 +1,46 @@
+id: cle_m1_r_c1_concept_formation
+title: 概念形成 (R-C1)
+tagline: 结构化材料 → 带边界与新例检验的可复用工作概念
+routing:
+  primitive: converge
+  goals:
+    - create
+    - digest
+  clarity_fit:
+    - concrete
+  domains:
+    - representation
+    - cognition
+    - general
+  app_affinity: []
+  pain_point: 有一组实例、区别与关系，想沉淀成一个定义清晰、边界明确、能拿去判断新例的可复用工作概念（而非仅仅起个名字）
+  trigger_utterances:
+    - 根据这些例子，帮我提炼出一个清晰可用的概念定义
+    - 怎么给这类现象写一个带明确边界的工作概念
+    - 我想把这个想法固化成一个概念，并用新例子检验边界
+    - 帮我检查这个概念定义够不够严谨，哪些算哪些不算
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: |
+    请基于以上材料，帮我提炼出一个定义清晰、带明确边界且可用于判断新例的工作概念：
+    1. **比较实例与关系**：先对比已有实例的表现、关系与关键区别，筛选与当前用途直接相关的依据。
+    2. **试写工作定义与边界**：提出含义草稿（名称可暂定），明确写出纳入范围、排除范围，并各给 1–2 个正例与不属于例说明理由。
+    3. **新例检验与修订**：举 1–2 个未讨论过的新实例，按定义草稿逐一判定“归入 / 不归入 / 暂无法判断”，并严格区分“当前材料不足”与“概念定义需要修改”。
+
+    **完成检查与边界**：必须能定义、举例、识别边界并在新例调用；仅起一个好听的名字不算形成概念，一次暂定定义也不等于长期稳定掌握。
+    *(向内自问备用句：“我能从这些实例试写什么含义，它能帮助我判断新例吗？”)*
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M1.md#r-c1
+  source_hash: cle_v0.7_m1_r_c1_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: general
+  subcategory: problem_solving
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

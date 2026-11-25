@@ -1,0 +1,49 @@
+id: cle_m2_c_c12_metacognitive
+title: 判断过程复盘 (C-C12)
+tagline: 认知活动 → 区分可见过程记录与事后解释，检视遗漏与盲点
+routing:
+  primitive: metacognize
+  goals:
+  - evaluate
+  - digest
+  clarity_fit:
+  - concrete
+  domains:
+  - cognition
+  - general
+  app_affinity: []
+  pain_point: 想复盘自己是怎么得出某个判断的，但容易陷入“事后合理化”编故事，需要把可见记录、推测和遗漏盲点分开
+  trigger_utterances:
+  - 根据这些过程记录，帮我梳理我当时怎么得出这个判断的、漏了什么
+  - 帮我复盘一下这段判断过程，分清哪些有记录、哪些只是我事后合理化
+  - 把“我对事情的判断”和“我怎么形成这个判断的过程”分开检视
+  - 整理我这次决策或分析的可见步骤和盲点，别替我脑补当时想法
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请根据以上判断、操作与材料记录，帮我客观复盘判断形成的过程与局限：
+
+    1. **分离对象判断与过程描述**：先区分“我得出的结论是什么”与“我经过了哪些步骤得出它”。
+
+    2. **区分记录与事后解释**：只根据实际可见的材料、选择和错误记录整理步骤，明确标出——① 有记录支撑的步骤；② 属于事后解释/合理化的部分；③ 过程记录中的遗漏与未知。
+
+    3. **指出盲点与待查**：列出可能被忽略的视角或信息缺口，以及哪些地方需要由我本人回忆或继续取证（不要替我补写我没有提供的内心过程）。
+
+
+    **检查与边界**：内省自述极易事后合理化，AI 的自解释也不能直接当成真实内部推理证据。
+
+    *(向内自问备用句：“我当时怎样作出判断，哪些步骤有记录，哪些是事后解释？”)*'
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M2.md#c-c12
+  source_hash: cle_v0.7_cle_m2_c_c12_metacognitive_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: general
+  subcategory: critical_thinking
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

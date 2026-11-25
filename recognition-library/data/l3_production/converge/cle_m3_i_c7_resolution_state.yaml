@@ -1,0 +1,55 @@
+id: cle_m3_i_c7_resolution_state
+title: 分歧结果收口 (I-C7)
+tagline: 已定位分歧 → 明确一致、保留分歧或暂停，并约定范围与重开条件
+routing:
+  primitive: converge
+  goals:
+  - evaluate
+  - optimize
+  clarity_fit:
+  - conflicted
+  domains:
+  - interaction
+  - communication
+  - general
+  app_affinity:
+  - Feishu
+  - Slack
+  - Mail
+  pain_point: 分歧已经摆明了但讨论迟迟收不了口，或者大家靠沉默疲倦散会，事后各自以为对方已经同意了自己的方案
+  trigger_utterances:
+  - 分歧已经定位清楚了，帮我起草一段收口确认：一致、保留分歧还是暂停
+  - 这场讨论需要明确结果状态，写清范围、下一步和什么条件下重开
+  - 防止大家沉默散会各执一词，帮我写一份清晰的讨论结果状态确认
+  - 针对这个分歧，整理成可由各方明确确认的处置方式和重开条款
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请针对以上已定位的分歧，帮我起草一份清晰、体面的“互动结果状态确认”：
+
+    1. **明确当前状态（三选一）**：在指定范围内，明确标出各方拟采用——① **达成一致**（写清一致内容与适用范围）；② **明确保留分歧**（写清各方保留的立场以及如何在保留分歧下继续推进）；③ **暂时中止/暂停**。
+
+    2. **写明下一步与重开条件**：说明接下来的查证、试行或协商动作，以及未来出现什么具体证据或条件变化时重开这项讨论。
+
+    3. **设计显式确认句**：附上一句简短的确认请求，要求相关方明确表态（防止把沉默、疲倦或散会当成默认同意）。
+
+
+    **检查与边界**：讨论层面的结果状态确认，不自动等于正式的对外任务承诺或授权；未获确认前必须标为“待确认”。'
+  variables: []
+  workflow: null
+meta:
+  source: cle-v0.7
+  source_ref: models/M3.md#i-c7
+  source_hash: cle_v0.7_m3_i_c7_v1
+  status: active
+  scope: domain_specific
+  shelf: off_shelf
+  tier: A
+  category: writing_comms
+  subcategory: workplace_comms
+  collections:
+  - cle_m3_interaction
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

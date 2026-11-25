@@ -1,0 +1,49 @@
+id: cle_m3_i_c5_frame_alignment
+title: 问题框架对齐 (I-C5)
+tagline: 不同范围与视角 → 约定本轮共同处理对象、目的、边界与分析维度
+routing:
+  primitive: converge
+  goals:
+    - optimize
+    - evaluate
+  clarity_fit:
+    - conflicted
+    - vague
+  domains:
+    - interaction
+    - communication
+    - general
+  app_affinity:
+    - Feishu
+    - Slack
+    - Notion
+  pain_point: 讨论越吵越散，根本原因是一个人在谈短期交付、一个人在谈长期架构，双方连“这轮到底在解什么问题、按什么视角看”都没对齐
+  trigger_utterances:
+    - 感觉我们在不同频道上各说各话，帮我对齐这轮讨论的问题框架和视角
+    - 帮我整理一下这轮共同处理什么对象、为了什么目的、暂不纳入什么
+    - 把各方不同的关注视角摊出来，提议一个本轮共同工作框架并保留其他视角
+    - 讨论跑题散架了，帮我起草一段拉齐范围和判断维度的框架约定
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: |
+    请帮我把以上处于不同频道的讨论拉回同一个“共同工作框架”：
+    1. **显化各自视角**：简明列出各方目前实际关注的对象、想达成的目的以及各自看重的判断维度。
+    2. **提议本轮共同框架**：给出一份简洁的“本轮共同框架提案”——明确本轮优先处理什么对象、服务什么目的、采用哪 2–3 个核心分析维度，以及哪些内容本轮**暂不纳入**。
+    3. **体面保留其他框架**：说明未纳入的其他视角/议题将如何保留、何时另行讨论，并附上一句请各方确认的简短问句。
+
+    **检查与边界**：共同采用某个工作框架只是为了本轮高效协作，不代表压服其他视角，也不代表已经找到了客观原因。
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M3.md#i-c5
+  source_hash: cle_v0.7_m3_i_c5_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: writing_comms
+  subcategory: workplace_comms
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

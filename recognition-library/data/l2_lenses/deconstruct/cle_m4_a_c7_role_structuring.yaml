@@ -1,0 +1,52 @@
+id: cle_m4_a_c7_role_structuring
+title: 协作角色组织 (A-C7)
+tagline: 角色未协调 → 明确谁执行、谁负责、谁决定、谁验收及交接替补
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - create
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - action
+  - coordination
+  - general
+  app_affinity:
+  - Feishu
+  - Slack
+  - Cursor
+  pain_point: 团队协作中执行、负责、拍板、验收全混在一起，一旦有人请假或出现分歧就找不到人接替和签字
+  trigger_utterances:
+  - 帮我把这项工作的执行、负责、决定和验收角色彻底理清楚
+  - 设计一份协作角色分工表，包含各自范围、交接点和有人缺席时的替补安排
+  - 避免干活的人和验收的人扯皮，帮我梳理清晰的角色接口结构
+  - 把这几个人在项目里的职责、决策权和替补机制整理成可确认的方案
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我将以上协作任务的角色与接口结构组织清楚：
+
+    1. **四类角色分离**：明确写出谁负责**执行**、谁对结果**负责**、谁拥有**决策权**、谁负责**验收**（四者可以不同，各自写明依据与范围）。
+
+    2. **接口与替补机制**：标出各角色之间的关键交接点、冲突协调人，以及当关键角色缺席/阻塞时的**替补接替人选**。
+
+    3. **确认生效**：整理成简洁的角色表，交由各方按既有安排确认。
+
+
+    **检查与边界**：不能只贴一个“负责人/架构师”等身份标签就默认拥有全部职权，每项角色关系都需有清晰依据与确认。'
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M4.md#a-c7
+  source_hash: cle_v0.7_cle_m4_a_c7_role_structuring_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: product_business
+  subcategory: product_design
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

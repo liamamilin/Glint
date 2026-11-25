@@ -1,0 +1,53 @@
+id: cle_m2_c_p7_reference
+title: 评价参照校准 (C-P7)
+tagline: 参照不明确 → 把“好/差”绑定到适用的基线、要求或案例
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - cognition
+  - general
+  app_affinity: []
+  pain_point: 嘴上说“太慢了”“质量很差”“还不错”，却没说清是相对于什么标杆，容易被不适用参照锚定或随意移动目标
+  trigger_utterances:
+  - 我说这个方案好或不好，到底应该拿什么当参照标杆
+  - 帮我找找有哪些可查的要求、历史基线或案例适合作为参照
+  - 检查一下我目前用的这个对比标杆合不合适、有没有锚定偏差
+  - 这个评价缺少参照系，帮我明确基线时点、单位和适用条件
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我为以上评价明确适用的参照系（标杆）：
+
+    1. **定位或提出候选参照**：先检查以上材料中是否已有明确的要求、历史基线或对标案例；若没有，列出 2–3 个可查的候选参照并说明来源。
+
+    2. **适用性核验**：逐一核对候选参照的**对象、时间点、单位与外部条件**是否真正适用于当前情境，提醒可能存在的锚定偏差。
+
+    3. **明确采用或待定**：指出哪项参照适合采用；若缺乏合适参照或材料不足，直接建议该评价先保留待定（不要把候选参照写成既定标准）。
+
+
+    **检查与边界**：参照只回答“相对于什么”，还不等于完整的判断规则。
+
+    *(向内自问备用句：“我说它好或不好，是相对于什么，参照是否适用？”)*'
+  variables: []
+  workflow: null
+meta:
+  source: cle-v0.7
+  source_ref: models/M2.md#c-p7
+  source_hash: cle_v0.7_cle_m2_c_p7_reference_v1
+  status: active
+  scope: domain_specific
+  shelf: off_shelf
+  tier: A
+  category: general
+  subcategory: decision
+  collections:
+  - cle_m2_cognition
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

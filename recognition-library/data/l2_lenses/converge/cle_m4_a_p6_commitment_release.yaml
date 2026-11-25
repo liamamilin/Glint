@@ -1,0 +1,51 @@
+id: cle_m4_a_p6_commitment_release
+title: 承诺正式解除 (A-P6)
+tagline: 有效承诺 → 按有权解除者或既有条件办理义务解除并明确剩余义务
+routing:
+  primitive: converge
+  goals:
+  - optimize
+  clarity_fit:
+  - conflicted
+  - concrete
+  domains:
+  - action
+  - coordination
+  - general
+  app_affinity:
+  - Feishu
+  - Slack
+  - Cursor
+  pain_point: 想退出或终止一项既有承诺，但直接消失、单方宣布取消或拖到过期并不会自动解除义务，容易引发信任危机
+  trigger_utterances:
+  - 这项承诺因为条件变化需要解除，帮我起草一份规范的解除申请并写明剩余义务
+  - 帮我核对解除这项承诺需要谁同意、依据什么条件、还有哪些收尾义务
+  - 不能直接单方退出，帮我写一段体面严谨的承诺解除沟通话术
+  - 整理承诺解除的依据、生效时间、受影响方和历史保留记录
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我起草一份规范、体面的“承诺解除提议与核对清单”：
+
+    1. **定位承诺与解除依据**：指明要解除哪项有效承诺（及具体义务范围），以及依据哪条既有解除条件或哪位有权解除者的确认。
+
+    2. **明确生效点与剩余义务**：写明解除何时生效、会影响哪些相关方、还有哪些必须善后的**剩余义务**，并保留历史记录。
+
+    3. **发起程序确认**：请有权方核对依据并正式确认解除。
+
+
+    **检查与边界**：失约、遗忘、项目暂停或单方宣布退出都不自动解除有效义务；在解除程序生效前，原义务按原规则保留。'
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M4.md#a-p6
+  source_hash: cle_v0.7_cle_m4_a_p6_commitment_release_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: writing_comms
+  subcategory: workplace_comms
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

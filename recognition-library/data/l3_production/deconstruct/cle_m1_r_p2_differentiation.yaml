@@ -1,0 +1,55 @@
+id: cle_m1_r_p2_differentiation
+title: 特征区分 (R-P2)
+tagline: 混合特征 → 拆开混在一起的描述方面，从粗到细
+routing:
+  primitive: deconstruct
+  goals:
+  - digest
+  - optimize
+  clarity_fit:
+  - vague
+  - conflicted
+  domains:
+  - representation
+  - cognition
+  - general
+  app_affinity: []
+  pain_point: 一句笼统描述（如“不在状态”“体验差”）把事件、情绪状态和不同表现混成一团，需要把混在一起的方面拆开、从粗到细具体化
+  trigger_utterances:
+  - 我这句话把好几件事混在一起了，帮我拆开区分一下
+  - 感觉状态很差但分不清具体是哪几个问题混在一起
+  - 这段描述太笼统了，里面混合了哪些不同的方面
+  - 把这段混杂的表述拆细，看看哪些可以单独变化
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我把以上笼统描述中混在一起的不同方面拆开、从粗到细区分清楚：
+
+    1. **还原具体情境**：结合以上材料或具体经历，把笼统/混合表述中混在一起的“外部事件”“主体状态”与“具体表现”分别列出来。
+
+    2. **独立变化检验**：检验这些方面——当某一方面改变时，其他方面是否必然跟着改变？据此把可以分别变化的方面拆开描述并给出清晰称呼。
+
+    3. **保留未分清部分**：对当前材料仍不足以分开的内容，诚实标明“仍未分清”，不强行硬拆。
+
+
+    **完成检查与边界**：至少展示会导致不同描述的实质差异（允许各方面相关，不要求绝对独立）；文字上写出了区别，不自动代表我已内化理解。
+
+    *(向内自问备用句：“我把哪些不同情况混在了一起，它们分别怎样发生？”)*'
+  variables: []
+  workflow: null
+meta:
+  source: cle-v0.7
+  source_ref: models/M1.md#r-p2
+  source_hash: cle_v0.7_m1_r_p2_v1
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  category: general
+  subcategory: problem_solving
+  collections:
+  - cle_m1_representation
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

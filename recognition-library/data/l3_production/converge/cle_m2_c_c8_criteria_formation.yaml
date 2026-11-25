@@ -1,0 +1,53 @@
+id: cle_m2_c_c8_criteria_formation
+title: 判断标准形成 (C-C8)
+tagline: 标准缺失/隐含 → 从正反实例试写可判例的判断规则
+routing:
+  primitive: converge
+  goals:
+  - evaluate
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - cognition
+  - general
+  app_affinity: []
+  pain_point: 要评价或筛选东西却没有靠谱标准，只会列几个空洞形容词（如“质量高”“体验好”）或随便拍脑袋打分
+  trigger_utterances:
+  - 帮我为这件事制定一套能真正判例的评价标准
+  - 根据这些要求和正反例子，帮我试写判断规则和所需检验材料
+  - 光说“好不好”太虚了，帮我把标准落到可接受和不可接受的具体规则上
+  - 帮我检查这套打分标准有没有用形容词或任意数字糊弄
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请根据以上用途、已有要求与实例，帮我形成真正能用于判例的判断规则（不要只列抽象维度名或任意数字）：
+
+    1. **正反例对照**：先对比可接受与不可接受的具体情况，说明它们的差异为什么直接影响当前用途。
+
+    2. **试写规则草稿**：区分“不可妥协的硬条件”与“可权衡维度”，写出清晰的判断规则草稿，并注明每条规则需要什么材料来检验。
+
+    3. **新例试判与价值留白**：用 1–2 个满足、不满足和缺材料的实例试判规则是否好用；明确标出哪些价值取舍必须由我本人确认（没有实例或要求时先说明缺项，不替我决定何为可接受）。
+
+
+    **检查与边界**：标准必须能对具体案例做出“通过 / 不通过 / 缺材料待定”的判定；不强行要求加权总分。
+
+    *(向内自问备用句：“哪些具体情况可以接受、不能接受，可以据此试写什么规则？”)*'
+  variables: []
+  workflow: null
+meta:
+  source: cle-v0.7
+  source_ref: models/M2.md#c-c8
+  source_hash: cle_v0.7_cle_m2_c_c8_criteria_formation_v1
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  category: general
+  subcategory: decision
+  collections:
+  - cle_m2_cognition
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

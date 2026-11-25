@@ -121,3 +121,124 @@ struct CapturedContext: Sendable {
     let anchorRect: CGRect?
     let isEditable: Bool
 }
+
+// MARK: - Glint Seed (Ambient HUD Carousel)
+
+enum SeedPoolMode: String, CaseIterable, Identifiable, Codable, Sendable {
+    case smartMix = "smart_mix"
+    case l4All = "l4_all"
+    case l3Discovery = "l3_discovery"
+    case tierS = "tier_s"
+
+    var id: String { rawValue }
+
+    var label: String {
+        switch self {
+        case .smartMix: return "全域智能混播 (L4 + L3探索)"
+        case .l4All: return "仅 L4 在架 (S/A/B加权)"
+        case .l3Discovery: return "仅 L3 休眠探索"
+        case .tierS: return "仅 S 级核心心法"
+        }
+    }
+
+    var shortLabel: String {
+        switch self {
+        case .smartMix: return "智能混播"
+        case .l4All: return "L4 在架"
+        case .l3Discovery: return "L3 探索"
+        case .tierS: return "S 级核心"
+        }
+    }
+}
+
+struct SeedItem: Codable, Identifiable, Equatable, Sendable {
+    let id: String
+    let title: String
+    let tagline: String
+    let pain_point: String
+    let prompt: String
+    let primitive: String
+    let category: String
+    let tier: String
+    let layer: String?
+    let source: String
+    let trigger_utterances: [String]
+    let weight: Double?
+    let probability_pct: Double?
+    let recall_count_30d: Int?
+    let reason_tag: String?
+
+    var isL3Discovery: Bool {
+        (layer ?? "L4").uppercased() == "L3"
+    }
+}
+
+struct SeedPoolResponse: Codable, Sendable {
+    let items: [SeedItem]
+    let mode: String?
+    let total_l4: Int
+    let total_l3: Int?
+    let muted_count: Int
+    let snoozed_count: Int
+    let release_version: String?
+}
+
+struct SeedDrawRequest: Codable, Sendable {
+    let mode: String
+    let exclude_ids: [String]
+}
+
+struct SeedDrawResponse: Codable, Sendable {
+    let item: SeedItem?
+    let mode: String
+    let eligible_count: Int
+    let total_l4: Int
+    let total_l3: Int
+    let muted_count: Int
+    let snoozed_count: Int
+    let release_version: String?
+}
+
+struct SeedFeedbackRequest: Codable, Sendable {
+    let id: String
+    let action: String
+    let snooze_days: Int
+    let category: String?
+
+    init(id: String, action: String, snoozeDays: Int = 7, category: String? = nil) {
+        self.id = id
+        self.action = action
+        self.snooze_days = snoozeDays
+        self.category = category
+    }
+}
+
+struct SeedFeedbackResponse: Codable, Sendable {
+    let ok: Bool
+    let muted_count: Int
+    let snoozed_count: Int
+}
+
+enum SeedOpacityPreset: String, CaseIterable, Identifiable {
+    case whisper
+    case standard
+    case clear
+
+    var id: String { rawValue }
+
+    var label: String {
+        switch self {
+        case .whisper: return "极轻 (28%)"
+        case .standard: return "标准 (42%)"
+        case .clear: return "清晰 (62%)"
+        }
+    }
+
+    var idleAlpha: Double {
+        switch self {
+        case .whisper: return 0.28
+        case .standard: return 0.42
+        case .clear: return 0.62
+        }
+    }
+}

@@ -441,7 +441,7 @@ def test_l2_to_l3_deterministic_cleaning_and_priority_dedup(tmp_path: Path) -> N
     assert report.total_quarantined_dedup == 1
     assert vecs is not None and vecs.shape == (1, 4)
     # Tier & taxonomy should be materialized automatically
-    assert kept[0].meta.tier == "S"  # glint-core defaults to Tier S
+    assert kept[0].meta.tier == "A"  # glint-core is in tier_a_sources (no longer hardcoded Tier S)
     assert kept[0].meta.category == "engineering"
     assert kept[0].meta.subcategory == "architecture"
 

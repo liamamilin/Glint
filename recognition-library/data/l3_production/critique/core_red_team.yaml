@@ -39,9 +39,9 @@ meta:
   source_ref: cards.yaml#red_team
   source_hash: 505582e4371def725c053f8d0a51838529ec5d434f16ec627a02b010be5d2de8
   status: active
-  scope: universal
-  shelf: evergreen
-  tier: S
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
   category: product_business
   subcategory: product_design
   collections: []

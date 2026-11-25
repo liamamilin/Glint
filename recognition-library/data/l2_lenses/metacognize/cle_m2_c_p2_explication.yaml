@@ -1,0 +1,49 @@
+id: cle_m2_c_p2_explication
+title: 想法倾向显化 (C-P2)
+tagline: 隐含或未被识别内容 → 把模糊想法、感受或倾向摊到桌面上
+routing:
+  primitive: metacognize
+  goals:
+  - digest
+  - create
+  clarity_fit:
+  - vague
+  domains:
+  - cognition
+  - general
+  app_affinity: []
+  pain_point: 心里隐约有某种判断、感受或倾向但说不清，需要从叙述和具体例子里把当前可识别的内容显化出来
+  trigger_utterances:
+  - 从我的这段话里，帮我看看我其实在担心或倾向什么
+  - 我隐约有点想法但说不清楚，帮我把里面的倾向显化出来
+  - 帮我从这段叙述中挑出可能隐含的判断，让我确认对不对
+  - 我感觉不太对劲但讲不明白，帮我把想法拉到台面上
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请根据以上我的叙述或经历记录，帮我把其中可能隐含的想法、感受或倾向显化出来：
+
+    1. **对应原话列出候选**：逐条指出你可能看到的想法、感受或价值倾向，并一一附上对应的原话或具体经历线索。
+
+    2. **保留多种解释**：如果同一句话存在不同解读，请分别保留，不要武断选一种。
+
+    3. **交给我本人确认**：明确列出哪些地方需要继续追问我、或必须由我本人确认（区分“我原本就有的判断”与“这轮才新形成的想法”）。
+
+
+    **检查与边界**：不要把你的推测写成我“早已认可的内心状态”；前状态未知时只确认我此刻能识别的内容。
+
+    *(向内自问备用句：“我现在有什么想法、感受或倾向，能举什么具体例子？”)*'
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M2.md#c-p2
+  source_hash: cle_v0.7_cle_m2_c_p2_explication_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: general
+  subcategory: problem_solving
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

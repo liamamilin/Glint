@@ -1,0 +1,50 @@
+id: cle_m4_a_c5_authority_transfer
+title: 权限转移交接 (A-C5)
+tagline: 原权限结构 → 核验转移资格、生效点、旧权保留与技术配置交接
+routing:
+  primitive: converge
+  goals:
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - action
+  - coordination
+  - general
+  app_affinity:
+  - Feishu
+  - Slack
+  - Cursor
+  pain_point: 休假代理、离职交接或项目转交时，随便说一句“以后你管吧”，结果旧权限没收回、新账号没生效或权责不清
+  trigger_utterances:
+  - 我要把这项权限或审批权转交给别人，帮我起草一份严谨的权限转移交接清单
+  - 帮我核对权限转移要查哪些点：资格、范围、生效时间、旧权是否保留和技术配置
+  - 区分一下这次是永久转移、临时委托代理还是仅仅复制技术访问权限
+  - 写一段规范的权限转移提议，避免交接空窗或旧权限失控
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我起草一份严谨防漏的“权限转移/交接提案与核对清单”：
+
+    1. **定性与资格核验**：先明确这次是**权限转移**、**临时授权委托**还是仅**复制技术访问**；核对原主体是否具备转移资格、哪些范围允许转移。
+
+    2. **明确交接四要点**：写清① 新接收主体与适用范围；② 正式生效时间点与期限；③ **原主体的旧权限是保留还是回收**；④ 对应系统技术配置/账号权限的切换安排。
+
+    3. **区分提议与生效**：列出需办理的认可程序，注明在未完成认可与技术配置前，原权限状态保持不变。
+
+
+    **检查与边界**：口头交接不等于权限生效，也绝不能凭身份标签跳过资格核验与技术回收。'
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M4.md#a-c5
+  source_hash: cle_v0.7_cle_m4_a_c5_authority_transfer_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: writing_comms
+  subcategory: workplace_comms
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

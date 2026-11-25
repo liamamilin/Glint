@@ -1,0 +1,55 @@
+id: cle_m1_r_c2_identification
+title: 指认与命名 (R-C2)
+tagline: 讨论所指尚未明确 → 有明确所指、可回查的对象表征
+routing:
+  primitive: metacognize
+  goals:
+  - digest
+  - create
+  clarity_fit:
+  - vague
+  domains:
+  - representation
+  - cognition
+  - general
+  app_affinity: []
+  pain_point: 面对一堆文字、截图或模糊感受，不知道自己在讨论什么、怎么命名，缺少可回查的所指对象（回答“讨论什么”，先于特征选择）
+  trigger_utterances:
+  - 这张图里我关注的部分通常叫什么
+  - 我说不清这是什么东西，先帮我定位一下
+  - 这堆材料里到底在讨论什么对象，帮我指认一下
+  - 感觉这里怪怪的但叫不出专业词，怎么描述它
+  - 先帮我从这段素材里圈出可以分别讨论的内容
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我从以上素材中明确本次要讨论的具体对象，并建立可回查的指代：
+
+    1. **先描述、不跳步**：先客观描述我关注的部分（或整份素材）具体呈现了什么内容、发生了什么，并指出对应素材中的具体位置；若我尚未限定范围，先列出可以分别讨论的若干对象供我选择，不要替我预定本次对象。
+
+    2. **补明范围**：只在容易混淆时，明确本次指代包含与不包含什么。
+
+    3. **再给候选称呼**：保留能回查素材的日常描述，再给出 1–3 个合适的称呼/术语并说明各自对应的范围；若无法确定正式名称，明确标为“名称待确认”。
+
+
+    **完成检查与边界**：确保每个称呼都能回到素材找到具体所指；名称不能替代所指本身，找到名称也不等于已经形成概念或证明原因成立。
+
+    *(向内自问备用句：“我具体注意到了什么，先不用术语，我能怎样描述它？”)*'
+  variables: []
+  workflow: null
+meta:
+  source: cle-v0.7
+  source_ref: models/M1.md#r-c2
+  source_hash: cle_v0.7_m1_r_c2_v1
+  status: active
+  scope: domain_specific
+  shelf: off_shelf
+  tier: A
+  category: general
+  subcategory: problem_solving
+  collections:
+  - cle_m1_representation
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

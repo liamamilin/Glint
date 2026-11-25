@@ -1,0 +1,50 @@
+id: cle_m2_c_p15_prioritization
+title: 依赖与优先排序 (C-P15)
+tagline: 未排序要素 → 按硬条件、依赖先后与延后后果排清顺序
+routing:
+  primitive: converge
+  goals:
+  - optimize
+  - evaluate
+  clarity_fit:
+  - conflicted
+  - concrete
+  domains:
+  - cognition
+  - general
+  app_affinity: []
+  pain_point: 手头一堆事项不知道先做哪个后做哪个，容易凭感觉拍脑袋排总榜，忽略硬约束、前置依赖或延后的真实代价
+  trigger_utterances:
+  - 这么多事我都不知道先做哪个，帮我按依赖和延后后果排个优先级
+  - 帮我理清这些事项的硬条件、前置依赖和先后顺序
+  - 排一下这几个任务的优先级，排不出高下的直接标并列或不可比
+  - 先处理哪个、延后哪个后果最严重，帮我排清先后
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请围绕我当前的排序用途，帮我理清以上事项的必要先后与优先关系：
+
+    1. **核查硬条件与依赖**：逐项检查必须满足的硬约束、外部期限以及“谁必须先于谁”的前置依赖。
+
+    2. **比较延后后果**：分析先处理或延后各项分别会带来什么具体后果与成本。
+
+    3. **给出结构化顺序**：按透明的排序依据给出先后结构——明确标出① 必须最先处理的项；② 可以并列推进的项；③ 当前依据不足、暂不可比较的项（不硬造虚假总排名）。
+
+
+    **检查与边界**：必须说清按什么依据排序；优先排序不自动等于最终决定（某些高优项仍可能因条件不具备而暂缓）。
+
+    *(向内自问备用句：“这些事项有哪些条件、依赖和延后后果，应怎样排先后？”)*'
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M2.md#c-p15
+  source_hash: cle_v0.7_cle_m2_c_p15_prioritization_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: general
+  subcategory: decision
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

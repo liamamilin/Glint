@@ -1,0 +1,50 @@
+id: cle_m2_c_p12_explanation_diversification
+title: 竞争解释多样化 (C-P12)
+tagline: 解释单一 → 构造能给出不同预测的竞争解释并指出区分材料
+routing:
+  primitive: diverge
+  goals:
+  - debug
+  - evaluate
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - cognition
+  - general
+  app_affinity: []
+  pain_point: 对一个现象只想到一种看似顺理成章的解释就深信不疑，需要强行构造至少一个竞争解释并用不同预测来区分真伪
+  trigger_utterances:
+  - 同一件事除了我现在这个解释，还可能是怎么发生的
+  - 帮我构造几个相互竞争的解释，并说出怎么用事实区分它们
+  - 我怕陷入单一归因，帮我多想几种不同机制并列出可区分预测
+  - 换个条件或过程想想，还有什么完全不同的原因能导致这个现象
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我打破对以上现象的单一归因，构造真正相互竞争的替代解释：
+
+    1. **改变机制构造替代**：通过改变原解释中的输入、条件、记录方式或对照相近案例，提出 2–3 个机制上真正不同的竞争解释（严禁只是给原解释换个同义词名字）。
+
+    2. **列出区分性预测**：清晰对比“如果解释 A 成立，预期会看到什么；如果解释 B 成立，预期会看到什么不同现象”。
+
+    3. **指出决胜材料**：说明去哪里获取什么现实材料，就能把这些竞争解释区分开（也提醒是否存在多种原因并存的可能）。
+
+
+    **检查与边界**：没有给出差异预测的“换词改名”不算新解释；想不出实质替代时诚实保留，不硬凑。
+
+    *(向内自问备用句：“同一观察还可能怎样发生，不同解释预期什么？”)*'
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M2.md#c-p12
+  source_hash: cle_v0.7_cle_m2_c_p12_explanation_diversification_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: general
+  subcategory: critical_thinking
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

@@ -1,0 +1,53 @@
+id: cle_m1_r_p6_compression
+title: 有损压缩摘要 (R-P6)
+tagline: 详细表征 → 按用途保留关键条件、标明省略与回查的摘要
+routing:
+  primitive: compress
+  goals:
+  - digest
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - representation
+  - general
+  app_affinity: []
+  pain_point: 材料太长想做摘要或提炼短标签，但怕一味追求简短把关键限制条件、量词、因果或责任给删丢了
+  trigger_utterances:
+  - 帮我压缩总结一下，但别把关键限制条件删丢了
+  - 为了回答这个问题，这份材料摘要必须保留什么、可以省略什么
+  - 把这段长内容提炼成精简摘要，并说明省略了哪些细节
+  - 帮我做个可追溯的摘要，核对有没有把原意改歪
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请围绕我当前要回答的问题，帮我对以上材料做高保真压缩摘要：
+
+    1. **按用途试删筛选**：明确这份摘要要服务的问题/用途，逐项判断“删去这条信息会不会改变答案、关键区别或适用条件？”。
+
+    2. **生成保真摘要**：只保留影响判断的核心关系与限制条件，写成精简摘要。
+
+    3. **标明省略与回查**：明确列出① 保留了什么；② 省略了哪些细节以及原材料的回查位置；③ 复核是否无声改变了原意中的量词、因果或责任归属。
+
+
+    **完成检查与边界**：短不等于准确；压缩是有损转换，必须说明保留与省略的取舍且重要材料可追溯。
+
+    *(向内自问备用句：“为了这个问题，我的摘要必须保留哪些内容？”)*'
+  variables: []
+  workflow: null
+meta:
+  source: cle-v0.7
+  source_ref: models/M1.md#r-p6
+  source_hash: cle_v0.7_m1_r_p6_v1
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  category: general
+  subcategory: problem_solving
+  collections:
+  - cle_m1_representation
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

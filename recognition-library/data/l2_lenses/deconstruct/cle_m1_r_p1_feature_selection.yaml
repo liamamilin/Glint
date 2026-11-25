@@ -1,0 +1,47 @@
+id: cle_m1_r_p1_feature_selection
+title: 特征选择 (R-P1)
+tagline: 未组织的任务相关经验 → 按用途选出影响判断的特征
+routing:
+  primitive: deconstruct
+  goals:
+    - digest
+    - evaluate
+  clarity_fit:
+    - vague
+    - concrete
+  domains:
+    - representation
+    - cognition
+    - general
+  app_affinity: []
+  pain_point: 面对复杂对象或经历，信息维度太多，不知道为了当前用途应该从哪些角度描述、保留哪些特征、略去哪些无关信息
+  trigger_utterances:
+    - 为了这个目的，我应该从哪些维度来看这份材料
+    - 信息太多了，帮我挑出真正影响判断的关键特征
+    - 这件事该保留哪些描述方面，哪些可以先忽略
+    - 分析这个对象时，哪些属性变了会改变我的结论
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: |
+    请围绕我当前的用途，帮我从以上内容中筛选真正影响判断的关键描述维度（特征）：
+    1. **列出候选方面**：先用日常语言简述素材中的对象或经历，从中拆出可观察、可询问的描述方面（属性、状态或表现）。
+    2. **按当前用途筛选**：逐项检验“如果这一方面取值不同，是否会改变本次判断？为什么？”。
+    3. **保留与暂略清单**：分别列出① 必须保留的特征（注明已有取值或标为“未知”，并标明信息来源）、② 本次可暂略的方面及理由。
+
+    **完成检查与边界**：区分“特征（描述方面）”“具体取值”与“信息来源”；未取得的取值必须标为未知，不编造事实，且选取只服务当前用途，不宣称穷尽。
+    *(向内自问备用句：“我已经注意到哪些方面，哪些会影响这次判断？”)*
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M1.md#r-p1
+  source_hash: cle_v0.7_m1_r_p1_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: general
+  subcategory: problem_solving
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

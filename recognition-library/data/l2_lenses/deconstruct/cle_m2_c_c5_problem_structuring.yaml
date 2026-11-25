@@ -1,0 +1,50 @@
+id: cle_m2_c_c5_problem_structuring
+title: 复杂问题组织 (C-C5)
+tagline: 混合复杂性 → 拆解子问题、依赖、冲突、优先级与证据缺口
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - debug
+  clarity_fit:
+  - conflicted
+  - concrete
+  domains:
+  - cognition
+  - general
+  app_affinity: []
+  pain_point: 一大团纠缠在一起的复杂问题无从下嘴，需要理出子问题之间的依赖、冲突和证据缺口，知道下一步先攻哪一块
+  trigger_utterances:
+  - 这一大团问题纠缠在一起，帮我拆出子问题和相互依赖
+  - 这段复杂叙述里有哪些待处理事项，它们怎么相互影响或冲突
+  - 帮我把这个问题网理顺，指出最该先取证或先处理哪一步
+  - 拆解一下这个复杂局面的子问题、冲突点和关键未知
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我把以上混杂的复杂问题组织成可指导下一步行动的问题结构：
+
+    1. **拆分子问题**：按涉及的事件、对象或待回答的疑问，将混合叙述拆分为清晰的子问题列表。
+
+    2. **标注依赖与冲突**：逐项标明——处理它需要什么输入、它会影响哪一项、哪些要求之间存在明显冲突、哪些关键信息仍是未知（证据缺口）。
+
+    3. **指明下一跳**：基于依赖和缺口，明确指出最值得先处理或先取证的那 1–2 个切入点。
+
+
+    **检查与边界**：分组方式是随材料可调整的候选结构（无需追求唯一完美问题树），但必须能直接指导下一步取证或处理，不能为了分细而分细。
+
+    *(向内自问备用句：“这段叙述中有哪些待处理事项，它们怎样相互影响？”)*'
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M2.md#c-c5
+  source_hash: cle_v0.7_cle_m2_c_c5_problem_structuring_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: general
+  subcategory: problem_solving
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

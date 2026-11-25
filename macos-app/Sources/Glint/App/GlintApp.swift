@@ -49,6 +49,56 @@ struct GlintApp: App {
 
                 Divider()
 
+                Button {
+                    coordinator.seedController.isEnabled.toggle()
+                } label: {
+                    Text(
+                        coordinator.seedController.isEnabled
+                            ? "✓ 认知种子轮播 (5min · \(coordinator.seedController.poolMode.shortLabel))"
+                            : "开启认知种子轮播 (5min)"
+                    )
+                }
+
+                Menu("认知种子设置") {
+                    Menu("轮播内容池：\(coordinator.seedController.poolMode.shortLabel)") {
+                        ForEach(SeedPoolMode.allCases) { mode in
+                            Button {
+                                coordinator.seedController.poolMode = mode
+                            } label: {
+                                Text(mode == coordinator.seedController.poolMode ? "✓ \(mode.label)" : mode.label)
+                            }
+                        }
+                    }
+
+                    Button("下一张种子") {
+                        coordinator.seedController.next(manual: true)
+                    }
+                    .disabled(!coordinator.seedController.isEnabled)
+
+                    Menu("静默透明度：\(coordinator.seedController.opacityPreset.label)") {
+                        ForEach(SeedOpacityPreset.allCases) { preset in
+                            Button {
+                                coordinator.seedController.opacityPreset = preset
+                            } label: {
+                                Text(preset == coordinator.seedController.opacityPreset ? "✓ \(preset.label)" : preset.label)
+                            }
+                        }
+                    }
+
+                    Button("重置小窗到右下角") {
+                        coordinator.seedController.resetPosition()
+                    }
+
+                    if coordinator.seedController.hiddenCount > 0 {
+                        Divider()
+                        Button("恢复已隐藏的种子 (\(coordinator.seedController.hiddenCount))") {
+                            coordinator.seedController.resetAllHidden()
+                        }
+                    }
+                }
+
+                Divider()
+
                 Button("Glint 管理…") {
                     coordinator.openAdminConsole()
                 }

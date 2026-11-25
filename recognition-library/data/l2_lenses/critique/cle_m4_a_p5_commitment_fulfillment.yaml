@@ -1,0 +1,48 @@
+id: cle_m4_a_p5_commitment_fulfillment
+title: 承诺履行核验 (A-P5)
+tagline: 未履行承诺 → 用真实结果对照有效承诺条件并按规则记录履行
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  clarity_fit:
+  - concrete
+  domains:
+  - action
+  - coordination
+  - general
+  app_affinity:
+  - Feishu
+  - Slack
+  - Cursor
+  pain_point: 觉得自己已经忙活完了就算兑现承诺，却没拿真实结果逐条核对当初承诺的条件和关闭依据
+  trigger_utterances:
+  - 帮我拿真实结果逐条对照当初的承诺条件，核验算不算履行完成
+  - 整理一份承诺履行核验说明，标出满足、未满足和无法核验的项
+  - 避免只凭自己做了动作就以为兑现承诺，帮我按原承诺版本做个核对
+  - 对照这份交付材料和原约定承诺，看看满足关闭履行状态了吗
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我将以上真实结果逐条对照原有效承诺条件，做一次客观的履行核验：
+
+    1. **逐项对照核验**：将实际结果材料对照有效承诺版本中的每一项条件，清晰标出——**已满足（附证据） / 未满足（附差距） / 无法核验（标缺项）**。
+
+    2. **关闭依据检查**：说明是否已具备规则所需的关闭/确认依据，并起草简短的履行状态同步说明。
+
+
+    **检查与边界**：付出了努力、执行了动作或口头自报完成，都不直接证明满足承诺条件；必须依赖真实结果证据。'
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M4.md#a-p5
+  source_hash: cle_v0.7_cle_m4_a_p5_commitment_fulfillment_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: writing_comms
+  subcategory: workplace_comms
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

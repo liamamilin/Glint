@@ -1,0 +1,53 @@
+id: cle_m2_c_c3_causal_structuring
+title: 因果结构组织 (C-C3)
+tagline: 观察序列 → 梳理实体、时序、机制假说、混杂因素与区分预测
+routing:
+  primitive: deconstruct
+  goals:
+  - debug
+  - evaluate
+  clarity_fit:
+  - concrete
+  domains:
+  - cognition
+  - general
+  app_affinity: []
+  pain_point: 面对一连串先后发生的事件或数据变化，想理清背后因果链，但极易把相关当因果、忽略混杂变量
+  trigger_utterances:
+  - 帮我理清这一连串事件的因果结构，标出哪些有证据哪些只是猜的
+  - 这个数据变化到底是什么原因造成的，有没有忽略混杂因素
+  - 组织一下这些实体、时间顺序、机制假说和可区分的验证预测
+  - 帮我画个因果链路，把已证实关系和候选箭头严格分开
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我把以上观察与事件序列组织成严谨的候选因果结构：
+
+    1. **还原实体与时序**：先按时间先后列出材料实际记录了哪些关键事件与实体状态。
+
+    2. **标注因果箭头与证据等级**：写出连接它们的候选因果过程，逐条标明——哪些箭头有直接证据支持、哪些只是候选假说。
+
+    3. **排查混杂与竞争解释**：重点指出有没有其他“同时影响原因和结果”的混杂因素，列出竞争解释及各自不同的可观察预测，说明需要什么现实材料才能检验。
+
+
+    **检查与边界**：故事讲得顺不等于识别了真实因果，脑内想象的干预也不能替代现实数据验证。
+
+    *(向内自问备用句：“观察的先后顺序是什么，哪些因果连接仍需检验？”)*'
+  variables: []
+  workflow: null
+meta:
+  source: cle-v0.7
+  source_ref: models/M2.md#c-c3
+  source_hash: cle_v0.7_cle_m2_c_c3_causal_structuring_v1
+  status: active
+  scope: domain_specific
+  shelf: off_shelf
+  tier: A
+  category: general
+  subcategory: research
+  collections:
+  - cle_m2_cognition
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

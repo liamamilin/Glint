@@ -36,9 +36,9 @@ meta:
   source_ref: cards.yaml#clarify_first
   source_hash: a895c81ca89c4d333d5d94e82ea590cc7c97415cf10a2b2f18cc913e6157accd
   status: active
-  scope: universal
-  shelf: evergreen
-  tier: S
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
   category: product_business
   subcategory: product_design
   collections: []

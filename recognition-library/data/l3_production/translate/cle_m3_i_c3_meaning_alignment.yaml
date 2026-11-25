@@ -1,0 +1,56 @@
+id: cle_m3_i_c3_meaning_alignment
+title: 关键含义对齐 (I-C3)
+tagline: 同一词不同理解 → 用具体例子与边界案例约定本次共同用法
+routing:
+  primitive: translate
+  goals:
+  - optimize
+  - evaluate
+  clarity_fit:
+  - conflicted
+  - vague
+  domains:
+  - interaction
+  - communication
+  - general
+  app_affinity:
+  - Feishu
+  - Slack
+  - Mail
+  pain_point: 双方嘴上说着同一个词（如“完成”“上线”“MVP”“高质量”），脑子里装的却是完全不同的标准，导致鸡同鸭讲
+  trigger_utterances:
+  - 我们对这个词的理解好像不一样，帮我用正反例子起草一个本次共同用法
+  - 帮我对齐一下“完成/验收/上线”这类关键词在这次合作里的具体含义
+  - 别先背大段抽象定义，帮我用具体边界案例核对双方对这个词算不算数
+  - 整理一下双方对这个概念的解释差异，提出一份本次可共用的含义草稿
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我围绕以上容易产生理解错位的关键词，做一次“含义对齐”梳理：
+
+    1. **用具体例子替代空定义**：不先写抽象辞典定义，而是围绕该关键词列出双方可能想到的具体情境例子，并给出 1–2 个容易扯皮的“边界情况”（例如“仅提交未验收算不算完成？”）。
+
+    2. **提议本次共同用法草稿**：基于这些具体例子，提炼出一段简洁、无歧义的“本次任务共同含义草稿”，明确写清算什么、不算什么。
+
+    3. **标出未统一部分与确认问句**：列出仍待双方确认的边界，并附上一句确认问句供双方敲定。
+
+
+    **检查与边界**：含义对齐只需要各方确认“在本次用途下按此理解该词”，理解一致不代表观点相同、标准相同或已经接受任务。'
+  variables: []
+  workflow: null
+meta:
+  source: cle-v0.7
+  source_ref: models/M3.md#i-c3
+  source_hash: cle_v0.7_m3_i_c3_v1
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  category: writing_comms
+  subcategory: workplace_comms
+  collections:
+  - cle_m3_interaction
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

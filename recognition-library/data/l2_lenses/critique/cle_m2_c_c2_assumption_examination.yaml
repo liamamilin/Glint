@@ -1,0 +1,50 @@
+id: cle_m2_c_c2_assumption_examination
+title: 假设反例审查 (C-C2)
+tagline: 已明示假设 → 审查证据、反例、边界与替代，决定保留或撤回
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  - debug
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - cognition
+  - general
+  app_affinity: []
+  pain_point: 已经明确了核心假设，但需要系统检查它的支持依据、适用范围反例和边界，决定该保留、修正还是撤回原结论
+  trigger_utterances:
+  - 帮我严格审查这个前提假设，看看有哪些支持、反例和未知
+  - 在适用范围内找找这个判断的反例，顺便分清是设想还是实证
+  - 检验一下这个假设靠不靠谱，如果不成立原结论怎么调整
+  - 给这个核心前提做一次压力测试，决定保留、修改还是暂缓
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我对以上核心前提假设做一次严格的证据与反例审查：
+
+    1. **明确范围与断言**：先写清该前提在什么适用范围内断言了什么结果（区分全称断言、条件断言还是概率判断）。
+
+    2. **核对支持、冲突与反例**：分别列出——① 已有支持依据；② 适用范围内的冲突或反例（**严格标注是“想象中的待查反例”还是“已核验的真实实例”**，且不把概率主张允许的单个例外当成彻底推翻）；③ 仍未知的关键部分。
+
+    3. **给出处置建议**：说明据此应“保持 / 缩小适用范围 / 修改前提 / 暂不判断”，并指出原结论的哪一步需要随之调整。
+
+
+    **检查与边界**：没有找到反例不等于已经证实；绝不歪曲原命题攻击稻草人，也不以反对数量代替真实检验。
+
+    *(向内自问备用句：“这个前提有哪些支持、冲突或未知，应怎样处理？”)*'
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M2.md#c-c2
+  source_hash: cle_v0.7_cle_m2_c_c2_assumption_examination_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: general
+  subcategory: critical_thinking
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

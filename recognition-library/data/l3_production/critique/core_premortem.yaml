@@ -39,9 +39,9 @@ meta:
   source_ref: cards.yaml#premortem
   source_hash: b87dd3000b9428f66bd0f9eab71356b1c9b160a1e8e27f7221b4582ba684db18
   status: active
-  scope: universal
-  shelf: evergreen
-  tier: S
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
   category: engineering
   subcategory: architecture
   collections: []

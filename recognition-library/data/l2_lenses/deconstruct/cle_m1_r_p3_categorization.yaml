@@ -1,0 +1,46 @@
+id: cle_m1_r_p3_categorization
+title: 分类归组 (R-P3)
+tagline: 实例集合 → 按明确归类依据与边界例形成类别表征
+routing:
+  primitive: deconstruct
+  goals:
+    - digest
+    - optimize
+  clarity_fit:
+    - concrete
+  domains:
+    - representation
+    - cognition
+    - general
+  app_affinity: []
+  pain_point: 手头有一堆具体案例或条目，不知道按什么清晰依据分组，容易随意贴标签、漏掉边界案例或误把同类当同因
+  trigger_utterances:
+    - 这些案例有哪些相同和不同，帮我按明确依据分个类
+    - 这堆条目太乱了，怎么制定分类标准和边界
+    - 帮我检查这个分类合不合理，有没有边界案例归不进去
+    - 按这个用途，把这些实例分组并说明为什么归入
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: |
+    请帮我为以上实例建立清晰的归类依据并完成分组：
+    1. **逐例描述与比较**：先简述各实例与当前用途相关的表现或关系，列出它们的相同与不同之处。
+    2. **提出暂定归类依据**：给出清晰、可判例的归类标准，将实例分组并说明每项归入的理由。
+    3. **边界例压力测试**：明确标出正例、不属于例与难以归入的边界例；指出边界例是否提示“归类依据需要修订”或“当前材料不足”（允许暂不归类）。
+
+    **完成检查与边界**：必须同时给出归类依据、正例与边界例；归为同一类别只表示满足当前归类依据，不自动意味着成员具有相同原因或共同本质。
+    *(向内自问备用句：“我想到的这些实例有哪些相同和不同，可以按什么依据分组？”)*
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M1.md#r-p3
+  source_hash: cle_v0.7_m1_r_p3_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: general
+  subcategory: problem_solving
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

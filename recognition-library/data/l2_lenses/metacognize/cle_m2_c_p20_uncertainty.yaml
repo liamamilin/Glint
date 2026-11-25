@@ -1,0 +1,51 @@
+id: cle_m2_c_p20_uncertainty
+title: 未知与置信标定 (C-P20)
+tagline: 未知程度未区分 → 严格分开已知、推测与缺材料，写明更新条件
+routing:
+  primitive: metacognize
+  goals:
+  - evaluate
+  - digest
+  clarity_fit:
+  - vague
+  - conflicted
+  - concrete
+  domains:
+  - cognition
+  - general
+  app_affinity: []
+  pain_point: 把确凿事实、合理推测和纯信息不足混在一起说，或者靠拍脑袋写个“80%把握”掩盖真实未知
+  trigger_utterances:
+  - 帮我把这段分析里“已知事实、推测、纯未知”彻底分开
+  - 关于这件事我到底能判断到哪里，还缺什么材料才能更新判断
+  - 别用模糊的把握度糊弄，帮我标清哪里有依据、哪里是猜的、哪里完全未知
+  - 整理一下当前的不确定性边界，以及获取什么信息会改变结论
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我把以上内容中的确定性与未知程度彻底分清：
+
+    1. **三层分离标注**：将所有关键点严格归入三栏——① **已有明确依据（已知）**；② **基于线索的候选推测**；③ **信息不足/完全未知**。
+
+    2. **界定当前判断上限**：说明凭借现有依据，我们此刻最多能可靠判断到哪一步（用有依据的定性描述即可，不靠随意填精确百分比制造虚假确定感）。
+
+    3. **写明更新路径**：针对每一个关键未知，写出需要获取什么具体材料、去哪里查，以及查到什么结果会改变当前判断。
+
+
+    **检查与边界**：精确数字不代表统计校准，低自信也不自动等于正确；定位未知本身就是高质量判断的一部分。
+
+    *(向内自问备用句：“哪些有依据、是推测或仍未知，还需取得什么材料？”)*'
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M2.md#c-p20
+  source_hash: cle_v0.7_cle_m2_c_p20_uncertainty_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: general
+  subcategory: critical_thinking
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

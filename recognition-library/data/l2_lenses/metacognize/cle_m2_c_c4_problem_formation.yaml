@@ -1,0 +1,50 @@
+id: cle_m2_c_c4_problem_formation
+title: 问题定义形成 (C-C4)
+tagline: 不满/异常/疑问 → 定位对象、现象、期待与未知（不预埋方案）
+routing:
+  primitive: metacognize
+  goals:
+  - create
+  - debug
+  clarity_fit:
+  - vague
+  - conflicted
+  domains:
+  - cognition
+  - general
+  app_affinity: []
+  pain_point: 只有模糊抱怨、异常现象或好奇疑问，或者把“我要用某方案”直接当成了问题，需要先定义出真正待解释或待解决的问题
+  trigger_utterances:
+  - 帮我把这段抱怨或现象提炼成一个清晰可分析的问题
+  - 先别急着给方案，帮我搞清楚我真正要解释或改变的是什么
+  - 这件事让我觉得不对劲，帮我定位对象、现象、期待和未知
+  - 检查一下我提的这个问题是不是偷偷把某种方案写死在里面了
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请先不要急着给解决方案，帮我把以上情况提炼成一个清晰可分析的问题定义：
+
+    1. **还原事实与疑问**：写清在什么具体情境下发生了什么现象/异常，以及我想知道却仍不知道的关键点是什么（问题不一定来自不满，也可以是探索性疑问）。
+
+    2. **对照期待与范围**：若有不满，明确它与什么期待或参照不符；划定本次问题的边界、已有材料与关键未知。
+
+    3. **剥离预埋方案**：检查我的原话是否悄悄把“必须采用某种方案”写成了问题本身；如果是，帮我退回一层，还原它真正想解决的问题（确保该定义允许比较多种不同方案）。
+
+
+    **检查与边界**：从抱怨中推断出的问题定义必须由我本人确认，不替我预设真实诉求。
+
+    *(向内自问备用句：“具体发生了什么，我需要解释或改变哪一部分？”)*'
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M2.md#c-c4
+  source_hash: cle_v0.7_cle_m2_c_c4_problem_formation_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: general
+  subcategory: problem_solving
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

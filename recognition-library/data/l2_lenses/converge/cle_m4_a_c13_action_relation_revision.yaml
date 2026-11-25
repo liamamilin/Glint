@@ -1,0 +1,52 @@
+id: cle_m4_a_c13_action_relation_revision
+title: 异常关系修订 (A-C13)
+tagline: 有效安排出现异常 → 盘点受影响任务/权限/承诺，按权限确认更新与剩余义务
+routing:
+  primitive: converge
+  goals:
+  - debug
+  - optimize
+  clarity_fit:
+  - conflicted
+  - concrete
+  domains:
+  - action
+  - coordination
+  - general
+  app_affinity:
+  - Feishu
+  - Slack
+  - Cursor
+  pain_point: 项目突发阻塞、任务取消、失败或人员变动，大家慌乱救火或默认一笔勾销，漏掉受影响的下游依赖、权限撤销与善后责任
+  trigger_utterances:
+  - 项目突发阻塞/取消/失败，帮我盘点所有受影响的任务、权限和承诺并起草修订
+  - 发生重大变更了，帮我整理一份严谨的异常关系更新方案：新版本、生效点与剩余义务
+  - 任务取消了但不能直接一拍两散，帮我核对要撤销哪些权限、善后哪些责任
+  - 帮我起草一份异常处理与关系重分配通知，区分已报告异常和已生效修订
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请针对以上突发异常或重大变更，帮我系统盘点受影响的协作关系并起草修订方案：
+
+    1. **盘点受影响半径**：对照原安排版本，逐项排查此次事件波及了哪些——① 任务与下游依赖；② 角色与责任分配；③ 需撤销或调整的权限；④ 尚未履行的承诺。
+
+    2. **拟定更新与善后**：提出清晰的修订方案（重分配 / 取消 / 降级 / 补救），明确写出**新版本号、生效时间点、必须完成的剩余善后义务与下一责任人**。
+
+    3. **确认生效程序**：标明哪些更新需要有权角色确认；严格区分“已报告异常”与“修订已正式生效”。
+
+
+    **检查与边界**：逾期不自动解除承诺，任务取消也不自动撤销全部相关义务和系统权限；未获确认生效前，旧安排中未变部分保持原状。'
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M4.md#a-c13
+  source_hash: cle_v0.7_cle_m4_a_c13_action_relation_revision_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: writing_comms
+  subcategory: workplace_comms
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

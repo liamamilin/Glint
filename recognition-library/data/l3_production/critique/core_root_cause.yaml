@@ -37,9 +37,9 @@ meta:
   source_ref: cards.yaml#root_cause
   source_hash: 751f5a99ef97d405dc387d8eae609c6bfb1810e5bdab84fd98e6b21f1dd28c16
   status: active
-  scope: universal
-  shelf: evergreen
-  tier: S
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
   category: engineering
   subcategory: debugging
   collections: []

@@ -1,0 +1,51 @@
+id: cle_m4_a_p14_deliverable_definition
+title: 交付对象定义 (A-P14)
+tagline: 交付物不明 → 从接收方用途倒推交付内容、形式与可找到的位置
+routing:
+  primitive: converge
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - action
+  - coordination
+  - general
+  app_affinity:
+  - Feishu
+  - Slack
+  - Cursor
+  pain_point: 交代工作只说“搞完发我”，没约定交什么形态、放哪里、怎么辨认版本，结果交上来的东西没法直接用
+  trigger_utterances:
+  - 帮我把这项任务的交付物、格式、位置和参考样例定义清楚
+  - 从接收方怎么使用结果出发，帮我约定清楚具体要交付什么
+  - 别只说“做好发我”，帮我把可观察的交付结果和存放路径写明确
+  - 核对一下这份任务的交付定义，接收方拿到后能不能一眼辨认版本
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请从“接收方拿到结果后怎么查看、使用或核验”出发，帮我起草清晰的“交付定义”：
+
+    1. **交付内容与可观察结果**：明确要交付什么具体产物或可观察的状态变化（不要先挑文件格式代替实质内容）。
+
+    2. **形式、位置与样例**：写清采用的格式、提交位置/渠道、版本命名方式，以及可参考的样例（若需求仍不明，先标出需澄清点）。
+
+    3. **辨认与核对**：说明接收方如何找到并辨认这份预期产物。
+
+
+    **检查与边界**：约定好了交付位置不等于文件已提交；交付物存在也不等于质量合格（质量须另按验收标准核验）。'
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M4.md#a-p14
+  source_hash: cle_v0.7_cle_m4_a_p14_deliverable_definition_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: product_business
+  subcategory: product_design
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

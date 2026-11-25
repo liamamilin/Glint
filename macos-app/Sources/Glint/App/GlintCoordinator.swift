@@ -28,10 +28,13 @@ final class GlintCoordinator: ObservableObject {
     private static let hotkeyDefaultsKey = "glint.hotkeyPreset"
 
     private let brainClient = BrainClient()
+    let seedController: SeedController
     private let contextReader = ContextReader()
     private let textInjector = TextInjector()
     private let inputMonitor = HotkeyAndInputMonitor()
     private let panel = FloatingPanel()
+
+    private var seedChangeCancellable: AnyCancellable?
 
     private var activeContext: CapturedContext?
     private var activeResponse: RouteResponse?
@@ -50,7 +53,12 @@ final class GlintCoordinator: ObservableObject {
         let resolvedPreset = savedRaw.flatMap(GlintHotkeyPreset.init(rawValue:)) ?? .doubleRightOption
         self.hotkeyPreset = resolvedPreset
         self.lastStatusMessage = "按 \(resolvedPreset.shortLabel) 在任意输入框呼出认知卡片"
+        self.seedController = SeedController(brainClient: brainClient)
         inputMonitor.preset = resolvedPreset
+
+        seedChangeCancellable = seedController.objectWillChange.sink { [weak self] _ in
+            self?.objectWillChange.send()
+        }
 
         inputMonitor.onTriggerHotkey = { [weak self] in
             self?.handleTriggerHotkey()
@@ -64,6 +72,7 @@ final class GlintCoordinator: ObservableObject {
     func start() {
         refreshPermissionsAndTaps()
         Task { await refreshBackendHealth() }
+        seedController.start()
 
         permissionTimer?.invalidate()
         permissionTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] _ in
@@ -83,12 +92,14 @@ final class GlintCoordinator: ObservableObject {
                     // Quietly re-warm the local 2B model after macOS sleep so the first trigger stays snappy.
                     await self.brainClient.warmup()
                     await self.refreshBackendHealth()
+                    await self.seedController.refreshPool(preserveCurrentId: true)
                 }
             }
         }
     }
 
     func stop() {
+        seedController.stop()
         permissionTimer?.invalidate()
         permissionTimer = nil
         if let wakeObserver {

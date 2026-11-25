@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import logging
 import sys
+import time
 from contextlib import asynccontextmanager
 from pathlib import Path
 
@@ -19,9 +20,20 @@ from models import (
     HealthResponse,
     RouteRequest,
     RouteResponse,
+    SeedConfigModel,
+    SeedDrawRequest,
+    SeedDrawResponse,
+    SeedFeedbackRequest,
+    SeedFeedbackResponse,
+    SeedItem,
+    SeedPoolMode,
+    SeedPoolResponse,
+    SeedStateEntry,
+    SeedStateResponse,
 )
 from reranker import LocalBgeReranker, RerankerClient
 from router import InferenceClient, OllamaClient, SemanticRouter
+from seed_store import SeedStore
 from skills.cognitive_cards import CognitiveCardsSkill
 from skills.lens_router import LensRouterSkill
 
@@ -42,6 +54,7 @@ def create_app(
     if reranker is None and cfg.enable_reranker and inference_client is None:
         reranker = LocalBgeReranker(model_name=cfg.reranker_model)
     usage_logger = UsageLogger(cfg.db_path)
+    seed_store = SeedStore(cfg.seed_state_path)
 
     use_v2 = cfg.dist_dir is not None and (cfg.dist_dir / "lenses.json").exists()
     if use_v2:
@@ -124,6 +137,138 @@ def create_app(
         if record_fn is not None:
             record_fn(request.app_name, request.selected_id)
         return FeedbackResponse(ok=True, record_id=record_id)
+
+    def _seed_layers() -> tuple[list[dict], list[dict]]:
+        raw_l4 = getattr(cognitive_skill, "raw_lenses", None)
+        raw_l3 = getattr(cognitive_skill, "raw_shadow_lenses", None)
+        if raw_l4 is not None:
+            return raw_l4, (raw_l3 or [])
+        # Legacy fallback for v0.1 CognitiveCardsSkill
+        legacy = [
+            {
+                "id": c.id,
+                "title": c.title,
+                "tagline": c.preview or c.intent,
+                "routing": {"pain_point": c.intent, "primitive": c.primitive or c.dimension},
+                "execution": {"content": c.prompt},
+                "meta": {"category": c.dimension, "tier": "A", "source": c.source or "cards"},
+            }
+            for c in cognitive_skill.cards
+        ]
+        return legacy, []
+
+    @app.get("/seed/pool", response_model=SeedPoolResponse)
+    async def seed_pool(mode: SeedPoolMode = "smart_mix") -> SeedPoolResponse:
+        l4_lenses, l3_lenses = _seed_layers()
+        recall_counts = usage_logger.get_recall_counts(days=30)
+        scored, muted_count, snoozed_count = seed_store.score_candidates(
+            l4_lenses=l4_lenses,
+            l3_lenses=l3_lenses,
+            recall_counts=recall_counts,
+            mode=mode,
+        )
+        return SeedPoolResponse(
+            items=[SeedItem(**s) for s in scored],
+            mode=mode,
+            total_l4=len(l4_lenses),
+            total_l3=len(l3_lenses),
+            muted_count=muted_count,
+            snoozed_count=snoozed_count,
+            release_version=getattr(cognitive_skill, "release_version", None),
+        )
+
+    @app.post("/seed/next", response_model=SeedDrawResponse)
+    async def seed_next(request: SeedDrawRequest) -> SeedDrawResponse:
+        l4_lenses, l3_lenses = _seed_layers()
+        recall_counts = usage_logger.get_recall_counts(days=30)
+        picked, eligible_count, muted_count, snoozed_count = seed_store.draw_next(
+            l4_lenses=l4_lenses,
+            l3_lenses=l3_lenses,
+            recall_counts=recall_counts,
+            mode=request.mode,
+            exclude_ids=set(request.exclude_ids),
+        )
+        return SeedDrawResponse(
+            item=SeedItem(**picked) if picked is not None else None,
+            mode=request.mode,
+            eligible_count=eligible_count,
+            total_l4=len(l4_lenses),
+            total_l3=len(l3_lenses),
+            muted_count=muted_count,
+            snoozed_count=snoozed_count,
+            release_version=getattr(cognitive_skill, "release_version", None),
+        )
+
+    @app.post("/seed/feedback", response_model=SeedFeedbackResponse)
+    async def seed_feedback(request: SeedFeedbackRequest) -> SeedFeedbackResponse:
+        muted_count, snoozed_count = seed_store.apply_action(
+            lens_id=request.id,
+            action=request.action,
+            snooze_days=request.snooze_days,
+            category=request.category,
+        )
+        return SeedFeedbackResponse(ok=True, muted_count=muted_count, snoozed_count=snoozed_count)
+
+    @app.post("/seed/reset", response_model=SeedFeedbackResponse)
+    async def seed_reset() -> SeedFeedbackResponse:
+        muted_count, snoozed_count = seed_store.reset_all()
+        return SeedFeedbackResponse(ok=True, muted_count=muted_count, snoozed_count=snoozed_count)
+
+    @app.get("/seed/state", response_model=SeedStateResponse)
+    async def seed_state() -> SeedStateResponse:
+        l4_lenses, l3_lenses = _seed_layers()
+        index: dict[str, tuple[dict, str]] = {}
+        for lens in l3_lenses:
+            index[str(lens.get("id", ""))] = (lens, "L3")
+        for lens in l4_lenses:
+            index[str(lens.get("id", ""))] = (lens, "L4")
+
+        st = seed_store.get_state_snapshot()
+        now = time.time()
+        hidden_items: list[SeedStateEntry] = []
+        for lid in st["muted_ids"]:
+            lens, layer = index.get(lid, ({}, "L4"))
+            meta = lens.get("meta") or {}
+            hidden_items.append(
+                SeedStateEntry(
+                    id=lid,
+                    title=str(lens.get("title") or lid),
+                    layer=layer,
+                    tier=str(meta.get("tier") or "B"),
+                    category=str(meta.get("category") or "general"),
+                    status="muted",
+                )
+            )
+        for lid, until_ts in st["snoozed_until"].items():
+            lens, layer = index.get(lid, ({}, "L4"))
+            meta = lens.get("meta") or {}
+            rem_days = max(0.1, round((float(until_ts) - now) / 86400.0, 1))
+            hidden_items.append(
+                SeedStateEntry(
+                    id=lid,
+                    title=str(lens.get("title") or lid),
+                    layer=layer,
+                    tier=str(meta.get("tier") or "B"),
+                    category=str(meta.get("category") or "general"),
+                    status="snoozed",
+                    remaining_days=rem_days,
+                )
+            )
+
+        return SeedStateResponse(
+            config=SeedConfigModel(**st["config"]),
+            hidden_items=hidden_items,
+            skip_counts=st["skip_counts"],
+            category_interest=st["category_interest"],
+            recent_shown_count=len(st["recent_shown"]),
+            total_l4=len(l4_lenses),
+            total_l3=len(l3_lenses),
+        )
+
+    @app.put("/seed/config", response_model=SeedConfigModel)
+    async def seed_update_config(request: SeedConfigModel) -> SeedConfigModel:
+        updated = seed_store.update_config(request.model_dump())
+        return SeedConfigModel(**updated)
 
     # Mount unified Glint Management Console at /admin (zero extra process needed!)
     recog_dir = Path(__file__).resolve().parent.parent / "recognition-library"

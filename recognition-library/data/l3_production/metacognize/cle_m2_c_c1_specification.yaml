@@ -1,0 +1,53 @@
+id: cle_m2_c_c1_specification
+title: 模糊说法具体化 (C-C1)
+tagline: 模糊对象 → 只补会影响当前判断的必要具体细节
+routing:
+  primitive: metacognize
+  goals:
+  - digest
+  - optimize
+  clarity_fit:
+  - vague
+  domains:
+  - cognition
+  - general
+  app_affinity: []
+  pain_point: 想法或描述太虚太宽，存在多种可能理解，需要拉高到恰好影响当前判断的分辨率，同时防止编造细节或过早锁死方案
+  trigger_utterances:
+  - 我这个说法太模糊了，帮我看看还有哪几种理解、该补什么细节
+  - 帮我把这段笼统的话具体化，只追问会改变判断的关键点
+  - 用符合和不符合的例子，帮我把这件事说具体
+  - 哪些细节补齐了才能往下判断，先别替我瞎猜
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我把以上偏模糊的说法拉高到恰好支持当前判断的具体程度：
+
+    1. **展示多义分叉**：指出我这段话存在哪 2–3 种不同理解，并说明不同理解会让接下来的判断或处理怎样不同。
+
+    2. **只追问关键细节**：只列出能区分这些理解的必要对象、条件、时间或事件（不要为了表格完整强行追问无关细节）。
+
+    3. **正反例校验**：给出 1 个“符合描述”和 1 个“不符合描述”的具体情境供我核对；当前材料决定不了的部分标为未知或向我发问。
+
+
+    **检查与边界**：绝不擅自替我编造未提供的事实，也不因过早细化而锁死单一解决方案。
+
+    *(向内自问备用句：“我的这个说法还可能怎样理解，哪些细节会改变判断？”)*'
+  variables: []
+  workflow: null
+meta:
+  source: cle-v0.7
+  source_ref: models/M2.md#c-c1
+  source_hash: cle_v0.7_cle_m2_c_c1_specification_v1
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  category: general
+  subcategory: problem_solving
+  collections:
+  - cle_m2_cognition
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

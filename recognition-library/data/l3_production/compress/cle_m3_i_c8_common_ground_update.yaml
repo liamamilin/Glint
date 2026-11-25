@@ -1,0 +1,57 @@
+id: cle_m3_i_c8_common_ground_update
+title: 共同背景更新 (I-C8)
+tagline: 旧共同背景 → 沉淀新共识、保留争议、划掉失效假设并记录版本
+routing:
+  primitive: compress
+  goals:
+  - digest
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - interaction
+  - communication
+  - general
+  app_affinity:
+  - Feishu
+  - Notion
+  - Slack
+  pain_point: 多轮沟通或与 AI 长对话后，新结论、作废的旧前提和未决争议混成一团，下一轮又得从头扯皮或反复踩旧坑
+  trigger_utterances:
+  - 帮我把这轮讨论的新共识、争议和失效旧假设整理成新版共同背景
+  - 多轮对话太长了，帮我更新一下共同背景：哪些已确认、哪些作废、哪些待共享
+  - 把刚才的变更沉淀成一份带版本号的共同背景摘要，方便下一轮直接调用
+  - 梳理一下目前哪些内容大家已共同确认，哪些仍有争议或尚未同步
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请根据以上新材料、讨论进展或决定，帮我将“共同背景记录”更新为一个清晰可调用的新版本，严格分为四栏：
+
+    1. **已共同确认（Confirmed）**：各方已确认的新信息、约定含义、共同框架或决定（注明版本/日期）。
+
+    2. **保留争议（Open Disagreements）**：已定位但尚未消除的分歧及各自立场。
+
+    3. **已失效/撤回（Deprecated）**：本轮被推翻、替代或不再适用的旧假设与旧版本内容（防止后续误用）。
+
+    4. **尚未同步/待确认（Pending）**：哪些变更相关方尚未收到或尚未反馈确认。
+
+
+    **检查与边界**：把文档放进共享空间不自动证明各方已阅读；共同背景只记录“各方约定后续可共同调用的内容”，不等于客观真理库。'
+  variables: []
+  workflow: null
+meta:
+  source: cle-v0.7
+  source_ref: models/M3.md#i-c8
+  source_hash: cle_v0.7_m3_i_c8_v1
+  status: active
+  scope: domain_specific
+  shelf: off_shelf
+  tier: A
+  category: writing_comms
+  subcategory: workplace_comms
+  collections:
+  - cle_m3_interaction
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

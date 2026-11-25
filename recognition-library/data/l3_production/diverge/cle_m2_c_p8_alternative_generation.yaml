@@ -1,0 +1,55 @@
+id: cle_m2_c_p8_alternative_generation
+title: 实质备选生成 (C-P8)
+tagline: 单一或缺少候选 → 换手段、条件或关系生成实质不同的选择
+routing:
+  primitive: diverge
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - conflicted
+  - concrete
+  domains:
+  - cognition
+  - general
+  app_affinity: []
+  pain_point: 陷入单一路径锁定，或者想出来的选项全是换汤不换药的同义改写，需要扩展出真正改变判断的实质备选
+  trigger_utterances:
+  - 除了这个做法，换个手段或条件还有哪些实质不同的选择
+  - 我感觉思路卡死在这一个方案上了，帮我拓展几个真正不同的备选
+  - 帮我生成几个不同机制的替代方案，包括可逆试验或暂缓不做
+  - 别给我同义词凑数，给我 3 条底层路径截然不同的候选
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请保留我当前的真实用途，帮我扩展出具有实质差异的备选方案集合：
+
+    1. **从手段/条件/关系切入变体**：尝试替换、移除现有思路中的某个关键手段、约束条件或关系（或借鉴相近案例），生成 3–5 个底层路径真正不同的候选。
+
+    2. **纳入非行动选项**：视情况将“分阶段可逆试验”“暂缓观察”或“干脆不做”也纳入候选视野。
+
+    3. **标明差异与待核验条件**：对每个候选说明——它与已有方案有什么**会影响判断的实质差异**，以及它依赖哪些尚未核验的前提条件（不强凑数量，若材料不足请说明需补什么信息）。
+
+
+    **检查与边界**：严禁生成换汤不换药的同义选项；本步只负责打开候选空间，不提前宣称某个候选已证实可行。
+
+    *(向内自问备用句：“换一个手段、条件或关系，还可能有什么选择？”)*'
+  variables: []
+  workflow: null
+meta:
+  source: cle-v0.7
+  source_ref: models/M2.md#c-p8
+  source_hash: cle_v0.7_cle_m2_c_p8_alternative_generation_v1
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  category: general
+  subcategory: problem_solving
+  collections:
+  - cle_m2_cognition
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

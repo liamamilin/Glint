@@ -1,5 +1,5 @@
 id: pt_support_macro
-title: 标准回复宏（客服
+title: 标准回复宏（客服）
 tagline: 为重复请求写可复用的标准回复，标出可变字段与升级条件
 routing:
   primitive: translate

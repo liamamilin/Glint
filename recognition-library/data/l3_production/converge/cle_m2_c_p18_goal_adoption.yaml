@@ -1,0 +1,53 @@
+id: cle_m2_c_p18_goal_adoption
+title: 目标采纳确认 (C-P18)
+tagline: 期望状态 → 把“觉得不错”与“真正投入资源追求”严格分开
+routing:
+  primitive: converge
+  goals:
+  - evaluate
+  clarity_fit:
+  - conflicted
+  - vague
+  domains:
+  - cognition
+  - general
+  app_affinity: []
+  pain_point: 看到很多好点子都觉得“挺不错”，容易冲动全接或者嘴上认同却不行动，需要冷静确认是否真愿意投入资源去追求
+  trigger_utterances:
+  - 这个想法听起来不错，帮我冷静检视一下我是不是真该采纳为目标
+  - 帮我把“欣赏想要”和“愿意真投入时间精力去做”分开
+  - 我现在想做的太多了，帮我做一次目标采纳与冲突检查
+  - 评估一下我该采纳、暂缓还是放弃这个期望
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我冷静检视以上期望状态，辅助我做出“采纳 / 暂缓 / 不采纳”的明确判断：
+
+    1. **区分欣赏与投入**：提醒我把“听起来不错、值得探索”与“我准备投入真实时间/精力/资金去追求”分开。
+
+    2. **显化资源与目标冲突**：列出如果要正式采纳它，大概需要投入什么范围的资源，以及它可能与我当前哪些其他目标争抢资源。
+
+    3. **给出三态确认选项**：帮我整理成清晰的确认项——① 正式采纳（写明投入范围与前提）；② 暂缓观察（写明重启条件）；③ 不采纳/放弃，最终由我本人决定。
+
+
+    **检查与边界**：礼貌赞同不等于目标采纳；个人内部采纳也不自动等于对他人的社会承诺。
+
+    *(向内自问备用句：“我愿意投入去追求这个期望吗，范围和条件是什么？”)*'
+  variables: []
+  workflow: null
+meta:
+  source: cle-v0.7
+  source_ref: models/M2.md#c-p18
+  source_hash: cle_v0.7_cle_m2_c_p18_goal_adoption_v1
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  category: general
+  subcategory: decision
+  collections:
+  - cle_m2_cognition
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

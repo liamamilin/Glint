@@ -1,0 +1,50 @@
+id: cle_m2_c_c7_goal_formation
+title: 目标规格形成 (C-C7)
+tagline: 期望变化 → 已采纳且边界、优先级清晰的可规划目标
+routing:
+  primitive: converge
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - cognition
+  - general
+  app_affinity: []
+  pain_point: 确定了想追求的变化方向，但还需要补齐影响后续规划的对象边界、优先级与基本判断要求，同时把未采纳的想法剥离出去
+  trigger_utterances:
+  - 我打算把这件事定为目标，帮我把边界、优先级和基本要求理清楚
+  - 帮我把这个期望变化整理成可以往下做计划的正式目标
+  - 哪些范围和标准会影响后续规划，帮我补齐并把未采纳的想法分出去
+  - 把这段目标想法结构化，只补影响下一步规划的关键边界
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我把以上准备追求的期望变化，整理成边界清晰、可继续推进规划的目标：
+
+    1. **确认采纳核心**：先确认目标核心对象与期望变化，把顺带提到但**尚未采纳**的衍生想法单独放进“暂未采纳池”。
+
+    2. **只补必要规格**：按后续规划的实际需要，补齐——① 范围与边界（包含与排除）；② 与其他事项的优先关系；③ 关键判断要求（不强行凑不需要的量化指标或死线）。
+
+    3. **标明缺口**：指出要进入具体计划前，还缺什么关键信息或确认。
+
+
+    **检查与边界**：时间、数量或精确指标不是目标存在的必要条件，避免过度形式化；若我尚未确认采纳，先停在期望阶段。
+
+    *(向内自问备用句：“我是否采纳这个期望变化为目标，哪些边界还需明确？”)*'
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M2.md#c-c7
+  source_hash: cle_v0.7_cle_m2_c_c7_goal_formation_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: general
+  subcategory: decision
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

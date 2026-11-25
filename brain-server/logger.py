@@ -135,3 +135,24 @@ class UsageLogger:
         with self._connect() as conn:
             row = conn.execute("SELECT COUNT(*) FROM usage_logs").fetchone()
             return int(row[0]) if row else 0
+
+    def get_recall_counts(self, days: int = 30) -> dict[str, int]:
+        """Return active hotkey recall counts per lens_id over the past N days."""
+        cutoff = datetime.fromtimestamp(
+            datetime.now(timezone.utc).timestamp() - max(1, days) * 86400.0,
+            tz=timezone.utc,
+        ).isoformat()
+        with self._connect() as conn:
+            rows = conn.execute(
+                """
+                SELECT selected_id, COUNT(*)
+                FROM usage_logs
+                WHERE selected_id IS NOT NULL
+                  AND selected_id != ''
+                  AND selected_id != '__custom__'
+                  AND timestamp >= ?
+                GROUP BY selected_id
+                """,
+                (cutoff,),
+            ).fetchall()
+        return {str(row[0]): int(row[1]) for row in rows if row[0]}

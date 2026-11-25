@@ -1,0 +1,46 @@
+id: cle_m1_r_p4_abstraction
+title: 抽象提结构 (R-P4)
+tagline: 具体表征 → 提取跨实例可复用的抽象关系或结构
+routing:
+  primitive: diverge
+  goals:
+    - digest
+    - create
+  clarity_fit:
+    - concrete
+  domains:
+    - representation
+    - cognition
+    - general
+  app_affinity: []
+  pain_point: 想从多个具体案例里提炼底层通用结构，避免只是换一个更宽泛的大词，需要找到要素间的对应关系与迁移失配边界
+  trigger_utterances:
+    - 这几个案例背后有什么共同的底层结构
+    - 帮我把这些具体做法抽象成可复用的关系模型
+    - 这些实例里的要素怎么联系，哪些部分起相近作用
+    - 提炼一下它们的共同结构，顺便看看换个新场景哪里会失配
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: |
+    请帮我从以上具体实例中提取跨案例可复用的底层关系或结构：
+    1. **列出要素与联系**：先分别写出各实例包含哪些关键要素，以及谁与谁怎样联系。
+    2. **对照映射与去具体化**：把作用相近的部分并列对照，将具体名称暂替换为一般称呼，提炼出跨实例可复用的候选关系结构（不要只是换一个更宽泛的名字）。
+    3. **新例迁移检验**：把这个结构草稿放到一个新情境中检查——明确指出哪些关系对应成立、哪些地方失配、哪些仍未知。
+
+    **完成检查与边界**：抽象必须同时说明结构对应处与不对应处；抽象程度服务于当前任务，不能把关键细节删光视为成功，关系不清时不强造共同结构。
+    *(向内自问备用句：“我熟悉的这些实例中，要素的联系有哪些可以对应？”)*
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M1.md#r-p4
+  source_hash: cle_v0.7_m1_r_p4_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: general
+  subcategory: problem_solving
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

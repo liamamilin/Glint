@@ -1,17 +1,17 @@
 {
-  "generated_at": "2026-11-25T15:07:02+0800",
-  "total_l2_input": 387,
-  "total_l3_active": 387,
+  "generated_at": "2026-11-25T21:05:10+0800",
+  "total_l2_input": 469,
+  "total_l3_active": 469,
   "total_l3_deprecated": 0,
   "total_quarantined_rules": 0,
   "total_quarantined_dedup": 0,
   "action_counts": {
     "attached_workflow_step": 89,
-    "cleaned_title_punctuation": 1,
+    "cleaned_triggers": 1,
     "normalized_domains": 22,
     "normalized_person_context": 8,
     "stripped_append_input_placeholder": 14,
-    "synced_variables": 94
+    "synced_variables": 96
   },
   "warnings_count": 0,
   "warnings": [],

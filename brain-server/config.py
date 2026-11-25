@@ -49,6 +49,7 @@ class Settings:
     # Legacy v0.1 fallback & usage database
     cards_path: Path = Path(os.getenv("GLINT_CARDS_PATH", str(DATA_DIR / "cards.yaml")))
     db_path: Path = Path(os.getenv("GLINT_DB_PATH", str(DATA_DIR / "usage.db")))
+    seed_state_path: Path = Path(os.getenv("GLINT_SEED_STATE_PATH", str(DATA_DIR / "seed_state.json")))
 
     # Routing constraints
     max_input_chars: int = int(os.getenv("GLINT_MAX_INPUT_CHARS", "1200"))

@@ -1,0 +1,52 @@
+id: cle_m4_a_p13_scope_definition
+title: 任务范围绑定 (A-P13)
+tagline: 任务范围未定 → 明确包含项、排除项、适用环境与变更方式
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - evaluate
+  clarity_fit:
+  - concrete
+  - vague
+  domains:
+  - action
+  - coordination
+  - general
+  app_affinity:
+  - Feishu
+  - Slack
+  - Cursor
+  pain_point: 派出去的任务没写“排除项”，执行方（或 AI）顺手改了一堆不该动的东西，或者中途需求不断蔓延失控
+  trigger_utterances:
+  - 帮我把这项任务的包含项、排除项和适用环境写清楚，防范围蔓延
+  - 给 AI 或协作者派活前，帮我明确哪些纳入、哪些排除、哪些待确认
+  - 用具体例子帮我核对这份任务范围的边界，顺便约定以后怎么改范围
+  - 把这项任务的范围定义写严谨，别让执行方顺手改了不该动的地方
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请围绕以上任务目的，帮我起草一份严谨防蔓延的“任务范围定义”：
+
+    1. **三清单划界**：列出会被一起考虑的具体事项，分为——① **本次纳入项**；② **明确排除项（不做/不动）**；③ **暂待确认项**，并注明适用环境。
+
+    2. **用影响举例校验**：对最容易扯皮的 1–2 个边界事项，说明“做或不做它会怎样影响任务目的”。
+
+    3. **变更与确认约定**：写明由哪个角色确认本版范围，以及后续如需变更范围应按什么方式确认。
+
+
+    **检查与边界**：心里划定的思考边界不等于协作约定，必须由适用角色确认并记录版本后才成为正式任务范围。'
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M4.md#a-p13
+  source_hash: cle_v0.7_cle_m4_a_p13_scope_definition_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: product_business
+  subcategory: product_design
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

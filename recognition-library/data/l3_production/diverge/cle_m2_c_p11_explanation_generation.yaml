@@ -1,0 +1,54 @@
+id: cle_m2_c_p11_explanation_generation
+title: 机制解释生成 (C-P11)
+tagline: 待解释观察 → 提出连接观察与条件的候选过程及可检验预测
+routing:
+  primitive: diverge
+  goals:
+  - debug
+  - digest
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - cognition
+  - general
+  app_affinity: []
+  pain_point: 看到了一个异常现象或结果，需要构造能把观察与条件一步步连起来的候选机制，而不是随便贴个原因标签敷衍了事
+  trigger_utterances:
+  - 看到了这个现象，帮我推演一下背后可能是什么过程导致的
+  - 帮我针对这个异常提出一个候选解释，并说明如果成立还该看到什么
+  - 不要只贴原因标签，帮我把已知事件和这个结果的中间机制连起来
+  - 这个现象怎么解释，如果按这个解释去查应该验证什么
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请针对以上待解释的观察或异常现象，帮我构造清晰的候选机制解释：
+
+    1. **梳理前后已知**：先分开列出观察发生前后已知的事件、输入与条件（严格区分观察事实与推测）。
+
+    2. **推演中间过程**：提出 1 个能把已知条件逐步连接到该观察的候选机制/过程（不要只用“执行不力/运气不好”这类原因标签填空）。
+
+    3. **导出可检验预测**：明确写出“如果这个候选过程成立，我们还应该在什么地方看到什么可观察现象，应该去哪里核查？”，并标出当前链条中还连不上的缺口。
+
+
+    **检查与边界**：流畅合理的解释绝不等于事实证据，时间先后也不足以证明因果。
+
+    *(向内自问备用句：“已知发生了什么，什么可能过程可以解释它？”)*'
+  variables: []
+  workflow: null
+meta:
+  source: cle-v0.7
+  source_ref: models/M2.md#c-p11
+  source_hash: cle_v0.7_cle_m2_c_p11_explanation_generation_v1
+  status: active
+  scope: domain_specific
+  shelf: off_shelf
+  tier: A
+  category: general
+  subcategory: research
+  collections:
+  - cle_m2_cognition
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

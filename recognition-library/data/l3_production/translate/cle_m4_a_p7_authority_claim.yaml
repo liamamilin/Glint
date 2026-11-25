@@ -1,0 +1,52 @@
+id: cle_m4_a_p7_authority_claim
+title: 权限主张记录 (A-P7)
+tagline: 权限主张未明 → 规范记录所主张的决定/控制权范围与声称依据
+routing:
+  primitive: translate
+  goals:
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - action
+  - coordination
+  - general
+  app_affinity:
+  - Feishu
+  - Slack
+  - Cursor
+  pain_point: 协作中有人说“这事我能拍板”或我想声明某项控制权，需要把主张本身与实际有效授权分开记录
+  trigger_utterances:
+  - 帮我把这项权限主张规范记录下来，写明对象、范围、声称依据和时间
+  - 我要声明对这个范围有决策/批准权，帮我写一段严谨的表述并标明待核验来源
+  - 有人自称有权批准这件事，帮我先记录其主张并列出后续需要核验的点
+  - 把“主张有权”和“有效授权”分开整理清楚
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我将以上权限主张规范整理并记录（严格区别于“已生效授权”）：
+
+    1. **记录主张要素**：清晰写明① 主张者是谁；② 主张对什么对象及范围拥有何种决定、批准或控制权；③ 所声称的依据来源；④ 提出时间。
+
+    2. **列出待核验清单**：提醒后续还需单独核验——授权来源是否真实有效、相关方是否认可、对应系统的技术访问权限是否实际具备。
+
+
+    **检查与边界**：自称有权只是“权限主张”，绝不能凭一句声明就直接登记为有效授权。'
+  variables: []
+  workflow: null
+meta:
+  source: cle-v0.7
+  source_ref: models/M4.md#a-p7
+  source_hash: cle_v0.7_cle_m4_a_p7_authority_claim_v1
+  status: active
+  scope: domain_specific
+  shelf: off_shelf
+  tier: A
+  category: writing_comms
+  subcategory: workplace_comms
+  collections:
+  - cle_m4_action
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

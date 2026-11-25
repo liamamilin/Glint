@@ -1,0 +1,48 @@
+id: cle_m2_c_p16_desired_state
+title: 期望状态构造 (C-P16)
+tagline: 模糊偏好方向 → 描绘变化后的具体状态（不锁死实现手段）
+routing:
+  primitive: diverge
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  domains:
+  - cognition
+  - general
+  app_affinity: []
+  pain_point: 只有一个抽象愿望（如“更自由”“更好用”），或者过早被某一种实现手段绑死，需要先清晰描绘“理想终态长什么样”
+  trigger_utterances:
+  - 沿着这个方向，帮我把我希望达到的具体状态描绘清楚
+  - 我只知道想更好/更高效，帮我拆成可感知的期望状态，先别锁死方案
+  - 先把目标状态和实现手段分开，帮我写清变化后会有什么不同
+  - 帮我把这种模糊的愿望转化成清晰的期望状态描述
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我沿着以上偏好方向，把抽象愿望转化为清晰可辨认的“期望状态”：
+
+    1. **描绘变化后的具体表现**：说明如果变化发生，在具体情境中哪些对象、哪些方面会变得和现在不同（可以先写方向与关系，不强行编造量化数字）。
+
+    2. **保留关键约束**：标出在追求这个状态时必须守住的前提或底线，以及还有哪些不确定的地方。
+
+    3. **剥离实现手段**：明确把“我希望达到的状态”与“某一种具体实现手段”分开，避免过早被单一方案锁死。
+
+
+    **检查与边界**：期望状态不要求立刻证明完全可行（可行性与约束后续再核对），也不自动等同于我已经采纳它为目标。
+
+    *(向内自问备用句：“沿着这个方向，我希望它变成什么具体状态？”)*'
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M2.md#c-p16
+  source_hash: cle_v0.7_cle_m2_c_p16_desired_state_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: general
+  subcategory: decision
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

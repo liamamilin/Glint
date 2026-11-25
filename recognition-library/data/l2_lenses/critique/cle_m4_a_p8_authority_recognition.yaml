@@ -1,0 +1,52 @@
+id: cle_m4_a_p8_authority_recognition
+title: 权限来源核验 (A-P8)
+tagline: 权限待定 → 核查授权来源、适用边界、期限、撤销条件与技术访问
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  - debug
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - action
+  - coordination
+  - general
+  app_affinity:
+  - Feishu
+  - Slack
+  - Cursor
+  pain_point: 卡在审批或发布前，搞不清某人到底有没有真实批准权，或者制度上批了但系统里根本没开通技术访问权限
+  trigger_utterances:
+  - 帮我核验这项权限到底来自哪里、边界期限是什么、有没有撤销条件
+  - 帮我检查这个审批或操作权：制度来源、相关方认可和系统技术访问分别齐不齐
+  - 起草一段权限核验确认，防止因为授权来源不清导致流程卡死或越权
+  - 把口头认可、有效授权来源和实际技术访问权限分开核对一遍
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我对以上待定权限做一次严谨的“来源、边界与访问”核验梳理：
+
+    1. **核查授权依据**：追查该权限具体来自哪份制度、约定或有效授权，明确其适用范围、有效期与撤销条件。
+
+    2. **分开核对三件事**：① 制度/规则来源是否有效；② 相关方是否已按规则认可；③ 系统层面的**技术访问凭证**是否实际可用（三者不可互相替代）。
+
+    3. **标明缺口**：若来源或认可不足，明确标为“权限待定”并列出需补办的确认步骤。
+
+
+    **检查与边界**：口头认可不能替代有效授权来源，社会职权也不能自动等同于系统技术访问已开通。'
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M4.md#a-p8
+  source_hash: cle_v0.7_cle_m4_a_p8_authority_recognition_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: engineering
+  subcategory: architecture
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

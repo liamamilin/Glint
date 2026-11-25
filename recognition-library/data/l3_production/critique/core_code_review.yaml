@@ -40,9 +40,9 @@ meta:
   source_ref: cards.yaml#code_review
   source_hash: 9e13a651eaf677331b4588fcde8ec706bdceccb12f1ec17d225488097c3e4e84
   status: active
-  scope: universal
-  shelf: evergreen
-  tier: S
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
   category: engineering
   subcategory: code_review
   collections: []

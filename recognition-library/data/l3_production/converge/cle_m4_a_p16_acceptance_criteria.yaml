@@ -1,0 +1,55 @@
+id: cle_m4_a_p16_acceptance_criteria
+title: 验收标准绑定 (A-P16)
+tagline: 完成判断未约定 → 绑定验收规则、检验材料、核验方式与验收权
+routing:
+  primitive: converge
+  goals:
+  - evaluate
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - action
+  - coordination
+  - general
+  app_affinity:
+  - Feishu
+  - Slack
+  - Cursor
+  pain_point: 做完了才扯皮“这算不算完成”，因为事前没把验收规则、拿什么材料验、谁有权验收写进任务约定
+  trigger_utterances:
+  - 帮我为这项任务起草可落地的验收标准、检验材料和核验方式
+  - 哪些结果算通过、哪些算失败、哪些算无法验证，帮我写进验收规则
+  - 为了避免交付后扯皮，帮我把验收标准和有权验收人明确绑定到任务里
+  - 用具体正反案例试判一下这份验收标准够不够清晰
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我为以上任务起草可落地、防扯皮的“验收标准绑定方案”：
+
+    1. **正反例提炼规则**：若有现成规则直接复用；若没有，对比任务中可接受与不可接受的具体结果，提出清晰的验收规则草稿。
+
+    2. **三态可区分试判**：用具体例子检查这套规则能否清晰区分——① **满足通过**；② **未通过（失败）**；③ **缺材料无法验证**。
+
+    3. **绑定材料、方式与验收权**：明确写清凭什么检验材料、采用什么核验方式（自动化测试/人工核对等），以及按既有安排由谁负责验收确认。
+
+
+    **检查与边界**：个人心里的好坏标准不自动成为任务约定，必须绑定到具体任务版本并由相关方确认采用。'
+  variables: []
+  workflow: null
+meta:
+  source: cle-v0.7
+  source_ref: models/M4.md#a-p16
+  source_hash: cle_v0.7_cle_m4_a_p16_acceptance_criteria_v1
+  status: active
+  scope: domain_specific
+  shelf: off_shelf
+  tier: A
+  category: product_business
+  subcategory: product_design
+  collections:
+  - cle_m4_action
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

@@ -1,0 +1,54 @@
+id: cle_m2_c_p13_boundary
+title: 对象边界划定 (C-P13)
+tagline: 对象范围不明 → 明确主体、时段、条件与排除项的清晰边界
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - evaluate
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - cognition
+  - general
+  app_affinity: []
+  pain_point: 讨论的对象范围漫无边际、容易越聊越散，需要划清这次纳入什么、排除什么，并用边界例验证
+  trigger_utterances:
+  - 这件事范围太宽了，帮我划一下这次讨论的边界
+  - 明确一下这次包含哪些情况、排除哪些情况
+  - 给我正反边界例子，帮我核对这个范围划得准不准
+  - 限定一下讨论范围，顺便说明什么情况下要重开边界
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请围绕我当前的用途，帮我为以上对象划定清晰的工作边界：
+
+    1. **划定范围要素**：明确写出本次处理涉及的主体、具体情境、时间段、纳入项、暂缓项与排除项，并简要说明理由。
+
+    2. **边界例核对**：给出至少 1 个明确属于“范围内”、1 个属于“范围外”以及 1 个“边界未明需确认”的具体例子。
+
+    3. **重开边界条件**：写明如果出现什么新信息或条件变化，就需要重新打开这次范围约定。
+
+
+    **检查与边界**：明确提醒这次排除只是为了当前工作聚焦的约定，不等于现实世界中这些因素不存在。
+
+    *(向内自问备用句：“这次我要处理哪些情况，哪些不在范围内？”)*'
+  variables: []
+  workflow: null
+meta:
+  source: cle-v0.7
+  source_ref: models/M2.md#c-p13
+  source_hash: cle_v0.7_cle_m2_c_p13_boundary_v1
+  status: active
+  scope: domain_specific
+  shelf: off_shelf
+  tier: A
+  category: general
+  subcategory: problem_solving
+  collections:
+  - cle_m2_cognition
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

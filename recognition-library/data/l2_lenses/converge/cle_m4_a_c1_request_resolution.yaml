@@ -1,0 +1,52 @@
+id: cle_m4_a_c1_request_resolution
+title: 请求清晰响应 (A-C1)
+tagline: 收到有效请求 → 明确回复接受、拒绝、协商或延后及待确认条件
+routing:
+  primitive: converge
+  goals:
+  - evaluate
+  - optimize
+  clarity_fit:
+  - conflicted
+  - concrete
+  domains:
+  - action
+  - coordination
+  - general
+  app_affinity:
+  - Feishu
+  - Slack
+  - Cursor
+  pain_point: 收到别人派活或提请求时，含糊回复“好的我看下”“尽量吧”，导致对方以为已经接单、后续扯皮
+  trigger_utterances:
+  - 收到这个请求，帮我起草一个清晰的响应：接受、拒绝、协商还是延后
+  - 帮我回复这个需求，把我的理解、响应状态、附加条件和下一步责任写清楚
+  - 我想委婉但明确地协商或拒绝这个请求，帮我写一段不留歧义的回复
+  - 整理一下我该如何回应这个请求，标出哪些条件待确认
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我针对以上收到的请求，起草一段清晰、不留歧义的响应回复：
+
+    1. **先核对理解**：用一句话复述我理解对方希望我完成的具体行为，防错位。
+
+    2. **明确四态响应**：清晰表态我是——**接受 / 拒绝 / 提议协商调整 / 延后处理**，并写明对应前提条件或待确认部分。
+
+    3. **写清下一跳责任**：说明接下来由谁在什么条件/时间点继续响应（协商或延后时必须注明尚未关闭）。
+
+
+    **检查与边界**：绝不把礼貌回应写成默认接单；未知或未回应状态如实保留，不代对方填写接受。'
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M4.md#a-c1
+  source_hash: cle_v0.7_cle_m4_a_c1_request_resolution_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: writing_comms
+  subcategory: workplace_comms
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

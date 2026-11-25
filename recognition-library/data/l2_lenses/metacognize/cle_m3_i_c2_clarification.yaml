@@ -1,0 +1,48 @@
+id: cle_m3_i_c2_clarification
+title: 歧义局部澄清 (I-C2)
+tagline: 多种未决解释 → 圈出歧义词、用具体情境缩小所指范围
+routing:
+  primitive: metacognize
+  goals:
+    - digest
+    - optimize
+  clarity_fit:
+    - vague
+  domains:
+    - interaction
+    - communication
+    - general
+  app_affinity:
+    - Feishu
+    - Slack
+    - Mail
+  pain_point: 对方的一句话或一段需求有好几种解读，直接猜着做容易返工，需要低成本精准发问把歧义点缩小到具体情境
+  trigger_utterances:
+    - 对方这句话有好几种理解，帮我圈出歧义点并写一句最精准的澄清问句
+    - 帮我看看这段需求里哪些词指代不清，该怎么用具体例子跟对方确认
+    - 我没太听懂对方具体指哪部分，帮我整理候选解释去跟对方核对
+    - 帮我把这段含糊的沟通拆出歧义点，先缩小所指范围再往下做
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: |
+    请帮我对以上存在歧义的表达做一次精准的局部澄清：
+    1. **圈出歧义点**：直接标出原话中指代不清或存在多义的关键字词。
+    2. **用具体情境提出候选解释**：围绕这些歧义点列出 2–3 种可能的具体理解，并说明它们各自对应什么情境。
+    3. **生成低成本澄清问句**：写出 1–2 句可直接发给对方（或向我追问）的澄清问题——请说话者举一个具体适用的情况，并用另一个边界情况核对双方是否指向同一内容。
+
+    **检查与边界**：澄清只负责局部缩小当前歧义，不假定双方已在所有方面达成一致；材料不足时保留未澄清，不擅自替对方拍板原意。
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M3.md#i-c2
+  source_hash: cle_v0.7_m3_i_c2_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: writing_comms
+  subcategory: workplace_comms
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

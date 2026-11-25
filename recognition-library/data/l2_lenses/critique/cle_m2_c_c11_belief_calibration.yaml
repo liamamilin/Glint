@@ -1,0 +1,50 @@
+id: cle_m2_c_c11_belief_calibration
+title: 证据信念校准 (C-C11)
+tagline: 新旧材料未匹配 → 对照新证据精确调整判断范围与信心
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  - optimize
+  clarity_fit:
+  - conflicted
+  - concrete
+  domains:
+  - cognition
+  - general
+  app_affinity: []
+  pain_point: 拿到了新材料或反例，不知道该坚持原判断、局部修正适用范围，还是彻底撤回，容易固执己见或矫枉过正
+  trigger_utterances:
+  - 有了这份新材料，帮我看看原判断的哪一步变了、该怎么校准结论
+  - 对照新证据和反例，我原来的判断是该保持、缩小范围还是撤回
+  - 帮我做一次信念校准，明确新信息怎么改变了原推理和把握度
+  - 检视一下原主张、前提和新材料，看结论和信心该怎么调整
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我对照新材料与原判断，做一次克制、精准的判断校准：
+
+    1. **精准定位冲击点**：指出新材料或反例具体对应原主张、原前提或原依据中的哪一步，是否真正改变了该步推理。
+
+    2. **决定保持或修订**：分别评估应如何调整——① **结论内容**（保持 / 局部修改 / 撤回）；② **适用范围**（扩大 / 收窄）；③ **信心程度**，并逐条给出材料与推理依据。
+
+    3. **保留残余未知**：写明校准后仍有哪部分不能判断，以及后续还需要什么证据。
+
+
+    **检查与边界**：反思校准完全可以得出“保持原判”的结果；修改必须指明新信息如何改变原推理，且单次文字校准不等于统计学上的大样本校准。
+
+    *(向内自问备用句：“新材料改变了原判断的哪一步，我的范围和信心应怎样调整？”)*'
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M2.md#c-c11
+  source_hash: cle_v0.7_cle_m2_c_c11_belief_calibration_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: general
+  subcategory: critical_thinking
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

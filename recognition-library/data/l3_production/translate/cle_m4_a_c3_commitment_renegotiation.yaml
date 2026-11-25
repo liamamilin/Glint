@@ -1,0 +1,55 @@
+id: cle_m4_a_c3_commitment_renegotiation
+title: 承诺重新协商 (A-C3)
+tagline: 既有承诺需调整 → 解释变化、提议修订、明确新旧义务交替点
+routing:
+  primitive: translate
+  goals:
+  - optimize
+  clarity_fit:
+  - conflicted
+  - concrete
+  domains:
+  - action
+  - coordination
+  - general
+  app_affinity:
+  - Feishu
+  - Slack
+  - Cursor
+  pain_point: 原定承诺因为突发变化履约困难，硬扛会崩、直接改期又显得失信，需要专业地发起重新协商并写清新旧义务交替
+  trigger_utterances:
+  - 情况有变原承诺按期做不完了，帮我起草一份专业的承诺重谈消息
+  - 帮我解释变化原因、提出修订方案，并写清新旧承诺怎么交替、还有什么剩余义务
+  - 我要和对方重新协商交付条件，帮我把受影响方和需要确认的点理清楚
+  - 起草一份不损信任的变更协商提案，注明未获认可前仍按原约定处理
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我针对以上变化，起草一份透明、负责任的“承诺重新协商提案”：
+
+    1. **客观说明变化**：定位原承诺版本，简明交代发生了什么实质变化（不推诿、不情绪化）。
+
+    2. **提出具体修订方案**：清晰列出建议修改的新期限、新范围或新交付条件，以及所有受影响的相关方。
+
+    3. **写明新旧义务交替**：明确提议获认可后的正式生效时间点、旧承诺何时被替代、以及哪些**剩余义务**依然保留；同时写明在提案未获认可前，旧义务仍按原规则处理。
+
+
+    **检查与边界**：单方发出改期通知不等于修订生效，必须取得受影响方按规则确认。'
+  variables: []
+  workflow: null
+meta:
+  source: cle-v0.7
+  source_ref: models/M4.md#a-c3
+  source_hash: cle_v0.7_cle_m4_a_c3_commitment_renegotiation_v1
+  status: active
+  scope: domain_specific
+  shelf: off_shelf
+  tier: A
+  category: writing_comms
+  subcategory: workplace_comms
+  collections:
+  - cle_m4_action
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

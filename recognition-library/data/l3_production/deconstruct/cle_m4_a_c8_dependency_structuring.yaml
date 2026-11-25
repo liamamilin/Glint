@@ -1,0 +1,55 @@
+id: cle_m4_a_c8_dependency_structuring
+title: 协作依赖追踪 (A-C8)
+tagline: 行动依赖不明 → 追查每步输入提供者、交接位置、继续条件与阻塞处理
+routing:
+  primitive: deconstruct
+  goals:
+  - debug
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - action
+  - coordination
+  - general
+  app_affinity:
+  - Feishu
+  - Slack
+  - Cursor
+  pain_point: 跨人或跨模块协作经常卡死，因为没理清“谁在等谁交什么版本、交到哪里、断供了谁来处理”
+  trigger_utterances:
+  - 帮我把这套跨方协作的输入输出、前置依赖和交接位置全理清楚
+  - 从这个关键步骤倒查：它依赖谁提供什么、哪个版本、阻塞了找谁
+  - 排查一下这几个任务之间有没有隐藏的相互等待或循环依赖
+  - 整理一份可追踪的协作依赖表，把“来源不明”的缺口标出来
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我将以上多方协作中的前置依赖与交接关系梳理成可追踪结构：
+
+    1. **沿输入倒查提供者**：从关键执行步骤出发，追问它开始前必须取得什么输入、由谁提供、哪个版本、交接到什么位置。
+
+    2. **排查相互等待与缺口**：连出上下游等待链条，检查是否存在**循环依赖**，把来源不明的输入诚实标为“依赖缺口”。
+
+    3. **明确继续条件与阻塞响应**：为每个关键交接写明“满足什么条件可继续”，以及一旦断供或交接失败由谁通知和处理。
+
+
+    **检查与边界**：把依赖写进表格不代表依赖输入此刻已可用；务必挑 1 个阻塞情境试走，确认能找到具体处理人。'
+  variables: []
+  workflow: null
+meta:
+  source: cle-v0.7
+  source_ref: models/M4.md#a-c8
+  source_hash: cle_v0.7_cle_m4_a_c8_dependency_structuring_v1
+  status: active
+  scope: domain_specific
+  shelf: off_shelf
+  tier: A
+  category: engineering
+  subcategory: architecture
+  collections:
+  - cle_m4_action
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

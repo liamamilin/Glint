@@ -1,0 +1,49 @@
+id: cle_m2_c_p5_difference_detection
+title: 精准差异识别 (C-P5)
+tagline: 差异未明确 → 同维度并列核对相同、不同、口径差与未知
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  - debug
+  clarity_fit:
+  - concrete
+  domains:
+  - cognition
+  - general
+  app_affinity: []
+  pain_point: 感觉两个版本/案例/数据不一样，但说不清差异到底来自对象本身、外部条件还是统计口径，容易把未知当成差异
+  trigger_utterances:
+  - 把这两份材料在同一维度下并列，找出到底哪里不同
+  - 这两个结果不一样，帮我分清是对象本身差异、条件不同还是口径问题
+  - 帮我逐项比对这两个方案或记录的相同、不同和未知
+  - 先客观列出差异，别急着下好坏结论
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我将以上对象在同一比较维度下并列，精准识别真实差异：
+
+    1. **同维并列记录**：列出双方在同一方面已有的取值、事件或关系记录及其来源。
+
+    2. **三栏分清异同**：严格分开列出——① 相同之处；② 明确不同之处；③ 信息缺失/未知之处（绝不把未知当成差异）。
+
+    3. **差异溯源**：逐条辨别每个差异究竟来自“对象本身”“所处条件不同”还是“记录/统计口径不同”，并说明还缺什么材料。
+
+
+    **检查与边界**：保持客观中立，不把“差异”直接等同于“缺陷”“原因”或“必须改变的方向”。
+
+    *(向内自问备用句：“把同一方面的记录并列后，哪些相同、不同或未知？”)*'
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M2.md#c-p5
+  source_hash: cle_v0.7_cle_m2_c_p5_difference_detection_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: general
+  subcategory: research
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

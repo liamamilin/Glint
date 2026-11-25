@@ -1,0 +1,54 @@
+id: cle_m4_a_p10_task_acceptance
+title: 任务接受确认 (A-P10)
+tagline: 已定义/指派任务 → 明确记录执行方接受的版本、条件、期限与待确认项
+routing:
+  primitive: converge
+  goals:
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - action
+  - coordination
+  - general
+  app_affinity:
+  - Feishu
+  - Slack
+  - Cursor
+  pain_point: 接任务或派任务时没有明示版本和前提条件，事后发现双方接受的根本不是同一版需求或期限
+  trigger_utterances:
+  - 帮我起草一段清晰的“任务接受确认”，写明我接哪个版本、条件和期限
+  - 我要确认接下这个任务，同时把前提依赖和待确认项说在前面
+  - 帮我核对一下对方是不是真的明确接受了这个版本的任务
+  - 写一份不留后患的接单确认消息，明确接受范围和暂不包含的内容
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我起草一段清晰、可追溯的“任务接受确认”消息（或核对清单）：
+
+    1. **锁定版本与范围**：明确写出我接受的是哪个任务及具体版本号、具体执行范围。
+
+    2. **写明前提条件与期限**：列出执行所依赖的前提条件、资源范围与约定期限。
+
+    3. **标出待确认项**：把目前仍未拍板或需要对方配合补齐的条件单独写明。
+
+
+    **检查与边界**：任务接受必须由执行方本人实际响应（不代他人填接受），拒绝、反提案、无响应与接受严格分开；且任务接受与正式承诺义务分别判断。'
+  variables: []
+  workflow: null
+meta:
+  source: cle-v0.7
+  source_ref: models/M4.md#a-p10
+  source_hash: cle_v0.7_cle_m4_a_p10_task_acceptance_v1
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  category: writing_comms
+  subcategory: workplace_comms
+  collections:
+  - cle_m4_action
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

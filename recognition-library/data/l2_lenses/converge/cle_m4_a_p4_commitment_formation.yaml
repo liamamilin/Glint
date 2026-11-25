@@ -1,0 +1,50 @@
+id: cle_m4_a_p4_commitment_formation
+title: 正式承诺建立 (A-P4)
+tagline: 未建立承诺 → 明确承诺内容、受益方、期限、例外与修改解除规则
+routing:
+  primitive: converge
+  goals:
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - action
+  - coordination
+  - general
+  app_affinity:
+  - Feishu
+  - Slack
+  - Cursor
+  pain_point: 口头说“我尽量”“我会努力一下”不算承诺，或者稀里糊涂给出无边界承诺导致事后背大锅
+  trigger_utterances:
+  - 我要向对方给出一个严肃清晰的承诺，帮我把条件、期限、例外和解除规则写完整
+  - 帮我把“尽量搞定”改写成边界清晰、可履行的正式承诺表述
+  - 检查一下我准备作出的这项承诺有没有漏掉前提条件和异常处理程序
+  - 起草一份对合作方或客户的交付承诺说明，避免过度承诺埋雷
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我将以上承诺意向整理成一份边界清晰、可履行、防过度承诺的正式表达：
+
+    1. **核心承诺要素**：明确写出承诺主体、相对方（受益方）、具体承诺事项、前提条件与明确期限。
+
+    2. **例外与变更条款**：写明遇到哪些外部例外按什么程序处理，以及如需修改或解除承诺应依据什么约定/规则。
+
+    3. **成立核对**：提醒按当前合作规则，这项承诺还需要什么确认动作才正式成立。
+
+
+    **检查与边界**：内部决心或“努力一下”不等于正式承诺；同时警惕过度承诺消耗关键资源。'
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M4.md#a-p4
+  source_hash: cle_v0.7_cle_m4_a_p4_commitment_formation_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: writing_comms
+  subcategory: workplace_comms
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

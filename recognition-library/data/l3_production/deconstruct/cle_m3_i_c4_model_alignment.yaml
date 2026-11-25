@@ -1,0 +1,56 @@
+id: cle_m3_i_c4_model_alignment
+title: 系统模型对齐 (I-C4)
+tagline: 不同运转理解 → 对齐同一事件的要素、机制与变化预测
+routing:
+  primitive: deconstruct
+  goals:
+  - digest
+  - optimize
+  clarity_fit:
+  - conflicted
+  - concrete
+  domains:
+  - interaction
+  - architecture
+  - general
+  app_affinity:
+  - Feishu
+  - Cursor
+  - Notion
+  pain_point: 术语说得一样，但双方对“系统或流程实际上怎么运转、改了 A 会怎么影响 B”的心理模型完全不同，导致方案永远谈不拢
+  trigger_utterances:
+  - 我们对这套流程或系统怎么运转的理解不一致，帮我对齐双方的系统模型
+  - 把双方对同一事件的要素、先后变化和预测并列出来，找出模型冲突点
+  - 帮我整理一份任务范围内的共同结构草稿，看看面对同一变化各自预期什么
+  - 术语对齐了但方案还是谈不拢，帮我排查是不是底层因果模型没对齐
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我把双方对以上系统或事件运转方式的不同理解，整理成可核验的“共同模型对齐草稿”：
+
+    1. **还原各自模型**：针对同一具体事件，分别列出双方认为的关键要素、先后变化过程以及“为什么一项会影响另一项”（严格区分已有记录与候选推测）。
+
+    2. **试写共同结构与冲突点**：提取任务范围内可以共同采用的结构部分，同时把双方模型冲突或未知的联系单独标出来（无法一致时保留“部分对齐”，不强行抹平）。
+
+    3. **用同一新变化做预测测试**：提出 1 个假设的新变化，分别写出双方模型下的预期结果，供各方对照检验并确认是否共同采用。
+
+
+    **检查与边界**：不需要双方全部背景知识完全一致，只需对齐本次任务范围；且提醒“双方共同采用的模型依然可能客观上出错”，仍需现实材料检验。'
+  variables: []
+  workflow: null
+meta:
+  source: cle-v0.7
+  source_ref: models/M3.md#i-c4
+  source_hash: cle_v0.7_m3_i_c4_v1
+  status: active
+  scope: domain_specific
+  shelf: off_shelf
+  tier: A
+  category: general
+  subcategory: problem_solving
+  collections:
+  - cle_m3_interaction
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

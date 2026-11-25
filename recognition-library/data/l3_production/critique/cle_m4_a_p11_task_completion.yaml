@@ -1,0 +1,54 @@
+id: cle_m4_a_p11_task_completion
+title: 任务验收关闭 (A-P11)
+tagline: 任务已提交 → 用真实交付材料对照验收标准判定通过/失败/无法核验
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  clarity_fit:
+  - concrete
+  domains:
+  - action
+  - coordination
+  - general
+  app_affinity:
+  - Feishu
+  - Slack
+  - Cursor
+  pain_point: 容易把“已经提交了”“AI/同事自报完成了”当成真正完成，漏掉逐条核验交付证据与正式关闭流程
+  trigger_utterances:
+  - 帮我把这份交付结果逐项对照验收标准，判定通过、未通过还是无法核验
+  - 别只听自报完成，帮我核验真实交付材料是否满足所有关闭条件
+  - 整理一份严谨的任务验收核对报告，标出缺证据不能关闭的地方
+  - 按预定标准检查这项产出到底达不达标，给出能否关闭的依据
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我对以上已提交的交付结果做一次严格的“任务完成与关闭核验”：
+
+    1. **逐条对照证据**：将真实交付材料（注明版本）逐项对照已约定的验收标准，每条明确判定为——① **通过（附证据）**；② **未通过（附偏差）**；③ **无法核验（标明缺失材料）**。
+
+    2. **核查关闭条件**：说明是否满足全部关闭条件；若存在缺失材料或未通过项，明确建议**暂不关闭任务**并列出需补项。
+
+    3. **明确关闭角色**：若已全部满足，写明应由哪位有权角色或约定系统正式记录关闭。
+
+
+    **检查与边界**：严格区分“已提交 / 自报完成”与“已按标准验收通过”；缺材料时绝不放行关闭，且关闭单项任务不自动解除其他尚未履行的承诺。'
+  variables: []
+  workflow: null
+meta:
+  source: cle-v0.7
+  source_ref: models/M4.md#a-p11
+  source_hash: cle_v0.7_cle_m4_a_p11_task_completion_v1
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  category: engineering
+  subcategory: code_review
+  collections:
+  - cle_m4_action
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

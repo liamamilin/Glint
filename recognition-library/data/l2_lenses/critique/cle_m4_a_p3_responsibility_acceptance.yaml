@@ -1,0 +1,52 @@
+id: cle_m4_a_p3_responsibility_acceptance
+title: 责任认可核验 (A-P3)
+tagline: 责任安排待定 → 核对责任来源、取得所需认可并标出权限缺口
+routing:
+  primitive: critique
+  goals:
+  - evaluate
+  - optimize
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - action
+  - coordination
+  - general
+  app_affinity:
+  - Feishu
+  - Slack
+  - Cursor
+  pain_point: 口头指派或自称负责却没查清安排有没有效认可，或者光扛了责任却没拿到对应权限，干到一半卡死
+  trigger_utterances:
+  - 帮我核对这项责任分工的来源和认可，看看有没有权限缺口
+  - 起草一份责任确认提案，明确谁对什么负责、按什么规则认可、缺什么权限
+  - 我被指派负责这件事，帮我检查职责边界、配套权限缺口和升级渠道
+  - 核查这份责任安排是否已获有效认可，缺什么确认先标出来
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我梳理并核验以上责任安排的有效性与配套条件：
+
+    1. **定位责任与来源**：明确谁对什么具体事项和范围负责，以及这项安排依据什么有效来源（既有指派、约定或规则）。
+
+    2. **检查所需认可**：指出该责任安排需要取得哪些主体的正式认可；若来源或认可不足，标为“待确认”。
+
+    3. **显化权限缺口与升级渠道**：核查承担该责任是否缺少必要的决策权或技术权限，并写明遇阻时的升级渠道。
+
+
+    **检查与边界**：承担责任不自动等于拥有决策权；未取得有效认可前，不把口头讨论登记为已生效的责任安排。'
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M4.md#a-p3
+  source_hash: cle_v0.7_cle_m4_a_p3_responsibility_acceptance_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: writing_comms
+  subcategory: workplace_comms
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

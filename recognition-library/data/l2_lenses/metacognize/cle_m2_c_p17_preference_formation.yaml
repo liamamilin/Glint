@@ -1,0 +1,50 @@
+id: cle_m2_c_p17_preference_formation
+title: 偏好倾向澄清 (C-P17)
+tagline: 候选方向 → 放进具体情境看代价，帮我确认趋近与回避
+routing:
+  primitive: metacognize
+  goals:
+  - evaluate
+  - create
+  clarity_fit:
+  - vague
+  - conflicted
+  domains:
+  - cognition
+  - general
+  app_affinity: []
+  pain_point: 面对几个方向不知道自己到底更喜欢哪个、更怕承受什么，需要把抽象选项放进具体生活/工作场景去感受趋近与回避
+  trigger_utterances:
+  - 这几个方向我分不清自己到底想要哪个，帮我具象化看看代价
+  - 帮我理清在这件事上我真正愿意趋近什么、最想回避什么
+  - 感觉几个选择都有吸引人的地方也有坑，帮我梳理一下我的偏好倾向
+  - 别替我做决定，帮我把各方向在具体情境里意味着什么展开来看
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请不要替我决定立场，帮我把以上候选方向放进具体情境中，辅助我澄清自己的真实偏好：
+
+    1. **情境化后果与代价**：在当前条件下，分别把每个方向翻译成“如果选了它，日常具体情境里会得到什么、必须承受什么代价、哪些后果仍未知”。
+
+    2. **补充遗漏方向**：提醒有没有重要但尚未列出的备选方向。
+
+    3. **提出引导自检**：列出 2–3 个帮我判断“最想趋近什么 / 最不愿继续承受什么 / 哪里存在内在冲突或暂无法比较”的具体问题，由我本人确认。
+
+
+    **检查与边界**：严禁替我预填未知后果或把你的价值倾向强加给我；若我目前仍无法形成偏好，允许保留未知或暂停。
+
+    *(向内自问备用句：“这些方向意味着什么，我愿意趋近什么、回避什么？”)*'
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M2.md#c-p17
+  source_hash: cle_v0.7_cle_m2_c_p17_preference_formation_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: general
+  subcategory: decision
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

@@ -1,0 +1,48 @@
+id: cle_m2_c_p9_search_bounding
+title: 搜索范围限定 (C-P9)
+tagline: 搜索范围不明 → 明确本轮纳入、暂缓与排除的搜索边界
+routing:
+  primitive: converge
+  goals:
+  - digest
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - cognition
+  - general
+  app_affinity: []
+  pain_point: 查资料或探索方案时漫无目的、信息黑洞越挖越深，需要限定本轮搜索范围并定好何时扩大范围的触发条件
+  trigger_utterances:
+  - 调研范围太大了，帮我限定一下这轮只搜什么、先不搜什么
+  - 资料越查越散，帮我划定搜索边界和扩大范围的条件
+  - 为了这个目的，哪些信源和方向先纳入搜索，哪些暂缓排除
+  - 控制一下搜索成本，帮我收紧这轮调研的边界
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请围绕我当前的搜索/调研目的，帮我限定本轮搜索范围以控制探索成本：
+
+    1. **三层搜索边界**：明确列出——① 本轮优先进入搜索的范围与对象；② 暂时搁置的次要方向；③ 本轮明确排除的范围，并分别说明理由。
+
+    2. **重开与扩大条件**：明确写明如果搜出什么新线索、或发现哪些关键缺口，就需要打破当前边界、扩大或切换搜索范围。
+
+
+    **检查与边界**：本轮排除只是为了控制搜索成本的工作约定，绝不能伪装成“已经证实这些范围外不存在原因或答案”。
+
+    *(向内自问备用句：“这次我搜索什么范围，出现什么情况需要扩大范围？”)*'
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M2.md#c-p9
+  source_hash: cle_v0.7_cle_m2_c_p9_search_bounding_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: general
+  subcategory: research
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

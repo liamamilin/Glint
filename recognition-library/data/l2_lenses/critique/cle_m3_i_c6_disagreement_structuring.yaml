@@ -1,0 +1,48 @@
+id: cle_m3_i_c6_disagreement_structuring
+title: 分歧结构定位 (I-C6)
+tagline: 笼统不一致 → 还原原话与依据，精准拆到事实/词义/模型/价值/选择
+routing:
+  primitive: critique
+  goals:
+    - evaluate
+    - optimize
+  clarity_fit:
+    - conflicted
+  domains:
+    - interaction
+    - communication
+    - general
+  app_affinity:
+    - Feishu
+    - Slack
+    - Mail
+  pain_point: 双方争论不休、互相觉得“你没听懂我”，其实没分清冲突到底卡在事实、用词、因果解释、评价标准还是行动选择上
+  trigger_utterances:
+    - 我们争了半天没结果，帮我把双方的分歧精准定位到底卡在哪一层
+    - 把双方各自的原话和依据摆出来，区分是事实、词义、模型、价值还是选择分歧
+    - 帮我客观复述对方立场并标出我们其实已经达成一致的部分
+    - 别和稀泥，帮我把这场笼统争论结构化成清晰的分歧清单
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: |
+    请帮我把以上笼统的争论或不一致，客观拆解成清晰可定位的分歧清单：
+    1. **还原原话与共识底座**：把双方放在同一具体情境下，各自忠实还原实际主张与依据（便于双方核对“复述是否准确”），并先标出双方其实**已经共享一致**的部分。
+    2. **精准分层定位冲突**：逐项定位分歧究竟发生在哪一层——① **事实记录不同**；② **关键用词含义不同**；③ **因果/机制解释不同**；④ **评价标准/价值权重不同**；⑤ **最终行动选择不同**（无法归类的先保留原话，不强贴标签）。
+    3. **标出残余未定位点**：指出还有哪些冲突点需要补充材料或进一步澄清。
+
+    **检查与边界**：准确理解完全可以伴随持续分歧；本步重在让双方能准确复述彼此立场，绝不和稀泥，也不把强势一方的说法当作共同判断。
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M3.md#i-c6
+  source_hash: cle_v0.7_m3_i_c6_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: writing_comms
+  subcategory: workplace_comms
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

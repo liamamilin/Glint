@@ -89,3 +89,92 @@ class HealthResponse(BaseModel):
     ollama_reachable: bool
     router_mode: str = "v2_dual_path"
     release_version: str | None = None
+
+
+SeedPoolMode = Literal["smart_mix", "l4_all", "l3_discovery", "tier_s"]
+
+
+class SeedItem(BaseModel):
+    id: str
+    title: str
+    tagline: str = ""
+    pain_point: str = ""
+    prompt: str = ""
+    primitive: str = "metacognize"
+    category: str = "general"
+    tier: str = "B"
+    layer: Literal["L4", "L3"] = "L4"
+    source: str = ""
+    trigger_utterances: list[str] = Field(default_factory=list)
+    weight: float = 1.0
+    probability_pct: float = 0.0
+    recall_count_30d: int = 0
+    reason_tag: str = ""
+
+
+class SeedPoolResponse(BaseModel):
+    items: list[SeedItem]
+    mode: SeedPoolMode = "smart_mix"
+    total_l4: int
+    total_l3: int = 0
+    muted_count: int
+    snoozed_count: int
+    release_version: str | None = None
+
+
+class SeedDrawRequest(BaseModel):
+    mode: SeedPoolMode = "smart_mix"
+    exclude_ids: list[str] = Field(default_factory=list)
+
+
+class SeedDrawResponse(BaseModel):
+    item: SeedItem | None = None
+    mode: SeedPoolMode = "smart_mix"
+    eligible_count: int = 0
+    total_l4: int = 0
+    total_l3: int = 0
+    muted_count: int = 0
+    snoozed_count: int = 0
+    release_version: str | None = None
+
+
+class SeedFeedbackRequest(BaseModel):
+    id: str = Field(..., min_length=1)
+    action: Literal["mute", "snooze", "unmute", "skip", "expand", "copy"]
+    snooze_days: int = Field(default=7, ge=1, le=365)
+    category: str | None = None
+
+
+class SeedFeedbackResponse(BaseModel):
+    ok: bool = True
+    muted_count: int
+    snoozed_count: int
+
+
+class SeedConfigModel(BaseModel):
+    tier_s_weight: float = Field(default=4.0, ge=0.1, le=20.0)
+    tier_a_weight: float = Field(default=2.0, ge=0.1, le=20.0)
+    tier_b_weight: float = Field(default=1.0, ge=0.1, le=20.0)
+    l3_smart_mix_share: float = Field(default=0.15, ge=0.0, le=0.8)
+    recall_decay_rate: float = Field(default=0.35, ge=0.0, le=2.0)
+    skip_decay_factor: float = Field(default=0.72, ge=0.2, le=1.0)
+
+
+class SeedStateEntry(BaseModel):
+    id: str
+    title: str
+    layer: str = "L4"
+    tier: str = "B"
+    category: str = "general"
+    status: Literal["muted", "snoozed"]
+    remaining_days: float | None = None
+
+
+class SeedStateResponse(BaseModel):
+    config: SeedConfigModel
+    hidden_items: list[SeedStateEntry] = Field(default_factory=list)
+    skip_counts: dict[str, int] = Field(default_factory=dict)
+    category_interest: dict[str, int] = Field(default_factory=dict)
+    recent_shown_count: int = 0
+    total_l4: int = 0
+    total_l3: int = 0

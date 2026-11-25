@@ -1,0 +1,56 @@
+id: cle_m4_a_c2_shared_responsibility
+title: 共同责任划分 (A-C2)
+tagline: 多人责任混乱 → 从关键结果倒推各自贡献、交接边界与无人区
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - create
+  clarity_fit:
+  - conflicted
+  - concrete
+  domains:
+  - action
+  - coordination
+  - general
+  app_affinity:
+  - Feishu
+  - Slack
+  - Cursor
+  pain_point: 多人合作喊着“大家共同负责”，结果变成了“谁都可以不负责”，关键交接处出现三不管无人区
+  trigger_utterances:
+  - 多人一起做这件事容易互相推诿，帮我把各自负责和共同负责的边界划清
+  - 从最终结果倒推需要哪些贡献，找出目前无人负责的三不管地带
+  - 帮我设计一份多人协作的责任分工提案，写明交接缺口和冲突找谁处理
+  - 把“大家共同负责”落成清晰的分工表和确认问句
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请从以上关键结果出发，帮我设计一份杜绝“三不管无人区”的共同责任分工提案：
+
+    1. **从结果倒推所需贡献**：列出达成关键结果必需的各项贡献，逐项标出目前谁能承担、哪些属于**能力未知或无人负责的空白区**。
+
+    2. **划清分别与共同边界**：明确写出各主体分别负责什么、哪些接口需要共同负责，以及交接缺口或冲突由谁按什么方式处理。
+
+    3. **交由各方确认**：对能力或意愿未知的部分不代填承担，附上一句请各相关方按规则确认的简短问句。
+
+
+    **检查与边界**：共同责任绝不是“谁都可以不负责”；每个关键结果都必须落到清晰的负责范围与冲突处理路径上。'
+  variables: []
+  workflow: null
+meta:
+  source: cle-v0.7
+  source_ref: models/M4.md#a-c2
+  source_hash: cle_v0.7_cle_m4_a_c2_shared_responsibility_v1
+  status: active
+  scope: domain_specific
+  shelf: off_shelf
+  tier: A
+  category: product_business
+  subcategory: product_design
+  collections:
+  - cle_m4_action
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

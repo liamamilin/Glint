@@ -1,0 +1,54 @@
+id: cle_m4_a_p12_goal_definition
+title: 任务目的绑定 (A-P12)
+tagline: 规格目的未绑定 → 明确任务服务的业务结果并交有权者确认
+routing:
+  primitive: converge
+  goals:
+  - optimize
+  - evaluate
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - action
+  - coordination
+  - general
+  app_affinity:
+  - Feishu
+  - Slack
+  - Cursor
+  pain_point: 任务写了一堆动作却没写清“究竟服务于什么结果”，执行方做完了却偏离真正目的，或把个人想法误当团队已采纳目的
+  trigger_utterances:
+  - 帮我明确这项任务究竟服务于什么结果，起草一份目的绑定确认
+  - 这项任务光写了动作没写目的，帮我提炼它要服务的结果并请相关方确认
+  - 把我的个人目标和这份正式任务规格的目的分开写清楚
+  - 帮我核对这个任务版本的目的定义，看交付是否真正服务该结果
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我为以上任务明确并起草“任务目的定义”，以便正式绑定到任务规格：
+
+    1. **写清服务结果**：将任务目的聚焦到“这项交付最终要服务于什么具体结果”（区分“动作本身”与“服务结果”）。
+
+    2. **区分提案与已绑定**：明确标出这目前是“目的提案”，需要哪位有权确定者按既有安排确认采用或提出修改。
+
+
+    **检查与边界**：写进任务规格的“任务目的”与个人内心的“目标采纳”是两件事；未经有权方确认前保留为提案，不自动生效。'
+  variables: []
+  workflow: null
+meta:
+  source: cle-v0.7
+  source_ref: models/M4.md#a-p12
+  source_hash: cle_v0.7_cle_m4_a_p12_goal_definition_v1
+  status: active
+  scope: domain_specific
+  shelf: off_shelf
+  tier: A
+  category: product_business
+  subcategory: product_design
+  collections:
+  - cle_m4_action
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

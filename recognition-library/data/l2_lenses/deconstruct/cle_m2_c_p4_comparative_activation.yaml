@@ -1,0 +1,50 @@
+id: cle_m2_c_p4_comparative_activation
+title: 建立可比对照 (C-P4)
+tagline: 孤立或分离对象 → 放进同一情境与可比维度并列对照
+routing:
+  primitive: deconstruct
+  goals:
+  - evaluate
+  - digest
+  clarity_fit:
+  - concrete
+  - conflicted
+  domains:
+  - cognition
+  - general
+  app_affinity: []
+  pain_point: 孤立看一个对象看不出好坏，或把不可比的两个对象硬凑在一起比，需要先确认共同情境、比较维度与可比条件
+  trigger_utterances:
+  - 我想把这两个东西放一起比，先帮我看看在什么维度下可比
+  - 这两个对象直接比好像口径不对，帮我对齐一下比较情境
+  - 为了这个目的，应该在哪些共同方面把它们并列对照
+  - 先别下结论，帮我搭一个公平可比的对照框架
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我把以上对象放进同一判断情境下建立公平的并列对照：
+
+    1. **明确比较维度与共同情境**：结合当前用途，列出双方可以并列对照的核心维度与共同适用情境。
+
+    2. **核查可比条件与口径**：逐项检查双方在时间范围、统计口径、前提条件上是否真正可比；标出哪些条件不一致、需要先补足或注明。
+
+    3. **待补信息**：列出建立对照前还缺哪些基础记录。
+
+
+    **检查与边界**：本步只负责搭好公平可比的对照台面，不提前夹带好坏评价或代替我形成偏好。
+
+    *(向内自问备用句：“我要比较的两个对象，在什么情境和方面可以对照？”)*'
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M2.md#c-p4
+  source_hash: cle_v0.7_cle_m2_c_p4_comparative_activation_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: general
+  subcategory: decision
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

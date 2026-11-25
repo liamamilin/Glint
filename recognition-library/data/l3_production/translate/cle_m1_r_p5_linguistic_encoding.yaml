@@ -1,0 +1,52 @@
+id: cle_m1_r_p5_linguistic_encoding
+title: 保真语言编码 (R-P5)
+tagline: 待表达内容 → 保留关键条件、来源与未知的清晰表达
+routing:
+  primitive: translate
+  goals:
+  - optimize
+  - create
+  clarity_fit:
+  - concrete
+  domains:
+  - representation
+  - writing
+  - general
+  app_affinity: []
+  pain_point: 脑中或草稿里有想法与关系，想写成面向特定对象和用途的清晰文字，同时防止润色时无声遗漏条件、偷换量词或用确定语气掩盖未知
+  trigger_utterances:
+  - 帮我把这段内容写清楚，同时核对别丢掉原意和边界条件
+  - 把这些零散想法组织成清晰表达，保留哪些是推测哪些是未知
+  - 帮我改写这段话让它更清楚，但不能偷换因果和确定性
+  - 检查我这段表达有没有把不确定的猜测写成了肯定事实
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我把以上内容组织成清晰准确的语言表达，并严格核对原意保真：
+
+    1. **保真组织表达**：将以上待表达内容写成适合目标对象与用途的清晰文字，完整保留其中的关键关系、适用条件、信息来源与未知部分（把“观察到 / 推测 / 仍缺”明确区分）。
+
+    2. **原意回查清单**：对照原始材料逐项核对——① 哪些核心含义与条件已保留；② 有没有在改写中无声遗漏前提、改变量词/因果/责任，或把未知写成确定语气；③ 如有遗漏或多余增添，请直接修正。
+
+
+    **完成检查与边界**：表达准确由主体对照原意确认；表达写清楚了，不等于事实必然正确，也不自动证明接收者已经理解（理解须另作共享核验）。
+
+    *(向内自问备用句：“我具体想表达什么，写出来后有没有遗漏或增添含义？”)*'
+  variables: []
+  workflow: null
+meta:
+  source: cle-v0.7
+  source_ref: models/M1.md#r-p5
+  source_hash: cle_v0.7_m1_r_p5_v1
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  category: general
+  subcategory: problem_solving
+  collections:
+  - cle_m1_representation
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

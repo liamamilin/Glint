@@ -1,0 +1,56 @@
+id: cle_m4_a_c6_executable_spec
+title: 可执行规格形成 (A-C6)
+tagline: 模糊任务 → 试走执行方下一步，补齐目的/范围/交付/约束/验收与阻塞升级
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - action
+  - coordination
+  - general
+  app_affinity:
+  - Feishu
+  - Slack
+  - Cursor
+  pain_point: 给 AI Agent 或协作者派活时规格太虚，导致反复返工；需要用“试走第一步”的方法精准补齐最小可执行规格
+  trigger_utterances:
+  - 我要把这个任务派给 AI 或协作者，帮我整理成完整的可执行规格
+  - 试走一下执行方下一步：做什么、要什么输入、交什么、怎么验收、卡住找谁
+  - 帮我检查这段任务描述还缺哪些关键规格，只补答不上来的空缺
+  - 把这段模糊需求打磨成足以直接执行和验收的委派契约
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请用“试走执行方下一步”的方式，帮我把以上任务描述打磨成一份干净、足以直接执行与验收的**可执行规格**：
+
+    1. **五问试走定位缺口**：顺着执行方视角逐项试答——① 第一步具体做什么？② 必须依赖什么输入/材料？③ 最终产出什么交付物与位置？④ 接收方按什么规则验收？⑤ 缺输入或阻塞时找谁/如何升级？
+
+    2. **只补必要规格**：在答不上来的地方补齐**目的、范围（含排除项）、约束（允许/禁止）、交付、验收与异常处理**（不要过度规定无关的技术细节，也不要把未确认空缺伪装成已确定）。
+
+    3. **四项就绪自检**：分开标注——① 规格是否已足以指导下一步；② 执行方是否已明确接受；③ 账号/资料/资源此刻是否实际可用；④ 哪些开始条件还需现实核验。
+
+
+    **检查与边界**：规格写全不代表资源已就绪或可行性已证实；用一个正常场景和一个阻塞场景试走，确认都能找到下一步。'
+  variables: []
+  workflow: null
+meta:
+  source: cle-v0.7
+  source_ref: models/M4.md#a-c6
+  source_hash: cle_v0.7_cle_m4_a_c6_executable_spec_v1
+  status: active
+  scope: domain_specific
+  shelf: off_shelf
+  tier: A
+  category: engineering
+  subcategory: ai_workflow
+  collections:
+  - cle_m4_action
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

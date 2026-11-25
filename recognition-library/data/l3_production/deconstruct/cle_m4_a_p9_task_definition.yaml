@@ -1,0 +1,55 @@
+id: cle_m4_a_p9_task_definition
+title: 任务对象定义 (A-P9)
+tagline: 任务对象不明 → 建立可共同指涉、带版本号的任务记录与缺项表
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - action
+  - coordination
+  - general
+  app_affinity:
+  - Feishu
+  - Slack
+  - Cursor
+  pain_point: 原始需求散落在聊天记录里，大家各自脑补的是不同任务，连“我们在做哪一版任务”都指认不清
+  trigger_utterances:
+  - 把这段原始需求整理成一个可共同指涉的任务定义和版本记录
+  - 帮我先明确这项需求到底想做什么，给个清晰暂称并标出还缺哪些字段
+  - 聊天记录太散了，帮我建一个清晰的任务对象，方便各方核对指向同一件事
+  - 提取这份需求的任务定义，区分已明确的描述和尚缺的执行/期限字段
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我把以上原始需求或请求整理成一个可共同指涉、可版本化的“任务对象定义”：
+
+    1. **日常描述与暂称**：用直白语言写清这项任务希望做什么或取得什么变化，给出一个便于引用的暂称与初始版本号（正式名称未知不阻断记录）。
+
+    2. **指向目标对象**：明确该任务直接作用的对象是谁/什么。
+
+    3. **诚实列出缺项**：把尚未明确的目的、执行者、期限、交付或验收字段统一列进“待补规格缺项”，不要脑补填满。
+
+
+    **检查与边界**：建立清晰的任务记录，不自动代表任务已被指派、接受或已具备执行条件。'
+  variables: []
+  workflow: null
+meta:
+  source: cle-v0.7
+  source_ref: models/M4.md#a-p9
+  source_hash: cle_v0.7_cle_m4_a_p9_task_definition_v1
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  category: product_business
+  subcategory: product_design
+  collections:
+  - cle_m4_action
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

@@ -1,0 +1,54 @@
+id: cle_m2_c_p1_focus
+title: 聚焦目标对象 (C-P1)
+tagline: 分散的任务关注 → 锁定单一目标对象与当前要回答的问题
+routing:
+  primitive: metacognize
+  goals:
+  - digest
+  - optimize
+  clarity_fit:
+  - vague
+  - conflicted
+  domains:
+  - cognition
+  - general
+  app_affinity: []
+  pain_point: 同时想处理太多东西、注意力分散，需要把认知资源先收敛到一个可辨认对象和一项具体问题上
+  trigger_utterances:
+  - 我现在思绪太散了，帮我聚焦到最核心的一个对象上
+  - 东西太多不知从哪下手，先帮我锁定当前要回答的一项问题
+  - 感觉聊偏了，帮我拉回到当前真正要处理的对象
+  - 把这段发散的内容收一收，明确我现在先处理哪一件事
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我把以上分散的关注点收敛到当前最值得优先处理的单一对象上：
+
+    1. **锁定对象与唯一问题**：从以上内容中帮我辨认出最核心的 1 个当前处理对象，以及围绕它此刻最需要回答的 1 项具体问题（若有多个候选，简短列出供我指定，不要替我强行拍板）。
+
+    2. **指明相关材料**：列出回答这一项问题直接需要的已有材料，把暂时无关的枝节先放到一旁。
+
+    3. **防偏离锚点**：给出一句清晰的回归锚点——如果接下来讨论偏离了，应该拉回到哪项具体问题。
+
+
+    **检查与边界**：只写“我要聚焦”不算完成，必须能围绕锁定的对象推进具体判断；同时提醒我聚焦可能暂时略过哪些其他关键对象。
+
+    *(向内自问备用句：“我现在围绕哪个对象，先处理哪一项问题？”)*'
+  variables: []
+  workflow: null
+meta:
+  source: cle-v0.7
+  source_ref: models/M2.md#c-p1
+  source_hash: cle_v0.7_cle_m2_c_p1_focus_v1
+  status: active
+  scope: domain_specific
+  shelf: off_shelf
+  tier: A
+  category: general
+  subcategory: problem_solving
+  collections:
+  - cle_m2_cognition
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

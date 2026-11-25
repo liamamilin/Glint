@@ -101,6 +101,7 @@
       <button class="tab-btn" data-tab="shelf">L3 库存 &amp; L4 货架</button>
       <button class="tab-btn" data-tab="forge">L0–L4 供给工坊</button>
       <button class="tab-btn" data-tab="evolution">进化飞轮 (M3)</button>
+      <button class="tab-btn" data-tab="seed">认知种子</button>
       <button class="tab-btn" data-tab="sandbox">沙盒 &amp; 黄金评测</button>
       <button class="tab-btn" data-tab="policy">策略与日志</button>
     </div>
@@ -303,6 +304,51 @@
         </div>
       </div>
     </section>
+
+    <!-- 7. Cognitive Seed Control Plane -->
+    <section id="tab-seed" class="panel">
+      <div class="kpi-grid" id="seed-kpi-grid"></div>
+      <div class="two-col">
+        <div class="card">
+          <h3>概率权重与探索预算（实时生效，无需重新构建）</h3>
+          <div class="form-grid">
+            <div class="form-field"><label>L4 Tier S 基准权重</label><input type="number" step="0.5" min="0.1" max="20" id="sc-tier-s" /></div>
+            <div class="form-field"><label>L4 Tier A 基准权重</label><input type="number" step="0.5" min="0.1" max="20" id="sc-tier-a" /></div>
+            <div class="form-field"><label>L4 Tier B 基准权重</label><input type="number" step="0.5" min="0.1" max="20" id="sc-tier-b" /></div>
+            <div class="form-field"><label>智能混播 L3 探索占比 (0~0.8)</label><input type="number" step="0.05" min="0" max="0.8" id="sc-l3-share" /></div>
+            <div class="form-field"><label>主动召回衰减系数 (越大越反回音室)</label><input type="number" step="0.05" min="0" max="2" id="sc-recall-decay" /></div>
+            <div class="form-field"><label>手动快跳降权倍率 (0.2~1.0)</label><input type="number" step="0.05" min="0.2" max="1" id="sc-skip-decay" /></div>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:12px;align-items:center">
+            <button class="btn primary" id="btn-seed-cfg-save">保存概率配置</button>
+            <button class="btn" id="btn-seed-draw-test">模拟抽一张</button>
+            <span id="seed-draw-preview" style="font-size:12px;color:var(--muted)"></span>
+          </div>
+        </div>
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <h3 style="margin:0">已屏蔽 / 暂缓轮播清单（不影响快捷键召回）</h3>
+            <button class="btn sm danger" id="btn-seed-reset-all">全部恢复</button>
+          </div>
+          <div id="seed-hidden-box" style="max-height:240px;overflow-y:auto"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:10px;flex-wrap:wrap">
+          <h3 style="margin:0">实时概率分布预览（Top 30）</h3>
+          <div style="display:flex;gap:8px;align-items:center">
+            <select id="seed-mode-select">
+              <option value="smart_mix">全域智能混播 (L4 + L3探索)</option>
+              <option value="l4_all">仅 L4 在架 (S/A/B加权)</option>
+              <option value="l3_discovery">仅 L3 休眠探索</option>
+              <option value="tier_s">仅 S 级核心心法</option>
+            </select>
+            <button class="btn sm" id="btn-seed-refresh">刷新分布</button>
+          </div>
+        </div>
+        <div id="seed-prob-table" style="max-height:420px;overflow-y:auto"></div>
+      </div>
+    </section>
   </main>
 
   <!-- Lens Detail & Overlay Modal -->
@@ -380,6 +426,7 @@
         btn.classList.add('active');
         document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
         if (btn.dataset.tab === 'evolution') loadEvolution();
+        if (btn.dataset.tab === 'seed') loadSeedPanel();
         if (btn.dataset.tab === 'forge') { loadJobs(); loadGaps(); loadQuarantine(); }
         if (btn.dataset.tab === 'policy') { loadConfig(); loadRecentLogs(); }
       });
@@ -867,6 +914,97 @@
         toast('已启动摩擦转 L2 草稿后台任务（可在供给工坊查看进度）');
       } catch (e) { toast('启动失败: ' + e.message); }
     }
+
+    // Cognitive Seed Control Plane
+    async function seedApi(path, opts = {}) {
+      const res = await fetch('../seed/' + path.replace(/^\//, ''), { headers: { 'Content-Type': 'application/json' }, ...opts });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.detail || JSON.stringify(data));
+      return data;
+    }
+    async function loadSeedPanel() {
+      try {
+        const mode = document.getElementById('seed-mode-select').value || 'smart_mix';
+        const [st, pool] = await Promise.all([seedApi('state'), seedApi('pool?mode=' + encodeURIComponent(mode))]);
+        const c = st.config || {};
+        document.getElementById('sc-tier-s').value = c.tier_s_weight ?? 4.0;
+        document.getElementById('sc-tier-a').value = c.tier_a_weight ?? 2.0;
+        document.getElementById('sc-tier-b').value = c.tier_b_weight ?? 1.0;
+        document.getElementById('sc-l3-share').value = c.l3_smart_mix_share ?? 0.15;
+        document.getElementById('sc-recall-decay').value = c.recall_decay_rate ?? 0.35;
+        document.getElementById('sc-skip-decay').value = c.skip_decay_factor ?? 0.72;
+
+        const l4Share = pool.items.filter(x => x.layer === 'L4').reduce((a, b) => a + (b.probability_pct || 0), 0);
+        const l3Share = pool.items.filter(x => x.layer === 'L3').reduce((a, b) => a + (b.probability_pct || 0), 0);
+        document.getElementById('seed-kpi-grid').innerHTML = `
+          <div class="kpi"><div class="label">当前池候选种子</div><div class="val" style="color:var(--green)">${esc(pool.items.length)}</div><div class="sub">L4: ${esc(st.total_l4)} · L3 休眠: ${esc(st.total_l3)}</div></div>
+          <div class="kpi"><div class="label">当前池层级概率占比</div><div class="val" style="font-size:18px;margin-top:6px">L4 ${l4Share.toFixed(1)}% / L3 ${l3Share.toFixed(1)}%</div><div class="sub">模式: ${esc(mode)}</div></div>
+          <div class="kpi"><div class="label">已屏蔽 / 暂缓</div><div class="val" style="color:var(--amber)">${esc(st.hidden_items.length)}</div><div class="sub">已降权跳过卡: ${esc(Object.keys(st.skip_counts || {}).length)}</div></div>
+          <div class="kpi"><div class="label">近期冷却窗口</div><div class="val">${esc(st.recent_shown_count)} / 25</div><div class="sub">避免短时间重复曝光</div></div>
+        `;
+
+        const hBox = document.getElementById('seed-hidden-box');
+        hBox.innerHTML = st.hidden_items.length
+          ? `<table><tr><th>标题</th><th>层级</th><th>状态</th><th>操作</th></tr>` + st.hidden_items.map(item => `
+              <tr>
+                <td>${esc(item.title)}</td>
+                <td><span class="pill">${esc(item.layer)} · ${esc(item.tier)}</span></td>
+                <td>${item.status === 'muted' ? '<span class="pill bad">不再显示</span>' : `<span class="pill ov">暂缓 ${esc(item.remaining_days)} 天</span>`}</td>
+                <td><button class="btn sm" onclick="unmuteSeed('${esc(item.id)}')">恢复</button></td>
+              </tr>`).join('') + `</table>`
+          : '<div style="font-size:12px;color:var(--muted)">暂无被屏蔽或暂缓的认知种子</div>';
+
+        const sorted = [...pool.items].sort((a, b) => (b.probability_pct || 0) - (a.probability_pct || 0)).slice(0, 30);
+        document.getElementById('seed-prob-table').innerHTML = sorted.length
+          ? `<table><tr><th>标题</th><th>层级/梯队</th><th>30天主动召回</th><th>实时权重</th><th>概率</th><th>入选说明</th></tr>` + sorted.map(x => `
+              <tr>
+                <td><b>${esc(x.title)}</b></td>
+                <td><span class="pill ${x.layer === 'L3' ? 'tier-A' : (x.tier === 'S' ? 'tier-S' : '')}">${esc(x.layer)} · ${esc(x.tier)}</span></td>
+                <td>${esc(x.recall_count_30d || 0)} 次</td>
+                <td>${esc(x.weight)}</td>
+                <td><b>${Number(x.probability_pct || 0).toFixed(2)}%</b></td>
+                <td style="color:var(--muted)">${esc(x.reason_tag || '')}</td>
+              </tr>`).join('') + `</table>`
+          : '<div style="font-size:12px;color:var(--muted)">当前池无可用种子</div>';
+      } catch (e) { toast('加载认知种子面板失败: ' + e.message); }
+    }
+    window.unmuteSeed = async (id) => {
+      try { await seedApi('feedback', { method: 'POST', body: JSON.stringify({ id, action: 'unmute' }) }); toast('已恢复到轮播池'); loadSeedPanel(); }
+      catch (e) { toast(e.message); }
+    };
+    document.getElementById('btn-seed-cfg-save').onclick = async () => {
+      try {
+        await seedApi('config', {
+          method: 'PUT',
+          body: JSON.stringify({
+            tier_s_weight: parseFloat(document.getElementById('sc-tier-s').value),
+            tier_a_weight: parseFloat(document.getElementById('sc-tier-a').value),
+            tier_b_weight: parseFloat(document.getElementById('sc-tier-b').value),
+            l3_smart_mix_share: parseFloat(document.getElementById('sc-l3-share').value),
+            recall_decay_rate: parseFloat(document.getElementById('sc-recall-decay').value),
+            skip_decay_factor: parseFloat(document.getElementById('sc-skip-decay').value),
+          }),
+        });
+        toast('认知种子概率配置已保存并立即生效');
+        loadSeedPanel();
+      } catch (e) { toast('保存失败: ' + e.message); }
+    };
+    document.getElementById('btn-seed-draw-test').onclick = async () => {
+      try {
+        const mode = document.getElementById('seed-mode-select').value || 'smart_mix';
+        const d = await seedApi('next', { method: 'POST', body: JSON.stringify({ mode, exclude_ids: [] }) });
+        document.getElementById('seed-draw-preview').textContent = d.item
+          ? `抽中：[${d.item.layer}·${d.item.tier}] ${d.item.title} (${Number(d.item.probability_pct||0).toFixed(2)}%)`
+          : '无可用种子';
+        loadSeedPanel();
+      } catch (e) { toast(e.message); }
+    };
+    document.getElementById('btn-seed-reset-all').onclick = async () => {
+      try { await seedApi('reset', { method: 'POST' }); toast('已恢复所有屏蔽/暂缓种子'); loadSeedPanel(); }
+      catch (e) { toast(e.message); }
+    };
+    document.getElementById('seed-mode-select').onchange = loadSeedPanel;
+    document.getElementById('btn-seed-refresh').onclick = loadSeedPanel;
 
     // Sandbox & Eval
     document.getElementById('btn-search').onclick = async () => {

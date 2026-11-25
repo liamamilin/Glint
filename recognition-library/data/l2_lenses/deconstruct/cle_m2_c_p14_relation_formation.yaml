@@ -1,0 +1,50 @@
+id: cle_m2_c_p14_relation_formation
+title: 要素关系梳理 (C-P14)
+tagline: 孤立要素 → 梳清组成、依赖、时序与候选因果及各自依据
+routing:
+  primitive: deconstruct
+  goals:
+  - digest
+  - debug
+  clarity_fit:
+  - concrete
+  - vague
+  domains:
+  - cognition
+  - general
+  app_affinity: []
+  pain_point: 手头有一堆零散要素和事件，看不清谁包含谁、谁依赖谁、谁先谁后，容易把先后发生或共同出现草率当成因果
+  trigger_utterances:
+  - 把这些零散要素之间的关系理清楚，谁依赖谁、谁先谁后
+  - 帮我看看材料里这些要素怎么联系，哪些有依据、哪些只是推测
+  - 画一下这几个模块或事件的依赖与组成关系结构
+  - 理清这些因素的关联，别把先后顺序直接当成因果
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请从以上具体记录出发，帮我把这些孤立要素组织成清晰的关系结构：
+
+    1. **逐对识别关系类型**：检查要素之间是否存在——① 包含/组成关系；② 输入/前置依赖关系；③ 时间先后顺序；④ 对照/冲突关系。
+
+    2. **标明依据与候选**：每条关系必须注明“材料直接支持到哪里”；对于尚待核验的依赖或候选因果，明确标为“候选/推测”，并列出仍未知的关联。
+
+    3. **防伪因果提醒**：对仅表现为“先后发生”或“同时出现”的项，明确提示不能直接等同于因果。
+
+
+    **检查与边界**：把关系写出来只是结构表征，不自动证明该关系在现实中真实成立。
+
+    *(向内自问备用句：“这些要素怎样联系，材料支持什么，什么还只是推测？”)*'
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M2.md#c-p14
+  source_hash: cle_v0.7_cle_m2_c_p14_relation_formation_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: general
+  subcategory: problem_solving
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

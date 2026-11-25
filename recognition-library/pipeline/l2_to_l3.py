@@ -361,7 +361,10 @@ def clean_single_lens(
 
     # Pass 4b: Assign 2-level Taxonomy (category/subcategory), Tier (S/A/B), Collections & Declarative L4 Shelf
     tax = taxonomy or {}
-    is_user_authored = lens.meta.source == "manual-custom" or lens.meta.source.startswith("forge-")
+    is_user_authored = (
+        lens.meta.source in {"manual-custom", "cle-v0.7"}
+        or lens.meta.source.startswith("forge-")
+    )
     valid_cats = tax.get("categories") or {}
     if is_user_authored and lens.meta.category in valid_cats:
         subcats = (valid_cats[lens.meta.category] or {}).get("subcategories") or {}
@@ -389,7 +392,7 @@ def clean_single_lens(
     lens.meta.collections = sorted(set(member_cols))
 
     # Tier assignment: S (Evergreen) > A (High-Signal) > B (Long-Tail)
-    if lens.id in evergreen_ids or lens.meta.source == "glint-core" or (is_user_authored and lens.meta.tier == "S"):
+    if lens.id in evergreen_ids or (is_user_authored and lens.meta.tier == "S"):
         lens.meta.tier = "S"
         lens.meta.scope = "universal"
     elif is_user_authored and lens.meta.tier in {"A", "B"}:

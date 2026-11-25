@@ -90,7 +90,10 @@ def _compact_preview(text: str, max_chars: int = 44) -> str:
 def _rerank_doc_text(lens: dict[str, Any]) -> str:
     """Compact semantic profile fed to Cross-Encoder bge-reranker-v2-m3."""
     routing = lens.get("routing", {})
-    triggers = " / ".join((routing.get("trigger_utterances") or [])[:3])
+    raw_trigs = [str(t) for t in (routing.get("trigger_utterances") or []) if str(t).strip()]
+    # Keep up to 6 triggers; if >6, keep first 2 + latest 4 so user-calibrated overrides always enter Stage 2
+    selected_trigs = raw_trigs if len(raw_trigs) <= 6 else list(dict.fromkeys(raw_trigs[:2] + raw_trigs[-4:]))
+    triggers = " / ".join(selected_trigs)
     parts = [
         f"{lens.get('title', '')}：{lens.get('tagline', '')}",
         f"痛点：{routing.get('pain_point', '')}",
@@ -222,6 +225,16 @@ class LensRouterSkill(BaseSkill):
     def cards(self) -> list[CardItem]:
         self.reload_if_changed()
         return [self._to_card_item(lens) for lens in self._lenses]
+
+    @property
+    def raw_lenses(self) -> list[dict[str, Any]]:
+        self.reload_if_changed()
+        return list(self._lenses)
+
+    @property
+    def raw_shadow_lenses(self) -> list[dict[str, Any]]:
+        self.reload_if_changed()
+        return list(self._shadow_lenses)
 
     def reload_if_changed(self) -> bool:
         """Hot-reload L4 dist/current (including symlink flips) and routing_policy.yaml."""

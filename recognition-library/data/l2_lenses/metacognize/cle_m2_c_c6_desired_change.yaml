@@ -1,0 +1,50 @@
+id: cle_m2_c_c6_desired_change
+title: 期望变化形成 (C-C6)
+tagline: 现状/不满/模糊方向 → 明确从哪到哪的变化向量
+routing:
+  primitive: metacognize
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - vague
+  - conflicted
+  domains:
+  - cognition
+  - general
+  app_affinity: []
+  pain_point: 只知道对现状不满、不想继续承受某些东西，或方向还很模糊，需要梳理清楚“从什么现状变成什么期望状态”
+  trigger_utterances:
+  - 我现在很不满意但说不清要改成什么样，帮我理清期望变化
+  - 从现状出发，帮我明确我希望哪一方面从什么状态变成什么状态
+  - 我只知道不想要什么，帮我反推出几个可以趋近的替代方向
+  - 梳理一下现状和期望之间的具体变化方向
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我梳理清楚以上情境中的“期望变化（从哪里 → 到哪里）”：
+
+    1. **锚定当前状态**：先基于已有材料写清现在的真实情况（现状不清楚的地方标为未知，不编造）。
+
+    2. **定位变化方向**：按我当前提供的信息选择最直接的切入方式——若已有参照，说明希望接近它的哪一方面；若只知道“不愿继续承受什么”，从回避对象反推出 2–3 个可趋近的替代状态供我比较。
+
+    3. **写清变化向量**：总结出“在【某方面】，希望从【当前状态】转向【期望状态/方向】”，交由我本人确认是否真想趋近。
+
+
+    **检查与边界**：允许暂时只明确方向而不锁死终点细节；始终由我确认方向，不替我凭空制造需求。
+
+    *(向内自问备用句：“现在是什么情况，我希望哪一方面变成怎样？”)*'
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M2.md#c-c6
+  source_hash: cle_v0.7_cle_m2_c_c6_desired_change_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: general
+  subcategory: problem_solving
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

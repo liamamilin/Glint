@@ -18,6 +18,7 @@ dist/
 brain-server/data/usage.db
 brain-server/data/usage.db-wal
 brain-server/data/usage.db-shm
+brain-server/data/seed_state.json
 brain-server/logs/
 
 # Xcode / Swift

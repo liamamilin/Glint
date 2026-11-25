@@ -1,0 +1,51 @@
+id: cle_m4_a_c10_coordination_stabilization
+title: 协作节奏稳定化 (A-C10)
+tagline: 临时安排 → 基于反复执行的真实反馈修订交接、替补与检查节奏
+routing:
+  primitive: critique
+  goals:
+  - optimize
+  - evaluate
+  clarity_fit:
+  - concrete
+  domains:
+  - action
+  - coordination
+  - general
+  app_affinity:
+  - Feishu
+  - Slack
+  - Cursor
+  pain_point: 一套流程纸面上看很美，但反复跑了几轮后总在某几个交接处卡壳，需要基于真实运行记录把它打磨稳定
+  trigger_utterances:
+  - 这套协作流程跑了几轮总出小状况，帮我基于实际运行记录修订交接和检查节奏
+  - 帮我复盘反复执行中真实发生的阻塞和异常，把临时救火变成稳定可重复的协作
+  - 别只看流程文档，帮我根据真实反馈找出哪些环节可靠、哪些必须修改
+  - 梳理一份协作稳定化修订方案，并列出改完后要继续观察哪些运行指标
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请基于以上协作安排在反复执行中的真实记录，帮我做一次“协调稳定化”复盘与修订：
+
+    1. **基于实录定位薄弱环**：根据实际运行材料（而非纸面想象），分开列出——① 反复可靠运转的环节；② 实际频繁发生交接掉球、阻塞或异常的环节。
+
+    2. **提出针对性修订**：针对薄弱环，修订交接方式、替补机制、异常升级触发或检查节奏，并注明需按什么有效程序确认生效。
+
+    3. **设定下轮观察材料**：写明修订落地后，需要继续收集哪些真实使用反馈来验证它是否真正变稳。
+
+
+    **检查与边界**：一份漂亮的流程文档或一次纸面推演都不足以证明协作稳定，必须依靠反复执行的真实反馈来验证。'
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M4.md#a-c10
+  source_hash: cle_v0.7_cle_m4_a_c10_coordination_stabilization_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: product_business
+  subcategory: product_design
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

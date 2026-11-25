@@ -1,0 +1,53 @@
+id: cle_m2_c_c13_plan_formation
+title: 倒推可执行计划 (C-C13)
+tagline: 已采纳目标/选择 → 倒推输入、依赖、检查点与现在能做的第一步
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  clarity_fit:
+  - concrete
+  domains:
+  - cognition
+  - general
+  app_affinity: []
+  pain_point: 目标和选择已经定下来了，但写出来的步骤清单只是空喊口号、没有因果和资源连接，不知道现在立刻能动手做哪一步
+  trigger_utterances:
+  - 目标定了，帮我从最终结果倒推步骤，一直追到现在就能做的一步
+  - 帮我做个落地计划，把输入依赖、检查点和阻塞回退都写清楚
+  - 我怕列出来的待办只是空清单，帮我检查每一步的资源条件和依赖
+  - 为了实现这个目标，前面需要什么、哪里缺方法或条件、第一步干什么
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请基于我已采纳的目标/选择、现有资源与限制，用“结果倒推法”帮我组织一份真正能动手的计划草稿：
+
+    1. **从结果倒推依赖**：先写清最终要得到什么产物或结果，再逐层倒推“取得它前必须有什么输入、前置活动和条件”，一直追到**此刻就能开始的第 1 个具体动作**。
+
+    2. **核查资源、检查点与回退**：逐项标注关键依赖、资源是否已具备、在哪里设置结果检查点，以及发生失败或阻塞时退到哪里/找谁求助。
+
+    3. **保留计划缺口**：对目前缺方法、缺权限或缺材料的环节明确标为“计划缺口”并给出获取方式，不要凭空默认条件已满足。
+
+
+    **检查与边界**：计划草稿仍需我本人核验可行性并采纳；列出了步骤不等于已经执行，涉及指派他人任务时需另作清晰委派。
+
+    *(向内自问备用句：“要得到这个结果，前面需要什么，哪一步现在可以做？”)*'
+  variables: []
+  workflow: null
+meta:
+  source: cle-v0.7
+  source_ref: models/M2.md#c-c13
+  source_hash: cle_v0.7_cle_m2_c_c13_plan_formation_v1
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  category: general
+  subcategory: problem_solving
+  collections:
+  - cle_m2_cognition
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

@@ -1,0 +1,49 @@
+id: cle_m2_c_p21_option_selection
+title: 可重审选项选择 (C-P21)
+tagline: 选择未确定 → 在当前规则下指定行动/试验/暂缓/退出及重选触发
+routing:
+  primitive: converge
+  goals:
+  - evaluate
+  clarity_fit:
+  - conflicted
+  - concrete
+  domains:
+  - cognition
+  - general
+  app_affinity: []
+  pain_point: 对比完选项还是迟迟定不下来，或以为选择只能“非黑即白选一个干到底”，需要做出可重审的当前选择
+  trigger_utterances:
+  - 基于现有信息和规则，帮我梳理这轮该选行动、试验、暂缓还是退出
+  - 帮我把当前选择落下来，并写明出现什么新情况需要重选
+  - 条件还不完美但得做个当前选择了，帮我明确选择条件和重开触发
+  - 先帮我收敛出一个本轮选择方案，不要陷入无限分析
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请基于以上当前材料与规则，帮我把“本轮选择”整理清楚，供我拍板：
+
+    1. **四态选择梳理**：结合硬条件与剩余未知，分析当前最合理的姿态是——① **直接采取某选项**；② **做低成本可逆试验**；③ **暂缓等待关键信息**；还是 ④ **明确放弃/退出**。
+
+    2. **写清停止搜索理由**：说明为什么基于当前信息成本，可以在这里停下来先做本轮选择，而不继续无限分析。
+
+    3. **写明重选触发条件**：明确列出“出现什么具体新信息或条件变化时，必须推翻并重开本次选择”。
+
+
+    **检查与边界**：选择是“当前规则+材料状态”支持的理性止步，不冒充全局最优，也不等同于已经开始执行。
+
+    *(向内自问备用句：“我本轮选择什么，出现什么情况需要重选？”)*'
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M2.md#c-p21
+  source_hash: cle_v0.7_cle_m2_c_p21_option_selection_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: general
+  subcategory: decision
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1

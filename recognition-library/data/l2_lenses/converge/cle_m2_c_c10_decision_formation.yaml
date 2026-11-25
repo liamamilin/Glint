@@ -1,0 +1,48 @@
+id: cle_m2_c_c10_decision_formation
+title: 完整决策形成 (C-C10)
+tagline: 待选情境 → 明确硬限制、关键未知、停止理由与可重审决定
+routing:
+  primitive: converge
+  goals:
+  - evaluate
+  clarity_fit:
+  - conflicted
+  domains:
+  - cognition
+  - general
+  app_affinity: []
+  pain_point: 面对重要且信息不全的纠结决策，既怕拍脑袋冲动，又怕陷入分析瘫痪，需要一套完整克制的决策闭环
+  trigger_utterances:
+  - 这个决定很纠结，帮我走一遍完整的决策梳理：限制、未知、权衡与重开条件
+  - 信息不全但必须拍板了，帮我看看哪些未知真会改变选择、该怎么定
+  - 帮我做个理性决策，分清可逆试验还是不可逆承诺，留好退路和重开条件
+  - 梳理一下这个决策问题：最低要求、核心权衡、停止搜索依据和最终建议
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: '请帮我围绕以上待选情境，梳理出一份严谨、可重审的完整决策框架：
+
+    1. **界定决策边界**：明确决策对象、时间约束、不可突破的最低要求（硬限制），以及是否漏掉了“可逆小试验 / 暂缓 / 不做”等选项。
+
+    2. **聚焦会改变选择的未知**：找出哪些评价差异和关键未知真正会改变最终选择；若存在阻止不可逆决定的关键未知，先提出低成本核查动作（绝不把缺失值当零分）。
+
+    3. **形成决定与重开条款**：给出清晰的决策建议（采取 / 可逆试验 / 暂缓 / 退出），写明核心依据、停止继续搜集信息的理由，以及未来什么具体信号会触发重开决策。
+
+
+    **检查与边界**：不追求虚假精确的打分表，也不把“做出决定”混同于“已经落地执行”。
+
+    *(向内自问备用句：“哪些评价和未知会改变选择，我据此作什么决定？”)*'
+  variables: []
+meta:
+  source: cle-v0.7
+  source_ref: models/M2.md#c-c10
+  source_hash: cle_v0.7_cle_m2_c_c10_decision_formation_v1
+  status: active
+  scope: universal
+  shelf: off_shelf
+  tier: A
+  category: general
+  subcategory: decision
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1
