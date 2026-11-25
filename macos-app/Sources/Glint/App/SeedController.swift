@@ -61,7 +61,9 @@ final class SeedController: ObservableObject {
     @Published private(set) var isReaderOpen: Bool = false
     @Published private(set) var progress: Double = 0.0
     @Published private(set) var copiedFeedback: Bool = false
+    @Published private(set) var copyFeedbackText: String = "已复制"
     @Published private(set) var isLoading: Bool = false
+    @Published private(set) var undoBanner: (item: SeedItem, label: String)?
 
     private let brainClient: BrainClient
     private let seedPanel = SeedPanel()
@@ -69,6 +71,7 @@ final class SeedController: ObservableObject {
 
     private var elapsedSeconds: Double = 0.0
     private var drawGeneration: Int = 0
+    private var undoWorkItem: DispatchWorkItem?
     private var tickTimer: Timer?
     private var retryTimer: Timer?
     private var readerOutsideClickMonitor: Any?
@@ -108,6 +111,10 @@ final class SeedController: ObservableObject {
 
         let rawMode = UserDefaults.standard.string(forKey: Self.poolModeKey)
         self.poolMode = rawMode.flatMap(SeedPoolMode.init(rawValue:)) ?? .smartMix
+
+        self.readerPanel.onCancelEscape = { [weak self] in
+            self?.closeReader()
+        }
     }
 
     func start() {
@@ -174,6 +181,7 @@ final class SeedController: ObservableObject {
     func snoozeCurrent(days: Int = 7) {
         guard let item = currentSeed else { return }
         snoozedCount += 1
+        showUndoBanner(item: item, label: "已 7 天不看「\(item.title)」")
         Task {
             if let res = await brainClient.sendSeedFeedback(id: item.id, action: "snooze", snoozeDays: days) {
                 self.mutedCount = res.muted_count
@@ -187,6 +195,7 @@ final class SeedController: ObservableObject {
     func muteCurrent() {
         guard let item = currentSeed else { return }
         mutedCount += 1
+        showUndoBanner(item: item, label: "已不再轮播「\(item.title)」")
         Task {
             if let res = await brainClient.sendSeedFeedback(id: item.id, action: "mute") {
                 self.mutedCount = res.muted_count
@@ -195,6 +204,42 @@ final class SeedController: ObservableObject {
             removeFromHistory(id: item.id)
             await drawNextFromServer(excludeCurrent: false, extraExcludeIds: [item.id])
         }
+    }
+
+    func undoLastHide() {
+        guard let pending = undoBanner else { return }
+        undoWorkItem?.cancel()
+        undoWorkItem = nil
+        undoBanner = nil
+        let restored = pending.item
+        Task {
+            if let res = await brainClient.sendSeedFeedback(id: restored.id, action: "unmute") {
+                self.mutedCount = res.muted_count
+                self.snoozedCount = res.snoozed_count
+            }
+            history.append(restored)
+            if history.count > Self.maxHistoryCount {
+                history.removeFirst(history.count - Self.maxHistoryCount)
+            }
+            historyIndex = history.count - 1
+            resetTimerProgress()
+            syncHUDFrame()
+            if isReaderOpen { renderReader() }
+        }
+    }
+
+    private func showUndoBanner(item: SeedItem, label: String) {
+        undoWorkItem?.cancel()
+        undoBanner = (item: item, label: label)
+        syncHUDFrame()
+        let work = DispatchWorkItem { [weak self] in
+            Task { @MainActor [weak self] in
+                self?.undoBanner = nil
+                self?.syncHUDFrame()
+            }
+        }
+        undoWorkItem = work
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4.5, execute: work)
     }
 
     func resetAllHidden() {
@@ -248,11 +293,12 @@ final class SeedController: ObservableObject {
         copyPromptText(cleaned.isEmpty ? item.title : cleaned)
     }
 
-    func copyPromptText(_ text: String) {
+    func copyPromptText(_ text: String, feedbackLabel: String = "已复制") {
         guard let item = currentSeed else { return }
         let pb = NSPasteboard.general
         pb.clearContents()
         pb.setString(text.isEmpty ? item.title : text, forType: .string)
+        copyFeedbackText = feedbackLabel
         copiedFeedback = true
         Task {
             _ = await brainClient.sendSeedFeedback(
@@ -261,7 +307,7 @@ final class SeedController: ObservableObject {
                 category: item.category
             )
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
             self?.copiedFeedback = false
         }
     }

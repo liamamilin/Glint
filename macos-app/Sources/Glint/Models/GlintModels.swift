@@ -228,17 +228,26 @@ enum SeedOpacityPreset: String, CaseIterable, Identifiable {
 
     var label: String {
         switch self {
-        case .whisper: return "极轻 (28%)"
-        case .standard: return "标准 (42%)"
-        case .clear: return "清晰 (62%)"
+        case .whisper: return "轻透玻璃"
+        case .standard: return "标准磨砂"
+        case .clear: return "清晰高对比"
         }
     }
 
-    var idleAlpha: Double {
+    /// Controls glass surface opacity while keeping text effortlessly glanceable.
+    var backdropAlpha: Double {
         switch self {
-        case .whisper: return 0.28
-        case .standard: return 0.42
-        case .clear: return 0.62
+        case .whisper: return 0.58
+        case .standard: return 0.78
+        case .clear: return 0.94
+        }
+    }
+
+    var textAlpha: Double {
+        switch self {
+        case .whisper: return 0.84
+        case .standard: return 0.95
+        case .clear: return 1.0
         }
     }
 }

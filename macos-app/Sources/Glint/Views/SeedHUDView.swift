@@ -59,82 +59,130 @@ private func cleanPlaceholderLabel(_ token: String) -> String {
 }
 
 /// Semi-transparent, non-intrusive Ambient HUD card for Glint 认知种子.
+/// Keeps the glass backdrop lightweight while preserving effortless glanceable text contrast
+/// and instant zero-delay inline hover hints on every control.
 struct SeedHUDView: View {
     @ObservedObject var controller: SeedController
+    @State private var hoveredHint: (text: String, tint: Color)?
+    @State private var isHoveringBody: Bool = false
 
-    private var activeOpacity: Double {
-        (controller.isHovering || controller.isReaderOpen) ? 0.96 : controller.opacityPreset.idleAlpha
+    private var activeBackdropAlpha: Double {
+        (controller.isHovering || controller.isReaderOpen) ? 0.96 : controller.opacityPreset.backdropAlpha
+    }
+
+    private var activeTextAlpha: Double {
+        (controller.isHovering || controller.isReaderOpen) ? 1.0 : controller.opacityPreset.textAlpha
     }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             if let seed = controller.currentSeed {
                 VStack(alignment: .leading, spacing: 6) {
-                    // Header row: primitive dot + category + layer/tier badge + micro action bar on hover
+                    // Header row: shows instant hover hint when pointing at any button, else category & tier
                     HStack(spacing: 6) {
-                        Circle()
-                            .fill(seedPrimitiveColor(seed.primitive).opacity(controller.isHovering ? 0.95 : 0.75))
-                            .frame(width: 6, height: 6)
-
-                        Text(seedCategoryLabel(seed.category))
-                            .font(.system(size: 10, weight: .medium))
-                            .foregroundStyle(Color.primary.opacity(0.55))
-
-                        if seed.isL3Discovery {
-                            Text("✦ L3探索")
-                                .font(.system(size: 9, weight: .semibold))
-                                .foregroundStyle(Color(red: 0.72, green: 0.56, blue: 0.94))
-                                .padding(.horizontal, 4.5)
-                                .padding(.vertical, 1)
-                                .background(
-                                    Color(red: 0.72, green: 0.56, blue: 0.94).opacity(0.14),
-                                    in: Capsule()
-                                )
-                        } else if seed.tier.uppercased() == "S" {
-                            Text("S")
-                                .font(.system(size: 9, weight: .semibold, design: .monospaced))
-                                .foregroundStyle(Color(red: 0.94, green: 0.72, blue: 0.34))
-                                .padding(.horizontal, 4)
-                                .padding(.vertical, 1)
-                                .background(
-                                    Color(red: 0.94, green: 0.72, blue: 0.34).opacity(0.14),
-                                    in: Capsule()
-                                )
+                        if let hint = hoveredHint {
+                            Text(hint.text)
+                                .font(.system(size: 10.5, weight: .semibold))
+                                .foregroundStyle(hint.tint)
+                                .lineLimit(1)
+                                .transition(.opacity)
                         } else {
-                            Text("·")
-                                .font(.system(size: 10))
-                                .foregroundStyle(Color.primary.opacity(0.28))
+                            Circle()
+                                .fill(seedPrimitiveColor(seed.primitive).opacity(0.92))
+                                .frame(width: 6, height: 6)
 
-                            Text("认知种子")
-                                .font(.system(size: 10, weight: .regular))
-                                .foregroundStyle(Color.primary.opacity(0.42))
+                            Text(seedCategoryLabel(seed.category))
+                                .font(.system(size: 10.5, weight: .medium))
+                                .foregroundStyle(Color.primary.opacity(0.68))
+
+                            if seed.isL3Discovery {
+                                Text("✦ L3探索")
+                                    .font(.system(size: 9.5, weight: .semibold))
+                                    .foregroundStyle(Color(red: 0.78, green: 0.62, blue: 0.98))
+                                    .padding(.horizontal, 5)
+                                    .padding(.vertical, 1)
+                                    .background(
+                                        Color(red: 0.72, green: 0.56, blue: 0.94).opacity(0.18),
+                                        in: Capsule()
+                                    )
+                            } else if seed.tier.uppercased() == "S" {
+                                Text("S")
+                                    .font(.system(size: 9.5, weight: .semibold, design: .monospaced))
+                                    .foregroundStyle(Color(red: 0.96, green: 0.76, blue: 0.36))
+                                    .padding(.horizontal, 4.5)
+                                    .padding(.vertical, 1)
+                                    .background(
+                                        Color(red: 0.94, green: 0.72, blue: 0.34).opacity(0.18),
+                                        in: Capsule()
+                                    )
+                            } else {
+                                Text("·")
+                                    .font(.system(size: 10))
+                                    .foregroundStyle(Color.primary.opacity(0.35))
+
+                                Text(isHoveringBody ? "点击展开本体 ↗" : "认知种子")
+                                    .font(.system(size: 10, weight: isHoveringBody ? .medium : .regular))
+                                    .foregroundStyle(isHoveringBody ? Color.accentColor : Color.primary.opacity(0.55))
+                            }
                         }
 
                         Spacer(minLength: 4)
 
                         if controller.isHovering || controller.isReaderOpen {
                             HStack(spacing: 2) {
-                                SeedIconButton(symbol: "chevron.left", help: "上一张") {
+                                SeedIconButton(
+                                    symbol: "chevron.left",
+                                    hint: "上一张",
+                                    hoverTint: Color.primary,
+                                    onHoverHint: { hoveredHint = $0 }
+                                ) {
                                     controller.prev()
                                 }
-                                .opacity(controller.canGoPrev ? 1.0 : 0.3)
+                                .opacity(controller.canGoPrev ? 1.0 : 0.28)
                                 .disabled(!controller.canGoPrev)
-                                SeedIconButton(symbol: "chevron.right", help: "下一张（快速跳过会轻度降权）") {
+
+                                SeedIconButton(
+                                    symbol: "chevron.right",
+                                    hint: "下一张",
+                                    hoverTint: Color.primary,
+                                    onHoverHint: { hoveredHint = $0 }
+                                ) {
                                     controller.next(manual: true)
                                 }
+
                                 SeedIconButton(
                                     symbol: controller.isReaderOpen ? "arrow.down.right.and.arrow.up.left" : "arrow.up.left.and.arrow.down.right",
-                                    help: controller.isReaderOpen ? "收起本体" : "展开本体"
+                                    hint: controller.isReaderOpen ? "收起完整本体" : "展开完整本体",
+                                    hoverTint: Color.accentColor,
+                                    onHoverHint: { hoveredHint = $0 }
                                 ) {
                                     controller.toggleReader()
                                 }
-                                SeedIconButton(symbol: "clock.arrow.circlepath", help: "7 天不看") {
+
+                                SeedIconButton(
+                                    symbol: "clock.arrow.circlepath",
+                                    hint: "7 天内不看",
+                                    hoverTint: Color(red: 0.96, green: 0.74, blue: 0.32),
+                                    onHoverHint: { hoveredHint = $0 }
+                                ) {
                                     controller.snoozeCurrent(days: 7)
                                 }
-                                SeedIconButton(symbol: "eye.slash", help: "不再显示（不影响快捷键召回）") {
+
+                                SeedIconButton(
+                                    symbol: "eye.slash",
+                                    hint: "不再轮播（保留快捷键）",
+                                    hoverTint: Color(red: 0.95, green: 0.45, blue: 0.45),
+                                    onHoverHint: { hoveredHint = $0 }
+                                ) {
                                     controller.muteCurrent()
                                 }
-                                SeedIconButton(symbol: "xmark", help: "暂时关闭小窗") {
+
+                                SeedIconButton(
+                                    symbol: "xmark",
+                                    hint: "暂时隐藏小窗",
+                                    hoverTint: Color.primary,
+                                    onHoverHint: { hoveredHint = $0 }
+                                ) {
                                     controller.isEnabled = false
                                 }
                             }
@@ -142,25 +190,31 @@ struct SeedHUDView: View {
                         } else {
                             Text(controller.remainingFormatted)
                                 .font(.system(size: 9.5, weight: .regular, design: .monospaced))
-                                .foregroundStyle(Color.primary.opacity(0.32))
+                                .foregroundStyle(Color.primary.opacity(0.45))
                         }
                     }
+                    .frame(height: 20)
 
-                    // Title + 1-2 line hook (clicking expands the full Reader)
+                    // Title + 1-2 line hook (always crisp & glanceable without hovering)
                     VStack(alignment: .leading, spacing: 3) {
                         Text(seed.title)
-                            .font(.system(size: 13, weight: .semibold))
-                            .foregroundStyle(Color.primary.opacity(0.92))
+                            .font(.system(size: 13.5, weight: .semibold))
+                            .foregroundStyle(Color.primary.opacity(0.95 * activeTextAlpha))
                             .lineLimit(1)
 
                         Text(seed.tagline)
-                            .font(.system(size: 11, weight: .regular))
-                            .foregroundStyle(Color.primary.opacity(0.62))
+                            .font(.system(size: 11.5, weight: .regular))
+                            .foregroundStyle(Color.primary.opacity(0.76 * activeTextAlpha))
                             .lineLimit(2)
                             .fixedSize(horizontal: false, vertical: true)
                     }
+                    .id(seed.id)
+                    .transition(.opacity)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .contentShape(Rectangle())
+                    .onHover { over in
+                        isHoveringBody = over
+                    }
                     .onTapGesture {
                         controller.toggleReader()
                     }
@@ -169,13 +223,34 @@ struct SeedHUDView: View {
                 .padding(.top, 10)
                 .padding(.bottom, 9)
 
+                // Undo whisper bar after mute/snooze (4.5s window to prevent accidental hide)
+                if let banner = controller.undoBanner {
+                    HStack(spacing: 6) {
+                        Text(banner.label)
+                            .font(.system(size: 10))
+                            .foregroundStyle(Color.primary.opacity(0.68))
+                            .lineLimit(1)
+                        Spacer()
+                        Button("撤销") {
+                            controller.undoLastHide()
+                        }
+                        .buttonStyle(.plain)
+                        .font(.system(size: 10.5, weight: .semibold))
+                        .foregroundStyle(Color.accentColor)
+                    }
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 5)
+                    .background(Color.primary.opacity(0.06))
+                    .transition(.opacity)
+                }
+
                 // Hairline 5-minute progress whisper
                 GeometryReader { geo in
                     ZStack(alignment: .leading) {
                         Rectangle()
-                            .fill(Color.primary.opacity(0.06))
+                            .fill(Color.primary.opacity(0.08))
                         Rectangle()
-                            .fill(seedPrimitiveColor(seed.primitive).opacity(controller.isHovering ? 0.65 : 0.42))
+                            .fill(seedPrimitiveColor(seed.primitive).opacity(controller.isHovering ? 0.78 : 0.55))
                             .frame(width: max(0, geo.size.width * controller.progress))
                             .animation(.linear(duration: 1.0), value: controller.progress)
                     }
@@ -186,10 +261,10 @@ struct SeedHUDView: View {
                 HStack(spacing: 8) {
                     Image(systemName: "sparkles")
                         .font(.system(size: 11))
-                        .foregroundStyle(Color.primary.opacity(0.45))
+                        .foregroundStyle(Color.primary.opacity(0.6))
                     Text(controller.totalL4Count > 0 ? "当前池认知种子已全部隐藏" : "正在连接 Glint 认知种子…")
                         .font(.system(size: 11.5))
-                        .foregroundStyle(Color.primary.opacity(0.6))
+                        .foregroundStyle(Color.primary.opacity(0.8))
                     Spacer()
                     if controller.hiddenCount > 0 {
                         Button("恢复") {
@@ -199,7 +274,12 @@ struct SeedHUDView: View {
                         .font(.system(size: 10.5, weight: .medium))
                         .foregroundStyle(Color.accentColor)
                     }
-                    SeedIconButton(symbol: "xmark", help: "关闭小窗") {
+                    SeedIconButton(
+                        symbol: "xmark",
+                        hint: "关闭小窗",
+                        hoverTint: Color.primary,
+                        onHoverHint: { hoveredHint = $0 }
+                    ) {
                         controller.isEnabled = false
                     }
                 }
@@ -208,7 +288,15 @@ struct SeedHUDView: View {
             }
         }
         .frame(width: 320)
-        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .background(
+            ZStack {
+                RoundedRectangle(cornerRadius: 14, style: .continuous)
+                    .fill(.ultraThinMaterial)
+                    .opacity(activeBackdropAlpha)
+                RoundedRectangle(cornerRadius: 14, style: .continuous)
+                    .fill(Color(nsColor: .windowBackgroundColor).opacity(controller.isHovering ? 0.36 : 0.22))
+            }
+        )
         .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
         .overlay(
             RoundedRectangle(cornerRadius: 14, style: .continuous)
@@ -216,8 +304,8 @@ struct SeedHUDView: View {
                     LinearGradient(
                         colors: [
                             Color.white.opacity(controller.isHovering ? 0.28 : 0.16),
-                            Color.primary.opacity(0.08),
-                            Color.primary.opacity(0.04)
+                            Color.primary.opacity(0.10),
+                            Color.primary.opacity(0.05)
                         ],
                         startPoint: .top,
                         endPoint: .bottom
@@ -225,19 +313,25 @@ struct SeedHUDView: View {
                     lineWidth: 0.75
                 )
         )
-        .opacity(activeOpacity)
-        .animation(.easeOut(duration: 0.18), value: controller.isHovering)
-        .animation(.easeOut(duration: 0.18), value: controller.isReaderOpen)
-        .animation(.easeOut(duration: 0.18), value: controller.opacityPreset)
+        .animation(.easeOut(duration: 0.16), value: controller.isHovering)
+        .animation(.easeOut(duration: 0.16), value: controller.isReaderOpen)
+        .animation(.easeOut(duration: 0.16), value: controller.opacityPreset)
+        .animation(.easeOut(duration: 0.18), value: controller.currentSeed?.id)
         .onHover { hovering in
             controller.setHovering(hovering)
+            if !hovering {
+                hoveredHint = nil
+                isHoveringBody = false
+            }
         }
     }
 }
 
 private struct SeedIconButton: View {
     let symbol: String
-    let help: String
+    let hint: String
+    let hoverTint: Color
+    let onHoverHint: ((text: String, tint: Color)?) -> Void
     let action: () -> Void
 
     @State private var isOver: Bool = false
@@ -245,22 +339,30 @@ private struct SeedIconButton: View {
     var body: some View {
         Button(action: action) {
             Image(systemName: symbol)
-                .font(.system(size: 10, weight: .medium))
-                .foregroundStyle(Color.primary.opacity(isOver ? 0.92 : 0.56))
-                .frame(width: 20, height: 20)
+                .font(.system(size: 10.5, weight: .medium))
+                .foregroundStyle(isOver ? hoverTint : Color.primary.opacity(0.62))
+                .frame(width: 21, height: 21)
                 .background(
                     RoundedRectangle(cornerRadius: 5, style: .continuous)
-                        .fill(isOver ? Color.primary.opacity(0.12) : Color.clear)
+                        .fill(isOver ? hoverTint.opacity(0.16) : Color.clear)
                 )
         }
         .buttonStyle(.plain)
-        .help(help)
-        .onHover { isOver = $0 }
+        .onHover { over in
+            isOver = over
+            if over {
+                NSCursor.pointingHand.push()
+                onHoverHint((text: hint, tint: hoverTint))
+            } else {
+                NSCursor.pop()
+                onHoverHint(nil)
+            }
+        }
     }
 }
 
 /// Enhanced full-card reader anchored cleanly beside the Ambient Seed HUD:
-/// supports inline variable fill-in, 1-click copy, and 1-click launch to ChatGPT / Claude / Gemini.
+/// supports inline variable fill-in, 1-click copy, Esc to close, and 1-click launch to ChatGPT / Claude / Gemini.
 struct SeedReaderView: View {
     @ObservedObject var controller: SeedController
     @State private var variableValues: [String: String] = [:]
@@ -286,9 +388,9 @@ struct SeedReaderView: View {
         return text.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
-    private func launchAI(provider: String, seed: SeedItem) {
+    private func launchAI(provider: String, label: String, seed: SeedItem) {
         let finalPrompt = resolvedPrompt(for: seed)
-        controller.copyPromptText(finalPrompt)
+        controller.copyPromptText(finalPrompt, feedbackLabel: "已复制并打开 \(label)")
         let encoded = finalPrompt.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
         let urlString: String
         switch provider {
@@ -320,14 +422,14 @@ struct SeedReaderView: View {
                         .font(.system(size: 10.5, weight: .medium))
                         .foregroundStyle(
                             seed.isL3Discovery
-                                ? Color(red: 0.72, green: 0.56, blue: 0.94)
-                                : Color.primary.opacity(0.58)
+                                ? Color(red: 0.78, green: 0.62, blue: 0.98)
+                                : Color.primary.opacity(0.64)
                         )
 
                     if !seed.source.isEmpty {
                         Text("· \(seed.source)")
                             .font(.system(size: 10))
-                            .foregroundStyle(Color.primary.opacity(0.38))
+                            .foregroundStyle(Color.primary.opacity(0.42))
                             .lineLimit(1)
                     }
 
@@ -336,19 +438,26 @@ struct SeedReaderView: View {
                     if let pct = seed.probability_pct, pct > 0 {
                         Text(String(format: "%.2f%%", pct))
                             .font(.system(size: 9.5, design: .monospaced))
-                            .foregroundStyle(Color.primary.opacity(0.38))
-                            .help(seed.reason_tag ?? "当前池动态抽样概率")
+                            .foregroundStyle(Color.primary.opacity(0.45))
                     }
 
-                    SeedIconButton(symbol: "xmark", help: "收起") {
+                    Button {
                         controller.closeReader()
+                    } label: {
+                        Text("Esc")
+                            .font(.system(size: 9.5, weight: .medium, design: .monospaced))
+                            .foregroundStyle(Color.primary.opacity(0.55))
+                            .padding(.horizontal, 6)
+                            .padding(.vertical, 2)
+                            .background(Color.primary.opacity(0.08), in: RoundedRectangle(cornerRadius: 4, style: .continuous))
                     }
+                    .buttonStyle(.plain)
                 }
 
                 if let reason = seed.reason_tag, !reason.isEmpty {
                     Text(reason)
                         .font(.system(size: 10))
-                        .foregroundStyle(Color.primary.opacity(0.45))
+                        .foregroundStyle(Color.primary.opacity(0.50))
                 }
 
                 // Title & tagline
@@ -360,7 +469,7 @@ struct SeedReaderView: View {
                     if !seed.tagline.isEmpty {
                         Text(seed.tagline)
                             .font(.system(size: 11.5))
-                            .foregroundStyle(Color.primary.opacity(0.65))
+                            .foregroundStyle(Color.primary.opacity(0.72))
                     }
                 }
 
@@ -369,10 +478,10 @@ struct SeedReaderView: View {
                     VStack(alignment: .leading, spacing: 4) {
                         Text("适用场景 / 盲区信号")
                             .font(.system(size: 10, weight: .semibold))
-                            .foregroundStyle(Color.primary.opacity(0.48))
+                            .foregroundStyle(Color.primary.opacity(0.52))
                         Text(seed.pain_point)
                             .font(.system(size: 11.5))
-                            .foregroundStyle(Color.primary.opacity(0.84))
+                            .foregroundStyle(Color.primary.opacity(0.88))
                             .fixedSize(horizontal: false, vertical: true)
                     }
                     .padding(9)
@@ -385,7 +494,7 @@ struct SeedReaderView: View {
                     VStack(alignment: .leading, spacing: 5) {
                         Text("就地填空（可选，复制/直达 AI 时自动代入）")
                             .font(.system(size: 10, weight: .semibold))
-                            .foregroundStyle(Color.primary.opacity(0.48))
+                            .foregroundStyle(Color.primary.opacity(0.52))
                         ForEach(vars, id: \.self) { token in
                             TextField(
                                 cleanPlaceholderLabel(token),
@@ -410,15 +519,15 @@ struct SeedReaderView: View {
                     HStack {
                         Text("认知指令本体")
                             .font(.system(size: 10, weight: .semibold))
-                            .foregroundStyle(Color.primary.opacity(0.48))
+                            .foregroundStyle(Color.primary.opacity(0.52))
                         Spacer()
                         Button {
-                            controller.copyPromptText(resolvedPrompt(for: seed))
+                            controller.copyPromptText(resolvedPrompt(for: seed), feedbackLabel: "已复制指令")
                         } label: {
                             HStack(spacing: 4) {
                                 Image(systemName: controller.copiedFeedback ? "checkmark" : "doc.on.doc")
                                     .font(.system(size: 9.5, weight: .medium))
-                                Text(controller.copiedFeedback ? "已复制" : "复制指令")
+                                Text(controller.copiedFeedback ? controller.copyFeedbackText : "复制指令")
                                     .font(.system(size: 10, weight: .medium))
                             }
                             .foregroundStyle(controller.copiedFeedback ? Color.green : Color.accentColor)
@@ -433,7 +542,7 @@ struct SeedReaderView: View {
                                 : resolvedPrompt(for: seed)
                         )
                         .font(.system(size: 11.5))
-                        .foregroundStyle(Color.primary.opacity(0.86))
+                        .foregroundStyle(Color.primary.opacity(0.90))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .textSelection(.enabled)
                     }
@@ -443,20 +552,19 @@ struct SeedReaderView: View {
                     HStack(spacing: 6) {
                         Text("直达：")
                             .font(.system(size: 10))
-                            .foregroundStyle(Color.primary.opacity(0.42))
+                            .foregroundStyle(Color.primary.opacity(0.48))
                         ForEach([("ChatGPT", "chatgpt"), ("Claude", "claude"), ("Gemini", "gemini")], id: \.1) { label, key in
                             Button {
-                                launchAI(provider: key, seed: seed)
+                                launchAI(provider: key, label: label, seed: seed)
                             } label: {
                                 Text("\(label) ↗")
                                     .font(.system(size: 10, weight: .medium))
                                     .padding(.horizontal, 7)
                                     .padding(.vertical, 3)
                                     .background(Color.primary.opacity(0.08), in: RoundedRectangle(cornerRadius: 5, style: .continuous))
-                                    .foregroundStyle(Color.primary.opacity(0.82))
+                                    .foregroundStyle(Color.primary.opacity(0.86))
                             }
                             .buttonStyle(.plain)
-                            .help("复制指令并在 \(label) 中打开")
                         }
                         Spacer()
                     }
@@ -469,10 +577,10 @@ struct SeedReaderView: View {
                     VStack(alignment: .leading, spacing: 4) {
                         Text("下次遇到时，直接这样呼出")
                             .font(.system(size: 10, weight: .semibold))
-                            .foregroundStyle(Color.primary.opacity(0.48))
+                            .foregroundStyle(Color.primary.opacity(0.52))
                         Text(seed.trigger_utterances.prefix(3).map { "「\($0)」" }.joined(separator: "  "))
                             .font(.system(size: 10.5))
-                            .foregroundStyle(Color.primary.opacity(0.64))
+                            .foregroundStyle(Color.primary.opacity(0.68))
                             .fixedSize(horizontal: false, vertical: true)
                     }
                 }
@@ -480,7 +588,7 @@ struct SeedReaderView: View {
                 Divider().opacity(0.22)
 
                 // Footer actions
-                HStack(spacing: 8) {
+                HStack(spacing: 10) {
                     Button {
                         controller.snoozeCurrent(days: 7)
                     } label: {
@@ -488,7 +596,7 @@ struct SeedReaderView: View {
                             .font(.system(size: 11, weight: .medium))
                     }
                     .buttonStyle(.plain)
-                    .foregroundStyle(Color.primary.opacity(0.62))
+                    .foregroundStyle(Color(red: 0.96, green: 0.74, blue: 0.32).opacity(0.9))
 
                     Button {
                         controller.muteCurrent()
@@ -497,7 +605,7 @@ struct SeedReaderView: View {
                             .font(.system(size: 11, weight: .medium))
                     }
                     .buttonStyle(.plain)
-                    .foregroundStyle(Color.red.opacity(0.78))
+                    .foregroundStyle(Color(red: 0.95, green: 0.45, blue: 0.45).opacity(0.9))
 
                     Spacer()
 
@@ -521,7 +629,7 @@ struct SeedReaderView: View {
             .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
             .overlay(
                 RoundedRectangle(cornerRadius: 16, style: .continuous)
-                    .strokeBorder(Color.white.opacity(0.2), lineWidth: 0.75)
+                    .strokeBorder(Color.white.opacity(0.22), lineWidth: 0.75)
             )
             .onChange(of: seed.id) { _, _ in
                 variableValues = [:]

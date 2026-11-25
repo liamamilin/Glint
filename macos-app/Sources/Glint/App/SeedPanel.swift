@@ -162,9 +162,14 @@ final class SeedPanel: NSPanel {
 @MainActor
 final class SeedReaderPanel: NSPanel {
     private var fadeGeneration: Int = 0
+    var onCancelEscape: (() -> Void)?
 
     override var canBecomeKey: Bool { true }
     override var canBecomeMain: Bool { false }
+
+    override func cancelOperation(_ sender: Any?) {
+        onCancelEscape?()
+    }
 
     init() {
         super.init(
