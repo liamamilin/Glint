@@ -156,3 +156,52 @@ cases:
     input_text: "最近每天忙到凌晨，做了很多优化但业务增长完全不动，感觉用力用偏了"
     expected_primitives: ["metacognize", "deconstruct"]
     expected_ids: ["disc_cognition_identifying_true_bottleneck", "disc_build_local_optimization_deadlocks", "disc_life_simplifying_when_overwhelmed"]
+
+  # 10. CLE v0.7 Structural Core (Tier S Regression Suite: M1–M4)
+  - id: cle_m1_lossy_compression
+    app_name: "Notion"
+    input_text: "把这份长报告压缩成一页摘要，但千万别把关键前提和限制条件删丢了"
+    expected_primitives: ["compress"]
+    expected_ids: ["cle_m1_r_p6_compression", "pt_exec_brief"]
+
+  - id: cle_m1_expand_abstract
+    app_name: "Obsidian"
+    input_text: "“项目失败”这个说法太笼统抽象了，帮我展开拆解看看具体对应哪些事实和缺口"
+    expected_primitives: ["deconstruct", "metacognize"]
+    expected_ids: ["cle_m1_r_p7_expansion", "cle_m1_r_p2_differentiation"]
+
+  - id: cle_m2_uncertainty_calibration
+    app_name: "Obsidian"
+    input_text: "帮我把这段分析里哪些是已知事实、哪些是推测、哪些是纯未知彻底分开"
+    expected_primitives: ["metacognize", "critique"]
+    expected_ids: ["cle_m2_c_p20_uncertainty", "disc_cognition_separating_facts_from_stories", "cle_m2_c_p19_evidence_linking"]
+
+  - id: cle_m2_criteria_formation
+    app_name: "Notion"
+    input_text: "帮我为这次选型制定一套能真正判例的评价标准和判断规则"
+    expected_primitives: ["converge", "critique"]
+    expected_ids: ["cle_m2_c_c8_criteria_formation", "cle_m2_c_c9_alternative_evaluation", "core_decision_matrix"]
+
+  - id: cle_m3_disagreement_structuring
+    app_name: "Feishu"
+    input_text: "我们争了半天没结果，帮我把双方分歧精准定位到底卡在事实、词义还是价值哪一层"
+    expected_primitives: ["critique"]
+    expected_ids: ["cle_m3_i_c6_disagreement_structuring", "cle_m3_i_c3_meaning_alignment"]
+
+  - id: cle_m3_meaning_alignment
+    app_name: "Feishu"
+    input_text: "感觉我们对“上线验收”这个词理解不太一样，帮我用正反例子对齐一下本次共同含义"
+    expected_primitives: ["translate", "metacognize"]
+    expected_ids: ["cle_m3_i_c3_meaning_alignment", "cle_m3_i_c2_clarification"]
+
+  - id: cle_m4_request_formation
+    app_name: "Feishu"
+    input_text: "我要请后端同学明天配合改个接口，帮我写成一条对象、动作、期限和回复方式都清楚的请求消息"
+    expected_primitives: ["translate"]
+    expected_ids: ["cle_m4_a_p1_request_formation", "pt_draft_email"]
+
+  - id: cle_m4_task_completion
+    app_name: "Cursor"
+    input_text: "别只听对方说做完了，帮我把这份交付结果逐项对照验收标准判定是否满足关闭条件"
+    expected_primitives: ["critique"]
+    expected_ids: ["cle_m4_a_p11_task_completion", "cle_m4_a_p16_acceptance_criteria"]

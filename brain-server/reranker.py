@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
+from concurrent.futures import ThreadPoolExecutor
 from typing import Protocol
 
 logger = logging.getLogger("glint.reranker")
@@ -29,6 +30,9 @@ class LocalBgeReranker:
         self._model = None
         self._device: str = "cpu"
         self._load_failed: bool = False
+        # Pin all PyTorch MPS load & inference calls to a single dedicated OS thread
+        # to prevent Apple Metal IOGPUMetalCommandBuffer cross-thread commit assertions.
+        self._executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix="glint-mps")
 
     def _ensure_loaded_sync(self) -> bool:
         if self._model is not None:
@@ -79,7 +83,9 @@ class LocalBgeReranker:
         return [float(s) for s in scores]
 
     async def score(self, query: str, documents: list[str]) -> list[float] | None:
-        return await asyncio.to_thread(self._score_sync, query, documents)
+        loop = asyncio.get_running_loop()
+        return await loop.run_in_executor(self._executor, self._score_sync, query, documents)
 
     async def warmup(self) -> None:
-        await asyncio.to_thread(self._score_sync, "warmup", ["warmup document"])
+        loop = asyncio.get_running_loop()
+        await loop.run_in_executor(self._executor, self._score_sync, "warmup", ["warmup document"])
