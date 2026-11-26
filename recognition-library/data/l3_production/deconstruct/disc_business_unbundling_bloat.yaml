@@ -55,6 +55,6 @@ meta:
   category: product_business
   subcategory: pricing_strategy
   collections: []
-  base_weight: 1.0
+  base_weight: 0.7
   confidence: 0.85
   version: 1

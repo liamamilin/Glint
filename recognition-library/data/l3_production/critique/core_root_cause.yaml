@@ -23,6 +23,11 @@ routing:
   - debug 这个 error
   - root cause 是什么
   - 日志报错了但不知道哪出问题
+  - 加载失败原因排查
+  - 连接中断或403错误原因分析
+  - 本地代理或网络访问异常排查
+  - 排查电脑存储空间异常占用原因
+  - 排查软件接管或运行异常原因
   anti_triggers:
   - 只是想了解概念而非排查故障
   - 代码 review 找风格问题
@@ -37,9 +42,9 @@ meta:
   source_ref: cards.yaml#root_cause
   source_hash: 751f5a99ef97d405dc387d8eae609c6bfb1810e5bdab84fd98e6b21f1dd28c16
   status: active
-  scope: domain_specific
-  shelf: on_shelf
-  tier: A
+  scope: universal
+  shelf: evergreen
+  tier: S
   category: engineering
   subcategory: debugging
   collections: []

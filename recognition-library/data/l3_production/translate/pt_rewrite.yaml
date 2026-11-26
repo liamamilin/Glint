@@ -40,9 +40,9 @@ meta:
   source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#rewrite
   source_hash: fcda32cc14b2a0d737073e7805510f10dae77c9ccce79a1dd68de0fb4e1e18f6
   status: active
-  scope: domain_specific
-  shelf: on_shelf
-  tier: A
+  scope: universal
+  shelf: evergreen
+  tier: S
   category: writing_comms
   subcategory: workplace_comms
   collections: []

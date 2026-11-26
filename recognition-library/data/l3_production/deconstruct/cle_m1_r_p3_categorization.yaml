@@ -19,6 +19,8 @@ routing:
   - 这堆条目太乱了，怎么制定分类标准和边界
   - 帮我检查这个分类合不合理，有没有边界案例归不进去
   - 按这个用途，把这些实例分组并说明为什么归入
+  - 开源项目或Agent分类体系
+  - 提炼分类框架和归类依据
   anti_triggers: []
 execution:
   action_type: inject_prompt
@@ -42,9 +44,9 @@ meta:
   source_ref: models/M1.md#r-p3
   source_hash: cle_v0.7_m1_r_p3_v1
   status: active
-  scope: domain_specific
-  shelf: off_shelf
-  tier: A
+  scope: universal
+  shelf: evergreen
+  tier: S
   category: general
   subcategory: problem_solving
   collections:

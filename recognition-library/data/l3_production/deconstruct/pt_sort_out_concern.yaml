@@ -44,9 +44,9 @@ meta:
   source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#sort-out-concern
   source_hash: 007c0e9b72c4e7ed09583ae3d222597dfeed24b1db4efa22f144527c1a424d74
   status: active
-  scope: domain_specific
-  shelf: on_shelf
-  tier: B
+  scope: universal
+  shelf: evergreen
+  tier: S
   category: personal_career
   subcategory: personal_os
   collections: []

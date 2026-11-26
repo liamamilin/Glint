@@ -42,9 +42,9 @@ meta:
   source_ref: models/M2.md#c-p1
   source_hash: cle_v0.7_cle_m2_c_p1_focus_v1
   status: active
-  scope: domain_specific
-  shelf: off_shelf
-  tier: A
+  scope: universal
+  shelf: evergreen
+  tier: S
   category: general
   subcategory: problem_solving
   collections:

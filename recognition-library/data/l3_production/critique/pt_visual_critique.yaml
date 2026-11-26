@@ -25,6 +25,8 @@ routing:
   - 给设计稿提点修改意见
   - review this design
   - 从传播目标看这张图
+  - 锐评画面或动效设计
+  - 点评设计稿或动画效果好不好
   anti_triggers:
   - 写营销文案
   - 生成新图片

@@ -63,6 +63,6 @@ meta:
   category: writing_comms
   subcategory: workplace_comms
   collections: []
-  base_weight: 1.0
+  base_weight: 0.75
   confidence: 0.85
   version: 1

@@ -38,9 +38,9 @@ meta:
   source_ref: cards.yaml#mece_breakdown
   source_hash: 826b2db681e4ef0d8cd27f88f7b4c37b9325d044af3262b3351ae82a53669ff8
   status: active
-  scope: domain_specific
-  shelf: on_shelf
-  tier: A
+  scope: universal
+  shelf: evergreen
+  tier: S
   category: personal_career
   subcategory: personal_os
   collections: []

@@ -46,9 +46,9 @@ meta:
   source_ref: models/M1.md#r-c2
   source_hash: cle_v0.7_m1_r_c2_v1
   status: active
-  scope: domain_specific
-  shelf: off_shelf
-  tier: A
+  scope: universal
+  shelf: evergreen
+  tier: S
   category: general
   subcategory: problem_solving
   collections:

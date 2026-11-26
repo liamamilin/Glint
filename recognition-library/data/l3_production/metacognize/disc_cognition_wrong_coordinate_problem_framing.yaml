@@ -54,6 +54,6 @@ meta:
   category: general
   subcategory: problem_solving
   collections: []
-  base_weight: 1.0
+  base_weight: 0.7
   confidence: 0.86
   version: 1

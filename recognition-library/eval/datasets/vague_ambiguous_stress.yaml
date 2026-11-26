@@ -1,0 +1,382 @@
+version: "1.0"
+dataset_name: "vague_ambiguous_stress"
+description: "模糊与高歧义问题专项压测集 — 36 条覆盖 6 类真实模糊输入（极短指代、想法发散、情绪混沌、半截输入、纯名词搜索式、抽象大词/伪问题）"
+
+cases:
+  # =========================================================================
+  # 1. 极短指代 / 缺上下文型 (vague_deictic, 6)
+  # =========================================================================
+  - id: vague_deictic_fix_it
+    bucket: vague_deictic
+    difficulty: hard
+    app_name: "ChatGPT"
+    input_text: "帮我改改"
+    expected_primitives: ["translate", "metacognize", "critique"]
+    expected_ids: ["pt_rewrite", "core_de_ai_rewrite", "pt_line_edit_markup", "core_clarify_first", "cle_m2_c_c1_specification"]
+    forbidden_ids: ["pt_sql_query", "pt_meal_plan", "disc_business_micro_glue", "pt_trip_itinerary"]
+    notes: "极短无对象请求：改写润色或先反问澄清，禁止跳无关垂直领域"
+
+  - id: vague_deictic_reasonable
+    bucket: vague_deictic
+    difficulty: hard
+    app_name: "ChatGPT"
+    input_text: "这个合理吗"
+    expected_primitives: ["critique", "metacognize"]
+    expected_ids: ["core_red_team", "pt_fact_check", "cle_m2_c_p20_uncertainty", "cle_m2_c_p19_evidence_linking", "core_clarify_first", "disc_cognition_explicit_assumptions_audit"]
+    forbidden_ids: ["pt_meal_plan", "pt_sql_query", "pt_trip_itinerary"]
+    notes: "极短合理性追问：审视假设/核查依据/先澄清"
+
+  - id: vague_deictic_analyze
+    bucket: vague_deictic
+    difficulty: hard
+    app_name: "Notion"
+    input_text: "帮我分析一下"
+    expected_primitives: ["metacognize", "deconstruct", "critique"]
+    expected_ids: ["core_clarify_first", "core_mece_breakdown", "cle_m1_r_p7_expansion", "cle_m2_c_p1_focus", "disc_cognition_question_refinement_loop"]
+    forbidden_ids: ["pt_meal_plan", "pt_sql_query", "pt_shopping_shortlist"]
+    notes: "零背景分析请求：先聚焦/反问或 MECE 结构拆解"
+
+  - id: vague_deictic_feels_off
+    bucket: vague_deictic
+    difficulty: hard
+    app_name: "Obsidian"
+    input_text: "有点不对劲"
+    expected_primitives: ["metacognize", "critique", "deconstruct"]
+    expected_ids: ["cle_m2_c_p2_explication", "cle_m2_c_c4_problem_formation", "core_clarify_first", "core_root_cause", "pt_sort_out_concern"]
+    forbidden_ids: ["pt_meal_plan", "pt_draft_email", "pt_shopping_shortlist"]
+    notes: "直觉察觉异常但说不清：想法显化/问题定义/先澄清"
+
+  - id: vague_deictic_what_next
+    bucket: vague_deictic
+    difficulty: hard
+    app_name: "Notes"
+    input_text: "接下来怎么办"
+    expected_primitives: ["metacognize", "deconstruct", "compress"]
+    expected_ids: ["core_clarify_first", "pt_sort_out_concern", "cle_m2_c_c13_plan_formation", "disc_life_simplifying_when_overwhelmed", "pt_project_plan"]
+    forbidden_ids: ["core_code_review", "pt_sql_query", "pt_meal_plan"]
+    notes: "卡住求下一步：先澄清或梳理事实与最小下一步"
+
+  - id: vague_deictic_give_advice
+    bucket: vague_deictic
+    difficulty: hard
+    app_name: "ChatGPT"
+    input_text: "给我点建议"
+    expected_primitives: ["metacognize", "diverge"]
+    expected_ids: ["core_clarify_first", "disc_cognition_question_refinement_loop", "cle_m2_c_p2_explication", "cle_m2_c_c1_specification", "pt_brainstorm"]
+    forbidden_ids: ["core_code_review", "pt_sql_query", "pt_meal_plan"]
+    notes: "完全空白的求建议：必须先反问澄清或显化意图"
+
+  # =========================================================================
+  # 2. 想法发散 / 起点模糊型 (vague_blank_slate, 6)
+  # =========================================================================
+  - id: vague_blank_side_hustle
+    bucket: vague_blank_slate
+    difficulty: hard
+    app_name: "Obsidian"
+    input_text: "想做点副业但不知道做什么好"
+    expected_primitives: ["metacognize", "diverge", "deconstruct"]
+    expected_ids: ["core_clarify_first", "disc_career_portfolio_of_small_bets", "disc_career_reversible_career_probes", "disc_business_niching_down_by_specific_user", "cle_m2_c_p16_desired_state", "disc_cognition_question_refinement_loop"]
+    forbidden_ids: ["core_code_review", "pt_debug_error", "pt_meal_plan"]
+    notes: "模糊副业探索：小步试探/收窄切口/先澄清"
+
+  - id: vague_blank_ai_efficiency
+    bucket: vague_blank_slate
+    difficulty: hard
+    app_name: "Notion"
+    input_text: "我想用AI提升一下工作效率，但不知道从哪开始"
+    expected_primitives: ["metacognize", "deconstruct", "converge"]
+    expected_ids: ["core_clarify_first", "disc_cognition_identifying_true_bottleneck", "disc_cognition_question_refinement_loop", "pt_tool_selection", "sit_ops_04", "core_mece_breakdown"]
+    forbidden_ids: ["pt_meal_plan", "pt_trip_itinerary", "pt_draft_email"]
+    notes: "宽泛提效诉求：先找真瓶颈/先澄清/选对AI能力"
+
+  - id: vague_blank_product_missing
+    bucket: vague_blank_slate
+    difficulty: hard
+    app_name: "Notion"
+    input_text: "感觉我这个产品缺了点什么，又说不上来"
+    expected_primitives: ["metacognize", "critique", "deconstruct"]
+    expected_ids: ["cle_m2_c_p2_explication", "cle_m2_c_c4_problem_formation", "core_clarify_first", "sit_prd_04", "pt_user_journey_map", "sit_cos_01"]
+    forbidden_ids: ["pt_meal_plan", "pt_sql_query", "pt_draft_email"]
+    notes: "模糊产品体感不满：显化直觉/走查核心路径/红队诊断"
+
+  - id: vague_blank_what_to_write
+    bucket: vague_blank_slate
+    difficulty: medium
+    app_name: "Obsidian"
+    input_text: "想写点东西持续输出，又不知道写啥主题"
+    expected_primitives: ["deconstruct", "metacognize", "diverge"]
+    expected_ids: ["disc_content_collecting_real_questions_from_readers", "core_clarify_first", "disc_content_series_with_clear_arc", "disc_content_field_notes_from_real_runs", "pt_brainstorm"]
+    forbidden_ids: ["core_code_review", "pt_debug_error", "pt_sql_query"]
+    notes: "无选题方向：从真问题找选题/实验日志/先澄清"
+
+  - id: vague_blank_messy_thoughts
+    bucket: vague_blank_slate
+    difficulty: medium
+    app_name: "Obsidian"
+    input_text: "手头一堆想法乱糟糟的，帮我理理头绪"
+    expected_primitives: ["deconstruct", "metacognize", "compress"]
+    expected_ids: ["core_mece_breakdown", "core_clarify_first", "cle_m2_c_p2_explication", "disc_life_simplifying_when_overwhelmed", "sit_os_01", "cle_m2_c_p1_focus"]
+    forbidden_ids: ["core_code_review", "pt_sql_query", "pt_meal_plan"]
+    notes: "思绪混乱理头绪：MECE拆解/显化想法/过载减法"
+
+  - id: vague_blank_career_change
+    bucket: vague_blank_slate
+    difficulty: medium
+    app_name: "Notes"
+    input_text: "我想转行，但是完全没想好去哪个方向"
+    expected_primitives: ["converge", "deconstruct", "metacognize"]
+    expected_ids: ["pt_career_options", "disc_career_reversible_career_probes", "core_clarify_first", "cle_m2_c_p17_preference_formation", "disc_life_micro_experiments_lifestyle"]
+    forbidden_ids: ["core_code_review", "pt_debug_error", "pt_resume_bullets"]
+    notes: "职业方向未定：比较职业方向/可撤回试探/偏好澄清"
+
+  # =========================================================================
+  # 3. 情绪夹杂 / 困境混沌型 (vague_emotional_fog, 6)
+  # =========================================================================
+  - id: vague_emo_burnout_drain
+    bucket: vague_emotional_fog
+    difficulty: hard
+    app_name: "Notes"
+    input_text: "最近干啥都提不起劲，觉得自己一直在内耗"
+    expected_primitives: ["deconstruct", "compress", "metacognize"]
+    expected_ids: ["disc_life_cognitive_bandwidth_hygiene", "pt_sort_out_concern", "sit_os_01", "disc_life_low_friction_joy_menu", "disc_life_physical_reset_rituals", "cle_m2_c_p2_explication"]
+    forbidden_ids: ["core_code_review", "pt_debug_error", "sit_ops_01", "pt_sql_query"]
+    notes: "精力枯竭与内耗：心理带宽审计/分清事实与下一步/低门槛恢复"
+
+  - id: vague_emo_busy_no_progress
+    bucket: vague_emotional_fog
+    difficulty: medium
+    app_name: "Obsidian"
+    input_text: "每天忙得要死但感觉毫无进展，挺迷茫的"
+    expected_primitives: ["metacognize", "compress", "deconstruct"]
+    expected_ids: ["disc_cognition_identifying_true_bottleneck", "disc_life_simplifying_when_overwhelmed", "pt_sort_out_concern", "disc_life_active_lifestyle_design", "sit_os_04"]
+    forbidden_ids: ["core_code_review", "pt_debug_error", "pt_performance_profile"]
+    notes: "假忙与迷茫：找真正瓶颈/过载减法/周度清仓复盘"
+
+  - id: vague_emo_team_misaligned
+    bucket: vague_emotional_fog
+    difficulty: hard
+    app_name: "Feishu"
+    input_text: "和团队沟通总是很累，感觉大家不在一个频道上"
+    expected_primitives: ["translate", "critique", "metacognize"]
+    expected_ids: ["cle_m3_i_c3_meaning_alignment", "cle_m3_i_p1_sharedness_verify", "cle_m3_i_c6_disagreement_structuring", "disc_career_personal_operating_manual", "cle_m3_i_c5_frame_alignment"]
+    forbidden_ids: ["core_code_review", "pt_debug_error", "pt_draft_email"]
+    notes: "团队不在同一频道：含义对齐/共享理解核验/问题框架对齐"
+
+  - id: vague_emo_persist_or_quit
+    bucket: vague_emotional_fog
+    difficulty: medium
+    app_name: "Obsidian"
+    input_text: "做了很久的项目没啥起色，不知道该继续坚持还是放弃"
+    expected_primitives: ["metacognize", "critique", "converge"]
+    expected_ids: ["disc_cognition_avoiding_sunk_cost_trap", "disc_cognition_stopping_rules_and_cadence", "disc_cognition_making_decisions_under_uncertainty", "core_premortem", "sit_os_04"]
+    forbidden_ids: ["core_code_review", "pt_project_plan"]
+    notes: "继续还是止损：沉没成本/停手规则/不完全信息拍板"
+
+  - id: vague_emo_gut_doubt
+    bucket: vague_emotional_fog
+    difficulty: hard
+    app_name: "Notion"
+    input_text: "总觉得这个决定哪儿怪怪的，但又说不出具体理由"
+    expected_primitives: ["metacognize", "critique"]
+    expected_ids: ["cle_m2_c_p2_explication", "disc_cognition_explicit_assumptions_audit", "core_premortem", "disc_cognition_looking_for_disconfirming_evidence", "pt_decision_precheck", "cle_m2_c_p10_assumption_explication"]
+    forbidden_ids: ["core_code_review", "pt_debug_error", "pt_draft_email"]
+    notes: "直觉怀疑某决定：显化隐含想法/审计默认假设/事前验尸"
+
+  - id: vague_emo_too_many_priorities
+    bucket: vague_emotional_fog
+    difficulty: easy
+    app_name: "Notion"
+    input_text: "事情太多太杂了，感觉每个都很重要但又顾不过来"
+    expected_primitives: ["compress", "converge", "deconstruct"]
+    expected_ids: ["disc_life_simplifying_when_overwhelmed", "sit_os_01", "pt_prioritize_backlog", "pt_weekly_calendar", "sit_os_04", "cle_m2_c_p15_prioritization"]
+    forbidden_ids: ["core_code_review", "pt_debug_error"]
+    notes: "优先级过载：过载先做减法/需求优先级/周度清仓"
+
+  # =========================================================================
+  # 4. 半截输入 / 打字中途呼出型 (vague_half_typed, 6)
+  # =========================================================================
+  - id: vague_half_tell_boss
+    bucket: vague_half_typed
+    difficulty: hard
+    app_name: "Feishu"
+    input_text: "帮我想想怎么跟老板说..."
+    expected_primitives: ["translate", "deconstruct", "metacognize"]
+    expected_ids: ["pt_difficult_conversation", "pt_negotiation_prep", "pt_escalate_blocker", "pt_exec_brief", "core_clarify_first", "pt_perspective_rehearsal"]
+    forbidden_ids: ["core_code_review", "pt_sql_query", "pt_meal_plan"]
+    notes: "打字中断：沟通准备/难开口演练/先澄清"
+
+  - id: vague_half_research_agent
+    bucket: vague_half_typed
+    difficulty: hard
+    app_name: "ChatGPT"
+    input_text: "最近在研究大模型Agent，感觉"
+    expected_primitives: ["deconstruct", "metacognize", "critique"]
+    expected_ids: ["pt_source_research", "pt_research_question", "disc_cognition_separating_signal_from_hype", "disc_cognition_weak_signal_radar", "core_clarify_first"]
+    forbidden_ids: ["pt_meal_plan", "pt_draft_email", "pt_shopping_shortlist"]
+    notes: "研究途中截断：主题调研/收窄研究问题/挤泡沫"
+
+  - id: vague_half_code_feels_weird
+    bucket: vague_half_typed
+    difficulty: hard
+    app_name: "Cursor"
+    input_text: "我写了一段代码但总感觉"
+    expected_primitives: ["critique", "deconstruct", "metacognize"]
+    expected_ids: ["core_code_review", "pt_review_code", "pt_refactor_code", "core_clarify_first", "pt_explain_code"]
+    forbidden_ids: ["pt_meal_plan", "pt_draft_email", "pt_trip_itinerary"]
+    notes: "Cursor 中途截断：代码审查/重构/先澄清"
+
+  - id: vague_half_new_process_pushback
+    bucket: vague_half_typed
+    difficulty: hard
+    app_name: "Feishu"
+    input_text: "公司要推一个新流程，但是大家"
+    expected_primitives: ["deconstruct", "critique", "converge", "metacognize"]
+    expected_ids: ["pt_stakeholder_map", "pt_change_announcement", "core_premortem", "pt_resolve_disagreement", "disc_business_testing_unspoken_buyer_assumptions", "core_clarify_first"]
+    forbidden_ids: ["core_code_review", "pt_sql_query", "pt_meal_plan"]
+    notes: "组织推进阻力截断：干系人梳理/事前验尸/变更公告"
+
+  - id: vague_half_quit_for_grad_school
+    bucket: vague_half_typed
+    difficulty: medium
+    app_name: "Notes"
+    input_text: "我在考虑要不要辞职去读研，主要是"
+    expected_primitives: ["converge", "metacognize", "critique"]
+    expected_ids: ["core_decision_matrix", "pt_compare_options", "pt_career_options", "disc_cognition_making_decisions_under_uncertainty", "disc_career_reversible_career_probes", "core_premortem"]
+    forbidden_ids: ["core_code_review", "pt_resume_bullets", "pt_meal_plan"]
+    notes: "重大人生决策截断：对比决策/职业方向/不完全信息拍板"
+
+  - id: vague_half_client_too_expensive
+    bucket: vague_half_typed
+    difficulty: medium
+    app_name: "WeChat"
+    input_text: "客户说我们的产品太贵了，其实"
+    expected_primitives: ["deconstruct", "translate", "metacognize"]
+    expected_ids: ["pt_sales_objection", "pt_value_proposition", "disc_business_clear_offer_and_positioning", "pt_negotiation_prep", "disc_business_charging_for_speed_and_certainty"]
+    forbidden_ids: ["core_code_review", "pt_shopping_shortlist", "pt_household_budget"]
+    notes: "销售异议场景截断：客户异议回应/价值主张"
+
+  # =========================================================================
+  # 5. 纯名词堆砌 / 搜索引擎式无动词输入 (vague_noun_only, 6)
+  # =========================================================================
+  - id: vague_noun_pkm
+    bucket: vague_noun_only
+    difficulty: hard
+    app_name: "Obsidian"
+    input_text: "个人知识管理"
+    expected_primitives: ["deconstruct", "metacognize"]
+    expected_ids: ["disc_life_frictionless_capture_and_review", "sit_ops_02", "disc_life_personal_knowledge_decay_pruning", "disc_build_personal_context_api", "pt_source_research", "pt_study_notes"]
+    forbidden_ids: ["core_code_review", "pt_meal_plan", "pt_draft_email"]
+    notes: "纯名词搜索式输入：知识库归档/随手记/知识断舍离"
+
+  - id: vague_noun_time_procrastination
+    bucket: vague_noun_only
+    difficulty: medium
+    app_name: "Notes"
+    input_text: "时间管理和拖延"
+    expected_primitives: ["deconstruct", "compress"]
+    expected_ids: ["disc_career_protecting_deep_focus_blocks", "disc_career_energy_aligned_scheduling", "pt_routine_design", "pt_weekly_calendar", "sit_os_01", "disc_life_default_environment_engineering"]
+    forbidden_ids: ["core_code_review", "pt_debug_error", "pt_sql_query"]
+    notes: "纯名词：深度专注块/精力排程/习惯设计/认知降噪"
+
+  - id: vague_noun_ai_moat
+    bucket: vague_noun_only
+    difficulty: hard
+    app_name: "ChatGPT"
+    input_text: "AI 时代的个人护城河"
+    expected_primitives: ["deconstruct", "diverge", "metacognize"]
+    expected_ids: ["disc_career_specifier_and_reviewer", "disc_career_skill_stacking_monopoly", "disc_cognition_second_order_consequences", "pt_source_research", "pt_research_question"]
+    forbidden_ids: ["core_code_review", "pt_debug_error", "pt_meal_plan"]
+    notes: "纯名词宽泛命题：定义与验收护城河/技能组合垄断/二阶效应"
+
+  - id: vague_noun_xhs_launch
+    bucket: vague_noun_only
+    difficulty: hard
+    app_name: "Notion"
+    input_text: "小红书起号"
+    expected_primitives: ["deconstruct", "diverge", "translate"]
+    expected_ids: ["disc_business_niching_down_by_specific_user", "pt_content_calendar", "disc_content_reader_first_opening_hook", "pt_source_research", "pt_how_to", "pt_campaign_plan"]
+    forbidden_ids: ["core_code_review", "pt_debug_error", "pt_sql_query"]
+    notes: "极短纯名词运营目标：受众收窄/内容日历/操作步骤"
+
+  - id: vague_noun_low_comm_efficiency
+    bucket: vague_noun_only
+    difficulty: medium
+    app_name: "Feishu"
+    input_text: "沟通效率低"
+    expected_primitives: ["translate", "deconstruct", "critique"]
+    expected_ids: ["cle_m3_i_c3_meaning_alignment", "disc_career_asking_high_signal_questions", "disc_career_personal_operating_manual", "pt_async_update", "cle_m4_a_p1_request_formation", "pt_meeting_agenda"]
+    forbidden_ids: ["core_code_review", "pt_performance_profile", "pt_debug_error"]
+    notes: "纯名词痛点：沟通对齐/高信号提问/个人协作说明书"
+
+  - id: vague_noun_buy_vs_rent
+    bucket: vague_noun_only
+    difficulty: easy
+    app_name: "ChatGPT"
+    input_text: "买房还是租房"
+    expected_primitives: ["converge", "critique"]
+    expected_ids: ["core_decision_matrix", "pt_compare_options", "disc_cognition_making_decisions_under_uncertainty", "disc_cognition_base_rates_and_outliers", "cle_m2_c_c10_decision_formation"]
+    forbidden_ids: ["core_code_review", "pt_offer_compare", "sit_leg_01"]
+    notes: "极短无动词二选一：收敛对比决策"
+
+  # =========================================================================
+  # 6. 概念笼统 / 抽象大词 / 疑似伪问题 (vague_abstract, 6)
+  # =========================================================================
+  - id: vague_abs_make_product_better
+    bucket: vague_abstract
+    difficulty: hard
+    app_name: "Notion"
+    input_text: "我们怎么把产品做得更好用？"
+    expected_primitives: ["metacognize", "deconstruct", "critique"]
+    expected_ids: ["cle_m2_c_c1_specification", "core_clarify_first", "disc_cognition_question_refinement_loop", "pt_usability_test_plan", "sit_prd_04", "pt_user_journey_map"]
+    forbidden_ids: ["core_code_review", "pt_sql_query", "pt_meal_plan"]
+    notes: "极笼统产品诉求：先具体化/澄清问题/核心路径走查/可用性测试"
+
+  - id: vague_abs_not_premium_enough
+    bucket: vague_abstract
+    difficulty: hard
+    app_name: "Figma"
+    input_text: "感觉这个方案不够高级，帮我优化一下"
+    expected_primitives: ["metacognize", "critique", "deconstruct"]
+    expected_ids: ["cle_m2_c_c1_specification", "cle_m3_i_c2_clarification", "core_clarify_first", "pt_visual_critique", "sit_des_01", "pt_critique_draft", "sit_des_04"]
+    forbidden_ids: ["core_code_review", "pt_debug_error", "pt_sql_query"]
+    notes: "典型抽象主观词“高级”：先具体化/澄清标准，或视觉评审"
+
+  - id: vague_abs_team_execution
+    bucket: vague_abstract
+    difficulty: hard
+    app_name: "Feishu"
+    input_text: "怎么提升我们团队的执行力？"
+    expected_primitives: ["deconstruct", "metacognize"]
+    expected_ids: ["cle_m1_r_p7_expansion", "cle_m2_c_c1_specification", "disc_career_explicit_expectation_alignment", "cle_m4_a_p9_task_definition", "disc_cognition_identifying_true_bottleneck", "core_clarify_first"]
+    forbidden_ids: ["core_code_review", "pt_performance_profile", "pt_debug_error"]
+    notes: "典型管理大词“执行力”：展开溯源/具体化/对齐验收标准/找瓶颈"
+
+  - id: vague_abs_deeper_writing
+    bucket: vague_abstract
+    difficulty: medium
+    app_name: "Obsidian"
+    input_text: "我想让我的文章写得更有深度"
+    expected_primitives: ["deconstruct", "critique", "metacognize"]
+    expected_ids: ["sit_edt_02", "disc_content_concrete_examples_over_abstract_claims", "pt_critique_draft", "disc_content_field_notes_from_real_runs", "cle_m2_c_c1_specification", "core_clarify_first"]
+    forbidden_ids: ["core_code_review", "pt_debug_error", "pt_summarize"]
+    notes: "抽象写作目标“有深度”：逻辑骨架/前后对比案例/初稿评审/具体化"
+
+  - id: vague_abs_make_money_fast
+    bucket: vague_abstract
+    difficulty: hard
+    app_name: "ChatGPT"
+    input_text: "怎么才能快速赚钱？"
+    expected_primitives: ["metacognize", "critique", "deconstruct"]
+    expected_ids: ["disc_cognition_wrong_coordinate_problem_framing", "disc_cognition_question_refinement_loop", "core_clarify_first", "disc_cognition_explicit_assumptions_audit", "disc_cognition_base_rates_and_outliers", "cle_m2_c_c1_specification"]
+    forbidden_ids: ["core_code_review", "pt_household_budget", "pt_sql_query"]
+    notes: "典型伪问题/过宽问题：换坐标系/改写问题/先澄清/看基准率"
+
+  - id: vague_abs_is_idea_viable
+    bucket: vague_abstract
+    difficulty: easy
+    app_name: "Notion"
+    input_text: "帮我评估一下这个想法靠不靠谱"
+    expected_primitives: ["critique", "metacognize"]
+    expected_ids: ["core_premortem", "core_red_team", "sit_cos_01", "pt_decision_precheck", "disc_cognition_steelman_adversarial", "core_clarify_first"]
+    forbidden_ids: ["core_code_review", "pt_debug_error", "pt_meal_plan"]
+    notes: "缺对象的想法评估：红队拷问/事前验尸/提前检验计划/先澄清"

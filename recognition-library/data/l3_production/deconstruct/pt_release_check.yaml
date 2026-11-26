@@ -26,6 +26,8 @@ routing:
   - release check 做一下
   - 这次发布有什么要验的
   - 发版前帮我理一下 checklist
+  - 全面回归整个项目
+  - 上线前全项目回归检查清单
   anti_triggers:
   - 仅做代码 review 不涉及发布
   - 需求评审或方案设计阶段

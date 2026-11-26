@@ -1,0 +1,751 @@
+version: "1.0"
+dataset_name: "everyday_simulated"
+description: "模拟普通人日常输入综合基准集 — 72 条跨 9 大真实场景（学习消化、消费生活、人际情绪、职场求职、写作表达、商业产品、工程编程、极短模糊、边界对抗）"
+
+cases:
+  # =========================================================================
+  # 1. 日常学习与知识消化 (learning_digest, 8)
+  # =========================================================================
+  - id: daily_learn_inflation_explain
+    bucket: learning_digest
+    difficulty: easy
+    app_name: "ChatGPT"
+    input_text: "帮我解释一下什么是通货膨胀，说人话"
+    expected_primitives: ["translate", "deconstruct"]
+    expected_ids: ["pt_explain", "sit_os_02", "disc_career_translating_jargon_for_stakeholders"]
+    forbidden_ids: ["core_code_review", "pt_debug_error", "disc_business_open_source_funnel"]
+    notes: "通俗概念解释，首选例子解释概念或概念记忆编码"
+
+  - id: daily_learn_video_editing_plan
+    bucket: learning_digest
+    difficulty: medium
+    app_name: "Notion"
+    input_text: "想从零开始学视频剪辑，每天只有一小时怎么安排"
+    expected_primitives: ["deconstruct", "converge"]
+    expected_ids: ["pt_study_plan", "disc_career_deliberate_skill_upgrade_sprint", "pt_choose_learning_resource", "pt_project_plan"]
+    forbidden_ids: ["pt_video_edit_plan", "core_code_review", "pt_brainstorm"]
+    notes: "零基础学习规划（不是具体素材剪辑节奏方案）"
+
+  - id: daily_learn_thick_book_distill
+    bucket: learning_digest
+    difficulty: easy
+    app_name: "Obsidian"
+    input_text: "这本专业书太厚了，怎么快速抓住最核心的观点"
+    expected_primitives: ["compress", "deconstruct"]
+    expected_ids: ["disc_content_distilling_long_reads_into_key_shifts", "pt_summarize", "pt_study_notes", "cle_m1_r_p6_compression"]
+    forbidden_ids: ["core_code_review", "pt_draft_email"]
+    notes: "长内容提炼核心观点/关键转向"
+
+  - id: daily_learn_concept_confusion
+    bucket: learning_digest
+    difficulty: medium
+    app_name: "ChatGPT"
+    input_text: "我老是搞混基金定投和波段操作，怎么确认自己真的懂了"
+    expected_primitives: ["metacognize", "translate", "deconstruct"]
+    expected_ids: ["pt_check_understanding", "disc_career_teaching_to_cement_mastery", "pt_explain", "cle_m1_r_p2_differentiation", "pt_retrieval_practice"]
+    forbidden_ids: ["core_code_review", "pt_debug_error"]
+    notes: "概念误解诊断 / 费曼检验 / 概念区分"
+
+  - id: daily_learn_english_vocab
+    bucket: learning_digest
+    difficulty: easy
+    app_name: "Chrome"
+    input_text: "把这段英文新闻里最地道的表达挑出来给我练练"
+    expected_primitives: ["translate", "deconstruct", "diverge"]
+    expected_ids: ["pt_vocabulary_in_context", "pt_reading_graded", "pt_practice_quiz", "pt_flashcards"]
+    forbidden_ids: ["core_code_review", "pt_sql_query"]
+    notes: "真实语境学高频词组 / 英语学习"
+
+  - id: daily_learn_mistake_review
+    bucket: learning_digest
+    difficulty: medium
+    app_name: "Notes"
+    input_text: "考公行测资料分析老是算错，帮我复盘一下错题规律"
+    expected_primitives: ["deconstruct", "critique", "metacognize"]
+    expected_ids: ["pt_review_mistakes", "disc_career_building_a_personal_error_log", "pt_retrieval_practice"]
+    forbidden_ids: ["core_code_review", "pt_debug_error", "pt_ci_failure"]
+    notes: "错题模式归因，不要串台到代码排障"
+
+  - id: daily_learn_mini_lesson
+    bucket: learning_digest
+    difficulty: medium
+    app_name: "Notion"
+    input_text: "下个月要给小学生讲一节15分钟的航天科普课，帮我设计一下"
+    expected_primitives: ["deconstruct", "translate"]
+    expected_ids: ["pt_teach_lesson", "pt_slides_outline", "pt_explain"]
+    forbidden_ids: ["core_code_review", "pt_api_docs"]
+    notes: "设计微型课"
+
+  - id: daily_learn_pdf_evidence
+    bucket: learning_digest
+    difficulty: easy
+    app_name: "Chrome"
+    input_text: "这份40页的行业PDF太长了，帮我按页挑出带数据证据的重点"
+    expected_primitives: ["compress", "deconstruct", "critique"]
+    expected_ids: ["pt_pdf_key_points", "pt_paper_brief", "pt_summarize", "cle_m2_c_p19_evidence_linking"]
+    forbidden_ids: ["pt_table_from_pdf", "core_code_review"]
+    notes: "按页定位 PDF 重点"
+
+  # =========================================================================
+  # 2. 消费、生活与出行决策 (life_daily, 8)
+  # =========================================================================
+  - id: daily_life_headphone_shopping
+    bucket: life_daily
+    difficulty: easy
+    app_name: "ChatGPT"
+    input_text: "预算3500买降噪耳机，索尼XM5和Bose QC Ultra纠结怎么选"
+    expected_primitives: ["converge", "critique"]
+    expected_ids: ["pt_shopping_shortlist", "core_decision_matrix", "pt_compare_options", "disc_content_opinionated_comparisons"]
+    forbidden_ids: ["pt_offer_compare", "core_code_review"]
+    notes: "购物候选清单筛选 / 多维对比决策"
+
+  - id: daily_life_fridge_meal
+    bucket: life_daily
+    difficulty: easy
+    app_name: "Notes"
+    input_text: "冰箱里只剩两个番茄、三个鸡蛋和半块豆腐，晚上做什么快手菜"
+    expected_primitives: ["deconstruct", "translate"]
+    expected_ids: ["pt_meal_plan", "pt_recipe_scale"]
+    forbidden_ids: ["core_code_review", "pt_brainstorm", "pt_project_plan"]
+    notes: "现有食材规划餐食"
+
+  - id: daily_life_chengdu_trip
+    bucket: life_daily
+    difficulty: easy
+    app_name: "Notes"
+    input_text: "国庆带爸妈去成都玩4天，不想走太多路怎么排行程"
+    expected_primitives: ["deconstruct"]
+    expected_ids: ["pt_trip_itinerary", "pt_packing_list", "pt_event_plan"]
+    forbidden_ids: ["pt_project_plan", "core_code_review", "pt_weekly_calendar"]
+    notes: "可调整行程规划"
+
+  - id: daily_life_budget_mess
+    bucket: life_daily
+    difficulty: medium
+    app_name: "Notes"
+    input_text: "每个月工资一万多不知道花哪去了，想理一下开销做个预算"
+    expected_primitives: ["deconstruct", "compress"]
+    expected_ids: ["pt_household_budget", "core_mece_breakdown", "pt_explore_data"]
+    forbidden_ids: ["sit_leg_02", "disc_business_transparent_simple_pricing", "core_code_review"]
+    notes: "家庭预算分类，不要串台到 SaaS 定价"
+
+  - id: daily_life_wifi_troubleshoot
+    bucket: life_daily
+    difficulty: medium
+    app_name: "ChatGPT"
+    input_text: "家里WiFi隔一堵墙就老断流，怎么一步步排查原因"
+    expected_primitives: ["deconstruct", "critique"]
+    expected_ids: ["pt_troubleshoot_everyday", "core_root_cause", "pt_support_troubleshoot"]
+    forbidden_ids: ["core_code_review", "pt_ci_failure", "pt_refactor_code"]
+    notes: "日常故障排查清单 / 根因排查"
+
+  - id: daily_life_rent_contract
+    bucket: life_daily
+    difficulty: easy
+    app_name: "WeChat"
+    input_text: "租房合同里写提前退租扣两个月押金，帮我看看这份合同还有哪些坑"
+    expected_primitives: ["critique", "deconstruct"]
+    expected_ids: ["sit_leg_01", "pt_compare_policies", "cle_m2_c_p19_evidence_linking"]
+    forbidden_ids: ["core_code_review", "pt_draft_email"]
+    notes: "合同条款排雷仪"
+
+  - id: daily_life_hospital_prep
+    bucket: life_daily
+    difficulty: medium
+    app_name: "Notes"
+    input_text: "明天去医院复查，之前拍过两次片子、吃过三种药，怕见医生说漏了怎么准备"
+    expected_primitives: ["deconstruct", "compress"]
+    expected_ids: ["pt_appointment_prep", "pt_timeline", "pt_how_to"]
+    forbidden_ids: ["pt_meeting_agenda", "core_code_review"]
+    notes: "预约前材料整理"
+
+  - id: daily_life_flight_delay
+    bucket: life_daily
+    difficulty: easy
+    app_name: "WeChat"
+    input_text: "航班突然取消了，明天下午还有重要会议，帮我重排两套出行方案"
+    expected_primitives: ["deconstruct", "converge"]
+    expected_ids: ["pt_trip_disruption", "pt_trip_itinerary", "pt_compare_options"]
+    forbidden_ids: ["core_code_review", "pt_meeting_agenda"]
+    notes: "行程变动替代方案"
+
+  # =========================================================================
+  # 3. 人际沟通与情绪压力 (comms_emotion, 8)
+  # =========================================================================
+  - id: daily_comms_refuse_borrow
+    bucket: comms_emotion
+    difficulty: medium
+    app_name: "WeChat"
+    input_text: "远房亲戚找我借三万块，不想借但又怕伤和气，怎么委婉拒绝"
+    expected_primitives: ["translate", "deconstruct"]
+    expected_ids: ["pt_difficult_conversation", "disc_life_saying_no_with_default_criteria", "pt_register_variants", "pt_perspective_rehearsal"]
+    forbidden_ids: ["pt_customer_complaint", "pt_sales_objection", "core_code_review"]
+    notes: "难开口对话演练 / 用预设标准说不"
+
+  - id: daily_comms_delay_email
+    bucket: comms_emotion
+    difficulty: easy
+    app_name: "Mail"
+    input_text: "跟客户约好今天交稿结果要延期两天，帮我写封诚恳不敷衍的邮件"
+    expected_primitives: ["translate"]
+    expected_ids: ["pt_draft_email", "pt_apology_repair", "pt_follow_up", "core_de_ai_rewrite", "cle_m4_a_c3_commitment_renegotiation"]
+    forbidden_ids: ["core_code_review", "pt_debug_error"]
+    notes: "起草邮件 / 道歉修复 / 承诺重新协商"
+
+  - id: daily_comms_apology_colleague
+    bucket: comms_emotion
+    difficulty: easy
+    app_name: "Feishu"
+    input_text: "不小心把同事做好的共享表格覆盖了，怎么道歉补救比较得体"
+    expected_primitives: ["translate", "critique"]
+    expected_ids: ["pt_apology_repair", "pt_difficult_conversation", "pt_perspective_rehearsal"]
+    forbidden_ids: ["pt_workbook_audit", "pt_formula_debug", "core_code_review"]
+    notes: "为失误准备道歉，不要被“表格”带偏去表格公式排错"
+
+  - id: daily_comms_overwhelmed_brain
+    bucket: comms_emotion
+    difficulty: medium
+    app_name: "Notes"
+    input_text: "最近事情堆成山，脑子嗡嗡的啥都推不动，怎么办"
+    expected_primitives: ["compress", "deconstruct", "metacognize"]
+    expected_ids: ["disc_life_simplifying_when_overwhelmed", "sit_os_01", "pt_sort_out_concern", "disc_life_cognitive_bandwidth_hygiene", "disc_life_physical_reset_rituals"]
+    forbidden_ids: ["core_code_review", "pt_prioritize_backlog", "pt_debug_error"]
+    notes: "过载减法 / 认知降噪 / 分清事实与下一步"
+
+  - id: daily_comms_partner_conflict
+    bucket: comms_emotion
+    difficulty: medium
+    app_name: "Feishu"
+    input_text: "和合伙人因为要不要招人吵了半天没结果，怎么理清双方分歧"
+    expected_primitives: ["critique", "converge", "deconstruct"]
+    expected_ids: ["cle_m3_i_c6_disagreement_structuring", "pt_resolve_disagreement", "pt_negotiation_prep"]
+    forbidden_ids: ["core_code_review", "pt_draft_email"]
+    notes: "分歧结构定位 / 分歧调解准备"
+
+  - id: daily_comms_vague_boss
+    bucket: comms_emotion
+    difficulty: hard
+    app_name: "Feishu"
+    input_text: "老板只回了一句'这个方案感觉还差点意思'，我该怎么问清楚他到底要啥"
+    expected_primitives: ["translate", "metacognize", "deconstruct"]
+    expected_ids: ["pt_ask_for_feedback", "cle_m3_i_c2_clarification", "disc_career_explicit_expectation_alignment", "disc_career_asking_high_signal_questions", "core_clarify_first"]
+    forbidden_ids: ["core_code_review", "pt_critique_draft"]
+    notes: "请求聚焦反馈 / 歧义局部澄清 / 对齐验收标准"
+
+  - id: daily_comms_ask_for_help
+    bucket: comms_emotion
+    difficulty: medium
+    app_name: "WeChat"
+    input_text: "想在技术群里问大佬一个部署报错，怎么描述别人才愿意回"
+    expected_primitives: ["translate", "deconstruct"]
+    expected_ids: ["pt_ask_for_help", "disc_career_asking_high_signal_questions", "pt_repro_brief"]
+    forbidden_ids: ["pt_draft_email", "core_de_ai_rewrite"]
+    notes: "把卡住的事写成可答问题 / 高信号提问清单"
+
+  - id: daily_comms_doomscroll_sleep
+    bucket: comms_emotion
+    difficulty: medium
+    app_name: "Notes"
+    input_text: "下班太累了每天晚上躺床上刷手机停不下来，睡眠越来越差怎么办"
+    expected_primitives: ["deconstruct", "metacognize"]
+    expected_ids: ["disc_life_frictionless_evening_wind_down", "disc_life_default_environment_engineering", "pt_routine_design", "disc_life_low_friction_joy_menu", "disc_life_making_healthy_defaults_easier"]
+    forbidden_ids: ["core_code_review", "pt_debug_error"]
+    notes: "睡前关机缓冲 / 环境摩擦力设计 / 习惯设计"
+
+  # =========================================================================
+  # 4. 职场求职与职业成长 (career_work, 8)
+  # =========================================================================
+  - id: daily_career_resume_bullets
+    bucket: career_work
+    difficulty: easy
+    app_name: "Notion"
+    input_text: "把这段做线下活动的经历压成3条有数据亮点的简历要点"
+    expected_primitives: ["compress", "translate"]
+    expected_ids: ["pt_resume_bullets", "pt_resume_tailor", "pt_portfolio_case"]
+    forbidden_ids: ["pt_event_plan", "core_code_review"]
+    notes: "项目经历压成简历要点"
+
+  - id: daily_career_interview_debrief
+    bucket: career_work
+    difficulty: easy
+    app_name: "Notes"
+    input_text: "刚面完一家公司感觉发挥一般，帮我复盘一下哪几个问题答砸了"
+    expected_primitives: ["critique", "metacognize"]
+    expected_ids: ["pt_interview_debrief", "pt_interview_practice", "pt_star_stories"]
+    forbidden_ids: ["pt_retro_plan", "core_code_review"]
+    notes: "面试复盘"
+
+  - id: daily_career_offer_choice
+    bucket: career_work
+    difficulty: easy
+    app_name: "ChatGPT"
+    input_text: "拿到两个offer，一个国企稳定但钱少，一个互联网高薪但加班，好纠结"
+    expected_primitives: ["converge", "metacognize"]
+    expected_ids: ["pt_offer_compare", "core_decision_matrix", "pt_compare_options", "pt_career_options"]
+    forbidden_ids: ["pt_shopping_shortlist", "core_code_review"]
+    notes: "多 Offer 对比决策"
+
+  - id: daily_career_weekly_report
+    bucket: career_work
+    difficulty: easy
+    app_name: "Feishu"
+    input_text: "每周五写周报都像记流水账，帮我改成老板一眼能看懂重点的版本"
+    expected_primitives: ["translate", "compress"]
+    expected_ids: ["pt_status_update", "pt_exec_brief", "pt_async_update"]
+    forbidden_ids: ["pt_meeting_notes", "core_code_review"]
+    notes: "写项目周报 / 一页简报"
+
+  - id: daily_career_pivot_probe
+    bucket: career_work
+    difficulty: medium
+    app_name: "Obsidian"
+    input_text: "想从运营转去做产品经理，不想直接裸辞怎么低成本试水"
+    expected_primitives: ["deconstruct", "converge", "diverge"]
+    expected_ids: ["disc_career_reversible_career_probes", "pt_career_options", "disc_career_portfolio_of_small_bets", "disc_life_micro_experiments_lifestyle"]
+    forbidden_ids: ["pt_product_requirements", "core_code_review"]
+    notes: "可撤回的职业试探 / 比较职业方向"
+
+  - id: daily_career_tech_to_exec
+    bucket: career_work
+    difficulty: easy
+    app_name: "Feishu"
+    input_text: "把这段数据中台架构升级方案翻译成业务老大能听懂的商业价值"
+    expected_primitives: ["translate", "compress"]
+    expected_ids: ["disc_career_translating_jargon_for_stakeholders", "pt_exec_brief"]
+    forbidden_ids: ["pt_api_docs", "core_code_review"]
+    notes: "跨语言翻译器 / 给决策者写简报"
+
+  - id: daily_career_first_week
+    bucket: career_work
+    difficulty: easy
+    app_name: "Notion"
+    input_text: "下周入职新团队，第一周该怎么安排快速上手不踩坑"
+    expected_primitives: ["deconstruct"]
+    expected_ids: ["pt_onboarding_plan", "pt_project_plan", "pt_how_to"]
+    forbidden_ids: ["core_code_review", "pt_study_plan"]
+    notes: "新同事首周上手计划"
+
+  - id: daily_career_jd_gap
+    bucket: career_work
+    difficulty: medium
+    app_name: "Notion"
+    input_text: "帮我对照这个产品经理JD看看我目前能力缺哪块，怎么补强"
+    expected_primitives: ["deconstruct", "translate"]
+    expected_ids: ["pt_skill_gap_plan", "pt_job_description", "pt_resume_tailor"]
+    forbidden_ids: ["core_code_review", "pt_product_requirements"]
+    notes: "岗位要求转技能补强计划 / 拆解岗位说明"
+
+  # =========================================================================
+  # 5. 写作、内容与表达加工 (writing_content, 8)
+  # =========================================================================
+  - id: daily_write_de_ai_summary
+    bucket: writing_content
+    difficulty: easy
+    app_name: "Notion"
+    input_text: "帮我改一下这段年终总结，现在读起来官话和AI味太重了"
+    expected_primitives: ["translate", "compress"]
+    expected_ids: ["core_de_ai_rewrite", "pt_rewrite", "sit_edt_01", "disc_content_tightening_prose_by_cutting_fluff"]
+    forbidden_ids: ["core_code_review", "pt_summarize"]
+    notes: "去 AI 味极简重写 / 润色"
+
+  - id: daily_write_opening_hook
+    bucket: writing_content
+    difficulty: easy
+    app_name: "Obsidian"
+    input_text: "我写的这篇文章开头铺垫太慢热了，帮我改得前三句就能抓住读者"
+    expected_primitives: ["compress", "translate", "critique"]
+    expected_ids: ["disc_content_reader_first_opening_hook", "disc_content_tightening_prose_by_cutting_fluff", "pt_critique_draft"]
+    forbidden_ids: ["core_code_review", "pt_summarize"]
+    notes: "前三句直击切口"
+
+  - id: daily_write_social_headlines
+    bucket: writing_content
+    difficulty: easy
+    app_name: "Notion"
+    input_text: "这篇笔记写完了，帮我想几个不同角度、抓人眼球的小红书标题"
+    expected_primitives: ["diverge", "compress"]
+    expected_ids: ["pt_headlines", "pt_campaign_copy", "disc_content_reader_first_opening_hook"]
+    forbidden_ids: ["core_code_review", "pt_summarize"]
+    notes: "多方向标题生成"
+
+  - id: daily_write_voice_to_article
+    bucket: writing_content
+    difficulty: easy
+    app_name: "Obsidian"
+    input_text: "录音转出来的两千字口语稿乱七八糟，帮我整理成能发的公众号文章"
+    expected_primitives: ["translate", "deconstruct"]
+    expected_ids: ["pt_turn_voice_to_text", "pt_rewrite", "sit_edt_02"]
+    forbidden_ids: ["pt_meeting_notes", "pt_video_captions"]
+    notes: "口述稿整理成文章"
+
+  - id: daily_write_repurpose_channels
+    bucket: writing_content
+    difficulty: easy
+    app_name: "Notion"
+    input_text: "把这篇长科普文章同时改写成小红书图文、即刻短帖和公众号版本"
+    expected_primitives: ["translate"]
+    expected_ids: ["pt_repurpose_content", "sit_grw_01"]
+    forbidden_ids: ["pt_summarize", "core_code_review"]
+    notes: "一份素材多渠道改写 / 一鱼多吃分发矩阵"
+
+  - id: daily_write_natural_en_trans
+    bucket: writing_content
+    difficulty: easy
+    app_name: "Chrome"
+    input_text: "帮我把这段产品介绍翻译成地道英文，千万别像机翻"
+    expected_primitives: ["translate"]
+    expected_ids: ["pt_translate", "sit_edt_03", "pt_localize_ui"]
+    forbidden_ids: ["core_de_ai_rewrite", "core_code_review"]
+    notes: "按场景翻译 / 双语地道本地化"
+
+  - id: daily_write_critique_draft
+    bucket: writing_content
+    difficulty: easy
+    app_name: "Obsidian"
+    input_text: "我写完一篇书评初稿，帮我挑挑逻辑和结构上的硬伤怎么改"
+    expected_primitives: ["critique", "deconstruct"]
+    expected_ids: ["pt_critique_draft", "sit_edt_02", "pt_line_edit_markup"]
+    forbidden_ids: ["core_code_review", "pt_summarize"]
+    notes: "评审一篇初稿"
+
+  - id: daily_write_shorten_notice
+    bucket: writing_content
+    difficulty: easy
+    app_name: "WeChat"
+    input_text: "这段群通知太长了，帮我压到150字以内但别漏掉截止时间和报名链接"
+    expected_primitives: ["compress", "translate"]
+    expected_ids: ["pt_shorten_copy", "cle_m1_r_p6_compression", "disc_content_tightening_prose_by_cutting_fluff"]
+    forbidden_ids: ["core_code_review", "pt_meeting_notes"]
+    notes: "把一段话压到限定长度 / 有损压缩保留关键条件"
+
+  # =========================================================================
+  # 6. 商业、产品与运营 (business_product, 8)
+  # =========================================================================
+  - id: daily_biz_pet_app_mvp
+    bucket: business_product
+    difficulty: easy
+    app_name: "Notion"
+    input_text: "我想做个宠物记账小程序，列了十几个功能不知道第一版先做哪个"
+    expected_primitives: ["converge", "compress", "deconstruct"]
+    expected_ids: ["pt_mvp_scope", "sit_prd_01", "pt_prioritize_backlog"]
+    forbidden_ids: ["pt_household_budget", "core_code_review"]
+    notes: "MVP 收敛裁剪，不要被“记账”带偏到家庭预算"
+
+  - id: daily_biz_user_feedback_cluster
+    bucket: business_product
+    difficulty: easy
+    app_name: "Notion"
+    input_text: "收集了50条用户吐槽和访谈记录，帮我归类看看大家最痛的点是什么"
+    expected_primitives: ["compress", "deconstruct"]
+    expected_ids: ["pt_synthesize_feedback", "pt_opportunity_map", "pt_compare_reviews", "pt_support_triage"]
+    forbidden_ids: ["core_code_review", "pt_meeting_notes"]
+    notes: "归纳用户反馈 / 产品机会地图"
+
+  - id: daily_biz_sub_premortem
+    bucket: business_product
+    difficulty: easy
+    app_name: "Obsidian"
+    input_text: "打算把工具从买断制改成按月订阅制，帮我看看这个想法有什么致命漏洞"
+    expected_primitives: ["critique", "metacognize"]
+    expected_ids: ["core_premortem", "core_red_team", "sit_cos_01", "disc_cognition_steelman_adversarial", "pt_decision_precheck"]
+    forbidden_ids: ["core_code_review", "pt_draft_email"]
+    notes: "事前验尸 / 红队拷问"
+
+  - id: daily_biz_landing_5s
+    bucket: business_product
+    difficulty: easy
+    app_name: "Chrome"
+    input_text: "我的独立工具写了个官网首屏，帮我看看陌生人进来5秒能不能看懂卖啥"
+    expected_primitives: ["critique", "deconstruct", "translate"]
+    expected_ids: ["sit_grw_02", "sit_prd_04", "pt_landing_page_outline", "disc_business_clear_offer_and_positioning", "pt_visual_critique"]
+    forbidden_ids: ["core_code_review", "pt_accessibility_review"]
+    notes: "首屏5秒转化诊断 / 核心路径走查"
+
+  - id: daily_biz_freelance_quote
+    bucket: business_product
+    difficulty: easy
+    app_name: "Notion"
+    input_text: "帮我设计一份接私活用的报价单模板，防止客户一直免费加需求"
+    expected_primitives: ["deconstruct", "translate"]
+    expected_ids: ["sit_leg_04", "pt_sales_proposal", "disc_business_outcome_pricing"]
+    forbidden_ids: ["core_code_review", "pt_household_budget"]
+    notes: "独立报价单与收款防坑模版"
+
+  - id: daily_biz_funnel_drop
+    bucket: business_product
+    difficulty: easy
+    app_name: "Notion"
+    input_text: "注册到付费的转化率这周突然掉了一半，帮我拆一下漏斗怎么查"
+    expected_primitives: ["deconstruct", "critique"]
+    expected_ids: ["pt_funnel_analysis", "pt_anomaly_triage", "core_root_cause"]
+    forbidden_ids: ["core_code_review", "pt_debug_error"]
+    notes: "分析漏斗流失阶段 / 排查图表突变根因"
+
+  - id: daily_biz_first_20_users
+    bucket: business_product
+    difficulty: medium
+    app_name: "Obsidian"
+    input_text: "小成本独立产品刚上线，怎么不烧钱投流找到前20个真实种子用户"
+    expected_primitives: ["translate", "metacognize", "deconstruct", "diverge"]
+    expected_ids: ["sit_grw_04", "disc_business_niche_community_distribution", "disc_business_free_high_value_lead_magnet", "disc_business_low_overhead_stack_first", "pt_campaign_plan"]
+    forbidden_ids: ["core_code_review", "pt_debug_error"]
+    notes: "冷启动种子用户话术库 / 极小众深价值获客"
+
+  - id: daily_biz_bookclub_event
+    bucket: business_product
+    difficulty: easy
+    app_name: "Notion"
+    input_text: "周末要组织一场30人的线下读书会，帮我把前期筹备和当天流程列成表"
+    expected_primitives: ["deconstruct"]
+    expected_ids: ["pt_event_plan", "pt_sop_checklist", "pt_project_plan"]
+    forbidden_ids: ["core_code_review", "pt_trip_itinerary"]
+    notes: "把聚会或活动拆成执行表"
+
+  # =========================================================================
+  # 7. 编程与工程日常 (engineering_dev, 8)
+  # =========================================================================
+  - id: daily_eng_python_keyerror
+    bucket: engineering_dev
+    difficulty: easy
+    app_name: "Cursor"
+    input_text: "Python脚本跑一半报 KeyError: 'user_id'，帮我看看怎么排查修复"
+    expected_primitives: ["critique", "deconstruct"]
+    expected_ids: ["pt_debug_error", "core_root_cause", "sit_eng_02", "atlas_obra_superpowers_skills_systemat_883abd3b6b"]
+    forbidden_ids: ["pt_troubleshoot_everyday", "pt_draft_email"]
+    notes: "定位报错最小修复 / 根因排查"
+
+  - id: daily_eng_code_review
+    bucket: engineering_dev
+    difficulty: easy
+    app_name: "Cursor"
+    input_text: "帮我review一下这个支付回调接口代码，有没有并发或者安全隐患"
+    expected_primitives: ["critique"]
+    expected_ids: ["core_code_review", "pt_review_code", "atlas_addyosmani_agent_skills_skills_c_ff14bfe369"]
+    forbidden_ids: ["pt_critique_draft", "pt_draft_email"]
+    notes: "架构师代码审查"
+
+  - id: daily_eng_refactor_400lines
+    bucket: engineering_dev
+    difficulty: easy
+    app_name: "Cursor"
+    input_text: "这个400行的工具函数越改越乱，想拆开重构但怕把旧逻辑改坏"
+    expected_primitives: ["deconstruct", "critique"]
+    expected_ids: ["pt_refactor_code", "disc_build_small_composable_modules", "pt_write_tests"]
+    forbidden_ids: ["pt_rewrite", "core_de_ai_rewrite"]
+    notes: "重构并保持行为 / 拆解臃肿脚本"
+
+  - id: daily_eng_sql_retention
+    bucket: engineering_dev
+    difficulty: easy
+    app_name: "Cursor"
+    input_text: "帮我写一条SQL统计近30天每天的新增用户和次日留存率"
+    expected_primitives: ["translate", "deconstruct"]
+    expected_ids: ["pt_sql_query", "pt_cohort_retention"]
+    forbidden_ids: ["pt_spreadsheet_formula", "pt_draft_email"]
+    notes: "从需求写 SQL / 分群留存"
+
+  - id: daily_eng_excel_vlookup
+    bucket: engineering_dev
+    difficulty: easy
+    app_name: "Excel"
+    input_text: "Excel里用VLOOKUP老是返回#N/A，帮我查查公式哪错了"
+    expected_primitives: ["deconstruct", "translate", "critique"]
+    expected_ids: ["pt_formula_debug", "pt_spreadsheet_formula", "pt_workbook_audit"]
+    forbidden_ids: ["core_code_review", "pt_sql_query"]
+    notes: "排查表格公式错误"
+
+  - id: daily_eng_api_latency
+    bucket: engineering_dev
+    difficulty: easy
+    app_name: "Terminal"
+    input_text: "这个接口突然从100ms慢到2秒，怎么一步步定位性能瓶颈"
+    expected_primitives: ["deconstruct", "critique"]
+    expected_ids: ["pt_performance_profile", "core_root_cause", "sit_eng_02", "pt_debug_error"]
+    forbidden_ids: ["pt_troubleshoot_everyday", "pt_draft_email"]
+    notes: "设计一次性能排查 / 根因定位"
+
+  - id: daily_eng_unit_tests
+    bucket: engineering_dev
+    difficulty: easy
+    app_name: "Cursor"
+    input_text: "给刚写好的登录鉴权模块补几条最关键的边界测试用例"
+    expected_primitives: ["deconstruct", "diverge"]
+    expected_ids: ["pt_write_tests", "sit_prd_03", "pt_sample_data", "atlas_obra_superpowers_skills_test_dri_5a1f863466"]
+    forbidden_ids: ["pt_usability_test_plan", "pt_draft_email"]
+    notes: "关键行为测试设计"
+
+  - id: daily_eng_api_doc
+    bucket: engineering_dev
+    difficulty: easy
+    app_name: "Cursor"
+    input_text: "把这几个后端接口代码整理成前端能直接对接的调用文档"
+    expected_primitives: ["translate", "deconstruct"]
+    expected_ids: ["pt_api_docs", "pt_handoff", "pt_explain_code"]
+    forbidden_ids: ["pt_draft_email", "pt_outline_article"]
+    notes: "给已有 API 写调用文档"
+
+  # =========================================================================
+  # 8. 极短 / 模糊 / 探索态输入 (ultra_short_vague, 8)
+  # =========================================================================
+  - id: daily_short_how_to_use
+    bucket: ultra_short_vague
+    difficulty: hard
+    app_name: "ChatGPT"
+    input_text: "这个怎么用？"
+    expected_primitives: ["deconstruct", "translate", "metacognize"]
+    expected_ids: ["pt_how_to", "pt_explain", "core_clarify_first", "cle_m1_r_c2_identification"]
+    forbidden_ids: ["core_code_review", "disc_business_micro_glue", "pt_sales_call_prep"]
+    notes: "超短口语提问：应路由到操作步骤/解释概念/先澄清，禁止无关垂直卡"
+
+  - id: daily_short_look_at_this
+    bucket: ultra_short_vague
+    difficulty: hard
+    app_name: "ChatGPT"
+    input_text: "帮我看看这个"
+    expected_primitives: ["metacognize", "critique", "translate"]
+    expected_ids: ["core_clarify_first", "cle_m1_r_c2_identification", "cle_m2_c_p1_focus", "pt_critique_draft", "pt_visual_read"]
+    forbidden_ids: ["disc_business_micro_glue", "pt_meal_plan", "pt_sql_query"]
+    notes: "无上下文极短请求：首选先反问澄清或聚焦对象"
+
+  - id: daily_short_self_media_vague
+    bucket: ultra_short_vague
+    difficulty: hard
+    app_name: "Notes"
+    input_text: "想做自媒体但没方向"
+    expected_primitives: ["metacognize", "deconstruct", "diverge"]
+    expected_ids: ["core_clarify_first", "disc_cognition_question_refinement_loop", "disc_business_niching_down_by_specific_user", "pt_research_question", "cle_m2_c_p16_desired_state", "disc_content_collecting_real_questions_from_readers"]
+    forbidden_ids: ["core_code_review", "pt_debug_error", "pt_sql_query"]
+    notes: "模糊创业/内容方向探索"
+
+  - id: daily_short_anxiety
+    bucket: ultra_short_vague
+    difficulty: hard
+    app_name: "ChatGPT"
+    input_text: "好焦虑怎么办"
+    expected_primitives: ["deconstruct", "compress", "metacognize"]
+    expected_ids: ["pt_sort_out_concern", "sit_os_01", "disc_life_simplifying_when_overwhelmed", "disc_life_cognitive_bandwidth_hygiene", "cle_m2_c_p2_explication"]
+    forbidden_ids: ["core_code_review", "pt_debug_error", "disc_business_micro_glue", "sit_ops_01"]
+    notes: "纯情绪短句：应分清事实与下一步/认知降噪/心理带宽，绝不路由到定时情报简报Agent等技术卡"
+
+  - id: daily_short_learn_ai
+    bucket: ultra_short_vague
+    difficulty: hard
+    app_name: "Gemini"
+    input_text: "怎么学AI"
+    expected_primitives: ["deconstruct", "converge", "metacognize"]
+    expected_ids: ["pt_study_plan", "pt_choose_learning_resource", "disc_career_deliberate_skill_upgrade_sprint", "core_clarify_first", "pt_how_to"]
+    forbidden_ids: ["pt_brainstorm", "core_code_review", "disc_build_agent_native_infra"]
+    notes: "超短学习目标（类比“我想要学习区块链”）"
+
+  - id: daily_short_summarize
+    bucket: ultra_short_vague
+    difficulty: medium
+    app_name: "Chrome"
+    input_text: "帮我总结一下"
+    expected_primitives: ["compress"]
+    expected_ids: ["pt_summarize", "cle_m1_r_p6_compression", "disc_content_distilling_long_reads_into_key_shifts", "pt_exec_brief"]
+    forbidden_ids: ["core_code_review", "pt_brainstorm"]
+    notes: "极短压缩指令"
+
+  - id: daily_short_write_plan
+    bucket: ultra_short_vague
+    difficulty: hard
+    app_name: "Notion"
+    input_text: "帮我写个方案"
+    expected_primitives: ["metacognize", "deconstruct"]
+    expected_ids: ["core_clarify_first", "pt_project_plan", "core_mece_breakdown", "cle_m2_c_c13_plan_formation", "cle_m4_a_c6_executable_spec"]
+    forbidden_ids: ["core_code_review", "pt_debug_error"]
+    notes: "缺对象的模糊请求：先澄清或拆计划"
+
+  - id: daily_short_pick_two
+    bucket: ultra_short_vague
+    difficulty: medium
+    app_name: "ChatGPT"
+    input_text: "两个方案怎么选"
+    expected_primitives: ["converge", "critique"]
+    expected_ids: ["core_decision_matrix", "pt_compare_options", "disc_cognition_making_decisions_under_uncertainty", "cle_m2_c_c10_decision_formation", "cle_m2_c_c9_alternative_evaluation"]
+    forbidden_ids: ["core_code_review", "pt_draft_email"]
+    notes: "极短决策对比请求"
+
+  # =========================================================================
+  # 9. 边界、干扰与对抗样本 (edge_adversarial, 8)
+  # =========================================================================
+  - id: daily_edge_modifier_car_choice
+    bucket: edge_adversarial
+    difficulty: hard
+    app_name: "ChatGPT"
+    input_text: "别废话、用大白话、给表格：帮我对比买新能源车还是燃油车划算"
+    expected_primitives: ["converge", "critique"]
+    expected_ids: ["core_decision_matrix", "pt_compare_options", "pt_shopping_shortlist", "disc_cognition_making_decisions_under_uncertainty"]
+    forbidden_ids: ["core_de_ai_rewrite", "pt_explain", "pt_clean_table"]
+    notes: "修饰语干扰（别废话/大白话/给表格），主意图仍是收敛对比决策"
+
+  - id: daily_edge_modifier_biz_critique
+    bucket: edge_adversarial
+    difficulty: hard
+    app_name: "Notion"
+    input_text: "去AI味、简洁一点，帮我看看这个创业计划书有哪些致命硬伤"
+    expected_primitives: ["critique"]
+    expected_ids: ["core_premortem", "core_red_team", "sit_cos_01", "pt_decision_precheck", "disc_cognition_steelman_adversarial"]
+    forbidden_ids: ["core_de_ai_rewrite", "pt_rewrite", "pt_shorten_copy"]
+    notes: "修饰语干扰（去AI味/简洁），主意图是批判排雷而非改写"
+
+  - id: daily_edge_multi_intent_trans_critique
+    bucket: edge_adversarial
+    difficulty: hard
+    app_name: "Chrome"
+    input_text: "把这段对外声明翻译成英文，顺便看看原话有没有逻辑漏洞和歧义"
+    expected_primitives: ["translate", "critique"]
+    expected_ids: ["pt_translate", "pt_bilingual_qa", "pt_perspective_rehearsal", "cle_m3_i_c2_clarification", "pt_critique_draft"]
+    forbidden_ids: ["core_code_review", "pt_debug_error"]
+    notes: "多意图混合：翻译 + 逻辑/歧义核查（正交Top-3应同时覆盖translate与critique）"
+
+  - id: daily_edge_low_efficiency_day
+    bucket: edge_adversarial
+    difficulty: hard
+    app_name: "Obsidian"
+    input_text: "帮我分析一下今天为什么效率这么低，感觉忙了一天啥也没干"
+    expected_primitives: ["metacognize", "deconstruct", "compress"]
+    expected_ids: ["disc_cognition_identifying_true_bottleneck", "disc_career_energy_aligned_scheduling", "sit_os_03", "disc_career_protecting_deep_focus_blocks", "pt_journal_reflection", "disc_life_simplifying_when_overwhelmed"]
+    forbidden_ids: ["pt_performance_profile", "core_code_review", "pt_debug_error"]
+    notes: "个人效率复盘，禁止串台到代码性能排查 pt_performance_profile"
+
+  - id: daily_edge_contract_clause_risk
+    bucket: edge_adversarial
+    difficulty: medium
+    app_name: "WeChat"
+    input_text: "合同条款里写'甲方保留最终解释权'是什么意思，签了有什么风险"
+    expected_primitives: ["critique", "translate"]
+    expected_ids: ["sit_leg_01", "pt_explain", "pt_compare_policies"]
+    forbidden_ids: ["core_code_review", "pt_debug_error"]
+    notes: "合同风险审阅，兼带解释"
+
+  - id: daily_edge_unrealistic_deadline
+    bucket: edge_adversarial
+    difficulty: hard
+    app_name: "Feishu"
+    input_text: "老板让我周五前把整个CRM系统重构完，怎么跟他说不现实并且协商砍范围"
+    expected_primitives: ["translate", "deconstruct", "converge"]
+    expected_ids: ["pt_negotiation_prep", "pt_difficult_conversation", "pt_escalate_blocker", "pt_mvp_scope", "cle_m4_a_c1_request_resolution"]
+    forbidden_ids: ["pt_refactor_code", "core_code_review"]
+    notes: "职场边界谈判与范围协商，不要被“重构”带偏到纯代码重构"
+
+  - id: daily_edge_english_react_refactor
+    bucket: edge_adversarial
+    difficulty: medium
+    app_name: "Cursor"
+    input_text: "How to refactor a bloated React component without breaking existing state?"
+    expected_primitives: ["deconstruct", "critique"]
+    expected_ids: ["pt_refactor_code", "disc_build_small_composable_modules", "atlas_vercel_labs_agent_skills_skills_4c506d6bbf", "core_code_review"]
+    forbidden_ids: ["pt_translate", "pt_draft_email"]
+    notes: "纯英文工程输入，测试双语检索能力（同时观察 L3 React 组合模式重构是否穿透）"
+
+  - id: daily_edge_finance_reconcile
+    bucket: edge_adversarial
+    difficulty: medium
+    app_name: "Excel"
+    input_text: "我们运营导出的营收表和财务那边的对账单差了三万块，怎么一步步查差异"
+    expected_primitives: ["deconstruct", "critique"]
+    expected_ids: ["pt_data_reconcile", "pt_source_disagreement", "pt_anomaly_triage", "pt_workbook_audit"]
+    forbidden_ids: ["pt_household_budget", "core_code_review"]
+    notes: "两张表对账 / 口径差异定位"

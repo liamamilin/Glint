@@ -404,3 +404,81 @@ def test_v2_l3_breakthrough_gate_and_inspect_recall(tmp_path: Path) -> None:
         by_id = {row["id"]: row for row in ibody["ranked_all"]}
         assert by_id["l3_rust_async"]["breakthrough_status"] == "triggered"
         assert by_id["l3_manual_banned"]["breakthrough_status"] == "manual_excluded"
+
+
+def test_v2_vague_signal_and_quality_gated_orthogonality(tmp_path: Path) -> None:
+    from skills.lens_router import _tokenize_zh_en, _vague_signal_score
+
+    # Vague linguistic detection
+    assert _vague_signal_score("帮我分析一下") >= 0.8
+    assert _vague_signal_score("我写了一段代码但总感觉") >= 0.7
+    assert _vague_signal_score("这个方案不够高级，帮我优化一下") >= 0.7
+    assert _vague_signal_score("请把这 40 页财务报告按季度提取现金流明细") == 0.0
+
+    # Chinese conversational stop-bigrams are denoised while preserving domain bigrams
+    toks = _tokenize_zh_en("帮我排查一下这个接口报错")
+    assert "帮我" not in toks and "这个" not in toks
+    assert "排查" in toks and "报错" in toks
+
+    # Quality-Gated Orthogonality preserves 3 orthogonal primitives while replacing a -6.0 vertical cliff card
+    # with a universal orthogonal card when available.
+    dist_current = _build_mock_dist(tmp_path, "v1")
+    lenses_path = dist_current / "lenses.json"
+    lenses = json.loads(lenses_path.read_text(encoding="utf-8"))
+    # Mark lens_clarify as universal evergreen; add a second critique lens (universal) vs vertical lens_premortem
+    lenses[3]["meta"]["shelf"] = "evergreen"
+    lenses[3]["meta"]["scope"] = "universal"
+    lenses.append(
+        {
+            "id": "lens_univ_compress",
+            "title": "通用摘要压榨",
+            "tagline": "通用视角压缩重点",
+            "routing": {
+                "primitive": "compress",
+                "goals": ["digest"],
+                "clarity_fit": ["concrete", "vague"],
+                "domains": ["general"],
+                "app_affinity": [],
+                "pain_point": "信息太杂需要聚焦重点",
+                "trigger_utterances": ["帮我提炼重点"],
+            },
+            "execution": {"action_type": "inject_prompt", "inject_mode": "append", "content": "提炼重点"},
+            "meta": {"source": "glint-core", "shelf": "evergreen", "scope": "universal", "base_weight": 1.0, "status": "active"},
+        }
+    )
+    lenses_path.write_text(json.dumps(lenses, ensure_ascii=False), encoding="utf-8")
+    np.savez_compressed(
+        dist_current / "embeddings.npz",
+        ids=np.array([l["id"] for l in lenses]),
+        vectors=np.array(
+            [
+                [1.0, 0.0, 0.0, 0.0],
+                [0.0, 1.0, 0.0, 0.0],
+                [0.8, 0.2, 0.0, 0.0],
+                [0.5, 0.5, 0.0, 0.0],
+                [0.6, 0.4, 0.0, 0.0],
+            ],
+            dtype=np.float32,
+        ),
+    )
+
+    fake_inf = FakeDualInferenceClient(chat_response="{}", embed_vec=[1.0, 0.0, 0.0, 0.0])
+    # Slot 1: lens_arch_mece (+2.0, deconstruct)
+    # Slot 2: lens_clarify (-2.5, metacognize - solid orthogonal)
+    # Slot 3 candidates: lens_premortem (-5.5, vertical critique cliff!) vs lens_univ_compress (-6.0, universal compress)
+    # Quality-Gated Orthogonality replaces vertical cliff lens_premortem with universal orthogonal lens_univ_compress!
+    cliff_reranker = FakeReranker({"架构MECE": 2.0, "文章大纲": -1.0, "事前验尸": -5.5, "先反问": -2.5, "通用摘要": -6.0})
+    app = create_app(
+        Settings(dist_dir=dist_current, db_path=tmp_path / "u_cliff.db", warmup_on_startup=False),
+        inference_client=fake_inf,
+        reranker_client=cliff_reranker,
+    )
+    with TestClient(app) as client:
+        r = client.post("/route", json={"app_name": "Cursor", "input_text": "拆解这个微服务架构"}).json()
+        got_ids = [c["id"] for c in r["cards"]]
+        assert got_ids[0] == "lens_arch_mece"
+        assert "lens_clarify" in got_ids
+        assert "lens_univ_compress" in got_ids
+        assert "lens_premortem" not in got_ids
+        # Strictly 3 distinct primitives preserved
+        assert len({c["primitive"] for c in r["cards"]}) == 3

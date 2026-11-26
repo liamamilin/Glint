@@ -55,6 +55,6 @@ meta:
   category: writing_comms
   subcategory: content_creation
   collections: []
-  base_weight: 1.0
+  base_weight: 0.8
   confidence: 0.88
   version: 1

@@ -19,6 +19,9 @@ routing:
   - 先别急着给方案，帮我搞清楚我真正要解释或改变的是什么
   - 这件事让我觉得不对劲，帮我定位对象、现象、期待和未知
   - 检查一下我提的这个问题是不是偷偷把某种方案写死在里面了
+  - 有点不对劲
+  - 感觉出了问题但说不清真正的问题在哪
+  - 帮我把模糊不满定义成清晰的问题
   anti_triggers: []
 execution:
   action_type: inject_prompt
@@ -42,9 +45,9 @@ meta:
   source_ref: models/M2.md#c-c4
   source_hash: cle_v0.7_cle_m2_c_c4_problem_formation_v1
   status: active
-  scope: domain_specific
-  shelf: off_shelf
-  tier: A
+  scope: universal
+  shelf: evergreen
+  tier: S
   category: general
   subcategory: problem_solving
   collections:

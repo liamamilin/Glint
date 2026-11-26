@@ -44,9 +44,9 @@ meta:
   source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#research-brief-for-others
   source_hash: bd7448eb0a0b063272cacf3f5242e32cbd4f1323fb2e815019a72566052cd274
   status: active
-  scope: domain_specific
-  shelf: on_shelf
-  tier: B
+  scope: universal
+  shelf: evergreen
+  tier: S
   category: general
   subcategory: research
   collections: []

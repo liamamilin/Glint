@@ -1,25 +1,194 @@
 # 本地不可变覆写层（Overlay）
 # 上游同步与 L1->L2 重编译绝不会覆盖此文件；构建 dist/current 时自动合并生效。
-#
-# 示例：
-# overrides:
-#   arch_mece_deconstruct:
-#     title: "架构 MECE 拆解（精选）"
-#     base_weight: 1.3
-#     status: "active"   # 可设为 deprecated 一键下线某张卡
 overrides:
+  # --- 1. 模糊 / 指代 / 元认知澄清核心卡（补齐真实口语糊话） ---
+  core_clarify_first:
+    add_trigger_utterances:
+      - "帮我分析一下"
+      - "给我点建议"
+      - "帮我写个方案"
+      - "帮我看看这个"
+      - "不知道从哪开始"
+      - "感觉不够好帮我优化一下"
+  cle_m2_c_c1_specification:
+    add_trigger_utterances:
+      - "怎么把产品或方案做得更好用"
+      - "感觉太虚不够高级怎么具体化优化"
+      - "怎么提升抽象能力或团队执行力"
+      - "想让内容或方案更有深度但太宽泛"
+      - "目标太笼统怎么拆具体"
+  cle_m2_c_p2_explication:
+    add_trigger_utterances:
+      - "总觉得这个决定哪儿怪怪的说不出理由"
+      - "感觉产品缺了点什么又说不上来"
+      - "有点不对劲"
+      - "帮我把脑子里模糊的感受和倾向理出来"
+  cle_m2_c_c4_problem_formation:
+    add_trigger_utterances:
+      - "有点不对劲"
+      - "感觉出了问题但说不清真正的问题在哪"
+      - "帮我把模糊不满定义成清晰的问题"
+  cle_m1_r_p7_expansion:
+    add_trigger_utterances:
+      - "这个是什么情况"
+      - "展开讲讲这个是什么"
+      - "这个词太抽象了帮我拆开看具体包含什么"
+  cle_m1_r_c2_identification:
+    add_trigger_utterances:
+      - "这个是什么"
+      - "这是什么东西"
+      - "这叫什么"
+
+  # --- 2. 解释 / 实操指南 / 学习规划（覆盖极短电报式输入） ---
   pt_explain:
     add_trigger_utterances:
       - "这个是什么"
       - "这是什么意思"
       - "帮我解释一下这个"
       - "这是啥"
-  cle_m1_r_p7_expansion:
+      - "这个怎么用"
+      - "简单解释这个概念和原理"
+  pt_how_to:
     add_trigger_utterances:
-      - "这个是什么情况"
-      - "展开讲讲这个是什么"
-  cle_m1_r_c2_identification:
+      - "怎么操作步骤指南"
+      - "取消订阅退款方法"
+      - "网上办理流程指南"
+  pt_study_plan:
+    base_weight: 1.25
     add_trigger_utterances:
-      - "这个是什么"
-      - "这是什么东西"
-      - "这叫什么"
+      - "怎么学AI或一门新技能"
+      - "想从零开始学，每天一小时怎么安排"
+      - "学习框架和系统入门路线"
+      - "新手入门怎么学"
+      - "我想要学习一门新领域怎么开始"
+  pt_vocabulary_in_context:
+    add_trigger_utterances:
+      - "把英文文章里地道的表达挑出来给我练练"
+      - "提取英语修饰词和地道词组"
+      - "从英文新闻里学高频表达"
+  disc_content_distilling_long_reads_into_key_shifts:
+    add_trigger_utterances:
+      - "专业书或长文太厚了怎么快速抓核心观点"
+      - "长书或长文怎么抓最颠覆的核心观点"
+
+  # --- 3. 调研 / 对比 / 评测 / 核实（短句抗实体词干扰） ---
+  pt_source_research:
+    add_trigger_utterances:
+      - "深度调研某个问题或行业"
+      - "分析招股书或深度行业报告"
+      - "系统调研渠道与市场现状"
+      - "想系统研究一个新赛道不知道从哪切入"
+  pt_research_question:
+    add_trigger_utterances:
+      - "想系统研究一个新赛道不知道从哪切入"
+      - "方向太宽泛不知道从哪个研究问题切入"
+  pt_compare_options:
+    base_weight: 1.15
+    add_trigger_utterances:
+      - "对比不同套餐的性价比和购买力"
+      - "两个方案怎么选"
+      - "买房还是租房怎么权衡"
+      - "客观对比几个选项给我建议"
+      - "帮我对比权衡一下选哪个"
+  disc_cognition_separating_signal_from_hype:
+    add_trigger_utterances:
+      - "客观评价一个新大模型好不好用"
+      - "分析新模型或产品的真实优势和水分"
+  pt_fact_check:
+    add_trigger_utterances:
+      - "核实官方套餐或规则调整是不是真的"
+      - "核实这条消息或政策变动"
+
+  # --- 4. 工程 / 排障 / Prompt / 分类体系 ---
+  core_root_cause:
+    add_trigger_utterances:
+      - "加载失败原因排查"
+      - "连接中断或403错误原因分析"
+      - "本地代理或网络访问异常排查"
+      - "排查电脑存储空间异常占用原因"
+      - "排查软件接管或运行异常原因"
+  core_code_review:
+    add_trigger_utterances:
+      - "我写了一段代码总感觉哪里不对"
+      - "帮我看看这段代码有没有隐患或坏味道"
+  pt_repair_prompt:
+    add_trigger_utterances:
+      - "优化项目提示词"
+      - "生成的文稿AI感太重或开头很奇怪怎么改提示词"
+  pt_release_check:
+    add_trigger_utterances:
+      - "全面回归整个项目"
+      - "上线前全项目回归检查清单"
+  cle_m1_r_p3_categorization:
+    add_trigger_utterances:
+      - "开源项目或Agent分类体系"
+      - "提炼分类框架和归类依据"
+  sit_prd_02:
+    add_trigger_utterances:
+      - "构建任务与技能目录分类关系"
+      - "梳理开源Agent分类框架"
+      - "提炼分类框架的隐性结构"
+
+  # --- 5. 创作 / 视觉 / 职场 / 生活与情绪 ---
+  pt_visual_critique:
+    add_trigger_utterances:
+      - "锐评画面或动效设计"
+      - "点评设计稿或动画效果好不好"
+  pt_outline_article:
+    add_trigger_utterances:
+      - "文章结构逆向拆解"
+      - "拆解一篇好文章的结构骨架"
+      - "撰写科普稿大纲"
+  disc_content_series_with_clear_arc:
+    add_trigger_utterances:
+      - "规划教程或视频内容矩阵"
+      - "复盘数据挑哪些内容矩阵开周期"
+  disc_content_collecting_real_questions_from_readers:
+    add_trigger_utterances:
+      - "想写点东西持续输出但不知道写啥主题"
+      - "不知道写什么选题怎么找方向"
+  pt_creative_draft:
+    add_trigger_utterances:
+      - "创作吐槽歌词"
+      - "写一段有梗的歌词或创意文案"
+  disc_life_cognitive_bandwidth_hygiene:
+    add_trigger_utterances:
+      - "生活心智成本太高怎么降低"
+      - "总觉得自己在内耗提不起劲"
+  disc_career_protecting_deep_focus_blocks:
+    add_trigger_utterances:
+      - "时间管理和拖延"
+      - "老是拖延怎么守住专注时间"
+  cle_m4_a_p1_request_formation:
+    add_trigger_utterances:
+      - "撰写账号申诉说明或正式请求"
+      - "清晰表达诉求、事实依据和期待回复"
+  pt_appointment_prep:
+    add_trigger_utterances:
+      - "身体出现异常症状怎么分析与就医准备"
+      - "术后饮食护理与复查问题准备"
+  sit_cos_01:
+    add_trigger_utterances:
+      - "帮我评估一下这个想法靠不靠谱"
+      - "看看这个点子靠不靠谱"
+  core_red_team:
+    add_trigger_utterances:
+      - "帮我评估一下这个想法靠不靠谱"
+      - "帮我挑挑这个想法靠不靠谱"
+  pt_stakeholder_map:
+    add_trigger_utterances:
+      - "公司推新流程大家有阻力怎么梳理各方关系"
+
+  # --- 6. 高频串台“钉子户”轻度降权（避免抢占无关领域首卡） ---
+  disc_cognition_wrong_coordinate_problem_framing:
+    base_weight: 0.70
+  sit_cos_04:
+    base_weight: 0.70
+  disc_business_unbundling_bloat:
+    base_weight: 0.70
+  pt_support_escalation:
+    base_weight: 0.75
+  disc_content_tightening_prose_by_cutting_fluff:
+    base_weight: 0.80
+  pt_brainstorm:
+    base_weight: 0.40

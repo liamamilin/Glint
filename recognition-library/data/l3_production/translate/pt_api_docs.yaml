@@ -69,9 +69,9 @@ meta:
   source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#api-docs
   source_hash: 6e5900bca950e6f3d3bdada180dfc38d515fee4e670d52e756ea18bae0b3b8fd
   status: active
-  scope: universal
-  shelf: evergreen
-  tier: S
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
   category: engineering
   subcategory: architecture
   collections: []

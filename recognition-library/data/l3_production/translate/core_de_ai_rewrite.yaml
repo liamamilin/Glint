@@ -41,9 +41,9 @@ meta:
   source_ref: cards.yaml#de_ai_rewrite
   source_hash: 01a638e698410980a2c18a0abae8ceb9e248bbf4ba604ee8ad7b6b283560fcb6
   status: active
-  scope: domain_specific
-  shelf: on_shelf
-  tier: A
+  scope: universal
+  shelf: evergreen
+  tier: S
   category: writing_comms
   subcategory: workplace_comms
   collections: []

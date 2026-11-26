@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-11-26T16:38:22+0800",
+  "generated_at": "2026-11-26T20:25:26+0800",
   "total_l2_input": 469,
   "total_l3_active": 469,
   "total_l3_deprecated": 0,
   "total_quarantined_rules": 0,
   "total_quarantined_dedup": 0,
   "action_counts": {
-    "applied_overlay": 3,
+    "applied_overlay": 40,
     "attached_workflow_step": 89,
     "cleaned_triggers": 1,
     "normalized_domains": 22,

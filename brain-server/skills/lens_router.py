@@ -53,9 +53,107 @@ ZERO_FRICTION_VAR_NOTE = (
 TOKEN_RE = re.compile(r"[a-z0-9_]{2,}|[\u4e00-\u9fff]+")
 MODIFIER_CLAUSE_RE = re.compile(
     r"(?:^|[，,、。\s；;])(?:硬核一点|通俗一点|简洁一点|专业一点|别废话|不要废话|去\s*ai\s*味|去掉\s*ai\s*味|"
-    r"只给表格|直接给对比表|用表格输出|markdown\s*表格|简短一点|直接给结论)(?=[，,、。\s；;：:]|$)",
+    r"只给表格|给表格|用大白话|直接给对比表|用表格输出|markdown\s*表格|简短一点|直接给结论)(?=[，,、。\s；;：:]|$)",
     re.IGNORECASE,
 )
+
+# High-frequency Chinese conversational filler bigrams that dilute BM25 precision
+ZH_STOP_BIGRAMS = frozenset(
+    {
+        "帮我",
+        "一下",
+        "这个",
+        "那个",
+        "什么",
+        "可以",
+        "有没有",
+        "能不能",
+        "应该",
+        "一些",
+        "一个",
+        "几个",
+        "关于",
+        "进行",
+        "需要",
+        "想要",
+        "觉得",
+        "感觉",
+        "东西",
+        "地方",
+        "知道",
+        "告诉",
+        "怎么",
+        "如何",
+        "为什么",
+        "其实",
+        "主要",
+        "但是",
+        "最近",
+        "现在",
+    }
+)
+
+DEV_APPS = ("cursor", "vscode", "code", "xcode", "terminal", "iterm", "warp", "ghostty", "codex", "claude code", "opencode", "pycharm")
+COMMS_APPS = ("feishu", "slack", "mail", "wechat", "discord", "teams", "outlook")
+DESIGN_APPS = ("figma", "sketch", "framer")
+SHEET_APPS = ("excel", "numbers", "sheets")
+
+# Core universal metacognitive / clarification safety-net anchors injected into Stage 2 on vague queries
+VAGUE_ANCHOR_IDS: tuple[str, ...] = (
+    "core_clarify_first",
+    "cle_m2_c_c1_specification",
+    "cle_m2_c_p2_explication",
+    "cle_m2_c_c4_problem_formation",
+)
+
+VAGUE_EXPLICIT_RE = re.compile(
+    r"(?:不知道(?:从哪|怎么|做啥|写啥|选哪|该不该|要什么|做什么|写什么|去哪)|"
+    r"没方向|没头绪|乱糟糟|说不上来|说不出|讲不明白|太笼统|太抽象|"
+    r"不够.{1,3}|怎么.{0,4}(?:更好|更有)|提不起劲|内耗|迷茫|哪儿怪怪|不对劲|"
+    r"理理头绪|怎么提升|怎么才能快速|靠不靠谱|不太一样|不在一个频道)",
+    re.IGNORECASE,
+)
+VAGUE_DEICTIC_RE = re.compile(
+    r"^(?:帮我|请)?(?:看看|改改|分析一下|总结一下|写个方案|给点建议|给我点建议|这个怎么用|这个合理吗|接下来怎么办|有点不对劲|帮我看看这个|这个是什么)[？?。！!….\s]*$"
+)
+HALF_TYPED_TAIL_RE = re.compile(r"(?:\.{2,}|…+|感觉|主要是|但是大家|不过|其实|总感觉|总觉得)[，,、\s]*$")
+
+
+def _vague_signal_score(text: str) -> float:
+    """Estimate linguistic vagueness / underspecification in [0.0, 1.0]."""
+    t = text.strip()
+    if not t:
+        return 0.0
+    score = 0.0
+    if VAGUE_DEICTIC_RE.match(t):
+        score = max(score, 0.95)
+    if HALF_TYPED_TAIL_RE.search(t):
+        score = max(score, 0.75)
+    if VAGUE_EXPLICIT_RE.search(t):
+        score = max(score, 0.80)
+    # Ultra-short phrase without explicit punctuation/context
+    if len(t) <= 6:
+        score = max(score, 0.50)
+    return min(1.0, score)
+
+
+def _app_category_bonus(app_lower: str, category: str, domains: list[str]) -> float:
+    """Gentle domain prior based on active application (never hard-filters)."""
+    if not app_lower:
+        return 0.0
+    if any(k in app_lower for k in DEV_APPS):
+        if category == "engineering":
+            return 0.28
+    elif any(k in app_lower for k in COMMS_APPS):
+        if category == "writing_comms":
+            return 0.15
+    elif any(k in app_lower for k in DESIGN_APPS):
+        if category == "product_business" or any(d in ("design", "ui", "ux", "visual") for d in domains):
+            return 0.20
+    elif any(k in app_lower for k in SHEET_APPS):
+        if any(d in ("spreadsheet", "excel", "data", "analytics", "finance") for d in domains):
+            return 0.25
+    return 0.0
 
 
 def _strip_style_modifiers(text: str) -> str:
@@ -65,19 +163,22 @@ def _strip_style_modifiers(text: str) -> str:
     return cleaned if len(cleaned) >= 6 else text
 
 
-def _tokenize_zh_en(text: str) -> list[str]:
+def _tokenize_zh_en(text: str, *, drop_stopwords: bool = True) -> list[str]:
     """Lightweight Chinese bigram + ASCII word tokenizer for zero-dependency BM25."""
-    tokens: list[str] = []
+    raw_tokens: list[str] = []
     for seg in TOKEN_RE.findall((text or "").lower()):
         if seg.isascii():
-            tokens.append(seg)
+            raw_tokens.append(seg)
         else:
             if len(seg) == 1:
-                tokens.append(seg)
+                raw_tokens.append(seg)
             else:
                 for i in range(len(seg) - 1):
-                    tokens.append(seg[i : i + 2])
-    return tokens
+                    raw_tokens.append(seg[i : i + 2])
+    if not drop_stopwords or not raw_tokens:
+        return raw_tokens
+    filtered = [tok for tok in raw_tokens if tok not in ZH_STOP_BIGRAMS]
+    return filtered if filtered else raw_tokens
 
 
 def _compact_preview(text: str, max_chars: int = 44) -> str:
@@ -91,8 +192,8 @@ def _rerank_doc_text(lens: dict[str, Any]) -> str:
     """Compact semantic profile fed to Cross-Encoder bge-reranker-v2-m3."""
     routing = lens.get("routing", {})
     raw_trigs = [str(t) for t in (routing.get("trigger_utterances") or []) if str(t).strip()]
-    # Keep up to 6 triggers; if >6, keep first 2 + latest 4 so user-calibrated overrides always enter Stage 2
-    selected_trigs = raw_trigs if len(raw_trigs) <= 6 else list(dict.fromkeys(raw_trigs[:2] + raw_trigs[-4:]))
+    # Keep up to 7 triggers; if >7, keep first 2 + latest 5 so user-calibrated overrides always enter Stage 2
+    selected_trigs = raw_trigs if len(raw_trigs) <= 7 else list(dict.fromkeys(raw_trigs[:2] + raw_trigs[-5:]))
     triggers = " / ".join(selected_trigs)
     parts = [
         f"{lens.get('title', '')}：{lens.get('tagline', '')}",
@@ -153,7 +254,7 @@ class LensRouterSkill(BaseSkill):
         inference: InferenceClient,
         reranker: RerankerClient | None = None,
         top_k: int = 3,
-        candidate_pool_size: int = 16,
+        candidate_pool_size: int = 18,
         max_input_chars: int = 1200,
         rng: random.Random | None = None,
     ) -> None:
@@ -269,10 +370,9 @@ class LensRouterSkill(BaseSkill):
             routing = lens.get("routing", {})
             prim = routing.get("primitive", "deconstruct")
             by_prim.setdefault(prim, []).append(lens)
-            # Pre-tokenize title (2x boost), tagline, pain_point, trigger_utterances, domains for BM25
+            # Pre-tokenize title, tagline, pain_point, trigger_utterances, domains for denoised BM25
             bm25_text = " ".join(
                 [
-                    str(lens.get("title", "")),
                     str(lens.get("title", "")),
                     str(lens.get("tagline", "")),
                     str(routing.get("pain_point", "")),
@@ -345,8 +445,9 @@ class LensRouterSkill(BaseSkill):
 
         trimmed_text = request.input_text.strip()[: self._max_input_chars]
         retrieval_text = _strip_style_modifiers(trimmed_text)
+        vague_signal = _vague_signal_score(trimmed_text)
 
-        # Stage 1: Hybrid Recall (BM25 + bge-m3 RRF) -> 16 diverse, high-relevance candidates (~25ms)
+        # Stage 1: Hybrid Recall (BM25 + bge-m3 RRF) -> 26 diverse, high-relevance candidates
         q_vec = await self._embed_query(retrieval_text)
         sim_map: dict[str, float] = {}
         used_embed = False
@@ -359,6 +460,7 @@ class LensRouterSkill(BaseSkill):
             input_text=retrieval_text,
             app_name=request.app_name,
             sim_map=sim_map,
+            vague_signal=vague_signal,
         )
         bt_cfg = self._policy.get("l3_breakthrough") or {}
         shadow_candidates = self._shadow_recall_candidates(
@@ -367,7 +469,7 @@ class LensRouterSkill(BaseSkill):
             bt_cfg=bt_cfg,
         )
 
-        # Stage 2A (Fastest & Most Accurate): In-process MPS Cross-Encoder bge-reranker-v2-m3 (~40ms)
+        # Stage 2A (Fastest & Most Accurate): In-process MPS Cross-Encoder bge-reranker-v2-m3
         used_fallback = False
         model_label = self._inference.model_name
         rerank_scores: list[float] | None = None
@@ -385,6 +487,7 @@ class LensRouterSkill(BaseSkill):
                 candidates=candidates,
                 rerank_scores=l4_scores,
                 app_name=request.app_name,
+                vague_signal=vague_signal,
             )
             if shadow_candidates and shadow_scores:
                 cards = self._apply_l3_breakthrough(
@@ -449,8 +552,9 @@ class LensRouterSkill(BaseSkill):
         input_text: str,
         app_name: str,
         sim_map: dict[str, float],
+        vague_signal: float = 0.0,
     ) -> list[tuple[float, dict[str, Any]]]:
-        """Stage 1: Fuse bge-m3 cosine rank and BM25 lexical rank via RRF into a diverse pool."""
+        """Stage 1: Fuse bge-m3 cosine rank and denoised BM25 rank via RRF into a diverse pool."""
         n = len(self._lenses)
         if n == 0:
             return []
@@ -470,23 +574,30 @@ class LensRouterSkill(BaseSkill):
         else:
             emb_rank = {}
 
-        rrf_k = 30.0
+        rrf_k_emb = 25.0
+        rrf_k_bm25 = 35.0
         app_lower = app_name.strip().lower()
         scored: list[tuple[float, dict[str, Any]]] = []
+        score_by_id: dict[str, float] = {}
         for idx, lens in enumerate(self._lenses):
             routing = lens.get("routing", {})
             meta = lens.get("meta", {})
             score = 0.0
             if emb_rank:
-                score += 1.0 / (rrf_k + emb_rank[idx])
+                score += 1.0 / (rrf_k_emb + emb_rank[idx])
             if bm25_scores[idx] > 0.0:
-                score += 0.85 / (rrf_k + bm25_rank[idx])
+                score += 0.55 / (rrf_k_bm25 + bm25_rank[idx])
             if meta.get("scope") == "universal" or meta.get("shelf") == "evergreen":
                 score += 0.004
             aff = [str(a).lower() for a in (routing.get("app_affinity") or [])]
             if app_lower and any(app_lower in a or a in app_lower for a in aff):
+                score += 0.0025
+            cat = str(meta.get("category", "general"))
+            doms = [str(d).lower() for d in (routing.get("domains") or [])]
+            if _app_category_bonus(app_lower, cat, doms) > 0.0:
                 score += 0.002
             scored.append((score, lens))
+            score_by_id[lens["id"]] = score
 
         scored.sort(key=lambda pair: pair[0], reverse=True)
 
@@ -495,8 +606,8 @@ class LensRouterSkill(BaseSkill):
         used_ids: set[str] = set()
         covered_prims: set[str] = set()
 
-        # 1) Global Top-10 Hybrid RRF winners
-        for pair in scored[: min(10, pool_limit)]:
+        # 1) Global Top-12 Hybrid RRF winners
+        for pair in scored[: min(12, pool_limit)]:
             chosen.append(pair)
             used_ids.add(pair[1]["id"])
             covered_prims.add(str(pair[1].get("routing", {}).get("primitive", "deconstruct")))
@@ -521,6 +632,16 @@ class LensRouterSkill(BaseSkill):
                 continue
             chosen.append(pair)
             used_ids.add(pair[1]["id"])
+
+        # 4) Vague-query metacognitive safety net: ensure core clarification/explication anchors enter Stage 2
+        if vague_signal >= 0.5:
+            for anchor_id in VAGUE_ANCHOR_IDS:
+                if anchor_id in used_ids:
+                    continue
+                lens = self._lenses_by_id.get(anchor_id)
+                if lens is not None:
+                    chosen.append((score_by_id.get(anchor_id, 0.0), lens))
+                    used_ids.add(anchor_id)
 
         return chosen
 
@@ -669,7 +790,9 @@ class LensRouterSkill(BaseSkill):
             routing = lens.get("routing", {})
             ce = float(rerank_scores[idx]) if rerank_scores is not None else None
             boost = 0.45 if (meta.get("scope") == "universal" or meta.get("shelf") == "evergreen") else 0.0
-            final_s = (ce + boost) if ce is not None else cos
+            base_w = float(meta.get("base_weight", 1.0))
+            bw_adj = 0.55 * (min(max(base_w, 0.2), 2.0) - 1.0)
+            final_s = (ce + boost + bw_adj) if ce is not None else cos
 
             bt_status = "l4"
             gap_top1 = None
@@ -740,65 +863,115 @@ class LensRouterSkill(BaseSkill):
         candidates: list[tuple[float, dict[str, Any]]],
         rerank_scores: list[float],
         app_name: str,
+        vague_signal: float = 0.0,
     ) -> list[CardItem]:
-        """Rank candidates using Cross-Encoder score + evergreen universal bonus, enforcing 3 orthogonal primitives.
-
-        When the Cross-Encoder is in its low-confidence negative floor (e.g. short open-ended domain
-        goals like '我想要学习区块链' whose concrete noun is out-of-vocabulary), smoothly blend in
-        the normalized Stage 1 Hybrid (BM25 + bge-m3 RRF) score so lexical/semantic action intent
-        isn't drowned out by Cross-Encoder noise.
-        """
+        """Rank candidates with Cross-Encoder + denoised Stage-1 rescue + Quality-Gated Orthogonality."""
         app_lower = app_name.strip().lower()
         max_ce = max(rerank_scores) if rerank_scores else 0.0
+
+        # Denoised Stage-1 Hybrid rescue for deep low-confidence OOV short queries
         s1_vals = [float(s1) for s1, _ in candidates]
         s1_min = min(s1_vals) if s1_vals else 0.0
         s1_span = (max(s1_vals) - s1_min) if s1_vals else 0.0
-        # Smooth rescue weight: 0.0 when max_ce >= -2.5; ramps up to 4.5 when max_ce <= -5.5
-        low_conf_deficit = min(1.0, max(0.0, (-2.5 - max_ce) / 3.0))
+        low_conf_deficit = min(1.0, max(0.0, (-2.4 - max_ce) / 3.1))
         hybrid_rescue_weight = 4.5 * low_conf_deficit
 
+        vague_anchor_set = set(VAGUE_ANCHOR_IDS)
         final_scored: list[tuple[float, dict[str, Any]]] = []
         for (s1_score, lens), ce_score in zip(candidates, rerank_scores):
             routing = lens.get("routing", {})
             meta = lens.get("meta", {})
+            prim = str(routing.get("primitive", "deconstruct"))
+            cat = str(meta.get("category", "general"))
+            doms = [str(d).lower() for d in (routing.get("domains") or [])]
+            clarity_fit = set(routing.get("clarity_fit") or [])
+
             score = float(ce_score)
             if hybrid_rescue_weight > 0.0 and s1_span > 1e-9:
                 s1_norm = (float(s1_score) - s1_min) / s1_span
                 score += hybrid_rescue_weight * s1_norm
+
             # Evergreen universal shelf gets a gentle logit boost (+0.45), softened in deep low-confidence floor
-            # so unrelated evergreen cards (e.g. brainstorm) don't crowd out Stage-1 matched vertical cards.
             if meta.get("scope") == "universal" or meta.get("shelf") == "evergreen":
-                score += 0.45 * (1.0 - 0.6 * low_conf_deficit)
+                score += 0.45 * (1.0 - 0.55 * low_conf_deficit)
+
             aff = [str(a).lower() for a in (routing.get("app_affinity") or [])]
             if app_lower and any(app_lower in a or a in app_lower for a in aff):
-                score += 0.15
+                score += 0.20
+            score += _app_category_bonus(app_lower, cat, doms)
+
+            # Vague / underspecified metacognitive safety-net prior
+            if vague_signal >= 0.5:
+                if lens["id"] in vague_anchor_set:
+                    score += 0.75 * vague_signal
+                elif prim == "metacognize" and "vague" in clarity_fit:
+                    score += 0.25 * vague_signal
+
             base_w = float(meta.get("base_weight", 1.0))
-            score += 0.20 * (min(base_w, 2.0) - 1.0)
+            score += 0.55 * (min(max(base_w, 0.2), 2.0) - 1.0)
             final_scored.append((score, lens))
 
         final_scored.sort(key=lambda pair: pair[0], reverse=True)
+        if not final_scored:
+            return []
 
+        def _is_universal(lens: dict[str, Any]) -> bool:
+            m = lens.get("meta", {})
+            return m.get("scope") == "universal" or m.get("shelf") == "evergreen"
+
+        # Quality-Gated Orthogonality:
+        # - Always preserves 3 strictly orthogonal primitives for genuine perspective switching.
+        # - When the top orthogonal candidate for Slot 2/3 falls into a vertical garbage cliff
+        #   (score < -4.2 and > 3.5 below Slot 1) and is domain-specific (non-universal),
+        #   substitute the highest-scoring universal orthogonal lens (excluding brainstorm noise)
+        #   so Slots 2-3 never pad with unrelated vertical cards (e.g. workbook audit on an apology query).
         cards: list[CardItem] = []
         used_ids: set[str] = set()
-        used_prims: set[str] = set()
+        used_prims: Counter[str] = Counter()
 
-        for score, lens in final_scored:
-            prim = str(lens.get("routing", {}).get("primitive", "deconstruct"))
-            if lens["id"] in used_ids or prim in used_prims:
-                continue
-            used_ids.add(lens["id"])
-            used_prims.add(prim)
-            cards.append(self._to_card_item(lens, score=score, is_exploration=False))
-            if len(cards) >= self._top_k:
-                return cards
+        top1_score, top1_lens = final_scored[0]
+        top1_prim = str(top1_lens.get("routing", {}).get("primitive", "deconstruct"))
+        used_ids.add(top1_lens["id"])
+        used_prims[top1_prim] += 1
+        cards.append(self._to_card_item(top1_lens, score=top1_score, is_exploration=False))
 
-        for score, lens in final_scored:
-            if lens["id"] in used_ids:
-                continue
-            used_ids.add(lens["id"])
-            cards.append(self._to_card_item(lens, score=score, is_exploration=False))
-            if len(cards) >= self._top_k:
+        while len(cards) < self._top_k:
+            best_ortho: tuple[float, dict[str, Any]] | None = None
+            best_univ_ortho: tuple[float, dict[str, Any]] | None = None
+
+            for sc, lens in final_scored:
+                lid = lens["id"]
+                if lid in used_ids:
+                    continue
+                prim = str(lens.get("routing", {}).get("primitive", "deconstruct"))
+                if used_prims[prim] == 0:
+                    if best_ortho is None:
+                        best_ortho = (sc, lens)
+                    if best_univ_ortho is None and _is_universal(lens) and lid != "pt_brainstorm":
+                        best_univ_ortho = (sc, lens)
+
+            chosen_pair: tuple[float, dict[str, Any]] | None = None
+            if best_ortho is not None:
+                bo_score, bo_lens = best_ortho
+                in_cliff = bo_score < -4.2 and (top1_score - bo_score) > 3.5
+                if in_cliff and not _is_universal(bo_lens) and best_univ_ortho is not None:
+                    chosen_pair = best_univ_ortho
+                else:
+                    chosen_pair = best_ortho
+            else:
+                for sc, lens in final_scored:
+                    if lens["id"] not in used_ids:
+                        chosen_pair = (sc, lens)
+                        break
+
+            if chosen_pair is None:
                 break
+            sc, lens = chosen_pair
+            prim = str(lens.get("routing", {}).get("primitive", "deconstruct"))
+            used_ids.add(lens["id"])
+            used_prims[prim] += 1
+            cards.append(self._to_card_item(lens, score=sc, is_exploration=False))
+
         return cards
 
     async def _rerank_with_2b(

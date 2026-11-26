@@ -25,6 +25,8 @@ routing:
   - 别附和我，直接挑刺
   - red team my plan
   - 我是不是漏了什么致命假设
+  - 帮我评估一下这个想法靠不靠谱
+  - 帮我挑挑这个想法靠不靠谱
   anti_triggers:
   - 用户只是想 brainstorm 更多点子或扩展可能性
   - 用户希望得到鼓励或建设性润色而非攻击
@@ -39,9 +41,9 @@ meta:
   source_ref: cards.yaml#red_team
   source_hash: 505582e4371def725c053f8d0a51838529ec5d434f16ec627a02b010be5d2de8
   status: active
-  scope: domain_specific
-  shelf: on_shelf
-  tier: A
+  scope: universal
+  shelf: evergreen
+  tier: S
   category: product_business
   subcategory: product_design
   collections: []

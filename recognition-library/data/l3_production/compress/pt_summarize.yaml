@@ -41,9 +41,9 @@ meta:
   source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#summarize
   source_hash: 7367aa00ff21dcaadc1aeabc358e688bcf34e7de67163fa7172af04808d5710e
   status: active
-  scope: domain_specific
-  shelf: on_shelf
-  tier: A
+  scope: universal
+  shelf: evergreen
+  tier: S
   category: writing_comms
   subcategory: writing_polish
   collections: []

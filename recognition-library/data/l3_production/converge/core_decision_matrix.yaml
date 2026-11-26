@@ -38,9 +38,9 @@ meta:
   source_ref: cards.yaml#decision_matrix
   source_hash: 6ec9cb79a5692d7d3c90df5d95151a22ff4a2d1ab6b3a43fd09aee1686253ef0
   status: active
-  scope: domain_specific
-  shelf: on_shelf
-  tier: A
+  scope: universal
+  shelf: evergreen
+  tier: S
   category: engineering
   subcategory: architecture
   collections: []

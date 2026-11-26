@@ -25,6 +25,11 @@ routing:
   - 给我一个学习路线图
   - 每周该学什么怎么安排
   - study plan for learning X
+  - 怎么学AI或一门新技能
+  - 想从零开始学，每天一小时怎么安排
+  - 学习框架和系统入门路线
+  - 新手入门怎么学
+  - 我想要学习一门新领域怎么开始
   anti_triggers:
   - 已有明确课程表只需答疑
   - 纯知识问答不需规划
@@ -51,6 +56,6 @@ meta:
   category: personal_career
   subcategory: learning
   collections: []
-  base_weight: 1.0
+  base_weight: 1.25
   confidence: 0.9
   version: 1

@@ -20,6 +20,7 @@ brain-server/data/usage.db-wal
 brain-server/data/usage.db-shm
 brain-server/data/seed_state.json
 brain-server/logs/
+recognition-library/eval/datasets/user_history_real.yaml
 
 # Xcode / Swift
 macos-app/build/

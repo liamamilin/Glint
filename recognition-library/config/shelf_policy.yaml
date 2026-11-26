@@ -144,13 +144,16 @@ collections:
       - disc_cognition_weak_signal_radar
       - pt_claim_evidence_matrix
 
-# 精选 S 级常青通用底座（永不自动下架；CLE v0.7 结构核心 23 项 + 精选跨领域常青卡）
+# 精选 S 级常青通用底座（永不自动下架；CLE v0.7 结构核心 27 项 + glint-core 8 项 + 精选跨领域常青卡）
 evergreen_ids:
-  # CLE v0.7 结构核心 v0.2 (23 项：M1:4 + M2:11 + M3:4 + M4:4)
+  # CLE v0.7 结构核心 v0.2 + 模糊态/分类核心扩展 (27 项)
+  - cle_m1_r_c2_identification
   - cle_m1_r_p2_differentiation
+  - cle_m1_r_p3_categorization
   - cle_m1_r_p5_linguistic_encoding
   - cle_m1_r_p6_compression
   - cle_m1_r_p7_expansion
+  - cle_m2_c_p1_focus
   - cle_m2_c_p2_explication
   - cle_m2_c_p8_alternative_generation
   - cle_m2_c_p16_desired_state
@@ -158,6 +161,7 @@ evergreen_ids:
   - cle_m2_c_p19_evidence_linking
   - cle_m2_c_p20_uncertainty
   - cle_m2_c_c1_specification
+  - cle_m2_c_c4_problem_formation
   - cle_m2_c_c8_criteria_formation
   - cle_m2_c_c9_alternative_evaluation
   - cle_m2_c_c10_decision_formation
@@ -170,27 +174,37 @@ evergreen_ids:
   - cle_m4_a_p9_task_definition
   - cle_m4_a_p10_task_acceptance
   - cle_m4_a_p11_task_completion
+  # Glint Core 通用思考底座 (8 项)
+  - core_clarify_first
+  - core_mece_breakdown
+  - core_decision_matrix
+  - core_premortem
+  - core_red_team
+  - core_root_cause
+  - core_code_review
+  - core_de_ai_rewrite
+  # Prompt Taxonomy 高频跨领域通配卡
   - pt_source_research
   - pt_research_question
-  - pt_claim_evidence_matrix
-  - pt_research_to_brief
+  - pt_evidence_map
+  - pt_research_brief_for_others
   - pt_compare_options
   - pt_mvp_scope
-  - pt_task_breakdown
   - pt_project_plan
+  - pt_summarize
+  - pt_rewrite
+  - pt_sort_out_concern
   - pt_fact_check
   - pt_review_code
   - pt_debug_error
-  - pt_perf_investigation
   - pt_meeting_notes
   - pt_exec_brief
   - pt_draft_email
   - pt_explain
   - pt_brainstorm
   - pt_headlines
-  - pt_stakeholder_read
-  - pt_api_docs
   - pt_handoff
+  # Discovery Taxonomy & Super Individual 通用常青卡
   - disc_cognition_separating_signal_from_hype
   - disc_cognition_weak_signal_radar
   - disc_cognition_steelman_adversarial

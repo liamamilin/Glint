@@ -23,6 +23,9 @@ routing:
   - give me collocations with examples and a cloze test
   - 这些词怎么用在真实场景里
   - 帮我做词汇自测题
+  - 把英文文章里地道的表达挑出来给我练练
+  - 提取英语修饰词和地道词组
+  - 从英文新闻里学高频表达
   anti_triggers:
   - 纯语法纠错
   - 翻译整段文章

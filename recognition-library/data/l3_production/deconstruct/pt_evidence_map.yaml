@@ -45,9 +45,9 @@ meta:
   source_ref: https://liamamilin.github.io/Prompt-taxonomy/catalog.json#evidence-map
   source_hash: d4901db041922850cc713eaa72d4de377668fc1c13e56c832ecd309ed93edb0a
   status: active
-  scope: domain_specific
-  shelf: on_shelf
-  tier: A
+  scope: universal
+  shelf: evergreen
+  tier: S
   category: general
   subcategory: research
   collections: []

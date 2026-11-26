@@ -23,6 +23,8 @@ routing:
   - 并发会不会有问题
   - 这代码能简化吗
   - code review 一下
+  - 我写了一段代码总感觉哪里不对
+  - 帮我看看这段代码有没有隐患或坏味道
   anti_triggers:
   - 只想调整命名或代码风格时
   - 需要从零实现新功能而非审查现有代码时
@@ -40,9 +42,9 @@ meta:
   source_ref: cards.yaml#code_review
   source_hash: 9e13a651eaf677331b4588fcde8ec706bdceccb12f1ec17d225488097c3e4e84
   status: active
-  scope: domain_specific
-  shelf: on_shelf
-  tier: A
+  scope: universal
+  shelf: evergreen
+  tier: S
   category: engineering
   subcategory: code_review
   collections: []
