@@ -67,7 +67,7 @@ struct SeedHUDView: View {
     @State private var isHoveringBody: Bool = false
 
     private var activeBackdropAlpha: Double {
-        (controller.isHovering || controller.isReaderOpen) ? 0.96 : controller.opacityPreset.backdropAlpha
+        (controller.isHovering || controller.isReaderOpen) ? 0.88 : controller.opacityPreset.backdropAlpha
     }
 
     private var activeTextAlpha: Double {
@@ -93,7 +93,7 @@ struct SeedHUDView: View {
 
                             Text(seedCategoryLabel(seed.category))
                                 .font(.system(size: 10.5, weight: .medium))
-                                .foregroundStyle(Color.primary.opacity(0.68))
+                                .foregroundStyle(Color.primary.opacity(0.78))
 
                             if seed.isL3Discovery {
                                 Text("✦ L3探索")
@@ -118,11 +118,11 @@ struct SeedHUDView: View {
                             } else {
                                 Text("·")
                                     .font(.system(size: 10))
-                                    .foregroundStyle(Color.primary.opacity(0.35))
+                                    .foregroundStyle(Color.primary.opacity(0.48))
 
                                 Text(isHoveringBody ? "点击展开本体 ↗" : "认知种子")
                                     .font(.system(size: 10, weight: isHoveringBody ? .medium : .regular))
-                                    .foregroundStyle(isHoveringBody ? Color.accentColor : Color.primary.opacity(0.55))
+                                    .foregroundStyle(isHoveringBody ? Color.accentColor : Color.primary.opacity(0.68))
                             }
                         }
 
@@ -199,12 +199,12 @@ struct SeedHUDView: View {
                     VStack(alignment: .leading, spacing: 3) {
                         Text(seed.title)
                             .font(.system(size: 13.5, weight: .semibold))
-                            .foregroundStyle(Color.primary.opacity(0.95 * activeTextAlpha))
+                            .foregroundStyle(Color.primary.opacity(0.98 * activeTextAlpha))
                             .lineLimit(1)
 
                         Text(seed.tagline)
                             .font(.system(size: 11.5, weight: .regular))
-                            .foregroundStyle(Color.primary.opacity(0.76 * activeTextAlpha))
+                            .foregroundStyle(Color.primary.opacity(0.84 * activeTextAlpha))
                             .lineLimit(2)
                             .fixedSize(horizontal: false, vertical: true)
                     }
@@ -288,31 +288,9 @@ struct SeedHUDView: View {
             }
         }
         .frame(width: 320)
-        .background(
-            ZStack {
-                RoundedRectangle(cornerRadius: 14, style: .continuous)
-                    .fill(.ultraThinMaterial)
-                    .opacity(activeBackdropAlpha)
-                RoundedRectangle(cornerRadius: 14, style: .continuous)
-                    .fill(Color(nsColor: .windowBackgroundColor).opacity(controller.isHovering ? 0.36 : 0.22))
-            }
-        )
+        .background(GlintGlassBackground(cornerRadius: 14, tintOpacity: activeBackdropAlpha))
         .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: 14, style: .continuous)
-                .strokeBorder(
-                    LinearGradient(
-                        colors: [
-                            Color.white.opacity(controller.isHovering ? 0.28 : 0.16),
-                            Color.primary.opacity(0.10),
-                            Color.primary.opacity(0.05)
-                        ],
-                        startPoint: .top,
-                        endPoint: .bottom
-                    ),
-                    lineWidth: 0.75
-                )
-        )
+        .overlay(GlintGlassBorder(cornerRadius: 14, emphasized: controller.isHovering || controller.isReaderOpen))
         .animation(.easeOut(duration: 0.16), value: controller.isHovering)
         .animation(.easeOut(duration: 0.16), value: controller.isReaderOpen)
         .animation(.easeOut(duration: 0.16), value: controller.opacityPreset)
@@ -423,13 +401,13 @@ struct SeedReaderView: View {
                         .foregroundStyle(
                             seed.isL3Discovery
                                 ? Color(red: 0.78, green: 0.62, blue: 0.98)
-                                : Color.primary.opacity(0.64)
+                                : Color.primary.opacity(0.76)
                         )
 
                     if !seed.source.isEmpty {
                         Text("· \(seed.source)")
                             .font(.system(size: 10))
-                            .foregroundStyle(Color.primary.opacity(0.42))
+                            .foregroundStyle(Color.primary.opacity(0.58))
                             .lineLimit(1)
                     }
 
@@ -438,7 +416,7 @@ struct SeedReaderView: View {
                     if let pct = seed.probability_pct, pct > 0 {
                         Text(String(format: "%.2f%%", pct))
                             .font(.system(size: 9.5, design: .monospaced))
-                            .foregroundStyle(Color.primary.opacity(0.45))
+                            .foregroundStyle(Color.primary.opacity(0.62))
                     }
 
                     Button {
@@ -446,18 +424,18 @@ struct SeedReaderView: View {
                     } label: {
                         Text("Esc")
                             .font(.system(size: 9.5, weight: .medium, design: .monospaced))
-                            .foregroundStyle(Color.primary.opacity(0.55))
+                            .foregroundStyle(Color.primary.opacity(0.74))
                             .padding(.horizontal, 6)
                             .padding(.vertical, 2)
-                            .background(Color.primary.opacity(0.08), in: RoundedRectangle(cornerRadius: 4, style: .continuous))
+                            .background(Color.primary.opacity(0.12), in: RoundedRectangle(cornerRadius: 4, style: .continuous))
                     }
                     .buttonStyle(.plain)
                 }
 
                 if let reason = seed.reason_tag, !reason.isEmpty {
                     Text(reason)
-                        .font(.system(size: 10))
-                        .foregroundStyle(Color.primary.opacity(0.50))
+                        .font(.system(size: 10.5))
+                        .foregroundStyle(Color.primary.opacity(0.68))
                 }
 
                 // Title & tagline
@@ -469,7 +447,7 @@ struct SeedReaderView: View {
                     if !seed.tagline.isEmpty {
                         Text(seed.tagline)
                             .font(.system(size: 11.5))
-                            .foregroundStyle(Color.primary.opacity(0.72))
+                            .foregroundStyle(Color.primary.opacity(0.82))
                     }
                 }
 
@@ -478,15 +456,19 @@ struct SeedReaderView: View {
                     VStack(alignment: .leading, spacing: 4) {
                         Text("适用场景 / 盲区信号")
                             .font(.system(size: 10, weight: .semibold))
-                            .foregroundStyle(Color.primary.opacity(0.52))
+                            .foregroundStyle(Color.primary.opacity(0.68))
                         Text(seed.pain_point)
                             .font(.system(size: 11.5))
-                            .foregroundStyle(Color.primary.opacity(0.88))
+                            .foregroundStyle(Color.primary.opacity(0.94))
                             .fixedSize(horizontal: false, vertical: true)
                     }
                     .padding(9)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(Color.primary.opacity(0.05), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                    .background(Color.primary.opacity(0.07), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8, style: .continuous)
+                            .strokeBorder(Color.primary.opacity(0.08), lineWidth: 0.5)
+                    )
                 }
 
                 // Inline variable fill-in (when prompt contains placeholders or {{input}})
@@ -519,16 +501,16 @@ struct SeedReaderView: View {
                     HStack {
                         Text("认知指令本体")
                             .font(.system(size: 10, weight: .semibold))
-                            .foregroundStyle(Color.primary.opacity(0.52))
+                            .foregroundStyle(Color.primary.opacity(0.68))
                         Spacer()
                         Button {
                             controller.copyPromptText(resolvedPrompt(for: seed), feedbackLabel: "已复制指令")
                         } label: {
                             HStack(spacing: 4) {
                                 Image(systemName: controller.copiedFeedback ? "checkmark" : "doc.on.doc")
-                                    .font(.system(size: 9.5, weight: .medium))
+                                    .font(.system(size: 9.5, weight: .semibold))
                                 Text(controller.copiedFeedback ? controller.copyFeedbackText : "复制指令")
-                                    .font(.system(size: 10, weight: .medium))
+                                    .font(.system(size: 10.5, weight: .semibold))
                             }
                             .foregroundStyle(controller.copiedFeedback ? Color.green : Color.accentColor)
                         }
@@ -542,7 +524,7 @@ struct SeedReaderView: View {
                                 : resolvedPrompt(for: seed)
                         )
                         .font(.system(size: 11.5))
-                        .foregroundStyle(Color.primary.opacity(0.90))
+                        .foregroundStyle(Color.primary.opacity(0.95))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .textSelection(.enabled)
                     }
@@ -552,7 +534,7 @@ struct SeedReaderView: View {
                     HStack(spacing: 6) {
                         Text("直达：")
                             .font(.system(size: 10))
-                            .foregroundStyle(Color.primary.opacity(0.48))
+                            .foregroundStyle(Color.primary.opacity(0.66))
                         ForEach([("ChatGPT", "chatgpt"), ("Claude", "claude"), ("Gemini", "gemini")], id: \.1) { label, key in
                             Button {
                                 launchAI(provider: key, label: label, seed: seed)
@@ -561,8 +543,8 @@ struct SeedReaderView: View {
                                     .font(.system(size: 10, weight: .medium))
                                     .padding(.horizontal, 7)
                                     .padding(.vertical, 3)
-                                    .background(Color.primary.opacity(0.08), in: RoundedRectangle(cornerRadius: 5, style: .continuous))
-                                    .foregroundStyle(Color.primary.opacity(0.86))
+                                    .background(Color.primary.opacity(0.11), in: RoundedRectangle(cornerRadius: 5, style: .continuous))
+                                    .foregroundStyle(Color.primary.opacity(0.92))
                             }
                             .buttonStyle(.plain)
                         }
@@ -570,22 +552,26 @@ struct SeedReaderView: View {
                     }
                 }
                 .padding(9)
-                .background(Color.primary.opacity(0.045), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                .background(Color.primary.opacity(0.065), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8, style: .continuous)
+                        .strokeBorder(Color.primary.opacity(0.08), lineWidth: 0.5)
+                )
 
                 // Trigger utterances
                 if !seed.trigger_utterances.isEmpty {
                     VStack(alignment: .leading, spacing: 4) {
                         Text("下次遇到时，直接这样呼出")
                             .font(.system(size: 10, weight: .semibold))
-                            .foregroundStyle(Color.primary.opacity(0.52))
+                            .foregroundStyle(Color.primary.opacity(0.68))
                         Text(seed.trigger_utterances.prefix(3).map { "「\($0)」" }.joined(separator: "  "))
                             .font(.system(size: 10.5))
-                            .foregroundStyle(Color.primary.opacity(0.68))
+                            .foregroundStyle(Color.primary.opacity(0.82))
                             .fixedSize(horizontal: false, vertical: true)
                     }
                 }
 
-                Divider().opacity(0.22)
+                Divider().opacity(0.28)
 
                 // Footer actions
                 HStack(spacing: 10) {
@@ -596,7 +582,7 @@ struct SeedReaderView: View {
                             .font(.system(size: 11, weight: .medium))
                     }
                     .buttonStyle(.plain)
-                    .foregroundStyle(Color(red: 0.96, green: 0.74, blue: 0.32).opacity(0.9))
+                    .foregroundStyle(Color(red: 0.96, green: 0.74, blue: 0.32))
 
                     Button {
                         controller.muteCurrent()
@@ -605,7 +591,7 @@ struct SeedReaderView: View {
                             .font(.system(size: 11, weight: .medium))
                     }
                     .buttonStyle(.plain)
-                    .foregroundStyle(Color(red: 0.95, green: 0.45, blue: 0.45).opacity(0.9))
+                    .foregroundStyle(Color(red: 0.96, green: 0.48, blue: 0.48))
 
                     Spacer()
 
@@ -617,20 +603,19 @@ struct SeedReaderView: View {
                             Image(systemName: "arrow.right")
                         }
                         .font(.system(size: 11, weight: .semibold))
+                        .foregroundStyle(Color.primary.opacity(0.95))
                         .padding(.horizontal, 10)
                         .padding(.vertical, 5)
-                        .background(Color.primary.opacity(0.1), in: RoundedRectangle(cornerRadius: 7, style: .continuous))
+                        .background(Color.primary.opacity(0.14), in: RoundedRectangle(cornerRadius: 7, style: .continuous))
                     }
                     .buttonStyle(.plain)
                 }
             }
             .padding(14)
             .frame(width: 400)
-            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
-            .overlay(
-                RoundedRectangle(cornerRadius: 16, style: .continuous)
-                    .strokeBorder(Color.white.opacity(0.22), lineWidth: 0.75)
-            )
+            .background(GlintGlassBackground(cornerRadius: 16))
+            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+            .overlay(GlintGlassBorder(cornerRadius: 16, emphasized: true))
             .onChange(of: seed.id) { _, _ in
                 variableValues = [:]
                 quickInputText = ""

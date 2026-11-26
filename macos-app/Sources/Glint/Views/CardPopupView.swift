@@ -1,6 +1,63 @@
 import AppKit
 import SwiftUI
 
+/// Shared high-contrast frosted glass surface for all Glint floating panels.
+/// Layers a dense adaptive charcoal/paper tint over `.regularMaterial` so white text in Dark Mode
+/// stays >= 9:1 contrast even over pure white webpages (and Light Mode stays crisp over dark IDEs).
+struct GlintGlassBackground: View {
+    @Environment(\.colorScheme) private var colorScheme
+    var cornerRadius: CGFloat = 14
+    var tintOpacity: Double? = nil
+
+    private var resolvedTintOpacity: Double {
+        if let tintOpacity { return tintOpacity }
+        return colorScheme == .dark ? 0.82 : 0.88
+    }
+
+    private var tintColor: Color {
+        colorScheme == .dark
+            ? Color(red: 0.10, green: 0.11, blue: 0.13)
+            : Color(red: 0.98, green: 0.98, blue: 0.99)
+    }
+
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                .fill(.regularMaterial)
+            RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                .fill(tintColor.opacity(resolvedTintOpacity))
+        }
+    }
+}
+
+struct GlintGlassBorder: View {
+    @Environment(\.colorScheme) private var colorScheme
+    var cornerRadius: CGFloat = 14
+    var emphasized: Bool = false
+
+    var body: some View {
+        RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+            .strokeBorder(
+                LinearGradient(
+                    colors: colorScheme == .dark
+                        ? [
+                            Color.white.opacity(emphasized ? 0.28 : 0.20),
+                            Color.white.opacity(0.09),
+                            Color.white.opacity(0.06)
+                        ]
+                        : [
+                            Color.black.opacity(emphasized ? 0.16 : 0.11),
+                            Color.black.opacity(0.09),
+                            Color.black.opacity(0.13)
+                        ],
+                    startPoint: .top,
+                    endPoint: .bottom
+                ),
+                lineWidth: 0.75
+            )
+    }
+}
+
 struct CardPopupView: View {
     let cards: [CardItem]
     let selectedIndex: Int
@@ -48,7 +105,7 @@ struct CardPopupView: View {
                 }
             }
 
-            // Ultra-quiet footer whisper
+            // Quiet footer whisper (still clearly legible over light/dark surfaces)
             HStack(spacing: 8) {
                 if isEditingCustomIntent {
                     Text("↵ 记录并追加 · ⇧↵ 仅记录")
@@ -60,28 +117,15 @@ struct CardPopupView: View {
                     .buttonStyle(.plain)
             }
             .font(.system(size: 9.5, weight: .regular))
-            .foregroundStyle(Color.primary.opacity(0.38))
+            .foregroundStyle(Color.primary.opacity(0.56))
             .padding(.horizontal, 8)
             .padding(.top, 2)
         }
         .padding(8)
         .frame(width: 380)
-        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: 14, style: .continuous)
-                .strokeBorder(
-                    LinearGradient(
-                        colors: [
-                            Color.white.opacity(0.24),
-                            Color.primary.opacity(0.08),
-                            Color.primary.opacity(0.04)
-                        ],
-                        startPoint: .top,
-                        endPoint: .bottom
-                    ),
-                    lineWidth: 0.75
-                )
-        )
+        .background(GlintGlassBackground(cornerRadius: 14))
+        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .overlay(GlintGlassBorder(cornerRadius: 14, emphasized: true))
     }
 }
 
@@ -347,72 +391,84 @@ struct LensReaderView: View {
             if !card.preview.isEmpty {
                 Text(card.preview)
                     .font(.system(size: 11.5))
-                    .foregroundStyle(Color.primary.opacity(0.62))
+                    .foregroundStyle(Color.primary.opacity(0.76))
             }
 
-            Divider().opacity(0.25)
+            Divider().opacity(0.28)
 
             ScrollView {
                 Text(cleanBody)
                     .font(.system(size: 12))
-                    .foregroundStyle(Color.primary.opacity(0.88))
+                    .foregroundStyle(Color.primary.opacity(0.94))
                     .textSelection(.enabled)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .fixedSize(horizontal: false, vertical: true)
             }
             .frame(maxHeight: 260)
 
-            Divider().opacity(0.25)
+            Divider().opacity(0.28)
 
             HStack(spacing: 10) {
                 Button("↵ 复制到剪贴板", action: onCopy)
                     .buttonStyle(.plain)
-                    .font(.system(size: 11, weight: .medium))
+                    .font(.system(size: 11, weight: .semibold))
                     .foregroundStyle(Color.accentColor)
 
                 Button("⇧↵ 仍要注入", action: onInject)
                     .buttonStyle(.plain)
                     .font(.system(size: 11))
-                    .foregroundStyle(Color.primary.opacity(0.6))
+                    .foregroundStyle(Color.primary.opacity(0.76))
 
                 Spacer()
 
                 Button("Esc 关闭", action: onClose)
                     .buttonStyle(.plain)
                     .font(.system(size: 10.5))
-                    .foregroundStyle(Color.primary.opacity(0.42))
+                    .foregroundStyle(Color.primary.opacity(0.62))
             }
         }
         .padding(12)
         .frame(width: 420)
-        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: 14, style: .continuous)
-                .strokeBorder(Color.white.opacity(0.18), lineWidth: 0.75)
-        )
+        .background(GlintGlassBackground(cornerRadius: 14))
+        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .overlay(GlintGlassBorder(cornerRadius: 14, emphasized: true))
     }
 }
 
 struct GlintToastView: View {
+    @Environment(\.colorScheme) private var colorScheme
     let symbol: String
     let message: String
 
     var body: some View {
         HStack(spacing: 6) {
             Image(systemName: symbol)
-                .font(.system(size: 10.5, weight: .medium))
-                .foregroundStyle(Color.primary.opacity(0.55))
+                .font(.system(size: 10.5, weight: .semibold))
+                .foregroundStyle(Color.primary.opacity(0.76))
             Text(message)
-                .font(.system(size: 11.5, weight: .regular))
-                .foregroundStyle(Color.primary.opacity(0.82))
+                .font(.system(size: 11.5, weight: .medium))
+                .foregroundStyle(Color.primary.opacity(0.94))
                 .lineLimit(1)
         }
-        .padding(.horizontal, 11)
-        .padding(.vertical, 6)
-        .background(.ultraThinMaterial, in: Capsule())
+        .padding(.horizontal, 12)
+        .padding(.vertical, 6.5)
+        .background(
+            ZStack {
+                Capsule().fill(.regularMaterial)
+                Capsule().fill(
+                    (colorScheme == .dark
+                        ? Color(red: 0.10, green: 0.11, blue: 0.13)
+                        : Color(red: 0.98, green: 0.98, blue: 0.99))
+                    .opacity(colorScheme == .dark ? 0.84 : 0.90)
+                )
+            }
+        )
         .overlay(
             Capsule()
-                .strokeBorder(Color.primary.opacity(0.10), lineWidth: 0.5)
+                .strokeBorder(
+                    colorScheme == .dark ? Color.white.opacity(0.18) : Color.black.opacity(0.12),
+                    lineWidth: 0.65
+                )
         )
     }
 }

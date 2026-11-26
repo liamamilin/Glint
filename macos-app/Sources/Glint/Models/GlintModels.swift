@@ -234,19 +234,19 @@ enum SeedOpacityPreset: String, CaseIterable, Identifiable {
         }
     }
 
-    /// Controls glass surface opacity while keeping text effortlessly glanceable.
+    /// Controls dark/light tint density over the frosted material so text stays crisp even on pure white pages.
     var backdropAlpha: Double {
         switch self {
-        case .whisper: return 0.58
-        case .standard: return 0.78
-        case .clear: return 0.94
+        case .whisper: return 0.62
+        case .standard: return 0.74
+        case .clear: return 0.86
         }
     }
 
     var textAlpha: Double {
         switch self {
-        case .whisper: return 0.84
-        case .standard: return 0.95
+        case .whisper: return 0.90
+        case .standard: return 0.96
         case .clear: return 1.0
         }
     }
