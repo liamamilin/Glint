@@ -49,6 +49,16 @@ flowchart LR
 
 ---
 
+## 实机界面预览
+
+### 1. 统一管理台 · L3 库存 & L4 声明式货架 + 召回诊断
+![Glint L3/L4 货架与召回诊断](docs/assets/admin_shelf.png)
+
+### 2. 认知种子控制面板 · 概率权重调度与屏蔽管理
+![Glint 认知种子控制面板](docs/assets/admin_seed.png)
+
+---
+
 ## 核心特性
 
 ### 1. 主动语义路由（Flywheel A）
