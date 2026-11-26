@@ -49,13 +49,35 @@ flowchart LR
 
 ---
 
-## 实机界面预览
+## 实机产品截图
 
-### 1. 统一管理台 · L3 库存 & L4 声明式货架 + 召回诊断
+<table>
+  <tr>
+    <td width="52%" align="center" valign="top">
+      <strong>飞轮 A · 主动语义路由浮窗（任意输入框原位呼出）</strong><br/><br/>
+      <img src="docs/assets/router_popup.jpg" alt="Glint 主动语义路由三卡浮窗" width="380" /><br/><br/>
+      <strong>飞轮 B · 认知种子 Ambient HUD（桌面半透明陪伴小窗）</strong><br/><br/>
+      <img src="docs/assets/seed_hud.png" alt="Glint 认知种子 Ambient HUD" width="340" />
+    </td>
+    <td width="48%" align="center" valign="top">
+      <strong>认知种子 · 展开本体阅读卡（就地填空 + 一键直达 AI）</strong><br/><br/>
+      <img src="docs/assets/seed_reader.jpg" alt="Glint 认知种子展开阅读卡" width="360" />
+    </td>
+  </tr>
+</table>
+
+<details>
+<summary>查看统一管理台后台截图（L3/L4 货架 & 认知种子概率控制面）</summary>
+
+<br/>
+
+**L3 库存 & L4 声明式货架 + 召回诊断**  
 ![Glint L3/L4 货架与召回诊断](docs/assets/admin_shelf.png)
 
-### 2. 认知种子控制面板 · 概率权重调度与屏蔽管理
+**认知种子控制面板 · 实时概率调度与屏蔽管理**  
 ![Glint 认知种子控制面板](docs/assets/admin_seed.png)
+
+</details>
 
 ---
 
