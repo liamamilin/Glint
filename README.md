@@ -8,7 +8,7 @@
 [![macOS 14+](https://img.shields.io/badge/macOS-14%2B%20Apple%20Silicon-000000?logo=apple&logoColor=white)](https://github.com/liamamilin/Glint)
 [![Swift + Python](https://img.shields.io/badge/Stack-SwiftUI%20%2B%20FastAPI%20%2B%20MPS-6ea8fe)](https://github.com/liamamilin/Glint)
 [![Local-First](https://img.shields.io/badge/Privacy-100%25%20Local%20Inference-4ade80)](#隐私与安全红线)
-[![Golden Eval](https://img.shields.io/badge/Golden%20Eval-Hit@1%2096.9%25%20%7C%20Hit@3%20100%25-c084fc)](#实机性能与评测基准)
+[![Golden Eval](https://img.shields.io/badge/Golden%20Eval-Hit@1%2097.1%25%20%7C%20Hit@3%20100%25-c084fc)](#实机性能与评测基准)
 [![License: MIT](https://img.shields.io/badge/License-MIT-fbbf24.svg)](LICENSE)
 
 </div>
@@ -97,25 +97,24 @@ flowchart LR
   - **零成本屏蔽与撤销**：点击「不再轮播 / 7 天不看」立即切卡并弹出 4.5 秒「撤销」条；**屏蔽仅移出轮播，完全不影响快捷键主动召回**。
 - **增强阅读卡**：点击卡片正文展开完整本体，自动识别 `[...]` / `【...】` / `{{...}}` 变量支持**就地填空**，一键复制或直接带入打开 **ChatGPT / Claude / Gemini**，按 `Esc` 收起。
 
-### 3. 五层认知供应链与 7 模块统一管理台
-- **五层管线**：`L0 原始文本 → L1 资产快照 → L2 结构化透镜 → L3 清洗总库存 (469 张) → L4 声明式上架货架 (394 张)`，原子构建、秒级热加载与一键回滚。
-- **CLE v0.7 底座**：内置认知语言工程（CLE v0.7）全量 82 项精炼接口（去术语化，外部 LLM 零门槛可执行），其中 23 项「结构核心 v0.2」作为 Tier S 常青底座，叠加 `discovery-taxonomy`（106）、`prompt-taxonomy`（221）、`super-individual-toolbox`（36）、`atlas-methods`（16）。
-- **统一后台（`http://127.0.0.1:18765/admin/`）**：直接挂载于 `brain-server`（零额外进程），菜单栏 `Glint 管理…` 一键打开，集成 **总览发布 / L3&L4 货架与召回诊断 / 供给工坊 (Forge) / 进化飞轮 (M3) / 认知种子控制面 / 沙盒与黄金评测 / 策略与日志** 7 大模块。
+### 3. 五层认知供应链与个人认知管理空间
+- **五层管线**：`L0 原始文本 → L1 资产快照 → L2 结构化透镜 → L3 清洗总库存 (469 张) → L4 声明式上架货架 (398 张)`，原子构建、秒级热加载与一键回滚。
+- **CLE v0.7 底座**：内置认知语言工程（CLE v0.7）全量 82 项精炼接口（去术语化，外部 LLM 零门槛可执行），其中 27 项「结构核心 + 模糊态/分类扩展」作为 Tier S 常青底座，叠加 `discovery-taxonomy`（106）、`prompt-taxonomy`（221）、`super-individual-toolbox`（36）、`atlas-methods`（16）。
+- **用户向个人空间 + 可选开发者模式（`http://127.0.0.1:18765/admin/`）**：直接挂载于 `brain-server`（零额外进程），菜单栏 `Glint 管理…` 一键打开。默认呈现面向日常用户的 5 大视图（**首页与实时试用 / 我的卡片库 / 桌面陪伴节奏 / 制作新卡片 / 使用回顾**，支持浅色/深色外观切换），左下角开启 **开发者模式** 后可展开 **召回排序诊断 / 黄金评测与素材库 / 底层 YAML 与脱敏日志**。
 
 ---
 
 ## 实机性能与评测基准
 
-基于 32 条真实口语回归样本（[golden_cases.yaml](recognition-library/eval/golden_cases.yaml)，含 8 条 CLE v0.7 Tier S 回归题）在 Apple Silicon 本机实测：
+基于 34 条核心回归样本（[golden_cases.yaml](recognition-library/eval/golden_cases.yaml)）及 108 条开源扩展日常/模糊压测集（[everyday_simulated.yaml](recognition-library/eval/datasets/everyday_simulated.yaml) + [vague_ambiguous_stress.yaml](recognition-library/eval/datasets/vague_ambiguous_stress.yaml)）在 Apple Silicon 本机实测：
 
-| 指标 | 实机成绩 | 说明 |
-| --- | --- | --- |
-| **Hit@1** | **96.9%** (31/32) | 首卡即命中预期透镜 |
-| **Hit@3** | **100.0%** (32/32) | Top 3 全量覆盖 |
-| **Prim@1** | **100.0%** (32/32) | 首卡认知元操作 100% 准确 |
-| **Forbidden Rate** | **0.0%** | 零跨领域串台误召回 |
-| **Orthogonality** | **100.0%** | 3 卡严格正交覆盖不同元操作 |
-| **单元测试** | **20/20 Passed** | `brain-server` (12) + `recognition-library` (8) |
+| 指标 | Golden Eval (34) | 日常模拟 (72) | 模糊高歧义 (36) | 说明 |
+| --- | :---: | :---: | :---: | --- |
+| **Hit@1** | **97.1%** (33/34) | **95.8%** | **72.2%** | 首卡即命中预期透镜 |
+| **Hit@3** | **100.0%** (34/34) | **100.0%** | **91.7%** | Top 3 覆盖率 |
+| **Forbidden Rate** | **0.0%** | **1.4%** | **0.0%** | 跨领域串台误召回控制 |
+| **Orthogonality** | **100.0%** | **100.0%** | **100.0%** | 3 卡严格正交覆盖不同元操作 |
+| **单元测试** | **21/21 Passed** | — | — | `brain-server` (13) + `recognition-library` (8) |
 
 ---
 

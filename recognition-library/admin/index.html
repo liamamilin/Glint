@@ -1,402 +1,1290 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Glint 统一后台管理台</title>
+  <title>Glint 微光 · 个人认知卡片空间</title>
   <style>
     :root {
-      --bg: #0e1015;
-      --surface: #161922;
-      --surface-2: #1e2330;
+      --bg: #f6f6f3;
+      --sidebar-bg: #f0f1ec;
+      --surface: #ffffff;
+      --surface-2: #f4f5f2;
+      --surface-hover: #f9faf8;
+      --border: #e5e7e1;
+      --border-strong: #d5d8cf;
+      --text: #181b20;
+      --text-2: #414752;
+      --muted: #6e7582;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --accent-soft: rgba(37, 99, 235, 0.10);
+      --green: #059669;
+      --green-soft: rgba(5, 150, 105, 0.11);
+      --amber: #d97706;
+      --amber-soft: rgba(217, 119, 6, 0.12);
+      --purple: #7c3aed;
+      --purple-soft: rgba(124, 58, 237, 0.11);
+      --red: #dc2626;
+      --red-soft: rgba(220, 38, 38, 0.10);
+      --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+      --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.07);
+      --shadow-lg: 0 20px 50px rgba(15, 23, 42, 0.16);
+      --radius: 14px;
+      --radius-sm: 9px;
+      --sidebar-w: 244px;
+    }
+
+    [data-theme="dark"] {
+      --bg: #0f1117;
+      --sidebar-bg: #141720;
+      --surface: #181c26;
+      --surface-2: #202534;
+      --surface-hover: #242a3a;
       --border: #2a3040;
-      --text: #e8ecf4;
+      --border-strong: #394257;
+      --text: #eef1f7;
+      --text-2: #c5ccd9;
       --muted: #8b95aa;
       --accent: #6ea8fe;
+      --accent-hover: #8cb9ff;
       --accent-soft: rgba(110, 168, 254, 0.14);
-      --green: #4ade80;
+      --green: #34d399;
+      --green-soft: rgba(52, 211, 153, 0.14);
       --amber: #fbbf24;
-      --red: #f87171;
+      --amber-soft: rgba(251, 191, 36, 0.14);
       --purple: #c084fc;
-      --radius: 10px;
+      --purple-soft: rgba(192, 132, 252, 0.15);
+      --red: #f87171;
+      --red-soft: rgba(248, 113, 113, 0.14);
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
+      --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.55);
     }
+
     * { box-sizing: border-box; }
-    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
-    header {
-      display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
-      padding: 12px 20px; border-bottom: 1px solid var(--border); background: var(--surface); position: sticky; top: 0; z-index: 30;
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Helvetica Neue", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
     }
-    .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; }
-    .brand .badge { font-size: 11px; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 500; }
-    .tabs { display: flex; gap: 4px; flex-wrap: wrap; }
-    .tab-btn { background: transparent; border: 1px solid transparent; color: var(--muted); padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 500; }
-    .tab-btn.active { background: var(--surface-2); color: var(--text); border-color: var(--border); }
-    .actions { display: flex; gap: 8px; }
-    button.btn { background: var(--surface-2); color: var(--text); border: 1px solid var(--border); padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 12.5px; }
-    button.btn.primary { background: var(--accent); color: #0a1220; border-color: var(--accent); font-weight: 600; }
-    button.btn.danger { border-color: rgba(248,113,113,0.4); color: var(--red); }
-    button.btn.sm { padding: 3px 8px; font-size: 11.5px; }
-    button.btn:disabled { opacity: 0.5; cursor: not-allowed; }
-    main { max-width: 1440px; margin: 0 auto; padding: 18px 20px 60px; }
-    .panel { display: none; }
+
+    /* App Shell */
+    .app-shell {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Left Sidebar */
+    .app-sidebar {
+      width: var(--sidebar-w);
+      flex: none;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      padding: 18px 14px 16px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+    .brand-block {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 4px 8px 16px;
+    }
+    .brand-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+      flex: none;
+    }
+    .brand-name { font-weight: 700; font-size: 15px; letter-spacing: -0.01em; line-height: 1.2; }
+    .brand-sub { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+
+    .nav-section-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      padding: 12px 10px 6px;
+      letter-spacing: 0.03em;
+    }
+    .nav-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 9px;
+      padding: 9px 11px;
+      margin-bottom: 3px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--text-2);
+      font: inherit;
+      font-size: 13.5px;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.14s, color 0.14s, box-shadow 0.14s;
+    }
+    .nav-btn:hover { background: rgba(128, 134, 148, 0.09); color: var(--text); }
+    .nav-btn.active {
+      background: var(--surface);
+      color: var(--text);
+      font-weight: 600;
+      border-color: var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+    .nav-btn .left { display: flex; align-items: center; gap: 9px; }
+    .nav-btn .ic { font-size: 15px; width: 20px; text-align: center; }
+    .nav-badge {
+      font-size: 11px;
+      padding: 1px 7px;
+      border-radius: 999px;
+      background: var(--surface-2);
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .nav-btn.active .nav-badge { background: var(--accent-soft); color: var(--accent); }
+
+    .dev-nav-group { display: none; margin-top: 4px; padding-top: 6px; border-top: 1px dashed var(--border-strong); }
+    .dev-nav-group.show { display: block; }
+
+    .sidebar-spacer { flex: 1; }
+
+    .pending-box {
+      display: none;
+      background: var(--amber-soft);
+      border: 1px solid rgba(217, 119, 6, 0.28);
+      border-radius: 11px;
+      padding: 10px 11px;
+      margin-bottom: 10px;
+      font-size: 12px;
+      color: var(--text);
+    }
+    .pending-box.show { display: block; }
+    .pending-box p { margin: 0 0 8px; line-height: 1.4; color: var(--text-2); }
+
+    .sidebar-footer {
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .switch-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 4px 6px;
+      font-size: 12.5px;
+      color: var(--text-2);
+    }
+    .toggle {
+      position: relative;
+      width: 36px;
+      height: 20px;
+      appearance: none;
+      background: var(--border-strong);
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.18s;
+      border: none;
+      padding: 0;
+      margin: 0;
+      flex: none;
+    }
+    .toggle::after {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+      transition: transform 0.18s;
+    }
+    .toggle:checked { background: var(--accent); }
+    .toggle:checked::after { transform: translateX(16px); }
+
+    /* Main Content */
+    .app-main {
+      flex: 1;
+      min-width: 0;
+      padding: 26px 34px 72px;
+      max-width: 1220px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .panel { display: none; animation: fadeIn 0.16s ease-out; }
     .panel.active { display: block; }
-    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 16px; }
-    .kpi { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 13px 15px; }
-    .kpi .label { font-size: 11.5px; color: var(--muted); }
-    .kpi .val { font-size: 24px; font-weight: 700; margin-top: 3px; }
-    .kpi .sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
-    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .shelf-layout { display: grid; grid-template-columns: 290px 1fr; gap: 16px; align-items: start; }
-    .sidebar { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; position: sticky; top: 68px; max-height: calc(100vh - 88px); overflow-y: auto; }
-    .sidebar h4 { margin: 12px 0 6px; font-size: 11.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; display: flex; justify-content: space-between; align-items: center; }
-    .sidebar h4:first-child { margin-top: 0; }
-    .nav-item { display: flex; align-items: center; justify-content: space-between; gap: 6px; padding: 6px 8px; border-radius: 7px; cursor: pointer; font-size: 12.5px; color: #c8d0e0; }
-    .nav-item:hover { background: var(--surface-2); }
-    .nav-item.active { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
-    .nav-row { display: flex; align-items: center; justify-content: space-between; gap: 4px; margin-bottom: 3px; }
-    .mode-select { padding: 2px 5px; font-size: 11px; background: var(--bg); border: 1px solid var(--border); color: var(--muted); border-radius: 6px; }
-    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 15px 17px; margin-bottom: 14px; }
-    .card h3 { margin: 0 0 10px; font-size: 14px; font-weight: 600; }
-    .bar-row { display: grid; grid-template-columns: 150px 1fr 48px; align-items: center; gap: 10px; margin-bottom: 7px; font-size: 12.5px; }
-    .bar-track { height: 7px; background: var(--surface-2); border-radius: 999px; overflow: hidden; }
-    .bar-fill { height: 100%; background: var(--accent); border-radius: 999px; }
-    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; align-items: center; }
-    input, select, textarea { background: var(--surface-2); color: var(--text); border: 1px solid var(--border); border-radius: 8px; padding: 7px 10px; font-size: 12.5px; font-family: inherit; }
-    textarea { width: 100%; min-height: 110px; resize: vertical; }
-    .lens-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 10px; }
-    .lens-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 14px; cursor: pointer; transition: border-color 0.15s; position: relative; }
-    .lens-item:hover { border-color: var(--accent); }
-    .lens-item.off-shelf { opacity: 0.72; border-style: dashed; }
-    .lens-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
-    .lens-title { font-weight: 600; font-size: 13.5px; }
-    .pill { display: inline-block; font-size: 10.5px; padding: 1px 6px; border-radius: 5px; background: var(--surface-2); color: var(--muted); border: 1px solid var(--border); margin: 3px 3px 0 0; }
-    .pill.prim { background: var(--accent-soft); color: var(--accent); border-color: rgba(110,168,254,0.3); }
-    .pill.tier-S { background: rgba(74,222,128,0.16); color: var(--green); border-color: rgba(74,222,128,0.35); font-weight: 600; }
-    .pill.tier-A { background: rgba(192,132,252,0.16); color: var(--purple); border-color: rgba(192,132,252,0.35); }
-    .pill.ov { background: rgba(251,191,36,0.14); color: var(--amber); border-color: rgba(251,191,36,0.35); }
-    .pill.ok { background: rgba(74,222,128,0.12); color: var(--green); }
-    .pill.bad { background: rgba(248,113,113,0.12); color: var(--red); }
-    .tagline { font-size: 11.5px; color: var(--muted); margin: 5px 0; }
-    .pain { font-size: 11.5px; color: #c4ccda; background: var(--surface-2); padding: 6px 8px; border-radius: 6px; margin-bottom: 6px; }
-    .batch-bar { display: none; align-items: center; gap: 8px; flex-wrap: wrap; background: var(--surface-2); border: 1px solid var(--accent); border-radius: 8px; padding: 8px 12px; margin-bottom: 10px; font-size: 12px; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: translateY(0); } }
+
+    .page-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+    .page-title { margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.02em; }
+    .page-sub { margin: 4px 0 0; font-size: 13.5px; color: var(--muted); }
+    .status-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 11px;
+      border-radius: 999px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-2);
+    }
+    .dot-green { width: 7px; height: 7px; border-radius: 50%; background: var(--green); display: inline-block; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border-strong);
+      padding: 8px 14px;
+      border-radius: 9px;
+      cursor: pointer;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.14s;
+      white-space: nowrap;
+    }
+    .btn:hover:not(:disabled) { background: var(--surface-hover); border-color: var(--accent); color: var(--accent); }
+    .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); font-weight: 600; }
+    .btn.primary:hover:not(:disabled) { background: var(--accent-hover); border-color: var(--accent-hover); color: #fff; }
+    .btn.soft { background: var(--accent-soft); color: var(--accent); border-color: transparent; font-weight: 600; }
+    .btn.soft:hover:not(:disabled) { background: var(--accent); color: #fff; }
+    .btn.danger { color: var(--red); border-color: rgba(220, 38, 38, 0.3); }
+    .btn.danger:hover:not(:disabled) { background: var(--red-soft); border-color: var(--red); color: var(--red); }
+    .btn.sm { padding: 4px 10px; font-size: 12px; border-radius: 7px; }
+    .btn.xs { padding: 3px 8px; font-size: 11.5px; border-radius: 6px; }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* Cards & Grids */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      margin-bottom: 18px;
+      box-shadow: var(--shadow-sm);
+    }
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .card h3 { margin: 0; font-size: 15.5px; font-weight: 650; letter-spacing: -0.01em; }
+    .card-desc { margin: 4px 0 0; font-size: 12.5px; color: var(--muted); }
+
+    .kpi-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-bottom: 18px; }
+    .kpi {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      box-shadow: var(--shadow-sm);
+      min-width: 0;
+    }
+    .kpi .label { font-size: 12.5px; color: var(--muted); font-weight: 500; }
+    .kpi .val { font-size: 26px; font-weight: 700; margin-top: 6px; letter-spacing: -0.02em; line-height: 1.15; }
+    .kpi .sub { font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .seed-two-col { display: grid; grid-template-columns: 1.35fr 1fr; gap: 16px; }
+    .three-col { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+
+    /* Hero Try-It Sandbox */
+    .hero-card {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.06), rgba(124, 58, 237, 0.05));
+      border: 1px solid rgba(37, 99, 235, 0.18);
+      border-radius: 18px;
+      padding: 24px 26px;
+      margin-bottom: 20px;
+    }
+    .hero-title { margin: 0; font-size: 18px; font-weight: 700; }
+    .hero-sub { margin: 4px 0 16px; font-size: 13px; color: var(--muted); }
+    .try-bar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      background: var(--surface);
+      padding: 8px;
+      border-radius: 13px;
+      border: 1px solid var(--border-strong);
+      box-shadow: var(--shadow-sm);
+    }
+    .try-bar input {
+      flex: 1;
+      min-width: 220px;
+      border: none;
+      background: transparent;
+      padding: 8px 10px;
+      font-size: 14.5px;
+      outline: none;
+    }
+    .try-bar select {
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 12.5px;
+    }
+    .example-chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; align-items: center; }
+    .example-chip {
+      font-size: 12px;
+      padding: 4px 11px;
+      border-radius: 999px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-2);
+      cursor: pointer;
+      transition: all 0.14s;
+    }
+    .example-chip:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Popup Preview Result Cards */
+    .popup-results { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
+    .popup-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 15px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 10px;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.14s, box-shadow 0.14s, border-color 0.14s;
+    }
+    .popup-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--accent); }
+    .popup-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      flex: none;
+    }
+
+    /* Inputs & Form Controls */
+    input, select, textarea {
+      background: var(--surface-2);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 8px 12px;
+      font-size: 13.5px;
+      font-family: inherit;
+      transition: border-color 0.14s;
+    }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); }
+    textarea { width: 100%; min-height: 110px; resize: vertical; line-height: 1.6; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form-field { display: flex; flex-direction: column; gap: 5px; font-size: 12.5px; color: var(--text-2); font-weight: 500; }
+    .form-hint { font-size: 11.5px; color: var(--muted); font-weight: 400; }
+
+    /* Pills & Badges */
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11.5px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--surface-2);
+      color: var(--text-2);
+      border: 1px solid var(--border);
+      font-weight: 500;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .pill.prim { background: var(--accent-soft); color: var(--accent); border-color: transparent; }
+    .pill.green { background: var(--green-soft); color: var(--green); border-color: transparent; }
+    .pill.purple { background: var(--purple-soft); color: var(--purple); border-color: transparent; }
+    .pill.amber { background: var(--amber-soft); color: var(--amber); border-color: transparent; }
+    .pill.red { background: var(--red-soft); color: var(--red); border-color: transparent; }
+
+    /* Segmented Tabs & Chips */
+    .seg-bar {
+      display: inline-flex;
+      background: var(--surface-2);
+      padding: 4px;
+      border-radius: 11px;
+      border: 1px solid var(--border);
+      gap: 3px;
+      flex-wrap: wrap;
+    }
+    .seg-btn {
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font: inherit;
+      font-size: 12.5px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.14s;
+    }
+    .seg-btn.active { background: var(--surface); color: var(--text); font-weight: 600; box-shadow: var(--shadow-sm); }
+
+    .chip-row { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; margin-bottom: 14px; }
+    .filter-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-2);
+      font-size: 12.5px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.14s;
+    }
+    .filter-chip:hover { border-color: var(--accent); color: var(--accent); }
+    .filter-chip.active { background: var(--text); color: var(--surface); border-color: var(--text); }
+    .filter-chip .cnt { opacity: 0.65; font-size: 11.5px; }
+
+    /* Library Lens Grid */
+    .lens-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 13px; }
+    .lens-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 17px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.14s, border-color 0.14s, box-shadow 0.14s;
+    }
+    .lens-card:hover { transform: translateY(-2px); border-color: var(--accent); box-shadow: var(--shadow-md); }
+    .lens-card.dormant { opacity: 0.78; background: var(--surface-2); border-style: dashed; }
+    .lens-card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+    .lens-card-title { font-weight: 650; font-size: 14.5px; line-height: 1.35; }
+    .lens-card-tag { font-size: 12.5px; color: var(--muted); line-height: 1.45; }
+    .lens-card-pain {
+      font-size: 12px;
+      color: var(--text-2);
+      background: var(--surface-2);
+      padding: 8px 10px;
+      border-radius: 8px;
+      line-height: 1.5;
+    }
+    .clamp-2 {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .lens-card.dormant .lens-card-pain { background: var(--surface); }
+    .lens-card-foot { display: flex; align-items: center; justify-content: space-between; gap: 6px; flex-wrap: wrap; margin-top: auto; padding-top: 2px; }
+
+    .batch-bar {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      background: var(--accent-soft);
+      border: 1px solid rgba(37, 99, 235, 0.3);
+      border-radius: 11px;
+      padding: 9px 14px;
+      margin-bottom: 14px;
+      font-size: 12.5px;
+    }
     .batch-bar.show { display: flex; }
-    .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.68); z-index: 50; align-items: center; justify-content: center; padding: 18px; }
+
+    /* Progress Bars */
+    .bar-row { display: grid; grid-template-columns: 140px 1fr 56px; align-items: center; gap: 12px; margin-bottom: 10px; font-size: 13px; }
+    .bar-track { height: 8px; background: var(--surface-2); border-radius: 999px; overflow: hidden; }
+    .bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent), #6366f1); border-radius: 999px; }
+
+    /* Seed Mood Preset Cards */
+    .preset-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 13px;
+      padding: 15px 16px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .preset-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+    .preset-card.active { border-color: var(--accent); background: var(--accent-soft); }
+    .preset-title { font-weight: 650; font-size: 14px; margin-bottom: 4px; }
+    .preset-sub { font-size: 12px; color: var(--muted); line-height: 1.45; }
+
+    /* Frosted Seed Preview */
+    .seed-preview-box {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(16, 185, 129, 0.08));
+      border: 1px solid var(--border-strong);
+      border-radius: 16px;
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* Slider Row */
+    .slider-row { margin-bottom: 14px; }
+    .slider-head { display: flex; justify-content: space-between; font-size: 13px; font-weight: 500; margin-bottom: 5px; }
+    .slider-row input[type="range"] { width: 100%; padding: 0; accent-color: var(--accent); cursor: pointer; }
+
+    /* Modal */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.48);
+      backdrop-filter: blur(4px);
+      z-index: 60;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
     .modal-backdrop.open { display: flex; }
-    .modal { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; width: min(840px, 95vw); max-height: 90vh; overflow-y: auto; padding: 18px 22px; }
-    .modal pre, .code-box { white-space: pre-wrap; background: var(--bg); padding: 10px; border-radius: 8px; border: 1px solid var(--border); font-size: 12px; color: #d6deeb; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
-    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-    .form-field { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--muted); }
-    .toast { position: fixed; right: 20px; bottom: 20px; background: var(--surface-2); border: 1px solid var(--accent); color: var(--text); padding: 10px 16px; border-radius: 8px; font-size: 13px; display: none; z-index: 60; }
-    .toast.show { display: block; }
-    table { width: 100%; border-collapse: collapse; font-size: 12px; }
-    th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--border); }
-    th { color: var(--muted); font-weight: 500; }
+    .modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      width: min(760px, 95vw);
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 24px 28px;
+      box-shadow: var(--shadow-lg);
+    }
+    .prompt-sheet {
+      white-space: pre-wrap;
+      background: var(--surface-2);
+      padding: 15px 17px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      font-size: 13.5px;
+      line-height: 1.7;
+      color: var(--text);
+      font-family: inherit;
+    }
+    .var-hl {
+      background: var(--amber-soft);
+      color: var(--amber);
+      padding: 1px 5px;
+      border-radius: 5px;
+      font-weight: 600;
+    }
+    .code-box {
+      white-space: pre-wrap;
+      background: var(--surface-2);
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text-2);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      overflow-x: auto;
+    }
+
+    /* Tables */
+    table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+    th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; font-size: 12px; }
+
+    details.clean-details {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 15px;
+      margin-top: 14px;
+      background: var(--surface-2);
+    }
+    details.clean-details summary {
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-2);
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .toast {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      background: var(--text);
+      color: var(--surface);
+      padding: 11px 18px;
+      border-radius: 11px;
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: var(--shadow-lg);
+      display: none;
+      z-index: 80;
+    }
+    .toast.show { display: block; animation: fadeIn 0.15s ease-out; }
+
+    .empty-state {
+      text-align: center;
+      padding: 28px 16px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 1120px) {
+      .kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .seed-two-col { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 960px) {
+      .app-shell { flex-direction: column; }
+      .app-sidebar { width: 100%; height: auto; position: static; border-right: none; border-bottom: 1px solid var(--border); }
+      .app-main { padding: 18px 16px 50px; }
+      .two-col, .three-col, .popup-results, .form-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
-  <header>
-    <div class="brand">✨ Glint 管理台 <span class="badge">L0 → L1 → L2 → L3 库存 → L4 货架</span></div>
-    <div class="tabs">
-      <button class="tab-btn active" data-tab="overview">总览与发布</button>
-      <button class="tab-btn" data-tab="shelf">L3 库存 &amp; L4 货架</button>
-      <button class="tab-btn" data-tab="forge">L0–L4 供给工坊</button>
-      <button class="tab-btn" data-tab="evolution">进化飞轮 (M3)</button>
-      <button class="tab-btn" data-tab="seed">认知种子</button>
-      <button class="tab-btn" data-tab="sandbox">沙盒 &amp; 黄金评测</button>
-      <button class="tab-btn" data-tab="policy">策略与日志</button>
-    </div>
-    <div class="actions">
-      <button class="btn" id="btn-refresh">刷新</button>
-      <button class="btn" id="btn-rollback">回滚</button>
-      <button class="btn primary" id="btn-build">L2→L3→L4 清洗发布</button>
-    </div>
-  </header>
-
-  <main>
-    <!-- 1. Overview -->
-    <section id="tab-overview" class="panel active">
-      <div class="kpi-grid" id="kpi-grid"></div>
-      <div class="two-col">
-        <div class="card"><h3>7 大认知元操作分布（L4 上架）</h3><div id="primitive-bars"></div></div>
-        <div class="card"><h3>二级主领域分布（L4 上架 / L3 库存）</h3><div id="category-bars"></div></div>
-      </div>
-      <div class="two-col">
-        <div class="card"><h3>L2 → L3 确定性清洗报告</h3><div id="cleaning-report-box" style="font-size:12px;color:var(--muted)"></div></div>
-        <div class="card"><h3>当前线上 L4 原子产物（dist/current）</h3><pre id="release-manifest" class="code-box" style="margin:0"></pre></div>
-      </div>
-    </section>
-
-    <!-- 2. Hierarchical L3 Inventory & L4 Shelf -->
-    <section id="tab-shelf" class="panel">
-      <div class="shelf-layout">
-        <aside class="sidebar">
-          <h4>货架视图</h4>
-          <div id="nav-shelves"></div>
-          <h4>领域分类树 <span style="font-size:10px;font-weight:400">右侧切换 L4 规则</span></h4>
-          <div id="nav-categories"></div>
-          <h4>自定义合集 <button class="btn sm" id="btn-new-col">+ 新建</button></h4>
-          <div id="nav-collections"></div>
-        </aside>
+  <div class="app-shell">
+    <!-- Left Sidebar -->
+    <aside class="app-sidebar">
+      <div class="brand-block">
+        <div class="brand-icon">✨</div>
         <div>
-          <!-- Recall Inspector & Calibration Bar -->
-          <div class="card" style="padding:11px 14px;margin-bottom:12px;border-color:rgba(110,168,254,0.35)">
-            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-              <span style="font-size:12.5px;font-weight:600;color:var(--accent)">🔍 召回排序诊断</span>
-              <input type="text" id="ri-query" style="flex:1;min-width:240px" placeholder="输入刚才觉得召回不准的原话，查看 L4 + L3 全库精排排序并手动校准..." />
-              <button class="btn primary" id="btn-ri-run">模拟线上召回</button>
-              <button class="btn" id="btn-ri-close" style="display:none">返回常规浏览</button>
-            </div>
-            <div id="ri-panel" style="display:none;margin-top:12px">
-              <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px">
-                <div id="ri-meta" style="font-size:12px;color:var(--muted)"></div>
-                <div style="display:flex;gap:6px;flex-wrap:wrap">
-                  <button class="btn sm" id="btn-gap-save">🕳️ 记入认知缺口</button>
-                  <button class="btn sm primary" id="btn-gap-ai">✨ 缺口一键 AI 锻造</button>
-                  <button class="btn sm" id="btn-gap-manual">✍️ 手工建卡(预填口语)</button>
-                </div>
-              </div>
-              <div id="ri-top3" style="margin-bottom:10px"></div>
-              <div id="ri-table" style="max-height:460px;overflow-y:auto"></div>
-            </div>
-          </div>
+          <div class="brand-name">Glint 微光</div>
+          <div class="brand-sub">个人认知卡片空间</div>
+        </div>
+      </div>
 
-          <div class="filters">
-            <input type="search" id="f-q" style="flex:1;min-width:200px" placeholder="搜索标题、痛点、口语触发句、领域、正文..." />
-            <select id="f-tier">
-              <option value="">全部 Tier</option>
-              <option value="S">S 级 (常青通用)</option>
-              <option value="A">A 级 (领域精品)</option>
-              <option value="B">B 级 (长尾细分)</option>
+      <div class="nav-section-title">日常使用</div>
+      <button class="nav-btn active" data-view="home"><span class="left"><span class="ic">🏠</span>首页与试用</span></button>
+      <button class="nav-btn" data-view="library"><span class="left"><span class="ic">🗂️</span>我的卡片库</span><span class="nav-badge" id="nav-active-cnt">-</span></button>
+      <button class="nav-btn" data-view="seed"><span class="left"><span class="ic">🌱</span>桌面陪伴</span></button>
+      <button class="nav-btn" data-view="create"><span class="left"><span class="ic">✨</span>制作新卡片</span></button>
+      <button class="nav-btn" data-view="insights"><span class="left"><span class="ic">📊</span>使用回顾</span></button>
+
+      <div class="dev-nav-group" id="dev-nav-group">
+        <div class="nav-section-title">开发者工具</div>
+        <button class="nav-btn" data-view="dev-recall"><span class="left"><span class="ic">🔬</span>召回排序诊断</span></button>
+        <button class="nav-btn" data-view="dev-eval"><span class="left"><span class="ic">🧪</span>评测与素材库</span></button>
+        <button class="nav-btn" data-view="dev-config"><span class="left"><span class="ic">⚙️</span>底层配置与日志</span></button>
+      </div>
+
+      <div class="sidebar-spacer"></div>
+
+      <div class="pending-box" id="pending-box">
+        <p>你有尚未生效的卡片调整，点击下方按钮即可同步到快捷键浮窗。</p>
+        <button class="btn primary sm" style="width:100%" id="btn-apply-changes">应用更改</button>
+      </div>
+
+      <div class="sidebar-footer">
+        <button class="btn sm" style="width:100%" id="btn-sync-quick">🔄 更新卡片库</button>
+        <label class="switch-row">
+          <span>🌙 深色外观</span>
+          <input type="checkbox" class="toggle" id="toggle-dark" />
+        </label>
+        <label class="switch-row">
+          <span>🛠️ 开发者模式</span>
+          <input type="checkbox" class="toggle" id="toggle-dev" />
+        </label>
+      </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <main class="app-main">
+
+      <!-- ==================== 1. 首页与试用 ==================== -->
+      <section id="view-home" class="panel active">
+        <div class="page-head">
+          <div>
+            <h1 class="page-title">欢迎回到 Glint</h1>
+            <p class="page-sub">在任意输入框双击右 Option 即可唤起思考卡片，也可以先在这里试试看。</p>
+          </div>
+          <div class="status-chip" id="home-status-chip"><span class="dot-green"></span>正在连接本地引擎…</div>
+        </div>
+
+        <!-- Hero Interactive Try-It -->
+        <div class="hero-card">
+          <h2 class="hero-title">✨ 试一句日常想法，看看 Glint 会给你推荐哪 3 张卡片</h2>
+          <p class="hero-sub">完全在你的本机运行，不会上传云端。如果觉得推荐不贴合，可以当场教它记住你的说法。</p>
+          <div class="try-bar">
+            <input type="text" id="try-input" placeholder="随便输一句，比如：有点不对劲 / 买降噪耳机怎么选 / 帮我改改这段邮件…" />
+            <select id="try-app" title="模拟当前使用的 App">
+              <option value="ChatGPT">通用 / 浏览器</option>
+              <option value="Cursor">Cursor / 代码</option>
+              <option value="Notion">Notion / 文档</option>
+              <option value="Obsidian">Obsidian / 笔记</option>
+              <option value="Notes">备忘录 / 随手记</option>
+              <option value="Feishu">飞书 / 沟通</option>
+              <option value="WeChat">微信 / 聊天</option>
             </select>
-            <select id="f-primitive"><option value="">全部元操作</option></select>
-            <select id="f-source"><option value="">全部来源</option></select>
-            <button class="btn primary" id="btn-new-manual">+ 手工新建卡片</button>
-            <span id="lens-count" style="font-size:12px;color:var(--muted)"></span>
+            <button class="btn primary" id="btn-try-run">看看推荐</button>
           </div>
-          <div class="batch-bar" id="batch-bar">
-            <span id="batch-count">已选 0 项</span>
-            <button class="btn sm" onclick="runBatch({shelf:'on_shelf'})">批量上架 L4</button>
-            <button class="btn sm" onclick="runBatch({shelf:'off_shelf'})">批量下架回 L3</button>
-            <button class="btn sm" onclick="runBatch({tier:'S',shelf:'evergreen'})">设为 S 级常青</button>
-            <button class="btn sm" onclick="runBatch({tier:'A'})">设为 A 级</button>
-            <select id="batch-col-select" style="padding:3px 6px;font-size:11.5px"><option value="">加入合集...</option></select>
-            <button class="btn sm" id="btn-batch-clear">取消选择</button>
+          <div class="example-chips">
+            <span style="font-size:12px;color:var(--muted)">试试这些：</span>
+            <button class="example-chip" onclick="runTryExample('有点不对劲','Obsidian')">有点不对劲</button>
+            <button class="example-chip" onclick="runTryExample('预算3500买降噪耳机，索尼和Bose怎么选','ChatGPT')">买降噪耳机怎么选</button>
+            <button class="example-chip" onclick="runTryExample('心里好乱，事情堆成山不知道先处理哪件','Notes')">事情太多心里好乱</button>
+            <button class="example-chip" onclick="runTryExample('想从零开始学视频剪辑，每天只有一小时怎么安排','Notion')">零基础学新技能</button>
+            <button class="example-chip" onclick="runTryExample('帮我改一下这段年终总结，现在AI味太重了','Notion')">去掉文字 AI 味</button>
           </div>
-          <div class="lens-grid" id="lens-grid"></div>
+          <div id="try-result-area" style="display:none">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px;flex-wrap:wrap;gap:8px">
+              <span id="try-meta" style="font-size:12.5px;color:var(--muted)"></span>
+              <button class="btn xs soft" id="btn-try-teach">不满意？教 Glint 记住这句</button>
+            </div>
+            <div class="popup-results" id="try-cards"></div>
+          </div>
         </div>
-      </div>
-    </section>
 
-    <!-- 3. M4 Supply Forge (L0-L4) -->
-    <section id="tab-forge" class="panel">
-      <div class="two-col">
-        <div class="card">
-          <h3>通道 A：投喂 L0 原始材料（自动 L0 → L1 → L2）</h3>
-          <div class="form-field"><label>标题</label><input type="text" id="l0-title" placeholder="例如：分布式事务排障复盘" /></div>
-          <div class="form-field" style="margin-top:8px"><label>L0 原文（长文 / 笔记 / 规范）</label><textarea id="l0-text" placeholder="粘贴原始 Markdown 或文章正文..."></textarea></div>
-          <div style="margin-top:10px;text-align:right"><button class="btn primary" id="btn-l0-submit">投入 L0→L2 精炼流水线</button></div>
+        <div class="kpi-grid" id="home-kpis"></div>
+
+        <div class="two-col">
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <h3>7 种思考视角覆盖</h3>
+                <p class="card-desc">每次唤起都会从 3 种不同视角给出建议，避免千篇一律</p>
+              </div>
+            </div>
+            <div id="home-prim-bars"></div>
+          </div>
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <h3>覆盖的工作与生活场景</h3>
+                <p class="card-desc">点进「我的卡片库」可按场景自由开关</p>
+              </div>
+              <button class="btn sm" onclick="switchView('library')">管理卡片库 →</button>
+            </div>
+            <div id="home-cat-bars"></div>
+          </div>
         </div>
+      </section>
+
+      <!-- ==================== 2. 我的卡片库 ==================== -->
+      <section id="view-library" class="panel">
+        <div class="page-head">
+          <div>
+            <h1 class="page-title">我的卡片库</h1>
+            <p class="page-sub">浏览、试用、启停或个性化你的每一张思考卡片。点击任意卡片可直接复制或教它你的口语。</p>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn" id="btn-toggle-batch">批量整理</button>
+            <button class="btn primary" id="btn-open-manual">+ 新建我的卡片</button>
+          </div>
+        </div>
+
+        <!-- Search + Status Tabs -->
+        <div class="card" style="padding:16px 18px;margin-bottom:14px">
+          <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px">
+            <input type="search" id="f-q" style="flex:1;min-width:220px" placeholder="搜索卡片名称、适用场景、口语说法或指令正文…" />
+            <select id="f-primitive"><option value="">全部思考方式</option></select>
+            <button class="btn sm" id="btn-domain-rules">⚙️ 场景自动启用规则</button>
+            <span id="lens-count" style="font-size:12.5px;color:var(--muted)"></span>
+          </div>
+
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px">
+            <div class="seg-bar" id="shelf-seg-bar"></div>
+          </div>
+
+          <div class="chip-row" id="cat-chip-row" style="margin-bottom:8px"></div>
+          <div class="chip-row" id="col-chip-row" style="margin-bottom:0"></div>
+        </div>
+
+        <!-- Collapsible Domain Rules Drawer -->
+        <div class="card" id="domain-rules-panel" style="display:none;padding:16px 18px">
+          <div class="card-head" style="margin-bottom:10px">
+            <div>
+              <h3>按领域控制默认启用范围</h3>
+              <p class="card-desc">不常涉及的领域可切换为「仅核心常驻」，让快捷键推荐更干净聚焦。</p>
+            </div>
+            <button class="btn sm" onclick="document.getElementById('domain-rules-panel').style.display='none'">收起</button>
+          </div>
+          <div id="domain-rules-grid" class="two-col"></div>
+        </div>
+
+        <!-- Batch Bar -->
+        <div class="batch-bar" id="batch-bar">
+          <strong id="batch-count">已选 0 张</strong>
+          <button class="btn sm primary" onclick="runBatch({shelf:'on_shelf'})">批量启用</button>
+          <button class="btn sm" onclick="runBatch({shelf:'off_shelf'})">放回备用库</button>
+          <button class="btn sm" onclick="runBatch({tier:'S',shelf:'evergreen'})">设为核心常驻</button>
+          <select id="batch-col-select" style="padding:4px 8px;font-size:12px"><option value="">加入专题卡包…</option></select>
+          <button class="btn sm" id="btn-batch-clear">退出批量</button>
+        </div>
+
+        <div class="lens-grid" id="lens-grid"></div>
+      </section>
+
+      <!-- ==================== 3. 桌面陪伴（认知种子） ==================== -->
+      <section id="view-seed" class="panel">
+        <div class="page-head">
+          <div>
+            <h1 class="page-title">桌面陪伴 · 认知种子</h1>
+            <p class="page-sub">在桌面角落以半透明小窗缓慢轮播，帮助你发现「平时想不到去搜」的好方法。</p>
+          </div>
+          <button class="btn" id="btn-seed-refresh">刷新预览</button>
+        </div>
+
+        <div class="kpi-grid" id="seed-kpi-grid"></div>
+
+        <!-- Live Seed Preview -->
         <div class="card">
-          <h3>通道 B：Glint Forge 零原料冷启动（合成 7 元操作领域包）</h3>
+          <div class="card-head">
+            <div>
+              <h3>🎲 抽一张看看现在的桌面手感</h3>
+              <p class="card-desc">实时按当前偏好从你的卡片库中抽取一张陪伴种子</p>
+            </div>
+            <div style="display:flex;gap:8px;align-items:center">
+              <select id="seed-mode-select">
+                <option value="smart_mix">智能混播（推荐 · 常用 + 探索）</option>
+                <option value="l4_all">仅已启用卡片</option>
+                <option value="l3_discovery">仅备用库深度探索</option>
+                <option value="tier_s">仅核心常驻心法</option>
+              </select>
+              <button class="btn primary" id="btn-seed-draw-test">抽一张看看</button>
+            </div>
+          </div>
+          <div id="seed-draw-stage" class="seed-preview-box">
+            <div style="color:var(--muted);font-size:13px">点击右上角「抽一张看看」，体验桌面小窗会向你展示什么卡片。</div>
+          </div>
+        </div>
+
+        <div class="seed-two-col">
+          <!-- Mood Presets & Friendly Sliders -->
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <h3>陪伴节奏偏好</h3>
+                <p class="card-desc">修改后立即生效，无需重启</p>
+              </div>
+            </div>
+            <div class="three-col" style="margin-bottom:16px">
+              <div class="preset-card" id="preset-calm" onclick="applySeedPreset('calm')">
+                <div class="preset-title">🌿 温和精选</div>
+                <div class="preset-sub">主打高价值核心心法，少量探索，安静陪伴</div>
+              </div>
+              <div class="preset-card" id="preset-balanced" onclick="applySeedPreset('balanced')">
+                <div class="preset-title">✨ 均衡破盲</div>
+                <div class="preset-sub">经典常驻为主，15% 概率发现备用库惊喜</div>
+              </div>
+              <div class="preset-card" id="preset-explore" onclick="applySeedPreset('explore')">
+                <div class="preset-title">🔭 深度探索</div>
+                <div class="preset-sub">35% 概率挖掘长尾与备用库冷门思维方法</div>
+              </div>
+            </div>
+
+            <div class="slider-row">
+              <div class="slider-head"><span>探索备用库比例（发现未知盲区）</span><span id="lbl-l3-share" style="color:var(--accent)">15%</span></div>
+              <input type="range" id="rng-l3-share" min="0" max="60" step="5" value="15" />
+            </div>
+            <div class="slider-row">
+              <div class="slider-head"><span>反审美疲劳（越常用的卡，桌面出现越少）</span><span id="lbl-recall-decay" style="color:var(--accent)">适中</span></div>
+              <input type="range" id="rng-recall-decay" min="0" max="100" step="5" value="35" />
+            </div>
+            <div class="slider-row">
+              <div class="slider-head"><span>跳过降权力度（手动跳过的卡少出现）</span><span id="lbl-skip-decay" style="color:var(--accent)">明显</span></div>
+              <input type="range" id="rng-skip-decay" min="30" max="95" step="5" value="72" />
+            </div>
+
+            <details class="clean-details" style="margin-top:8px">
+              <summary>展开精确权重微调 <span>▾</span></summary>
+              <div class="form-grid" style="margin-top:10px">
+                <div class="form-field"><label>核心常驻权重</label><input type="number" step="0.5" min="0.5" max="20" id="sc-tier-s" /></div>
+                <div class="form-field"><label>精品卡片权重</label><input type="number" step="0.5" min="0.5" max="20" id="sc-tier-a" /></div>
+                <div class="form-field"><label>长尾卡片权重</label><input type="number" step="0.5" min="0.5" max="20" id="sc-tier-b" /></div>
+              </div>
+            </details>
+            <div style="margin-top:14px;display:flex;justify-content:flex-end">
+              <button class="btn primary" id="btn-seed-cfg-save">保存陪伴偏好</button>
+            </div>
+          </div>
+
+          <!-- Hidden / Snoozed List -->
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <h3>已暂缓 / 不再轮播</h3>
+                <p class="card-desc">仅移出桌面轮播，完全不影响快捷键主动召回</p>
+              </div>
+              <button class="btn sm danger" id="btn-seed-reset-all">全部恢复</button>
+            </div>
+            <div id="seed-hidden-box" style="max-height:360px;overflow-y:auto"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h3>接下来最常出现的 20 张种子</h3>
+              <p class="card-desc">根据你的使用习惯实时计算，你越熟悉的卡排得越靠后</p>
+            </div>
+          </div>
+          <div id="seed-prob-table" style="max-height:380px;overflow-y:auto"></div>
+        </div>
+      </section>
+
+      <!-- ==================== 4. 制作新卡片 ==================== -->
+      <section id="view-create" class="panel">
+        <div class="page-head">
+          <div>
+            <h1 class="page-title">制作新卡片</h1>
+            <p class="page-sub">把你自己的常用提问、读过的好文章或想攻克的新领域，沉淀为随时可唤起的思考卡片。</p>
+          </div>
+        </div>
+
+        <div class="seg-bar" style="margin-bottom:18px" id="create-mode-bar">
+          <button class="seg-btn active" data-cmode="manual">✍️ 自己写一张</button>
+          <button class="seg-btn" data-cmode="article">📄 从文章 / 笔记提炼</button>
+          <button class="seg-btn" data-cmode="pack">🧭 为新领域一键生成一套</button>
+        </div>
+
+        <!-- Mode 1: Manual -->
+        <div class="card create-pane" id="cpane-manual">
+          <div class="card-head">
+            <div>
+              <h3>✍️ 手工创建我的思考卡片</h3>
+              <p class="card-desc">写清楚「什么时候用」和「希望 AI 怎么帮我」，保存后点击左侧「更新卡片库」即可使用。</p>
+            </div>
+          </div>
           <div class="form-grid">
-            <div class="form-field"><label>目标新领域</label><input type="text" id="fg-domain" placeholder="例如：区块链与 Web3 调研" /></div>
-            <div class="form-field"><label>归属主类目</label><select id="fg-cat"></select></div>
+            <div class="form-field"><label>卡片标题 <span class="form-hint">（简短好记，建议 12 字以内）</span></label><input type="text" id="mm-title" placeholder="例如：周报提炼成老板视角" /></div>
+            <div class="form-field"><label>一句话说明</label><input type="text" id="mm-tagline" placeholder="例如：把流水账改成结论+风险+待拍板" /></div>
+            <div class="form-field"><label>思考方式</label><select id="mm-primitive"></select></div>
+            <div class="form-field"><label>所属场景领域</label><select id="mm-category"></select></div>
+            <div class="form-field"><label>重要程度</label><select id="mm-tier"><option value="A">常用精品</option><option value="S">核心常驻（优先推荐）</option><option value="B">细分备用</option></select></div>
+            <div class="form-field"><label>触发后的交互方式</label><select id="mm-action"><option value="inject_prompt">自动补充为高质量提示词</option><option value="show_checklist">浮窗展示检查清单（不改写输入）</option><option value="open_resource">打开工具或参考链接</option></select></div>
           </div>
-          <div class="form-field" style="margin-top:8px"><label>高频痛点与期望状态</label><input type="text" id="fg-pain" placeholder="例如：概念泡沫多、分不清一手信源、需要快速摸清技术与商业真伪" /></div>
-          <div class="form-field" style="margin-top:8px"><label>表达风格偏好</label><input type="text" id="fg-style" value="硬核实战、去AI味、直击本质" /></div>
-          <div style="margin-top:10px;text-align:right"><button class="btn primary" id="btn-fg-submit">一键合成 7 张 Starter Pack</button></div>
+          <div class="form-field" style="margin-top:12px"><label>什么情况下需要这张卡？</label><input type="text" id="mm-pain" placeholder="例如：每周写周报总写成工作流水账，老板抓不到重点" /></div>
+          <div class="form-field" style="margin-top:12px"><label>我通常会怎么说？ <span class="form-hint">（每行一句，写 2–4 句日常口语，Glint 会据此精准识别）</span></label><textarea id="mm-triggers" style="min-height:78px" placeholder="帮我改一下这份周报&#10;把这周做的事总结给老板看"></textarea></div>
+          <div class="form-field" style="margin-top:12px"><label>希望 AI 执行的指令或清单正文</label><textarea id="mm-content" placeholder="请把我的工作记录重构成：1）本周最关键的 3 个结果；2）当前风险与阻塞；3）需要决策确认的事项。"></textarea></div>
+          <div style="margin-top:14px;display:flex;justify-content:flex-end">
+            <button class="btn primary" id="mm-save">保存这张卡片</button>
+          </div>
         </div>
-      </div>
 
-      <div class="card">
-        <h3>通道 C：ATLAS-METHODS 按主题精选入 L3 库存（默认 off_shelf，不污染 L4）</h3>
-        <div class="filters">
-          <input type="text" id="atlas-q" style="flex:1" placeholder="输入关键词搜索 ATLAS-METHODS（如 react / sql / security / review）" />
-          <button class="btn" id="btn-atlas-search">搜索预览</button>
-          <button class="btn primary" id="btn-atlas-import">将勾选条目精炼入 L3</button>
+        <!-- Mode 2: From Article -->
+        <div class="card create-pane" id="cpane-article" style="display:none">
+          <div class="card-head">
+            <div>
+              <h3>📄 粘贴好文章 / 复盘笔记，自动提炼卡片</h3>
+              <p class="card-desc">把你收藏的方法论长文或工作复盘贴进来，AI 会在后台自动提炼成结构化思考卡片。</p>
+            </div>
+          </div>
+          <div class="form-field"><label>材料标题</label><input type="text" id="l0-title" placeholder="例如：如何写好一份产品复盘报告" /></div>
+          <div class="form-field" style="margin-top:12px"><label>粘贴正文内容</label><textarea id="l0-text" style="min-height:160px" placeholder="粘贴文章、笔记或操作手册正文…"></textarea></div>
+          <div style="margin-top:14px;display:flex;justify-content:flex-end">
+            <button class="btn primary" id="btn-l0-submit">开始 AI 提炼</button>
+          </div>
         </div>
-        <div id="atlas-results" style="max-height:240px;overflow-y:auto"></div>
-      </div>
 
-      <div class="two-col">
-        <div class="card">
-          <h3>后台任务进度（异步 OpenCode Go 流水线） <button class="btn sm" id="btn-jobs-refresh">刷新</button></h3>
-          <div id="jobs-list" style="font-size:12px;color:var(--muted)">暂无任务</div>
+        <!-- Mode 3: Starter Pack -->
+        <div class="card create-pane" id="cpane-pack" style="display:none">
+          <div class="card-head">
+            <div>
+              <h3>🧭 零基础切入新领域：一键生成 7 张全视角卡包</h3>
+              <p class="card-desc">告诉 Glint 你正在研究的新方向，它会自动为你定制覆盖 7 种思考方式的入门卡包。</p>
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="form-field"><label>想探索的新领域</label><input type="text" id="fg-domain" placeholder="例如：独立产品增长 / 英语面试 / 家庭理财" /></div>
+            <div class="form-field"><label>归属场景领域</label><select id="fg-cat"></select></div>
+          </div>
+          <div class="form-field" style="margin-top:12px"><label>你在这个领域最常遇到的困惑</label><input type="text" id="fg-pain" placeholder="例如：概念太多分不清真伪、不知道第一步从哪下手" /></div>
+          <div class="form-field" style="margin-top:12px"><label>偏好的表达风格</label><input type="text" id="fg-style" value="简洁实战、说人话、直接给可执行下一步" /></div>
+          <div style="margin-top:14px;display:flex;justify-content:flex-end">
+            <button class="btn primary" id="btn-fg-submit">一键生成 7 张卡包</button>
+          </div>
         </div>
-        <div class="card">
-          <h3>认知缺口清单（Cognitive Gaps · 待补齐） <button class="btn sm" id="btn-gaps-refresh">刷新</button></h3>
-          <div id="gaps-list" style="max-height:220px;overflow-y:auto;font-size:12px;color:var(--muted)">暂无认知缺口</div>
-        </div>
-      </div>
 
-      <div class="card">
-        <h3>隔离区与 L0 拒收审计（Gate 1 / 2 / 3）</h3>
-        <div id="q-summary" style="max-height:220px;overflow-y:auto"></div>
-      </div>
-    </section>
+        <div class="two-col">
+          <div class="card">
+            <div class="card-head">
+              <div><h3>💡 待补充的灵感清单</h3><p class="card-desc">平时发现搜不到理想卡片时记在这里，随时一键生成</p></div>
+              <button class="btn sm" id="btn-gaps-refresh">刷新</button>
+            </div>
+            <div id="gaps-list" style="max-height:260px;overflow-y:auto"></div>
+          </div>
+          <div class="card">
+            <div class="card-head">
+              <div><h3>⏳ 后台制作进度</h3><p class="card-desc">AI 提炼和卡包生成在后台运行，不影响日常使用</p></div>
+              <button class="btn sm" id="btn-jobs-refresh">刷新</button>
+            </div>
+            <div id="jobs-list" style="max-height:260px;overflow-y:auto"></div>
+          </div>
+        </div>
+      </section>
 
-    <!-- 4. M3 Evolution Flywheel -->
-    <section id="tab-evolution" class="panel">
-      <div class="kpi-grid" id="evo-kpis"></div>
-      <div class="two-col">
-        <div class="card">
-          <h3>动态垂直货架调度建议（常青 S 级豁免淘汰）</h3>
-          <div style="font-size:11.5px;color:var(--muted);margin-bottom:8px">高曝光零点击垂直卡建议下架回 L3；命中近期 Esc / 自定义需求的 L3 库存卡建议上架 L4。</div>
-          <div id="evo-proposals"></div>
+      <!-- ==================== 5. 使用回顾 ==================== -->
+      <section id="view-insights" class="panel">
+        <div class="page-head">
+          <div>
+            <h1 class="page-title">使用回顾</h1>
+            <p class="page-sub">过去 30 天里 Glint 在本机陪伴你的思考足迹（数据 100% 留在本机，已自动脱敏）。</p>
+          </div>
+          <button class="btn" onclick="loadEvolution()">刷新数据</button>
         </div>
-        <div class="card">
-          <h3>Top 热门透镜 &amp; App 使用分布</h3>
-          <div id="evo-apps" style="margin-bottom:12px"></div>
-          <div id="evo-top-cards"></div>
+
+        <div class="kpi-grid" id="evo-kpis"></div>
+
+        <div class="two-col">
+          <div class="card">
+            <div class="card-head">
+              <div><h3>🪄 贴心卡片整理建议</h3><p class="card-desc">根据你的真实点击习惯，自动发现可以精简或启用的卡片</p></div>
+            </div>
+            <div id="evo-proposals"></div>
+          </div>
+          <div class="card">
+            <div class="card-head">
+              <div><h3>⭐ 最常用的思考卡片 &amp; 应用</h3><p class="card-desc">看看你在哪些 App 里最常唤起 Glint</p></div>
+            </div>
+            <div id="evo-apps" style="margin-bottom:14px"></div>
+            <div id="evo-top-cards"></div>
+          </div>
         </div>
-      </div>
-      <div class="card">
-        <h3>第 4 选项自定义意图摩擦（一键转 L2 草稿） &amp; 外环微调数据导出</h3>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-          <span style="font-size:12px;color:var(--muted)">仅导出正负反馈 JSONL 供后续本地 MLX LoRA 使用（当前不自动触发微调）</span>
+
+        <div class="card">
+          <div class="card-head">
+            <div><h3>✍️ 你最近手动输入过的自定义需求</h3><p class="card-desc">如果你反复手动输入类似想法，可以一键把它做成永久思考卡片</p></div>
+          </div>
+          <div id="evo-custom-list"></div>
+        </div>
+      </section>
+
+      <!-- ==================== DEV 1. 召回排序诊断 ==================== -->
+      <section id="view-dev-recall" class="panel">
+        <div class="page-head">
+          <div>
+            <h1 class="page-title">🔬 召回排序诊断（开发者）</h1>
+            <p class="page-sub">透视 Stage 1（BM25 + bge-m3）与 Stage 2（MPS bge-reranker-v2-m3 + L3 穿透门控）全链路打分并在线校准。</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+            <input type="text" id="ri-query" style="flex:1;min-width:260px" placeholder="输入想要诊断的原话，查看 L4 + L3 全库精排排序与穿透判定…" />
+            <select id="ri-app">
+              <option value="Unknown">App: Unknown</option>
+              <option value="ChatGPT">ChatGPT</option>
+              <option value="Cursor">Cursor</option>
+              <option value="Notion">Notion</option>
+              <option value="Feishu">Feishu</option>
+              <option value="Obsidian">Obsidian</option>
+            </select>
+            <button class="btn primary" id="btn-ri-run">运行全链路诊断</button>
+          </div>
+          <div id="ri-panel" style="display:none;margin-top:16px">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px">
+              <div id="ri-meta" style="font-size:12px;color:var(--muted)"></div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap">
+                <button class="btn sm" id="btn-gap-save">记入认知缺口</button>
+                <button class="btn sm primary" id="btn-gap-ai">缺口一键 AI 锻造</button>
+                <button class="btn sm" id="btn-gap-manual">手工建卡(预填)</button>
+              </div>
+            </div>
+            <div id="ri-top3" style="margin-bottom:14px"></div>
+            <div id="ri-table" style="max-height:520px;overflow-y:auto"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== DEV 2. 评测与素材库 ==================== -->
+      <section id="view-dev-eval" class="panel">
+        <div class="page-head">
+          <div>
+            <h1 class="page-title">🧪 评测与素材库（开发者）</h1>
+            <p class="page-sub">Golden Eval 回归门禁、纯向量沙盒、ATLAS-METHODS 导入、隔离区审计与 SFT 数据导出。</p>
+          </div>
           <a class="btn sm" href="./api/evolution/export-sft" target="_blank">导出 SFT JSONL 训练集</a>
         </div>
-        <div id="evo-custom-list"></div>
-      </div>
-    </section>
 
-    <!-- 5. Sandbox & Golden Eval -->
-    <section id="tab-sandbox" class="panel">
-      <div class="two-col">
-        <div class="card">
-          <h3>实时语义召回沙盒（L4 dist/current + bge-m3）</h3>
-          <div class="filters">
-            <input type="text" id="sb-query" style="flex:1" placeholder="输入碎片口语，例如：我想要调研一下区块链" />
-            <select id="sb-primitive"><option value="">不限元操作</option></select>
-            <button class="btn primary" id="btn-search">测试召回</button>
+        <div class="two-col">
+          <div class="card">
+            <div class="card-head"><div><h3>Golden Eval 黄金回归评测</h3><p class="card-desc">直接针对 18765 端口运行 golden_cases.yaml 全量回归校验</p></div></div>
+            <button class="btn primary" id="btn-run-eval">一键运行 Golden Eval</button>
+            <pre id="eval-output" class="code-box" style="margin-top:12px;min-height:150px">点击上方按钮开始评测…</pre>
           </div>
-          <div id="sb-mode" style="font-size:11.5px;color:var(--muted);margin-bottom:8px"></div>
-          <div class="lens-grid" id="sb-results"></div>
+          <div class="card">
+            <div class="card-head"><div><h3>纯向量检索沙盒（bge-m3 Cosine）</h3><p class="card-desc">跳过 Cross-Encoder，直接检验向量空间召回</p></div></div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
+              <input type="text" id="sb-query" style="flex:1" placeholder="输入测试句…" />
+              <select id="sb-primitive"><option value="">不限元操作</option></select>
+              <button class="btn primary" id="btn-search">向量测试</button>
+            </div>
+            <div id="sb-mode" style="font-size:12px;color:var(--muted);margin-bottom:8px"></div>
+            <div id="sb-results" style="display:flex;flex-direction:column;gap:8px;max-height:240px;overflow-y:auto"></div>
+          </div>
         </div>
-        <div class="card">
-          <h3>Golden Eval 自动化回归门禁（24 条黄金集）</h3>
-          <p style="font-size:12px;color:var(--muted);margin-top:0">直接针对线上 18765 端口跑全量 24 条黄金样本，检验 Hit@1 / Hit@3 / 禁忌误召回率与 P95 延迟。</p>
-          <button class="btn primary" id="btn-run-eval">一键运行 Golden Eval</button>
-          <pre id="eval-output" class="code-box" style="margin-top:12px;min-height:140px">点击上方按钮开始评测...</pre>
-        </div>
-      </div>
-    </section>
 
-    <!-- 6. Policy & Config Center -->
-    <section id="tab-policy" class="panel">
-      <div class="two-col">
         <div class="card">
-          <h3>策略配置文件在线编辑（保存后热生效 / 发布生效）</h3>
-          <div class="filters">
-            <select id="cfg-select">
-              <option value="routing_policy">routing_policy.yaml (路由权重与策略)</option>
-              <option value="shelf_policy">shelf_policy.yaml (L4 声明式货架与合集)</option>
-              <option value="cleaning_rules">cleaning_rules.yaml (L2→L3 清洗与查重)</option>
-              <option value="taxonomy">taxonomy.yaml (二级领域分类树)</option>
-            </select>
-            <button class="btn primary" id="btn-cfg-save">保存 YAML</button>
+          <div class="card-head"><div><h3>ATLAS-METHODS 主题精选入库（默认备用库）</h3></div></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px">
+            <input type="text" id="atlas-q" style="flex:1" placeholder="搜索 ATLAS-METHODS（如 react / sql / security / review）" />
+            <button class="btn" id="btn-atlas-search">搜索预览</button>
+            <button class="btn primary" id="btn-atlas-import">精炼勾选条目入库</button>
           </div>
-          <textarea id="cfg-editor" style="min-height:360px;font-family:ui-monospace,Menlo,monospace;font-size:12px"></textarea>
+          <div id="atlas-results" style="max-height:240px;overflow-y:auto"></div>
         </div>
-        <div class="card">
-          <h3>最近脱敏日志抽查（usage.db · 验证 Key/手机号已擦除）</h3>
-          <div id="recent-logs-box" style="max-height:420px;overflow-y:auto"></div>
-        </div>
-      </div>
-    </section>
 
-    <!-- 7. Cognitive Seed Control Plane -->
-    <section id="tab-seed" class="panel">
-      <div class="kpi-grid" id="seed-kpi-grid"></div>
-      <div class="two-col">
         <div class="card">
-          <h3>概率权重与探索预算（实时生效，无需重新构建）</h3>
-          <div class="form-grid">
-            <div class="form-field"><label>L4 Tier S 基准权重</label><input type="number" step="0.5" min="0.1" max="20" id="sc-tier-s" /></div>
-            <div class="form-field"><label>L4 Tier A 基准权重</label><input type="number" step="0.5" min="0.1" max="20" id="sc-tier-a" /></div>
-            <div class="form-field"><label>L4 Tier B 基准权重</label><input type="number" step="0.5" min="0.1" max="20" id="sc-tier-b" /></div>
-            <div class="form-field"><label>智能混播 L3 探索占比 (0~0.8)</label><input type="number" step="0.05" min="0" max="0.8" id="sc-l3-share" /></div>
-            <div class="form-field"><label>主动召回衰减系数 (越大越反回音室)</label><input type="number" step="0.05" min="0" max="2" id="sc-recall-decay" /></div>
-            <div class="form-field"><label>手动快跳降权倍率 (0.2~1.0)</label><input type="number" step="0.05" min="0.2" max="1" id="sc-skip-decay" /></div>
-          </div>
-          <div style="display:flex;gap:8px;margin-top:12px;align-items:center">
-            <button class="btn primary" id="btn-seed-cfg-save">保存概率配置</button>
-            <button class="btn" id="btn-seed-draw-test">模拟抽一张</button>
-            <span id="seed-draw-preview" style="font-size:12px;color:var(--muted)"></span>
-          </div>
+          <div class="card-head"><div><h3>Gate 1–3 隔离区与 L0 拒收审计</h3></div><button class="btn sm" onclick="loadQuarantine()">刷新</button></div>
+          <div id="q-summary" style="max-height:220px;overflow-y:auto"></div>
         </div>
-        <div class="card">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-            <h3 style="margin:0">已屏蔽 / 暂缓轮播清单（不影响快捷键召回）</h3>
-            <button class="btn sm danger" id="btn-seed-reset-all">全部恢复</button>
-          </div>
-          <div id="seed-hidden-box" style="max-height:240px;overflow-y:auto"></div>
-        </div>
-      </div>
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:10px;flex-wrap:wrap">
-          <h3 style="margin:0">实时概率分布预览（Top 30）</h3>
-          <div style="display:flex;gap:8px;align-items:center">
-            <select id="seed-mode-select">
-              <option value="smart_mix">全域智能混播 (L4 + L3探索)</option>
-              <option value="l4_all">仅 L4 在架 (S/A/B加权)</option>
-              <option value="l3_discovery">仅 L3 休眠探索</option>
-              <option value="tier_s">仅 S 级核心心法</option>
-            </select>
-            <button class="btn sm" id="btn-seed-refresh">刷新分布</button>
-          </div>
-        </div>
-        <div id="seed-prob-table" style="max-height:420px;overflow-y:auto"></div>
-      </div>
-    </section>
-  </main>
+      </section>
 
-  <!-- Lens Detail & Overlay Modal -->
-  <div class="modal-backdrop" id="lens-modal">
-    <div class="modal">
-      <div class="lens-head">
-        <div><h2 id="m-title" style="margin:0;font-size:17px"></h2><div id="m-id" style="font-size:11.5px;color:var(--muted);margin-top:2px"></div></div>
-        <button class="btn" id="m-close">关闭</button>
-      </div>
-      <div id="m-tags" style="margin:8px 0"></div>
-      <div class="pain" id="m-pain"></div>
-      <div style="font-size:11.5px;color:var(--muted);margin:6px 0 3px">触发口语（trigger_utterances）：</div>
-      <div id="m-triggers" style="margin-bottom:8px"></div>
-      <div style="font-size:11.5px;color:var(--muted);margin:6px 0 3px">执行内容（execution.content）：</div>
-      <pre id="m-content"></pre>
-      <hr style="border:0;border-top:1px solid var(--border);margin:14px 0" />
-      <h3 style="margin:0 0 6px;font-size:13.5px">本地不可变覆写层（Overlay · 写入 overrides.yaml）</h3>
-      <div class="form-grid">
-        <div class="form-field"><label>覆写标题</label><input type="text" id="ov-title" /></div>
-        <div class="form-field"><label>基础权重 (0.0~5.0)</label><input type="number" step="0.1" min="0" max="5" id="ov-weight" /></div>
-        <div class="form-field"><label>质量层级 (Tier)</label><select id="ov-tier"><option value="S">S (常青通用)</option><option value="A">A (领域精品)</option><option value="B">B (长尾细分)</option></select></div>
-        <div class="form-field"><label>货架状态 (L3 ↔ L4)</label><select id="ov-shelf"><option value="evergreen">evergreen (L4 常青)</option><option value="on_shelf">on_shelf (L4 动态上架)</option><option value="off_shelf">off_shelf (仅留 L3 库存)</option></select></div>
-        <div class="form-field"><label>归属主类目</label><select id="ov-category"></select></div>
-        <div class="form-field"><label>归属元操作</label><select id="ov-primitive"></select></div>
-      </div>
-      <div style="display:flex;gap:8px;margin-top:12px;justify-content:flex-end">
-        <button class="btn danger" id="ov-reset">清除覆写</button>
-        <button class="btn primary" id="ov-save">保存 Overlay</button>
-      </div>
-    </div>
+      <!-- ==================== DEV 3. 底层配置与日志 ==================== -->
+      <section id="view-dev-config" class="panel">
+        <div class="page-head">
+          <div>
+            <h1 class="page-title">⚙️ 底层配置与日志（开发者）</h1>
+            <p class="page-sub">YAML 策略编辑、L2→L3 清洗报告、dist/current 发布清单、版本回滚与 usage.db 脱敏抽查。</p>
+          </div>
+          <div style="display:flex;gap:8px">
+            <button class="btn danger" id="btn-rollback">回滚上一版本</button>
+            <button class="btn primary" id="btn-build-dev">L2→L3→L4 清洗发布</button>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="card">
+            <div class="card-head"><h3>策略 YAML 在线编辑</h3></div>
+            <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap">
+              <select id="cfg-select" style="flex:1">
+                <option value="routing_policy">routing_policy.yaml (路由权重与策略)</option>
+                <option value="shelf_policy">shelf_policy.yaml (L4 声明式货架与合集)</option>
+                <option value="cleaning_rules">cleaning_rules.yaml (L2→L3 清洗与查重)</option>
+                <option value="taxonomy">taxonomy.yaml (二级领域分类树)</option>
+              </select>
+              <button class="btn primary" id="btn-cfg-save">保存 YAML</button>
+            </div>
+            <textarea id="cfg-editor" style="min-height:340px;font-family:ui-monospace,Menlo,monospace;font-size:12px"></textarea>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3>最近脱敏日志抽查（usage.db）</h3></div>
+            <div id="recent-logs-box" style="max-height:400px;overflow-y:auto"></div>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="card">
+            <div class="card-head"><h3>L2 → L3 确定性清洗报告</h3></div>
+            <div id="cleaning-report-box" style="font-size:12.5px;color:var(--muted)"></div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3>当前发布清单（dist/current）</h3></div>
+            <pre id="release-manifest" class="code-box" style="margin:0;max-height:260px;overflow:auto"></pre>
+          </div>
+        </div>
+      </section>
+
+    </main>
   </div>
 
-  <!-- Manual Lens Modal -->
-  <div class="modal-backdrop" id="manual-modal">
+  <!-- Card Reader & Customize Modal -->
+  <div class="modal-backdrop" id="lens-modal">
     <div class="modal">
-      <div class="lens-head"><h2 style="margin:0;font-size:16px">手工新建个人认知卡片（写入 L2）</h2><button class="btn" id="mm-close">关闭</button></div>
-      <div class="form-grid">
-        <div class="form-field"><label>短标题 (<=12字)</label><input type="text" id="mm-title" /></div>
-        <div class="form-field"><label>一句话摘要</label><input type="text" id="mm-tagline" /></div>
-        <div class="form-field"><label>元操作</label><select id="mm-primitive"></select></div>
-        <div class="form-field"><label>主类目</label><select id="mm-category"></select></div>
-        <div class="form-field"><label>Tier</label><select id="mm-tier"><option value="A">A 级精品</option><option value="S">S 级常青</option><option value="B">B 级长尾</option></select></div>
-        <div class="form-field"><label>动作类型</label><select id="mm-action"><option value="inject_prompt">inject_prompt</option><option value="show_checklist">show_checklist</option><option value="open_resource">open_resource</option></select></div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+        <div>
+          <h2 id="m-title" style="margin:0;font-size:20px;font-weight:700"></h2>
+          <div id="m-tagline" style="font-size:13.5px;color:var(--muted);margin-top:4px"></div>
+        </div>
+        <button class="btn sm" id="m-close">关闭</button>
       </div>
-      <div class="form-field" style="margin-top:8px"><label>解决的真实痛点</label><input type="text" id="mm-pain" /></div>
-      <div class="form-field" style="margin-top:8px"><label>触发口语（每行一句，至少 2 句）</label><textarea id="mm-triggers" style="min-height:66px"></textarea></div>
-      <div class="form-field" style="margin-top:8px"><label>执行指令 / 清单正文</label><textarea id="mm-content"></textarea></div>
-      <div style="margin-top:12px;text-align:right"><button class="btn primary" id="mm-save">创建并入 L2</button></div>
+
+      <div id="m-tags" style="display:flex;flex-wrap:wrap;gap:6px;margin:12px 0"></div>
+
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+        <button class="btn primary sm" id="m-copy">📋 复制卡片指令</button>
+        <button class="btn sm soft" id="m-open-chatgpt">打开 ChatGPT 使用</button>
+        <button class="btn sm soft" id="m-open-claude">打开 Claude 使用</button>
+      </div>
+
+      <div style="background:var(--surface-2);border-radius:11px;padding:12px 14px;margin-bottom:14px">
+        <div style="font-size:11.5px;font-weight:600;color:var(--muted);margin-bottom:4px">💡 什么时候适合用它</div>
+        <div id="m-pain" style="font-size:13.5px;color:var(--text)"></div>
+      </div>
+
+      <div style="margin-bottom:14px">
+        <div style="font-size:12px;font-weight:600;color:var(--muted);margin-bottom:6px">🗣️ 你这样说时，Glint 会优先推荐它</div>
+        <div id="m-triggers" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px"></div>
+        <div style="display:flex;gap:8px">
+          <input type="text" id="m-add-trig-input" style="flex:1;font-size:12.5px;padding:6px 10px" placeholder="添加一句你自己的常用说法，教 Glint 下次记住它…" />
+          <button class="btn sm soft" id="m-add-trig-btn">+ 添加说法</button>
+        </div>
+      </div>
+
+      <div style="margin-bottom:14px">
+        <div style="font-size:12px;font-weight:600;color:var(--muted);margin-bottom:6px">📝 卡片指令正文</div>
+        <div id="m-content" class="prompt-sheet"></div>
+      </div>
+
+      <details class="clean-details" id="m-custom-details">
+        <summary>⚙️ 自定义这张卡片的启用状态与偏好 <span>▾</span></summary>
+        <div class="form-grid" style="margin-top:12px">
+          <div class="form-field"><label>自定义名称（留空则用默认）</label><input type="text" id="ov-title" /></div>
+          <div class="form-field"><label>启用状态</label>
+            <select id="ov-shelf">
+              <option value="evergreen">核心常驻（优先推荐）</option>
+              <option value="on_shelf">已启用（按场景推荐）</option>
+              <option value="off_shelf">暂放备用库（平时不打扰）</option>
+            </select>
+          </div>
+          <div class="form-field"><label>所属场景领域</label><select id="ov-category"></select></div>
+          <div class="form-field"><label>思考方式</label><select id="ov-primitive"></select></div>
+          <div class="form-field"><label>质量梯队</label>
+            <select id="ov-tier">
+              <option value="S">核心常驻 (S)</option>
+              <option value="A">常用精品 (A)</option>
+              <option value="B">长尾细分 (B)</option>
+            </select>
+          </div>
+          <div class="form-field"><label>推荐倾向权重 (0.2~3.0)</label><input type="number" step="0.1" min="0.2" max="3" id="ov-weight" /></div>
+        </div>
+        <div id="m-dev-id" style="display:none;font-size:11px;color:var(--muted);margin-top:10px;font-family:ui-monospace,Menlo,monospace"></div>
+        <div style="display:flex;gap:8px;margin-top:14px;justify-content:flex-end">
+          <button class="btn sm danger" id="ov-reset">恢复默认</button>
+          <button class="btn sm primary" id="ov-save">保存设置</button>
+        </div>
+      </details>
     </div>
   </div>
 
@@ -404,14 +1292,71 @@
 
   <script>
     const state = {
-      overview: null, lenses: [], selectedLens: null,
-      nav: { shelf: '', category: '', subcategory: '', collection: '' },
+      overview: null,
+      lenses: [],
+      selectedLens: null,
+      nav: { shelf: 'l4_all', category: '', collection: '' },
+      batchMode: false,
       checkedIds: new Set(),
       atlasOffsets: new Set(),
+      pendingChanges: false,
+      devMode: localStorage.getItem('glint_dev_mode') === '1',
+      theme: localStorage.getItem('glint_theme') || 'light',
+      lastTryQuery: '',
+      lastRiQuery: '',
     };
 
-    function esc(v) { return String(v ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
-    function toast(msg) { const el=document.getElementById('toast'); el.textContent=msg; el.classList.add('show'); setTimeout(()=>el.classList.remove('show'), 3000); }
+    const SHELF_LABELS = {
+      evergreen: { text: '核心常驻', cls: 'green' },
+      on_shelf: { text: '已启用', cls: 'prim' },
+      off_shelf: { text: '备用库', cls: '' },
+    };
+
+    function esc(v) {
+      return String(v ?? '')
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
+    function primLabel(key) {
+      return state.overview?.ontology?.primitives?.[key]?.label || key || '思考';
+    }
+    function catLabel(key) {
+      return state.overview?.taxonomy?.[key]?.label || key || '通用';
+    }
+    function highlightVars(text) {
+      return esc(text).replace(/(\{\{[^}]+\}\}|\[[^\]]{1,24}\]|【[^】]{1,24}】)/g, '<span class="var-hl">$1</span>');
+    }
+
+    let _toastTimer = null;
+    function toast(msg) {
+      const el = document.getElementById('toast');
+      el.textContent = msg;
+      el.classList.add('show');
+      clearTimeout(_toastTimer);
+      _toastTimer = setTimeout(() => el.classList.remove('show'), 3200);
+    }
+
+    function markPending(flag = true) {
+      state.pendingChanges = flag;
+      document.getElementById('pending-box').classList.toggle('show', flag);
+    }
+
+    async function copyText(text, okMsg = '已复制到剪贴板') {
+      try {
+        await navigator.clipboard.writeText(text);
+        toast(okMsg);
+      } catch {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+        toast(okMsg);
+      }
+    }
+
     async function api(path, opts = {}) {
       const res = await fetch('./' + path.replace(/^\//, ''), { headers: { 'Content-Type': 'application/json' }, ...opts });
       const data = await res.json();
@@ -419,245 +1364,462 @@
       return data;
     }
 
-    document.querySelectorAll('.tab-btn').forEach(btn => {
+    async function rootApi(path, opts = {}) {
+      const res = await fetch('../' + path.replace(/^\//, ''), { headers: { 'Content-Type': 'application/json' }, ...opts });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.detail || JSON.stringify(data));
+      return data;
+    }
+
+    // Theme & Dev Mode persistence
+    function applyTheme(t) {
+      state.theme = t;
+      document.documentElement.setAttribute('data-theme', t);
+      document.getElementById('toggle-dark').checked = (t === 'dark');
+      localStorage.setItem('glint_theme', t);
+    }
+    function applyDevMode(on) {
+      state.devMode = on;
+      document.getElementById('toggle-dev').checked = on;
+      document.getElementById('dev-nav-group').classList.toggle('show', on);
+      document.getElementById('m-dev-id').style.display = on ? 'block' : 'none';
+      localStorage.setItem('glint_dev_mode', on ? '1' : '0');
+      const activeView = document.querySelector('.panel.active')?.id?.replace('view-', '');
+      if (!on && activeView && activeView.startsWith('dev-')) switchView('home');
+    }
+    document.getElementById('toggle-dark').onchange = e => applyTheme(e.target.checked ? 'dark' : 'light');
+    document.getElementById('toggle-dev').onchange = e => {
+      applyDevMode(e.target.checked);
+      toast(e.target.checked ? '已开启开发者工具' : '已切换回简洁日常视图');
+    };
+
+    // Navigation
+    function switchView(view) {
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.view === view));
+      document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === 'view-' + view));
+      if (view === 'library') loadLenses();
+      if (view === 'seed') loadSeedPanel();
+      if (view === 'create') { loadGaps(); loadJobs(); }
+      if (view === 'insights') loadEvolution();
+      if (view === 'dev-eval') loadQuarantine();
+      if (view === 'dev-config') { loadConfig(); loadRecentLogs(); }
+    }
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+      btn.addEventListener('click', () => switchView(btn.dataset.view));
+    });
+
+    // Create mode tabs
+    document.querySelectorAll('#create-mode-bar .seg-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('#create-mode-bar .seg-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
-        if (btn.dataset.tab === 'evolution') loadEvolution();
-        if (btn.dataset.tab === 'seed') loadSeedPanel();
-        if (btn.dataset.tab === 'forge') { loadJobs(); loadGaps(); loadQuarantine(); }
-        if (btn.dataset.tab === 'policy') { loadConfig(); loadRecentLogs(); }
+        const mode = btn.dataset.cmode;
+        document.querySelectorAll('.create-pane').forEach(p => p.style.display = p.id === 'cpane-' + mode ? 'block' : 'none');
       });
     });
 
+    // Helper: Bars
     function renderBars(id, obj, labelFn = k => k) {
       const entries = Object.entries(obj || {});
-      const maxV = Math.max(1, ...entries.map(([,v]) => typeof v === 'number' ? v : v.l4));
+      const maxV = Math.max(1, ...entries.map(([, v]) => typeof v === 'number' ? v : v.l4));
       document.getElementById(id).innerHTML = entries.map(([k, v]) => {
         const num = typeof v === 'number' ? v : v.l4;
-        const txt = typeof v === 'number' ? v : `${v.l4}/${v.l3}`;
-        return `<div class="bar-row"><div>${esc(labelFn(k))}</div><div class="bar-track"><div class="bar-fill" style="width:${Math.round(num/maxV*100)}%"></div></div><div style="text-align:right;font-weight:600">${esc(txt)}</div></div>`;
+        const txt = typeof v === 'number' ? `${v} 张` : `${v.l4} / ${v.l3}`;
+        return `<div class="bar-row"><div style="font-weight:500">${esc(labelFn(k))}</div><div class="bar-track"><div class="bar-fill" style="width:${Math.round(num / maxV * 100)}%"></div></div><div style="text-align:right;color:var(--muted);font-weight:600;font-size:12px">${esc(txt)}</div></div>`;
       }).join('');
     }
 
+    // ==================== 1. HOME & OVERVIEW ====================
     async function loadOverview() {
       const d = await api('api/overview');
       state.overview = d;
       const sh = d.by_shelf || {};
-      const ti = d.by_tier || {};
-      document.getElementById('kpi-grid').innerHTML = `
-        <div class="kpi"><div class="label">L4 线上上架货架</div><div class="val" style="color:var(--green)">${esc(d.l4_total)}</div><div class="sub">常青S: ${esc(sh.evergreen||0)} · 动态: ${esc(sh.on_shelf||0)}</div></div>
-        <div class="kpi"><div class="label">L3 合格总库存</div><div class="val">${esc(d.l3_total)}</div><div class="sub">待命: ${esc(sh.off_shelf||0)} · S:${esc(ti.S||0)} A:${esc(ti.A||0)} B:${esc(ti.B||0)}</div></div>
-        <div class="kpi"><div class="label">隔离 / L0 拒收</div><div class="val" style="color:var(--amber)">${esc(d.quarantined_l2)} / ${esc(d.rejected_l0)}</div><div class="sub">Gate 1–3 拦截保护</div></div>
-        <div class="kpi"><div class="label">本地 Overlay</div><div class="val">${esc(d.overlays_count)}</div><div class="sub">永不被上游同步冲掉</div></div>
-        <div class="kpi"><div class="label">当前 L4 版本</div><div class="val" style="font-size:14px;margin-top:8px">${esc(d.current_release ? d.current_release.version : '未发布')}</div><div class="sub">${esc(d.current_release ? d.current_release.embedding_model : '')}</div></div>
+      document.getElementById('nav-active-cnt').textContent = d.l4_total;
+      document.getElementById('home-status-chip').innerHTML = `<span class="dot-green"></span>本地引擎运行中 · ${esc(d.l4_total)} 张卡片已就绪`;
+
+      // Try to enrich home KPIs with 30-day usage count
+      let recentCalls = '—';
+      let recentCtr = '日常使用后自动记录';
+      try {
+        const ana = await api('api/evolution/analytics?days=30');
+        recentCalls = ana.total_events || 0;
+        recentCtr = ana.total_events ? `采纳率 ${Math.round((ana.ctr || 0) * 100)}% · 响应 ${ana.p50_ms || 0}ms` : '双击右 Option 开始第一次呼出';
+      } catch {}
+
+      document.getElementById('home-kpis').innerHTML = `
+        <div class="kpi"><div class="label">已启用思考卡片</div><div class="val" style="color:var(--green)">${esc(d.l4_total)}</div><div class="sub">核心常驻 ${esc(sh.evergreen || 0)} · 场景专项 ${esc(sh.on_shelf || 0)}</div></div>
+        <div class="kpi"><div class="label">备用卡片库</div><div class="val">${esc(sh.off_shelf || 0)}</div><div class="sub">平时安静待命，高匹配时自动穿透发现</div></div>
+        <div class="kpi"><div class="label">近 30 天唤起次数</div><div class="val">${esc(recentCalls)}</div><div class="sub">${esc(recentCtr)}</div></div>
+        <div class="kpi"><div class="label">我的个性化调校</div><div class="val" style="color:var(--accent)">${esc(d.overlays_count)}</div><div class="sub">自定义口语与偏好，永不丢失</div></div>
       `;
-      renderBars('primitive-bars', d.l2_by_primitive, k => `${d.ontology.primitives[k]?.label || k} (${k})`);
+
+      renderBars('home-prim-bars', d.l2_by_primitive, k => primLabel(k));
       const catPairs = {};
-      Object.entries(d.taxonomy).forEach(([k, info]) => {
+      Object.entries(d.taxonomy).forEach(([k]) => {
         catPairs[k] = { l4: d.by_category_l4[k] || 0, l3: d.by_category_l3[k] || 0 };
       });
-      renderBars('category-bars', catPairs, k => d.taxonomy[k]?.label || k);
+      renderBars('home-cat-bars', catPairs, k => catLabel(k));
 
+      // Dev cleaning report & manifest
       const cr = d.l3_cleaning_report;
       const crBox = document.getElementById('cleaning-report-box');
       if (cr) {
-        const acts = Object.entries(cr.action_counts || {}).map(([k,v]) => `<span class="pill ok">${esc(k)}: ${esc(v)}</span>`).join('');
-        crBox.innerHTML = `<div style="margin-bottom:6px">L2 输入: <b>${esc(cr.total_l2_input)}</b> · L3 合格: <b>${esc(cr.total_l3_active)}</b> · 查重隔离: <b>${esc(cr.total_quarantined_dedup)}</b></div><div>${acts}</div>`;
-      } else crBox.textContent = '尚未执行清洗';
+        const acts = Object.entries(cr.action_counts || {}).map(([k, v]) => `<span class="pill green">${esc(k)}: ${esc(v)}</span>`).join(' ');
+        crBox.innerHTML = `<div style="margin-bottom:8px">L2 输入: <b>${esc(cr.total_l2_input)}</b> · L3 合格: <b>${esc(cr.total_l3_active)}</b> · 查重隔离: <b>${esc(cr.total_quarantined_dedup)}</b></div><div style="display:flex;flex-wrap:wrap;gap:6px">${acts}</div>`;
+      } else {
+        crBox.textContent = '尚未执行清洗';
+      }
       document.getElementById('release-manifest').textContent = d.current_release ? JSON.stringify(d.current_release, null, 2) : '未发布';
 
-      // Populate dropdowns
-      const primOpts = Object.entries(d.ontology.primitives).map(([k,v]) => `<option value="${esc(k)}">${esc(v.label)} (${esc(k)})</option>`).join('');
-      const catOpts = Object.entries(d.taxonomy).map(([k,v]) => `<option value="${esc(k)}">${esc(v.label)}</option>`).join('');
-      ['f-primitive','sb-primitive'].forEach(id => { const el=document.getElementById(id); const cur=el.value; el.innerHTML='<option value="">全部元操作</option>'+primOpts; el.value=cur; });
-      ['ov-primitive','mm-primitive'].forEach(id => document.getElementById(id).innerHTML = primOpts);
-      ['ov-category','mm-category','fg-cat'].forEach(id => document.getElementById(id).innerHTML = catOpts);
-      const fSrc = document.getElementById('f-source'); const curS = fSrc.value;
-      fSrc.innerHTML = '<option value="">全部来源</option>' + Object.keys(d.l2_by_source).map(s => `<option value="${esc(s)}">${esc(s)}</option>`).join('');
-      fSrc.value = curS;
+      // Populate dropdowns cleanly in Chinese
+      const primOpts = Object.entries(d.ontology.primitives).map(([k, v]) => `<option value="${esc(k)}">${esc(v.label)}</option>`).join('');
+      const catOpts = Object.entries(d.taxonomy).map(([k, v]) => `<option value="${esc(k)}">${esc(v.label)}</option>`).join('');
+      ['f-primitive', 'sb-primitive'].forEach(id => {
+        const el = document.getElementById(id);
+        const cur = el.value;
+        el.innerHTML = '<option value="">全部思考方式</option>' + primOpts;
+        el.value = cur;
+      });
+      ['ov-primitive', 'mm-primitive'].forEach(id => document.getElementById(id).innerHTML = primOpts);
+      ['ov-category', 'mm-category', 'fg-cat'].forEach(id => document.getElementById(id).innerHTML = catOpts);
       const colOpts = Object.entries(d.shelf_policy.collections || {}).map(([cid, c]) => `<option value="${esc(cid)}">${esc(c.name)}</option>`).join('');
-      document.getElementById('batch-col-select').innerHTML = '<option value="">加入合集...</option>' + colOpts;
+      document.getElementById('batch-col-select').innerHTML = '<option value="">加入专题卡包…</option>' + colOpts;
 
-      renderSidebar(d);
+      renderLibraryFilters(d);
     }
 
-    function renderSidebar(d) {
+    // Hero Interactive Try-It (calls live ../route!)
+    async function runTryIt() {
+      const q = document.getElementById('try-input').value.trim();
+      if (!q) return toast('先输入一句话试试看吧');
+      const app = document.getElementById('try-app').value;
+      const btn = document.getElementById('btn-try-run');
+      btn.disabled = true; btn.textContent = '思考中…';
+      state.lastTryQuery = q;
+      try {
+        const res = await rootApi('route', { method: 'POST', body: JSON.stringify({ app_name: app, input_text: q }) });
+        const area = document.getElementById('try-result-area');
+        area.style.display = 'block';
+        document.getElementById('try-meta').textContent = `本地推理耗时 ${Math.round(res.latency_ms || 0)}ms · 为你挑出 3 个互补思考视角`;
+        const cards = res.cards || [];
+        document.getElementById('try-cards').innerHTML = cards.map((c, idx) => `
+          <div class="popup-card">
+            <div>
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+                <span class="popup-num">${idx + 1}</span>
+                <strong style="font-size:14.5px;line-height:1.35">${esc(c.title)}</strong>
+              </div>
+              <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px">
+                <span class="pill prim">${esc(primLabel(c.primitive || c.dimension))}</span>
+                ${c.is_l3_breakthrough ? '<span class="pill purple">✦ 备用库发现</span>' : ''}
+              </div>
+              <div style="font-size:12.5px;color:var(--muted);line-height:1.5">${esc(c.intent || c.preview || '')}</div>
+            </div>
+            <div style="display:flex;gap:6px;padding-top:8px;border-top:1px solid var(--border)">
+              <button class="btn xs primary" onclick="copyText(${esc(JSON.stringify((c.prompt || '').trim()))}, '已复制「${esc(c.title)}」指令')">复制指令</button>
+              <button class="btn xs" onclick="openLensById('${esc(c.id)}')">查看详情</button>
+            </div>
+          </div>
+        `).join('');
+      } catch (e) {
+        toast('试跑失败：' + e.message);
+      } finally {
+        btn.disabled = false; btn.textContent = '看看推荐';
+      }
+    }
+    window.runTryExample = (text, app) => {
+      document.getElementById('try-input').value = text;
+      const sel = document.getElementById('try-app');
+      sel.value = Array.from(sel.options).some(o => o.value === app) ? app : 'ChatGPT';
+      runTryIt();
+    };
+    document.getElementById('btn-try-run').onclick = runTryIt;
+    document.getElementById('try-input').addEventListener('keydown', e => { if (e.key === 'Enter') runTryIt(); });
+    document.getElementById('btn-try-teach').onclick = () => {
+      if (!state.devMode) applyDevMode(true);
+      switchView('dev-recall');
+      document.getElementById('ri-query').value = state.lastTryQuery;
+      document.getElementById('ri-app').value = document.getElementById('try-app').value;
+      runRecallInspector();
+    };
+
+    // ==================== 2. MY CARD LIBRARY ====================
+    function renderLibraryFilters(d) {
       const sh = d.by_shelf || {};
-      const shelfViews = [
-        { k: '', label: '全部 L3 库存', cnt: d.l3_total },
-        { k: 'l4_all', label: 'L4 全部上架', cnt: d.l4_total },
-        { k: 'evergreen', label: 'S 级常青底座', cnt: sh.evergreen || 0 },
-        { k: 'on_shelf', label: 'L4 动态垂直', cnt: sh.on_shelf || 0 },
-        { k: 'off_shelf', label: 'L3 待命库存', cnt: sh.off_shelf || 0 },
+      const segs = [
+        { k: 'l4_all', label: `已启用 (${d.l4_total})` },
+        { k: 'evergreen', label: `核心常驻 (${sh.evergreen || 0})` },
+        { k: 'on_shelf', label: `场景专项 (${sh.on_shelf || 0})` },
+        { k: 'off_shelf', label: `备用库 (${sh.off_shelf || 0})` },
+        { k: '', label: `全部 (${d.l3_total})` },
       ];
-      document.getElementById('nav-shelves').innerHTML = shelfViews.map(v => `
-        <div class="nav-item ${state.nav.shelf===v.k && !state.nav.category && !state.nav.collection ? 'active':''}" onclick="selectNav({shelf:'${v.k}'})">
-          <span>${esc(v.label)}</span><span class="pill">${esc(v.cnt)}</span>
-        </div>
+      document.getElementById('shelf-seg-bar').innerHTML = segs.map(s => `
+        <button class="seg-btn ${state.nav.shelf === s.k && !state.nav.collection ? 'active' : ''}" onclick="setShelfFilter('${s.k}')">${esc(s.label)}</button>
       `).join('');
 
-      const modes = d.shelf_policy.category_modes || {};
-      document.getElementById('nav-categories').innerHTML = Object.entries(d.taxonomy).map(([cat, info]) => {
-        const l4 = d.by_category_l4[cat] || 0;
-        const l3 = d.by_category_l3[cat] || 0;
-        const m = modes[cat] || 'all';
-        return `
-          <div class="nav-row">
-            <div class="nav-item ${state.nav.category===cat ? 'active':''}" style="flex:1" onclick="selectNav({category:'${esc(cat)}'})">
-              <span>${esc(info.label)}</span><span style="font-size:11px;color:var(--muted)">${l4}/${l3}</span>
-            </div>
-            <select class="mode-select" onchange="changeCategoryMode('${esc(cat)}', this.value)" title="声明式 L4 货架规则">
-              <option value="all" ${m==='all'?'selected':''}>A+B全开</option>
-              <option value="tier_a" ${m==='tier_a'?'selected':''}>仅A级</option>
-              <option value="off" ${m==='off'?'selected':''}>仅S常青</option>
-            </select>
-          </div>`;
-      }).join('');
+      document.getElementById('cat-chip-row').innerHTML =
+        `<span style="font-size:12px;color:var(--muted);margin-right:2px">领域：</span>` +
+        `<button class="filter-chip ${!state.nav.category && !state.nav.collection ? 'active' : ''}" onclick="setCategoryFilter('')">全部领域</button>` +
+        Object.entries(d.taxonomy).map(([cat, info]) => {
+          const l4 = d.by_category_l4[cat] || 0;
+          return `<button class="filter-chip ${state.nav.category === cat ? 'active' : ''}" onclick="setCategoryFilter('${esc(cat)}')">${esc(info.label)} <span class="cnt">${l4}</span></button>`;
+        }).join('');
 
       const activeCols = new Set(d.shelf_policy.active_collections || []);
-      document.getElementById('nav-collections').innerHTML = Object.entries(d.shelf_policy.collections || {}).map(([cid, c]) => {
-        const on = activeCols.has(cid);
-        return `
-          <div class="nav-row">
-            <div class="nav-item ${state.nav.collection===cid ? 'active':''}" style="flex:1" onclick="selectNav({collection:'${esc(cid)}'})">
-              <span>📦 ${esc(c.name)}</span><span style="font-size:11px;color:var(--muted)">${(c.lens_ids||[]).length}</span>
-            </div>
-            <button class="btn sm ${on?'primary':''}" onclick="toggleCollection('${esc(cid)}', ${!on})">${on?'已上架':'上架'}</button>
-            <button class="btn sm danger" onclick="deleteCollection('${esc(cid)}', '${esc(c.name)}')" title="删除合集">×</button>
-          </div>`;
-      }).join('') || '<div style="font-size:11.5px;color:var(--muted);padding:4px">暂无自定义合集</div>';
+      const cols = Object.entries(d.shelf_policy.collections || {});
+      document.getElementById('col-chip-row').innerHTML =
+        `<span style="font-size:12px;color:var(--muted);margin-right:2px">专题包：</span>` +
+        cols.map(([cid, c]) => {
+          const on = activeCols.has(cid);
+          return `<span class="filter-chip ${state.nav.collection === cid ? 'active' : ''}" onclick="setCollectionFilter('${esc(cid)}')">
+            📦 ${esc(c.name)}
+            <button class="btn xs ${on ? 'primary' : ''}" style="padding:1px 6px;font-size:10.5px;margin-left:2px" onclick="event.stopPropagation();toggleCollection('${esc(cid)}', ${!on})">${on ? '已开' : '开启'}</button>
+          </span>`;
+        }).join('') +
+        `<button class="btn xs soft" id="btn-new-col-inline">+ 新建专题包</button>`;
+      document.getElementById('btn-new-col-inline').onclick = createNewCollection;
+
+      // Domain Rules Drawer
+      const modes = d.shelf_policy.category_modes || {};
+      document.getElementById('domain-rules-grid').innerHTML = Object.entries(d.taxonomy).map(([cat, info]) => {
+        const m = modes[cat] || 'all';
+        const l4 = d.by_category_l4[cat] || 0;
+        const l3 = d.by_category_l3[cat] || 0;
+        return `<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--surface-2);border-radius:10px">
+          <div><strong style="font-size:13px">${esc(info.label)}</strong><div style="font-size:11.5px;color:var(--muted)">已启用 ${l4} / 共 ${l3} 张</div></div>
+          <select style="font-size:12px;padding:5px 8px" onchange="changeCategoryMode('${esc(cat)}', this.value)">
+            <option value="all" ${m === 'all' ? 'selected' : ''}>全部启用</option>
+            <option value="tier_a" ${m === 'tier_a' ? 'selected' : ''}>仅启用精品</option>
+            <option value="off" ${m === 'off' ? 'selected' : ''}>仅保留核心常驻</option>
+          </select>
+        </div>`;
+      }).join('');
     }
 
-    function selectNav(patch) {
-      state.nav = { shelf: '', category: '', subcategory: '', collection: '', ...patch };
-      renderSidebar(state.overview);
+    window.setShelfFilter = k => { state.nav.shelf = k; state.nav.collection = ''; renderLibraryFilters(state.overview); loadLenses(); };
+    window.setCategoryFilter = cat => { state.nav.category = cat; state.nav.collection = ''; renderLibraryFilters(state.overview); loadLenses(); };
+    window.setCollectionFilter = cid => {
+      state.nav.collection = state.nav.collection === cid ? '' : cid;
+      if (state.nav.collection) { state.nav.category = ''; state.nav.shelf = ''; }
+      renderLibraryFilters(state.overview);
       loadLenses();
-    }
+    };
+    document.getElementById('btn-domain-rules').onclick = () => {
+      const p = document.getElementById('domain-rules-panel');
+      p.style.display = p.style.display === 'none' ? 'block' : 'none';
+    };
 
-    async function changeCategoryMode(cat, mode) {
-      try {
-        await api('api/shelf/category-mode', { method: 'PUT', body: JSON.stringify({ category: cat, mode }) });
-        toast(`已将「${cat}」设为 ${mode}（实时预览已更新，点击清洗发布同步至线上）`);
-        await refreshAll();
-      } catch (e) { toast('切换失败: ' + e.message); }
-    }
-
-    async function toggleCollection(cid, active) {
-      try {
-        await api(`api/shelf/collections/${encodeURIComponent(cid)}/toggle`, { method: 'PUT', body: JSON.stringify({ active }) });
-        toast(active ? '合集已设为上架（实时预览已更新，点击清洗发布同步至线上）' : '合集已撤回 L3（点击清洗发布同步至线上）');
-        await refreshAll();
-      } catch (e) { toast('切换失败: ' + e.message); }
-    }
-
-    async function deleteCollection(cid, name) {
-      if (!confirm(`确定删除自定义合集「${name}」吗？（不会删除卡片本身）`)) return;
-      try {
-        await api(`api/shelf/collections/${encodeURIComponent(cid)}`, { method: 'DELETE' });
-        if (state.nav.collection === cid) state.nav.collection = '';
-        toast(`已删除合集「${name}」`);
-        await refreshAll();
-      } catch (e) { toast('删除失败: ' + e.message); }
-    }
-
-    document.getElementById('btn-new-col').onclick = async () => {
-      const name = prompt('输入新自定义合集名称（如：区块链调研包）：');
+    async function createNewCollection() {
+      const name = prompt('输入专题卡包名称（例如：写作必备、面试冲刺包）：');
       if (!name || !name.trim()) return;
       try {
         await api('api/shelf/collections', { method: 'POST', body: JSON.stringify({ name: name.trim(), active: true }) });
-        toast('已创建自定义合集');
+        toast(`已创建专题包「${name.trim()}」`);
         await loadOverview();
-      } catch (e) { toast('创建失败: ' + e.message); }
+      } catch (e) { toast('创建失败：' + e.message); }
+    }
+
+    window.changeCategoryMode = async (cat, mode) => {
+      try {
+        await api('api/shelf/category-mode', { method: 'PUT', body: JSON.stringify({ category: cat, mode }) });
+        markPending(true);
+        toast(`已调整「${catLabel(cat)}」默认启用范围，点击左侧「应用更改」即可生效`);
+        await refreshAll();
+      } catch (e) { toast('切换失败：' + e.message); }
     };
 
-    function lensCardHtml(lens, score = null, showCheckbox = true) {
-      const primLabel = state.overview?.ontology?.primitives?.[lens.routing.primitive]?.label || lens.routing.primitive;
-      const tier = lens.meta.tier || 'B';
+    window.toggleCollection = async (cid, active) => {
+      try {
+        await api(`api/shelf/collections/${encodeURIComponent(cid)}/toggle`, { method: 'PUT', body: JSON.stringify({ active }) });
+        markPending(true);
+        toast(active ? '专题包已开启，点击左侧「应用更改」生效' : '专题包已关闭，点击左侧「应用更改」生效');
+        await refreshAll();
+      } catch (e) { toast('操作失败：' + e.message); }
+    };
+
+    function lensCardHtml(lens) {
       const shelf = lens.meta.shelf || 'on_shelf';
+      const shInfo = SHELF_LABELS[shelf] || SHELF_LABELS.on_shelf;
+      const isOff = shelf === 'off_shelf';
       const checked = state.checkedIds.has(lens.id) ? 'checked' : '';
       return `
-        <div class="lens-item ${shelf === 'off_shelf' ? 'off-shelf' : ''}" data-id="${esc(lens.id)}">
-          <div class="lens-head">
-            <div style="display:flex;align-items:center;gap:6px">
-              ${showCheckbox ? `<input type="checkbox" class="lens-chk" data-id="${esc(lens.id)}" ${checked} onclick="event.stopPropagation();toggleCheck('${esc(lens.id)}',this.checked)" />` : ''}
-              <div class="lens-title">${esc(lens.title)}</div>
+        <div class="lens-card ${isOff ? 'dormant' : ''}" data-id="${esc(lens.id)}">
+          <div class="lens-card-top">
+            <div style="display:flex;align-items:flex-start;gap:8px;min-width:0">
+              ${state.batchMode ? `<input type="checkbox" ${checked} style="margin-top:3px" onclick="event.stopPropagation();toggleCheck('${esc(lens.id)}',this.checked)" />` : ''}
+              <div class="lens-card-title">${esc(lens.title)}</div>
             </div>
-            ${score !== null ? `<span class="pill ok">sim ${score.toFixed(3)}</span>` : `<span class="pill tier-${esc(tier)}">${esc(tier)}级</span>`}
+            <button class="btn xs ${isOff ? 'soft' : ''}" onclick="event.stopPropagation();quickToggleShelf('${esc(lens.id)}','${isOff ? 'on_shelf' : 'off_shelf'}')" title="${isOff ? '启用这张卡' : '暂时放回备用库'}">
+              ${isOff ? '启用' : '已启用'}
+            </button>
           </div>
-          <div class="tagline">${esc(lens.tagline)}</div>
-          <div class="pain">${esc(lens.routing.pain_point)}</div>
-          <div>
-            <span class="pill prim">${esc(primLabel)}</span>
-            <span class="pill">${esc(lens.meta.category)}</span>
-            <span class="pill ${shelf==='evergreen'?'ok':(shelf==='off_shelf'?'bad':'')}">${esc(shelf)}</span>
-            ${lens.has_override ? '<span class="pill ov">Overlay</span>' : ''}
+          <div class="lens-card-tag">${esc(lens.tagline)}</div>
+          <div class="lens-card-pain"><div class="clamp-2">${esc(lens.routing.pain_point)}</div></div>
+          <div class="lens-card-foot">
+            <div style="display:flex;flex-wrap:wrap;gap:5px">
+              <span class="pill prim">${esc(primLabel(lens.routing.primitive))}</span>
+              <span class="pill">${esc(catLabel(lens.meta.category))}</span>
+              ${shelf === 'evergreen' ? `<span class="pill green">${shInfo.text}</span>` : ''}
+              ${lens.has_override ? '<span class="pill amber">已调校</span>' : ''}
+            </div>
+            <button class="btn xs" onclick="event.stopPropagation();quickCopyLens('${esc(lens.id)}')">复制</button>
           </div>
         </div>`;
     }
 
-    function toggleCheck(id, isChecked) {
-      if (isChecked) state.checkedIds.add(id); else state.checkedIds.delete(id);
-      const bar = document.getElementById('batch-bar');
-      document.getElementById('batch-count').textContent = `已选 ${state.checkedIds.size} 项`;
-      bar.classList.toggle('show', state.checkedIds.size > 0);
-    }
+    window.quickCopyLens = id => {
+      const l = state.lenses.find(x => x.id === id);
+      if (l) copyText(l.execution.content, `已复制「${l.title}」指令`);
+    };
 
-    async function runBatch(payload) {
-      if (!state.checkedIds.size) return;
+    window.quickToggleShelf = async (id, shelf) => {
       try {
-        await api('api/overlays/batch', { method: 'POST', body: JSON.stringify({ lens_ids: Array.from(state.checkedIds), ...payload }) });
-        toast(`已批量更新 ${state.checkedIds.size} 张卡（点击清洗发布生效）`);
+        await api(`api/overlays/${encodeURIComponent(id)}`, { method: 'PUT', body: JSON.stringify({ shelf }) });
+        markPending(true);
+        toast(shelf === 'off_shelf' ? '已移至备用库（点击「应用更改」生效）' : '已设为启用（点击「应用更改」生效）');
+        await refreshAll();
+      } catch (e) { toast('操作失败：' + e.message); }
+    };
+
+    document.getElementById('btn-toggle-batch').onclick = () => {
+      state.batchMode = !state.batchMode;
+      if (!state.batchMode) {
         state.checkedIds.clear();
         document.getElementById('batch-bar').classList.remove('show');
+      } else {
+        document.getElementById('batch-bar').classList.add('show');
+      }
+      document.getElementById('btn-toggle-batch').textContent = state.batchMode ? '退出批量' : '批量整理';
+      loadLenses();
+    };
+    window.toggleCheck = (id, isChecked) => {
+      if (isChecked) state.checkedIds.add(id); else state.checkedIds.delete(id);
+      document.getElementById('batch-count').textContent = `已选 ${state.checkedIds.size} 张`;
+      document.getElementById('batch-bar').classList.toggle('show', state.batchMode || state.checkedIds.size > 0);
+    };
+    window.runBatch = async payload => {
+      if (!state.checkedIds.size) return toast('请先勾选至少一张卡片');
+      try {
+        await api('api/overlays/batch', { method: 'POST', body: JSON.stringify({ lens_ids: Array.from(state.checkedIds), ...payload }) });
+        markPending(true);
+        toast(`已批量调整 ${state.checkedIds.size} 张卡片（点击左侧「应用更改」生效）`);
+        state.checkedIds.clear();
+        state.batchMode = false;
+        document.getElementById('batch-bar').classList.remove('show');
+        document.getElementById('btn-toggle-batch').textContent = '批量整理';
         await refreshAll();
-      } catch (e) { toast('批量操作失败: ' + e.message); }
-    }
-    document.getElementById('batch-col-select').onchange = (e) => { if (e.target.value) { runBatch({ add_collection: e.target.value }); e.target.value = ''; } };
-    document.getElementById('btn-batch-clear').onclick = () => { state.checkedIds.clear(); document.getElementById('batch-bar').classList.remove('show'); loadLenses(); };
+      } catch (e) { toast('批量操作失败：' + e.message); }
+    };
+    document.getElementById('batch-col-select').onchange = e => { if (e.target.value) { runBatch({ add_collection: e.target.value }); e.target.value = ''; } };
+    document.getElementById('btn-batch-clear').onclick = () => {
+      state.checkedIds.clear(); state.batchMode = false;
+      document.getElementById('batch-bar').classList.remove('show');
+      document.getElementById('btn-toggle-batch').textContent = '批量整理';
+      loadLenses();
+    };
+    document.getElementById('btn-open-manual').onclick = () => { switchView('create'); };
 
     async function loadLenses() {
       const params = new URLSearchParams({
         q: document.getElementById('f-q').value,
-        tier: document.getElementById('f-tier').value,
         primitive: document.getElementById('f-primitive').value,
-        source: document.getElementById('f-source').value,
         shelf: state.nav.shelf,
         category: state.nav.category,
         collection: state.nav.collection,
       });
       const data = await api('api/lenses?' + params.toString());
-      state.lenses = data.items;
-      document.getElementById('lens-count').textContent = `共 ${data.total} 条`;
+      state.lenses = data.items || [];
+      document.getElementById('lens-count').textContent = `共 ${data.total} 张卡片`;
       const grid = document.getElementById('lens-grid');
-      grid.innerHTML = data.items.map(l => lensCardHtml(l)).join('');
-      grid.querySelectorAll('.lens-item').forEach(el => {
-        el.addEventListener('click', () => openModal(data.items.find(x => x.id === el.dataset.id)));
+      if (!state.lenses.length) {
+        grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1">没有找到匹配的卡片，试试换个关键词或清空筛选条件。</div>';
+        return;
+      }
+      grid.innerHTML = state.lenses.map(l => lensCardHtml(l)).join('');
+      grid.querySelectorAll('.lens-card').forEach(el => {
+        el.addEventListener('click', () => openModal(state.lenses.find(x => x.id === el.dataset.id)));
       });
     }
+
+    // ==================== CARD READER & CUSTOMIZE MODAL ====================
+    async function openLensById(id) {
+      let found = state.lenses.find(x => x.id === id);
+      if (!found) {
+        const d = await api('api/lenses?q=' + encodeURIComponent(id));
+        found = (d.items || []).find(x => x.id === id);
+      }
+      if (found) openModal(found);
+      else toast('未找到卡片详情');
+    }
+    window.openLensById = openLensById;
 
     function openModal(lens) {
       if (!lens) return;
       state.selectedLens = lens;
+      const sh = SHELF_LABELS[lens.meta.shelf || 'on_shelf'] || SHELF_LABELS.on_shelf;
       document.getElementById('m-title').textContent = lens.title;
-      document.getElementById('m-id').textContent = `${lens.id} · ${lens.meta.source} · ${lens.meta.category}/${lens.meta.subcategory}`;
-      document.getElementById('m-tags').innerHTML = `<span class="pill prim">${esc(lens.routing.primitive)}</span><span class="pill tier-${esc(lens.meta.tier)}">${esc(lens.meta.tier)}级</span>` + (lens.routing.domains||[]).map(d=>`<span class="pill">#${esc(d)}</span>`).join('');
-      document.getElementById('m-pain').textContent = '痛点：' + lens.routing.pain_point;
-      document.getElementById('m-triggers').innerHTML = (lens.routing.trigger_utterances||[]).map(t=>`<span class="pill">“${esc(t)}”</span>`).join('');
-      document.getElementById('m-content').textContent = lens.execution.content;
+      document.getElementById('m-tagline').textContent = lens.tagline;
+      document.getElementById('m-tags').innerHTML = `
+        <span class="pill prim">${esc(primLabel(lens.routing.primitive))}</span>
+        <span class="pill">${esc(catLabel(lens.meta.category))}</span>
+        <span class="pill ${sh.cls}">${esc(sh.text)}</span>
+        ${lens.has_override ? '<span class="pill amber">已个性化调校</span>' : ''}
+      `;
+      document.getElementById('m-pain').textContent = lens.routing.pain_point;
+      renderModalTriggers(lens.routing.trigger_utterances || []);
+      document.getElementById('m-content').innerHTML = highlightVars(lens.execution.content || '');
       document.getElementById('ov-title').value = lens.override?.title || '';
       document.getElementById('ov-weight').value = lens.meta.base_weight;
       document.getElementById('ov-tier').value = lens.meta.tier || 'B';
       document.getElementById('ov-shelf').value = lens.meta.shelf || 'on_shelf';
       document.getElementById('ov-category').value = lens.meta.category || 'general';
       document.getElementById('ov-primitive').value = lens.routing.primitive;
+      document.getElementById('m-dev-id').textContent = `ID: ${lens.id} · source: ${lens.meta.source} · category: ${lens.meta.category}/${lens.meta.subcategory}`;
+      document.getElementById('m-dev-id').style.display = state.devMode ? 'block' : 'none';
+      document.getElementById('m-add-trig-input').value = '';
+      document.getElementById('m-custom-details').open = false;
       document.getElementById('lens-modal').classList.add('open');
     }
+
+    function renderModalTriggers(trigs) {
+      document.getElementById('m-triggers').innerHTML = trigs.map(t => `<span class="pill">“${esc(t)}”</span>`).join('') || '<span style="font-size:12px;color:var(--muted)">暂无示例说法</span>';
+    }
+
     document.getElementById('m-close').onclick = () => document.getElementById('lens-modal').classList.remove('open');
+    document.getElementById('lens-modal').addEventListener('click', e => {
+      if (e.target.id === 'lens-modal') document.getElementById('lens-modal').classList.remove('open');
+    });
+    document.getElementById('m-copy').onclick = () => {
+      if (state.selectedLens) copyText(state.selectedLens.execution.content, '已复制卡片指令，可直接粘贴给 AI');
+    };
+    document.getElementById('m-open-chatgpt').onclick = async () => {
+      if (!state.selectedLens) return;
+      const txt = state.selectedLens.execution.content || '';
+      await copyText(txt, '已复制指令并打开 ChatGPT');
+      window.open('https://chatgpt.com/?q=' + encodeURIComponent(txt.slice(0, 1500)), '_blank');
+    };
+    document.getElementById('m-open-claude').onclick = async () => {
+      if (!state.selectedLens) return;
+      const txt = state.selectedLens.execution.content || '';
+      await copyText(txt, '已复制指令并打开 Claude');
+      window.open('https://claude.ai/new?q=' + encodeURIComponent(txt.slice(0, 1500)), '_blank');
+    };
+    document.getElementById('m-add-trig-btn').onclick = async () => {
+      const utt = document.getElementById('m-add-trig-input').value.trim();
+      if (!utt || !state.selectedLens) return;
+      try {
+        await api(`api/overlays/${encodeURIComponent(state.selectedLens.id)}/add-trigger`, { method: 'POST', body: JSON.stringify({ utterance: utt }) });
+        state.selectedLens.routing.trigger_utterances = [...(state.selectedLens.routing.trigger_utterances || []), utt];
+        renderModalTriggers(state.selectedLens.routing.trigger_utterances);
+        document.getElementById('m-add-trig-input').value = '';
+        markPending(true);
+        toast('已记住这句说法，点击左侧「应用更改」后生效');
+      } catch (e) { toast('添加失败：' + e.message); }
+    };
+
     document.getElementById('ov-save').onclick = async () => {
       const l = state.selectedLens;
+      if (!l) return;
       const ov = l.override || {};
       const payload = {};
       const newTitle = document.getElementById('ov-title').value.trim();
@@ -674,254 +1836,69 @@
       if (newPrim !== l.routing.primitive || ov.primitive !== undefined) payload.primitive = newPrim;
       try {
         await api('api/overlays/' + encodeURIComponent(l.id), { method: 'PUT', body: JSON.stringify(payload) });
-        toast('Overlay 已保存（仅写入变更项，点击清洗发布生效）');
+        markPending(true);
+        toast('已保存卡片设置，点击左侧「应用更改」立即同步');
         document.getElementById('lens-modal').classList.remove('open');
         await refreshAll();
-      } catch (e) { toast('保存失败: ' + e.message); }
+      } catch (e) { toast('保存失败：' + e.message); }
     };
     document.getElementById('ov-reset').onclick = async () => {
+      if (!state.selectedLens) return;
       try {
         await api('api/overlays/' + encodeURIComponent(state.selectedLens.id), { method: 'DELETE' });
-        toast('已清除覆写');
+        markPending(true);
+        toast('已恢复默认设置');
         document.getElementById('lens-modal').classList.remove('open');
         await refreshAll();
-      } catch (e) { toast('清除失败: ' + e.message); }
+      } catch (e) { toast('操作失败：' + e.message); }
     };
 
-    // Manual Lens Modal
-    document.getElementById('btn-new-manual').onclick = () => document.getElementById('manual-modal').classList.add('open');
-    document.getElementById('mm-close').onclick = () => document.getElementById('manual-modal').classList.remove('open');
-    document.getElementById('mm-save').onclick = async () => {
-      try {
-        await api('api/lenses/manual', { method: 'POST', body: JSON.stringify({
-          title: document.getElementById('mm-title').value,
-          tagline: document.getElementById('mm-tagline').value,
-          primitive: document.getElementById('mm-primitive').value,
-          category: document.getElementById('mm-category').value,
-          tier: document.getElementById('mm-tier').value,
-          action_type: document.getElementById('mm-action').value,
-          pain_point: document.getElementById('mm-pain').value,
-          trigger_utterances: document.getElementById('mm-triggers').value.split('\n').filter(Boolean),
-          content: document.getElementById('mm-content').value,
-        })});
-        toast('手工卡片已写入 L2（点击清洗发布即可上架）');
-        ['mm-title','mm-tagline','mm-pain','mm-triggers','mm-content'].forEach(id => document.getElementById(id).value = '');
-        document.getElementById('manual-modal').classList.remove('open');
-        await refreshAll();
-      } catch (e) { toast('创建失败: ' + e.message); }
-    };
-
-    // Recall Inspector & Calibration + Cognitive Gaps
-    let _lastRiQuery = '';
-    async function runRecallInspector() {
-      const q = document.getElementById('ri-query').value.trim();
-      if (!q) return toast('请输入要诊断的查询语句');
-      _lastRiQuery = q;
-      try {
-        const d = await api('api/inspect-recall', { method: 'POST', body: JSON.stringify({ query: q, top_k: 20 }) });
-        document.getElementById('ri-panel').style.display = 'block';
-        document.getElementById('btn-ri-close').style.display = 'inline-block';
-        const bp = d.breakthrough_policy || {};
-        document.getElementById('ri-meta').innerHTML = `剥离修饰词后: <b>${esc(d.cleaned_query)}</b> · 引擎: <b>${d.reranker_active ? 'BM25 + bge-m3 + MPS bge-reranker-v2-m3' : 'bge-m3 降级'}</b> · L3 断层门禁: cos≥${esc(bp.min_cosine ?? 0.45)}, logit≥${esc(bp.min_rerank_logit ?? -1.0)}, ΔTop1≥+${esc(bp.margin_over_top1 ?? 1.5)}`;
-
-        const top3 = d.would_show_top3 || [];
-        document.getElementById('ri-top3').innerHTML = top3.length ? (
-          `<div style="font-size:11.5px;color:var(--muted);margin-bottom:4px">此时弹窗实际会推送的 Top-3：</div><div style="display:flex;gap:8px;flex-wrap:wrap">` +
-          top3.map((c, i) => `<div class="pain" style="flex:1;min-width:200px;margin:0;border:1px solid ${c.is_l3_breakthrough?'var(--purple)':'var(--border)'}"><b>#${i+1} ${esc(c.title)}</b> <span class="pill prim">${esc(c.primitive||c.dimension)}</span>${c.is_l3_breakthrough?'<span class="pill tier-A">L3 发现</span>':''}<div style="color:var(--muted);font-size:11px;margin-top:3px">score: ${esc(c.score)} · ${esc(c.preview)}</div></div>`).join('') + `</div>`
-        ) : '';
-
-        const rows = d.ranked_all || [];
-        document.getElementById('ri-table').innerHTML = rows.length ? `<table><tr><th>#</th><th>透镜</th><th>货架/层</th><th>精排分</th><th>向量</th><th>穿透判定</th><th>一键校准</th></tr>` + rows.map(r => {
-          let btHtml = '<span class="pill">L4</span>';
-          if (r.breakthrough_status === 'triggered') btHtml = '<span class="pill tier-A">✓ L3穿透触发</span>';
-          else if (r.breakthrough_status === 'blocked_orthogonal') btHtml = '<span class="pill ov">达标(被正交/上限拦)</span>';
-          else if (r.breakthrough_status === 'eligible_gap') btHtml = `<span class="pill ov">差 +${esc(Math.min(r.breakthrough_gap_top1 ?? 99, r.breakthrough_gap_top3 ?? 99))} 穿透</span>`;
-          else if (r.breakthrough_status === 'manual_excluded') btHtml = '<span class="pill bad">人工下架豁免</span>';
-          else if (r.breakthrough_status === 'below_floor') btHtml = '<span class="pill">低于底线</span>';
-          const isOff = r.shelf === 'off_shelf';
-          return `<tr style="${r.in_live_top3 ? 'background:rgba(110,168,254,0.08)' : ''}">
-            <td><b>#${r.rank}</b>${r.in_live_top3?' ⭐':''}</td>
-            <td><b>${esc(r.title)}</b> <span class="pill prim">${esc(r.primitive)}</span><div style="color:var(--muted);font-size:11px">${esc(r.tagline)}</div></td>
-            <td><span class="pill tier-${esc(r.tier)}">${esc(r.tier)}</span><span class="pill ${isOff?'bad':(r.shelf==='evergreen'?'ok':'')}">${esc(r.shelf)}</span></td>
-            <td><b>${r.rerank_logit !== null ? esc(r.rerank_logit) : '-'}</b></td>
-            <td>${esc(r.cosine)}</td>
-            <td>${btHtml}</td>
-            <td style="white-space:nowrap">
-              <button class="btn sm" onclick="calibrateBindTrigger('${esc(r.id)}')">+绑口语</button>
-              <button class="btn sm ${isOff?'primary':'danger'}" onclick="calibrateShelf('${esc(r.id)}','${isOff?'on_shelf':'off_shelf'}')">${isOff?'上架L4':'下架L3'}</button>
-            </td>
-          </tr>`;
-        }).join('') + `</table>` : '<div style="font-size:12px;color:var(--muted)">无匹配结果</div>';
-      } catch (e) { toast('诊断失败: ' + e.message); }
-    }
-    document.getElementById('btn-ri-run').onclick = runRecallInspector;
-    document.getElementById('ri-query').addEventListener('keydown', e => { if (e.key === 'Enter') runRecallInspector(); });
-    document.getElementById('btn-ri-close').onclick = () => {
-      document.getElementById('ri-panel').style.display = 'none';
-      document.getElementById('btn-ri-close').style.display = 'none';
-    };
-
-    async function calibrateBindTrigger(id) {
-      if (!_lastRiQuery) return;
-      try {
-        await api(`api/overlays/${encodeURIComponent(id)}/add-trigger`, { method: 'POST', body: JSON.stringify({ utterance: _lastRiQuery }) });
-        toast(`已将「${_lastRiQuery.slice(0,18)}」绑定为触发口语（点击顶部清洗发布后重算向量生效）`);
-        await loadOverview();
-      } catch (e) { toast('绑定失败: ' + e.message); }
-    }
-    async function calibrateShelf(id, shelf) {
-      try {
-        await api(`api/overlays/${encodeURIComponent(id)}`, { method: 'PUT', body: JSON.stringify({ shelf }) });
-        toast(`已设为 ${shelf}（点击顶部清洗发布同步至线上）`);
-        await refreshAll();
-      } catch (e) { toast('操作失败: ' + e.message); }
-    }
-
-    document.getElementById('btn-gap-save').onclick = async () => {
-      const q = _lastRiQuery || document.getElementById('ri-query').value.trim();
-      if (!q) return;
-      try {
-        await api('api/gaps', { method: 'POST', body: JSON.stringify({ query: q }) });
-        toast('已记入认知缺口清单（可在 L0-L4 供给工坊集中处理）');
-      } catch (e) { toast('保存失败: ' + e.message); }
-    };
-    document.getElementById('btn-gap-ai').onclick = async () => {
-      const q = _lastRiQuery || document.getElementById('ri-query').value.trim();
-      if (!q) return;
-      try {
-        await api('api/gaps', { method: 'POST', body: JSON.stringify({ query: q, note: '已触发 AI 锻造' }) });
-        await api('api/evolution/friction-to-draft', { method: 'POST', body: JSON.stringify({ custom_intent: q, sample_input: q }) });
-        toast('已记录缺口并启动 AI 锻造 L2 草稿（可在供给工坊查看进度）');
-      } catch (e) { toast('启动失败: ' + e.message); }
-    };
-    document.getElementById('btn-gap-manual').onclick = () => {
-      const q = _lastRiQuery || document.getElementById('ri-query').value.trim();
-      document.getElementById('mm-triggers').value = q;
-      document.getElementById('mm-pain').value = q;
-      document.getElementById('manual-modal').classList.add('open');
-    };
-
-    async function loadGaps() {
-      try {
-        const d = await api('api/gaps');
-        const box = document.getElementById('gaps-list');
-        box.innerHTML = d.gaps.length ? d.gaps.map(g => `
-          <div class="pain" style="display:flex;justify-content:space-between;align-items:center;gap:8px;opacity:${g.status==='resolved'?0.55:1}">
-            <div><b>${esc(g.query)}</b> <span class="pill ${g.status==='resolved'?'ok':'ov'}">${esc(g.status)}</span><div style="font-size:11px;color:var(--muted)">${esc(g.created_at)} ${g.note ? '· '+esc(g.note) : ''}</div></div>
-            <div style="display:flex;gap:4px;white-space:nowrap">
-              ${g.status !== 'resolved' ? `<button class="btn sm primary" onclick="forgeGap('${esc(g.id)}', ${esc(JSON.stringify(g.query))})">AI锻造</button><button class="btn sm" onclick="resolveGap('${esc(g.id)}')">已解决</button>` : ''}
-              <button class="btn sm danger" onclick="deleteGap('${esc(g.id)}')">×</button>
-            </div>
-          </div>`).join('') : '暂无认知缺口记录';
-      } catch (e) { toast('加载缺口失败: ' + e.message); }
-    }
-    document.getElementById('btn-gaps-refresh').onclick = loadGaps;
-    async function forgeGap(id, query) {
-      try {
-        await api('api/evolution/friction-to-draft', { method: 'POST', body: JSON.stringify({ custom_intent: query, sample_input: query }) });
-        toast('已启动缺口 AI 锻造任务'); loadJobs();
-      } catch (e) { toast(e.message); }
-    }
-    async function resolveGap(id) {
-      try { await api(`api/gaps/${encodeURIComponent(id)}`, { method: 'PUT', body: JSON.stringify({ status: 'resolved' }) }); loadGaps(); } catch (e) { toast(e.message); }
-    }
-    async function deleteGap(id) {
-      try { await api(`api/gaps/${encodeURIComponent(id)}`, { method: 'DELETE' }); loadGaps(); } catch (e) { toast(e.message); }
-    }
-
-    // M4 Forge & ATLAS & Jobs
-    async function loadJobs() {
-      const d = await api('api/jobs');
-      document.getElementById('jobs-list').innerHTML = d.jobs.length ? d.jobs.map(j => `
-        <div class="pain"><b>${esc(j.label)}</b> <span class="pill ${j.status==='done'?'ok':(j.status==='failed'?'bad':'ov')}">${esc(j.status)}</span> (${esc(j.started_at)} → ${esc(j.finished_at||'运行中')})
-        ${j.error ? `<div style="color:var(--red)">${esc(j.error)}</div>` : (j.result ? `<div style="color:var(--muted)">${esc(JSON.stringify(j.result).slice(0,220))}</div>` : '')}</div>
-      `).join('') : '暂无后台任务';
-    }
-    document.getElementById('btn-jobs-refresh').onclick = loadJobs;
-
-    document.getElementById('btn-l0-submit').onclick = async () => {
-      try {
-        await api('api/forge/l0-text', { method: 'POST', body: JSON.stringify({ title: document.getElementById('l0-title').value, raw_text: document.getElementById('l0-text').value }) });
-        toast('已启动 L0→L2 后台精炼任务'); loadJobs();
-      } catch (e) { toast(e.message); }
-    };
-    document.getElementById('btn-fg-submit').onclick = async () => {
-      try {
-        await api('api/forge/starter-pack', { method: 'POST', body: JSON.stringify({
-          domain_name: document.getElementById('fg-domain').value,
-          pain_points: document.getElementById('fg-pain').value,
-          style_pref: document.getElementById('fg-style').value,
-          category: document.getElementById('fg-cat').value,
-        })});
-        toast('已启动 Glint Forge 7 元操作领域包合成'); loadJobs();
-      } catch (e) { toast(e.message); }
-    };
-    document.getElementById('btn-atlas-search').onclick = async () => {
-      try {
-        const q = document.getElementById('atlas-q').value;
-        const d = await api('api/forge/atlas-search?q=' + encodeURIComponent(q));
-        state.atlasOffsets.clear();
-        document.getElementById('atlas-results').innerHTML = d.items.length ? `<table><tr><th>选</th><th>标题</th><th>仓库</th><th>摘要</th></tr>` + d.items.map(it => `
-          <tr><td><input type="checkbox" onchange="if(this.checked)state.atlasOffsets.add(${it.offset});else state.atlasOffsets.delete(${it.offset})" /></td>
-          <td><b>${esc(it.title)}</b></td><td>${esc(it.repository)}</td><td style="color:var(--muted)">${esc(it.summary)}</td></tr>`).join('') + `</table>` : '<div style="font-size:12px;color:var(--muted)">无匹配结果</div>';
-      } catch (e) { toast('搜索失败: ' + e.message); }
-    };
-    document.getElementById('btn-atlas-import').onclick = async () => {
-      if (!state.atlasOffsets.size) return toast('请先勾选要导入的 ATLAS 条目');
-      try {
-        await api('api/forge/atlas-import', { method: 'POST', body: JSON.stringify({ offsets: Array.from(state.atlasOffsets) }) });
-        toast(`已启动导入 ${state.atlasOffsets.size} 条 ATLAS 原料到 L3 库存`); loadJobs();
-      } catch (e) { toast('导入失败: ' + e.message); }
-    };
-    async function loadQuarantine() {
-      const d = await api('api/quarantine');
-      const items = [...(d.l2_quarantined||[]).map(x => `[L2/L3] ${x.id} (${x.source}): ${(x.reasons||[]).join('; ')}`), ...(d.l0_rejected||[]).map(x => `[L0拒收] ${x.title||x.id}: ${(x.reasons||[]).join('; ')}`)];
-      document.getElementById('q-summary').innerHTML = items.length ? items.map(t => `<div class="pain">${esc(t)}</div>`).join('') : '<div style="font-size:12px;color:var(--muted)">暂无隔离记录</div>';
-    }
-
-    // M3 Evolution
-    async function loadEvolution() {
-      const [ana, prop] = await Promise.all([api('api/evolution/analytics?days=30'), api('api/evolution/proposals?days=30')]);
-      document.getElementById('evo-kpis').innerHTML = `
-        <div class="kpi"><div class="label">近 30 天呼出总数</div><div class="val">${esc(ana.total_events)}</div><div class="sub">点击 ${esc(ana.clicks)} · Esc ${esc(ana.escapes)} · 自定义 ${esc(ana.custom_intents)}</div></div>
-        <div class="kpi"><div class="label">整体点击率 (CTR)</div><div class="val" style="color:var(--green)">${Math.round((ana.ctr||0)*100)}%</div><div class="sub">Esc 跳过率: ${Math.round((ana.esc_rate||0)*100)}%</div></div>
-        <div class="kpi"><div class="label">实机 P50 / P95 延迟</div><div class="val">${esc(ana.p50_ms)} / ${esc(ana.p95_ms)}ms</div><div class="sub">来自 usage.db 真实记录</div></div>
-        <div class="kpi"><div class="label">常青 S 级免淘汰保护</div><div class="val">${esc(prop.evergreen_protected)}</div><div class="sub">仅调度动态垂直货架</div></div>
-      `;
-      renderBars('evo-apps', ana.by_app);
-      document.getElementById('evo-top-cards').innerHTML = ana.top_cards.length ? `<table><tr><th>透镜</th><th>Tier</th><th>点击/曝光</th><th>CTR</th></tr>` + ana.top_cards.map(c => `<tr><td>${esc(c.title)}</td><td>${esc(c.tier)}</td><td>${c.clicks}/${c.impressions}</td><td>${Math.round(c.ctr*100)}%</td></tr>`).join('') + `</table>` : '<div style="font-size:12px;color:var(--muted)">暂无点击数据，日常使用后自动呈现</div>';
-
-      const demotes = (prop.demote_to_l3||[]).map(p => `<div class="pain" style="display:flex;justify-content:space-between;align-items:center"><div><b>[建议下架回 L3] ${esc(p.title)}</b> · ${esc(p.reason)}</div><button class="btn sm danger" onclick="applyShelfProposal('${esc(p.id)}','off_shelf')">下架回 L3</button></div>`).join('');
-      const promotes = (prop.promote_to_l4||[]).map(p => `<div class="pain" style="display:flex;justify-content:space-between;align-items:center"><div><b>[建议上架 L4] ${esc(p.title)}</b> · ${esc(p.reason)}</div><button class="btn sm primary" onclick="applyShelfProposal('${esc(p.id)}','on_shelf')">上架 L4</button></div>`).join('');
-      document.getElementById('evo-proposals').innerHTML = (demotes + promotes) || '<div style="font-size:12px;color:var(--muted)">当前货架状态健康，暂无上下架调整建议。</div>';
-
-      document.getElementById('evo-custom-list').innerHTML = ana.custom_intent_logs.length ? ana.custom_intent_logs.map(c => `
-        <div class="pain" style="display:flex;justify-content:space-between;align-items:center;gap:8px">
-          <div><b>${esc(c.custom_intent)}</b><div style="color:var(--muted)">[${esc(c.app_name)}] 原文: ${esc(c.input_text)}</div></div>
-          <button class="btn sm primary" onclick="frictionToDraft(${esc(JSON.stringify(c.custom_intent))}, ${esc(JSON.stringify(c.input_text))})">生成 L2 草稿</button>
-        </div>`).join('') : '<div style="font-size:12px;color:var(--muted)">暂无第 4 选项自定义意图摩擦记录</div>';
-    }
-    async function applyShelfProposal(id, shelf) {
-      try {
-        await api('api/overlays/' + encodeURIComponent(id), { method: 'PUT', body: JSON.stringify({ shelf }) });
-        toast(`已写入 Overlay: ${id} → ${shelf}（点击顶部清洗发布生效）`);
-        loadEvolution(); loadOverview();
-      } catch (e) { toast('操作失败: ' + e.message); }
-    }
-    async function frictionToDraft(custom_intent, sample_input) {
-      try {
-        await api('api/evolution/friction-to-draft', { method: 'POST', body: JSON.stringify({ custom_intent, sample_input }) });
-        toast('已启动摩擦转 L2 草稿后台任务（可在供给工坊查看进度）');
-      } catch (e) { toast('启动失败: ' + e.message); }
-    }
-
-    // Cognitive Seed Control Plane
+    // ==================== 3. DESKTOP SEED COMPANION ====================
     async function seedApi(path, opts = {}) {
-      const res = await fetch('../seed/' + path.replace(/^\//, ''), { headers: { 'Content-Type': 'application/json' }, ...opts });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.detail || JSON.stringify(data));
-      return data;
+      return rootApi('seed/' + path.replace(/^\//, ''), opts);
     }
+
+    function syncSeedSliderLabels() {
+      const share = Number(document.getElementById('rng-l3-share').value);
+      const decay = Number(document.getElementById('rng-recall-decay').value);
+      const skip = Number(document.getElementById('rng-skip-decay').value);
+      document.getElementById('lbl-l3-share').textContent = `${share}%`;
+      document.getElementById('lbl-recall-decay').textContent = decay < 20 ? '温和' : (decay < 55 ? '适中' : '强反回音室');
+      document.getElementById('lbl-skip-decay').textContent = skip > 82 ? '轻微' : (skip > 62 ? '明显' : '大幅减少');
+    }
+    ['rng-l3-share', 'rng-recall-decay', 'rng-skip-decay'].forEach(id => {
+      document.getElementById(id).addEventListener('input', syncSeedSliderLabels);
+    });
+
+    window.applySeedPreset = name => {
+      document.querySelectorAll('.preset-card').forEach(c => c.classList.remove('active'));
+      document.getElementById('preset-' + name)?.classList.add('active');
+      if (name === 'calm') {
+        document.getElementById('sc-tier-s').value = 5;
+        document.getElementById('sc-tier-a').value = 2;
+        document.getElementById('sc-tier-b').value = 0.8;
+        document.getElementById('rng-l3-share').value = 10;
+        document.getElementById('rng-recall-decay').value = 30;
+        document.getElementById('rng-skip-decay').value = 70;
+      } else if (name === 'balanced') {
+        document.getElementById('sc-tier-s').value = 4;
+        document.getElementById('sc-tier-a').value = 2;
+        document.getElementById('sc-tier-b').value = 1;
+        document.getElementById('rng-l3-share').value = 15;
+        document.getElementById('rng-recall-decay').value = 35;
+        document.getElementById('rng-skip-decay').value = 72;
+      } else if (name === 'explore') {
+        document.getElementById('sc-tier-s').value = 3;
+        document.getElementById('sc-tier-a').value = 2;
+        document.getElementById('sc-tier-b').value = 1.5;
+        document.getElementById('rng-l3-share').value = 35;
+        document.getElementById('rng-recall-decay').value = 50;
+        document.getElementById('rng-skip-decay').value = 65;
+      }
+      syncSeedSliderLabels();
+      saveSeedConfig();
+    };
+
     async function loadSeedPanel() {
       try {
         const mode = document.getElementById('seed-mode-select').value || 'smart_mix';
@@ -930,96 +1907,355 @@
         document.getElementById('sc-tier-s').value = c.tier_s_weight ?? 4.0;
         document.getElementById('sc-tier-a').value = c.tier_a_weight ?? 2.0;
         document.getElementById('sc-tier-b').value = c.tier_b_weight ?? 1.0;
-        document.getElementById('sc-l3-share').value = c.l3_smart_mix_share ?? 0.15;
-        document.getElementById('sc-recall-decay').value = c.recall_decay_rate ?? 0.35;
-        document.getElementById('sc-skip-decay').value = c.skip_decay_factor ?? 0.72;
+        document.getElementById('rng-l3-share').value = Math.round((c.l3_smart_mix_share ?? 0.15) * 100);
+        document.getElementById('rng-recall-decay').value = Math.round((c.recall_decay_rate ?? 0.35) * 100);
+        document.getElementById('rng-skip-decay').value = Math.round((c.skip_decay_factor ?? 0.72) * 100);
+        syncSeedSliderLabels();
 
-        const l4Share = pool.items.filter(x => x.layer === 'L4').reduce((a, b) => a + (b.probability_pct || 0), 0);
         const l3Share = pool.items.filter(x => x.layer === 'L3').reduce((a, b) => a + (b.probability_pct || 0), 0);
         document.getElementById('seed-kpi-grid').innerHTML = `
-          <div class="kpi"><div class="label">当前池候选种子</div><div class="val" style="color:var(--green)">${esc(pool.items.length)}</div><div class="sub">L4: ${esc(st.total_l4)} · L3 休眠: ${esc(st.total_l3)}</div></div>
-          <div class="kpi"><div class="label">当前池层级概率占比</div><div class="val" style="font-size:18px;margin-top:6px">L4 ${l4Share.toFixed(1)}% / L3 ${l3Share.toFixed(1)}%</div><div class="sub">模式: ${esc(mode)}</div></div>
-          <div class="kpi"><div class="label">已屏蔽 / 暂缓</div><div class="val" style="color:var(--amber)">${esc(st.hidden_items.length)}</div><div class="sub">已降权跳过卡: ${esc(Object.keys(st.skip_counts || {}).length)}</div></div>
-          <div class="kpi"><div class="label">近期冷却窗口</div><div class="val">${esc(st.recent_shown_count)} / 25</div><div class="sub">避免短时间重复曝光</div></div>
+          <div class="kpi"><div class="label">参与轮播的卡片</div><div class="val" style="color:var(--green)">${esc(pool.items.length)}</div><div class="sub">常用卡片 ${esc(st.total_l4)} · 备用探索 ${esc(st.total_l3)}</div></div>
+          <div class="kpi"><div class="label">新视角探索比例</div><div class="val" style="color:var(--purple)">${l3Share.toFixed(0)}%</div><div class="sub">来自备用库的盲区卡片占比</div></div>
+          <div class="kpi"><div class="label">已暂缓 / 不再显示</div><div class="val" style="color:var(--amber)">${esc(st.hidden_items.length)}</div><div class="sub">不影响快捷键主动唤起</div></div>
+          <div class="kpi"><div class="label">防重复冷却记录</div><div class="val">${esc(st.recent_shown_count)} / 25</div><div class="sub">最近看过的 25 张不会很快重复</div></div>
         `;
 
         const hBox = document.getElementById('seed-hidden-box');
         hBox.innerHTML = st.hidden_items.length
-          ? `<table><tr><th>标题</th><th>层级</th><th>状态</th><th>操作</th></tr>` + st.hidden_items.map(item => `
+          ? `<table><tr><th>卡片</th><th>状态</th><th></th></tr>` + st.hidden_items.map(item => `
               <tr>
-                <td>${esc(item.title)}</td>
-                <td><span class="pill">${esc(item.layer)} · ${esc(item.tier)}</span></td>
-                <td>${item.status === 'muted' ? '<span class="pill bad">不再显示</span>' : `<span class="pill ov">暂缓 ${esc(item.remaining_days)} 天</span>`}</td>
-                <td><button class="btn sm" onclick="unmuteSeed('${esc(item.id)}')">恢复</button></td>
+                <td><strong>${esc(item.title)}</strong></td>
+                <td>${item.status === 'muted' ? '<span class="pill red">不再轮播</span>' : `<span class="pill amber">暂缓 ${esc(item.remaining_days)} 天</span>`}</td>
+                <td style="text-align:right"><button class="btn xs" onclick="unmuteSeed('${esc(item.id)}')">恢复</button></td>
               </tr>`).join('') + `</table>`
-          : '<div style="font-size:12px;color:var(--muted)">暂无被屏蔽或暂缓的认知种子</div>';
+          : '<div class="empty-state">暂无屏蔽或暂缓的卡片，所有好方法都在安静待命。</div>';
 
-        const sorted = [...pool.items].sort((a, b) => (b.probability_pct || 0) - (a.probability_pct || 0)).slice(0, 30);
+        const sorted = [...pool.items].sort((a, b) => (b.probability_pct || 0) - (a.probability_pct || 0)).slice(0, 20);
+        const maxPct = Math.max(0.1, ...sorted.map(x => Number(x.probability_pct || 0)));
         document.getElementById('seed-prob-table').innerHTML = sorted.length
-          ? `<table><tr><th>标题</th><th>层级/梯队</th><th>30天主动召回</th><th>实时权重</th><th>概率</th><th>入选说明</th></tr>` + sorted.map(x => `
+          ? `<table><tr><th>卡片</th><th>来源</th><th>近期主动使用</th><th style="width:160px">出现倾向</th><th>说明</th></tr>` + sorted.map(x => `
               <tr>
-                <td><b>${esc(x.title)}</b></td>
-                <td><span class="pill ${x.layer === 'L3' ? 'tier-A' : (x.tier === 'S' ? 'tier-S' : '')}">${esc(x.layer)} · ${esc(x.tier)}</span></td>
+                <td><strong style="cursor:pointer" onclick="openLensById('${esc(x.id)}')">${esc(x.title)}</strong></td>
+                <td><span class="pill ${x.layer === 'L3' ? 'purple' : (x.tier === 'S' ? 'green' : '')}">${x.layer === 'L3' ? '备用探索' : (x.tier === 'S' ? '核心常驻' : '已启用')}</span></td>
                 <td>${esc(x.recall_count_30d || 0)} 次</td>
-                <td>${esc(x.weight)}</td>
-                <td><b>${Number(x.probability_pct || 0).toFixed(2)}%</b></td>
-                <td style="color:var(--muted)">${esc(x.reason_tag || '')}</td>
+                <td><div class="bar-track"><div class="bar-fill" style="width:${Math.round((x.probability_pct || 0) / maxPct * 100)}%"></div></div></td>
+                <td style="color:var(--muted)">${esc((x.reason_tag || '').replace('Tier S 核心心法', '核心常驻'))}</td>
               </tr>`).join('') + `</table>`
-          : '<div style="font-size:12px;color:var(--muted)">当前池无可用种子</div>';
-      } catch (e) { toast('加载认知种子面板失败: ' + e.message); }
+          : '<div class="empty-state">当前模式下暂无可轮播的卡片</div>';
+      } catch (e) { toast('加载桌面陪伴面板失败：' + e.message); }
     }
-    window.unmuteSeed = async (id) => {
-      try { await seedApi('feedback', { method: 'POST', body: JSON.stringify({ id, action: 'unmute' }) }); toast('已恢复到轮播池'); loadSeedPanel(); }
-      catch (e) { toast(e.message); }
-    };
-    document.getElementById('btn-seed-cfg-save').onclick = async () => {
+
+    async function saveSeedConfig() {
       try {
         await seedApi('config', {
           method: 'PUT',
           body: JSON.stringify({
-            tier_s_weight: parseFloat(document.getElementById('sc-tier-s').value),
-            tier_a_weight: parseFloat(document.getElementById('sc-tier-a').value),
-            tier_b_weight: parseFloat(document.getElementById('sc-tier-b').value),
-            l3_smart_mix_share: parseFloat(document.getElementById('sc-l3-share').value),
-            recall_decay_rate: parseFloat(document.getElementById('sc-recall-decay').value),
-            skip_decay_factor: parseFloat(document.getElementById('sc-skip-decay').value),
+            tier_s_weight: parseFloat(document.getElementById('sc-tier-s').value) || 4.0,
+            tier_a_weight: parseFloat(document.getElementById('sc-tier-a').value) || 2.0,
+            tier_b_weight: parseFloat(document.getElementById('sc-tier-b').value) || 1.0,
+            l3_smart_mix_share: Number(document.getElementById('rng-l3-share').value) / 100,
+            recall_decay_rate: Number(document.getElementById('rng-recall-decay').value) / 100,
+            skip_decay_factor: Number(document.getElementById('rng-skip-decay').value) / 100,
           }),
         });
-        toast('认知种子概率配置已保存并立即生效');
+        toast('陪伴节奏已保存并立即生效');
         loadSeedPanel();
-      } catch (e) { toast('保存失败: ' + e.message); }
-    };
+      } catch (e) { toast('保存失败：' + e.message); }
+    }
+    document.getElementById('btn-seed-cfg-save').onclick = saveSeedConfig;
     document.getElementById('btn-seed-draw-test').onclick = async () => {
       try {
         const mode = document.getElementById('seed-mode-select').value || 'smart_mix';
         const d = await seedApi('next', { method: 'POST', body: JSON.stringify({ mode, exclude_ids: [] }) });
-        document.getElementById('seed-draw-preview').textContent = d.item
-          ? `抽中：[${d.item.layer}·${d.item.tier}] ${d.item.title} (${Number(d.item.probability_pct||0).toFixed(2)}%)`
-          : '无可用种子';
+        const stage = document.getElementById('seed-draw-stage');
+        if (!d.item) {
+          stage.innerHTML = '<div style="color:var(--muted)">当前池暂无可抽取的卡片</div>';
+          return;
+        }
+        const it = d.item;
+        stage.innerHTML = `
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+            <div style="display:flex;align-items:center;gap:8px">
+              <span class="pill ${it.layer === 'L3' ? 'purple' : 'green'}">${it.layer === 'L3' ? '✦ 备用库惊喜' : '✨ 桌面种子'}</span>
+              <span class="pill prim">${esc(primLabel(it.primitive))}</span>
+            </div>
+            <div style="display:flex;gap:6px">
+              <button class="btn xs primary" onclick="copyText(${esc(JSON.stringify(it.content || ''))}, '已复制种子指令')">复制指令</button>
+              <button class="btn xs" onclick="openLensById('${esc(it.id)}')">查看全文</button>
+            </div>
+          </div>
+          <div style="font-size:17px;font-weight:700">${esc(it.title)}</div>
+          <div style="font-size:13.5px;color:var(--text-2)">${esc(it.tagline || it.pain_point || '')}</div>
+        `;
         loadSeedPanel();
-      } catch (e) { toast(e.message); }
+      } catch (e) { toast('抽取失败：' + e.message); }
+    };
+    window.unmuteSeed = async id => {
+      try { await seedApi('feedback', { method: 'POST', body: JSON.stringify({ id, action: 'unmute' }) }); toast('已恢复到桌面轮播'); loadSeedPanel(); }
+      catch (e) { toast(e.message); }
     };
     document.getElementById('btn-seed-reset-all').onclick = async () => {
-      try { await seedApi('reset', { method: 'POST' }); toast('已恢复所有屏蔽/暂缓种子'); loadSeedPanel(); }
+      try { await seedApi('reset', { method: 'POST' }); toast('已全部恢复轮播'); loadSeedPanel(); }
       catch (e) { toast(e.message); }
     };
     document.getElementById('seed-mode-select').onchange = loadSeedPanel;
     document.getElementById('btn-seed-refresh').onclick = loadSeedPanel;
 
-    // Sandbox & Eval
+    // ==================== 4. CREATE NEW CARDS ====================
+    document.getElementById('mm-save').onclick = async () => {
+      try {
+        await api('api/lenses/manual', {
+          method: 'POST',
+          body: JSON.stringify({
+            title: document.getElementById('mm-title').value,
+            tagline: document.getElementById('mm-tagline').value,
+            primitive: document.getElementById('mm-primitive').value,
+            category: document.getElementById('mm-category').value,
+            tier: document.getElementById('mm-tier').value,
+            action_type: document.getElementById('mm-action').value,
+            pain_point: document.getElementById('mm-pain').value,
+            trigger_utterances: document.getElementById('mm-triggers').value.split('\n').filter(Boolean),
+            content: document.getElementById('mm-content').value,
+          }),
+        });
+        markPending(true);
+        toast('新卡片已创建！点击左侧「应用更改」即可立即使用');
+        ['mm-title', 'mm-tagline', 'mm-pain', 'mm-triggers', 'mm-content'].forEach(id => document.getElementById(id).value = '');
+        await refreshAll();
+      } catch (e) { toast('创建失败：' + e.message); }
+    };
+
+    document.getElementById('btn-l0-submit').onclick = async () => {
+      try {
+        await api('api/forge/l0-text', { method: 'POST', body: JSON.stringify({ title: document.getElementById('l0-title').value, raw_text: document.getElementById('l0-text').value }) });
+        toast('已提交 AI 提炼，请在下方查看制作进度');
+        loadJobs();
+      } catch (e) { toast(e.message); }
+    };
+
+    document.getElementById('btn-fg-submit').onclick = async () => {
+      try {
+        await api('api/forge/starter-pack', {
+          method: 'POST',
+          body: JSON.stringify({
+            domain_name: document.getElementById('fg-domain').value,
+            pain_points: document.getElementById('fg-pain').value,
+            style_pref: document.getElementById('fg-style').value,
+            category: document.getElementById('fg-cat').value,
+          }),
+        });
+        toast('已启动 7 张全视角卡包生成，请在下方查看进度');
+        loadJobs();
+      } catch (e) { toast(e.message); }
+    };
+
+    async function loadGaps() {
+      try {
+        const d = await api('api/gaps');
+        const box = document.getElementById('gaps-list');
+        box.innerHTML = d.gaps.length ? d.gaps.map(g => `
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 12px;background:var(--surface-2);border-radius:10px;margin-bottom:8px;opacity:${g.status === 'resolved' ? 0.55 : 1}">
+            <div>
+              <strong style="font-size:13px">${esc(g.query)}</strong>
+              <span class="pill ${g.status === 'resolved' ? 'green' : 'amber'}" style="margin-left:6px">${g.status === 'resolved' ? '已补齐' : '待制作'}</span>
+              <div style="font-size:11.5px;color:var(--muted);margin-top:2px">${esc(g.created_at)} ${g.note ? '· ' + esc(g.note) : ''}</div>
+            </div>
+            <div style="display:flex;gap:5px;white-space:nowrap">
+              ${g.status !== 'resolved' ? `<button class="btn xs primary" onclick="forgeGap('${esc(g.id)}', ${esc(JSON.stringify(g.query))})">AI 制作</button><button class="btn xs" onclick="resolveGap('${esc(g.id)}')">完成</button>` : ''}
+              <button class="btn xs danger" onclick="deleteGap('${esc(g.id)}')">×</button>
+            </div>
+          </div>`).join('') : '<div class="empty-state">暂无待补充的想法</div>';
+      } catch {}
+    }
+    document.getElementById('btn-gaps-refresh').onclick = loadGaps;
+    window.forgeGap = async (id, query) => {
+      try { await api('api/evolution/friction-to-draft', { method: 'POST', body: JSON.stringify({ custom_intent: query, sample_input: query }) }); toast('已启动 AI 制作卡片'); loadJobs(); }
+      catch (e) { toast(e.message); }
+    };
+    window.resolveGap = async id => {
+      try { await api(`api/gaps/${encodeURIComponent(id)}`, { method: 'PUT', body: JSON.stringify({ status: 'resolved' }) }); loadGaps(); } catch (e) { toast(e.message); }
+    };
+    window.deleteGap = async id => {
+      try { await api(`api/gaps/${encodeURIComponent(id)}`, { method: 'DELETE' }); loadGaps(); } catch (e) { toast(e.message); }
+    };
+
+    async function loadJobs() {
+      try {
+        const d = await api('api/jobs');
+        const stMap = { running: ['进行中', 'amber'], done: ['已完成', 'green'], failed: ['失败', 'red'] };
+        document.getElementById('jobs-list').innerHTML = d.jobs.length ? d.jobs.map(j => {
+          const [stTxt, stCls] = stMap[j.status] || [j.status, ''];
+          return `<div style="padding:10px 12px;background:var(--surface-2);border-radius:10px;margin-bottom:8px;font-size:12.5px">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+              <strong>${esc(j.label)}</strong>
+              <span class="pill ${stCls}">${esc(stTxt)}</span>
+            </div>
+            <div style="font-size:11.5px;color:var(--muted);margin-top:3px">${esc(j.started_at)} → ${esc(j.finished_at || '处理中…')}</div>
+            ${j.error ? `<div style="color:var(--red);margin-top:4px;font-size:12px">${esc(j.error)}</div>` : ''}
+          </div>`;
+        }).join('') : '<div class="empty-state">暂无后台制作任务</div>';
+      } catch {}
+    }
+    document.getElementById('btn-jobs-refresh').onclick = loadJobs;
+
+    // ==================== 5. USAGE INSIGHTS ====================
+    const LEGACY_CARD_TITLES = {
+      premortem: '事前验尸排雷',
+      clarify_first: '先反问我3个问题',
+      code_review: '架构师代码审查',
+      root_cause: '根因定位与排障',
+      mece_breakdown: 'MECE结构拆解',
+      decision_matrix: '多维对比决策表',
+      red_team: '红队反方拷问',
+      de_ai_rewrite: '去 AI 味极简重写',
+    };
+    function friendlyCardTitle(titleOrId) {
+      return LEGACY_CARD_TITLES[titleOrId] || titleOrId;
+    }
+
+    async function loadEvolution() {
+      document.getElementById('evo-proposals').innerHTML = '<div class="empty-state">正在整理近 30 天使用数据…</div>';
+      document.getElementById('evo-top-cards').innerHTML = '<div class="empty-state">加载中…</div>';
+      document.getElementById('evo-custom-list').innerHTML = '<div class="empty-state">加载中…</div>';
+      const [ana, prop] = await Promise.all([api('api/evolution/analytics?days=30'), api('api/evolution/proposals?days=30')]);
+      document.getElementById('evo-kpis').innerHTML = `
+        <div class="kpi"><div class="label">近 30 天唤起次数</div><div class="val">${esc(ana.total_events)}</div><div class="sub">采纳 ${esc(ana.clicks)} · 取消 ${esc(ana.escapes)} · 自定义 ${esc(ana.custom_intents)}</div></div>
+        <div class="kpi"><div class="label">推荐采纳率</div><div class="val" style="color:var(--green)">${Math.round((ana.ctr || 0) * 100)}%</div><div class="sub">直接跳过率 ${Math.round((ana.esc_rate || 0) * 100)}%</div></div>
+        <div class="kpi"><div class="label">平均响应速度</div><div class="val">${esc(ana.p50_ms)}ms</div><div class="sub">95% 请求快于 ${esc(ana.p95_ms)}ms</div></div>
+        <div class="kpi"><div class="label">核心常驻保护</div><div class="val">${esc(prop.evergreen_protected)}</div><div class="sub">常青卡片始终保留，不会被自动精简</div></div>
+      `;
+      renderBars('evo-apps', ana.by_app, k => k);
+      document.getElementById('evo-top-cards').innerHTML = ana.top_cards.length
+        ? `<table><tr><th>思考卡片</th><th>采纳 / 出现</th><th>采纳率</th></tr>` + ana.top_cards.map(c => `<tr><td><strong>${esc(friendlyCardTitle(c.title))}</strong></td><td>${c.clicks} / ${c.impressions}</td><td><b>${Math.round(c.ctr * 100)}%</b></td></tr>`).join('') + `</table>`
+        : '<div class="empty-state">平时在任意输入框双击右 Option 使用几次后，这里就会呈现你的常用卡片。</div>';
+
+      const demotes = (prop.demote_to_l3 || []).map(p => `<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;background:var(--surface-2);border-radius:10px;margin-bottom:8px"><div><strong style="font-size:13px">${esc(p.title)}</strong><div style="font-size:12px;color:var(--muted)">经常弹出但很少用到，可以先放回备用库</div></div><button class="btn xs danger" onclick="applyShelfProposal('${esc(p.id)}','off_shelf')">移至备用库</button></div>`).join('');
+      const promotes = (prop.promote_to_l4 || []).map(p => `<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;background:var(--surface-2);border-radius:10px;margin-bottom:8px"><div><strong style="font-size:13px">${esc(p.title)}</strong><div style="font-size:12px;color:var(--muted)">贴合你最近的需求，建议直接启用</div></div><button class="btn xs primary" onclick="applyShelfProposal('${esc(p.id)}','on_shelf')">立即启用</button></div>`).join('');
+      document.getElementById('evo-proposals').innerHTML = (demotes + promotes) || '<div class="empty-state">✨ 你的卡片库当前非常清爽健康，暂无需要调整的项目。</div>';
+
+      document.getElementById('evo-custom-list').innerHTML = ana.custom_intent_logs.length ? ana.custom_intent_logs.map(c => `
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;background:var(--surface-2);border-radius:10px;margin-bottom:8px">
+          <div><strong style="font-size:13px">${esc(c.custom_intent)}</strong><div style="font-size:12px;color:var(--muted)">来自 ${esc(c.app_name)} · 原话：${esc(c.input_text)}</div></div>
+          <button class="btn xs primary" onclick="frictionToDraft(${esc(JSON.stringify(c.custom_intent))}, ${esc(JSON.stringify(c.input_text))})">一键做成卡片</button>
+        </div>`).join('') : '<div class="empty-state">暂无手动自定义记录。</div>';
+    }
+    window.applyShelfProposal = async (id, shelf) => {
+      try {
+        await api('api/overlays/' + encodeURIComponent(id), { method: 'PUT', body: JSON.stringify({ shelf }) });
+        markPending(true);
+        toast('已调整卡片状态，点击左侧「应用更改」生效');
+        loadEvolution(); loadOverview();
+      } catch (e) { toast('操作失败：' + e.message); }
+    };
+    window.frictionToDraft = async (custom_intent, sample_input) => {
+      try {
+        await api('api/evolution/friction-to-draft', { method: 'POST', body: JSON.stringify({ custom_intent, sample_input }) });
+        toast('已开始为你制作这张新卡片，可在「制作新卡片」页查看进度');
+      } catch (e) { toast('启动失败：' + e.message); }
+    };
+
+    // ==================== DEV TOOLS ====================
+    async function runRecallInspector() {
+      const q = document.getElementById('ri-query').value.trim();
+      if (!q) return toast('请输入要诊断的查询语句');
+      const app = document.getElementById('ri-app').value;
+      state.lastRiQuery = q;
+      try {
+        const d = await api('api/inspect-recall', { method: 'POST', body: JSON.stringify({ query: q, app_name: app, top_k: 20 }) });
+        document.getElementById('ri-panel').style.display = 'block';
+        const bp = d.breakthrough_policy || {};
+        document.getElementById('ri-meta').innerHTML = `剥离修饰词后: <b>${esc(d.cleaned_query)}</b> · 引擎: <b>${d.reranker_active ? 'BM25 + bge-m3 + MPS bge-reranker-v2-m3' : 'bge-m3 降级'}</b> · L3 穿透门控: cos≥${esc(bp.min_cosine ?? 0.45)}, logit≥${esc(bp.min_rerank_logit ?? -1.0)}, ΔTop1≥+${esc(bp.margin_over_top1 ?? 1.5)}`;
+
+        const top3 = d.would_show_top3 || [];
+        document.getElementById('ri-top3').innerHTML = top3.length ? (
+          `<div style="font-size:12px;color:var(--muted);margin-bottom:6px">线上浮窗实际返回的 Top-3：</div><div class="popup-results" style="margin-top:0">` +
+          top3.map((c, i) => `<div class="popup-card"><div><strong>#${i + 1} ${esc(c.title)}</strong> <span class="pill prim">${esc(primLabel(c.primitive || c.dimension))}</span>${c.is_l3_breakthrough ? ' <span class="pill purple">L3 穿透</span>' : ''}<div style="font-size:12px;color:var(--muted);margin-top:5px">score: ${esc(c.score)} · ${esc(c.preview)}</div></div></div>`).join('') + `</div>`
+        ) : '';
+
+        const rows = d.ranked_all || [];
+        document.getElementById('ri-table').innerHTML = rows.length ? `<table><tr><th>#</th><th>卡片</th><th>状态</th><th>精排分</th><th>向量</th><th>穿透判定</th><th>校准</th></tr>` + rows.map(r => {
+          let btHtml = '<span class="pill">L4</span>';
+          if (r.breakthrough_status === 'triggered') btHtml = '<span class="pill purple">✓ L3 穿透</span>';
+          else if (r.breakthrough_status === 'blocked_orthogonal') btHtml = '<span class="pill amber">被正交拦截</span>';
+          else if (r.breakthrough_status === 'eligible_gap') btHtml = `<span class="pill amber">差 +${esc(Math.min(r.breakthrough_gap_top1 ?? 99, r.breakthrough_gap_top3 ?? 99))}</span>`;
+          else if (r.breakthrough_status === 'manual_excluded') btHtml = '<span class="pill red">人工下架</span>';
+          else if (r.breakthrough_status === 'below_floor') btHtml = '<span class="pill">低于底线</span>';
+          const isOff = r.shelf === 'off_shelf';
+          return `<tr style="${r.in_live_top3 ? 'background:var(--accent-soft)' : ''}">
+            <td><b>#${r.rank}</b>${r.in_live_top3 ? ' ⭐' : ''}</td>
+            <td><b style="cursor:pointer" onclick="openLensById('${esc(r.id)}')">${esc(r.title)}</b> <span class="pill prim">${esc(primLabel(r.primitive))}</span><div style="color:var(--muted);font-size:11.5px">${esc(r.tagline)}</div></td>
+            <td><span class="pill ${isOff ? '' : 'green'}">${esc(r.tier)} · ${esc(SHELF_LABELS[r.shelf]?.text || r.shelf)}</span></td>
+            <td><b>${r.rerank_logit !== null ? esc(r.rerank_logit) : '-'}</b></td>
+            <td>${esc(r.cosine)}</td>
+            <td>${btHtml}</td>
+            <td style="white-space:nowrap">
+              <button class="btn xs soft" onclick="calibrateBindTrigger('${esc(r.id)}')">+绑口语</button>
+              <button class="btn xs ${isOff ? 'primary' : 'danger'}" onclick="calibrateShelf('${esc(r.id)}','${isOff ? 'on_shelf' : 'off_shelf'}')">${isOff ? '启用' : '放备用'}</button>
+            </td>
+          </tr>`;
+        }).join('') + `</table>` : '<div class="empty-state">无匹配结果</div>';
+      } catch (e) { toast('诊断失败：' + e.message); }
+    }
+    document.getElementById('btn-ri-run').onclick = runRecallInspector;
+    document.getElementById('ri-query').addEventListener('keydown', e => { if (e.key === 'Enter') runRecallInspector(); });
+
+    window.calibrateBindTrigger = async id => {
+      if (!state.lastRiQuery) return;
+      try {
+        await api(`api/overlays/${encodeURIComponent(id)}/add-trigger`, { method: 'POST', body: JSON.stringify({ utterance: state.lastRiQuery }) });
+        markPending(true);
+        toast(`已绑定口语「${state.lastRiQuery.slice(0, 18)}」，点击左侧「应用更改」生效`);
+        await loadOverview();
+      } catch (e) { toast('绑定失败：' + e.message); }
+    };
+    window.calibrateShelf = async (id, shelf) => {
+      try {
+        await api(`api/overlays/${encodeURIComponent(id)}`, { method: 'PUT', body: JSON.stringify({ shelf }) });
+        markPending(true);
+        toast('已调整卡片状态，点击左侧「应用更改」生效');
+        await refreshAll();
+      } catch (e) { toast('操作失败：' + e.message); }
+    };
+    document.getElementById('btn-gap-save').onclick = async () => {
+      const q = state.lastRiQuery || document.getElementById('ri-query').value.trim();
+      if (!q) return;
+      try { await api('api/gaps', { method: 'POST', body: JSON.stringify({ query: q }) }); toast('已记入灵感缺口清单'); }
+      catch (e) { toast(e.message); }
+    };
+    document.getElementById('btn-gap-ai').onclick = async () => {
+      const q = state.lastRiQuery || document.getElementById('ri-query').value.trim();
+      if (!q) return;
+      try {
+        await api('api/gaps', { method: 'POST', body: JSON.stringify({ query: q, note: '已触发 AI 制作' }) });
+        await api('api/evolution/friction-to-draft', { method: 'POST', body: JSON.stringify({ custom_intent: q, sample_input: q }) });
+        toast('已启动缺口 AI 制作任务');
+      } catch (e) { toast(e.message); }
+    };
+    document.getElementById('btn-gap-manual').onclick = () => {
+      const q = state.lastRiQuery || document.getElementById('ri-query').value.trim();
+      switchView('create');
+      document.getElementById('mm-triggers').value = q;
+      document.getElementById('mm-pain').value = q;
+    };
+
+    // Dev Eval / Search / ATLAS / Quarantine
     document.getElementById('btn-search').onclick = async () => {
       const q = document.getElementById('sb-query').value.trim(); if (!q) return;
       try {
         const d = await api('api/search', { method: 'POST', body: JSON.stringify({ query: q, primitive: document.getElementById('sb-primitive').value || null, top_k: 6 }) });
         document.getElementById('sb-mode').textContent = `引擎: ${d.mode} · 返回 ${d.results.length} 条`;
-        document.getElementById('sb-results').innerHTML = d.results.map(r => lensCardHtml(r.lens, r.score, false)).join('');
-      } catch (e) { toast('召回测试失败: ' + e.message); }
+        document.getElementById('sb-results').innerHTML = d.results.map(r => `
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:var(--surface-2);border-radius:8px;cursor:pointer" onclick="openLensById('${esc(r.lens.id)}')">
+            <div><strong>${esc(r.lens.title)}</strong> <span class="pill prim">${esc(primLabel(r.lens.routing.primitive))}</span></div>
+            <span class="pill green">sim ${Number(r.score).toFixed(3)}</span>
+          </div>`).join('');
+      } catch (e) { toast('召回测试失败：' + e.message); }
     };
     document.getElementById('btn-run-eval').onclick = async () => {
       const out = document.getElementById('eval-output');
       try {
         const res = await api('api/eval/run', { method: 'POST' });
-        out.textContent = `评测任务已启动 (${res.job.id})，请稍候约 8 秒...`;
+        out.textContent = `评测任务已启动 (${res.job.id})，请稍候…`;
         const timer = setInterval(async () => {
           try {
             const jlist = await api('api/jobs');
@@ -1028,15 +2264,37 @@
               clearInterval(timer);
               out.textContent = job.status === 'done' ? JSON.stringify(job.result, null, 2) : '评测失败: ' + job.error;
             }
-          } catch (err) {
-            clearInterval(timer);
-            out.textContent = '轮询任务状态失败: ' + err.message;
-          }
+          } catch (err) { clearInterval(timer); out.textContent = '轮询失败: ' + err.message; }
         }, 2000);
       } catch (e) { out.textContent = '启动失败: ' + e.message; }
     };
+    document.getElementById('btn-atlas-search').onclick = async () => {
+      try {
+        const q = document.getElementById('atlas-q').value;
+        const d = await api('api/forge/atlas-search?q=' + encodeURIComponent(q));
+        state.atlasOffsets.clear();
+        document.getElementById('atlas-results').innerHTML = d.items.length ? `<table><tr><th>选</th><th>标题</th><th>仓库</th><th>摘要</th></tr>` + d.items.map(it => `
+          <tr><td><input type="checkbox" onchange="if(this.checked)state.atlasOffsets.add(${it.offset});else state.atlasOffsets.delete(${it.offset})" /></td>
+          <td><b>${esc(it.title)}</b></td><td>${esc(it.repository)}</td><td style="color:var(--muted)">${esc(it.summary)}</td></tr>`).join('') + `</table>` : '<div class="empty-state">无匹配结果</div>';
+      } catch (e) { toast('搜索失败：' + e.message); }
+    };
+    document.getElementById('btn-atlas-import').onclick = async () => {
+      if (!state.atlasOffsets.size) return toast('请先勾选条目');
+      try {
+        await api('api/forge/atlas-import', { method: 'POST', body: JSON.stringify({ offsets: Array.from(state.atlasOffsets) }) });
+        toast(`已启动导入 ${state.atlasOffsets.size} 条素材`);
+        loadJobs();
+      } catch (e) { toast('导入失败：' + e.message); }
+    };
+    async function loadQuarantine() {
+      try {
+        const d = await api('api/quarantine');
+        const items = [...(d.l2_quarantined || []).map(x => `[L2/L3] ${x.id} (${x.source}): ${(x.reasons || []).join('; ')}`), ...(d.l0_rejected || []).map(x => `[L0拒收] ${x.title || x.id}: ${(x.reasons || []).join('; ')}`)];
+        document.getElementById('q-summary').innerHTML = items.length ? items.map(t => `<div style="padding:8px 10px;background:var(--surface-2);border-radius:8px;margin-bottom:6px;font-size:12px">${esc(t)}</div>`).join('') : '<div class="empty-state">暂无隔离记录</div>';
+      } catch {}
+    }
 
-    // Policy & Logs
+    // Dev Config & Logs
     async function loadConfig() {
       const name = document.getElementById('cfg-select').value;
       const d = await api('api/config/' + name);
@@ -1047,39 +2305,50 @@
       const name = document.getElementById('cfg-select').value;
       try {
         await api('api/config/' + name, { method: 'PUT', body: JSON.stringify({ yaml_text: document.getElementById('cfg-editor').value }) });
+        markPending(true);
         toast(`${name}.yaml 已保存`);
-      } catch (e) { toast('保存失败: ' + e.message); }
+      } catch (e) { toast('保存失败：' + e.message); }
     };
     async function loadRecentLogs() {
       const ana = await api('api/evolution/analytics?days=30');
-      document.getElementById('recent-logs-box').innerHTML = ana.recent_logs.length ? `<table><tr><th>时间</th><th>App</th><th>脱敏输入</th><th>选中</th><th>耗时</th></tr>` + ana.recent_logs.map(r => `<tr><td>${esc((r.timestamp||'').slice(5,16))}</td><td>${esc(r.app_name)}</td><td>${esc((r.input_text||'').slice(0,40))}</td><td>${esc(r.selected_id||'Esc')}</td><td>${esc(r.latency_ms||'-')}ms</td></tr>`).join('') + `</table>` : '<div style="font-size:12px;color:var(--muted)">暂无日志</div>';
+      document.getElementById('recent-logs-box').innerHTML = ana.recent_logs.length
+        ? `<table><tr><th>时间</th><th>App</th><th>脱敏输入</th><th>选中</th><th>耗时</th></tr>` + ana.recent_logs.map(r => `<tr><td>${esc((r.timestamp || '').slice(5, 16))}</td><td>${esc(r.app_name)}</td><td>${esc((r.input_text || '').slice(0, 40))}</td><td>${esc(r.selected_id || 'Esc')}</td><td>${esc(r.latency_ms || '-')}ms</td></tr>`).join('') + `</table>`
+        : '<div class="empty-state">暂无日志记录</div>';
     }
 
-    // Header actions
-    document.getElementById('btn-build').onclick = async () => {
-      const btn = document.getElementById('btn-build'); btn.disabled = true; btn.textContent = '清洗发布中...';
+    // Apply Changes / Build / Rollback
+    async function runApplyBuild(btn) {
+      const orig = btn.textContent;
+      btn.disabled = true; btn.textContent = '正在更新卡片库…';
       try {
         const r = await api('api/build', { method: 'POST' });
-        toast(`发布成功: ${r.manifest.version} (L4=${r.manifest.total_active_lenses}, L3=${r.manifest.total_l3_inventory})`);
+        markPending(false);
+        toast(`卡片库已更新！当前已启用 ${r.manifest.total_active_lenses} 张卡片`);
         await refreshAll();
-      } catch (e) { toast('发布失败: ' + e.message); }
-      finally { btn.disabled = false; btn.textContent = 'L2→L3→L4 清洗发布'; }
-    };
+      } catch (e) { toast('更新失败：' + e.message); }
+      finally { btn.disabled = false; btn.textContent = orig; }
+    }
+    document.getElementById('btn-apply-changes').onclick = e => runApplyBuild(e.currentTarget);
+    document.getElementById('btn-sync-quick').onclick = e => runApplyBuild(e.currentTarget);
+    document.getElementById('btn-build-dev').onclick = e => runApplyBuild(e.currentTarget);
     document.getElementById('btn-rollback').onclick = async () => {
       try { const r = await api('api/rollback', { method: 'POST', body: '{}' }); toast('已回滚至 ' + r.active_version); await refreshAll(); }
       catch (e) { toast(e.message); }
     };
 
+    // Live Search Debounce
     let _qTimer = null;
-    document.getElementById('f-q').addEventListener('input', () => {
-      clearTimeout(_qTimer);
-      _qTimer = setTimeout(loadLenses, 180);
-    });
-    ['f-tier','f-primitive','f-source'].forEach(id => {
-      document.getElementById(id).addEventListener('change', loadLenses);
-    });
-    async function refreshAll() { await loadOverview(); await loadLenses(); }
-    document.getElementById('btn-refresh').onclick = refreshAll;
+    document.getElementById('f-q').addEventListener('input', () => { clearTimeout(_qTimer); _qTimer = setTimeout(loadLenses, 180); });
+    document.getElementById('f-primitive').addEventListener('change', loadLenses);
+
+    async function refreshAll() {
+      await loadOverview();
+      if (document.getElementById('view-library').classList.contains('active')) await loadLenses();
+    }
+
+    // Boot
+    applyTheme(state.theme);
+    applyDevMode(state.devMode);
     refreshAll();
   </script>
 </body>

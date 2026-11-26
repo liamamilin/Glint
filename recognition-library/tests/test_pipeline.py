@@ -324,7 +324,7 @@ def test_admin_api_smoke() -> None:
     client = TestClient(create_admin_app())
     r_index = client.get("/")
     assert r_index.status_code == 200
-    assert "Glint 管理台" in r_index.text
+    assert "Glint 微光" in r_index.text
 
     r_ov = client.get("/api/overview")
     assert r_ov.status_code == 200
