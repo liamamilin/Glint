@@ -1,0 +1,61 @@
+id: manual_domain_cognitive_expansion
+title: 领域认知空间展开
+tagline: 说不出怎么改？把该领域的专业维度、通俗概念与可选改造方向一次摊开
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  - evaluate
+  - create
+  clarity_fit:
+  - vague
+  - conflicted
+  domains:
+  - design
+  - web
+  - product
+  - writing
+  - general
+  app_affinity:
+  - ChatGPT
+  - Claude
+  - Cursor
+  - Notion
+  - Obsidian
+  pain_point: 想优化或修改某个对象（如网页、界面、方案、文案、作品），总觉得差点意思或看着别扭，但缺乏该领域的专业词汇与框架，说不出具体该往哪改，需要先展开专业维度、通俗概念与可选改造路径再做决策
+  trigger_utterances:
+  - 总觉得差点意思，说不上来哪不对
+  - 我想改一下这个网页，但说不出来怎么改
+  - 这个页面看着不太舒服，不知道怎么调
+  - 感觉太糙了，不知道从哪下手改
+  - 想升级一下效果，先给我展开看看有哪些改法
+  - 我缺乏这方面的专业词，不知道怎么描述想要的改动
+  - 帮我看看这个东西有哪些可以改进的地方
+  - 看着有点别扭，不知道怎么改更好
+  - 想改得高级一点，但描述不出来
+  - 觉得还能更好，但不知道还能改什么
+  - 想优化一下，但脑子里没词
+  - 不知道从哪几个维度下手改，先展开选择空间
+  anti_triggers:
+  - 用户已经给出明确具体的修改指令，只需要直接执行改动
+  - 单纯查询某个已知概念的百科定义，无优化或决策意图
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 请先不要急着直接动手修改，帮我把这件事对应的「领域认知空间」完整展开，建立共同语言后再由我做选择。请按以下 5 步输出：1）意图与对象锚定：用 1–2 句话确认我当前关注的对象是什么、想促成怎样的体验或效果变化（若有隐含目标一并点出）；2）专业认知空间展开：按 3–5 个互不重叠的核心专业维度，系统列出该领域真正用来调校质量的维度、关键概念与常用方法（每个维度下给 2–3 个具象抓手，拒绝空泛大词）；3）通俗概念译解：用大白话讲清上述每个关键抓手「是什么意思」「动了它之后直觉体感会有什么变化」「适合什么情况 / 什么时候别乱动」；4）条件化映射（严禁脑补）：若我已提供具体现状（如代码、截图、文案或细节），请仅基于可见事实标出当前最值得优先动的 2–3 个高杠杆点；若当前信息不足，不要臆测我的现状有问题，而是给出一套「自检判断标尺」（例如：如果你觉得 X 感太重，优先看维度 A；如果觉得缺乏 Y，优先看维度 B）；5）可选改造路线与取舍：组合出 3–4 条风格或力度不同的行动路线，每条写明「改动方向」「预期效果」「投入成本与取舍」。最后只需问我一句：想先选哪条路线或哪 1–2 个维度深入，或是否补充现状让我直接落地。
+  variables: []
+  workflow: null
+meta:
+  source: manual-custom
+  source_ref: manual#manual_domain_cognitive_expansion
+  source_hash: 8d2f4e9b6c1a73e5b0f4d2c8a1e9f3b7c5a0d8e2f6b4a1c9e7d3f5a2b8c4e601
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  category: general
+  subcategory: problem_solving
+  collections: []
+  base_weight: 1.15
+  confidence: 1.0
+  version: 1
