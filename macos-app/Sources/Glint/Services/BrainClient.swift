@@ -8,8 +8,8 @@ final class BrainClient: Sendable {
     init(baseURL: URL = URL(string: "http://127.0.0.1:18765")!) {
         self.baseURL = baseURL
         let config = URLSessionConfiguration.ephemeral
-        config.timeoutIntervalForRequest = 6.0
-        config.timeoutIntervalForResource = 10.0
+        config.timeoutIntervalForRequest = 12.0
+        config.timeoutIntervalForResource = 20.0
         self.session = URLSession(configuration: config)
     }
 
@@ -24,8 +24,12 @@ final class BrainClient: Sendable {
         do {
             return try await routeOnce(inputText: inputText, appName: appName)
         } catch {
-            // Silent single retry (200ms) absorbs launchd startup / brief loopback hiccups.
-            try? await Task.sleep(nanoseconds: 200_000_000)
+            // Never retry a cancelled task.
+            if Task.isCancelled || error is CancellationError || (error as? URLError)?.code == .cancelled {
+                throw error
+            }
+            // Silent single retry (250ms) absorbs launchd startup / brief loopback hiccups.
+            try await Task.sleep(nanoseconds: 250_000_000)
             return try await routeOnce(inputText: inputText, appName: appName)
         }
     }

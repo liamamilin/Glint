@@ -43,6 +43,7 @@ final class GlintCoordinator: ObservableObject {
     private var isPopupVisible: Bool = false
     private var isEditingCustomIntent: Bool = false
     private var inFlightTask: Task<Void, Never>?
+    private var routingGeneration: Int = 0
     private var permissionTimer: Timer?
     private var outsideClickMonitor: Any?
     private var appSwitchObserver: NSObjectProtocol?
@@ -204,8 +205,14 @@ final class GlintCoordinator: ObservableObject {
                 return
             }
 
+            self.routingGeneration += 1
+            let gen = self.routingGeneration
             self.isRouting = true
-            defer { self.isRouting = false }
+            defer {
+                if self.routingGeneration == gen {
+                    self.isRouting = false
+                }
+            }
 
             do {
                 let response = try await self.brainClient.route(
@@ -221,9 +228,18 @@ final class GlintCoordinator: ObservableObject {
                 self.lastStatusMessage = "已在 \(context.appName) 路由 \(response.cards.count) 张卡片 (\(Int(response.latency_ms))ms)"
                 self.showPopup()
             } catch {
-                self.backendSummary = "未连接 (localhost:18765)"
-                self.lastStatusMessage = "路由失败：请确认 brain-server 已启动 (\(error.localizedDescription))"
-                self.panel.presentToast(message: "brain-server 未启动 (18765)", symbol: "bolt.slash")
+                // Swallow task cancellation when the user re-triggers the hotkey mid-flight.
+                if Task.isCancelled || error is CancellationError || (error as? URLError)?.code == .cancelled {
+                    return
+                }
+                if (error as? URLError)?.code == .timedOut {
+                    self.lastStatusMessage = "本地模型响应超时，正在预热中，请再试一次"
+                    self.panel.presentToast(message: "本地模型正在预热，请再试一次", symbol: "hourglass")
+                } else {
+                    self.backendSummary = "未连接 (localhost:18765)"
+                    self.lastStatusMessage = "路由失败：请确认 brain-server 已启动 (\(error.localizedDescription))"
+                    self.panel.presentToast(message: "brain-server 未启动 (18765)", symbol: "bolt.slash")
+                }
                 NSLog("[Glint] Route failed: \(error.localizedDescription)")
             }
         }

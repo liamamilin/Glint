@@ -41,7 +41,12 @@ final class ContextReader {
             return .silentIgnore
         }
 
-        primeAccessibilityIfNeeded(for: pid)
+        let didPrime = primeAccessibilityIfNeeded(for: pid)
+        if didPrime {
+            // Give Chromium/Electron a short window to materialize its accessibility tree on first access.
+            try? await Task.sleep(nanoseconds: 85_000_000)
+            guard !Task.isCancelled else { return .silentIgnore }
+        }
         let focusedElement = focusedAXElement()
 
         // Privacy redline: never read from password or sensitive fields.
@@ -117,13 +122,27 @@ final class ContextReader {
 
         // Tier 2 / Tier 3b: Safe synthetic selection + copy fallback for Electron/web composers.
         if isConservative {
-            // Editors & browsers: ONLY select current paragraph (Cmd + Shift + Up), never Cmd + A.
+            // Editors & browsers: try current paragraph (Cmd + Shift + Up) first so multi-line
+            // paragraphs stay intact (and match TextInjector's .paragraph wrap), then fall back
+            // to current line (Cmd + Shift + Left) for single-line web inputs. Never Cmd + A.
             if let paragraph = await probeClipboardViaCopy(selectBeforeCopy: .currentParagraph),
                !paragraph.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 return .captured(CapturedContext(
                     appName: appName,
                     appPID: pid,
                     inputText: paragraph,
+                    captureScope: .paragraph,
+                    anchorRect: anchorRect,
+                    isEditable: isEditable
+                ))
+            }
+            guard !Task.isCancelled else { return .silentIgnore }
+            if let lineText = await probeClipboardViaCopy(selectBeforeCopy: .currentLine),
+               !lineText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                return .captured(CapturedContext(
+                    appName: appName,
+                    appPID: pid,
+                    inputText: lineText,
                     captureScope: .paragraph,
                     anchorRect: anchorRect,
                     isEditable: isEditable
@@ -192,11 +211,13 @@ final class ContextReader {
     // MARK: - Accessibility helpers
 
     /// Enables Chromium/Electron accessibility tree lazily once per process PID.
-    private func primeAccessibilityIfNeeded(for pid: pid_t) {
-        guard !primedAppPIDs.contains(pid) else { return }
+    @discardableResult
+    private func primeAccessibilityIfNeeded(for pid: pid_t) -> Bool {
+        guard !primedAppPIDs.contains(pid) else { return false }
         primedAppPIDs.insert(pid)
         let appElement = AXUIElementCreateApplication(pid)
-        AXUIElementSetAttributeValue(appElement, "AXManualAccessibility" as CFString, kCFBooleanTrue)
+        let status = AXUIElementSetAttributeValue(appElement, "AXManualAccessibility" as CFString, kCFBooleanTrue)
+        return status == .success
     }
 
     private func selectedRangeLength(of element: AXUIElement) -> Int? {
@@ -250,7 +271,20 @@ final class ContextReader {
                 let nsText = text as NSString
                 let clamped = min(max(cfRange.location, 0), nsText.length)
                 let paragraphRange = nsText.paragraphRange(for: NSRange(location: clamped, length: 0))
-                return nsText.substring(with: paragraphRange)
+                let currentPara = nsText.substring(with: paragraphRange)
+                if !currentPara.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                    return currentPara
+                }
+                // Caret is sitting on an empty trailing line: scan backward for the nearest non-empty paragraph.
+                var cursor = paragraphRange.location
+                while cursor > 0 {
+                    let prevRange = nsText.paragraphRange(for: NSRange(location: cursor - 1, length: 0))
+                    let prevPara = nsText.substring(with: prevRange)
+                    if !prevPara.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                        return prevPara
+                    }
+                    cursor = prevRange.location
+                }
             }
         }
         // Fallback: take last non-empty line/paragraph.
@@ -299,11 +333,13 @@ final class ContextReader {
     // MARK: - Clipboard fallback with full pasteboard preservation
 
     private enum SelectionShortcut {
+        case currentLine
         case currentParagraph
         case selectAll
     }
 
     private func probeClipboardViaCopy(selectBeforeCopy: SelectionShortcut?) async -> String? {
+        guard !Task.isCancelled else { return nil }
         let pasteboard = NSPasteboard.general
         let saved = PasteboardSnapshot.capture(from: pasteboard)
         let sentinelChangeCount = pasteboard.changeCount
@@ -313,26 +349,44 @@ final class ContextReader {
 
         if let shortcut = selectBeforeCopy {
             switch shortcut {
+            case .currentLine:
+                // Cmd + Shift + Left selects from caret to start of current line (works in single-line & multiline inputs)
+                postKey(virtualKey: 123, flags: [.maskCommand, .maskShift])
             case .currentParagraph:
-                // Cmd + Shift + Up selects from caret to start of current paragraph/line
+                // Cmd + Shift + Up selects from caret to start of current paragraph/block
                 postKey(virtualKey: 126, flags: [.maskCommand, .maskShift])
             case .selectAll:
                 // Cmd + A
                 postKey(virtualKey: 0, flags: .maskCommand)
             }
-            try? await Task.sleep(nanoseconds: 45_000_000)
+            try? await Task.sleep(nanoseconds: 55_000_000)
+            if Task.isCancelled {
+                if pasteboard.changeCount != sentinelChangeCount {
+                    PasteboardSnapshot.restore(saved, to: pasteboard)
+                }
+                return nil
+            }
         }
 
         // Cmd + C
         postKey(virtualKey: 8, flags: .maskCommand)
-        try? await Task.sleep(nanoseconds: 90_000_000)
 
-        let copied: String? = (pasteboard.changeCount != clearedChangeCount)
-            ? pasteboard.string(forType: .string)
-            : nil
+        // Poll pasteboard up to 220ms (fast native apps finish in ~20ms; busy Chrome/Electron webviews can take 120-200ms).
+        var copied: String?
+        let maxPolls = (selectBeforeCopy == nil) ? 6 : 11
+        for _ in 0..<maxPolls {
+            try? await Task.sleep(nanoseconds: 20_000_000)
+            if Task.isCancelled {
+                break
+            }
+            if pasteboard.changeCount != clearedChangeCount {
+                copied = pasteboard.string(forType: .string)
+                break
+            }
+        }
 
-        // Collapse temporary selection back to the right edge so we don't leave text highlighted.
-        if selectBeforeCopy != nil {
+        // Collapse temporary selection back to the right edge ONLY if text was actually selected & copied.
+        if selectBeforeCopy != nil && copied != nil && !Task.isCancelled {
             postKey(virtualKey: 124, flags: []) // Right arrow
             try? await Task.sleep(nanoseconds: 25_000_000)
         }
@@ -341,11 +395,13 @@ final class ContextReader {
         if pasteboard.changeCount != sentinelChangeCount {
             PasteboardSnapshot.restore(saved, to: pasteboard)
         }
-        return copied
+        return Task.isCancelled ? nil : copied
     }
 
     private func postKey(virtualKey: CGKeyCode, flags: CGEventFlags) {
-        let source = CGEventSource(stateID: .combinedSessionState)
+        // Use .privateState so residual Option/modifier flags from the Double-Right-Option hotkey
+        // NEVER leak into synthetic Cmd+C / Cmd+Shift+Left events (which would turn Cmd+C into Cmd+Opt+C!).
+        let source = CGEventSource(stateID: .privateState)
         guard let down = CGEvent(keyboardEventSource: source, virtualKey: virtualKey, keyDown: true),
               let up = CGEvent(keyboardEventSource: source, virtualKey: virtualKey, keyDown: false) else {
             return
