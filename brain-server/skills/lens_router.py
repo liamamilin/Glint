@@ -741,16 +741,34 @@ class LensRouterSkill(BaseSkill):
         rerank_scores: list[float],
         app_name: str,
     ) -> list[CardItem]:
-        """Rank candidates using Cross-Encoder score + evergreen universal bonus, enforcing 3 orthogonal primitives."""
+        """Rank candidates using Cross-Encoder score + evergreen universal bonus, enforcing 3 orthogonal primitives.
+
+        When the Cross-Encoder is in its low-confidence negative floor (e.g. short open-ended domain
+        goals like '我想要学习区块链' whose concrete noun is out-of-vocabulary), smoothly blend in
+        the normalized Stage 1 Hybrid (BM25 + bge-m3 RRF) score so lexical/semantic action intent
+        isn't drowned out by Cross-Encoder noise.
+        """
         app_lower = app_name.strip().lower()
+        max_ce = max(rerank_scores) if rerank_scores else 0.0
+        s1_vals = [float(s1) for s1, _ in candidates]
+        s1_min = min(s1_vals) if s1_vals else 0.0
+        s1_span = (max(s1_vals) - s1_min) if s1_vals else 0.0
+        # Smooth rescue weight: 0.0 when max_ce >= -2.5; ramps up to 4.5 when max_ce <= -5.5
+        low_conf_deficit = min(1.0, max(0.0, (-2.5 - max_ce) / 3.0))
+        hybrid_rescue_weight = 4.5 * low_conf_deficit
+
         final_scored: list[tuple[float, dict[str, Any]]] = []
-        for (_, lens), ce_score in zip(candidates, rerank_scores):
+        for (s1_score, lens), ce_score in zip(candidates, rerank_scores):
             routing = lens.get("routing", {})
             meta = lens.get("meta", {})
             score = float(ce_score)
-            # Evergreen universal shelf gets a gentle logit boost (+0.45) so vertical cards only win on clear semantic superiority
+            if hybrid_rescue_weight > 0.0 and s1_span > 1e-9:
+                s1_norm = (float(s1_score) - s1_min) / s1_span
+                score += hybrid_rescue_weight * s1_norm
+            # Evergreen universal shelf gets a gentle logit boost (+0.45), softened in deep low-confidence floor
+            # so unrelated evergreen cards (e.g. brainstorm) don't crowd out Stage-1 matched vertical cards.
             if meta.get("scope") == "universal" or meta.get("shelf") == "evergreen":
-                score += 0.45
+                score += 0.45 * (1.0 - 0.6 * low_conf_deficit)
             aff = [str(a).lower() for a in (routing.get("app_affinity") or [])]
             if app_lower and any(app_lower in a or a in app_lower for a in aff):
                 score += 0.15

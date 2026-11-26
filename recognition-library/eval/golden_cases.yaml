@@ -205,3 +205,11 @@ cases:
     input_text: "别只听对方说做完了，帮我把这份交付结果逐项对照验收标准判定是否满足关闭条件"
     expected_primitives: ["critique"]
     expected_ids: ["cle_m4_a_p11_task_completion", "cle_m4_a_p16_acceptance_criteria"]
+
+  # 11. Short open-ended domain learning goals (OOV topic noun + clear learning verb)
+  - id: learn_new_domain_blockchain
+    app_name: "Gemini"
+    input_text: "我想要学习区块链"
+    expected_primitives: ["deconstruct", "converge", "translate"]
+    expected_ids: ["pt_study_plan", "pt_choose_learning_resource", "disc_career_deliberate_skill_upgrade_sprint", "sit_os_02"]
+    forbidden_ids: ["pt_brainstorm", "disc_content_workflow_as_asset"]
