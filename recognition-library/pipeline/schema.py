@@ -163,6 +163,8 @@ class QuarantineRecord(BaseModel):
 class LensOverride(BaseModel):
     title: str | None = None
     tagline: str | None = None
+    pain_point: str | None = None
+    content: str | None = None
     status: Literal["active", "quarantine", "deprecated"] | None = None
     scope: Literal["universal", "domain_specific"] | None = None
     shelf: Literal["evergreen", "on_shelf", "off_shelf"] | None = None
@@ -175,6 +177,7 @@ class LensOverride(BaseModel):
     domains: list[str] | None = None
     app_affinity: list[str] | None = None
     add_trigger_utterances: list[str] | None = None
+    remove_trigger_utterances: list[str] | None = None
 
 
 class OverlayFile(BaseModel):

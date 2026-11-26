@@ -280,13 +280,14 @@ class _JobStore:
         self._lock = threading.Lock()
         self._jobs: dict[str, dict[str, Any]] = {}
 
-    def start(self, kind: str, label: str, fn: Any) -> dict[str, Any]:
+    def start(self, kind: str, label: str, fn: Any, *, initial_stage: str = "") -> dict[str, Any]:
         job_id = f"{kind}_{uuid.uuid4().hex[:8]}"
         rec = {
             "id": job_id,
             "kind": kind,
             "label": label,
             "status": "running",
+            "stage": initial_stage,
             "started_at": time.strftime("%H:%M:%S"),
             "finished_at": None,
             "result": None,
@@ -295,16 +296,26 @@ class _JobStore:
         with self._lock:
             self._jobs[job_id] = rec
 
+        def _set_stage(text: str) -> None:
+            with self._lock:
+                if job_id in self._jobs:
+                    self._jobs[job_id]["stage"] = text
+
         def _runner() -> None:
             try:
-                res = fn()
+                try:
+                    res = fn(_set_stage)
+                except TypeError:
+                    res = fn()
                 with self._lock:
                     self._jobs[job_id]["status"] = "done"
+                    self._jobs[job_id]["stage"] = ""
                     self._jobs[job_id]["result"] = res
                     self._jobs[job_id]["finished_at"] = time.strftime("%H:%M:%S")
             except Exception as exc:
                 with self._lock:
                     self._jobs[job_id]["status"] = "failed"
+                    self._jobs[job_id]["stage"] = ""
                     self._jobs[job_id]["error"] = str(exc)
                     self._jobs[job_id]["finished_at"] = time.strftime("%H:%M:%S")
 
@@ -314,6 +325,27 @@ class _JobStore:
     def list_all(self) -> list[dict[str, Any]]:
         with self._lock:
             return list(reversed(list(self._jobs.values())))[:30]
+
+
+def _is_personal_source(source: str) -> bool:
+    s = (source or "").strip().lower()
+    return s in {"manual-custom", "user-friction", "user-l0-forge"} or s.startswith("forge-")
+
+
+def _latest_source_mtime_ns() -> int:
+    latest = 0
+    for p in (OVERLAY_PATH, DEFAULT_SHELF_POLICY_PATH, DEFAULT_POLICY_PATH):
+        if p.exists():
+            latest = max(latest, p.stat().st_mtime_ns)
+    if L2_DIR.exists():
+        latest = max(latest, L2_DIR.stat().st_mtime_ns)
+        for p in L2_DIR.rglob("*"):
+            if p.is_dir() or p.suffix == ".yaml":
+                try:
+                    latest = max(latest, p.stat().st_mtime_ns)
+                except OSError:
+                    continue
+    return latest
 
 
 def create_admin_app(router_skill: Any = None) -> FastAPI:
@@ -370,8 +402,21 @@ def create_admin_app(router_skill: Any = None) -> FastAPI:
 
         current_manifest = None
         manifest_path = DIST_DIR / "current" / "manifest.json"
+        manifest_mtime_ns = 0
         if manifest_path.exists():
             current_manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            manifest_mtime_ns = manifest_path.stat().st_mtime_ns
+
+        personal_total = sum(
+            1 for lens in merged if lens.meta.status != "deprecated" and _is_personal_source(lens.meta.source)
+        )
+        l4_total = by_shelf["evergreen"] + by_shelf["on_shelf"]
+        live_l4_total = int(current_manifest.get("total_active_lenses", 0)) if current_manifest else 0
+        needs_rebuild = (
+            current_manifest is None
+            or live_l4_total != l4_total
+            or _latest_source_mtime_ns() > manifest_mtime_ns
+        )
 
         releases_dir = DIST_DIR / "releases"
         releases = (
@@ -397,7 +442,10 @@ def create_admin_app(router_skill: Any = None) -> FastAPI:
             },
             "l1_counts": _count_l1_snapshots(),
             "l3_total": len(merged),
-            "l4_total": by_shelf["evergreen"] + by_shelf["on_shelf"],
+            "l4_total": l4_total,
+            "live_l4_total": live_l4_total,
+            "personal_total": personal_total,
+            "needs_rebuild": needs_rebuild,
             "by_shelf": dict(by_shelf),
             "by_tier": dict(by_tier),
             "by_category_l3": dict(by_category_l3),
@@ -448,6 +496,9 @@ def create_admin_app(router_skill: Any = None) -> FastAPI:
             if shelf == "l4_all":
                 if lens.meta.status != "active" or lens.meta.shelf not in {"evergreen", "on_shelf"}:
                     continue
+            elif shelf == "personal":
+                if not _is_personal_source(lens.meta.source):
+                    continue
             elif shelf and lens.meta.shelf != shelf:
                 continue
             if tier and lens.meta.tier != tier:
@@ -477,6 +528,7 @@ def create_admin_app(router_skill: Any = None) -> FastAPI:
             row = lens.model_dump()
             row["has_override"] = ov is not None
             row["override"] = ov.model_dump(exclude_none=True) if ov is not None else {}
+            row["is_personal"] = _is_personal_source(lens.meta.source)
             items.append(row)
 
         return {"total": len(items), "items": items}
@@ -525,10 +577,66 @@ def create_admin_app(router_skill: Any = None) -> FastAPI:
         if utt and utt not in existing:
             existing.append(utt)
         entry["add_trigger_utterances"] = existing
+        # If previously removed, un-remove it
+        if entry.get("remove_trigger_utterances"):
+            entry["remove_trigger_utterances"] = [t for t in entry["remove_trigger_utterances"] if t != utt]
+            if not entry["remove_trigger_utterances"]:
+                entry.pop("remove_trigger_utterances", None)
         raw_map[lens_id] = entry
         _save_overlay_file(OVERLAY_PATH, raw_map)
         lens_cache.clear()
         return {"ok": True, "lens_id": lens_id, "add_trigger_utterances": existing}
+
+    @app.post("/api/overlays/{lens_id}/remove-trigger")
+    def remove_trigger_overlay(lens_id: str, req: AddTriggerRequest) -> dict[str, Any]:
+        l2_map = load_existing_l2_lenses(L2_DIR)
+        if lens_id not in l2_map:
+            raise HTTPException(status_code=404, detail=f"Lens '{lens_id}' not found")
+        utt = req.utterance.strip()
+        overlay = load_overlay(OVERLAY_PATH)
+        raw_map = {k: v.model_dump(exclude_none=True) for k, v in overlay.overrides.items()}
+        entry = dict(raw_map.get(lens_id, {}))
+        added = list(entry.get("add_trigger_utterances") or [])
+        if utt in added:
+            added = [t for t in added if t != utt]
+            if added:
+                entry["add_trigger_utterances"] = added
+            else:
+                entry.pop("add_trigger_utterances", None)
+        base_trigs = list(l2_map[lens_id].routing.trigger_utterances)
+        if utt in base_trigs:
+            removed = list(entry.get("remove_trigger_utterances") or [])
+            if utt not in removed:
+                removed.append(utt)
+            entry["remove_trigger_utterances"] = removed
+        if entry:
+            raw_map[lens_id] = entry
+        else:
+            raw_map.pop(lens_id, None)
+        _save_overlay_file(OVERLAY_PATH, raw_map)
+        lens_cache.clear()
+        return {"ok": True, "lens_id": lens_id, "removed": utt}
+
+    @app.delete("/api/lenses/{lens_id}")
+    def delete_personal_lens(lens_id: str) -> dict[str, Any]:
+        l2_map = load_existing_l2_lenses(L2_DIR)
+        lens = l2_map.get(lens_id)
+        if lens is None:
+            raise HTTPException(status_code=404, detail=f"卡片 '{lens_id}' 不存在")
+        if not _is_personal_source(lens.meta.source):
+            raise HTTPException(status_code=400, detail="内置卡片不支持删除，请改为「放回备用库」")
+        removed_files = 0
+        for p in list(L2_DIR.rglob(f"{lens_id}.yaml")):
+            p.unlink(missing_ok=True)
+            removed_files += 1
+        # Also remove from overrides if present
+        overlay = load_overlay(OVERLAY_PATH)
+        raw_map = {k: v.model_dump(exclude_none=True) for k, v in overlay.overrides.items()}
+        if lens_id in raw_map:
+            raw_map.pop(lens_id, None)
+            _save_overlay_file(OVERLAY_PATH, raw_map)
+        lens_cache.clear()
+        return {"ok": True, "lens_id": lens_id, "removed_files": removed_files}
 
     @app.post("/api/inspect-recall")
     async def api_inspect_recall(req: InspectRecallRequest) -> dict[str, Any]:
@@ -586,9 +694,16 @@ def create_admin_app(router_skill: Any = None) -> FastAPI:
     @app.post("/api/gaps")
     def api_create_gap(req: CognitiveGapCreateRequest) -> dict[str, Any]:
         gaps = _load_gaps()
+        q_clean = req.query.strip()
+        for existing in gaps:
+            if existing.get("status") != "resolved" and str(existing.get("query") or "").strip() == q_clean:
+                if req.note.strip() and not existing.get("note"):
+                    existing["note"] = req.note.strip()
+                    _save_gaps(gaps)
+                return {"ok": True, "gap": existing, "deduplicated": True}
         gap = {
             "id": f"gap_{uuid.uuid4().hex[:8]}",
-            "query": req.query.strip(),
+            "query": q_clean,
             "note": req.note.strip(),
             "app_name": req.app_name,
             "status": "open",
@@ -736,9 +851,8 @@ def create_admin_app(router_skill: Any = None) -> FastAPI:
                     continue
         return {"l2_quarantined": l2_items, "l0_rejected": l0_items}
 
-    @app.post("/api/build")
-    def trigger_build() -> dict[str, Any]:
-        if not _BUILD_LOCK.acquire(blocking=False):
+    def _execute_build(*, blocking: bool = False) -> tuple[Path, Any]:
+        if not _BUILD_LOCK.acquire(blocking=blocking):
             raise HTTPException(status_code=409, detail="已有清洗发布任务正在进行中，请稍候…")
         try:
             policy = load_policy()
@@ -746,21 +860,28 @@ def create_admin_app(router_skill: Any = None) -> FastAPI:
             ollama_url = policy.get("models", {}).get("ollama_base_url", "http://127.0.0.1:11434")
             client = OllamaEmbedClient(model=embed_model, base_url=ollama_url)
             embedder = client if client.is_available() else None
-            try:
-                release_dir, manifest = build_release(
-                    l2_dir=L2_DIR,
-                    l3_dir=L3_DIR,
-                    overlay_path=OVERLAY_PATH,
-                    quarantine_dir=QUARANTINE_DIR,
-                    dist_dir=DIST_DIR,
-                    embedder=embedder,
-                )
-            except Exception as exc:
-                raise HTTPException(status_code=400, detail=str(exc)) from exc
+            release_dir, manifest = build_release(
+                l2_dir=L2_DIR,
+                l3_dir=L3_DIR,
+                overlay_path=OVERLAY_PATH,
+                quarantine_dir=QUARANTINE_DIR,
+                dist_dir=DIST_DIR,
+                embedder=embedder,
+            )
             lens_cache.clear()
-            return {"ok": True, "release_dir": str(release_dir), "manifest": manifest.model_dump()}
+            return release_dir, manifest
         finally:
             _BUILD_LOCK.release()
+
+    @app.post("/api/build")
+    def trigger_build() -> dict[str, Any]:
+        try:
+            release_dir, manifest = _execute_build(blocking=False)
+        except HTTPException:
+            raise
+        except Exception as exc:
+            raise HTTPException(status_code=400, detail=str(exc)) from exc
+        return {"ok": True, "release_dir": str(release_dir), "manifest": manifest.model_dump()}
 
     @app.post("/api/rollback")
     def trigger_rollback(req: RollbackRequest) -> dict[str, Any]:
@@ -768,6 +889,7 @@ def create_admin_app(router_skill: Any = None) -> FastAPI:
             chosen = rollback_release(DIST_DIR, target_version=req.version)
         except Exception as exc:
             raise HTTPException(status_code=400, detail=str(exc)) from exc
+        lens_cache.clear()
         return {"ok": True, "active_version": chosen}
 
     # =====================================================================
@@ -790,13 +912,41 @@ def create_admin_app(router_skill: Any = None) -> FastAPI:
 
     @app.post("/api/evolution/friction-to-draft")
     def api_friction_to_draft(req: FrictionDraftRequest) -> dict[str, Any]:
-        job = jobs.start(
-            "friction_draft",
-            f"摩擦转草稿: {req.custom_intent[:24]}",
-            lambda: synthesize_draft_from_friction(
+        def _run(set_stage: Any) -> dict[str, Any]:
+            set_stage("① AI 正在起草新卡片内容与触发口语（约 20–40 秒）…")
+            res = synthesize_draft_from_friction(
                 custom_intent=req.custom_intent,
                 sample_input=req.sample_input,
-            ),
+            )
+            lens_cache.clear()
+            compiled = int((res.get("summary") or {}).get("compiled", 0))
+            if compiled > 0:
+                set_stage("② 卡片已生成，正在自动同步索引使其立即可匹配（约 10–15 秒）…")
+                try:
+                    _, manifest = _execute_build(blocking=True)
+                    res["auto_synced"] = True
+                    res["total_active_lenses"] = manifest.total_active_lenses
+                except Exception as exc:
+                    res["auto_synced"] = False
+                    res["sync_error"] = str(exc)
+                # Auto-resolve matching open gaps so the gap list stays clean
+                q_match = req.custom_intent.strip()
+                gaps = _load_gaps()
+                changed = False
+                for g in gaps:
+                    if g.get("status") != "resolved" and str(g.get("query") or "").strip() == q_match:
+                        g["status"] = "resolved"
+                        g["note"] = f"已自动生成卡片（{res.get('material_id', '')}）"
+                        changed = True
+                if changed:
+                    _save_gaps(gaps)
+            return res
+
+        job = jobs.start(
+            "friction_draft",
+            f"AI 生成新卡片：{req.custom_intent[:24]}",
+            _run,
+            initial_stage="① AI 正在起草新卡片内容与触发口语（约 20–40 秒）…",
         )
         return {"ok": True, "job": job}
 
@@ -820,16 +970,36 @@ def create_admin_app(router_skill: Any = None) -> FastAPI:
 
     @app.post("/api/forge/l0-text")
     def api_forge_l0(req: L0IngestRequest) -> dict[str, Any]:
+        def _run(set_stage: Any) -> dict[str, Any]:
+            set_stage("① AI 正在从正文提炼思考卡片（约 20–45 秒）…")
+            res = ingest_l0_raw_text(title=req.title, raw_text=req.raw_text)
+            lens_cache.clear()
+            compiled = int((res.get("l2_summary") or res.get("summary") or {}).get("compiled", 0))
+            if res.get("stage") == "compiled_to_l2" and compiled > 0:
+                if res.get("item_id") and not res.get("material_id"):
+                    res["material_id"] = res["item_id"]
+                set_stage("② 提炼完成，正在自动同步索引使其立即可匹配（约 10–15 秒）…")
+                try:
+                    _, manifest = _execute_build(blocking=True)
+                    res["auto_synced"] = True
+                    res["total_active_lenses"] = manifest.total_active_lenses
+                except Exception as exc:
+                    res["auto_synced"] = False
+                    res["sync_error"] = str(exc)
+            return res
+
         job = jobs.start(
             "l0_ingest",
-            f"L0 投喂精炼: {req.title[:24]}",
-            lambda: ingest_l0_raw_text(title=req.title, raw_text=req.raw_text),
+            f"文章提炼卡片：{req.title[:24]}",
+            _run,
+            initial_stage="① AI 正在从正文提炼思考卡片（约 20–45 秒）…",
         )
         return {"ok": True, "job": job}
 
     @app.post("/api/forge/starter-pack")
     def api_forge_starter_pack(req: ForgePackRequest) -> dict[str, Any]:
-        def _run() -> dict[str, Any]:
+        def _run(set_stage: Any) -> dict[str, Any]:
+            set_stage("① AI 正在定制 7 张全视角入门卡片（约 1–2 分钟）…")
             res = forge_starter_domain_pack(
                 domain_name=req.domain_name,
                 pain_points=req.pain_points,
@@ -852,9 +1022,22 @@ def create_admin_app(router_skill: Any = None) -> FastAPI:
                 _save_yaml(DEFAULT_SHELF_POLICY_PATH, sp)
                 lens_cache.clear()
                 res["collection_id"] = cid
+                set_stage("② 7 张卡包已生成，正在自动同步索引使其立即可匹配（约 10–15 秒）…")
+                try:
+                    _, manifest = _execute_build(blocking=True)
+                    res["auto_synced"] = True
+                    res["total_active_lenses"] = manifest.total_active_lenses
+                except Exception as exc:
+                    res["auto_synced"] = False
+                    res["sync_error"] = str(exc)
             return res
 
-        job = jobs.start("forge_pack", f"Glint Forge 合成: {req.domain_name}", _run)
+        job = jobs.start(
+            "forge_pack",
+            f"生成 7 张专题卡包：{req.domain_name[:20]}",
+            _run,
+            initial_stage="① AI 正在定制 7 张全视角入门卡片（约 1–2 分钟）…",
+        )
         return {"ok": True, "job": job}
 
     @app.get("/api/forge/atlas-search")
@@ -863,10 +1046,27 @@ def create_admin_app(router_skill: Any = None) -> FastAPI:
 
     @app.post("/api/forge/atlas-import")
     def api_atlas_import(req: AtlasImportRequest) -> dict[str, Any]:
+        def _run(set_stage: Any) -> dict[str, Any]:
+            set_stage(f"① 正在精炼 {len(req.offsets)} 条 ATLAS 素材…")
+            res = import_atlas_offsets(req.offsets)
+            lens_cache.clear()
+            compiled = int((res.get("l2_summary") or {}).get("compiled", 0))
+            if compiled > 0:
+                set_stage("② 精炼完成，正在自动同步卡片库索引…")
+                try:
+                    _, manifest = _execute_build(blocking=True)
+                    res["auto_synced"] = True
+                    res["total_active_lenses"] = manifest.total_active_lenses
+                except Exception as exc:
+                    res["auto_synced"] = False
+                    res["sync_error"] = str(exc)
+            return res
+
         job = jobs.start(
             "atlas_import",
-            f"ATLAS 精选导入 ({len(req.offsets)} 条)",
-            lambda: import_atlas_offsets(req.offsets),
+            f"精选素材入库（{len(req.offsets)} 条）",
+            _run,
+            initial_stage=f"① 正在精炼 {len(req.offsets)} 条 ATLAS 素材…",
         )
         return {"ok": True, "job": job}
 

@@ -649,19 +649,325 @@
 
     .toast {
       position: fixed;
-      right: 24px;
+      left: 50%;
       bottom: 24px;
+      transform: translateX(-50%);
       background: var(--text);
       color: var(--surface);
-      padding: 11px 18px;
+      padding: 11px 20px;
       border-radius: 11px;
       font-size: 13px;
       font-weight: 500;
       box-shadow: var(--shadow-lg);
       display: none;
-      z-index: 80;
+      z-index: 95;
+      max-width: min(560px, 90vw);
+      text-align: center;
     }
-    .toast.show { display: block; animation: fadeIn 0.15s ease-out; }
+    .toast.show { display: block; animation: toastIn 0.16s ease-out; }
+    @keyframes toastIn { from { opacity: 0; transform: translate(-50%, 6px); } to { opacity: 1; transform: translate(-50%, 0); } }
+
+    /* Pure-CSS Tooltips */
+    [data-tip] { position: relative; }
+    [data-tip]::after {
+      content: attr(data-tip);
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 8px);
+      transform: translateX(-50%) translateY(3px);
+      background: var(--text);
+      color: var(--surface);
+      padding: 7px 11px;
+      border-radius: 8px;
+      font-size: 11.5px;
+      font-weight: 500;
+      line-height: 1.45;
+      width: max-content;
+      max-width: 240px;
+      white-space: normal;
+      text-align: left;
+      box-shadow: var(--shadow-lg);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.14s ease, transform 0.14s ease;
+      z-index: 120;
+    }
+    [data-tip]:hover::after {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    [data-tip-pos="right"]::after {
+      left: calc(100% + 10px);
+      bottom: 50%;
+      transform: translateY(50%) translateX(-3px);
+    }
+    [data-tip-pos="right"]:hover::after {
+      transform: translateY(50%) translateX(0);
+    }
+    [data-tip-pos="left"]::after {
+      left: auto;
+      right: 0;
+      transform: translateY(3px);
+    }
+    [data-tip-pos="left"]:hover::after {
+      transform: translateY(0);
+    }
+    .trig-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px 3px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text-2);
+      transition: all 0.12s;
+    }
+    .trig-pill:hover { border-color: var(--accent); color: var(--accent); }
+    .trig-pill .trig-txt { cursor: pointer; }
+    .trig-pill .trig-del {
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 13px;
+      line-height: 1;
+      padding: 0 2px;
+      border-radius: 4px;
+    }
+    .trig-pill .trig-del:hover { color: var(--red); background: var(--red-soft); }
+    .kbd-hint {
+      display: inline-block;
+      padding: 1px 5px;
+      border-radius: 5px;
+      border: 1px solid var(--border-strong);
+      background: var(--surface);
+      font-size: 10.5px;
+      font-family: ui-monospace, Menlo, monospace;
+      color: var(--muted);
+    }
+
+    /* Onboarding Guide Banner & Info Strips */
+    .guide-banner {
+      background: linear-gradient(135deg, var(--surface) 0%, var(--accent-soft) 100%);
+      border: 1px solid rgba(59, 108, 244, 0.22);
+      border-radius: 16px;
+      padding: 16px 20px;
+      margin-bottom: 18px;
+      box-shadow: var(--shadow-sm);
+    }
+    .guide-banner-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .guide-steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .guide-step {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      padding: 11px 13px;
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: var(--text-2);
+    }
+    .guide-step strong {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .guide-step .step-num {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 11.5px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .info-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 10px 14px;
+      border-radius: 11px;
+      font-size: 12.5px;
+      line-height: 1.5;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text-2);
+      margin-bottom: 14px;
+    }
+    .info-strip.green {
+      background: var(--green-soft);
+      border-color: rgba(22, 163, 74, 0.25);
+      color: var(--text);
+    }
+    .info-strip.accent {
+      background: var(--accent-soft);
+      border-color: rgba(59, 108, 244, 0.22);
+      color: var(--text);
+    }
+
+    /* Inline Teach Drawer on Home */
+    .inline-teach-box {
+      margin-top: 14px;
+      padding: 16px 18px;
+      border-radius: 14px;
+      background: var(--surface);
+      border: 1px solid rgba(59, 108, 244, 0.26);
+      box-shadow: var(--shadow-sm);
+      animation: fadeIn 0.16s ease-out;
+    }
+    .teach-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 14px;
+      margin-top: 12px;
+    }
+    .teach-col {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 13px 14px;
+    }
+    .teach-col h4 { margin: 0 0 4px; font-size: 13.5px; font-weight: 700; }
+    .teach-col p { margin: 0 0 10px; font-size: 12px; color: var(--muted); line-height: 1.45; }
+    .teach-results {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      max-height: 185px;
+      overflow-y: auto;
+      margin-top: 8px;
+    }
+    .teach-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 7px 10px;
+      border-radius: 9px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      font-size: 12.5px;
+    }
+
+    /* Global Live Task Dock */
+    .nav-badge.running {
+      background: var(--amber-soft);
+      color: var(--amber);
+      animation: pulseSoft 1.6s ease-in-out infinite;
+    }
+    @keyframes pulseSoft { 0%, 100% { opacity: 1; } 50% { opacity: 0.55; } }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .task-dock {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      width: min(390px, calc(100vw - 32px));
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      border-radius: 16px;
+      box-shadow: var(--shadow-lg);
+      z-index: 88;
+      display: none;
+      overflow: hidden;
+    }
+    .task-dock.show { display: block; animation: fadeIn 0.16s ease-out; }
+    .task-dock-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 11px 14px;
+      background: var(--surface-2);
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .task-dock-body {
+      max-height: 320px;
+      overflow-y: auto;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+    .task-dock.collapsed .task-dock-body { display: none; }
+    .task-item {
+      padding: 11px 12px;
+      border-radius: 11px;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      font-size: 12.5px;
+    }
+    .task-item.running { border-color: rgba(217, 119, 6, 0.35); background: var(--amber-soft); }
+    .task-item.done { border-color: rgba(22, 163, 74, 0.32); background: var(--green-soft); }
+    .task-item.failed { border-color: rgba(220, 38, 38, 0.32); background: var(--red-soft); }
+    .task-item-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .task-spinner {
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(217, 119, 6, 0.25);
+      border-top-color: var(--amber);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      flex-shrink: 0;
+    }
+    .task-meta {
+      font-size: 11.5px;
+      color: var(--text-2);
+      margin-top: 5px;
+      line-height: 1.45;
+    }
+    .task-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 9px;
+    }
+    .task-dock-launcher {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 86;
+      display: none;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      box-shadow: var(--shadow-md);
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+    }
+    .task-dock-launcher.show { display: inline-flex; }
 
     .empty-state {
       text-align: center;
@@ -672,7 +978,7 @@
 
     @media (max-width: 1120px) {
       .kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .seed-two-col { grid-template-columns: 1fr; }
+      .seed-two-col, .teach-grid, .guide-steps { grid-template-columns: 1fr; }
     }
     @media (max-width: 960px) {
       .app-shell { flex-direction: column; }
@@ -698,7 +1004,7 @@
       <button class="nav-btn active" data-view="home"><span class="left"><span class="ic">🏠</span>首页与试用</span></button>
       <button class="nav-btn" data-view="library"><span class="left"><span class="ic">🗂️</span>我的卡片库</span><span class="nav-badge" id="nav-active-cnt">-</span></button>
       <button class="nav-btn" data-view="seed"><span class="left"><span class="ic">🌱</span>桌面陪伴</span></button>
-      <button class="nav-btn" data-view="create"><span class="left"><span class="ic">✨</span>制作新卡片</span></button>
+      <button class="nav-btn" data-view="create"><span class="left"><span class="ic">✨</span>制作新卡片</span><span class="nav-badge running" id="nav-jobs-badge" style="display:none"></span></button>
       <button class="nav-btn" data-view="insights"><span class="left"><span class="ic">📊</span>使用回顾</span></button>
 
       <div class="dev-nav-group" id="dev-nav-group">
@@ -711,17 +1017,17 @@
       <div class="sidebar-spacer"></div>
 
       <div class="pending-box" id="pending-box">
-        <p>你有尚未生效的卡片调整，点击下方按钮即可同步到快捷键浮窗。</p>
-        <button class="btn primary sm" style="width:100%" id="btn-apply-changes">应用更改</button>
+        <p id="pending-msg">你有尚未同步的卡片调整，点击下方按钮（约 15 秒）即可更新到快捷键浮窗。</p>
+        <button class="btn primary sm" style="width:100%" id="btn-apply-changes">立即同步生效</button>
       </div>
 
       <div class="sidebar-footer">
-        <button class="btn sm" style="width:100%" id="btn-sync-quick">🔄 更新卡片库</button>
+        <button class="btn sm" style="width:100%" id="btn-sync-quick" data-tip="重新为所有卡片与自定义口语建立本机语义索引（约 15 秒），使最新增改同步到快捷键浮窗" data-tip-pos="right">🔄 更新卡片库</button>
         <label class="switch-row">
           <span>🌙 深色外观</span>
           <input type="checkbox" class="toggle" id="toggle-dark" />
         </label>
-        <label class="switch-row">
+        <label class="switch-row" data-tip="显示召回打分诊断、Golden Eval 回归评测、YAML 配置等进阶调试工具" data-tip-pos="right">
           <span>🛠️ 开发者模式</span>
           <input type="checkbox" class="toggle" id="toggle-dev" />
         </label>
@@ -738,7 +1044,32 @@
             <h1 class="page-title">欢迎回到 Glint</h1>
             <p class="page-sub">在任意输入框双击右 Option 即可唤起思考卡片，也可以先在这里试试看。</p>
           </div>
-          <div class="status-chip" id="home-status-chip"><span class="dot-green"></span>正在连接本地引擎…</div>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <button class="btn sm" id="btn-toggle-guide" data-tip="展开或收起 Glint 3 步使用说明">❔ 使用说明</button>
+            <div class="status-chip" id="home-status-chip"><span class="dot-green"></span>正在连接本地引擎…</div>
+          </div>
+        </div>
+
+        <!-- Dismissible 3-Step Onboarding Guide -->
+        <div class="guide-banner" id="home-guide-banner" style="display:none">
+          <div class="guide-banner-head">
+            <strong style="font-size:14px">💡 30 秒看懂怎么用好 Glint</strong>
+            <button class="btn xs" id="btn-dismiss-guide">我知道了，先收起</button>
+          </div>
+          <div class="guide-steps">
+            <div class="guide-step">
+              <strong><span class="step-num">1</span>随时随地唤起</strong>
+              在微信、备忘录、Cursor、ChatGPT 等任意输入框，连续轻按两下 <b>右 Option</b>，Glint 会即时给出 3 个不同视角的思考卡片。
+            </div>
+            <div class="guide-step">
+              <strong><span class="step-num">2</span>按需调校与造卡</strong>
+              不满意推荐？直接点「教 Glint 下次更准」绑上你的口语，或让 AI 现做一张新卡片（约 30 秒，右下角实时可见进度）。
+            </div>
+            <div class="guide-step">
+              <strong><span class="step-num">3</span>一键同步到浮窗</strong>
+              每次增改卡片或口语后，点左下角 <b>「🔄 更新卡片库」</b>（约 15 秒）即生效；「桌面陪伴」的节奏调整则是<b>立即生效</b>。
+            </div>
+          </div>
         </div>
 
         <!-- Hero Interactive Try-It -->
@@ -769,9 +1100,43 @@
           <div id="try-result-area" style="display:none">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px;flex-wrap:wrap;gap:8px">
               <span id="try-meta" style="font-size:12.5px;color:var(--muted)"></span>
-              <button class="btn xs soft" id="btn-try-teach">不满意？教 Glint 记住这句</button>
+              <button class="btn xs soft" id="btn-try-teach" data-tip="推荐不够贴切？在这里把这句话教给现有卡片，或让 AI 现做一张新卡" data-tip-pos="left">不太满意？教 Glint 下次更准</button>
             </div>
             <div class="popup-results" id="try-cards"></div>
+
+            <!-- Inline Friendly Teach Drawer (No forced Developer Mode!) -->
+            <div id="home-teach-drawer" class="inline-teach-box" style="display:none">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+                <div>
+                  <strong style="font-size:14px">🪄 教 Glint 记住「<span id="teach-query-label"></span>」</strong>
+                  <div style="font-size:12px;color:var(--muted);margin-top:2px">选一种最省事的方式，不需要懂任何参数：</div>
+                </div>
+                <button class="btn xs" id="btn-teach-close">收起</button>
+              </div>
+              <div class="teach-grid">
+                <div class="teach-col">
+                  <h4>方式 A · 教给库里已有的某张卡</h4>
+                  <p>搜一张你心目中应该弹出的卡片，点一下「+ 记住这句话」即可。</p>
+                  <div style="display:flex;gap:6px">
+                    <input type="text" id="teach-search-input" style="flex:1;padding:6px 10px;font-size:12.5px" placeholder="搜卡片名或关键词，例如：写作 / 拆解 / 选型…" />
+                    <button class="btn xs" id="btn-teach-search">搜索</button>
+                  </div>
+                  <div id="teach-search-results" class="teach-results"></div>
+                </div>
+                <div class="teach-col">
+                  <h4>方式 B · 库里还没有？现场做一张</h4>
+                  <p>如果这是个全新场景，可以让 AI 直接帮你起草一张专属思考卡片。</p>
+                  <div style="display:flex;flex-direction:column;gap:8px">
+                    <button class="btn sm primary" id="btn-teach-ai" data-tip="在后台调用本地模型自动生成一张完整卡片，约需 20–45 秒，右下角实时展示进度和查看入口">✨ 让 AI 现做一张（约 30 秒）</button>
+                    <button class="btn sm" id="btn-teach-manual" data-tip="跳转到「制作新卡片」手工表单，自动帮你预填这句话">✍️ 我想自己手写一张</button>
+                    <button class="btn sm" id="btn-teach-gap" data-tip="先放进「制作新卡片 → 待补充的灵感清单」，有空再做">📝 先记入灵感清单，稍后再做</button>
+                  </div>
+                  <div style="margin-top:10px;text-align:right">
+                    <button class="btn xs" style="border:none;background:transparent;color:var(--muted)" id="btn-teach-dev">想看底层打分细节？进入开发者诊断 →</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -808,17 +1173,18 @@
             <p class="page-sub">浏览、试用、启停或个性化你的每一张思考卡片。点击任意卡片可直接复制或教它你的口语。</p>
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
-            <button class="btn" id="btn-toggle-batch">批量整理</button>
-            <button class="btn primary" id="btn-open-manual">+ 新建我的卡片</button>
+            <button class="btn" id="btn-toggle-batch" data-tip="开启多选模式，一次性批量启用、放回备用库或加入专题卡包" data-tip-pos="left">批量整理</button>
+            <button class="btn primary" id="btn-open-manual" data-tip="自己写一张新卡，或粘贴文章 / 用 AI 生成新卡" data-tip-pos="left">+ 新建我的卡片</button>
           </div>
         </div>
 
         <!-- Search + Status Tabs -->
         <div class="card" style="padding:16px 18px;margin-bottom:14px">
           <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px">
-            <input type="search" id="f-q" style="flex:1;min-width:220px" placeholder="搜索卡片名称、适用场景、口语说法或指令正文…" />
+            <input type="search" id="f-q" style="flex:1;min-width:220px" placeholder="搜索卡片名称、适用场景、口语说法或指令正文… (⌘K)" />
             <select id="f-primitive"><option value="">全部思考方式</option></select>
-            <button class="btn sm" id="btn-domain-rules">⚙️ 场景自动启用规则</button>
+            <button class="btn sm" id="btn-clear-filters" style="display:none" onclick="resetLibraryFilters()">清空筛选</button>
+            <button class="btn sm" id="btn-domain-rules" data-tip="按工作/生活领域统一设定默认启用范围，不常用领域可仅保留核心常驻卡" data-tip-pos="left">⚙️ 场景自动启用规则</button>
             <span id="lens-count" style="font-size:12.5px;color:var(--muted)"></span>
           </div>
 
@@ -828,6 +1194,10 @@
 
           <div class="chip-row" id="cat-chip-row" style="margin-bottom:8px"></div>
           <div class="chip-row" id="col-chip-row" style="margin-bottom:0"></div>
+        </div>
+
+        <div class="info-strip">
+          <span>💡 <b>卡片状态说明</b>：<span class="pill green">核心常驻</span> 高频优先推荐 · <span class="pill prim">已启用</span> 日常按场景推荐 · <span class="pill">备用库</span> 平时不打扰，高度匹配时自动穿透。调整后点左下角 <b>「更新卡片库」</b> 同步生效。</span>
         </div>
 
         <!-- Collapsible Domain Rules Drawer -->
@@ -863,6 +1233,10 @@
             <p class="page-sub">在桌面角落以半透明小窗缓慢轮播，帮助你发现「平时想不到去搜」的好方法。</p>
           </div>
           <button class="btn" id="btn-seed-refresh">刷新预览</button>
+        </div>
+
+        <div class="info-strip green">
+          <span>✅ <b>即时生效</b>：本页的所有偏好调整（节奏预设、探索滑块、暂缓或恢复轮播）都会立即同步到桌面小窗，<b>无需</b>点击左下角「更新卡片库」。</span>
         </div>
 
         <div class="kpi-grid" id="seed-kpi-grid"></div>
@@ -972,6 +1346,10 @@
           </div>
         </div>
 
+        <div class="info-strip accent">
+          <span>🧭 <b>上线说明</b>：AI 提炼和生成卡包完成后会<b>自动重建索引并直接上线</b>（约 30–60 秒，右下角实时可见阶段与进度）；如果你是「自己写一张」手工建卡，保存后点左下角 <b>「更新卡片库」</b>（约 15 秒）即可同步到快捷键浮窗。</span>
+        </div>
+
         <div class="seg-bar" style="margin-bottom:18px" id="create-mode-bar">
           <button class="seg-btn active" data-cmode="manual">✍️ 自己写一张</button>
           <button class="seg-btn" data-cmode="article">📄 从文章 / 笔记提炼</button>
@@ -983,8 +1361,14 @@
           <div class="card-head">
             <div>
               <h3>✍️ 手工创建我的思考卡片</h3>
-              <p class="card-desc">写清楚「什么时候用」和「希望 AI 怎么帮我」，保存后点击左侧「更新卡片库」即可使用。</p>
+              <p class="card-desc">写清楚「什么时候用」和「希望 AI 怎么帮我」，也可以先套一个常用模板再改。</p>
             </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:14px">
+            <span style="font-size:12px;color:var(--muted)">快速套用模板：</span>
+            <button class="example-chip" type="button" onclick="applyManualTemplate('weekly')">📋 老板视角周报</button>
+            <button class="example-chip" type="button" onclick="applyManualTemplate('polite')">💬 委婉拒绝与沟通</button>
+            <button class="example-chip" type="button" onclick="applyManualTemplate('debug')">🔍 复杂问题拆解</button>
           </div>
           <div class="form-grid">
             <div class="form-field"><label>卡片标题 <span class="form-hint">（简短好记，建议 12 字以内）</span></label><input type="text" id="mm-title" placeholder="例如：周报提炼成老板视角" /></div>
@@ -997,8 +1381,9 @@
           <div class="form-field" style="margin-top:12px"><label>什么情况下需要这张卡？</label><input type="text" id="mm-pain" placeholder="例如：每周写周报总写成工作流水账，老板抓不到重点" /></div>
           <div class="form-field" style="margin-top:12px"><label>我通常会怎么说？ <span class="form-hint">（每行一句，写 2–4 句日常口语，Glint 会据此精准识别）</span></label><textarea id="mm-triggers" style="min-height:78px" placeholder="帮我改一下这份周报&#10;把这周做的事总结给老板看"></textarea></div>
           <div class="form-field" style="margin-top:12px"><label>希望 AI 执行的指令或清单正文</label><textarea id="mm-content" placeholder="请把我的工作记录重构成：1）本周最关键的 3 个结果；2）当前风险与阻塞；3）需要决策确认的事项。"></textarea></div>
-          <div style="margin-top:14px;display:flex;justify-content:flex-end">
-            <button class="btn primary" id="mm-save">保存这张卡片</button>
+          <div style="margin-top:14px;display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap">
+            <button class="btn" id="mm-save" data-tip="仅保存到草稿库，适合连续建多张卡后再统一同步" data-tip-pos="left">仅保存草稿</button>
+            <button class="btn primary" id="mm-save-sync" data-tip="保存后立即自动更新本地索引（约 15 秒），完成后马上就能搜到" data-tip-pos="left">保存并立即同步上线</button>
           </div>
         </div>
 
@@ -1012,7 +1397,8 @@
           </div>
           <div class="form-field"><label>材料标题</label><input type="text" id="l0-title" placeholder="例如：如何写好一份产品复盘报告" /></div>
           <div class="form-field" style="margin-top:12px"><label>粘贴正文内容</label><textarea id="l0-text" style="min-height:160px" placeholder="粘贴文章、笔记或操作手册正文…"></textarea></div>
-          <div style="margin-top:14px;display:flex;justify-content:flex-end">
+          <div style="margin-top:14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+            <span style="font-size:12px;color:var(--muted)">⏱️ 后台调用本地模型提炼，通常需要 20–45 秒，提交后可自由切换页面，右下角会实时提示完成。</span>
             <button class="btn primary" id="btn-l0-submit">开始 AI 提炼</button>
           </div>
         </div>
@@ -1031,7 +1417,8 @@
           </div>
           <div class="form-field" style="margin-top:12px"><label>你在这个领域最常遇到的困惑</label><input type="text" id="fg-pain" placeholder="例如：概念太多分不清真伪、不知道第一步从哪下手" /></div>
           <div class="form-field" style="margin-top:12px"><label>偏好的表达风格</label><input type="text" id="fg-style" value="简洁实战、说人话、直接给可执行下一步" /></div>
-          <div style="margin-top:14px;display:flex;justify-content:flex-end">
+          <div style="margin-top:14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+            <span style="font-size:12px;color:var(--muted)">⏱️ 一次生成 7 张卡片约需 1–2 分钟，右下角会实时跟踪进度，完成后可直接查看与启用。</span>
             <button class="btn primary" id="btn-fg-submit">一键生成 7 张卡包</button>
           </div>
         </div>
@@ -1042,7 +1429,11 @@
               <div><h3>💡 待补充的灵感清单</h3><p class="card-desc">平时发现搜不到理想卡片时记在这里，随时一键生成</p></div>
               <button class="btn sm" id="btn-gaps-refresh">刷新</button>
             </div>
-            <div id="gaps-list" style="max-height:260px;overflow-y:auto"></div>
+            <div style="display:flex;gap:6px;margin-bottom:10px">
+              <input type="text" id="gap-quick-input" style="flex:1;padding:6px 10px;font-size:12.5px" placeholder="随手记一条想做成的卡片场景，例如：面试复盘 / 旅游行李清单…" />
+              <button class="btn sm soft" id="btn-gap-quick-add">+ 记下来</button>
+            </div>
+            <div id="gaps-list" style="max-height:240px;overflow-y:auto"></div>
           </div>
           <div class="card">
             <div class="card-head">
@@ -1116,10 +1507,13 @@
             <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px">
               <div id="ri-meta" style="font-size:12px;color:var(--muted)"></div>
               <div style="display:flex;gap:6px;flex-wrap:wrap">
-                <button class="btn sm" id="btn-gap-save">记入认知缺口</button>
-                <button class="btn sm primary" id="btn-gap-ai">缺口一键 AI 锻造</button>
-                <button class="btn sm" id="btn-gap-manual">手工建卡(预填)</button>
+                <button class="btn sm" id="btn-gap-save" data-tip="仅将这句话记入「制作新卡片 → 待补充的灵感清单」，稍后再处理">记入认知缺口</button>
+                <button class="btn sm primary" id="btn-gap-ai" data-tip="调用本地模型为这句话自动生成 1 张新卡片（约 20–45 秒），右下角实时展示进度并可直接预览">✨ 缺口一键 AI 锻造</button>
+                <button class="btn sm" id="btn-gap-manual" data-tip="跳到手工建卡页面，并自动把这句话填入触发口语与痛点">手工建卡(预填)</button>
               </div>
+            </div>
+            <div class="info-strip" style="margin-bottom:12px;padding:8px 12px;font-size:12px">
+              <span>💡 <b>怎么校准？</b>如果下方列表里已有理想卡片，点该行右侧 <b>+绑口语</b> 或 <b>启用</b>；如果库里确实缺这类卡片，点上方 <b>✨ 缺口一键 AI 锻造</b>（右下角实时可见进度，完成后点「查看新卡片」→「更新卡片库」即可生效）。</span>
             </div>
             <div id="ri-top3" style="margin-bottom:14px"></div>
             <div id="ri-table" style="max-height:520px;overflow-y:auto"></div>
@@ -1227,7 +1621,7 @@
           <h2 id="m-title" style="margin:0;font-size:20px;font-weight:700"></h2>
           <div id="m-tagline" style="font-size:13.5px;color:var(--muted);margin-top:4px"></div>
         </div>
-        <button class="btn sm" id="m-close">关闭</button>
+        <button class="btn sm" id="m-close">关闭 <span class="kbd-hint">Esc</span></button>
       </div>
 
       <div id="m-tags" style="display:flex;flex-wrap:wrap;gap:6px;margin:12px 0"></div>
@@ -1244,23 +1638,30 @@
       </div>
 
       <div style="margin-bottom:14px">
-        <div style="font-size:12px;font-weight:600;color:var(--muted);margin-bottom:6px">🗣️ 你这样说时，Glint 会优先推荐它</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px">
+          <span style="font-size:12px;font-weight:600;color:var(--muted)">🗣️ 你这样说时，Glint 会优先推荐它</span>
+          <span style="font-size:11px;color:var(--muted)">点句子可立即试跑 · 点 × 可移除</span>
+        </div>
         <div id="m-triggers" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px"></div>
         <div style="display:flex;gap:8px">
-          <input type="text" id="m-add-trig-input" style="flex:1;font-size:12.5px;padding:6px 10px" placeholder="添加一句你自己的常用说法，教 Glint 下次记住它…" />
+          <input type="text" id="m-add-trig-input" style="flex:1;font-size:12.5px;padding:6px 10px" placeholder="添加一句你自己的常用说法，按回车即可记住…" />
           <button class="btn sm soft" id="m-add-trig-btn">+ 添加说法</button>
         </div>
       </div>
 
       <div style="margin-bottom:14px">
-        <div style="font-size:12px;font-weight:600;color:var(--muted);margin-bottom:6px">📝 卡片指令正文</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px">
+          <span style="font-size:12px;font-weight:600;color:var(--muted)">📝 卡片指令正文</span>
+          <button class="btn xs" id="m-edit-prompt-btn">✏️ 修改正文或标题</button>
+        </div>
         <div id="m-content" class="prompt-sheet"></div>
       </div>
 
       <details class="clean-details" id="m-custom-details">
-        <summary>⚙️ 自定义这张卡片的启用状态与偏好 <span>▾</span></summary>
+        <summary>⚙️ 自定义这张卡片的文案、指令与启用状态 <span>▾</span></summary>
         <div class="form-grid" style="margin-top:12px">
           <div class="form-field"><label>自定义名称（留空则用默认）</label><input type="text" id="ov-title" /></div>
+          <div class="form-field"><label>自定义一句话说明</label><input type="text" id="ov-tagline" /></div>
           <div class="form-field"><label>启用状态</label>
             <select id="ov-shelf">
               <option value="evergreen">核心常驻（优先推荐）</option>
@@ -1279,14 +1680,34 @@
           </div>
           <div class="form-field"><label>推荐倾向权重 (0.2~3.0)</label><input type="number" step="0.1" min="0.2" max="3" id="ov-weight" /></div>
         </div>
+        <div class="form-field" style="margin-top:10px"><label>自定义适用场景说明</label><input type="text" id="ov-pain" /></div>
+        <div class="form-field" style="margin-top:10px"><label>自定义卡片指令正文 <span class="form-hint">（可随时改写成最顺手的表达，不破坏原卡备份）</span></label><textarea id="ov-content" style="min-height:110px"></textarea></div>
         <div id="m-dev-id" style="display:none;font-size:11px;color:var(--muted);margin-top:10px;font-family:ui-monospace,Menlo,monospace"></div>
-        <div style="display:flex;gap:8px;margin-top:14px;justify-content:flex-end">
-          <button class="btn sm danger" id="ov-reset">恢复默认</button>
-          <button class="btn sm primary" id="ov-save">保存设置</button>
+        <div style="display:flex;gap:8px;margin-top:14px;justify-content:space-between;align-items:center;flex-wrap:wrap">
+          <button class="btn sm danger" id="ov-delete-personal" style="display:none">🗑️ 删除这张自建卡</button>
+          <div style="display:flex;gap:8px;margin-left:auto">
+            <button class="btn sm danger" id="ov-reset">恢复默认</button>
+            <button class="btn sm primary" id="ov-save">保存设置</button>
+          </div>
         </div>
       </details>
     </div>
   </div>
+
+  <!-- Global Live Task Dock -->
+  <div class="task-dock" id="task-dock" role="region" aria-label="后台任务进度">
+    <div class="task-dock-head">
+      <span id="task-dock-title">⏳ 后台任务进度</span>
+      <div style="display:flex;gap:5px;align-items:center">
+        <button class="btn xs" id="btn-dock-collapse">收起</button>
+        <button class="btn xs" id="btn-dock-close" title="隐藏进度面板">×</button>
+      </div>
+    </div>
+    <div class="task-dock-body" id="task-dock-body"></div>
+  </div>
+  <button class="task-dock-launcher" id="task-dock-launcher" data-tip="展开后台 AI 制作与索引更新进度">
+    <span id="task-launcher-text">📋 任务进度</span>
+  </button>
 
   <div class="toast" id="toast"></div>
 
@@ -1300,10 +1721,19 @@
       checkedIds: new Set(),
       atlasOffsets: new Set(),
       pendingChanges: false,
+      pendingCount: 0,
       devMode: localStorage.getItem('glint_dev_mode') === '1',
       theme: localStorage.getItem('glint_theme') || 'light',
       lastTryQuery: '',
       lastRiQuery: '',
+      jobs: [],
+      localBuild: null,
+      dockOpen: false,
+      dockCollapsed: false,
+      knownJobStatus: {},
+      jobSeenAt: {},
+      pollTimer: null,
+      tickTimer: null,
     };
 
     const SHELF_LABELS = {
@@ -1329,17 +1759,327 @@
     }
 
     let _toastTimer = null;
-    function toast(msg) {
+    function toast(msg, ms = 3600) {
       const el = document.getElementById('toast');
       el.textContent = msg;
       el.classList.add('show');
       clearTimeout(_toastTimer);
-      _toastTimer = setTimeout(() => el.classList.remove('show'), 3200);
+      _toastTimer = setTimeout(() => el.classList.remove('show'), ms);
     }
 
     function markPending(flag = true) {
-      state.pendingChanges = flag;
-      document.getElementById('pending-box').classList.toggle('show', flag);
+      if (flag) {
+        state.pendingChanges = true;
+        state.pendingCount += 1;
+      } else {
+        state.pendingChanges = false;
+        state.pendingCount = 0;
+      }
+      const box = document.getElementById('pending-box');
+      const msg = document.getElementById('pending-msg');
+      if (msg && state.pendingCount > 0) {
+        msg.textContent = `你有 ${state.pendingCount} 项卡片调整尚未同步，点击下方按钮（约 15 秒）即可同步到快捷键浮窗。`;
+      }
+      box.classList.toggle('show', state.pendingChanges);
+    }
+
+    function initGuideBanner() {
+      const dismissed = localStorage.getItem('glint_guide_dismissed') === '1';
+      document.getElementById('home-guide-banner').style.display = dismissed ? 'none' : 'block';
+    }
+    document.getElementById('btn-dismiss-guide').onclick = () => {
+      document.getElementById('home-guide-banner').style.display = 'none';
+      localStorage.setItem('glint_guide_dismissed', '1');
+    };
+    document.getElementById('btn-toggle-guide').onclick = () => {
+      const el = document.getElementById('home-guide-banner');
+      const next = el.style.display === 'none';
+      el.style.display = next ? 'block' : 'none';
+      localStorage.setItem('glint_guide_dismissed', next ? '0' : '1');
+    };
+
+    // ==================== GLOBAL LIVE TASK DOCK ====================
+    function parseJobTimeMs(iso, fallbackId) {
+      if (iso) {
+        const ms = Date.parse(iso);
+        if (!Number.isNaN(ms)) return ms;
+      }
+      return state.jobSeenAt[fallbackId] || Date.now();
+    }
+
+    function formatElapsed(sec) {
+      const s = Math.max(0, Math.floor(sec));
+      if (s < 60) return `${s} 秒`;
+      return `${Math.floor(s / 60)} 分 ${s % 60} 秒`;
+    }
+
+    function getJobPrimaryCardIds(job) {
+      const res = job?.result || {};
+      const ids = [];
+      if (typeof res.material_id === 'string' && res.material_id) ids.push(res.material_id);
+      if (res.stage === 'compiled_to_l2' && typeof res.item_id === 'string' && res.item_id && !ids.includes(res.item_id)) {
+        const l2c = Number((res.l2_summary || {}).compiled || 0);
+        if (l2c > 0) ids.push(res.item_id);
+      }
+      if (Array.isArray(res.created_ids)) {
+        res.created_ids.forEach(id => { if (id && !ids.includes(id)) ids.push(id); });
+      }
+      return ids;
+    }
+
+    function jobSummaryText(job) {
+      if (job.status === 'running') {
+        const startMs = state.jobSeenAt[job.id] || parseJobTimeMs(job.started_at, job.id);
+        const sec = Math.max(1, Math.round((Date.now() - startMs) / 1000));
+        if (job.stage) {
+          return `${job.stage}（已运行 ${formatElapsed(sec)}）`;
+        }
+        const eta = job.kind === 'forge_pack' ? '通常需 1–2 分钟' : (job.kind === 'local_build' ? '通常需 10–20 秒' : '通常需 30–55 秒');
+        return `正在本机后台处理 · 已运行 ${formatElapsed(sec)}（${eta}），可自由切换页面。`;
+      }
+      if (job.status === 'done') {
+        if (job.kind === 'local_build') {
+          const total = job.result?.total_active_lenses;
+          return `卡片库索引已同步完成！当前共 ${total ?? '-'} 张卡片在快捷键浮窗中就绪。`;
+        }
+        if (job.result?.stage === 'l0_gate_rejected') {
+          return '这篇文章未通过方法论质检（可能偏背景介绍、缺少可复用步骤），建议提炼核心操作要点或改用手工创建。';
+        }
+        const ids = getJobPrimaryCardIds(job);
+        const sumObj = job.result?.l2_summary || job.result?.summary || job.result || {};
+        const failed = Number(sumObj.failed || 0);
+        const compiled = Number(sumObj.compiled || ids.length || 0);
+        if (ids.length > 0 && job.result?.auto_synced) {
+          return `已生成 ${ids.length} 张新卡片并自动同步上线！现在就能在首页或快捷键里直接匹配到。`;
+        }
+        if (ids.length > 0) {
+          return `已完成，生成 ${ids.length} 张新卡片草稿！点下方「查看新卡片」预览，再点「立即更新卡片库」同步到快捷键浮窗。`;
+        }
+        if (compiled === 0 && failed > 0) {
+          return `AI 提炼未能产出合格卡片（${failed} 条未通过质检），建议改用手工创建。`;
+        }
+        return '任务已完成。如果新增了卡片，记得点左下角「更新卡片库」使其生效。';
+      }
+      return `处理遇到问题：${job.error || '未知错误'}（可检查本机模型服务或改用手工创建）`;
+    }
+
+    function jobActionsHtml(job, compact = false) {
+      if (job.status === 'running') return '';
+      if (job.status === 'done') {
+        if (job.kind === 'local_build') return '';
+        const ids = getJobPrimaryCardIds(job);
+        const isCardKind = ['friction_draft', 'l0_ingest', 'forge_pack', 'atlas_import'].includes(job.kind);
+        const autoSynced = Boolean(job.result?.auto_synced);
+        const btns = [];
+        if (ids.length === 1) {
+          btns.push(`<button class="btn xs primary" onclick="openLensById('${esc(ids[0])}')">👀 查看新卡片</button>`);
+        } else if (ids.length > 1) {
+          btns.push(`<button class="btn xs primary" onclick="openLensById('${esc(ids[0])}')">👀 查看首张新卡（共 ${ids.length} 张）</button>`);
+        }
+        if (autoSynced) {
+          btns.push(`<button class="btn xs soft" onclick="switchView('home');document.getElementById('try-input').focus()">✨ 立即去首页试一句</button>`);
+        } else if (isCardKind) {
+          btns.push(`<button class="btn xs soft" onclick="runApplyBuild(this)">🔄 立即更新卡片库</button>`);
+        }
+        if (!btns.length && !compact) return '';
+        return `<div class="task-actions">${btns.join('')}</div>`;
+      }
+      if (job.status === 'failed') {
+        return `<div class="task-actions"><button class="btn xs" onclick="goManualFromJob(${esc(JSON.stringify(job.label || ''))})">✍️ 改为手工创建</button></div>`;
+      }
+      return '';
+    }
+
+    window.goManualFromJob = label => {
+      const cleaned = String(label || '').replace(/^[^：:]+[：:]\s*/, '').trim();
+      switchView('create');
+      document.querySelector('#create-mode-bar .seg-btn[data-cmode="manual"]')?.click();
+      if (cleaned) {
+        document.getElementById('mm-triggers').value = cleaned;
+        document.getElementById('mm-pain').value = cleaned;
+      }
+      toast('已切换到手工创建并预填内容');
+    };
+
+    function renderTaskDock() {
+      const dock = document.getElementById('task-dock');
+      const body = document.getElementById('task-dock-body');
+      const title = document.getElementById('task-dock-title');
+      const launcher = document.getElementById('task-dock-launcher');
+      const launcherTxt = document.getElementById('task-launcher-text');
+      const navBadge = document.getElementById('nav-jobs-badge');
+
+      const allItems = [];
+      if (state.localBuild) allItems.push(state.localBuild);
+      state.jobs.slice(0, 6).forEach(j => allItems.push(j));
+
+      const runningCount = allItems.filter(j => j.status === 'running').length;
+      if (runningCount > 0) {
+        navBadge.textContent = `${runningCount} 进行中`;
+        navBadge.style.display = 'inline-block';
+      } else {
+        navBadge.style.display = 'none';
+      }
+
+      if (!allItems.length) {
+        dock.classList.remove('show');
+        launcher.classList.remove('show');
+        return;
+      }
+
+      title.textContent = runningCount > 0
+        ? `⏳ 后台处理中（${runningCount} 项）`
+        : `✅ 最近后台任务（${allItems.length}）`;
+
+      dock.classList.toggle('show', state.dockOpen);
+      dock.classList.toggle('collapsed', state.dockCollapsed);
+      document.getElementById('btn-dock-collapse').textContent = state.dockCollapsed ? '展开' : '收起';
+
+      launcher.classList.toggle('show', !state.dockOpen);
+      launcherTxt.textContent = runningCount > 0
+        ? `⏳ ${runningCount} 项 AI 任务进行中…`
+        : `📋 最近任务（${allItems.length}）`;
+
+      body.innerHTML = allItems.map(j => {
+        const stPill = j.status === 'running'
+          ? '<span class="pill amber">进行中</span>'
+          : (j.status === 'done' ? '<span class="pill green">已完成</span>' : '<span class="pill red">失败</span>');
+        const lead = j.status === 'running'
+          ? '<span class="task-spinner"></span>'
+          : (j.status === 'done' ? '<span>✅</span>' : '<span>⚠️</span>');
+        return `<div class="task-item ${esc(j.status)}">
+          <div class="task-item-top">
+            <div style="display:flex;align-items:center;gap:7px;min-width:0"><span style="display:inline-flex;align-items:center">${lead}</span><strong style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(j.label)}</strong></div>
+            ${stPill}
+          </div>
+          <div class="task-meta">${esc(jobSummaryText(j))}</div>
+          ${jobActionsHtml(j, true)}
+        </div>`;
+      }).join('');
+    }
+
+    document.getElementById('btn-dock-collapse').onclick = () => {
+      state.dockCollapsed = !state.dockCollapsed;
+      renderTaskDock();
+    };
+    document.getElementById('btn-dock-close').onclick = () => {
+      state.dockOpen = false;
+      renderTaskDock();
+    };
+    document.getElementById('task-dock-launcher').onclick = () => {
+      state.dockOpen = true;
+      state.dockCollapsed = false;
+      renderTaskDock();
+    };
+
+    function ensureJobTimers() {
+      const hasRunning = state.jobs.some(j => j.status === 'running') || state.localBuild?.status === 'running';
+      if (hasRunning) {
+        if (!state.pollTimer) {
+          state.pollTimer = setInterval(() => refreshJobs({ silent: true }), 2200);
+        }
+        if (!state.tickTimer) {
+          state.tickTimer = setInterval(renderTaskDock, 1000);
+        }
+      } else {
+        if (state.pollTimer) { clearInterval(state.pollTimer); state.pollTimer = null; }
+        if (state.tickTimer) { clearInterval(state.tickTimer); state.tickTimer = null; }
+      }
+    }
+
+    async function refreshJobs(opts = {}) {
+      try {
+        const d = await api('api/jobs');
+        const jobs = d.jobs || [];
+        let justFinishedCardJob = false;
+        let justAutoSynced = false;
+        let finishedLabel = '';
+        let anyRunning = false;
+
+        jobs.forEach(j => {
+          if (!state.jobSeenAt[j.id]) {
+            state.jobSeenAt[j.id] = parseJobTimeMs(j.started_at, j.id);
+          }
+          const prev = state.knownJobStatus[j.id];
+          if (j.status === 'running') anyRunning = true;
+          if (prev === 'running' && j.status === 'done') {
+            finishedLabel = j.label;
+            if (['friction_draft', 'l0_ingest', 'forge_pack', 'atlas_import'].includes(j.kind)) {
+              justFinishedCardJob = true;
+              if (j.result?.auto_synced) justAutoSynced = true;
+            }
+          }
+          if (prev === 'running' && j.status === 'failed') {
+            toast(`任务「${j.label}」未成功，可在右下角查看详情`, 4500);
+          }
+          state.knownJobStatus[j.id] = j.status;
+        });
+
+        state.jobs = jobs;
+        if (opts.openIfRecent) {
+          if (anyRunning) {
+            state.dockOpen = true;
+          } else if (jobs.length) {
+            const latestMs = parseJobTimeMs(jobs[0].finished_at || jobs[0].started_at, jobs[0].id);
+            if ((Date.now() - latestMs) < 2 * 3600 * 1000) {
+              state.dockOpen = true;
+            }
+          }
+        }
+        if (justFinishedCardJob) {
+          if (justAutoSynced) {
+            markPending(false);
+            toast(`✅「${finishedLabel}」已生成并自动上线！现在就能直接匹配到`, 5000);
+          } else {
+            markPending(true);
+            toast(`✅「${finishedLabel}」已完成！可在右下角查看新卡片并更新卡片库`, 5000);
+          }
+          state.dockOpen = true;
+          state.dockCollapsed = false;
+          refreshAll();
+          if (document.getElementById('view-create').classList.contains('active')) loadGaps();
+        }
+        renderJobsList(jobs);
+        renderTaskDock();
+        ensureJobTimers();
+      } catch {}
+    }
+
+    function trackStartedJob(job, startMsg) {
+      if (job && job.id) {
+        state.jobSeenAt[job.id] = Date.now();
+        state.knownJobStatus[job.id] = job.status || 'running';
+        state.jobs = [job, ...state.jobs.filter(x => x.id !== job.id)];
+      }
+      state.dockOpen = true;
+      state.dockCollapsed = false;
+      renderTaskDock();
+      renderJobsList(state.jobs);
+      ensureJobTimers();
+      if (startMsg) toast(startMsg, 3800);
+      setTimeout(() => refreshJobs({ silent: true }), 1200);
+    }
+
+    async function withBtnLoading(btn, loadingText, doneText, fn) {
+      if (!btn) return fn();
+      const orig = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = loadingText;
+      try {
+        const res = await fn();
+        if (doneText) {
+          btn.textContent = doneText;
+          setTimeout(() => { btn.textContent = orig; btn.disabled = false; }, 1400);
+        } else {
+          btn.textContent = orig;
+          btn.disabled = false;
+        }
+        return res;
+      } catch (e) {
+        btn.textContent = orig;
+        btn.disabled = false;
+        throw e;
+      }
     }
 
     async function copyText(text, okMsg = '已复制到剪贴板') {
@@ -1357,17 +2097,52 @@
       }
     }
 
+    const FIELD_LABELS = {
+      title: '卡片标题',
+      tagline: '一句话说明',
+      pain_point: '适用场景说明',
+      trigger_utterances: '触发口语',
+      content: '指令正文',
+      raw_text: '文章正文',
+      domain_name: '新领域名称',
+      pain_points: '常见困惑',
+      utterance: '常用说法',
+      query: '查询语句',
+    };
+    function formatApiError(data) {
+      if (!data) return '请求失败';
+      const detail = data.detail;
+      if (typeof detail === 'string') return detail;
+      if (Array.isArray(detail) && detail.length) {
+        return detail.map(err => {
+          const field = Array.isArray(err.loc) ? err.loc[err.loc.length - 1] : '';
+          const label = FIELD_LABELS[field] || field || '输入项';
+          if (err.type === 'string_too_short' && err.ctx?.min_length) {
+            return `${label}至少需要 ${err.ctx.min_length} 个字`;
+          }
+          if (err.type === 'too_short' && err.ctx?.min_length) {
+            return `${label}至少需要填写 ${err.ctx.min_length} 条`;
+          }
+          if (err.type === 'missing') return `请填写${label}`;
+          return `${label}格式有误（${err.msg || '请检查'}）`;
+        }).join('；');
+      }
+      return JSON.stringify(data);
+    }
+
     async function api(path, opts = {}) {
       const res = await fetch('./' + path.replace(/^\//, ''), { headers: { 'Content-Type': 'application/json' }, ...opts });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.detail || JSON.stringify(data));
+      let data = null;
+      try { data = await res.json(); } catch { data = { detail: `HTTP ${res.status}` }; }
+      if (!res.ok) throw new Error(formatApiError(data));
       return data;
     }
 
     async function rootApi(path, opts = {}) {
       const res = await fetch('../' + path.replace(/^\//, ''), { headers: { 'Content-Type': 'application/json' }, ...opts });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.detail || JSON.stringify(data));
+      let data = null;
+      try { data = await res.json(); } catch { data = { detail: `HTTP ${res.status}` }; }
+      if (!res.ok) throw new Error(formatApiError(data));
       return data;
     }
 
@@ -1434,8 +2209,21 @@
       const d = await api('api/overview');
       state.overview = d;
       const sh = d.by_shelf || {};
+      const liveTotal = d.live_l4_total ?? d.l4_total;
       document.getElementById('nav-active-cnt').textContent = d.l4_total;
-      document.getElementById('home-status-chip').innerHTML = `<span class="dot-green"></span>本地引擎运行中 · ${esc(d.l4_total)} 张卡片已就绪`;
+      if (d.needs_rebuild) {
+        document.getElementById('home-status-chip').innerHTML = `<span class="dot-green" style="background:var(--amber)"></span>线上 ${esc(liveTotal)} 张 · 有待同步改动`;
+        if (!state.pendingChanges) {
+          state.pendingChanges = true;
+          document.getElementById('pending-msg').textContent = '检测到有新建卡片或设置调整尚未同步到快捷键浮窗，点击下方按钮（约 15 秒）即可立即生效。';
+          document.getElementById('pending-box').classList.add('show');
+        }
+      } else {
+        document.getElementById('home-status-chip').innerHTML = `<span class="dot-green"></span>本地引擎运行中 · ${esc(liveTotal)} 张卡片已上线`;
+        if (state.pendingChanges && state.pendingCount === 0) {
+          markPending(false);
+        }
+      }
 
       // Try to enrich home KPIs with 30-day usage count
       let recentCalls = '—';
@@ -1496,6 +2284,8 @@
       const btn = document.getElementById('btn-try-run');
       btn.disabled = true; btn.textContent = '思考中…';
       state.lastTryQuery = q;
+      const teachDrawer = document.getElementById('home-teach-drawer');
+      if (teachDrawer) teachDrawer.style.display = 'none';
       try {
         const res = await rootApi('route', { method: 'POST', body: JSON.stringify({ app_name: app, input_text: q }) });
         const area = document.getElementById('try-result-area');
@@ -1516,7 +2306,7 @@
               <div style="font-size:12.5px;color:var(--muted);line-height:1.5">${esc(c.intent || c.preview || '')}</div>
             </div>
             <div style="display:flex;gap:6px;padding-top:8px;border-top:1px solid var(--border)">
-              <button class="btn xs primary" onclick="copyText(${esc(JSON.stringify((c.prompt || '').trim()))}, '已复制「${esc(c.title)}」指令')">复制指令</button>
+              <button class="btn xs primary" onclick="copyText(${esc(JSON.stringify((c.prompt || '').trim()))}, ${esc(JSON.stringify('已复制「' + (c.title || '') + '」指令'))})">复制指令</button>
               <button class="btn xs" onclick="openLensById('${esc(c.id)}')">查看详情</button>
             </div>
           </div>
@@ -1535,7 +2325,92 @@
     };
     document.getElementById('btn-try-run').onclick = runTryIt;
     document.getElementById('try-input').addEventListener('keydown', e => { if (e.key === 'Enter') runTryIt(); });
+
+    // Inline Friendly Teach Drawer on Home (no longer kicks user into Developer Mode)
+    async function searchHomeTeachLenses() {
+      const q = document.getElementById('teach-search-input').value.trim();
+      const box = document.getElementById('teach-search-results');
+      box.innerHTML = '<div style="font-size:12px;color:var(--muted);padding:6px">搜索中…</div>';
+      try {
+        const d = await api('api/lenses?q=' + encodeURIComponent(q));
+        const items = (d.items || []).slice(0, 8);
+        if (!items.length) {
+          box.innerHTML = '<div style="font-size:12px;color:var(--muted);padding:6px">没搜到相关卡片，试试换个词，或在右侧直接让 AI 现做一张。</div>';
+          return;
+        }
+        box.innerHTML = items.map(l => `
+          <div class="teach-item">
+            <div style="min-width:0">
+              <div style="font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(l.title)}</div>
+              <div style="font-size:11px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(primLabel(l.routing.primitive))} · ${esc(l.tagline)}</div>
+            </div>
+            <button class="btn xs soft" style="flex-shrink:0" onclick="bindHomeTeachPhrase('${esc(l.id)}', ${esc(JSON.stringify(l.title))}, this)">+ 记住这句</button>
+          </div>`).join('');
+      } catch (e) {
+        box.innerHTML = `<div style="font-size:12px;color:var(--red)">搜索失败：${esc(e.message)}</div>`;
+      }
+    }
+    window.bindHomeTeachPhrase = async (id, title, btn) => {
+      const q = state.lastTryQuery || document.getElementById('try-input').value.trim();
+      if (!q) return;
+      try {
+        await withBtnLoading(btn, '保存中…', '已记住 ✓', async () => {
+          await api(`api/overlays/${encodeURIComponent(id)}/add-trigger`, { method: 'POST', body: JSON.stringify({ utterance: q }) });
+          markPending(true);
+          toast(`已让「${title}」记住这句话！点左下角「立即同步生效」即可生效`);
+          await loadOverview();
+        });
+      } catch (e) { toast('绑定失败：' + e.message); }
+    };
+
     document.getElementById('btn-try-teach').onclick = () => {
+      const q = state.lastTryQuery || document.getElementById('try-input').value.trim();
+      if (!q) return toast('请先输入一句想法再进行调校');
+      const drawer = document.getElementById('home-teach-drawer');
+      const opening = drawer.style.display === 'none';
+      drawer.style.display = opening ? 'block' : 'none';
+      if (opening) {
+        document.getElementById('teach-query-label').textContent = q.slice(0, 26);
+        const searchEl = document.getElementById('teach-search-input');
+        searchEl.value = '';
+        searchHomeTeachLenses();
+      }
+    };
+    document.getElementById('btn-teach-close').onclick = () => {
+      document.getElementById('home-teach-drawer').style.display = 'none';
+    };
+    document.getElementById('btn-teach-search').onclick = searchHomeTeachLenses;
+    document.getElementById('teach-search-input').addEventListener('keydown', e => { if (e.key === 'Enter') searchHomeTeachLenses(); });
+    document.getElementById('btn-teach-ai').onclick = async e => {
+      const q = state.lastTryQuery || document.getElementById('try-input').value.trim();
+      if (!q) return;
+      try {
+        await withBtnLoading(e.currentTarget, '正在启动 AI…', '已启动，见右下角 ↘', async () => {
+          await api('api/gaps', { method: 'POST', body: JSON.stringify({ query: q, note: '首页试跑触发 AI 制作' }) }).catch(() => {});
+          const res = await api('api/evolution/friction-to-draft', { method: 'POST', body: JSON.stringify({ custom_intent: q, sample_input: q }) });
+          trackStartedJob(res.job, '✨ 已启动 AI 制作新卡片！右下角可实时查看进度与结果');
+        });
+      } catch (err) { toast('启动失败：' + err.message); }
+    };
+    document.getElementById('btn-teach-manual').onclick = () => {
+      const q = state.lastTryQuery || document.getElementById('try-input').value.trim();
+      switchView('create');
+      document.querySelector('#create-mode-bar .seg-btn[data-cmode="manual"]')?.click();
+      document.getElementById('mm-triggers').value = q;
+      document.getElementById('mm-pain').value = q;
+      toast('已为你预填好这句话，补齐标题和指令即可保存');
+    };
+    document.getElementById('btn-teach-gap').onclick = async e => {
+      const q = state.lastTryQuery || document.getElementById('try-input').value.trim();
+      if (!q) return;
+      try {
+        await withBtnLoading(e.currentTarget, '记录中…', '已记入清单 ✓', async () => {
+          await api('api/gaps', { method: 'POST', body: JSON.stringify({ query: q, note: '来自首页试用' }) });
+          toast('已记入「制作新卡片 → 待补充的灵感清单」');
+        });
+      } catch (err) { toast('记录失败：' + err.message); }
+    };
+    document.getElementById('btn-teach-dev').onclick = () => {
       if (!state.devMode) applyDevMode(true);
       switchView('dev-recall');
       document.getElementById('ri-query').value = state.lastTryQuery;
@@ -1548,6 +2423,7 @@
       const sh = d.by_shelf || {};
       const segs = [
         { k: 'l4_all', label: `已启用 (${d.l4_total})` },
+        { k: 'personal', label: `✨ 我制作的 (${d.personal_total || 0})` },
         { k: 'evergreen', label: `核心常驻 (${sh.evergreen || 0})` },
         { k: 'on_shelf', label: `场景专项 (${sh.on_shelf || 0})` },
         { k: 'off_shelf', label: `备用库 (${sh.off_shelf || 0})` },
@@ -1649,7 +2525,7 @@
               ${state.batchMode ? `<input type="checkbox" ${checked} style="margin-top:3px" onclick="event.stopPropagation();toggleCheck('${esc(lens.id)}',this.checked)" />` : ''}
               <div class="lens-card-title">${esc(lens.title)}</div>
             </div>
-            <button class="btn xs ${isOff ? 'soft' : ''}" onclick="event.stopPropagation();quickToggleShelf('${esc(lens.id)}','${isOff ? 'on_shelf' : 'off_shelf'}')" title="${isOff ? '启用这张卡' : '暂时放回备用库'}">
+            <button class="btn xs ${isOff ? 'soft' : ''}" onclick="event.stopPropagation();quickToggleShelf('${esc(lens.id)}','${isOff ? 'on_shelf' : 'off_shelf'}')" data-tip="${isOff ? '启用这张卡参与日常快捷键推荐' : '暂时放回备用库（平时不打扰，高匹配仍可穿透）'}">
               ${isOff ? '启用' : '已启用'}
             </button>
           </div>
@@ -1659,10 +2535,11 @@
             <div style="display:flex;flex-wrap:wrap;gap:5px">
               <span class="pill prim">${esc(primLabel(lens.routing.primitive))}</span>
               <span class="pill">${esc(catLabel(lens.meta.category))}</span>
+              ${lens.is_personal ? '<span class="pill purple">✨ 自建</span>' : ''}
               ${shelf === 'evergreen' ? `<span class="pill green">${shInfo.text}</span>` : ''}
               ${lens.has_override ? '<span class="pill amber">已调校</span>' : ''}
             </div>
-            <button class="btn xs" onclick="event.stopPropagation();quickCopyLens('${esc(lens.id)}')">复制</button>
+            <button class="btn xs" onclick="event.stopPropagation();quickCopyLens('${esc(lens.id)}')" data-tip="复制完整提示词正文，可直接发给 AI">复制</button>
           </div>
         </div>`;
     }
@@ -1719,10 +2596,23 @@
     };
     document.getElementById('btn-open-manual').onclick = () => { switchView('create'); };
 
+    window.resetLibraryFilters = () => {
+      document.getElementById('f-q').value = '';
+      document.getElementById('f-primitive').value = '';
+      state.nav = { shelf: 'l4_all', category: '', collection: '' };
+      if (state.overview) renderLibraryFilters(state.overview);
+      loadLenses();
+    };
+
     async function loadLenses() {
+      const qVal = document.getElementById('f-q').value;
+      const pVal = document.getElementById('f-primitive').value;
+      const hasFilter = Boolean(qVal.trim() || pVal || state.nav.category || state.nav.collection || state.nav.shelf !== 'l4_all');
+      const clrBtn = document.getElementById('btn-clear-filters');
+      if (clrBtn) clrBtn.style.display = hasFilter ? 'inline-flex' : 'none';
       const params = new URLSearchParams({
-        q: document.getElementById('f-q').value,
-        primitive: document.getElementById('f-primitive').value,
+        q: qVal,
+        primitive: pVal,
         shelf: state.nav.shelf,
         category: state.nav.category,
         collection: state.nav.collection,
@@ -1732,7 +2622,7 @@
       document.getElementById('lens-count').textContent = `共 ${data.total} 张卡片`;
       const grid = document.getElementById('lens-grid');
       if (!state.lenses.length) {
-        grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1">没有找到匹配的卡片，试试换个关键词或清空筛选条件。</div>';
+        grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1">没有找到匹配的卡片。<div style="margin-top:10px"><button class="btn sm soft" onclick="resetLibraryFilters()">清空全部筛选条件</button></div></div>`;
         return;
       }
       grid.innerHTML = state.lenses.map(l => lensCardHtml(l)).join('');
@@ -1763,17 +2653,22 @@
         <span class="pill prim">${esc(primLabel(lens.routing.primitive))}</span>
         <span class="pill">${esc(catLabel(lens.meta.category))}</span>
         <span class="pill ${sh.cls}">${esc(sh.text)}</span>
+        ${lens.is_personal ? '<span class="pill purple">✨ 我制作的</span>' : ''}
         ${lens.has_override ? '<span class="pill amber">已个性化调校</span>' : ''}
       `;
       document.getElementById('m-pain').textContent = lens.routing.pain_point;
       renderModalTriggers(lens.routing.trigger_utterances || []);
       document.getElementById('m-content').innerHTML = highlightVars(lens.execution.content || '');
       document.getElementById('ov-title').value = lens.override?.title || '';
+      document.getElementById('ov-tagline').value = lens.override?.tagline || lens.tagline || '';
+      document.getElementById('ov-pain').value = lens.override?.pain_point || lens.routing.pain_point || '';
+      document.getElementById('ov-content').value = lens.override?.content || lens.execution.content || '';
       document.getElementById('ov-weight').value = lens.meta.base_weight;
       document.getElementById('ov-tier').value = lens.meta.tier || 'B';
       document.getElementById('ov-shelf').value = lens.meta.shelf || 'on_shelf';
       document.getElementById('ov-category').value = lens.meta.category || 'general';
       document.getElementById('ov-primitive').value = lens.routing.primitive;
+      document.getElementById('ov-delete-personal').style.display = lens.is_personal ? 'inline-flex' : 'none';
       document.getElementById('m-dev-id').textContent = `ID: ${lens.id} · source: ${lens.meta.source} · category: ${lens.meta.category}/${lens.meta.subcategory}`;
       document.getElementById('m-dev-id').style.display = state.devMode ? 'block' : 'none';
       document.getElementById('m-add-trig-input').value = '';
@@ -1782,8 +2677,35 @@
     }
 
     function renderModalTriggers(trigs) {
-      document.getElementById('m-triggers').innerHTML = trigs.map(t => `<span class="pill">“${esc(t)}”</span>`).join('') || '<span style="font-size:12px;color:var(--muted)">暂无示例说法</span>';
+      const canRemove = trigs.length > 1;
+      document.getElementById('m-triggers').innerHTML = trigs.map(t => `
+        <span class="trig-pill">
+          <span class="trig-txt" title="点击去首页试跑这句" onclick="testTriggerInHome(${esc(JSON.stringify(t))})">“${esc(t)}”</span>
+          ${canRemove ? `<button class="trig-del" title="移除这句口语" onclick="removeModalTrigger(${esc(JSON.stringify(t))})">×</button>` : ''}
+        </span>`).join('') || '<span style="font-size:12px;color:var(--muted)">暂无示例说法</span>';
     }
+    window.testTriggerInHome = phrase => {
+      document.getElementById('lens-modal').classList.remove('open');
+      switchView('home');
+      runTryExample(phrase, 'ChatGPT');
+    };
+    window.removeModalTrigger = async phrase => {
+      const l = state.selectedLens;
+      if (!l) return;
+      if ((l.routing.trigger_utterances || []).length <= 1) return toast('至少需保留 1 句触发口语');
+      try {
+        await api(`api/overlays/${encodeURIComponent(l.id)}/remove-trigger`, { method: 'POST', body: JSON.stringify({ utterance: phrase }) });
+        l.routing.trigger_utterances = (l.routing.trigger_utterances || []).filter(x => x !== phrase);
+        renderModalTriggers(l.routing.trigger_utterances);
+        markPending(true);
+        toast('已移除这句口语，点左下角「立即同步生效」后生效');
+      } catch (e) { toast('移除失败：' + e.message); }
+    };
+    document.getElementById('m-edit-prompt-btn').onclick = () => {
+      const det = document.getElementById('m-custom-details');
+      det.open = true;
+      setTimeout(() => document.getElementById('ov-content').focus(), 60);
+    };
 
     document.getElementById('m-close').onclick = () => document.getElementById('lens-modal').classList.remove('open');
     document.getElementById('lens-modal').addEventListener('click', e => {
@@ -1804,18 +2726,25 @@
       await copyText(txt, '已复制指令并打开 Claude');
       window.open('https://claude.ai/new?q=' + encodeURIComponent(txt.slice(0, 1500)), '_blank');
     };
-    document.getElementById('m-add-trig-btn').onclick = async () => {
-      const utt = document.getElementById('m-add-trig-input').value.trim();
-      if (!utt || !state.selectedLens) return;
+    async function addModalTrigger() {
+      const input = document.getElementById('m-add-trig-input');
+      const utt = input.value.trim();
+      if (!state.selectedLens) return;
+      if (utt.length < 2) return toast('请至少输入 2 个字的常用说法');
+      const btn = document.getElementById('m-add-trig-btn');
       try {
-        await api(`api/overlays/${encodeURIComponent(state.selectedLens.id)}/add-trigger`, { method: 'POST', body: JSON.stringify({ utterance: utt }) });
-        state.selectedLens.routing.trigger_utterances = [...(state.selectedLens.routing.trigger_utterances || []), utt];
-        renderModalTriggers(state.selectedLens.routing.trigger_utterances);
-        document.getElementById('m-add-trig-input').value = '';
-        markPending(true);
-        toast('已记住这句说法，点击左侧「应用更改」后生效');
+        await withBtnLoading(btn, '保存中…', '已添加 ✓', async () => {
+          await api(`api/overlays/${encodeURIComponent(state.selectedLens.id)}/add-trigger`, { method: 'POST', body: JSON.stringify({ utterance: utt }) });
+          state.selectedLens.routing.trigger_utterances = [...(state.selectedLens.routing.trigger_utterances || []), utt];
+          renderModalTriggers(state.selectedLens.routing.trigger_utterances);
+          input.value = '';
+          markPending(true);
+          toast('已记住这句说法，点击左侧「立即同步生效」后生效');
+        });
       } catch (e) { toast('添加失败：' + e.message); }
-    };
+    }
+    document.getElementById('m-add-trig-btn').onclick = addModalTrigger;
+    document.getElementById('m-add-trig-input').addEventListener('keydown', e => { if (e.key === 'Enter') addModalTrigger(); });
 
     document.getElementById('ov-save').onclick = async () => {
       const l = state.selectedLens;
@@ -1824,6 +2753,12 @@
       const payload = {};
       const newTitle = document.getElementById('ov-title').value.trim();
       if (newTitle) payload.title = newTitle;
+      const newTagline = document.getElementById('ov-tagline').value.trim();
+      if (newTagline && (newTagline !== l.tagline || ov.tagline !== undefined)) payload.tagline = newTagline;
+      const newPain = document.getElementById('ov-pain').value.trim();
+      if (newPain.length >= 4 && (newPain !== l.routing.pain_point || ov.pain_point !== undefined)) payload.pain_point = newPain;
+      const newContent = document.getElementById('ov-content').value.trim();
+      if (newContent.length >= 4 && (newContent !== l.execution.content || ov.content !== undefined)) payload.content = newContent;
       const newWeight = parseFloat(document.getElementById('ov-weight').value);
       if (!Number.isNaN(newWeight) && (newWeight !== l.meta.base_weight || ov.base_weight !== undefined)) payload.base_weight = newWeight;
       const newTier = document.getElementById('ov-tier').value;
@@ -1837,10 +2772,22 @@
       try {
         await api('api/overlays/' + encodeURIComponent(l.id), { method: 'PUT', body: JSON.stringify(payload) });
         markPending(true);
-        toast('已保存卡片设置，点击左侧「应用更改」立即同步');
+        toast('已保存卡片修改，点击左侧「立即同步生效」即可同步');
         document.getElementById('lens-modal').classList.remove('open');
         await refreshAll();
       } catch (e) { toast('保存失败：' + e.message); }
+    };
+    document.getElementById('ov-delete-personal').onclick = async () => {
+      const l = state.selectedLens;
+      if (!l || !l.is_personal) return;
+      if (!confirm(`确定要永久删除自建卡片「${l.title}」吗？删除后需点击更新卡片库同步。`)) return;
+      try {
+        await api('api/lenses/' + encodeURIComponent(l.id), { method: 'DELETE' });
+        markPending(true);
+        toast(`已删除自建卡片「${l.title}」，点左下角「立即同步生效」同步`);
+        document.getElementById('lens-modal').classList.remove('open');
+        await refreshAll();
+      } catch (e) { toast('删除失败：' + e.message); }
     };
     document.getElementById('ov-reset').onclick = async () => {
       if (!state.selectedLens) return;
@@ -1865,6 +2812,10 @@
       document.getElementById('lbl-l3-share').textContent = `${share}%`;
       document.getElementById('lbl-recall-decay').textContent = decay < 20 ? '温和' : (decay < 55 ? '适中' : '强反回音室');
       document.getElementById('lbl-skip-decay').textContent = skip > 82 ? '轻微' : (skip > 62 ? '明显' : '大幅减少');
+      document.querySelectorAll('.preset-card').forEach(c => c.classList.remove('active'));
+      if (share === 10 && decay === 30 && Math.abs(skip - 70) <= 3) document.getElementById('preset-calm')?.classList.add('active');
+      else if (share === 15 && decay === 35 && Math.abs(skip - 70) <= 3) document.getElementById('preset-balanced')?.classList.add('active');
+      else if (share === 35 && decay === 50 && Math.abs(skip - 65) <= 3) document.getElementById('preset-explore')?.classList.add('active');
     }
     ['rng-l3-share', 'rng-recall-decay', 'rng-skip-decay'].forEach(id => {
       document.getElementById(id).addEventListener('input', syncSeedSliderLabels);
@@ -2002,51 +2953,135 @@
     document.getElementById('btn-seed-refresh').onclick = loadSeedPanel;
 
     // ==================== 4. CREATE NEW CARDS ====================
-    document.getElementById('mm-save').onclick = async () => {
-      try {
-        await api('api/lenses/manual', {
-          method: 'POST',
-          body: JSON.stringify({
-            title: document.getElementById('mm-title').value,
-            tagline: document.getElementById('mm-tagline').value,
-            primitive: document.getElementById('mm-primitive').value,
-            category: document.getElementById('mm-category').value,
-            tier: document.getElementById('mm-tier').value,
-            action_type: document.getElementById('mm-action').value,
-            pain_point: document.getElementById('mm-pain').value,
-            trigger_utterances: document.getElementById('mm-triggers').value.split('\n').filter(Boolean),
-            content: document.getElementById('mm-content').value,
-          }),
-        });
-        markPending(true);
-        toast('新卡片已创建！点击左侧「应用更改」即可立即使用');
-        ['mm-title', 'mm-tagline', 'mm-pain', 'mm-triggers', 'mm-content'].forEach(id => document.getElementById(id).value = '');
-        await refreshAll();
-      } catch (e) { toast('创建失败：' + e.message); }
+    const MANUAL_TEMPLATES = {
+      weekly: {
+        title: '老板视角周报提炼',
+        tagline: '把工作流水账改成结论 + 风险 + 待拍板',
+        primitive: 'compress',
+        category: 'writing_comms',
+        pain: '每周写周报总写成细节流水账，老板抓不到重点和需要协助的卡点',
+        triggers: '帮我改一下这份周报\n把这周做的事总结给老板看\n周报写得太啰嗦怎么精简',
+        content: '请把下面这段工作记录重构成面向管理层的周报：1）用 3 条结果导向的要点概括本周核心产出（含关键数据或里程碑）；2）列出 1–2 个当前风险或阻塞及我已采取的动作；3）明确指出需要领导拍板或协调的具体事项。语言克制简洁，去掉过程流水账。',
+      },
+      polite: {
+        title: '委婉拒绝且不伤和气',
+        tagline: '守住边界的同时给出替代方案，保持好关系',
+        primitive: 'translate',
+        category: 'writing_comms',
+        pain: '想拒绝临时加塞或超出范围的请求，但怕话说得太生硬伤关系',
+        triggers: '帮我委婉拒绝这个需求\n怎么回才不得罪人\n这个活接不了怎么说比较好',
+        content: '请帮我把这段想法改写成 2 个版本的委婉回复（版本A：偏同事/平级，温暖坦诚；版本B：偏客户/上级，专业稳重）。结构遵循：1）先正向肯定对方目标；2）清晰说明当前优先级或资源约束（不找借口、不卑微）；3）给出可行的替代时间或折中方案。',
+      },
+      debug: {
+        title: '复杂难题第一步拆解',
+        tagline: '把一团乱麻拆成可验证假设与最小行动',
+        primitive: 'deconstruct',
+        category: 'general',
+        pain: '面对跨领域复杂问题无从下手，不知道核心瓶颈在哪里',
+        triggers: '这个问题太复杂不知道从哪下手\n帮我理清这件事的脉络\n一团乱麻怎么拆解',
+        content: '请帮我用结构化方式拆解这个问题：1）先界定真正要解决的核心目标和约束条件；2）按 MECE 原则拆成 3–4 个互不重叠的子问题；3）标出其中最可能是决定性瓶颈的 1 个子问题；4）给出我今天花 30 分钟就能验证的第一步最小行动。',
+      },
+    };
+    window.applyManualTemplate = key => {
+      const t = MANUAL_TEMPLATES[key];
+      if (!t) return;
+      document.getElementById('mm-title').value = t.title;
+      document.getElementById('mm-tagline').value = t.tagline;
+      const primEl = document.getElementById('mm-primitive');
+      if (Array.from(primEl.options).some(o => o.value === t.primitive)) primEl.value = t.primitive;
+      const catEl = document.getElementById('mm-category');
+      if (Array.from(catEl.options).some(o => o.value === t.category)) catEl.value = t.category;
+      document.getElementById('mm-pain').value = t.pain;
+      document.getElementById('mm-triggers').value = t.triggers;
+      document.getElementById('mm-content').value = t.content;
+      toast(`已套用「${t.title}」模板，按你的习惯微调后即可保存`);
     };
 
-    document.getElementById('btn-l0-submit').onclick = async () => {
+    async function saveManualCard(autoSync, btn) {
+      const title = document.getElementById('mm-title').value.trim();
+      const pain = document.getElementById('mm-pain').value.trim();
+      const triggers = document.getElementById('mm-triggers').value.split('\n').map(s => s.trim()).filter(Boolean);
+      const content = document.getElementById('mm-content').value.trim();
+      if (title.length < 2) return toast('请填写至少 2 个字的卡片标题');
+      if (pain.length < 4) return toast('请简单描述「什么情况下需要这张卡」（至少 4 个字）');
+      if (!triggers.length) return toast('请至少填写 1 句你平时会怎么说的口语');
+      if (content.length < 4) return toast('请填写希望 AI 执行的指令或清单正文（至少 4 个字）');
       try {
-        await api('api/forge/l0-text', { method: 'POST', body: JSON.stringify({ title: document.getElementById('l0-title').value, raw_text: document.getElementById('l0-text').value }) });
-        toast('已提交 AI 提炼，请在下方查看制作进度');
-        loadJobs();
-      } catch (e) { toast(e.message); }
+        await withBtnLoading(btn, autoSync ? '保存并同步中…' : '正在保存…', autoSync ? '已上线 ✓' : '已保存 ✓', async () => {
+          await api('api/lenses/manual', {
+            method: 'POST',
+            body: JSON.stringify({
+              title,
+              tagline: document.getElementById('mm-tagline').value.trim(),
+              primitive: document.getElementById('mm-primitive').value,
+              category: document.getElementById('mm-category').value,
+              tier: document.getElementById('mm-tier').value,
+              action_type: document.getElementById('mm-action').value,
+              pain_point: pain,
+              trigger_utterances: triggers,
+              content,
+            }),
+          });
+          ['mm-title', 'mm-tagline', 'mm-pain', 'mm-triggers', 'mm-content'].forEach(id => document.getElementById(id).value = '');
+          if (autoSync) {
+            await runApplyBuild(null);
+          } else {
+            markPending(true);
+            toast('新卡片已保存为草稿！稍后点击左侧「立即同步生效」即可上线', 4200);
+            await refreshAll();
+          }
+        });
+      } catch (err) { toast('创建失败：' + err.message, 4500); }
+    }
+    document.getElementById('mm-save').onclick = e => saveManualCard(false, e.currentTarget);
+    document.getElementById('mm-save-sync').onclick = e => saveManualCard(true, e.currentTarget);
+
+    async function addQuickGap() {
+      const inp = document.getElementById('gap-quick-input');
+      const q = inp.value.trim();
+      if (q.length < 2) return toast('请至少输入 2 个字的场景或灵感');
+      try {
+        await withBtnLoading(document.getElementById('btn-gap-quick-add'), '记录中…', '已记入 ✓', async () => {
+          await api('api/gaps', { method: 'POST', body: JSON.stringify({ query: q, note: '手动记入灵感' }) });
+          inp.value = '';
+          toast('已记入灵感清单，随时可点「AI 制作」');
+          await loadGaps();
+        });
+      } catch (e) { toast('记录失败：' + e.message); }
+    }
+    document.getElementById('btn-gap-quick-add').onclick = addQuickGap;
+    document.getElementById('gap-quick-input').addEventListener('keydown', e => { if (e.key === 'Enter') addQuickGap(); });
+
+    document.getElementById('btn-l0-submit').onclick = async e => {
+      const title = document.getElementById('l0-title').value.trim();
+      const rawText = document.getElementById('l0-text').value.trim();
+      if (!title || rawText.length < 20) return toast('请先填写材料标题并粘贴至少 20 字正文');
+      try {
+        await withBtnLoading(e.currentTarget, '正在提交…', '已启动，见右下角 ↘', async () => {
+          const res = await api('api/forge/l0-text', { method: 'POST', body: JSON.stringify({ title, raw_text: rawText }) });
+          trackStartedJob(res.job, '✨ 已开始 AI 提炼！可在右下角实时查看进度');
+        });
+      } catch (err) { toast('提交失败：' + err.message); }
     };
 
-    document.getElementById('btn-fg-submit').onclick = async () => {
+    document.getElementById('btn-fg-submit').onclick = async e => {
+      const domain = document.getElementById('fg-domain').value.trim();
+      const pain = document.getElementById('fg-pain').value.trim();
+      if (!domain || !pain) return toast('请先填写想探索的新领域和常见困惑');
       try {
-        await api('api/forge/starter-pack', {
-          method: 'POST',
-          body: JSON.stringify({
-            domain_name: document.getElementById('fg-domain').value,
-            pain_points: document.getElementById('fg-pain').value,
-            style_pref: document.getElementById('fg-style').value,
-            category: document.getElementById('fg-cat').value,
-          }),
+        await withBtnLoading(e.currentTarget, '正在启动…', '已启动，见右下角 ↘', async () => {
+          const res = await api('api/forge/starter-pack', {
+            method: 'POST',
+            body: JSON.stringify({
+              domain_name: domain,
+              pain_points: pain,
+              style_pref: document.getElementById('fg-style').value,
+              category: document.getElementById('fg-cat').value,
+            }),
+          });
+          trackStartedJob(res.job, '🧭 已启动 7 张全视角卡包生成，右下角实时跟踪进度');
         });
-        toast('已启动 7 张全视角卡包生成，请在下方查看进度');
-        loadJobs();
-      } catch (e) { toast(e.message); }
+      } catch (err) { toast('启动失败：' + err.message); }
     };
 
     async function loadGaps() {
@@ -2061,16 +3096,20 @@
               <div style="font-size:11.5px;color:var(--muted);margin-top:2px">${esc(g.created_at)} ${g.note ? '· ' + esc(g.note) : ''}</div>
             </div>
             <div style="display:flex;gap:5px;white-space:nowrap">
-              ${g.status !== 'resolved' ? `<button class="btn xs primary" onclick="forgeGap('${esc(g.id)}', ${esc(JSON.stringify(g.query))})">AI 制作</button><button class="btn xs" onclick="resolveGap('${esc(g.id)}')">完成</button>` : ''}
-              <button class="btn xs danger" onclick="deleteGap('${esc(g.id)}')">×</button>
+              ${g.status !== 'resolved' ? `<button class="btn xs primary" onclick="forgeGap('${esc(g.id)}', ${esc(JSON.stringify(g.query))}, this)" data-tip="调用本地模型为这条想法自动生成新卡片（约 30 秒）">AI 制作</button><button class="btn xs" onclick="resolveGap('${esc(g.id)}')" data-tip="标记为已补齐">完成</button>` : ''}
+              <button class="btn xs danger" onclick="deleteGap('${esc(g.id)}')" title="删除这条记录">×</button>
             </div>
           </div>`).join('') : '<div class="empty-state">暂无待补充的想法</div>';
       } catch {}
     }
     document.getElementById('btn-gaps-refresh').onclick = loadGaps;
-    window.forgeGap = async (id, query) => {
-      try { await api('api/evolution/friction-to-draft', { method: 'POST', body: JSON.stringify({ custom_intent: query, sample_input: query }) }); toast('已启动 AI 制作卡片'); loadJobs(); }
-      catch (e) { toast(e.message); }
+    window.forgeGap = async (id, query, btn) => {
+      try {
+        await withBtnLoading(btn, '启动中…', '见右下角 ↘', async () => {
+          const res = await api('api/evolution/friction-to-draft', { method: 'POST', body: JSON.stringify({ custom_intent: query, sample_input: query }) });
+          trackStartedJob(res.job, '✨ 已启动 AI 制作卡片，右下角实时可见进度与结果');
+        });
+      } catch (e) { toast('启动失败：' + e.message); }
     };
     window.resolveGap = async id => {
       try { await api(`api/gaps/${encodeURIComponent(id)}`, { method: 'PUT', body: JSON.stringify({ status: 'resolved' }) }); loadGaps(); } catch (e) { toast(e.message); }
@@ -2079,24 +3118,25 @@
       try { await api(`api/gaps/${encodeURIComponent(id)}`, { method: 'DELETE' }); loadGaps(); } catch (e) { toast(e.message); }
     };
 
-    async function loadJobs() {
-      try {
-        const d = await api('api/jobs');
-        const stMap = { running: ['进行中', 'amber'], done: ['已完成', 'green'], failed: ['失败', 'red'] };
-        document.getElementById('jobs-list').innerHTML = d.jobs.length ? d.jobs.map(j => {
-          const [stTxt, stCls] = stMap[j.status] || [j.status, ''];
-          return `<div style="padding:10px 12px;background:var(--surface-2);border-radius:10px;margin-bottom:8px;font-size:12.5px">
-            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
-              <strong>${esc(j.label)}</strong>
-              <span class="pill ${stCls}">${esc(stTxt)}</span>
-            </div>
-            <div style="font-size:11.5px;color:var(--muted);margin-top:3px">${esc(j.started_at)} → ${esc(j.finished_at || '处理中…')}</div>
-            ${j.error ? `<div style="color:var(--red);margin-top:4px;font-size:12px">${esc(j.error)}</div>` : ''}
-          </div>`;
-        }).join('') : '<div class="empty-state">暂无后台制作任务</div>';
-      } catch {}
+    function renderJobsList(jobs) {
+      const box = document.getElementById('jobs-list');
+      if (!box) return;
+      const stMap = { running: ['进行中', 'amber'], done: ['已完成', 'green'], failed: ['失败', 'red'] };
+      box.innerHTML = jobs.length ? jobs.map(j => {
+        const [stTxt, stCls] = stMap[j.status] || [j.status, ''];
+        return `<div style="padding:10px 12px;background:var(--surface-2);border-radius:10px;margin-bottom:8px;font-size:12.5px">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+            <strong>${esc(j.label)}</strong>
+            <span class="pill ${stCls}">${esc(stTxt)}</span>
+          </div>
+          <div style="font-size:11.5px;color:var(--muted);margin-top:3px">${esc(j.started_at)} → ${esc(j.finished_at || '处理中…')}</div>
+          <div style="font-size:12px;color:var(--text-2);margin-top:4px">${esc(jobSummaryText(j))}</div>
+          ${jobActionsHtml(j)}
+        </div>`;
+      }).join('') : '<div class="empty-state">暂无后台制作任务</div>';
     }
-    document.getElementById('btn-jobs-refresh').onclick = loadJobs;
+    async function loadJobs() { await refreshJobs(); }
+    document.getElementById('btn-jobs-refresh').onclick = () => refreshJobs();
 
     // ==================== 5. USAGE INSIGHTS ====================
     const LEGACY_CARD_TITLES = {
@@ -2126,31 +3166,33 @@
       `;
       renderBars('evo-apps', ana.by_app, k => k);
       document.getElementById('evo-top-cards').innerHTML = ana.top_cards.length
-        ? `<table><tr><th>思考卡片</th><th>采纳 / 出现</th><th>采纳率</th></tr>` + ana.top_cards.map(c => `<tr><td><strong>${esc(friendlyCardTitle(c.title))}</strong></td><td>${c.clicks} / ${c.impressions}</td><td><b>${Math.round(c.ctr * 100)}%</b></td></tr>`).join('') + `</table>`
+        ? `<table><tr><th>思考卡片</th><th>采纳 / 出现</th><th>采纳率</th></tr>` + ana.top_cards.map(c => `<tr><td><strong style="cursor:pointer" onclick="openLensById('${esc(c.id)}')" title="点击查看卡片详情">${esc(friendlyCardTitle(c.title))}</strong></td><td>${c.clicks} / ${c.impressions}</td><td><b>${Math.round(c.ctr * 100)}%</b></td></tr>`).join('') + `</table>`
         : '<div class="empty-state">平时在任意输入框双击右 Option 使用几次后，这里就会呈现你的常用卡片。</div>';
 
-      const demotes = (prop.demote_to_l3 || []).map(p => `<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;background:var(--surface-2);border-radius:10px;margin-bottom:8px"><div><strong style="font-size:13px">${esc(p.title)}</strong><div style="font-size:12px;color:var(--muted)">经常弹出但很少用到，可以先放回备用库</div></div><button class="btn xs danger" onclick="applyShelfProposal('${esc(p.id)}','off_shelf')">移至备用库</button></div>`).join('');
-      const promotes = (prop.promote_to_l4 || []).map(p => `<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;background:var(--surface-2);border-radius:10px;margin-bottom:8px"><div><strong style="font-size:13px">${esc(p.title)}</strong><div style="font-size:12px;color:var(--muted)">贴合你最近的需求，建议直接启用</div></div><button class="btn xs primary" onclick="applyShelfProposal('${esc(p.id)}','on_shelf')">立即启用</button></div>`).join('');
+      const demotes = (prop.demote_to_l3 || []).map(p => `<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;background:var(--surface-2);border-radius:10px;margin-bottom:8px"><div><strong style="font-size:13px;cursor:pointer" onclick="openLensById('${esc(p.id)}')" title="点击查看卡片详情">${esc(p.title)}</strong><div style="font-size:12px;color:var(--muted)">经常弹出但很少用到，可以先放回备用库</div></div><button class="btn xs danger" onclick="applyShelfProposal('${esc(p.id)}','off_shelf')">移至备用库</button></div>`).join('');
+      const promotes = (prop.promote_to_l4 || []).map(p => `<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;background:var(--surface-2);border-radius:10px;margin-bottom:8px"><div><strong style="font-size:13px;cursor:pointer" onclick="openLensById('${esc(p.id)}')" title="点击查看卡片详情">${esc(p.title)}</strong><div style="font-size:12px;color:var(--muted)">贴合你最近的需求，建议直接启用</div></div><button class="btn xs primary" onclick="applyShelfProposal('${esc(p.id)}','on_shelf')">立即启用</button></div>`).join('');
       document.getElementById('evo-proposals').innerHTML = (demotes + promotes) || '<div class="empty-state">✨ 你的卡片库当前非常清爽健康，暂无需要调整的项目。</div>';
 
       document.getElementById('evo-custom-list').innerHTML = ana.custom_intent_logs.length ? ana.custom_intent_logs.map(c => `
         <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;background:var(--surface-2);border-radius:10px;margin-bottom:8px">
           <div><strong style="font-size:13px">${esc(c.custom_intent)}</strong><div style="font-size:12px;color:var(--muted)">来自 ${esc(c.app_name)} · 原话：${esc(c.input_text)}</div></div>
-          <button class="btn xs primary" onclick="frictionToDraft(${esc(JSON.stringify(c.custom_intent))}, ${esc(JSON.stringify(c.input_text))})">一键做成卡片</button>
+          <button class="btn xs primary" onclick="frictionToDraft(${esc(JSON.stringify(c.custom_intent))}, ${esc(JSON.stringify(c.input_text))}, this)" data-tip="调用 AI 自动为这段自定义需求生成永久卡片（约 30 秒）">一键做成卡片</button>
         </div>`).join('') : '<div class="empty-state">暂无手动自定义记录。</div>';
     }
     window.applyShelfProposal = async (id, shelf) => {
       try {
         await api('api/overlays/' + encodeURIComponent(id), { method: 'PUT', body: JSON.stringify({ shelf }) });
         markPending(true);
-        toast('已调整卡片状态，点击左侧「应用更改」生效');
+        toast('已调整卡片状态，点击左侧「立即同步生效」生效');
         loadEvolution(); loadOverview();
       } catch (e) { toast('操作失败：' + e.message); }
     };
-    window.frictionToDraft = async (custom_intent, sample_input) => {
+    window.frictionToDraft = async (custom_intent, sample_input, btn) => {
       try {
-        await api('api/evolution/friction-to-draft', { method: 'POST', body: JSON.stringify({ custom_intent, sample_input }) });
-        toast('已开始为你制作这张新卡片，可在「制作新卡片」页查看进度');
+        await withBtnLoading(btn, '启动中…', '见右下角 ↘', async () => {
+          const res = await api('api/evolution/friction-to-draft', { method: 'POST', body: JSON.stringify({ custom_intent, sample_input }) });
+          trackStartedJob(res.job, '✨ 已开始为你制作新卡片！右下角可实时查看进度与预览');
+        });
       } catch (e) { toast('启动失败：' + e.message); }
     };
 
@@ -2189,8 +3231,8 @@
             <td>${esc(r.cosine)}</td>
             <td>${btHtml}</td>
             <td style="white-space:nowrap">
-              <button class="btn xs soft" onclick="calibrateBindTrigger('${esc(r.id)}')">+绑口语</button>
-              <button class="btn xs ${isOff ? 'primary' : 'danger'}" onclick="calibrateShelf('${esc(r.id)}','${isOff ? 'on_shelf' : 'off_shelf'}')">${isOff ? '启用' : '放备用'}</button>
+              <button class="btn xs soft" onclick="calibrateBindTrigger('${esc(r.id)}')" data-tip="把上面这句查询原话绑定给这张卡，下次说类似的话会优先推荐">+绑口语</button>
+              <button class="btn xs ${isOff ? 'primary' : 'danger'}" onclick="calibrateShelf('${esc(r.id)}','${isOff ? 'on_shelf' : 'off_shelf'}')" data-tip="${isOff ? '把这张卡从备用库启用到日常推荐' : '把这张卡放回备用库，平时不主动打扰'}">${isOff ? '启用' : '放备用'}</button>
             </td>
           </tr>`;
         }).join('') + `</table>` : '<div class="empty-state">无匹配结果</div>';
@@ -2204,7 +3246,7 @@
       try {
         await api(`api/overlays/${encodeURIComponent(id)}/add-trigger`, { method: 'POST', body: JSON.stringify({ utterance: state.lastRiQuery }) });
         markPending(true);
-        toast(`已绑定口语「${state.lastRiQuery.slice(0, 18)}」，点击左侧「应用更改」生效`);
+        toast(`已绑定口语「${state.lastRiQuery.slice(0, 18)}」，点击左侧「立即同步生效」生效`);
         await loadOverview();
       } catch (e) { toast('绑定失败：' + e.message); }
     };
@@ -2212,24 +3254,30 @@
       try {
         await api(`api/overlays/${encodeURIComponent(id)}`, { method: 'PUT', body: JSON.stringify({ shelf }) });
         markPending(true);
-        toast('已调整卡片状态，点击左侧「应用更改」生效');
+        toast('已调整卡片状态，点击左侧「立即同步生效」生效');
         await refreshAll();
       } catch (e) { toast('操作失败：' + e.message); }
     };
-    document.getElementById('btn-gap-save').onclick = async () => {
-      const q = state.lastRiQuery || document.getElementById('ri-query').value.trim();
-      if (!q) return;
-      try { await api('api/gaps', { method: 'POST', body: JSON.stringify({ query: q }) }); toast('已记入灵感缺口清单'); }
-      catch (e) { toast(e.message); }
-    };
-    document.getElementById('btn-gap-ai').onclick = async () => {
+    document.getElementById('btn-gap-save').onclick = async e => {
       const q = state.lastRiQuery || document.getElementById('ri-query').value.trim();
       if (!q) return;
       try {
-        await api('api/gaps', { method: 'POST', body: JSON.stringify({ query: q, note: '已触发 AI 制作' }) });
-        await api('api/evolution/friction-to-draft', { method: 'POST', body: JSON.stringify({ custom_intent: q, sample_input: q }) });
-        toast('已启动缺口 AI 制作任务');
-      } catch (e) { toast(e.message); }
+        await withBtnLoading(e.currentTarget, '记录中…', '已记入 ✓', async () => {
+          await api('api/gaps', { method: 'POST', body: JSON.stringify({ query: q }) });
+          toast('已记入「制作新卡片 → 待补充的灵感清单」');
+        });
+      } catch (err) { toast(err.message); }
+    };
+    document.getElementById('btn-gap-ai').onclick = async e => {
+      const q = state.lastRiQuery || document.getElementById('ri-query').value.trim();
+      if (!q) return;
+      try {
+        await withBtnLoading(e.currentTarget, '正在启动 AI…', '已启动，见右下角 ↘', async () => {
+          await api('api/gaps', { method: 'POST', body: JSON.stringify({ query: q, note: '已触发 AI 制作' }) }).catch(() => {});
+          const res = await api('api/evolution/friction-to-draft', { method: 'POST', body: JSON.stringify({ custom_intent: q, sample_input: q }) });
+          trackStartedJob(res.job, '✨ 已启动 AI 锻造！右下角实时展示进度，完成后可直接查看新卡片');
+        });
+      } catch (err) { toast('启动失败：' + err.message); }
     };
     document.getElementById('btn-gap-manual').onclick = () => {
       const q = state.lastRiQuery || document.getElementById('ri-query').value.trim();
@@ -2278,13 +3326,14 @@
           <td><b>${esc(it.title)}</b></td><td>${esc(it.repository)}</td><td style="color:var(--muted)">${esc(it.summary)}</td></tr>`).join('') + `</table>` : '<div class="empty-state">无匹配结果</div>';
       } catch (e) { toast('搜索失败：' + e.message); }
     };
-    document.getElementById('btn-atlas-import').onclick = async () => {
+    document.getElementById('btn-atlas-import').onclick = async e => {
       if (!state.atlasOffsets.size) return toast('请先勾选条目');
       try {
-        await api('api/forge/atlas-import', { method: 'POST', body: JSON.stringify({ offsets: Array.from(state.atlasOffsets) }) });
-        toast(`已启动导入 ${state.atlasOffsets.size} 条素材`);
-        loadJobs();
-      } catch (e) { toast('导入失败：' + e.message); }
+        await withBtnLoading(e.currentTarget, '启动导入…', '见右下角 ↘', async () => {
+          const res = await api('api/forge/atlas-import', { method: 'POST', body: JSON.stringify({ offsets: Array.from(state.atlasOffsets) }) });
+          trackStartedJob(res.job, `已启动导入 ${state.atlasOffsets.size} 条素材，右下角可见进度`);
+        });
+      } catch (err) { toast('导入失败：' + err.message); }
     };
     async function loadQuarantine() {
       try {
@@ -2318,16 +3367,45 @@
 
     // Apply Changes / Build / Rollback
     async function runApplyBuild(btn) {
-      const orig = btn.textContent;
-      btn.disabled = true; btn.textContent = '正在更新卡片库…';
+      const orig = btn ? btn.textContent : '';
+      if (btn) { btn.disabled = true; btn.textContent = '正在同步…'; }
+      const buildId = 'local_build_' + Date.now();
+      state.jobSeenAt[buildId] = Date.now();
+      state.localBuild = { id: buildId, kind: 'local_build', label: '同步更新卡片库索引', status: 'running' };
+      state.dockOpen = true;
+      state.dockCollapsed = false;
+      renderTaskDock();
+      ensureJobTimers();
       try {
         const r = await api('api/build', { method: 'POST' });
         markPending(false);
-        toast(`卡片库已更新！当前已启用 ${r.manifest.total_active_lenses} 张卡片`);
+        state.localBuild = {
+          id: buildId,
+          kind: 'local_build',
+          label: '同步更新卡片库索引',
+          status: 'done',
+          result: { total_active_lenses: r.manifest.total_active_lenses },
+        };
+        renderTaskDock();
+        ensureJobTimers();
+        toast(`✅ 卡片库已同步！当前 ${r.manifest.total_active_lenses} 张卡片已在快捷键浮窗中就绪`, 4500);
         await refreshAll();
-      } catch (e) { toast('更新失败：' + e.message); }
-      finally { btn.disabled = false; btn.textContent = orig; }
+      } catch (e) {
+        state.localBuild = {
+          id: buildId,
+          kind: 'local_build',
+          label: '同步更新卡片库索引',
+          status: 'failed',
+          error: e.message,
+        };
+        renderTaskDock();
+        ensureJobTimers();
+        toast('更新失败：' + e.message, 4500);
+      } finally {
+        if (btn) { btn.disabled = false; btn.textContent = orig; }
+      }
     }
+    window.runApplyBuild = runApplyBuild;
     document.getElementById('btn-apply-changes').onclick = e => runApplyBuild(e.currentTarget);
     document.getElementById('btn-sync-quick').onclick = e => runApplyBuild(e.currentTarget);
     document.getElementById('btn-build-dev').onclick = e => runApplyBuild(e.currentTarget);
@@ -2346,10 +3424,30 @@
       if (document.getElementById('view-library').classList.contains('active')) await loadLenses();
     }
 
+    // Global keyboard ergonomics (Esc closes modal/drawer, Cmd/Ctrl+K focuses search)
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        const modal = document.getElementById('lens-modal');
+        if (modal.classList.contains('open')) { modal.classList.remove('open'); return; }
+        const drawer = document.getElementById('home-teach-drawer');
+        if (drawer && drawer.style.display !== 'none') { drawer.style.display = 'none'; }
+      } else if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        if (document.getElementById('view-library').classList.contains('active')) {
+          document.getElementById('f-q').focus();
+        } else {
+          switchView('library');
+          setTimeout(() => document.getElementById('f-q').focus(), 40);
+        }
+      }
+    });
+
     // Boot
     applyTheme(state.theme);
     applyDevMode(state.devMode);
+    initGuideBanner();
     refreshAll();
+    refreshJobs({ openIfRecent: true });
   </script>
 </body>
 </html>

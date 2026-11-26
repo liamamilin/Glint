@@ -43,6 +43,10 @@ def apply_overlays(
                 lens.title = ov.title
             if ov.tagline is not None:
                 lens.tagline = ov.tagline
+            if ov.pain_point is not None and len(ov.pain_point.strip()) >= 4:
+                lens.routing.pain_point = ov.pain_point.strip()
+            if ov.content is not None and len(ov.content.strip()) >= 4:
+                lens.execution.content = ov.content.strip()
             if ov.status is not None:
                 lens.meta.status = ov.status
             if ov.tier is not None:
@@ -75,6 +79,11 @@ def apply_overlays(
                     if t_clean and t_clean not in merged_trigs:
                         merged_trigs.append(t_clean)
                 lens.routing.trigger_utterances = merged_trigs
+            if ov.remove_trigger_utterances:
+                rm_set = {t.strip() for t in ov.remove_trigger_utterances if t.strip()}
+                kept = [t for t in lens.routing.trigger_utterances if t.strip() not in rm_set]
+                if kept:
+                    lens.routing.trigger_utterances = kept
         merged.append(lens)
     return merged
 
