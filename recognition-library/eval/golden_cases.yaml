@@ -213,3 +213,11 @@ cases:
     expected_primitives: ["deconstruct", "converge", "translate"]
     expected_ids: ["pt_study_plan", "pt_choose_learning_resource", "disc_career_deliberate_skill_upgrade_sprint", "sit_os_02"]
     forbidden_ids: ["pt_brainstorm", "disc_content_workflow_as_asset"]
+
+  # 12. Ultra-short everyday explanation / identification query
+  - id: explain_ultra_short_what_is_this
+    app_name: "Gemini"
+    input_text: "这个是什么?"
+    expected_primitives: ["translate", "metacognize", "deconstruct"]
+    expected_ids: ["pt_explain", "cle_m1_r_c2_identification", "cle_m1_r_p7_expansion"]
+    forbidden_ids: ["pt_ask_for_help", "pt_how_to", "core_root_cause"]

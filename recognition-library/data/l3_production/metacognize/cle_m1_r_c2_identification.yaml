@@ -20,6 +20,9 @@ routing:
   - 这堆材料里到底在讨论什么对象，帮我指认一下
   - 感觉这里怪怪的但叫不出专业词，怎么描述它
   - 先帮我从这段素材里圈出可以分别讨论的内容
+  - 这个是什么
+  - 这是什么东西
+  - 这叫什么
   anti_triggers: []
 execution:
   action_type: inject_prompt

@@ -7,4 +7,19 @@
 #     title: "架构 MECE 拆解（精选）"
 #     base_weight: 1.3
 #     status: "active"   # 可设为 deprecated 一键下线某张卡
-overrides: {}
+overrides:
+  pt_explain:
+    add_trigger_utterances:
+      - "这个是什么"
+      - "这是什么意思"
+      - "帮我解释一下这个"
+      - "这是啥"
+  cle_m1_r_p7_expansion:
+    add_trigger_utterances:
+      - "这个是什么情况"
+      - "展开讲讲这个是什么"
+  cle_m1_r_c2_identification:
+    add_trigger_utterances:
+      - "这个是什么"
+      - "这是什么东西"
+      - "这叫什么"
