@@ -21,7 +21,7 @@ from pipeline.embed_client import DEFAULT_EMBED_MODEL, OllamaEmbedClient
 from pipeline.l0_to_l1 import run_l0_to_l1
 from pipeline.l1_to_l2 import compile_l1_to_l2, load_existing_l2_lenses
 from pipeline.l2_to_l3 import run_l2_to_l3
-from pipeline.ontology import LIB_ROOT, Ontology, load_policy, load_sources
+from pipeline.ontology import LIB_ROOT, Ontology, load_policy, load_sources, resolve_meta_vault_dir
 from pipeline.opencode_client import DEFAULT_MODEL, OpenCodeGoClient
 from pipeline.schema import L1Material
 
@@ -138,6 +138,7 @@ def cmd_validate(_: argparse.Namespace) -> int:
         LIB_ROOT / "data" / "l2_lenses",
         LIB_ROOT / "data" / "overlays" / "overrides.yaml",
         Ontology.load(),
+        meta_vault_dir=resolve_meta_vault_dir(),
     )
     if errors:
         print("VALIDATION FAILED:")
@@ -166,6 +167,7 @@ def cmd_clean_l3(args: argparse.Namespace) -> int:
         overlay_path=LIB_ROOT / "data" / "overlays" / "overrides.yaml",
         quarantine_dir=LIB_ROOT / "data" / "quarantine",
         embedder=embedder,
+        meta_vault_dir=resolve_meta_vault_dir(),
     )
     print(json.dumps(report.to_dict(), ensure_ascii=False, indent=2))
     return 0
@@ -184,6 +186,7 @@ def cmd_build(args: argparse.Namespace) -> int:
         quarantine_dir=LIB_ROOT / "data" / "quarantine",
         dist_dir=LIB_ROOT / "dist",
         embedder=embedder,
+        meta_vault_dir=resolve_meta_vault_dir(),
     )
     print(f"Built atomic release: {release_dir}")
     print(manifest.model_dump_json(indent=2))

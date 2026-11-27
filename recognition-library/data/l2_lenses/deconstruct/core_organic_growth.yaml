@@ -1,0 +1,51 @@
+id: core_organic_growth
+title: 有机生长式编排
+tagline: 拒绝静态摊开归类，从 1 个核心种子靠张力与问题逐阶长出完整体系
+routing:
+  primitive: deconstruct
+  goals:
+  - create
+  - optimize
+  - digest
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - knowledge_management
+  - writing
+  - curriculum_design
+  - architecture
+  app_affinity:
+  - Obsidian
+  - Notion
+  - ChatGPT
+  - Claude
+  pain_point: 整理一本书、课程或知识体系时，不想要生硬的“一二三四”静态目录或平行归类分组，而是想让概念由简入繁、顺着上一层暴露的局限与张力有机长出来
+  trigger_utterances:
+  - 帮我好好组织一下内容，不要一下子摊开简单归类，而是有机的生长
+  - 整理这本书或知识体系时，希望概念顺着问题一点点长出来
+  - 别给我一二三四静态目录树，按由简入繁的演化顺序编排内容
+  - 怎么把散乱的知识材料编排成有生命力、层层长出来的结构
+  - 反对生硬的平行分组，帮我用问题驱动的方式展开这份内容
+  - 用种子到生长的递进结构重构这份资料
+  - organize this book or knowledge system organically instead of flat categories
+  anti_triggers:
+  - 只需要快速提取 3 条要点摘要，不需编排结构
+  - 已经有确定好的一二三章目录只需逐字润色
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 请不要一上来摊开完整目录，也禁止做无因果关系的平行归类分组。请用“种子 → 张力 → 生长”的方式重构我上面提到的内容：1) 唯一核心种子：先只提炼 1 个最根本的问题或原动力，解释为什么一切都从这里长出；2) 逐阶有机生长（3–5 阶）：每往下一阶，只引入 1–2 个新概念或模块；且每个新节点必须显式写明“上一阶遇到了什么具体局限或张力，才逼出它的出现”；3) 生长边界：每一阶保持当前闭环完整，先不剧透后续高阶概念，让读者在当下就能看懂并推演下一步。
+  variables: []
+  workflow: null
+meta:
+  source: glint-core
+  source_ref: cards.yaml#organic_growth
+  source_hash: 6e1d4a8c3b9f7025e8a1c4d9b2f603a7c5e1d8b4f2a906c3e7d1b5a8f4c209e6
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  base_weight: 1.0
+  confidence: 0.95
+  version: 1

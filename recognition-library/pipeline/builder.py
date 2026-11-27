@@ -92,11 +92,16 @@ def validate_l2_repository(
     l2_dir: Path,
     overlay_path: Path,
     ontology: Ontology | None = None,
+    meta_vault_dir: Path | None = None,
 ) -> tuple[list[L2Lens], list[str]]:
     """Validate all L2 lenses + overlays against Ontology SSOT."""
     ont = ontology or Ontology.load()
     errors: list[str] = []
     lenses_map = load_existing_l2_lenses(l2_dir)
+    if meta_vault_dir is not None:
+        vault_l2 = meta_vault_dir / "l2_lenses"
+        if vault_l2.exists():
+            lenses_map.update(load_existing_l2_lenses(vault_l2))
     overlay = load_overlay(overlay_path)
 
     try:
@@ -146,6 +151,7 @@ def build_release(
     rules_path: Path = DEFAULT_CLEANING_RULES_PATH,
     ontology: Ontology | None = None,
     embedder: Embedder | None = None,
+    meta_vault_dir: Path | None = None,
 ) -> tuple[Path, BuildManifest]:
     """Run deterministic L2->L3 cleaning, build immutable dist/releases/<ver>/, and atomically flip dist/current."""
     ont = ontology or Ontology.load()
@@ -159,6 +165,7 @@ def build_release(
         ontology=ont,
         rules_path=rules_path,
         embedder=embedder,
+        meta_vault_dir=meta_vault_dir,
     )
     if not inventory:
         raise ValueError("No active L3 inventory lenses found after L2->L3 cleaning")

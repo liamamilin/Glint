@@ -126,7 +126,8 @@ def test_hot_reload_cards_yaml(tmp_path: Path) -> None:
     app = create_app(cfg, inference_client=fake)
 
     with TestClient(app) as client:
-        assert len(client.get("/cards").json()) == 8
+        initial_count = len(client.get("/cards").json())
+        assert initial_count >= 8
 
         # Append a new card and bump mtime
         updated = cfg.cards_path.read_text(encoding="utf-8") + (
@@ -142,7 +143,7 @@ def test_hot_reload_cards_yaml(tmp_path: Path) -> None:
         os.utime(cfg.cards_path, ns=(stat.st_atime_ns, stat.st_mtime_ns + 1_000_000))
 
         cards = client.get("/cards").json()
-        assert len(cards) == 9
+        assert len(cards) == initial_count + 1
         assert any(c["id"] == "first_principles" for c in cards)
 
 

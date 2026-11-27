@@ -312,7 +312,7 @@ def test_gate2_gate3_and_gate4_full_flow_with_rollback(tmp_path: Path) -> None:
 def test_glint_core_adapter_reads_existing_cards() -> None:
     cards_yaml = LIB_ROOT.parent / "brain-server" / "data" / "cards.yaml"
     mats = load_glint_core_l1(cards_yaml)
-    assert len(mats) == 8
+    assert len(mats) == 9
     assert all(m.source == "glint-core" for m in mats)
 
 
@@ -595,3 +595,112 @@ def test_declarative_shelf_rules_and_tier_s_protection(tmp_path: Path) -> None:
     assert "core_tier_s" not in demote_ids
     assert "eng_tier_a" in demote_ids
     assert proposals["evergreen_protected"] == 1
+
+
+def test_meta_vault_merges_without_polluting_public_l3(tmp_path: Path) -> None:
+    from pipeline.l2_to_l3 import run_l2_to_l3
+
+    pub_l2 = tmp_path / "pub" / "l2_lenses" / "deconstruct"
+    pub_l3 = tmp_path / "pub" / "l3_production"
+    overlay_path = tmp_path / "pub" / "overrides.yaml"
+    quarantine_dir = tmp_path / "pub" / "quarantine"
+    vault_dir = tmp_path / "meta-vault"
+    vault_l2 = vault_dir / "l2_lenses" / "translate"
+
+    pub_l2.mkdir(parents=True, exist_ok=True)
+    vault_l2.mkdir(parents=True, exist_ok=True)
+    overlay_path.write_text("overrides: {}\n", encoding="utf-8")
+
+    (pub_l2 / "pub_one.yaml").write_text(
+        yaml.safe_dump(
+            {
+                "id": "pub_one",
+                "title": "公开卡片",
+                "tagline": "公开一阶卡片测试",
+                "routing": {
+                    "primitive": "deconstruct",
+                    "goals": ["optimize"],
+                    "clarity_fit": ["concrete"],
+                    "domains": ["architecture"],
+                    "app_affinity": ["Cursor"],
+                    "pain_point": "架构混乱不知道从哪拆",
+                    "trigger_utterances": ["帮我拆解架构", "模块太乱了理一下"],
+                    "anti_triggers": [],
+                },
+                "execution": {
+                    "action_type": "inject_prompt",
+                    "inject_mode": "append",
+                    "content": "请帮我拆解这个架构。",
+                    "variables": [],
+                },
+                "meta": {
+                    "source": "glint-core",
+                    "source_ref": "test#pub_one",
+                    "source_hash": "abc123",
+                    "confidence": 0.95,
+                },
+            },
+            allow_unicode=True,
+            sort_keys=False,
+        ),
+        encoding="utf-8",
+    )
+
+    (vault_dir / "shelf_policy.yaml").write_text(
+        "evergreen_ids:\n  - secret_meta_one\n",
+        encoding="utf-8",
+    )
+    (vault_l2 / "secret_meta_one.yaml").write_text(
+        yaml.safe_dump(
+            {
+                "id": "secret_meta_one",
+                "title": "私有二阶算子",
+                "tagline": "私有二阶元认知卡片测试",
+                "routing": {
+                    "primitive": "translate",
+                    "goals": ["create"],
+                    "clarity_fit": ["vague"],
+                    "domains": ["prompt_engineering"],
+                    "app_affinity": ["Obsidian"],
+                    "pain_point": "把直觉转成可复用规则",
+                    "trigger_utterances": ["把直觉转成卡片", "锻造可复用提示词"],
+                    "anti_triggers": [],
+                },
+                "execution": {
+                    "action_type": "inject_prompt",
+                    "inject_mode": "append",
+                    "content": "请将我的直觉锻造为可复用卡片。",
+                    "variables": [],
+                },
+                "meta": {
+                    "source": "glint-core",
+                    "source_ref": "vault#secret",
+                    "source_hash": "def456",
+                    "confidence": 0.95,
+                },
+            },
+            allow_unicode=True,
+            sort_keys=False,
+        ),
+        encoding="utf-8",
+    )
+
+    kept, _, report = run_l2_to_l3(
+        l2_dir=tmp_path / "pub" / "l2_lenses",
+        l3_dir=pub_l3,
+        overlay_path=overlay_path,
+        quarantine_dir=quarantine_dir,
+        meta_vault_dir=vault_dir,
+    )
+
+    kept_ids = {l.id for l in kept}
+    assert kept_ids == {"pub_one", "secret_meta_one"}
+    assert report.total_l2_input == 1
+    assert report.total_l3_active == 1
+    assert (pub_l3 / "deconstruct" / "pub_one.yaml").exists()
+    assert not (pub_l3 / "translate" / "secret_meta_one.yaml").exists()
+    vault_l3_item = vault_dir / "l3_production" / "translate" / "secret_meta_one.yaml"
+    assert vault_l3_item.exists()
+    vault_loaded = yaml.safe_load(vault_l3_item.read_text(encoding="utf-8"))
+    assert vault_loaded["meta"]["shelf"] == "evergreen"
+    assert vault_loaded["meta"]["tier"] == "S"

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 import re
 from dataclasses import dataclass
 from pathlib import Path
@@ -10,9 +11,25 @@ from typing import Any
 import yaml
 
 LIB_ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = LIB_ROOT.parent
 DEFAULT_ONTOLOGY_PATH = LIB_ROOT / "config" / "ontology.yaml"
 DEFAULT_POLICY_PATH = LIB_ROOT / "config" / "routing_policy.yaml"
 DEFAULT_SOURCES_PATH = LIB_ROOT / "config" / "sources.yaml"
+
+
+def resolve_meta_vault_dir() -> Path | None:
+    """Locate optional private meta-cognitive vault without hardcoding private assets into public repo."""
+    env_val = os.getenv("GLINT_META_VAULT_DIR")
+    if env_val is not None:
+        stripped = env_val.strip()
+        if not stripped:
+            return None
+        candidate = Path(stripped).expanduser()
+        return candidate if candidate.exists() else None
+    for candidate in (REPO_ROOT / "meta-vault", Path.home() / ".glint" / "meta-vault"):
+        if candidate.exists():
+            return candidate
+    return None
 
 PLACEHOLDER_RE = re.compile(r"\{\{\s*([a-zA-Z0-9_.-]+)\s*\}\}")
 MALFORMED_BRACE_RE = re.compile(r"\{\{[^}]*$|^[^{]*\}\}|\{\{\s*\}\}")

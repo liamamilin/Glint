@@ -14,7 +14,8 @@ venv/
 *.egg-info/
 dist/
 
-# Glint runtime data (local privacy data, never commit)
+# Glint runtime data & private meta-cognitive vault (never commit)
+meta-vault/
 brain-server/data/usage.db
 brain-server/data/usage.db-wal
 brain-server/data/usage.db-shm

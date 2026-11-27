@@ -47,7 +47,14 @@ from pipeline.l2_to_l3 import (
     load_shelf_policy,
     load_taxonomy,
 )
-from pipeline.ontology import DEFAULT_POLICY_PATH, LIB_ROOT, Ontology, load_policy, load_sources
+from pipeline.ontology import (
+    DEFAULT_POLICY_PATH,
+    LIB_ROOT,
+    Ontology,
+    load_policy,
+    load_sources,
+    resolve_meta_vault_dir,
+)
 from pipeline.schema import LensOverride, make_stable_id
 
 ADMIN_DIR = Path(__file__).resolve().parent
@@ -867,6 +874,7 @@ def create_admin_app(router_skill: Any = None) -> FastAPI:
                 quarantine_dir=QUARANTINE_DIR,
                 dist_dir=DIST_DIR,
                 embedder=embedder,
+                meta_vault_dir=resolve_meta_vault_dir(),
             )
             lens_cache.clear()
             return release_dir, manifest
