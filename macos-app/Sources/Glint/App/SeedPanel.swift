@@ -173,7 +173,7 @@ final class SeedReaderPanel: NSPanel {
 
     init() {
         super.init(
-            contentRect: NSRect(x: 0, y: 0, width: 400, height: 320),
+            contentRect: NSRect(x: 0, y: 0, width: 420, height: 360),
             styleMask: [.borderless, .nonactivatingPanel],
             backing: .buffered,
             defer: false
@@ -190,20 +190,22 @@ final class SeedReaderPanel: NSPanel {
 
     func present<Content: View>(rootView: Content, anchoredTo anchorFrame: NSRect) {
         fadeGeneration += 1
-        let hosting = NSHostingView(rootView: rootView)
-        hosting.frame = NSRect(x: 0, y: 0, width: 400, height: 460)
-        hosting.layoutSubtreeIfNeeded()
-        let fitting = hosting.fittingSize
-        let size = CGSize(width: 400, height: max(180, min(520, ceil(fitting.height))))
-        hosting.frame = NSRect(origin: .zero, size: size)
-        contentView = hosting
-        setContentSize(size)
 
         let center = NSPoint(x: anchorFrame.midX, y: anchorFrame.midY)
         let screen = NSScreen.screens.first { $0.frame.contains(center) }
             ?? NSScreen.main
             ?? NSScreen.screens.first
         let visible = screen?.visibleFrame ?? NSRect(x: 0, y: 0, width: 1440, height: 900)
+        let maxPanelHeight = min(700.0, floor(visible.height * 0.80))
+
+        let hosting = NSHostingView(rootView: rootView)
+        hosting.frame = NSRect(x: 0, y: 0, width: 420, height: maxPanelHeight)
+        hosting.layoutSubtreeIfNeeded()
+        let fitting = hosting.fittingSize
+        let size = CGSize(width: 420, height: max(220, min(maxPanelHeight, ceil(fitting.height))))
+        hosting.frame = NSRect(origin: .zero, size: size)
+        contentView = hosting
+        setContentSize(size)
 
         var x = anchorFrame.maxX - size.width
         var y = anchorFrame.maxY + 10

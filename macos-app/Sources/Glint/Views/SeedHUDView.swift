@@ -384,197 +384,271 @@ struct SeedReaderView: View {
         }
     }
 
+    private func seedTierFriendlyLabel(_ seed: SeedItem) -> String {
+        if seed.isL3Discovery { return "✦ 备用探索" }
+        switch seed.tier.uppercased() {
+        case "S": return "核心常驻"
+        case "A": return "常用精品"
+        default: return "场景工具"
+        }
+    }
+
+    private func formatDisplayPrompt(_ raw: String) -> String {
+        raw
+            .components(separatedBy: "\n")
+            .map { line in
+                let trimmed = line.trimmingCharacters(in: .whitespaces)
+                if trimmed.hasPrefix("- [ ] ") {
+                    return "☐ " + trimmed.dropFirst(6)
+                } else if trimmed.hasPrefix("-[ ] ") {
+                    return "☐ " + trimmed.dropFirst(5)
+                } else if trimmed.hasPrefix("- [x] ") || trimmed.hasPrefix("- [X] ") {
+                    return "☑ " + trimmed.dropFirst(6)
+                }
+                return line
+            }
+            .joined(separator: "\n")
+    }
+
     var body: some View {
         if let seed = controller.currentSeed {
             let vars = extractSeedVariables(from: seed.prompt)
             let hasInputSlot = seed.prompt.contains("{{input}}")
+            let hasFillers = !vars.isEmpty || hasInputSlot
 
-            VStack(alignment: .leading, spacing: 10) {
-                // Header
-                HStack(spacing: 6) {
-                    Circle()
-                        .fill(seedPrimitiveColor(seed.primitive))
-                        .frame(width: 7, height: 7)
+            VStack(alignment: .leading, spacing: 13) {
+                // Header + Title block (single-line clean meta + 10px breathing space + 17px bold headline)
+                VStack(alignment: .leading, spacing: 10) {
+                    HStack(spacing: 6) {
+                        Circle()
+                            .fill(seedPrimitiveColor(seed.primitive))
+                            .frame(width: 7, height: 7)
 
-                    Text(seed.isL3Discovery ? "\(seedCategoryLabel(seed.category)) · ✦ L3 休眠探索" : "\(seedCategoryLabel(seed.category)) · L4 Tier \(seed.tier)")
-                        .font(.system(size: 10.5, weight: .medium))
-                        .foregroundStyle(
-                            seed.isL3Discovery
-                                ? Color(red: 0.78, green: 0.62, blue: 0.98)
-                                : Color.primary.opacity(0.76)
-                        )
+                        Text("\(seedCategoryLabel(seed.category)) · \(seedTierFriendlyLabel(seed))")
+                            .font(.system(size: 11, weight: .medium))
+                            .foregroundStyle(
+                                seed.isL3Discovery
+                                    ? Color(red: 0.78, green: 0.62, blue: 0.98)
+                                    : Color.primary.opacity(0.68)
+                            )
 
-                    if !seed.source.isEmpty {
-                        Text("· \(seed.source)")
-                            .font(.system(size: 10))
-                            .foregroundStyle(Color.primary.opacity(0.58))
-                            .lineLimit(1)
+                        Spacer()
+
+                        Button {
+                            controller.closeReader()
+                        } label: {
+                            Text("Esc")
+                                .font(.system(size: 10, weight: .medium, design: .monospaced))
+                                .foregroundStyle(Color.primary.opacity(0.72))
+                                .padding(.horizontal, 6.5)
+                                .padding(.vertical, 2.5)
+                                .background(Color.primary.opacity(0.11), in: RoundedRectangle(cornerRadius: 5, style: .continuous))
+                        }
+                        .buttonStyle(.plain)
                     }
 
-                    Spacer()
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(seed.title)
+                            .font(.system(size: 17, weight: .bold))
+                            .foregroundStyle(Color.primary)
 
-                    if let pct = seed.probability_pct, pct > 0 {
-                        Text(String(format: "%.2f%%", pct))
-                            .font(.system(size: 9.5, design: .monospaced))
-                            .foregroundStyle(Color.primary.opacity(0.62))
-                    }
-
-                    Button {
-                        controller.closeReader()
-                    } label: {
-                        Text("Esc")
-                            .font(.system(size: 9.5, weight: .medium, design: .monospaced))
-                            .foregroundStyle(Color.primary.opacity(0.74))
-                            .padding(.horizontal, 6)
-                            .padding(.vertical, 2)
-                            .background(Color.primary.opacity(0.12), in: RoundedRectangle(cornerRadius: 4, style: .continuous))
-                    }
-                    .buttonStyle(.plain)
-                }
-
-                if let reason = seed.reason_tag, !reason.isEmpty {
-                    Text(reason)
-                        .font(.system(size: 10.5))
-                        .foregroundStyle(Color.primary.opacity(0.68))
-                }
-
-                // Title & tagline
-                VStack(alignment: .leading, spacing: 3) {
-                    Text(seed.title)
-                        .font(.system(size: 15, weight: .semibold))
-                        .foregroundStyle(Color.primary)
-
-                    if !seed.tagline.isEmpty {
-                        Text(seed.tagline)
-                            .font(.system(size: 11.5))
-                            .foregroundStyle(Color.primary.opacity(0.82))
+                        if !seed.tagline.isEmpty {
+                            Text(seed.tagline)
+                                .font(.system(size: 12))
+                                .foregroundStyle(Color.primary.opacity(0.76))
+                                .lineSpacing(2)
+                        }
                     }
                 }
 
-                // Pain point / blind-spot signal
+                // Pain point / blind-spot signal (quiet secondary note so hero prompt card owns focal weight)
                 if !seed.pain_point.isEmpty && seed.pain_point != seed.tagline {
                     VStack(alignment: .leading, spacing: 4) {
                         Text("适用场景 / 盲区信号")
                             .font(.system(size: 10, weight: .semibold))
-                            .foregroundStyle(Color.primary.opacity(0.68))
+                            .foregroundStyle(Color.primary.opacity(0.54))
                         Text(seed.pain_point)
                             .font(.system(size: 11.5))
-                            .foregroundStyle(Color.primary.opacity(0.94))
+                            .foregroundStyle(Color.primary.opacity(0.80))
+                            .lineSpacing(3)
                             .fixedSize(horizontal: false, vertical: true)
                     }
-                    .padding(9)
+                    .padding(.horizontal, 11)
+                    .padding(.vertical, 8)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(Color.primary.opacity(0.07), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 8, style: .continuous)
-                            .strokeBorder(Color.primary.opacity(0.08), lineWidth: 0.5)
-                    )
+                    .background(Color.primary.opacity(0.038), in: RoundedRectangle(cornerRadius: 9, style: .continuous))
                 }
 
-                // Inline variable fill-in (when prompt contains placeholders or {{input}})
-                if !vars.isEmpty || hasInputSlot {
-                    VStack(alignment: .leading, spacing: 5) {
+                // Inline variable fill-in: compact 2-column grid (saves ~80-110px vertical height!)
+                if hasFillers {
+                    VStack(alignment: .leading, spacing: 6) {
                         Text("就地填空（可选，复制/直达 AI 时自动代入）")
-                            .font(.system(size: 10, weight: .semibold))
-                            .foregroundStyle(Color.primary.opacity(0.52))
-                        ForEach(vars, id: \.self) { token in
-                            TextField(
-                                cleanPlaceholderLabel(token),
-                                text: Binding(
-                                    get: { variableValues[token] ?? "" },
-                                    set: { variableValues[token] = $0 }
-                                )
-                            )
-                            .textFieldStyle(.roundedBorder)
-                            .font(.system(size: 11))
+                            .font(.system(size: 10.5, weight: .semibold))
+                            .foregroundStyle(Color.primary.opacity(0.60))
+
+                        if !vars.isEmpty {
+                            let columns = vars.count == 1
+                                ? [GridItem(.flexible())]
+                                : [GridItem(.flexible(), spacing: 8), GridItem(.flexible(), spacing: 8)]
+                            LazyVGrid(columns: columns, spacing: 6) {
+                                ForEach(vars, id: \.self) { token in
+                                    SeedCompactTextField(
+                                        placeholder: cleanPlaceholderLabel(token),
+                                        text: Binding(
+                                            get: { variableValues[token] ?? "" },
+                                            set: { variableValues[token] = $0 }
+                                        )
+                                    )
+                                }
+                            }
                         }
+
                         if hasInputSlot {
-                            TextField("补充你的具体问题或上下文（可选）…", text: $quickInputText)
-                                .textFieldStyle(.roundedBorder)
-                                .font(.system(size: 11))
+                            SeedCompactTextField(
+                                placeholder: "补充你的具体问题或上下文（可选）…",
+                                text: $quickInputText
+                            )
                         }
                     }
                 }
 
-                // Prompt body + Copy + Direct AI launchers
-                VStack(alignment: .leading, spacing: 6) {
-                    HStack {
+                // Prompt body (sole elevated hero surface, soft bottom fade prevents hard line clipping)
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack(alignment: .center) {
                         Text("认知指令本体")
-                            .font(.system(size: 10, weight: .semibold))
+                            .font(.system(size: 10.5, weight: .semibold))
                             .foregroundStyle(Color.primary.opacity(0.68))
                         Spacer()
                         Button {
                             controller.copyPromptText(resolvedPrompt(for: seed), feedbackLabel: "已复制指令")
                         } label: {
-                            HStack(spacing: 4) {
+                            HStack(spacing: 4.5) {
                                 Image(systemName: controller.copiedFeedback ? "checkmark" : "doc.on.doc")
-                                    .font(.system(size: 9.5, weight: .semibold))
+                                    .font(.system(size: 10, weight: .semibold))
                                 Text(controller.copiedFeedback ? controller.copyFeedbackText : "复制指令")
-                                    .font(.system(size: 10.5, weight: .semibold))
+                                    .font(.system(size: 11, weight: .semibold))
                             }
-                            .foregroundStyle(controller.copiedFeedback ? Color.green : Color.accentColor)
+                            .foregroundStyle(controller.copiedFeedback ? Color.green : Color(red: 0.45, green: 0.72, blue: 1.0))
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 4)
+                            .background(
+                                (controller.copiedFeedback ? Color.green : Color.accentColor).opacity(0.18),
+                                in: RoundedRectangle(cornerRadius: 6, style: .continuous)
+                            )
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 6, style: .continuous)
+                                    .strokeBorder(
+                                        (controller.copiedFeedback ? Color.green : Color.accentColor).opacity(0.36),
+                                        lineWidth: 0.75
+                                    )
+                            )
                         }
                         .buttonStyle(.plain)
                     }
 
-                    ScrollView {
-                        Text(
-                            resolvedPrompt(for: seed).isEmpty
-                                ? seed.prompt.replacingOccurrences(of: "{{input}}", with: "「你的输入」")
-                                : resolvedPrompt(for: seed)
-                        )
-                        .font(.system(size: 11.5))
-                        .foregroundStyle(Color.primary.opacity(0.95))
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .textSelection(.enabled)
-                    }
-                    .frame(maxHeight: 144)
+                    let displayBody = formatDisplayPrompt(
+                        resolvedPrompt(for: seed).isEmpty
+                            ? seed.prompt.replacingOccurrences(of: "{{input}}", with: "「你的输入」")
+                            : resolvedPrompt(for: seed)
+                    )
 
-                    // Direct AI launch bar
+                    ScrollView {
+                        Text(displayBody)
+                            .font(.system(size: 12.5))
+                            .foregroundStyle(Color.primary.opacity(0.95))
+                            .lineSpacing(4.5)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .padding(.bottom, 18)
+                            .textSelection(.enabled)
+                    }
+                    .scrollIndicators(.visible)
+                    .frame(
+                        minHeight: 118,
+                        idealHeight: hasFillers ? 158 : 210,
+                        maxHeight: hasFillers ? 195 : 255
+                    )
+                    .mask(
+                        LinearGradient(
+                            stops: [
+                                .init(color: .black, location: 0.0),
+                                .init(color: .black, location: 0.88),
+                                .init(color: .clear, location: 1.0)
+                            ],
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                    )
+                    .layoutPriority(1)
+
+                    Rectangle()
+                        .fill(Color.primary.opacity(0.11))
+                        .frame(height: 0.75)
+
+                    // Direct AI launch bar (cleanly separated from prompt body)
                     HStack(spacing: 6) {
                         Text("直达：")
-                            .font(.system(size: 10))
-                            .foregroundStyle(Color.primary.opacity(0.66))
+                            .font(.system(size: 10.5))
+                            .foregroundStyle(Color.primary.opacity(0.64))
                         ForEach([("ChatGPT", "chatgpt"), ("Claude", "claude"), ("Gemini", "gemini")], id: \.1) { label, key in
                             Button {
                                 launchAI(provider: key, label: label, seed: seed)
                             } label: {
                                 Text("\(label) ↗")
-                                    .font(.system(size: 10, weight: .medium))
-                                    .padding(.horizontal, 7)
-                                    .padding(.vertical, 3)
-                                    .background(Color.primary.opacity(0.11), in: RoundedRectangle(cornerRadius: 5, style: .continuous))
+                                    .font(.system(size: 10.5, weight: .medium))
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 3.5)
+                                    .background(Color.primary.opacity(0.10), in: RoundedRectangle(cornerRadius: 6, style: .continuous))
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 6, style: .continuous)
+                                            .strokeBorder(Color.primary.opacity(0.12), lineWidth: 0.5)
+                                    )
                                     .foregroundStyle(Color.primary.opacity(0.92))
                             }
                             .buttonStyle(.plain)
                         }
                         Spacer()
                     }
+                    .padding(.top, 2)
                 }
-                .padding(9)
-                .background(Color.primary.opacity(0.065), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                .padding(.horizontal, 12)
+                .padding(.vertical, 11)
+                .background(Color.primary.opacity(0.07), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
                 .overlay(
-                    RoundedRectangle(cornerRadius: 8, style: .continuous)
-                        .strokeBorder(Color.primary.opacity(0.08), lineWidth: 0.5)
+                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                        .strokeBorder(Color.primary.opacity(0.11), lineWidth: 0.75)
                 )
 
-                // Trigger utterances
+                // Trigger utterances: crisp left-aligned pill list (zero Chinese quote overhang)
                 if !seed.trigger_utterances.isEmpty {
-                    VStack(alignment: .leading, spacing: 4) {
+                    VStack(alignment: .leading, spacing: 6) {
                         Text("下次遇到时，直接这样呼出")
-                            .font(.system(size: 10, weight: .semibold))
-                            .foregroundStyle(Color.primary.opacity(0.68))
-                        Text(seed.trigger_utterances.prefix(3).map { "「\($0)」" }.joined(separator: "  "))
-                            .font(.system(size: 10.5))
-                            .foregroundStyle(Color.primary.opacity(0.82))
-                            .fixedSize(horizontal: false, vertical: true)
+                            .font(.system(size: 10.5, weight: .semibold))
+                            .foregroundStyle(Color.primary.opacity(0.60))
+
+                        VStack(alignment: .leading, spacing: 4) {
+                            ForEach(Array(seed.trigger_utterances.prefix(3)), id: \.self) { phrase in
+                                Text(phrase)
+                                    .font(.system(size: 11))
+                                    .foregroundStyle(Color.primary.opacity(0.84))
+                                    .lineLimit(1)
+                                    .truncationMode(.tail)
+                                    .padding(.horizontal, 9)
+                                    .padding(.vertical, 4.5)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .background(
+                                        Color.primary.opacity(0.045),
+                                        in: RoundedRectangle(cornerRadius: 6, style: .continuous)
+                                    )
+                            }
+                        }
                     }
                 }
 
-                Divider().opacity(0.28)
+                Divider().opacity(0.24)
 
                 // Footer actions
-                HStack(spacing: 10) {
+                HStack(spacing: 12) {
                     Button {
                         controller.snoozeCurrent(days: 7)
                     } label: {
@@ -603,16 +677,17 @@ struct SeedReaderView: View {
                             Image(systemName: "arrow.right")
                         }
                         .font(.system(size: 11, weight: .semibold))
-                        .foregroundStyle(Color.primary.opacity(0.95))
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 5)
-                        .background(Color.primary.opacity(0.14), in: RoundedRectangle(cornerRadius: 7, style: .continuous))
+                        .foregroundStyle(Color.primary.opacity(0.92))
+                        .padding(.horizontal, 11)
+                        .padding(.vertical, 5.5)
+                        .background(Color.primary.opacity(0.12), in: RoundedRectangle(cornerRadius: 7, style: .continuous))
                     }
                     .buttonStyle(.plain)
                 }
             }
-            .padding(14)
-            .frame(width: 400)
+            .padding(.horizontal, 18)
+            .padding(.vertical, 16)
+            .frame(width: 420)
             .background(GlintGlassBackground(cornerRadius: 16))
             .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
             .overlay(GlintGlassBorder(cornerRadius: 16, emphasized: true))
@@ -621,5 +696,33 @@ struct SeedReaderView: View {
                 quickInputText = ""
             }
         }
+    }
+}
+
+/// Clean border-aligned compact input without macOS's loud default focus halo.
+private struct SeedCompactTextField: View {
+    let placeholder: String
+    @Binding var text: String
+
+    var body: some View {
+        ZStack(alignment: .leading) {
+            if text.isEmpty {
+                Text(placeholder)
+                    .font(.system(size: 11.5))
+                    .foregroundStyle(Color.primary.opacity(0.48))
+                    .lineLimit(1)
+            }
+            TextField("", text: $text)
+                .textFieldStyle(.plain)
+                .font(.system(size: 11.5))
+                .foregroundStyle(Color.primary.opacity(0.95))
+        }
+        .padding(.horizontal, 9)
+        .padding(.vertical, 6)
+        .background(Color.primary.opacity(0.06), in: RoundedRectangle(cornerRadius: 7, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 7, style: .continuous)
+                .strokeBorder(Color.primary.opacity(0.14), lineWidth: 0.65)
+        )
     }
 }
