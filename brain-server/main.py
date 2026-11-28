@@ -26,6 +26,8 @@ from models import (
     SeedFeedbackRequest,
     SeedFeedbackResponse,
     SeedItem,
+    SeedPinnedUpdateRequest,
+    SeedPinnedUpdateResponse,
     SeedPoolMode,
     SeedPoolResponse,
     SeedStateEntry,
@@ -174,6 +176,7 @@ def create_app(
             total_l3=len(l3_lenses),
             muted_count=muted_count,
             snoozed_count=snoozed_count,
+            pinned_count=len(seed_store.get_pinned_ids()),
             release_version=getattr(cognitive_skill, "release_version", None),
         )
 
@@ -196,6 +199,7 @@ def create_app(
             total_l3=len(l3_lenses),
             muted_count=muted_count,
             snoozed_count=snoozed_count,
+            pinned_count=len(seed_store.get_pinned_ids()),
             release_version=getattr(cognitive_skill, "release_version", None),
         )
 
@@ -207,12 +211,27 @@ def create_app(
             snooze_days=request.snooze_days,
             category=request.category,
         )
-        return SeedFeedbackResponse(ok=True, muted_count=muted_count, snoozed_count=snoozed_count)
+        return SeedFeedbackResponse(
+            ok=True,
+            muted_count=muted_count,
+            snoozed_count=snoozed_count,
+            pinned_count=len(seed_store.get_pinned_ids()),
+        )
+
+    @app.put("/seed/pinned", response_model=SeedPinnedUpdateResponse)
+    async def seed_update_pinned(request: SeedPinnedUpdateRequest) -> SeedPinnedUpdateResponse:
+        updated = seed_store.set_pinned(request.ids, mode=request.mode)
+        return SeedPinnedUpdateResponse(ok=True, pinned_ids=updated, pinned_count=len(updated))
 
     @app.post("/seed/reset", response_model=SeedFeedbackResponse)
     async def seed_reset() -> SeedFeedbackResponse:
         muted_count, snoozed_count = seed_store.reset_all()
-        return SeedFeedbackResponse(ok=True, muted_count=muted_count, snoozed_count=snoozed_count)
+        return SeedFeedbackResponse(
+            ok=True,
+            muted_count=muted_count,
+            snoozed_count=snoozed_count,
+            pinned_count=len(seed_store.get_pinned_ids()),
+        )
 
     @app.get("/seed/state", response_model=SeedStateResponse)
     async def seed_state() -> SeedStateResponse:
@@ -254,10 +273,28 @@ def create_app(
                     remaining_days=rem_days,
                 )
             )
+        muted_set = set(st["muted_ids"])
+        active_pinned_ids = [lid for lid in st["pinned_ids"] if lid not in muted_set]
+        pinned_items: list[SeedStateEntry] = []
+        for lid in active_pinned_ids:
+            lens, layer = index.get(lid, ({}, "L4"))
+            meta = lens.get("meta") or {}
+            pinned_items.append(
+                SeedStateEntry(
+                    id=lid,
+                    title=str(lens.get("title") or lid),
+                    layer=layer,
+                    tier=str(meta.get("tier") or "B"),
+                    category=str(meta.get("category") or "general"),
+                    status="pinned",
+                )
+            )
 
         return SeedStateResponse(
             config=SeedConfigModel(**st["config"]),
             hidden_items=hidden_items,
+            pinned_items=pinned_items,
+            pinned_ids=active_pinned_ids,
             skip_counts=st["skip_counts"],
             category_interest=st["category_interest"],
             recent_shown_count=len(st["recent_shown"]),

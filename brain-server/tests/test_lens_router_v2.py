@@ -482,3 +482,125 @@ def test_v2_vague_signal_and_quality_gated_orthogonality(tmp_path: Path) -> None
         assert "lens_premortem" not in got_ids
         # Strictly 3 distinct primitives preserved
         assert len({c["primitive"] for c in r["cards"]}) == 3
+
+
+def test_workflow_does_not_hijack_unrelated_query(tmp_path: Path) -> None:
+    dist_current = _build_mock_dist(tmp_path, "v1")
+    lenses_path = dist_current / "lenses.json"
+    lenses = json.loads(lenses_path.read_text(encoding="utf-8"))
+    lenses[0]["execution"]["workflow"] = {
+        "workflow_id": "arch-to-premortem",
+        "step": 1,
+        "next_lens_id": "lens_premortem",
+    }
+    lenses_path.write_text(json.dumps(lenses, ensure_ascii=False), encoding="utf-8")
+
+    # Orthogonal embedding [0, 1, 0, 0] aligns with writing lens, far from lens_premortem [0.8, 0.2, 0, 0] (cos=0.2 < 0.45)
+    fake = FakeDualInferenceClient(
+        chat_response=json.dumps({"picks": [1, 2, 3], "primitive": "deconstruct", "goal": "create", "clarity": "concrete"}),
+        embed_vec=[0.0, 1.0, 0.0, 0.0],
+    )
+    cfg = Settings(dist_dir=dist_current, db_path=tmp_path / "u_wf.db", warmup_on_startup=False)
+    app = create_app(cfg, inference_client=fake)
+    with TestClient(app) as client:
+        client.post(
+            "/feedback",
+            json={
+                "app_name": "Cursor",
+                "input_text": "拆解架构",
+                "recommended_ids": ["lens_arch_mece", "lens_premortem", "lens_clarify"],
+                "selected_id": "lens_arch_mece",
+            },
+        )
+        r = client.post(
+            "/route",
+            json={"app_name": "Cursor", "input_text": "帮我把这段报错翻译成英文并整理成周报"},
+        ).json()
+        assert not any(c["is_workflow_next"] for c in r["cards"])
+
+
+def test_l3_breakthrough_raw_logit_gate_and_inspect_score_parity(tmp_path: Path) -> None:
+    dist_current = _build_mock_dist(tmp_path, "v1")
+    lenses_path = dist_current / "lenses.json"
+    lenses = json.loads(lenses_path.read_text(encoding="utf-8"))
+    lenses[0]["meta"]["shelf"] = "evergreen"
+    lenses[0]["meta"]["scope"] = "universal"
+    lenses_path.write_text(json.dumps(lenses, ensure_ascii=False), encoding="utf-8")
+
+    shadow_lenses = [
+        {
+            "id": "l3_shadow_win",
+            "title": "Tokio 死锁诊断",
+            "tagline": "定位异步锁问题",
+            "routing": {
+                "primitive": "translate",
+                "goals": ["debug"],
+                "clarity_fit": ["concrete"],
+                "domains": ["general"],
+                "app_affinity": [],
+                "pain_point": "异步阻塞",
+                "trigger_utterances": ["tokio deadlock", "异步锁"],
+            },
+            "execution": {"action_type": "inject_prompt", "inject_mode": "append", "content": "诊断死锁。"},
+            "meta": {"source": "atlas-methods", "shelf": "off_shelf", "tier": "B", "category": "general", "base_weight": 1.0},
+            "_manual_off_shelf": False,
+        }
+    ]
+    (dist_current / "l3_shadow_lenses.json").write_text(json.dumps(shadow_lenses, ensure_ascii=False), encoding="utf-8")
+    np.savez_compressed(
+        dist_current / "l3_shadow_embeddings.npz",
+        ids=np.array(["l3_shadow_win"]),
+        vectors=np.array([[1.0, 0.0, 0.0, 0.0]], dtype=np.float32),
+    )
+
+    # L4 evergreen raw logit 0.0 (with +0.45 evergreen boost => 0.45+), L3 raw logit 1.65 (delta 1.65 >= 1.5!)
+    reranker = FakeReranker({"架构MECE": 0.0, "Tokio 死锁": 1.65, "事前验尸": -0.2, "先反问": -0.4})
+    fake_inf = FakeDualInferenceClient(chat_response="{}", embed_vec=[1.0, 0.0, 0.0, 0.0])
+    app = create_app(
+        Settings(dist_dir=dist_current, db_path=tmp_path / "u_bt.db", warmup_on_startup=False),
+        inference_client=fake_inf,
+        reranker_client=reranker,
+    )
+    with TestClient(app) as client:
+        r = client.post("/route", json={"app_name": "Notes", "input_text": "tokio deadlock"}).json()
+        assert r["cards"][0]["id"] == "l3_shadow_win"
+        assert r["cards"][0]["is_l3_breakthrough"] is True
+        scores = [c["score"] for c in r["cards"]]
+        assert scores == sorted(scores, reverse=True)
+
+        insp = client.post("/admin/api/inspect-recall", json={"query": "tokio deadlock", "app_name": "Notes", "top_k": 10}).json()
+        insp_by_id = {row["id"]: row for row in insp["ranked_all"]}
+        for card in r["cards"]:
+            assert card["id"] in insp_by_id
+
+
+def test_redaction_rules_blank_validation_and_seed_backup(tmp_path: Path) -> None:
+    import pytest
+    from pydantic import ValidationError
+
+    from logger import redact_sensitive_text
+    from models import FeedbackRequest, RouteRequest
+    from seed_store import SeedStore
+
+    samples = [
+        ("sk_live_51ABC1234567890xyz", "[REDACTED_KEY]"),
+        ("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjMifQ.abcDEF1234567890", "[REDACTED_JWT]"),
+        ("https://admin:SuperSecret99@db.local:5432/app", "https://admin:[REDACTED]@db.local:5432/app"),
+        ("我的密码：MySecret123", "我的密码：[REDACTED]"),
+        ('password = "my secret phrase"', 'password = "[REDACTED]"'),
+        ("password=abc", "password=[REDACTED]"),
+    ]
+    for raw, expected in samples:
+        assert redact_sensitive_text(raw) == expected
+
+    with pytest.raises(ValidationError):
+        RouteRequest(input_text="   \n\t ")
+    with pytest.raises(ValidationError):
+        FeedbackRequest(input_text="   ")
+
+    seed_file = tmp_path / "seed_state.json"
+    seed_file.write_text("{corrupt json", encoding="utf-8")
+    store = SeedStore(seed_file)
+    st = store.get_state_snapshot()
+    assert st["muted_ids"] == []
+    assert list(tmp_path.glob("seed_state.json.corrupt.*.bak"))

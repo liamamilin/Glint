@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 import time
 from pathlib import Path
 from typing import Any
@@ -12,7 +13,8 @@ import yaml
 from pipeline.adapters.atlas_l0 import load_atlas_l0_sample
 from pipeline.l0_to_l1 import run_l0_to_l1
 from pipeline.l1_to_l2 import compile_l1_to_l2
-from pipeline.ontology import LIB_ROOT, load_sources
+from pipeline.l2_to_l3 import load_taxonomy
+from pipeline.ontology import LIB_ROOT, Ontology, load_sources
 from pipeline.opencode_client import DEFAULT_MODEL, OpenCodeGoClient
 from pipeline.schema import (
     L0RawItem,
@@ -53,6 +55,179 @@ FORGE_PROMPT = """你是 Glint（微光）的领域冷启动引擎（Glint Forge
 """
 
 
+_FENCED_BLOCK_RE = re.compile(r"```(?:yaml|yml|json|glint-card)?\s*\r?\n([\s\S]*?)(?:\r?\n)?```", re.IGNORECASE)
+
+_PRIMITIVE_CN_MAP = {
+    "降噪压缩": "compress",
+    "压缩": "compress",
+    "解构建模": "deconstruct",
+    "拆解": "deconstruct",
+    "批判排雷": "critique",
+    "批判": "critique",
+    "发散联想": "diverge",
+    "发散": "diverge",
+    "收敛决策": "converge",
+    "收敛": "converge",
+    "转译重构": "translate",
+    "转译": "translate",
+    "元认知追问": "metacognize",
+    "元认知": "metacognize",
+}
+
+
+def parse_card_import_text(
+    raw_text: str,
+    *,
+    ontology: Ontology | None = None,
+    existing_lenses: dict[str, L2Lens] | None = None,
+    vault_ids: set[str] | None = None,
+) -> dict[str, Any]:
+    """Deterministically parse a pasted strong-LLM response (YAML/JSON fence or raw YAML) into Glint card fields."""
+    ont = ontology or Ontology.load()
+    taxonomy = load_taxonomy()
+    cats = taxonomy.get("categories") or {}
+    cat_cn_map = {str(v.get("label", "")).strip(): k for k, v in cats.items() if isinstance(v, dict)}
+
+    text = (raw_text or "").strip()
+    if not text:
+        return {"ok": False, "error": "粘贴内容为空"}
+
+    parsed: dict[str, Any] | None = None
+    detected_format = "raw"
+    blocks = _FENCED_BLOCK_RE.findall(text)
+    candidates = list(reversed(blocks)) + ([text] if not blocks else [])
+    for idx, cand in enumerate(candidates):
+        snippet = cand.strip()
+        if not snippet:
+            continue
+        try:
+            obj = yaml.safe_load(snippet)
+        except Exception:
+            continue
+        if isinstance(obj, dict) and any(k in obj for k in ("title", "content", "execution", "prompt", "标题")):
+            parsed = obj
+            detected_format = "fenced_yaml" if idx < len(blocks) else "raw_yaml"
+            break
+
+    if parsed is None:
+        return {
+            "ok": False,
+            "error": "未检测到标准 YAML/JSON 卡片代码块，可检查格式或改用「从文章/笔记提炼」",
+        }
+
+    notes: list[str] = []
+    warnings: list[str] = []
+
+    routing = parsed.get("routing") if isinstance(parsed.get("routing"), dict) else {}
+    execution = parsed.get("execution") if isinstance(parsed.get("execution"), dict) else {}
+    meta = parsed.get("meta") if isinstance(parsed.get("meta"), dict) else {}
+
+    title = str(parsed.get("title") or parsed.get("标题") or "").strip()
+    tagline = str(parsed.get("tagline") or parsed.get("一句话说明") or "").strip()
+    pain_point = str(parsed.get("pain_point") or routing.get("pain_point") or parsed.get("适用场景") or "").strip()
+    content = str(parsed.get("content") or execution.get("content") or parsed.get("prompt") or parsed.get("正文") or "").strip()
+
+    raw_prim = str(parsed.get("primitive") or routing.get("primitive") or parsed.get("思考方式") or "deconstruct").strip()
+    norm_prim = ont.normalize_primitive(raw_prim) or _PRIMITIVE_CN_MAP.get(raw_prim)
+    if norm_prim is None:
+        norm_prim = "deconstruct"
+        warnings.append(f"未识别思考方式「{raw_prim}」，已默认设为解构建模")
+    elif norm_prim != raw_prim:
+        notes.append(f"思考方式已自动对齐为 {norm_prim}")
+
+    raw_cat = str(parsed.get("category") or meta.get("category") or parsed.get("领域") or "custom").strip()
+    if raw_cat in cats:
+        norm_cat = raw_cat
+    elif raw_cat in cat_cn_map:
+        norm_cat = cat_cn_map[raw_cat]
+        notes.append(f"领域已自动对齐为 {norm_cat}")
+    else:
+        norm_cat = "custom" if "custom" in cats else "general"
+        if raw_cat and raw_cat != norm_cat:
+            notes.append(f"领域「{raw_cat}」已归入 {norm_cat}")
+
+    raw_tier = str(parsed.get("tier") or meta.get("tier") or "A").strip().upper()
+    norm_tier = raw_tier if raw_tier in {"S", "A", "B"} else "A"
+
+    raw_action = str(parsed.get("action_type") or execution.get("action_type") or "inject_prompt").strip()
+    norm_action = ont.normalize_action_type(raw_action) or "inject_prompt"
+
+    raw_inject = str(parsed.get("inject_mode") or execution.get("inject_mode") or "append").strip().lower()
+    norm_inject = "wrap" if raw_inject == "wrap" else "append"
+
+    raw_trigs = parsed.get("trigger_utterances") or routing.get("trigger_utterances") or parsed.get("triggers") or []
+    if isinstance(raw_trigs, str):
+        trigs = [s.strip() for s in re.split(r"[\n;；]+", raw_trigs) if s.strip()]
+    elif isinstance(raw_trigs, list):
+        trigs = [str(s).strip() for s in raw_trigs if str(s).strip()]
+    else:
+        trigs = []
+
+    supersedes_hint = str(parsed.get("supersedes") or meta.get("supersedes") or parsed.get("id") or "").strip()
+    evolution_note = str(parsed.get("evolution_note") or meta.get("evolution_note") or "").strip()
+
+    if not title:
+        warnings.append("缺少卡片标题（title），请补充")
+    elif len(title) > 18:
+        warnings.append(f"卡片标题偏长（{len(title)} 字），建议精简至 12–18 字")
+    if len(content) < 4:
+        warnings.append("缺少指令正文（content），请补充")
+    if not pain_point:
+        pain_point = tagline or title
+        if pain_point:
+            notes.append("未提供适用场景（pain_point），已暂用摘要填充")
+    if not trigs and title:
+        trigs = [title]
+        warnings.append("未检测到触发口语（trigger_utterances），建议补 2–4 句常用口语")
+
+    v_set = vault_ids or set()
+    matched_predecessor: dict[str, Any] | None = None
+    if existing_lenses:
+        active_lenses = {k: v for k, v in existing_lenses.items() if v.meta.status != "deprecated"}
+        if supersedes_hint and supersedes_hint in active_lenses:
+            old = active_lenses[supersedes_hint]
+            matched_predecessor = {
+                "id": old.id,
+                "title": old.title,
+                "version": old.meta.version,
+                "is_vault": old.id in v_set,
+                "reason": "id_match",
+            }
+        elif title:
+            norm_t = title.strip().lower()
+            for old in active_lenses.values():
+                if old.title.strip().lower() == norm_t:
+                    matched_predecessor = {
+                        "id": old.id,
+                        "title": old.title,
+                        "version": old.meta.version,
+                        "is_vault": old.id in v_set,
+                        "reason": "title_match",
+                    }
+                    break
+
+    return {
+        "ok": True,
+        "format": detected_format,
+        "card": {
+            "title": title[:24],
+            "tagline": tagline,
+            "primitive": norm_prim,
+            "category": norm_cat,
+            "tier": norm_tier,
+            "action_type": norm_action,
+            "inject_mode": norm_inject,
+            "pain_point": pain_point,
+            "trigger_utterances": trigs,
+            "content": content,
+            "evolution_note": evolution_note,
+        },
+        "notes": notes,
+        "warnings": warnings,
+        "matched_predecessor": matched_predecessor,
+    }
+
+
 def create_manual_lens(
     *,
     title: str,
@@ -68,16 +243,23 @@ def create_manual_lens(
     domains: list[str] | None = None,
     category: str = "custom",
     tier: str = "A",
+    supersedes: str | None = None,
+    evolution_note: str | None = None,
+    version: int = 1,
     l2_dir: Path = LIB_ROOT / "data" / "l2_lenses",
 ) -> L2Lens:
     """Create a hand-crafted personal lens directly in L2 (ready for L2->L3 build)."""
-    lid = make_stable_id("manual", f"{title}_{int(time.time()) % 100000}")
+    lid = make_stable_id("manual", f"{title}_{int(time.time() * 1000) % 1000000}")
     cleaned_triggers = [t.strip() for t in trigger_utterances if t.strip()]
     if len(cleaned_triggers) < 2:
         for fallback in (title.strip(), pain_point.strip()):
             if fallback and fallback not in cleaned_triggers:
                 cleaned_triggers.append(fallback)
     norm_action = action_type if action_type in {"inject_prompt", "show_checklist", "open_resource"} else "inject_prompt"
+    norm_inject = inject_mode if norm_action == "inject_prompt" else None
+    final_content = content.strip()
+    if norm_action == "inject_prompt" and norm_inject == "wrap" and "{{input}}" not in final_content:
+        final_content = final_content + "\n\n{{input}}"
     lens = L2Lens(
         id=lid,
         title=title.strip(),
@@ -93,8 +275,8 @@ def create_manual_lens(
         ),
         execution=LensExecution(
             action_type=norm_action,
-            inject_mode=inject_mode if norm_action == "inject_prompt" else None,  # type: ignore[arg-type]
-            content=content.strip(),
+            inject_mode=norm_inject,  # type: ignore[arg-type]
+            content=final_content,
             variables=[],
         ),
         meta=LensMeta(
@@ -105,6 +287,10 @@ def create_manual_lens(
             tier=tier if tier in {"S", "A", "B"} else "A",  # type: ignore[arg-type]
             category=category,
             confidence=1.0,
+            version=max(1, int(version)),
+            created_at=time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+            supersedes=supersedes.strip() if supersedes and supersedes.strip() else None,
+            evolution_note=evolution_note.strip() if evolution_note and evolution_note.strip() else None,
         ),
     )
     out_path = l2_dir / lens.routing.primitive / f"{lens.id}.yaml"

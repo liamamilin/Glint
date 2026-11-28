@@ -32,6 +32,7 @@ final class ContextReader {
     private var primedAppPIDs: Set<pid_t> = []
 
     func captureContext() async -> ContextCaptureOutcome {
+        let t0 = CFAbsoluteTimeGetCurrent()
         guard let frontApp = NSWorkspace.shared.frontmostApplication else { return .emptyText }
         let appName = frontApp.localizedName ?? "Unknown"
         let pid = frontApp.processIdentifier
@@ -44,7 +45,7 @@ final class ContextReader {
         let didPrime = primeAccessibilityIfNeeded(for: pid)
         if didPrime {
             // Give Chromium/Electron a short window to materialize its accessibility tree on first access.
-            try? await Task.sleep(nanoseconds: 85_000_000)
+            try? await Task.sleep(nanoseconds: 60_000_000)
             guard !Task.isCancelled else { return .silentIgnore }
         }
         let focusedElement = focusedAXElement()
@@ -58,10 +59,20 @@ final class ContextReader {
         let anchorRect = focusedElement.flatMap(resolveCaretOrElementRect)
         let isEditable = focusedElement.map(isElementEditable) ?? true
 
+        func logTier(_ tier: String, chars: Int) {
+            let ms = (CFAbsoluteTimeGetCurrent() - t0) * 1000.0
+            let line = String(
+                format: "[PERF][capture] app=%@ tier=%@ primed=%@ chars=%d ms=%.1f",
+                appName, tier, didPrime ? "true" : "false", chars, ms
+            )
+            NSLog("[Glint] %@", line)
+        }
+
         // Tier 1a: AX selected text (zero side effects).
         if let element = focusedElement,
            let selected = stringAttribute(kAXSelectedTextAttribute as CFString, of: element),
            !selected.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            logTier("1a_ax_selection", chars: selected.count)
             return .captured(CapturedContext(
                 appName: appName,
                 appPID: pid,
@@ -80,6 +91,7 @@ final class ContextReader {
         if shouldProbeSelectionViaClipboard,
            let copiedSelection = await probeClipboardViaCopy(selectBeforeCopy: nil),
            !copiedSelection.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            logTier("1b_clip_selection", chars: copiedSelection.count)
             return .captured(CapturedContext(
                 appName: appName,
                 appPID: pid,
@@ -97,18 +109,21 @@ final class ContextReader {
            let fullValue = stringAttribute(kAXValueAttribute as CFString, of: element),
            !fullValue.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             if isConservative {
-                let paragraph = extractParagraphAroundCaret(in: fullValue, element: element)
+                let (paragraph, wrapPrefix) = extractParagraphAroundCaret(in: fullValue, element: element)
                 if !paragraph.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                    logTier("2a_ax_paragraph", chars: paragraph.count)
                     return .captured(CapturedContext(
                         appName: appName,
                         appPID: pid,
                         inputText: paragraph,
                         captureScope: .paragraph,
                         anchorRect: anchorRect,
-                        isEditable: isEditable
+                        isEditable: isEditable,
+                        wrapParagraphPrefix: wrapPrefix
                     ))
                 }
             } else {
+                logTier("3a_ax_full", chars: fullValue.count)
                 return .captured(CapturedContext(
                     appName: appName,
                     appPID: pid,
@@ -127,6 +142,7 @@ final class ContextReader {
             // to current line (Cmd + Shift + Left) for single-line web inputs. Never Cmd + A.
             if let paragraph = await probeClipboardViaCopy(selectBeforeCopy: .currentParagraph),
                !paragraph.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                logTier("2b_clip_paragraph", chars: paragraph.count)
                 return .captured(CapturedContext(
                     appName: appName,
                     appPID: pid,
@@ -139,11 +155,12 @@ final class ContextReader {
             guard !Task.isCancelled else { return .silentIgnore }
             if let lineText = await probeClipboardViaCopy(selectBeforeCopy: .currentLine),
                !lineText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                logTier("2b_clip_line", chars: lineText.count)
                 return .captured(CapturedContext(
                     appName: appName,
                     appPID: pid,
                     inputText: lineText,
-                    captureScope: .paragraph,
+                    captureScope: .line,
                     anchorRect: anchorRect,
                     isEditable: isEditable
                 ))
@@ -152,6 +169,7 @@ final class ContextReader {
             // Standalone chat / input boxes: safe to select field text.
             if let fullText = await probeClipboardViaCopy(selectBeforeCopy: .selectAll),
                !fullText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                logTier("3b_clip_selectall", chars: fullText.count)
                 return .captured(CapturedContext(
                     appName: appName,
                     appPID: pid,
@@ -163,6 +181,7 @@ final class ContextReader {
             }
         }
 
+        logTier("empty", chars: 0)
         return .emptyText
     }
 
@@ -261,7 +280,7 @@ final class ContextReader {
         return value as? String
     }
 
-    private func extractParagraphAroundCaret(in text: String, element: AXUIElement) -> String {
+    private func extractParagraphAroundCaret(in text: String, element: AXUIElement) -> (String, String?) {
         var rangeValue: CFTypeRef?
         if AXUIElementCopyAttributeValue(element, kAXSelectedTextRangeAttribute as CFString, &rangeValue) == .success,
            let axVal = rangeValue,
@@ -273,7 +292,12 @@ final class ContextReader {
                 let paragraphRange = nsText.paragraphRange(for: NSRange(location: clamped, length: 0))
                 let currentPara = nsText.substring(with: paragraphRange)
                 if !currentPara.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                    return currentPara
+                    let prefixLen = max(0, clamped - paragraphRange.location)
+                    let prefix = nsText.substring(with: NSRange(location: paragraphRange.location, length: prefixLen))
+                    let suffixLen = max(0, (paragraphRange.location + paragraphRange.length) - clamped)
+                    let suffix = nsText.substring(with: NSRange(location: clamped, length: suffixLen))
+                    let hasTrailingText = !suffix.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+                    return (currentPara, hasTrailingText ? prefix : nil)
                 }
                 // Caret is sitting on an empty trailing line: scan backward for the nearest non-empty paragraph.
                 var cursor = paragraphRange.location
@@ -281,17 +305,18 @@ final class ContextReader {
                     let prevRange = nsText.paragraphRange(for: NSRange(location: cursor - 1, length: 0))
                     let prevPara = nsText.substring(with: prevRange)
                     if !prevPara.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                        return prevPara
+                        return (prevPara, "")
                     }
                     cursor = prevRange.location
                 }
             }
         }
         // Fallback: take last non-empty line/paragraph.
-        return text
+        let fallback = text
             .components(separatedBy: .newlines)
             .reversed()
             .first { !$0.trimmingCharacters(in: .whitespaces).isEmpty } ?? text
+        return (fallback, nil)
     }
 
     private func resolveCaretOrElementRect(_ element: AXUIElement) -> CGRect? {
@@ -359,7 +384,7 @@ final class ContextReader {
                 // Cmd + A
                 postKey(virtualKey: 0, flags: .maskCommand)
             }
-            try? await Task.sleep(nanoseconds: 55_000_000)
+            try? await Task.sleep(nanoseconds: 25_000_000)
             if Task.isCancelled {
                 if pasteboard.changeCount != sentinelChangeCount {
                     PasteboardSnapshot.restore(saved, to: pasteboard)
@@ -371,11 +396,11 @@ final class ContextReader {
         // Cmd + C
         postKey(virtualKey: 8, flags: .maskCommand)
 
-        // Poll pasteboard up to 220ms (fast native apps finish in ~20ms; busy Chrome/Electron webviews can take 120-200ms).
+        // Poll pasteboard at 10ms granularity: empty-selection probe caps at 50ms; synthetic selection caps at 180ms.
         var copied: String?
-        let maxPolls = (selectBeforeCopy == nil) ? 6 : 11
+        let maxPolls = (selectBeforeCopy == nil) ? 5 : 18
         for _ in 0..<maxPolls {
-            try? await Task.sleep(nanoseconds: 20_000_000)
+            try? await Task.sleep(nanoseconds: 10_000_000)
             if Task.isCancelled {
                 break
             }
@@ -388,7 +413,7 @@ final class ContextReader {
         // Collapse temporary selection back to the right edge ONLY if text was actually selected & copied.
         if selectBeforeCopy != nil && copied != nil && !Task.isCancelled {
             postKey(virtualKey: 124, flags: []) // Right arrow
-            try? await Task.sleep(nanoseconds: 25_000_000)
+            try? await Task.sleep(nanoseconds: 10_000_000)
         }
 
         // Restore user's original clipboard in original type order.

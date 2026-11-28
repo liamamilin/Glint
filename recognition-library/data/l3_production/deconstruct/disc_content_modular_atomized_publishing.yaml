@@ -101,3 +101,7 @@ meta:
   base_weight: 1.0
   confidence: 0.88
   version: 1
+  created_at: null
+  supersedes: null
+  superseded_by: null
+  evolution_note: null

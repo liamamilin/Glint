@@ -95,7 +95,17 @@ struct SeedHUDView: View {
                                 .font(.system(size: 10.5, weight: .medium))
                                 .foregroundStyle(Color.primary.opacity(0.78))
 
-                            if seed.isL3Discovery {
+                            if seed.isPinned {
+                                Text("📌 精读")
+                                    .font(.system(size: 9.5, weight: .semibold))
+                                    .foregroundStyle(Color(red: 0.42, green: 0.76, blue: 1.0))
+                                    .padding(.horizontal, 5)
+                                    .padding(.vertical, 1)
+                                    .background(
+                                        Color.accentColor.opacity(0.18),
+                                        in: Capsule()
+                                    )
+                            } else if seed.isL3Discovery {
                                 Text("✦ L3探索")
                                     .font(.system(size: 9.5, weight: .semibold))
                                     .foregroundStyle(Color(red: 0.78, green: 0.62, blue: 0.98))
@@ -157,6 +167,15 @@ struct SeedHUDView: View {
                                     onHoverHint: { hoveredHint = $0 }
                                 ) {
                                     controller.toggleReader()
+                                }
+
+                                SeedIconButton(
+                                    symbol: seed.isPinned ? "pin.fill" : "pin",
+                                    hint: seed.isPinned ? "移出精读清单" : "钉入精读轮播",
+                                    hoverTint: Color.accentColor,
+                                    onHoverHint: { hoveredHint = $0 }
+                                ) {
+                                    controller.togglePinCurrent()
                                 }
 
                                 SeedIconButton(
@@ -262,7 +281,7 @@ struct SeedHUDView: View {
                     Image(systemName: "sparkles")
                         .font(.system(size: 11))
                         .foregroundStyle(Color.primary.opacity(0.6))
-                    Text(controller.totalL4Count > 0 ? "当前池认知种子已全部隐藏" : "正在连接 Glint 认知种子…")
+                    Text(controller.poolMode == .pinnedOnly ? "精读清单为空，点卡片 📌 或在管理台导入" : (controller.totalL4Count > 0 ? "当前池认知种子已全部隐藏" : "正在连接 Glint 认知种子…"))
                         .font(.system(size: 11.5))
                         .foregroundStyle(Color.primary.opacity(0.8))
                     Spacer()
@@ -649,6 +668,15 @@ struct SeedReaderView: View {
 
                 // Footer actions
                 HStack(spacing: 12) {
+                    Button {
+                        controller.togglePinCurrent()
+                    } label: {
+                        Label(seed.isPinned ? "已钉精读" : "钉入精读", systemImage: seed.isPinned ? "pin.fill" : "pin")
+                            .font(.system(size: 11, weight: .medium))
+                    }
+                    .buttonStyle(.plain)
+                    .foregroundStyle(seed.isPinned ? Color.accentColor : Color.primary.opacity(0.76))
+
                     Button {
                         controller.snoozeCurrent(days: 7)
                     } label: {

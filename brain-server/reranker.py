@@ -68,7 +68,7 @@ class LocalBgeReranker:
         import torch
 
         pairs = [[query, doc] for doc in documents]
-        with torch.no_grad():
+        with torch.inference_mode():
             inputs = self._tokenizer(  # type: ignore[misc]
                 pairs,
                 padding=True,
@@ -78,8 +78,6 @@ class LocalBgeReranker:
             ).to(self._device)
             logits = self._model(**inputs).logits.view(-1)  # type: ignore[misc]
             scores = logits.float().cpu().tolist()
-            if self._device == "mps":
-                torch.mps.synchronize()
         return [float(s) for s in scores]
 
     async def score(self, query: str, documents: list[str]) -> list[float] | None:

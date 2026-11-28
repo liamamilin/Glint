@@ -147,3 +147,75 @@ def test_seed_endpoints_modes_draw_and_mute_isolation(tmp_path: Path) -> None:
     r_state = client.get("/seed/state")
     assert r_state.status_code == 200
     assert r_state.json()["config"]["tier_s_weight"] == 6.0
+
+
+def test_seed_pinned_focus_mode_and_smart_mix_budget(tmp_path: Path) -> None:
+    store = SeedStore(tmp_path / "seed_state.json")
+    l4 = [_fake_lens(f"l4_{i}", tier="A") for i in range(6)]
+    l3 = [_fake_lens(f"l3_{i}", tier="A") for i in range(3)]
+
+    # Pin 2 cards (1 from L4, 1 from L3)
+    pinned = store.set_pinned(["l4_0", "l3_0"], mode="add")
+    assert pinned == ["l4_0", "l3_0"]
+
+    # 1. smart_mix allocates ~30% probability budget to pinned cards & bypasses recall decay on pinned cards
+    scored_mix, _, _ = store.score_candidates(l4, l3, recall_counts={"l4_0": 20}, mode="smart_mix")
+    pinned_pct = sum(x["probability_pct"] for x in scored_mix if x["is_pinned"])
+    assert 29.0 <= pinned_pct <= 31.0
+    by_id = {x["id"]: x for x in scored_mix}
+    assert by_id["l4_0"]["is_pinned"] is True
+    assert "精读" in by_id["l4_0"]["reason_tag"]
+
+    # 2. pinned_only mode strictly restricts pool to pinned_ids and cycles smoothly with adaptive cooldown
+    scored_only, _, _ = store.score_candidates(l4, l3, recall_counts={"l4_0": 20}, mode="pinned_only")
+    assert {x["id"] for x in scored_only} == {"l4_0", "l3_0"}
+    assert scored_only[0]["weight"] == scored_only[1]["weight"]
+
+    # 3. Resetting muted/snoozed hidden items preserves user's pinned_ids
+    store.apply_action("l4_1", "mute")
+    store.reset_all()
+    assert store.get_pinned_ids() == ["l4_0", "l3_0"]
+
+    # 4. API endpoints: PUT /seed/pinned & pin/unpin feedback
+    cfg = Settings(
+        db_path=tmp_path / "usage.db",
+        seed_state_path=tmp_path / "api_seed_state.json",
+        warmup_on_startup=False,
+        enable_reranker=False,
+    )
+    app = create_app(cfg=cfg, inference_client=_DummyInference())
+    client = TestClient(app)
+
+    pool = client.get("/seed/pool?mode=l4_all").json()["items"]
+    sample_ids = [pool[0]["id"], pool[1]["id"]]
+
+    r_put = client.put("/seed/pinned", json={"ids": sample_ids, "mode": "replace"})
+    assert r_put.status_code == 200
+    assert r_put.json()["pinned_count"] == 2
+
+    r_only = client.get("/seed/pool?mode=pinned_only")
+    assert r_only.status_code == 200
+    assert {x["id"] for x in r_only.json()["items"]} == set(sample_ids)
+
+    r_unpin = client.post("/seed/feedback", json={"id": sample_ids[0], "action": "unpin"})
+    assert r_unpin.status_code == 200
+    assert r_unpin.json()["pinned_count"] == 1
+
+    r_st = client.get("/seed/state")
+    assert r_st.status_code == 200
+    assert r_st.json()["pinned_ids"] == [sample_ids[1]]
+    assert len(r_st.json()["pinned_items"]) == 1
+
+    # 5. Regression: pinned_smart_mix_share=0.0 keeps natural weight (never zeroes out pinned cards)
+    store.update_config({"pinned_smart_mix_share": 0.0})
+    scored_zero, _, _ = store.score_candidates(l4, l3, recall_counts={}, mode="smart_mix")
+    pinned_zero = [x for x in scored_zero if x["is_pinned"]]
+    assert all(x["weight"] > 0 and x["probability_pct"] > 0 for x in pinned_zero)
+
+    # 6. Regression: mute -> unmute (undo) preserves pinned state without client/server drift
+    store.apply_action("l4_0", "mute")
+    scored_muted, _, _ = store.score_candidates(l4, l3, recall_counts={}, mode="pinned_only")
+    assert "l4_0" not in {x["id"] for x in scored_muted}
+    store.apply_action("l4_0", "unmute")
+    scored_restored, _, _ = store.score_candidates(l4, l3, recall_counts={}, mode="pinned_only")
+    assert "l4_0" in {x["id"] for x in scored_restored}

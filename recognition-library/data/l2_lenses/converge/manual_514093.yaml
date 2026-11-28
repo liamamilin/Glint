@@ -1,0 +1,48 @@
+id: manual_514093
+title: 保真优化
+tagline: 消除低效与脆弱性，而不消耗已有价值
+routing:
+  primitive: converge
+  goals:
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - general
+  app_affinity: []
+  pain_point: 希望提升效率、性能或稳定性，却担心优化破坏已有质量，且缺乏实际收益的验证机制
+  trigger_utterances:
+  - 无损优化
+  - 提速不降质
+  - 帮我优化项目的性能和稳定性但不要牺牲质量
+  - 能不能在保证效果的前提下降低运行成本
+  - 帮我找出真正的瓶颈并提高效率
+  - 帮我优化一下项目
+  - 优化一下性能
+  - 优化一下稳定性
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 建立目标指标与质量底线，实测基线并定位瓶颈。 禁止以功能削减、正确性下降或风险转移换取收益。 分批实施，同条件对照并验证边界与异常场景， 仅保留目标改善且质量未退化的变更，否则回退。 报告实际收益、未验证项与剩余瓶颈。
+  variables: []
+  workflow: null
+meta:
+  source: manual-custom
+  source_ref: manual#manual_514093
+  source_hash: a1fe3222351297889fedec5bfd1856bc87cb227cdd8514ed3d69241f9adb7751
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: S
+  category: general
+  subcategory: problem_solving
+  collections: []
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1
+  created_at: 2026-11-28T13:08:34+0800
+  supersedes: null
+  superseded_by: null
+  evolution_note: null

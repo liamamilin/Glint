@@ -15,12 +15,32 @@ from pathlib import Path
 from typing import Any
 
 from pipeline.l1_to_l2 import compile_l1_to_l2, load_existing_l2_lenses
-from pipeline.ontology import LIB_ROOT
+from pipeline.ontology import LIB_ROOT, resolve_meta_vault_dir
 from pipeline.opencode_client import DEFAULT_MODEL, OpenCodeGoClient
 from pipeline.schema import L1Material, content_sha256, make_stable_id
 
 DEFAULT_USAGE_DB = LIB_ROOT.parent / "brain-server" / "data" / "usage.db"
 TOKEN_RE = re.compile(r"[a-z0-9_]{2,}|[\u4e00-\u9fff]+")
+
+
+DEFAULT_L3_DIR = LIB_ROOT / "data" / "l3_production"
+
+
+def _resolve_vault_for_l3(l3_dir: Path, meta_vault_dir: Path | None) -> Path | None:
+    if meta_vault_dir is not None:
+        return meta_vault_dir
+    if l3_dir == DEFAULT_L3_DIR:
+        return resolve_meta_vault_dir()
+    return None
+
+
+def _load_l3_with_vault(l3_dir: Path, meta_vault_dir: Path | None) -> dict[str, Any]:
+    l3_map = load_existing_l2_lenses(l3_dir) if l3_dir.exists() else {}
+    if meta_vault_dir is not None:
+        v_l3 = meta_vault_dir / "l3_production"
+        if v_l3.exists():
+            l3_map.update(load_existing_l2_lenses(v_l3))
+    return l3_map
 
 
 def _bigrams(text: str) -> set[str]:
@@ -80,10 +100,12 @@ def compute_usage_analytics(
     db_path: Path = DEFAULT_USAGE_DB,
     l3_dir: Path = LIB_ROOT / "data" / "l3_production",
     days: int = 30,
+    meta_vault_dir: Path | None = None,
 ) -> dict[str, Any]:
     """Compute M3 analytics dashboard metrics and per-card CTR from usage.db."""
     rows = _read_usage_rows(db_path, days=days)
-    l3_map = load_existing_l2_lenses(l3_dir) if l3_dir.exists() else {}
+    vault_dir = _resolve_vault_for_l3(l3_dir, meta_vault_dir)
+    l3_map = _load_l3_with_vault(l3_dir, vault_dir)
 
     total = len(rows)
     clicks = 0
@@ -183,17 +205,21 @@ def compute_shelf_proposals(
     overlay_path: Path | None = None,
     days: int = 30,
     min_impressions_demote: int = 5,
+    meta_vault_dir: Path | None = None,
 ) -> dict[str, Any]:
     """Dynamic Vertical Shelf Scheduler: propose demoting stale/low-CTR domain cards & promoting L3 matches.
 
     Strictly exempts Tier S / evergreen lenses from auto-demotion.
     """
     rows = _read_usage_rows(db_path, days=days)
-    l3_map = load_existing_l2_lenses(l3_dir) if l3_dir.exists() else {}
-    if overlay_path is not None and overlay_path.exists():
+    vault_dir = _resolve_vault_for_l3(l3_dir, meta_vault_dir)
+    l3_map = _load_l3_with_vault(l3_dir, vault_dir)
+    if (overlay_path is not None and overlay_path.exists()) or (
+        vault_dir is not None and (vault_dir / "overrides.yaml").exists()
+    ):
         from pipeline.builder import load_overlay
 
-        ov_file = load_overlay(overlay_path)
+        ov_file = load_overlay(overlay_path or Path("/nonexistent"), meta_vault_dir=vault_dir)
         for lid, ov in ov_file.overrides.items():
             lens = l3_map.get(lid)
             if lens is None:

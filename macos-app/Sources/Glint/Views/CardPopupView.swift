@@ -435,6 +435,29 @@ struct LensReaderView: View {
     }
 }
 
+struct CardLoadingPopupView: View {
+    let appName: String
+
+    var body: some View {
+        HStack(spacing: 8) {
+            ProgressView()
+                .controlSize(.small)
+                .scaleEffect(0.75)
+            Text("正在为 \(appName) 匹配认知卡片…")
+                .font(.system(size: 11.5, weight: .medium))
+                .foregroundStyle(Color.primary.opacity(0.78))
+                .lineLimit(1)
+            Spacer()
+        }
+        .padding(.horizontal, 12)
+        .padding(.vertical, 10)
+        .frame(width: 380)
+        .background(GlintGlassBackground(cornerRadius: 14))
+        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .overlay(GlintGlassBorder(cornerRadius: 14, emphasized: true))
+    }
+}
+
 struct GlintToastView: View {
     @Environment(\.colorScheme) private var colorScheme
     let symbol: String

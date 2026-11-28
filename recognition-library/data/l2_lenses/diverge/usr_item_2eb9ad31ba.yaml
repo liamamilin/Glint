@@ -1,0 +1,49 @@
+id: usr_item_2eb9ad31ba
+title: 歌曲创作引导
+tagline: 帮你把模糊灵感变成可唱的歌曲草稿
+routing:
+  primitive: diverge
+  goals:
+  - create
+  clarity_fit:
+  - vague
+  domains:
+  - songwriting
+  - music
+  - creative_writing
+  app_affinity:
+  - Notion
+  - Obsidian
+  - ChatGPT
+  - Claude
+  pain_point: 用户想创作一首歌，但只有模糊灵感，不知道从主题、歌词、旋律还是结构开始
+  trigger_utterances:
+  - 我想写首歌但没灵感
+  - 帮我编个副歌
+  - 把这段情绪写成歌词
+  - 想给朋友写歌
+  - melody idea 怎么展开
+  anti_triggers:
+  - 只是要分析现有歌曲的结构或和弦
+  - 只需要润色已经写好的完整歌词
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 你是一位经验丰富的词曲作者。请基于用户当前灵感，按以下步骤协作创作一首歌：1）先澄清歌曲类型、情绪、主题、受众和时长；2）提出 3 个可选歌名和一句核心 hook；3）给出歌曲结构（主歌/预副歌/副歌/桥段）；4）为每段写出歌词草稿，注意押韵、节奏和可唱性；5）提供旋律/编曲方向建议（BPM、调性、乐器、律动）；6）最后给出
+    2 个可快速验证的 demo 版本和下一步修改建议。表达要具体、可执行，避免空泛鼓励。
+  variables: []
+  workflow: null
+meta:
+  source: user-friction
+  source_ref: usage.db#custom_intent
+  source_hash: 2eb9ad31ba43da9a9b37605c9ffd0bf623fc1ba68e84c38fdf8a7568beda6380
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: B
+  category: general
+  subcategory: problem_solving
+  collections: []
+  base_weight: 1.0
+  confidence: 0.72
+  version: 1

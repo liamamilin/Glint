@@ -1,6 +1,6 @@
 import Foundation
 
-/// HTTP client talking to the local Python FastAPI brain-server (localhost:8765).
+/// HTTP client talking to the local Python FastAPI brain-server (127.0.0.1:18765).
 final class BrainClient: Sendable {
     let baseURL: URL
     private let session: URLSession
@@ -29,6 +29,7 @@ final class BrainClient: Sendable {
                 throw error
             }
             // Silent single retry (250ms) absorbs launchd startup / brief loopback hiccups.
+            NSLog("[Glint] [PERF][http] route failed (%@), retrying after 250ms", error.localizedDescription)
             try await Task.sleep(nanoseconds: 250_000_000)
             return try await routeOnce(inputText: inputText, appName: appName)
         }

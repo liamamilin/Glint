@@ -1,0 +1,49 @@
+id: manual_875385
+title: 主动证伪
+tagline: 主动创造使未知错误暴露的条件
+routing:
+  primitive: critique
+  goals:
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - general
+  app_affinity: []
+  pain_point: 怀疑对象存在隐蔽问题，却缺乏系统性的检查判据与验证路径
+  trigger_utterances:
+  - 检查一遍
+  - 找找问题
+  - 你帮我检查一遍代码
+  - 看看这里面有没有什么潜在问题
+  - 帮我验证一下这个方案到底靠不靠谱
+  - 帮我看下项目代码
+  - 帮我看下代码
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 提取对象的预期目标、行为与约束，建立可检验命题。 构造反例、边界条件与失败路径，通过执行、推演或证据追踪验证。 报告问题位置、证据及影响，区分已验证缺陷、潜在风险与未验证区域。 未经授权不得修改对象。
+  variables: []
+  workflow: null
+meta:
+  source: manual-custom
+  source_ref: manual#manual_875385
+  source_hash: d77d0eaa910a6d79667592d438d6e1b3709270f74fdeab99f5f959e3e1b076c7
+  status: active
+  scope: universal
+  shelf: evergreen
+  tier: S
+  category: general
+  subcategory: problem_solving
+  collections:
+  - col_item_3c3742f184
+  - col_vibe_codeing
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1
+  created_at: null
+  supersedes: null
+  superseded_by: null
+  evolution_note: null

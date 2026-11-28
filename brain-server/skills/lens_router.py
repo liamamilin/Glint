@@ -7,6 +7,7 @@ import logging
 import math
 import random
 import re
+import threading
 import time
 from collections import Counter
 from pathlib import Path
@@ -117,6 +118,20 @@ VAGUE_DEICTIC_RE = re.compile(
     r"^(?:帮我|请)?(?:看看|改改|分析一下|总结一下|写个方案|给点建议|给我点建议|这个怎么用|这个合理吗|接下来怎么办|有点不对劲|帮我看看这个|这个是什么)[？?。！!….\s]*$"
 )
 HALF_TYPED_TAIL_RE = re.compile(r"(?:\.{2,}|…+|感觉|主要是|但是大家|不过|其实|总感觉|总觉得)[，,、\s]*$")
+WORKFLOW_CONTINUE_RE = re.compile(
+    r"(?:继续|下一步|下步|接着|接下来|然后呢|再来|按这个|展开说说|next|continue)",
+    re.IGNORECASE,
+)
+
+
+def _is_workflow_continuation(text: str) -> bool:
+    """Detect short or explicit follow-up cues that legitimately continue an active workflow."""
+    t = text.strip()
+    if not t:
+        return False
+    if WORKFLOW_CONTINUE_RE.search(t) and len(t) <= 32:
+        return True
+    return len(t) <= 6
 
 
 def _vague_signal_score(text: str) -> float:
@@ -188,13 +203,18 @@ def _compact_preview(text: str, max_chars: int = 44) -> str:
     return compact[: max_chars - 1].rstrip() + "…"
 
 
-def _rerank_doc_text(lens: dict[str, Any]) -> str:
-    """Compact semantic profile fed to Cross-Encoder bge-reranker-v2-m3."""
+def _rerank_doc_text(lens: dict[str, Any], query: str = "") -> str:
+    """Semantic profile fed to Cross-Encoder bge-reranker-v2-m3 (never drops user triggers)."""
     routing = lens.get("routing", {})
-    raw_trigs = [str(t) for t in (routing.get("trigger_utterances") or []) if str(t).strip()]
-    # Keep up to 7 triggers; if >7, keep first 2 + latest 5 so user-calibrated overrides always enter Stage 2
-    selected_trigs = raw_trigs if len(raw_trigs) <= 7 else list(dict.fromkeys(raw_trigs[:2] + raw_trigs[-5:]))
-    triggers = " / ".join(selected_trigs)
+    raw_trigs = list(dict.fromkeys(str(t).strip() for t in (routing.get("trigger_utterances") or []) if str(t).strip()))
+    if query and len(raw_trigs) > 1:
+        q_toks = set(_tokenize_zh_en(query, drop_stopwords=False))
+        if q_toks:
+            raw_trigs.sort(
+                key=lambda t: len(q_toks & set(_tokenize_zh_en(t, drop_stopwords=False))),
+                reverse=True,
+            )
+    triggers = " / ".join(raw_trigs)
     parts = [
         f"{lens.get('title', '')}：{lens.get('tagline', '')}",
         f"痛点：{routing.get('pain_point', '')}",
@@ -267,12 +287,13 @@ class LensRouterSkill(BaseSkill):
         self._max_input_chars = max_input_chars
         self._rng = rng or random.Random()
 
-        self._release_key: tuple[str, int, int] = ("", -1, -1)
+        self._release_key: tuple[tuple[str, int], ...] = ()
         self._release_version: str | None = None
         self._lenses: list[dict[str, Any]] = []
         self._lenses_by_id: dict[str, dict[str, Any]] = {}
         self._lenses_by_primitive: dict[str, list[dict[str, Any]]] = {}
         self._embed_ids: list[str] = []
+        self._embed_idx_by_id: dict[str, int] = {}
         self._embed_matrix: np.ndarray | None = None
         self._bm25: _LightweightBM25 | None = None
         self._shadow_lenses: list[dict[str, Any]] = []
@@ -280,38 +301,61 @@ class LensRouterSkill(BaseSkill):
         self._shadow_embed_matrix: np.ndarray | None = None
         self._shadow_bm25: _LightweightBM25 | None = None
         self._policy: dict[str, Any] = {}
+        self._state_lock = threading.RLock()
         self._workflow_sessions: dict[str, tuple[str, float]] = {}
         self._workflow_ttl_s: float = 600.0
 
         self.reload_if_changed()
 
+    def _stage2_params(self) -> dict[str, float]:
+        s2 = self._policy.get("stage2_rerank") or {}
+        wf = self._policy.get("workflow") or {}
+        return {
+            "evergreen_boost": float(s2.get("evergreen_boost", 0.45)),
+            "app_affinity_boost": float(s2.get("app_affinity_boost", 0.20)),
+            "base_weight_scale": float(s2.get("base_weight_scale", 0.55)),
+            "cliff_score_floor": float(s2.get("cliff_score_floor", -4.2)),
+            "cliff_margin_below_top1": float(s2.get("cliff_margin_below_top1", 3.5)),
+            "workflow_ttl_seconds": float(wf.get("ttl_seconds", self._workflow_ttl_s)),
+            "workflow_min_rerank_logit": float(wf.get("min_rerank_logit", -1.2)),
+            "workflow_min_cosine": float(wf.get("min_cosine", 0.45)),
+        }
+
     def record_selection(self, app_name: str, selected_id: str | None) -> None:
-        """Track lightweight per-app workflow state (10-min TTL) for next-step chaining."""
+        """Track lightweight per-app workflow state for next-step chaining."""
         key = app_name.strip().lower() or "unknown"
         if not selected_id or selected_id == "__custom__":
             return
-        lens = self._lenses_by_id.get(selected_id)
-        if not lens:
-            self._workflow_sessions.pop(key, None)
-            return
-        wf = lens.get("execution", {}).get("workflow") or {}
-        next_id = wf.get("next_lens_id")
-        if next_id and next_id in self._lenses_by_id:
-            self._workflow_sessions[key] = (str(next_id), time.monotonic() + self._workflow_ttl_s)
-            logger.info("Workflow session [%s]: next step pinned -> %s", app_name, next_id)
-        else:
-            self._workflow_sessions.pop(key, None)
+        with self._state_lock:
+            lens = self._lenses_by_id.get(selected_id)
+            if not lens:
+                self._workflow_sessions.pop(key, None)
+                return
+            wf = lens.get("execution", {}).get("workflow") or {}
+            next_id = wf.get("next_lens_id")
+            ttl = self._stage2_params()["workflow_ttl_seconds"]
+            if next_id and next_id in self._lenses_by_id:
+                self._workflow_sessions[key] = (str(next_id), time.monotonic() + ttl)
+                logger.info("Workflow session [%s]: next step pinned -> %s", app_name, next_id)
+            else:
+                self._workflow_sessions.pop(key, None)
 
     def _get_pinned_workflow_lens(self, app_name: str) -> dict[str, Any] | None:
         key = app_name.strip().lower() or "unknown"
-        entry = self._workflow_sessions.get(key)
-        if not entry:
-            return None
-        next_id, expires_at = entry
-        if time.monotonic() > expires_at:
+        with self._state_lock:
+            entry = self._workflow_sessions.get(key)
+            if not entry:
+                return None
+            next_id, expires_at = entry
+            if time.monotonic() > expires_at:
+                self._workflow_sessions.pop(key, None)
+                return None
+            return self._lenses_by_id.get(next_id)
+
+    def _clear_workflow_session(self, app_name: str) -> None:
+        key = app_name.strip().lower() or "unknown"
+        with self._state_lock:
             self._workflow_sessions.pop(key, None)
-            return None
-        return self._lenses_by_id.get(next_id)
 
     @property
     def system_prompt(self) -> str:
@@ -339,116 +383,121 @@ class LensRouterSkill(BaseSkill):
 
     def reload_if_changed(self) -> bool:
         """Hot-reload L4 dist/current (including symlink flips) and routing_policy.yaml."""
-        lenses_path = (self._dist_dir / "lenses.json").resolve()
-        manifest_path = (self._dist_dir / "manifest.json").resolve()
-        lenses_mtime = lenses_path.stat().st_mtime_ns if lenses_path.exists() else -1
-        policy_mtime = self._policy_path.stat().st_mtime_ns if self._policy_path.exists() else -1
-        key = (str(lenses_path), lenses_mtime, policy_mtime)
-        if key == self._release_key and self._lenses:
-            return False
-
-        if not lenses_path.exists():
-            raise FileNotFoundError(f"dist/current lenses.json not found at {lenses_path}")
-
-        lenses_raw: list[dict[str, Any]] = json.loads(lenses_path.read_text(encoding="utf-8"))
-        manifest = (
-            json.loads(manifest_path.read_text(encoding="utf-8"))
-            if manifest_path.exists()
-            else {}
-        )
-        policy = (
-            yaml.safe_load(self._policy_path.read_text(encoding="utf-8")) or {}
-            if self._policy_path.exists()
-            else {}
-        )
-
-        by_prim: dict[str, list[dict[str, Any]]] = {p: [] for p in PRIMITIVES}
-        by_id: dict[str, dict[str, Any]] = {}
-        docs_tokens: list[list[str]] = []
-        for lens in lenses_raw:
-            by_id[lens["id"]] = lens
-            routing = lens.get("routing", {})
-            prim = routing.get("primitive", "deconstruct")
-            by_prim.setdefault(prim, []).append(lens)
-            # Pre-tokenize title, tagline, pain_point, trigger_utterances, domains for denoised BM25
-            bm25_text = " ".join(
-                [
-                    str(lens.get("title", "")),
-                    str(lens.get("tagline", "")),
-                    str(routing.get("pain_point", "")),
-                    " ".join(routing.get("trigger_utterances") or []),
-                    " ".join(routing.get("domains") or []),
-                ]
+        with self._state_lock:
+            lenses_path = (self._dist_dir / "lenses.json").resolve()
+            manifest_path = (self._dist_dir / "manifest.json").resolve()
+            embed_path = (self._dist_dir / "embeddings.npz").resolve()
+            shadow_path = (self._dist_dir / "l3_shadow_lenses.json").resolve()
+            shadow_emb_path = (self._dist_dir / "l3_shadow_embeddings.npz").resolve()
+            watched = (lenses_path, manifest_path, embed_path, shadow_path, shadow_emb_path, self._policy_path)
+            key = tuple(
+                (str(p), p.stat().st_mtime_ns if p.exists() else -1)
+                for p in watched
             )
-            docs_tokens.append(_tokenize_zh_en(bm25_text))
+            if key == self._release_key and self._lenses:
+                return False
 
-        embed_path = (self._dist_dir / "embeddings.npz").resolve()
-        embed_ids: list[str] = []
-        embed_matrix: np.ndarray | None = None
-        if embed_path.exists():
-            npz = np.load(embed_path, allow_pickle=False)
-            embed_ids = [str(x) for x in npz["ids"].tolist()]
-            embed_matrix = np.asarray(npz["vectors"], dtype=np.float32)
+            if not lenses_path.exists():
+                raise FileNotFoundError(f"dist/current lenses.json not found at {lenses_path}")
 
-        # Load optional L3 Shadow Pool (off_shelf lenses eligible for L3 Breakthrough & Recall Inspector)
-        shadow_path = (self._dist_dir / "l3_shadow_lenses.json").resolve()
-        shadow_raw: list[dict[str, Any]] = (
-            json.loads(shadow_path.read_text(encoding="utf-8")) if shadow_path.exists() else []
-        )
-        shadow_docs_tokens: list[list[str]] = []
-        for sl in shadow_raw:
-            sr = sl.get("routing", {})
-            s_text = " ".join(
-                [
-                    str(sl.get("title", "")),
-                    str(sl.get("title", "")),
-                    str(sl.get("tagline", "")),
-                    str(sr.get("pain_point", "")),
-                    " ".join(sr.get("trigger_utterances") or []),
-                    " ".join(sr.get("domains") or []),
-                ]
+            lenses_raw: list[dict[str, Any]] = json.loads(lenses_path.read_text(encoding="utf-8"))
+            manifest = (
+                json.loads(manifest_path.read_text(encoding="utf-8"))
+                if manifest_path.exists()
+                else {}
             )
-            shadow_docs_tokens.append(_tokenize_zh_en(s_text))
-        shadow_emb_path = (self._dist_dir / "l3_shadow_embeddings.npz").resolve()
-        shadow_embed_ids: list[str] = []
-        shadow_embed_matrix: np.ndarray | None = None
-        if shadow_emb_path.exists():
-            snpz = np.load(shadow_emb_path, allow_pickle=False)
-            shadow_embed_ids = [str(x) for x in snpz["ids"].tolist()]
-            shadow_embed_matrix = np.asarray(snpz["vectors"], dtype=np.float32)
+            policy = (
+                yaml.safe_load(self._policy_path.read_text(encoding="utf-8")) or {}
+                if self._policy_path.exists()
+                else {}
+            )
 
-        self._lenses = lenses_raw
-        self._lenses_by_id = by_id
-        self._lenses_by_primitive = by_prim
-        self._embed_ids = embed_ids
-        self._embed_matrix = embed_matrix
-        self._bm25 = _LightweightBM25(docs_tokens)
-        self._shadow_lenses = shadow_raw
-        self._shadow_embed_ids = shadow_embed_ids
-        self._shadow_embed_matrix = shadow_embed_matrix
-        self._shadow_bm25 = _LightweightBM25(shadow_docs_tokens) if shadow_docs_tokens else None
-        self._policy = policy
-        self._release_version = manifest.get("version")
-        self._release_key = key
-        logger.info(
-            "Loaded %d L4 lenses + %d L3 shadow lenses (release=%s, embeddings=%s)",
-            len(lenses_raw),
-            len(shadow_raw),
-            self._release_version,
-            embed_matrix.shape if embed_matrix is not None else "none",
-        )
-        return True
+            by_prim: dict[str, list[dict[str, Any]]] = {p: [] for p in PRIMITIVES}
+            by_id: dict[str, dict[str, Any]] = {}
+            docs_tokens: list[list[str]] = []
+            for lens in lenses_raw:
+                by_id[lens["id"]] = lens
+                routing = lens.get("routing", {})
+                prim = routing.get("primitive", "deconstruct")
+                by_prim.setdefault(prim, []).append(lens)
+                bm25_text = " ".join(
+                    [
+                        str(lens.get("title", "")),
+                        str(lens.get("tagline", "")),
+                        str(routing.get("pain_point", "")),
+                        " ".join(routing.get("trigger_utterances") or []),
+                        " ".join(routing.get("domains") or []),
+                    ]
+                )
+                docs_tokens.append(_tokenize_zh_en(bm25_text))
+
+            embed_ids: list[str] = []
+            embed_matrix: np.ndarray | None = None
+            if embed_path.exists():
+                npz = np.load(embed_path, allow_pickle=False)
+                embed_ids = [str(x) for x in npz["ids"].tolist()]
+                embed_matrix = np.asarray(npz["vectors"], dtype=np.float32)
+
+            shadow_raw: list[dict[str, Any]] = (
+                json.loads(shadow_path.read_text(encoding="utf-8")) if shadow_path.exists() else []
+            )
+            shadow_docs_tokens: list[list[str]] = []
+            for sl in shadow_raw:
+                sr = sl.get("routing", {})
+                s_text = " ".join(
+                    [
+                        str(sl.get("title", "")),
+                        str(sl.get("title", "")),
+                        str(sl.get("tagline", "")),
+                        str(sr.get("pain_point", "")),
+                        " ".join(sr.get("trigger_utterances") or []),
+                        " ".join(sr.get("domains") or []),
+                    ]
+                )
+                shadow_docs_tokens.append(_tokenize_zh_en(s_text))
+            shadow_embed_ids: list[str] = []
+            shadow_embed_matrix: np.ndarray | None = None
+            if shadow_emb_path.exists():
+                snpz = np.load(shadow_emb_path, allow_pickle=False)
+                shadow_embed_ids = [str(x) for x in snpz["ids"].tolist()]
+                shadow_embed_matrix = np.asarray(snpz["vectors"], dtype=np.float32)
+
+            self._lenses = lenses_raw
+            self._lenses_by_id = by_id
+            self._lenses_by_primitive = by_prim
+            self._embed_ids = embed_ids
+            self._embed_idx_by_id = {cid: idx for idx, cid in enumerate(embed_ids)}
+            self._embed_matrix = embed_matrix
+            self._bm25 = _LightweightBM25(docs_tokens)
+            self._shadow_lenses = shadow_raw
+            self._shadow_embed_ids = shadow_embed_ids
+            self._shadow_embed_matrix = shadow_embed_matrix
+            self._shadow_bm25 = _LightweightBM25(shadow_docs_tokens) if shadow_docs_tokens else None
+            self._policy = policy
+            self._release_version = manifest.get("version")
+            self._release_key = key
+            logger.info(
+                "Loaded %d L4 lenses + %d L3 shadow lenses (release=%s, embeddings=%s)",
+                len(lenses_raw),
+                len(shadow_raw),
+                self._release_version,
+                embed_matrix.shape if embed_matrix is not None else "none",
+            )
+            return True
 
     async def execute(self, request: RouteRequest) -> RouteResponse:
-        self.reload_if_changed()
         start = time.perf_counter()
+        self.reload_if_changed()
+        t_after_reload = time.perf_counter()
+        s2_params = self._stage2_params()
 
         trimmed_text = request.input_text.strip()[: self._max_input_chars]
         retrieval_text = _strip_style_modifiers(trimmed_text)
         vague_signal = _vague_signal_score(trimmed_text)
 
-        # Stage 1: Hybrid Recall (BM25 + bge-m3 RRF) -> 26 diverse, high-relevance candidates
+        # Stage 1: Hybrid Recall (BM25 + bge-m3 RRF) -> diverse, high-relevance candidates
         q_vec = await self._embed_query(retrieval_text)
+        t_after_embed = time.perf_counter()
         sim_map: dict[str, float] = {}
         used_embed = False
         if q_vec is not None and self._embed_matrix is not None and len(self._embed_ids) > 0:
@@ -469,21 +518,49 @@ class LensRouterSkill(BaseSkill):
             bt_cfg=bt_cfg,
         )
 
+        # Evaluate active workflow session (score pinned lens in the same CE batch if needed)
+        pinned_lens = self._get_pinned_workflow_lens(request.app_name)
+        is_explicit_cont = _is_workflow_continuation(trimmed_text)
+        extra_pinned_for_rerank: list[dict[str, Any]] = []
+        cand_ids = {lens["id"] for _, lens in candidates}
+        if pinned_lens is not None and not is_explicit_cont and pinned_lens["id"] not in cand_ids:
+            extra_pinned_for_rerank = [pinned_lens]
+        t_after_recall = time.perf_counter()
+
         # Stage 2A (Fastest & Most Accurate): In-process MPS Cross-Encoder bge-reranker-v2-m3
         used_fallback = False
         model_label = self._inference.model_name
         rerank_scores: list[float] | None = None
+        ce_batch_size = 0
         if self._reranker is not None and candidates:
-            all_docs = [_rerank_doc_text(lens) for _, lens in candidates] + [
-                _rerank_doc_text(lens) for _, lens in shadow_candidates
-            ]
+            all_docs = (
+                [_rerank_doc_text(lens, query=retrieval_text) for _, lens in candidates]
+                + [_rerank_doc_text(lens, query=retrieval_text) for _, lens in shadow_candidates]
+                + [_rerank_doc_text(lens, query=retrieval_text) for lens in extra_pinned_for_rerank]
+            )
+            ce_batch_size = len(all_docs)
             rerank_scores = await self._reranker.score(retrieval_text, all_docs)
+        t_after_rerank = time.perf_counter()
 
-        if rerank_scores is not None and len(rerank_scores) == len(candidates) + len(shadow_candidates):
-            l4_scores = rerank_scores[: len(candidates)]
-            shadow_scores = rerank_scores[len(candidates) :]
+        pinned_ce_score: float | None = None
+        if rerank_scores is not None and len(rerank_scores) == (
+            len(candidates) + len(shadow_candidates) + len(extra_pinned_for_rerank)
+        ):
+            n_l4 = len(candidates)
+            n_sh = len(shadow_candidates)
+            l4_scores = rerank_scores[:n_l4]
+            shadow_scores = rerank_scores[n_l4 : n_l4 + n_sh]
+            if pinned_lens is not None:
+                if extra_pinned_for_rerank:
+                    pinned_ce_score = float(rerank_scores[-1])
+                else:
+                    for (_, lens), sc in zip(candidates, l4_scores):
+                        if lens["id"] == pinned_lens["id"]:
+                            pinned_ce_score = float(sc)
+                            break
+
             model_label = self._reranker.model_name  # type: ignore[union-attr]
-            cards = self._select_from_reranker(
+            cards, l4_raw_ce_by_id, low_conf_deficit = self._select_from_reranker(
                 candidates=candidates,
                 rerank_scores=l4_scores,
                 app_name=request.app_name,
@@ -492,9 +569,13 @@ class LensRouterSkill(BaseSkill):
             if shadow_candidates and shadow_scores:
                 cards = self._apply_l3_breakthrough(
                     l4_cards=cards,
+                    l4_raw_ce_by_id=l4_raw_ce_by_id,
                     shadow_candidates=shadow_candidates,
                     shadow_scores=shadow_scores,
                     bt_cfg=bt_cfg,
+                    app_name=request.app_name,
+                    vague_signal=vague_signal,
+                    low_conf_deficit=low_conf_deficit,
                 )
             h_prim, h_goal, h_clarity = self._heuristic_intent(request.app_name, trimmed_text)
             top_prim = cards[0].primitive if cards and cards[0].primitive else h_prim
@@ -511,6 +592,7 @@ class LensRouterSkill(BaseSkill):
                 input_text=trimmed_text,
                 candidates=candidates[:12],
             )
+            t_after_rerank = time.perf_counter()
             if rerank_res is None:
                 used_fallback = True
                 prim, goal, clarity = self._heuristic_intent(request.app_name, trimmed_text)
@@ -528,14 +610,37 @@ class LensRouterSkill(BaseSkill):
                 used_embed=used_embed,
             )
 
-        # If this app has an active workflow session, pin the next step cleanly at Slot 1
-        pinned_lens = self._get_pinned_workflow_lens(request.app_name)
+        # Only pin workflow next-step when user continues the workflow or query is semantically aligned
         if pinned_lens is not None:
-            pinned_card = self._to_card_item(pinned_lens, score=1.0, is_workflow_next=True)
-            others = [c for c in cards if c.id != pinned_card.id]
-            cards = [pinned_card] + others[: max(0, self._top_k - 1)]
+            should_pin = is_explicit_cont
+            if not should_pin:
+                if pinned_ce_score is not None:
+                    should_pin = pinned_ce_score >= s2_params["workflow_min_rerank_logit"]
+                else:
+                    pinned_cos = sim_map.get(pinned_lens["id"], 0.0)
+                    should_pin = pinned_cos >= s2_params["workflow_min_cosine"]
 
-        latency_ms = round((time.perf_counter() - start) * 1000.0, 2)
+            if should_pin:
+                pinned_card = self._to_card_item(pinned_lens, score=1.0, is_workflow_next=True)
+                others = [c for c in cards if c.id != pinned_card.id]
+                cards = [pinned_card] + others[: max(0, self._top_k - 1)]
+            else:
+                self._clear_workflow_session(request.app_name)
+
+        t_end = time.perf_counter()
+        latency_ms = round((t_end - start) * 1000.0, 2)
+        reload_ms = (t_after_reload - start) * 1000.0
+        embed_ms = (t_after_embed - t_after_reload) * 1000.0
+        recall_ms = (t_after_recall - t_after_embed) * 1000.0
+        rerank_ms = (t_after_rerank - t_after_recall) * 1000.0
+        post_ms = (t_end - t_after_rerank) * 1000.0
+        perf_line = (
+            f"[PERF][route] app={request.app_name} chars={len(trimmed_text)} "
+            f"ce_batch={ce_batch_size} total={latency_ms:.1f}ms "
+            f"(reload={reload_ms:.1f} embed={embed_ms:.1f} recall={recall_ms:.1f} "
+            f"rerank={rerank_ms:.1f} post={post_ms:.1f}) fallback={used_fallback}"
+        )
+        logger.info(perf_line)
         return RouteResponse(
             skill_type=self.name,
             cards=cards,
@@ -606,8 +711,9 @@ class LensRouterSkill(BaseSkill):
         used_ids: set[str] = set()
         covered_prims: set[str] = set()
 
-        # 1) Global Top-12 Hybrid RRF winners
-        for pair in scored[: min(12, pool_limit)]:
+        # 1) Global Hybrid RRF winners (always reserve up to 3 slots for uncovered primitives)
+        primary_limit = min(max(pool_limit - 3, 1), 12)
+        for pair in scored[:primary_limit]:
             chosen.append(pair)
             used_ids.add(pair[1]["id"])
             covered_prims.add(str(pair[1].get("routing", {}).get("primitive", "deconstruct")))
@@ -684,13 +790,60 @@ class LensRouterSkill(BaseSkill):
         scored.sort(key=lambda pair: pair[0], reverse=True)
         return scored[:max_k]
 
+    def _compute_stage2_score(
+        self,
+        *,
+        ce_score: float,
+        lens: dict[str, Any],
+        app_lower: str,
+        vague_signal: float,
+        vague_anchor_set: set[str],
+        low_conf_deficit: float = 0.0,
+        s1_norm: float = 0.0,
+        hybrid_rescue_weight: float = 0.0,
+    ) -> float:
+        """Compute unified Stage-2 adjusted score from raw CE logit and contextual priors."""
+        params = self._stage2_params()
+        routing = lens.get("routing", {})
+        meta = lens.get("meta", {})
+        prim = str(routing.get("primitive", "deconstruct"))
+        cat = str(meta.get("category", "general"))
+        doms = [str(d).lower() for d in (routing.get("domains") or [])]
+        clarity_fit = set(routing.get("clarity_fit") or [])
+
+        score = float(ce_score)
+        if hybrid_rescue_weight > 0.0:
+            score += hybrid_rescue_weight * s1_norm
+
+        if meta.get("scope") == "universal" or meta.get("shelf") == "evergreen":
+            score += params["evergreen_boost"] * (1.0 - 0.55 * low_conf_deficit)
+
+        aff = [str(a).lower() for a in (routing.get("app_affinity") or [])]
+        if app_lower and any(app_lower in a or a in app_lower for a in aff):
+            score += params["app_affinity_boost"]
+        score += _app_category_bonus(app_lower, cat, doms)
+
+        if vague_signal >= 0.5:
+            if lens["id"] in vague_anchor_set:
+                score += 0.75 * vague_signal
+            elif prim == "metacognize" and "vague" in clarity_fit:
+                score += 0.25 * vague_signal
+
+        base_w = float(meta.get("base_weight", 1.0))
+        score += params["base_weight_scale"] * (min(max(base_w, 0.2), 2.0) - 1.0)
+        return score
+
     def _apply_l3_breakthrough(
         self,
         *,
         l4_cards: list[CardItem],
+        l4_raw_ce_by_id: dict[str, float],
         shadow_candidates: list[tuple[float, dict[str, Any]]],
         shadow_scores: list[float],
         bt_cfg: dict[str, Any],
+        app_name: str = "Unknown",
+        vague_signal: float = 0.0,
+        low_conf_deficit: float = 0.0,
     ) -> list[CardItem]:
         """Allow at most 1 off_shelf L3 card to break through ONLY on overwhelming margin over L4."""
         if not l4_cards or not shadow_candidates or not shadow_scores:
@@ -705,24 +858,36 @@ class LensRouterSkill(BaseSkill):
         if best_logit < min_logit:
             return l4_cards
 
-        top1_score = float(l4_cards[0].score) if l4_cards[0].score is not None else 0.0
-        top3_score = float(l4_cards[-1].score) if l4_cards[-1].score is not None else 0.0
+        # Compare raw CE logits directly so L4 evergreen/affinity priors don't skew margin gates
+        raw_top1_logit = l4_raw_ce_by_id.get(l4_cards[0].id, float(l4_cards[0].score or 0.0))
+        raw_top3_logit = l4_raw_ce_by_id.get(l4_cards[-1].id, float(l4_cards[-1].score or 0.0))
         l3_prim = str(best_lens.get("routing", {}).get("primitive", "deconstruct"))
+        bt_score = self._compute_stage2_score(
+            ce_score=best_logit,
+            lens=best_lens,
+            app_lower=app_name.strip().lower(),
+            vague_signal=vague_signal,
+            vague_anchor_set=set(VAGUE_ANCHOR_IDS),
+            low_conf_deficit=low_conf_deficit,
+        )
 
         # Case 1: Overwhelmingly beats L4 Slot 1 -> surface at Slot 1 (keep orthogonal Top-3)
-        if best_logit - top1_score >= margin_top1:
-            bt_card = self._to_card_item(best_lens, score=best_logit, is_l3_breakthrough=True)
+        if best_logit - raw_top1_logit >= margin_top1:
+            bt_display_score = max(bt_score, (l4_cards[0].score or 0.0) + 0.01)
+            bt_card = self._to_card_item(best_lens, score=bt_display_score, is_l3_breakthrough=True)
             others = [c for c in l4_cards if c.id != bt_card.id and c.primitive != l3_prim]
             if len(others) < self._top_k - 1:
                 others = [c for c in l4_cards if c.id != bt_card.id]
             return [bt_card] + others[: max(0, self._top_k - 1)]
 
-        # Case 2: Overwhelmingly beats L4 Slot 3 & orthogonal to Slot 1/2 -> replace Slot 3
-        if len(l4_cards) >= self._top_k and best_logit - top3_score >= margin_top3:
+        # Case 2: Overwhelmingly beats L4 Slot 3 & orthogonal to Slot 1/2 -> replace Slot 3 and keep monotonic order
+        if len(l4_cards) >= self._top_k and best_logit - raw_top3_logit >= margin_top3:
             top2_prims = {c.primitive for c in l4_cards[: self._top_k - 1]}
             if l3_prim not in top2_prims:
-                bt_card = self._to_card_item(best_lens, score=best_logit, is_l3_breakthrough=True)
-                return l4_cards[: self._top_k - 1] + [bt_card]
+                bt_card = self._to_card_item(best_lens, score=bt_score, is_l3_breakthrough=True)
+                combined = l4_cards[: self._top_k - 1] + [bt_card]
+                combined.sort(key=lambda c: float(c.score or 0.0), reverse=True)
+                return combined
 
         return l4_cards
 
@@ -737,6 +902,8 @@ class LensRouterSkill(BaseSkill):
         self.reload_if_changed()
         trimmed = query.strip()[: self._max_input_chars]
         retrieval_text = _strip_style_modifiers(trimmed)
+        vague_signal = _vague_signal_score(trimmed)
+        app_lower = app_name.strip().lower()
         bt_cfg = self._policy.get("l3_breakthrough") or {}
         min_cos = float(bt_cfg.get("min_cosine", 0.45))
         min_logit = float(bt_cfg.get("min_rerank_logit", -1.0))
@@ -757,42 +924,97 @@ class LensRouterSkill(BaseSkill):
 
         q_toks = _tokenize_zh_en(retrieval_text)
         l4_bm = self._bm25.score_all(q_toks) if self._bm25 is not None else [0.0] * len(self._lenses)
+        l4_bm_map = {self._lenses[i]["id"]: l4_bm[i] for i in range(len(self._lenses))}
         sh_bm = self._shadow_bm25.score_all(q_toks) if self._shadow_bm25 is not None else [0.0] * len(self._shadow_lenses)
+        sh_bm_map = {self._shadow_lenses[i]["id"]: sh_bm[i] for i in range(len(self._shadow_lenses))}
 
-        # Build broad inspection pool: top-20 L4 + top-10 L3 shadow by Stage 1 hybrid
+        # Include live Stage-1 recall candidates first so live Top-3 is always inspected under identical scoring
+        live_stage1 = self._hybrid_recall_candidates(
+            input_text=retrieval_text,
+            app_name=app_name,
+            sim_map=l4_sim,
+            vague_signal=vague_signal,
+        )
+        live_s1_map = {lens["id"]: float(s1) for s1, lens in live_stage1}
+        s1_vals = [float(s1) for s1, _ in live_stage1]
+        s1_min = min(s1_vals) if s1_vals else 0.0
+        s1_span = (max(s1_vals) - s1_min) if s1_vals else 0.0
+
         l4_pool_raw = [
             (l4_sim.get(l["id"], 0.0) + (0.04 * min(l4_bm[i], 10.0)), l4_sim.get(l["id"], 0.0), l4_bm[i], l, "l4")
             for i, l in enumerate(self._lenses)
         ]
         l4_pool_raw.sort(key=lambda x: x[0], reverse=True)
+        inspect_l4: list[tuple[float, float, float, dict[str, Any], str]] = []
+        seen_inspect: set[str] = set()
+        for _, lens in live_stage1:
+            lid = lens["id"]
+            if lid not in seen_inspect:
+                seen_inspect.add(lid)
+                inspect_l4.append((live_s1_map.get(lid, 0.0), l4_sim.get(lid, 0.0), l4_bm_map.get(lid, 0.0), lens, "l4"))
+        for item in l4_pool_raw:
+            if len(inspect_l4) >= max(20, len(live_stage1)):
+                break
+            lid = item[3]["id"]
+            if lid not in seen_inspect:
+                seen_inspect.add(lid)
+                inspect_l4.append(item)
+
         sh_pool_raw = [
             (sh_sim.get(l["id"], 0.0) + (0.04 * min(sh_bm[i], 10.0)), sh_sim.get(l["id"], 0.0), sh_bm[i], l, "l3_shadow")
             for i, l in enumerate(self._shadow_lenses)
         ]
         sh_pool_raw.sort(key=lambda x: x[0], reverse=True)
 
-        inspect_pool = l4_pool_raw[:20] + sh_pool_raw[:10]
+        inspect_pool = inspect_l4 + sh_pool_raw[:10]
         rerank_scores: list[float] | None = None
         if self._reranker is not None and inspect_pool:
-            docs = [_rerank_doc_text(item[3]) for item in inspect_pool]
+            docs = [_rerank_doc_text(item[3], query=retrieval_text) for item in inspect_pool]
             rerank_scores = await self._reranker.score(retrieval_text, docs)
+
+        live_l4_ce = [
+            float(rerank_scores[i])
+            for i, item in enumerate(inspect_pool)
+            if rerank_scores is not None and item[4] == "l4" and item[3]["id"] in live_s1_map
+        ]
+        max_ce = max(live_l4_ce) if live_l4_ce else 0.0
+        low_conf_deficit = min(1.0, max(0.0, (-2.4 - max_ce) / 3.1)) if live_l4_ce else 0.0
+        hybrid_rescue_weight = 4.5 * low_conf_deficit
 
         # Compute exact live Top-3 that macOS popup would show
         live_resp = await self.execute(RouteRequest(input_text=trimmed, app_name=app_name))
-        live_l4_scores = [float(c.score) for c in live_resp.cards if c.score is not None and not c.is_l3_breakthrough]
-        ref_top1 = live_l4_scores[0] if live_l4_scores else 0.0
-        ref_top3 = live_l4_scores[-1] if live_l4_scores else 0.0
+        live_l4_cards = [c for c in live_resp.cards if not c.is_l3_breakthrough and not c.is_workflow_next]
+        ce_by_id = {
+            inspect_pool[i][3]["id"]: float(rerank_scores[i])
+            for i in range(len(inspect_pool))
+            if rerank_scores is not None
+        }
+        ref_raw_top1 = ce_by_id.get(live_l4_cards[0].id, 0.0) if live_l4_cards else 0.0
+        ref_raw_top3 = ce_by_id.get(live_l4_cards[-1].id, 0.0) if live_l4_cards else 0.0
+        top2_prims = {c.primitive for c in live_resp.cards[: max(0, self._top_k - 1)]}
         shown_ids = {c.id for c in live_resp.cards}
+        vague_anchor_set = set(VAGUE_ANCHOR_IDS)
 
         rows: list[dict[str, Any]] = []
         for idx, (_, cos, bm, lens, pool_kind) in enumerate(inspect_pool):
             meta = lens.get("meta", {})
             routing = lens.get("routing", {})
             ce = float(rerank_scores[idx]) if rerank_scores is not None else None
-            boost = 0.45 if (meta.get("scope") == "universal" or meta.get("shelf") == "evergreen") else 0.0
-            base_w = float(meta.get("base_weight", 1.0))
-            bw_adj = 0.55 * (min(max(base_w, 0.2), 2.0) - 1.0)
-            final_s = (ce + boost + bw_adj) if ce is not None else cos
+            if ce is not None:
+                s1_val = live_s1_map.get(lens["id"])
+                s1_norm = ((s1_val - s1_min) / s1_span) if (s1_val is not None and s1_span > 1e-9) else 0.0
+                final_s = self._compute_stage2_score(
+                    ce_score=ce,
+                    lens=lens,
+                    app_lower=app_lower,
+                    vague_signal=vague_signal,
+                    vague_anchor_set=vague_anchor_set,
+                    low_conf_deficit=low_conf_deficit,
+                    s1_norm=s1_norm,
+                    hybrid_rescue_weight=hybrid_rescue_weight if s1_val is not None else 0.0,
+                )
+            else:
+                final_s = cos
 
             bt_status = "l4"
             gap_top1 = None
@@ -804,12 +1026,14 @@ class LensRouterSkill(BaseSkill):
                 elif exclude_manual and manual_off:
                     bt_status = "manual_excluded"
                 elif ce is not None:
-                    gap_top1 = round((ref_top1 + margin_top1) - ce, 2)
-                    gap_top3 = round((ref_top3 + margin_top3) - ce, 2)
+                    gap_top1 = round((ref_raw_top1 + margin_top1) - ce, 2)
+                    gap_top3 = round((ref_raw_top3 + margin_top3) - ce, 2)
                     if ce < min_logit or (sh_sim and cos < min_cos and bm < 4.0):
                         bt_status = "below_floor"
-                    elif gap_top1 <= 0 or gap_top3 <= 0:
+                    elif gap_top3 <= 0 and str(routing.get("primitive", "")) in top2_prims:
                         bt_status = "blocked_orthogonal"
+                    elif gap_top1 > 0 and gap_top3 > 0:
+                        bt_status = "below_margin"
                     else:
                         bt_status = "eligible_gap"
 
@@ -864,8 +1088,9 @@ class LensRouterSkill(BaseSkill):
         rerank_scores: list[float],
         app_name: str,
         vague_signal: float = 0.0,
-    ) -> list[CardItem]:
+    ) -> tuple[list[CardItem], dict[str, float], float]:
         """Rank candidates with Cross-Encoder + denoised Stage-1 rescue + Quality-Gated Orthogonality."""
+        params = self._stage2_params()
         app_lower = app_name.strip().lower()
         max_ce = max(rerank_scores) if rerank_scores else 0.0
 
@@ -877,54 +1102,31 @@ class LensRouterSkill(BaseSkill):
         hybrid_rescue_weight = 4.5 * low_conf_deficit
 
         vague_anchor_set = set(VAGUE_ANCHOR_IDS)
+        raw_ce_by_id: dict[str, float] = {}
         final_scored: list[tuple[float, dict[str, Any]]] = []
         for (s1_score, lens), ce_score in zip(candidates, rerank_scores):
-            routing = lens.get("routing", {})
-            meta = lens.get("meta", {})
-            prim = str(routing.get("primitive", "deconstruct"))
-            cat = str(meta.get("category", "general"))
-            doms = [str(d).lower() for d in (routing.get("domains") or [])]
-            clarity_fit = set(routing.get("clarity_fit") or [])
-
-            score = float(ce_score)
-            if hybrid_rescue_weight > 0.0 and s1_span > 1e-9:
-                s1_norm = (float(s1_score) - s1_min) / s1_span
-                score += hybrid_rescue_weight * s1_norm
-
-            # Evergreen universal shelf gets a gentle logit boost (+0.45), softened in deep low-confidence floor
-            if meta.get("scope") == "universal" or meta.get("shelf") == "evergreen":
-                score += 0.45 * (1.0 - 0.55 * low_conf_deficit)
-
-            aff = [str(a).lower() for a in (routing.get("app_affinity") or [])]
-            if app_lower and any(app_lower in a or a in app_lower for a in aff):
-                score += 0.20
-            score += _app_category_bonus(app_lower, cat, doms)
-
-            # Vague / underspecified metacognitive safety-net prior
-            if vague_signal >= 0.5:
-                if lens["id"] in vague_anchor_set:
-                    score += 0.75 * vague_signal
-                elif prim == "metacognize" and "vague" in clarity_fit:
-                    score += 0.25 * vague_signal
-
-            base_w = float(meta.get("base_weight", 1.0))
-            score += 0.55 * (min(max(base_w, 0.2), 2.0) - 1.0)
+            raw_ce_by_id[lens["id"]] = float(ce_score)
+            s1_norm = ((float(s1_score) - s1_min) / s1_span) if s1_span > 1e-9 else 0.0
+            score = self._compute_stage2_score(
+                ce_score=float(ce_score),
+                lens=lens,
+                app_lower=app_lower,
+                vague_signal=vague_signal,
+                vague_anchor_set=vague_anchor_set,
+                low_conf_deficit=low_conf_deficit,
+                s1_norm=s1_norm,
+                hybrid_rescue_weight=hybrid_rescue_weight,
+            )
             final_scored.append((score, lens))
 
         final_scored.sort(key=lambda pair: pair[0], reverse=True)
         if not final_scored:
-            return []
+            return [], raw_ce_by_id, low_conf_deficit
 
         def _is_universal(lens: dict[str, Any]) -> bool:
             m = lens.get("meta", {})
             return m.get("scope") == "universal" or m.get("shelf") == "evergreen"
 
-        # Quality-Gated Orthogonality:
-        # - Always preserves 3 strictly orthogonal primitives for genuine perspective switching.
-        # - When the top orthogonal candidate for Slot 2/3 falls into a vertical garbage cliff
-        #   (score < -4.2 and > 3.5 below Slot 1) and is domain-specific (non-universal),
-        #   substitute the highest-scoring universal orthogonal lens (excluding brainstorm noise)
-        #   so Slots 2-3 never pad with unrelated vertical cards (e.g. workbook audit on an apology query).
         cards: list[CardItem] = []
         used_ids: set[str] = set()
         used_prims: Counter[str] = Counter()
@@ -934,6 +1136,9 @@ class LensRouterSkill(BaseSkill):
         used_ids.add(top1_lens["id"])
         used_prims[top1_prim] += 1
         cards.append(self._to_card_item(top1_lens, score=top1_score, is_exploration=False))
+
+        cliff_floor = params["cliff_score_floor"]
+        cliff_margin = params["cliff_margin_below_top1"]
 
         while len(cards) < self._top_k:
             best_ortho: tuple[float, dict[str, Any]] | None = None
@@ -953,7 +1158,7 @@ class LensRouterSkill(BaseSkill):
             chosen_pair: tuple[float, dict[str, Any]] | None = None
             if best_ortho is not None:
                 bo_score, bo_lens = best_ortho
-                in_cliff = bo_score < -4.2 and (top1_score - bo_score) > 3.5
+                in_cliff = bo_score < cliff_floor and (top1_score - bo_score) > cliff_margin
                 if in_cliff and not _is_universal(bo_lens) and best_univ_ortho is not None:
                     chosen_pair = best_univ_ortho
                 else:
@@ -972,7 +1177,7 @@ class LensRouterSkill(BaseSkill):
             used_prims[prim] += 1
             cards.append(self._to_card_item(lens, score=sc, is_exploration=False))
 
-        return cards
+        return cards, raw_ce_by_id, low_conf_deficit
 
     async def _rerank_with_2b(
         self,

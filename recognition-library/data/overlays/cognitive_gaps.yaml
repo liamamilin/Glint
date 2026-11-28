@@ -1,1 +1,7 @@
-gaps: []
+gaps:
+- id: gap_d8172e35
+  query: 我想创作一首歌曲
+  note: 已触发 AI 制作
+  app_name: Unknown
+  status: resolved
+  created_at: '2026-11-26 22:04:39'

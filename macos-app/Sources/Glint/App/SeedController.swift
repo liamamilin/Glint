@@ -57,6 +57,7 @@ final class SeedController: ObservableObject {
     @Published private(set) var totalL3Count: Int = 0
     @Published private(set) var mutedCount: Int = 0
     @Published private(set) var snoozedCount: Int = 0
+    @Published private(set) var pinnedCount: Int = 0
     @Published private(set) var isHovering: Bool = false
     @Published private(set) var isReaderOpen: Bool = false
     @Published private(set) var progress: Double = 0.0
@@ -192,6 +193,27 @@ final class SeedController: ObservableObject {
         }
     }
 
+    func togglePinCurrent() {
+        guard historyIndex >= 0, historyIndex < history.count else { return }
+        let item = history[historyIndex]
+        let nextPinned = !item.isPinned
+        history[historyIndex] = item.withPinned(nextPinned)
+        if isReaderOpen { renderReader() }
+        Task {
+            if let res = await brainClient.sendSeedFeedback(id: item.id, action: nextPinned ? "pin" : "unpin") {
+                self.mutedCount = res.muted_count
+                self.snoozedCount = res.snoozed_count
+                if let pc = res.pinned_count {
+                    self.pinnedCount = pc
+                }
+            }
+            if !nextPinned && self.poolMode == .pinnedOnly {
+                removeFromHistory(id: item.id)
+                await drawNextFromServer(excludeCurrent: false, extraExcludeIds: [item.id])
+            }
+        }
+    }
+
     func muteCurrent() {
         guard let item = currentSeed else { return }
         mutedCount += 1
@@ -200,6 +222,7 @@ final class SeedController: ObservableObject {
             if let res = await brainClient.sendSeedFeedback(id: item.id, action: "mute") {
                 self.mutedCount = res.muted_count
                 self.snoozedCount = res.snoozed_count
+                if let pc = res.pinned_count { self.pinnedCount = pc }
             }
             removeFromHistory(id: item.id)
             await drawNextFromServer(excludeCurrent: false, extraExcludeIds: [item.id])
@@ -347,6 +370,7 @@ final class SeedController: ObservableObject {
             totalL3Count = res.total_l3
             mutedCount = res.muted_count
             snoozedCount = res.snoozed_count
+            if let pc = res.pinned_count { pinnedCount = pc }
 
             if let item = res.item {
                 if historyIndex >= 0 && historyIndex + 1 < history.count {

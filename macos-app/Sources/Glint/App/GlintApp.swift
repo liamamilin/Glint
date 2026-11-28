@@ -103,6 +103,10 @@ struct GlintApp: App {
                     coordinator.openAdminConsole()
                 }
 
+                Button("⚡ 从剪贴板导入认知卡…") {
+                    coordinator.openAdminImportFromClipboard()
+                }
+
                 Button {
                     coordinator.toggleLaunchAtLogin()
                 } label: {

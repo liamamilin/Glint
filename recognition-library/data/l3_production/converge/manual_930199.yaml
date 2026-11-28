@@ -1,0 +1,48 @@
+id: manual_930199
+title: 信息代谢
+tagline: 让信息随现实演化，而不是随时间堆积
+routing:
+  primitive: converge
+  goals:
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - general
+  app_affinity: []
+  pain_point: 信息持续积累，新旧内容冲突，缺乏权威来源与生命周期治理机制
+  trigger_utterances:
+  - 更新文档
+  - 整理旧资料
+  - 帮我更新项目文档并归档历史文档
+  - 把知识库里面过时和重复的内容清理一下
+  - 项目已经发生了很多变化，把相关资料同步一下
+  - 更新一下项目文档
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 以可验证的当前状态为基准，盘点存量信息，识别缺失、过时、重复与冲突。 优先更新、合并已有内容，确立权威来源。 归档失效内容并记录原因及替代关系，修复索引与引用，输出变更清单。 未经授权不得永久删除。
+  variables: []
+  workflow: null
+meta:
+  source: manual-custom
+  source_ref: manual#manual_930199
+  source_hash: 13b7bfd257d5919c4c97a0b3a86a0300c1f830a3c0ba7ae1d3b12bc9de526584
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: A
+  category: general
+  subcategory: problem_solving
+  collections:
+  - col_item_3c3742f184
+  - col_vibe_codeing
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1
+  created_at: null
+  supersedes: null
+  superseded_by: null
+  evolution_note: null

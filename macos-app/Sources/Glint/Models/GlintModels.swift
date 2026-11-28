@@ -109,6 +109,7 @@ struct HealthResponse: Codable, Sendable {
 
 enum CaptureScope: String, Sendable {
     case selection
+    case line
     case paragraph
     case fullField
 }
@@ -120,12 +121,34 @@ struct CapturedContext: Sendable {
     let captureScope: CaptureScope
     let anchorRect: CGRect?
     let isEditable: Bool
+    /// When AX reads a full paragraph while the caret is in the middle or at the start,
+    /// stores the exact prefix before the caret so `.wrap` matches `Cmd+Shift+Up` cleanly.
+    let wrapParagraphPrefix: String?
+
+    init(
+        appName: String,
+        appPID: pid_t,
+        inputText: String,
+        captureScope: CaptureScope,
+        anchorRect: CGRect?,
+        isEditable: Bool,
+        wrapParagraphPrefix: String? = nil
+    ) {
+        self.appName = appName
+        self.appPID = appPID
+        self.inputText = inputText
+        self.captureScope = captureScope
+        self.anchorRect = anchorRect
+        self.isEditable = isEditable
+        self.wrapParagraphPrefix = wrapParagraphPrefix
+    }
 }
 
 // MARK: - Glint Seed (Ambient HUD Carousel)
 
 enum SeedPoolMode: String, CaseIterable, Identifiable, Codable, Sendable {
     case smartMix = "smart_mix"
+    case pinnedOnly = "pinned_only"
     case l4All = "l4_all"
     case l3Discovery = "l3_discovery"
     case tierS = "tier_s"
@@ -134,7 +157,8 @@ enum SeedPoolMode: String, CaseIterable, Identifiable, Codable, Sendable {
 
     var label: String {
         switch self {
-        case .smartMix: return "全域智能混播 (L4 + L3探索)"
+        case .smartMix: return "全域智能混播 (精读 + L4 + L3探索)"
+        case .pinnedOnly: return "📌 仅播我的精读清单"
         case .l4All: return "仅 L4 在架 (S/A/B加权)"
         case .l3Discovery: return "仅 L3 休眠探索"
         case .tierS: return "仅 S 级核心心法"
@@ -144,6 +168,7 @@ enum SeedPoolMode: String, CaseIterable, Identifiable, Codable, Sendable {
     var shortLabel: String {
         switch self {
         case .smartMix: return "智能混播"
+        case .pinnedOnly: return "精读清单"
         case .l4All: return "L4 在架"
         case .l3Discovery: return "L3 探索"
         case .tierS: return "S 级核心"
@@ -167,9 +192,35 @@ struct SeedItem: Codable, Identifiable, Equatable, Sendable {
     let probability_pct: Double?
     let recall_count_30d: Int?
     let reason_tag: String?
+    let is_pinned: Bool?
 
     var isL3Discovery: Bool {
         (layer ?? "L4").uppercased() == "L3"
+    }
+
+    var isPinned: Bool {
+        is_pinned == true
+    }
+
+    func withPinned(_ pinned: Bool) -> SeedItem {
+        SeedItem(
+            id: id,
+            title: title,
+            tagline: tagline,
+            pain_point: pain_point,
+            prompt: prompt,
+            primitive: primitive,
+            category: category,
+            tier: tier,
+            layer: layer,
+            source: source,
+            trigger_utterances: trigger_utterances,
+            weight: weight,
+            probability_pct: probability_pct,
+            recall_count_30d: recall_count_30d,
+            reason_tag: reason_tag,
+            is_pinned: pinned
+        )
     }
 }
 
@@ -180,6 +231,7 @@ struct SeedPoolResponse: Codable, Sendable {
     let total_l3: Int?
     let muted_count: Int
     let snoozed_count: Int
+    let pinned_count: Int?
     let release_version: String?
 }
 
@@ -196,6 +248,7 @@ struct SeedDrawResponse: Codable, Sendable {
     let total_l3: Int
     let muted_count: Int
     let snoozed_count: Int
+    let pinned_count: Int?
     let release_version: String?
 }
 
@@ -217,6 +270,7 @@ struct SeedFeedbackResponse: Codable, Sendable {
     let ok: Bool
     let muted_count: Int
     let snoozed_count: Int
+    let pinned_count: Int?
 }
 
 enum SeedOpacityPreset: String, CaseIterable, Identifiable {

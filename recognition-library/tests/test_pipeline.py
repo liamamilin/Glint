@@ -704,3 +704,587 @@ def test_meta_vault_merges_without_polluting_public_l3(tmp_path: Path) -> None:
     vault_loaded = yaml.safe_load(vault_l3_item.read_text(encoding="utf-8"))
     assert vault_loaded["meta"]["shelf"] == "evergreen"
     assert vault_loaded["meta"]["tier"] == "S"
+
+
+def test_vault_duplicate_validation_stale_cleanup_and_admin_isolation(tmp_path: Path) -> None:
+    import pytest
+    from fastapi.testclient import TestClient
+
+    import admin.server as admin_srv
+    from pipeline.builder import validate_l2_repository
+    from pipeline.l2_to_l3 import run_l2_to_l3
+    from pipeline.schema import L2Lens, LensExecution, LensMeta, LensRouting
+
+    def _mk(lid: str, source: str = "glint-core", triggers: list[str] | None = None, title: str | None = None) -> L2Lens:
+        return L2Lens(
+            id=lid,
+            title=title or f"卡片-{lid}",
+            tagline="把模糊输入拆解为可验证前提",
+            routing=LensRouting(
+                primitive="deconstruct",
+                goals=["digest"],
+                clarity_fit=["concrete"],
+                domains=["architecture"],
+                pain_point="面对复杂结构不知道如何拆解",
+                trigger_utterances=triggers if triggers is not None else ["帮我拆解", "理一下结构"],
+            ),
+            execution=LensExecution(action_type="inject_prompt", inject_mode="append", content="请按前提逐项拆解。"),
+            meta=LensMeta(source=source, source_ref="test#item", source_hash=content_sha256(lid), confidence=0.9),
+        )
+
+    l2_dir = tmp_path / "l2_lenses"
+    l3_dir = tmp_path / "l3_production"
+    q_dir = tmp_path / "quarantine"
+    ov_path = tmp_path / "overlays" / "overrides.yaml"
+    dist_dir = tmp_path / "dist"
+    vault_dir = tmp_path / "meta-vault"
+    (l2_dir / "deconstruct").mkdir(parents=True)
+    (vault_dir / "l2_lenses" / "deconstruct").mkdir(parents=True)
+    ov_path.parent.mkdir(parents=True)
+    ov_path.write_text("overrides: {}\n", encoding="utf-8")
+
+    # 1. Duplicate ID + single-trigger failure detected explicitly by validate_l2_repository
+    (l2_dir / "deconstruct" / "dup_id.yaml").write_text(
+        yaml.safe_dump(_mk("dup_id", title="公开卡片").model_dump(), allow_unicode=True), encoding="utf-8"
+    )
+    (vault_dir / "l2_lenses" / "deconstruct" / "dup_id.yaml").write_text(
+        yaml.safe_dump(_mk("dup_id", title="私有卡片").model_dump(), allow_unicode=True), encoding="utf-8"
+    )
+    (vault_dir / "l2_lenses" / "deconstruct" / "vault_1trig.yaml").write_text(
+        yaml.safe_dump(_mk("vault_1trig", triggers=["只有一条"]).model_dump(), allow_unicode=True), encoding="utf-8"
+    )
+    _, errs = validate_l2_repository(l2_dir, ov_path, meta_vault_dir=vault_dir)
+    assert any("duplicate lens ID" in e for e in errs)
+    assert any("vault_1trig: insufficient trigger_utterances" in e for e in errs)
+
+    # 2. run_l2_to_l3 raises on duplicate ID rather than silently overwriting
+    with pytest.raises(ValueError, match="Duplicate lens IDs"):
+        run_l2_to_l3(l2_dir=l2_dir, l3_dir=l3_dir, overlay_path=ov_path, quarantine_dir=q_dir, meta_vault_dir=vault_dir)
+
+    # Remove duplicate conflict; vault_1trig fails rule gate -> written to vault quarantine & stale vault l3 cleared!
+    (vault_dir / "l2_lenses" / "deconstruct" / "dup_id.yaml").unlink()
+    (vault_dir / "l3_production" / "deconstruct").mkdir(parents=True)
+    (vault_dir / "l3_production" / "deconstruct" / "stale_vault.yaml").write_text("id: stale\n", encoding="utf-8")
+    _, _, rep = run_l2_to_l3(
+        l2_dir=l2_dir, l3_dir=l3_dir, overlay_path=ov_path, quarantine_dir=q_dir, meta_vault_dir=vault_dir
+    )
+    assert rep.total_quarantined_rules == 0  # never leaks into public cleaning report
+    assert (vault_dir / "quarantine" / "l3_rules" / "vault_1trig.yaml").exists()
+    assert not (vault_dir / "l3_production" / "deconstruct" / "stale_vault.yaml").exists()
+
+    # 3. Admin console recognizes vault lenses, keeps vault overlays private, and cleans L3 on personal delete
+    (vault_dir / "l2_lenses" / "deconstruct" / "vault_1trig.yaml").unlink()
+    (vault_dir / "l2_lenses" / "deconstruct" / "vault_only.yaml").write_text(
+        yaml.safe_dump(_mk("vault_only", title="私有透镜").model_dump(), allow_unicode=True), encoding="utf-8"
+    )
+    (l2_dir / "deconstruct" / "usr_personal_1.yaml").write_text(
+        yaml.safe_dump(_mk("usr_personal_1", source="user-forge", title="自建卡").model_dump(), allow_unicode=True),
+        encoding="utf-8",
+    )
+    build_release(
+        l2_dir=l2_dir, l3_dir=l3_dir, overlay_path=ov_path, quarantine_dir=q_dir,
+        dist_dir=dist_dir, embedder=None, meta_vault_dir=vault_dir,
+    )
+
+    orig = (admin_srv.L2_DIR, admin_srv.L3_DIR, admin_srv.OVERLAY_PATH, admin_srv.QUARANTINE_DIR, admin_srv.DIST_DIR, admin_srv.META_VAULT_DIR)
+    try:
+        admin_srv.L2_DIR = l2_dir
+        admin_srv.L3_DIR = l3_dir
+        admin_srv.OVERLAY_PATH = ov_path
+        admin_srv.QUARANTINE_DIR = q_dir
+        admin_srv.DIST_DIR = dist_dir
+        admin_srv.META_VAULT_DIR = vault_dir
+        client = TestClient(admin_srv.create_admin_app())
+
+        ov_resp = client.get("/api/overview").json()
+        assert ov_resp["l4_total"] == ov_resp["live_l4_total"] == 3
+        assert ov_resp["needs_rebuild"] is False
+
+        lenses_resp = client.get("/api/lenses").json()
+        by_id = {it["id"]: it for it in lenses_resp["items"]}
+        assert "vault_only" in by_id and by_id["vault_only"]["is_vault"] is True
+
+        # Vault overlay saved strictly into meta-vault/overrides.yaml, keeping public overrides.yaml clean
+        put_ov = client.put("/api/overlays/vault_only", json={"tier": "S"})
+        assert put_ov.status_code == 200
+        assert (vault_dir / "overrides.yaml").exists()
+        assert "vault_only" in (vault_dir / "overrides.yaml").read_text(encoding="utf-8")
+        assert "vault_only" not in ov_path.read_text(encoding="utf-8")
+
+        # Personal card deletion immediately removes from both L2 and L3
+        del_resp = client.delete("/api/lenses/usr_personal_1")
+        assert del_resp.status_code == 200 and del_resp.json()["removed_files"] == 2
+        after_ids = {it["id"] for it in client.get("/api/lenses").json()["items"]}
+        assert "usr_personal_1" not in after_ids
+    finally:
+        (admin_srv.L2_DIR, admin_srv.L3_DIR, admin_srv.OVERLAY_PATH, admin_srv.QUARANTINE_DIR, admin_srv.DIST_DIR, admin_srv.META_VAULT_DIR) = orig
+
+
+def test_meta_vault_collections_isolation_and_write_routing(tmp_path: Path) -> None:
+    from fastapi.testclient import TestClient
+
+    import admin.server as admin_srv
+    from pipeline.l2_to_l3 import _merge_vault_shelf_policy, run_l2_to_l3
+    from pipeline.schema import L2Lens, LensExecution, LensMeta, LensRouting
+
+    def _mk(lid: str, title: str) -> L2Lens:
+        return L2Lens(
+            id=lid,
+            title=title,
+            tagline="测试副标题",
+            routing=LensRouting(
+                primitive="deconstruct",
+                goals=["digest"],
+                clarity_fit=["concrete"],
+                domains=["architecture"],
+                pain_point="测试痛点描述",
+                trigger_utterances=["测试触发语一", "测试触发语二"],
+            ),
+            execution=LensExecution(action_type="inject_prompt", inject_mode="append", content="请按结构拆解。"),
+            meta=LensMeta(source="glint-core", source_ref="test#col", source_hash=content_sha256(lid), confidence=0.9),
+        )
+
+    l2_dir = tmp_path / "l2_lenses"
+    l3_dir = tmp_path / "l3_production"
+    q_dir = tmp_path / "quarantine"
+    ov_path = tmp_path / "overrides.yaml"
+    dist_dir = tmp_path / "dist"
+    pub_sp_path = tmp_path / "shelf_policy.yaml"
+    vault_dir = tmp_path / "meta-vault"
+
+    (l2_dir / "deconstruct").mkdir(parents=True)
+    (vault_dir / "l2_lenses" / "deconstruct").mkdir(parents=True)
+    ov_path.write_text("overrides: {}\n", encoding="utf-8")
+
+    (l2_dir / "deconstruct" / "pub_card.yaml").write_text(
+        yaml.safe_dump(_mk("pub_card", "公开卡片").model_dump(), allow_unicode=True), encoding="utf-8"
+    )
+    (vault_dir / "l2_lenses" / "deconstruct" / "vault_card.yaml").write_text(
+        yaml.safe_dump(_mk("vault_card", "私有二阶卡").model_dump(), allow_unicode=True), encoding="utf-8"
+    )
+
+    pub_sp_initial = yaml.safe_dump(
+        {
+            "version": "2.3",
+            "always_on_tier_s": True,
+            "category_modes": {"engineering": "all"},
+            "active_collections": [],
+            "collections": {"pub_pack": {"name": "公开专题包", "lens_ids": ["pub_card"]}},
+            "evergreen_ids": [],
+        },
+        allow_unicode=True,
+        sort_keys=False,
+    )
+    pub_sp_path.write_text(pub_sp_initial, encoding="utf-8")
+
+    (vault_dir / "shelf_policy.yaml").write_text(
+        yaml.safe_dump(
+            {
+                "version": "1.0",
+                "evergreen_ids": ["vault_card"],
+                "active_collections": ["vault_pack"],
+                "collections": {
+                    "vault_pack": {
+                        "name": "私有专题包",
+                        "lens_ids": ["vault_card", "pub_card"],
+                    }
+                },
+            },
+            allow_unicode=True,
+            sort_keys=False,
+        ),
+        encoding="utf-8",
+    )
+
+    # 1. Merge sets is_vault=True on vault collections; public L3 never persists vault collection IDs
+    merged_sp = _merge_vault_shelf_policy(yaml.safe_load(pub_sp_initial), vault_dir)
+    assert merged_sp["collections"]["vault_pack"]["is_vault"] is True
+    assert merged_sp["collections"]["pub_pack"]["is_vault"] is False
+    assert "vault_pack" in merged_sp["active_collections"]
+
+    kept, _, _ = run_l2_to_l3(
+        l2_dir=l2_dir,
+        l3_dir=l3_dir,
+        overlay_path=ov_path,
+        quarantine_dir=q_dir,
+        shelf_policy_path=pub_sp_path,
+        meta_vault_dir=vault_dir,
+    )
+    assert any(l.id == "vault_card" and "vault_pack" in l.meta.collections for l in kept)
+    pub_l3_data = yaml.safe_load((l3_dir / "deconstruct" / "pub_card.yaml").read_text(encoding="utf-8"))
+    assert "vault_pack" not in pub_l3_data["meta"]["collections"]
+
+    # 2. Admin API exposes vault collection, routes toggles/creates to vault, and blocks leaking vault cards into public collections
+    orig = (
+        admin_srv.L2_DIR,
+        admin_srv.L3_DIR,
+        admin_srv.OVERLAY_PATH,
+        admin_srv.QUARANTINE_DIR,
+        admin_srv.DIST_DIR,
+        admin_srv.META_VAULT_DIR,
+        admin_srv.DEFAULT_SHELF_POLICY_PATH,
+    )
+    try:
+        admin_srv.L2_DIR = l2_dir
+        admin_srv.L3_DIR = l3_dir
+        admin_srv.OVERLAY_PATH = ov_path
+        admin_srv.QUARANTINE_DIR = q_dir
+        admin_srv.DIST_DIR = dist_dir
+        admin_srv.META_VAULT_DIR = vault_dir
+        admin_srv.DEFAULT_SHELF_POLICY_PATH = pub_sp_path
+        client = TestClient(admin_srv.create_admin_app())
+
+        ov = client.get("/api/overview").json()
+        assert ov["shelf_policy"]["collections"]["vault_pack"]["is_vault"] is True
+        assert "vault_pack" in ov["shelf_policy"]["active_collections"]
+
+        # Filtering by vault collection works
+        filtered = client.get("/api/lenses?collection=vault_pack").json()["items"]
+        assert "vault_card" in {it["id"] for it in filtered}
+
+        # Toggling vault collection updates ONLY meta-vault/shelf_policy.yaml
+        r_tog = client.put("/api/shelf/collections/vault_pack/toggle", json={"active": False})
+        assert r_tog.status_code == 200
+        assert "vault_pack" not in (yaml.safe_load((vault_dir / "shelf_policy.yaml").read_text(encoding="utf-8")).get("active_collections") or [])
+        assert pub_sp_path.read_text(encoding="utf-8") == pub_sp_initial
+
+        # Attempting to batch-add a vault card into a public collection is blocked with 400
+        r_leak = client.post("/api/overlays/batch", json={"lens_ids": ["vault_card"], "add_collection": "pub_pack"})
+        assert r_leak.status_code == 400
+        assert "vault_card" not in pub_sp_path.read_text(encoding="utf-8")
+
+        # Creating a collection containing a vault card auto-routes into meta-vault/shelf_policy.yaml
+        r_create = client.post("/api/shelf/collections", json={"name": "新私库包", "lens_ids": ["vault_card"], "active": True})
+        assert r_create.status_code == 200 and r_create.json()["is_vault"] is True
+        assert "vault_card" not in pub_sp_path.read_text(encoding="utf-8")
+        assert r_create.json()["id"] in yaml.safe_load((vault_dir / "shelf_policy.yaml").read_text(encoding="utf-8"))["collections"]
+    finally:
+        (
+            admin_srv.L2_DIR,
+            admin_srv.L3_DIR,
+            admin_srv.OVERLAY_PATH,
+            admin_srv.QUARANTINE_DIR,
+            admin_srv.DIST_DIR,
+            admin_srv.META_VAULT_DIR,
+            admin_srv.DEFAULT_SHELF_POLICY_PATH,
+        ) = orig
+
+
+def test_card_import_parser_and_lineage_archiving(tmp_path: Path) -> None:
+    from fastapi.testclient import TestClient
+
+    import admin.server as admin_srv
+    from pipeline.forge import parse_card_import_text
+    from pipeline.schema import L2Lens, LensExecution, LensMeta, LensRouting
+
+    l2_dir = tmp_path / "l2_lenses"
+    l3_dir = tmp_path / "l3_production"
+    q_dir = tmp_path / "quarantine"
+    ov_path = tmp_path / "overrides.yaml"
+    dist_dir = tmp_path / "dist"
+    (l2_dir / "deconstruct").mkdir(parents=True)
+    ov_path.write_text("overrides: {}\n", encoding="utf-8")
+
+    old_lens = L2Lens(
+        id="old_card_v1",
+        title="架构边界拆解",
+        tagline="旧版一句话",
+        routing=LensRouting(
+            primitive="deconstruct",
+            goals=["optimize"],
+            clarity_fit=["concrete"],
+            domains=["architecture"],
+            pain_point="旧版痛点描述",
+            trigger_utterances=["架构拆解", "怎么拆模块"],
+        ),
+        execution=LensExecution(action_type="inject_prompt", inject_mode="append", content="旧版指令正文。"),
+        meta=LensMeta(source="manual-custom", source_ref="manual#old", source_hash=content_sha256("old"), version=1),
+    )
+    (l2_dir / "deconstruct" / "old_card_v1.yaml").write_text(
+        yaml.safe_dump(old_lens.model_dump(), allow_unicode=True), encoding="utf-8"
+    )
+
+    llm_reply = """1) 反模式：空泛堆砌形容词
+2) 核心机制：按耦合度排序
+
+```yaml
+title: 架构边界拆解
+tagline: 3步拆出模块边界与最脆弱耦合点
+primitive: 解构建模
+category: engineering
+tier: S
+inject_mode: append
+pain_point: 系统模块搅成一团，不知道从哪一层切分
+trigger_utterances:
+  - 架构拆解
+  - 模块拆分
+  - 帮我理清这个系统的模块边界
+evolution_note: 外科锐化 v2，补上最脆弱耦合点红线
+content: 请按边界与依赖方向把系统拆为 3-5 个模块，并指出最脆弱耦合点。
+```
+"""
+    parsed = parse_card_import_text(llm_reply, existing_lenses={"old_card_v1": old_lens})
+    assert parsed["ok"] is True
+    assert parsed["card"]["primitive"] == "deconstruct"
+    assert parsed["card"]["tier"] == "S"
+    assert parsed["matched_predecessor"]["id"] == "old_card_v1"
+
+    orig = (admin_srv.L2_DIR, admin_srv.L3_DIR, admin_srv.OVERLAY_PATH, admin_srv.QUARANTINE_DIR, admin_srv.DIST_DIR, admin_srv.META_VAULT_DIR)
+    try:
+        admin_srv.L2_DIR = l2_dir
+        admin_srv.L3_DIR = l3_dir
+        admin_srv.OVERLAY_PATH = ov_path
+        admin_srv.QUARANTINE_DIR = q_dir
+        admin_srv.DIST_DIR = dist_dir
+        admin_srv.META_VAULT_DIR = None
+        client = TestClient(admin_srv.create_admin_app())
+
+        # Create v2 card replacing old_card_v1 (archives old via overlay, records bidirectional lineage)
+        r_create = client.post(
+            "/api/lenses/manual",
+            json={
+                **parsed["card"],
+                "supersedes_id": "old_card_v1",
+            },
+        )
+        assert r_create.status_code == 200
+        body = r_create.json()
+        new_id = body["lens"]["id"]
+        assert body["archived_predecessor"] == "old_card_v1"
+        assert body["lens"]["meta"]["version"] == 2
+        assert body["lens"]["meta"]["supersedes"] == "old_card_v1"
+
+        # Old card appears in archived tab with superseded_by pointing to new_id, and active tab excludes it
+        archived = client.get("/api/lenses?shelf=archived").json()["items"]
+        assert len(archived) == 1
+        assert archived[0]["id"] == "old_card_v1"
+        assert archived[0]["meta"]["status"] == "deprecated"
+        assert archived[0]["meta"]["superseded_by"] == new_id
+
+        active = client.get("/api/lenses?shelf=l4_all").json()["items"]
+        active_ids = {it["id"] for it in active}
+        assert new_id in active_ids
+        assert "old_card_v1" not in active_ids
+
+        # Regression 1: Re-archiving an already-deprecated predecessor returns 409 without creating a card
+        before_files = set(l2_dir.rglob("*.yaml"))
+        r_dup_arch = client.post(
+            "/api/lenses/manual",
+            json={**parsed["card"], "supersedes_id": "old_card_v1"},
+        )
+        assert r_dup_arch.status_code == 409
+        assert set(l2_dir.rglob("*.yaml")) == before_files
+
+        # Regression 2: Wrap mode without {{input}} auto-appends {{input}} and passes validate_l2_repository
+        from pipeline.builder import validate_l2_repository
+
+        r_wrap = client.post(
+            "/api/lenses/manual",
+            json={
+                "title": "包裹模式自动补位",
+                "tagline": "测试 wrap 自动补齐 input",
+                "primitive": "translate",
+                "category": "custom",
+                "tier": "A",
+                "action_type": "inject_prompt",
+                "inject_mode": "wrap",
+                "pain_point": "需要包裹输入但忘记写占位符",
+                "trigger_utterances": ["包裹测试", "自动补位"],
+                "content": "请帮我润色下面这段话：",
+            },
+        )
+        assert r_wrap.status_code == 200
+        assert "{{input}}" in r_wrap.json()["lens"]["execution"]["content"]
+        _, val_errs = validate_l2_repository(l2_dir, ov_path)
+        assert not val_errs
+
+        # Regression 3: Fenced block without newline before closing ``` still parses cleanly
+        inline_close = "```yaml\ntitle: 紧贴闭合卡\npain_point: 闭合反引号没有换行\ntrigger_utterances: [紧贴闭合, 闭合测试]\ncontent: 请直接执行这段测试指令。```"
+        p_inline = parse_card_import_text(inline_close)
+        assert p_inline["ok"] is True and p_inline["card"]["title"] == "紧贴闭合卡"
+
+        # Regression 4: Vault predecessor cannot be superseded by a public card, and invalid vault+public collection leaves zero files
+        vault_dir = tmp_path / "meta-vault"
+        (vault_dir / "l2_lenses" / "translate").mkdir(parents=True)
+        v_old = L2Lens(
+            id="vault_old_v1",
+            title="私库旧卡",
+            tagline="私库旧版",
+            routing=LensRouting(
+                primitive="translate",
+                goals=["optimize"],
+                clarity_fit=["concrete"],
+                domains=["prompt_engineering"],
+                pain_point="私库旧版痛点",
+                trigger_utterances=["私库旧卡", "私库测试"],
+            ),
+            execution=LensExecution(action_type="inject_prompt", inject_mode="append", content="私库旧正文。"),
+            meta=LensMeta(source="glint-core", source_ref="vault#old", source_hash=content_sha256("vold"), version=1),
+        )
+        (vault_dir / "l2_lenses" / "translate" / "vault_old_v1.yaml").write_text(
+            yaml.safe_dump(v_old.model_dump(), allow_unicode=True), encoding="utf-8"
+        )
+        admin_srv.META_VAULT_DIR = vault_dir
+        client_v = TestClient(admin_srv.create_admin_app())
+
+        pub_before = set(l2_dir.rglob("*.yaml"))
+        vault_before = set((vault_dir / "l2_lenses").rglob("*.yaml"))
+        r_cross = client_v.post(
+            "/api/lenses/manual",
+            json={**parsed["card"], "supersedes_id": "vault_old_v1", "target_vault": False},
+        )
+        assert r_cross.status_code == 400
+        assert set(l2_dir.rglob("*.yaml")) == pub_before
+
+        r_bad_col = client_v.post(
+            "/api/lenses/manual",
+            json={**parsed["card"], "supersedes_id": "vault_old_v1", "target_vault": True, "add_collection": "non_vault_col"},
+        )
+        assert r_bad_col.status_code == 400
+        assert set((vault_dir / "l2_lenses").rglob("*.yaml")) == vault_before
+        assert not (vault_dir / "overrides.yaml").exists()
+    finally:
+        (admin_srv.L2_DIR, admin_srv.L3_DIR, admin_srv.OVERLAY_PATH, admin_srv.QUARANTINE_DIR, admin_srv.DIST_DIR, admin_srv.META_VAULT_DIR) = orig
+
+
+def test_sort_newest_single_card_collections_and_rename(tmp_path: Path) -> None:
+    from fastapi.testclient import TestClient
+
+    import admin.server as admin_srv
+    from pipeline.schema import L2Lens, LensExecution, LensMeta, LensRouting
+
+    l2_dir = tmp_path / "l2_lenses"
+    l3_dir = tmp_path / "l3_production"
+    q_dir = tmp_path / "quarantine"
+    ov_path = tmp_path / "overrides.yaml"
+    dist_dir = tmp_path / "dist"
+    pub_sp_path = tmp_path / "shelf_policy.yaml"
+    vault_dir = tmp_path / "meta-vault"
+    (l2_dir / "deconstruct").mkdir(parents=True)
+    (vault_dir / "l2_lenses" / "translate").mkdir(parents=True)
+    ov_path.write_text("overrides: {}\n", encoding="utf-8")
+
+    older = L2Lens(
+        id="card_older",
+        title="老卡片",
+        tagline="较早创建的卡",
+        routing=LensRouting(
+            primitive="deconstruct",
+            goals=["optimize"],
+            clarity_fit=["concrete"],
+            domains=["general"],
+            pain_point="旧痛点描述",
+            trigger_utterances=["老卡片", "旧测试"],
+        ),
+        execution=LensExecution(action_type="inject_prompt", inject_mode="append", content="老卡片正文。"),
+        meta=LensMeta(
+            source="manual-custom",
+            source_ref="manual#old",
+            source_hash=content_sha256("older"),
+            created_at="2026-11-01T10:00:00+0800",
+        ),
+    )
+    (l2_dir / "deconstruct" / "card_older.yaml").write_text(
+        yaml.safe_dump(older.model_dump(), allow_unicode=True), encoding="utf-8"
+    )
+    v_card = L2Lens(
+        id="vault_secret_1",
+        title="私库卡",
+        tagline="私库卡片",
+        routing=LensRouting(
+            primitive="translate",
+            goals=["optimize"],
+            clarity_fit=["concrete"],
+            domains=["general"],
+            pain_point="私库痛点描述",
+            trigger_utterances=["私库卡", "私库测试"],
+        ),
+        execution=LensExecution(action_type="inject_prompt", inject_mode="append", content="私库正文。"),
+        meta=LensMeta(source="glint-core", source_ref="vault#1", source_hash=content_sha256("v1")),
+    )
+    (vault_dir / "l2_lenses" / "translate" / "vault_secret_1.yaml").write_text(
+        yaml.safe_dump(v_card.model_dump(), allow_unicode=True), encoding="utf-8"
+    )
+    pub_sp_path.write_text(
+        yaml.safe_dump(
+            {
+                "version": "2.3",
+                "always_on_tier_s": True,
+                "category_modes": {"general": "all", "custom": "all"},
+                "active_collections": ["col_vibe"],
+                "collections": {"col_vibe": {"name": "Vibe_codeing", "lens_ids": []}},
+                "evergreen_ids": [],
+            },
+            allow_unicode=True,
+            sort_keys=False,
+        ),
+        encoding="utf-8",
+    )
+
+    orig = (
+        admin_srv.L2_DIR,
+        admin_srv.L3_DIR,
+        admin_srv.OVERLAY_PATH,
+        admin_srv.QUARANTINE_DIR,
+        admin_srv.DIST_DIR,
+        admin_srv.META_VAULT_DIR,
+        admin_srv.DEFAULT_SHELF_POLICY_PATH,
+    )
+    try:
+        admin_srv.L2_DIR = l2_dir
+        admin_srv.L3_DIR = l3_dir
+        admin_srv.OVERLAY_PATH = ov_path
+        admin_srv.QUARANTINE_DIR = q_dir
+        admin_srv.DIST_DIR = dist_dir
+        admin_srv.META_VAULT_DIR = vault_dir
+        admin_srv.DEFAULT_SHELF_POLICY_PATH = pub_sp_path
+        client = TestClient(admin_srv.create_admin_app())
+
+        # Create a brand new card -> should sort #1 under sort=newest
+        r_new = client.post(
+            "/api/lenses/manual",
+            json={
+                "title": "最新卡片",
+                "tagline": "刚刚创建",
+                "primitive": "deconstruct",
+                "category": "custom",
+                "tier": "A",
+                "pain_point": "刚刚遇到的新问题",
+                "trigger_utterances": ["最新卡片", "新问题"],
+                "content": "请按最新思路拆解。",
+            },
+        )
+        assert r_new.status_code == 200
+        new_id = r_new.json()["lens"]["id"]
+
+        newest = client.get("/api/lenses?shelf=personal&sort=newest").json()["items"]
+        assert newest[0]["id"] == new_id
+
+        # Single-card add/remove collection + vault anti-leakage guard
+        r_add = client.put(f"/api/lenses/{new_id}/collections", json={"add": "col_vibe"})
+        assert r_add.status_code == 200
+        in_col = client.get("/api/lenses?collection=col_vibe").json()["items"]
+        assert new_id in {x["id"] for x in in_col}
+
+        r_leak = client.put("/api/lenses/vault_secret_1/collections", json={"add": "col_vibe"})
+        assert r_leak.status_code == 400
+        assert "vault_secret_1" not in pub_sp_path.read_text(encoding="utf-8")
+
+        r_rm = client.put(f"/api/lenses/{new_id}/collections", json={"remove": "col_vibe"})
+        assert r_rm.status_code == 200
+        assert client.get("/api/lenses?collection=col_vibe").json()["items"] == []
+
+        # Rename collection cleanly
+        r_ren = client.put("/api/shelf/collections/col_vibe", json={"name": "Vibe_Coding"})
+        assert r_ren.status_code == 200
+        assert client.get("/api/overview").json()["shelf_policy"]["collections"]["col_vibe"]["name"] == "Vibe_Coding"
+    finally:
+        (
+            admin_srv.L2_DIR,
+            admin_srv.L3_DIR,
+            admin_srv.OVERLAY_PATH,
+            admin_srv.QUARANTINE_DIR,
+            admin_srv.DIST_DIR,
+            admin_srv.META_VAULT_DIR,
+            admin_srv.DEFAULT_SHELF_POLICY_PATH,
+        ) = orig

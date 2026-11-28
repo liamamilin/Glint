@@ -1,4 +1,4 @@
-version: "2.0"
+version: "2.2"
 
 # 本地模型配置（双路并发：2B 闭集路由 + bge-m3 向量召回）
 models:
@@ -6,7 +6,7 @@ models:
   embedding_model: "bge-m3:latest"
   ollama_base_url: "http://127.0.0.1:11434"
 
-# 质量门禁阈值（L1 -> L2 编译期）
+# 质量门禁阈值（L1 -> L2 / L3 编译与清洗期）
 gates:
   l0_min_quality_score: 0.65
   l2_min_confidence: 0.60
@@ -14,42 +14,19 @@ gates:
   min_trigger_utterances: 2
   max_title_chars: 18
 
-# 全局融合打分权重（Global Recall + Intent Boost + 正交 Top-3）
-# 语义相关性主导，2B 主意图给强加权，其余元数据仅做平手决胜，彻底避免小桶“矮子里拔将军”
-scoring_weights:
-  embedding_cosine: 0.78
-  primitive_match: 0.06
-  goal_match: 0.05
-  clarity_match: 0.04
-  app_affinity: 0.04
-  base_weight: 0.03
+# Stage 2A Cross-Encoder 精排与质量门控正交参数（由 LensRouterSkill 实时热读取）
+stage2_rerank:
+  evergreen_boost: 0.45
+  app_affinity_boost: 0.20
+  base_weight_scale: 0.55
+  cliff_score_floor: -4.2
+  cliff_margin_below_top1: 3.5
 
-# 第 3 位探索策略（防马太效应）
-exploration:
-  enabled: true
-  slot3_explore_probability: 0.18
-  prefer_sources:
-    - "discovery-taxonomy"
-    - "glint-core"
-
-# clarity 驱动的三卡正交槽位模板
-# "__primary__" 表示 2B 预测的主 primitive，后续槽位按优先级顺延且强制与已选 primitive 正交
-clarity_slot_templates:
-  vague:
-    slot_1: ["__primary__"]
-    slot_2: ["metacognize", "diverge", "deconstruct"]
-    slot_3: ["deconstruct", "diverge", "critique"]
-    prefer_sources: ["discovery-taxonomy", "glint-core"]
-  conflicted:
-    slot_1: ["__primary__"]
-    slot_2: ["critique", "converge", "metacognize"]
-    slot_3: ["metacognize", "diverge", "deconstruct"]
-    prefer_sources: ["discovery-taxonomy", "prompt-taxonomy"]
-  concrete:
-    slot_1: ["__primary__"]
-    slot_2: ["critique", "deconstruct", "translate"]
-    slot_3: ["metacognize", "diverge", "converge"]
-    prefer_sources: ["prompt-taxonomy", "super-individual-toolbox"]
+# 多步工作流会话续接门控（避免跨主题误劫持）
+workflow:
+  ttl_seconds: 600
+  min_rerank_logit: -1.2
+  min_cosine: 0.45
 
 # L3 断层领先穿透召回（L3 Breakthrough Gate）
 # 分差不大一律选 L4；仅当 L3 影子库候选同时满足双锚点底线与断层领先幅度时，允许最多 1 张穿透进入 Top-3

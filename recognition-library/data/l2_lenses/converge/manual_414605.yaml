@@ -1,0 +1,47 @@
+id: manual_414605
+title: 闭环修复
+tagline: 以问题消除为终点，而非以修改完成为终点
+routing:
+  primitive: converge
+  goals:
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - general
+  app_affinity: []
+  pain_point: 执行了修改却无法确认问题真正消除，缺乏验证反馈与问题关闭机制
+  trigger_utterances:
+  - 修复这些问题
+  - 开始修复吧
+  - 帮我修复刚才发现的所有问题
+  - 按照制定的修复计划执行
+  - 把这些问题解决掉并确认没有引入新问题
+  - 修复bug
+  - 修复缺陷
+  - 修复这些代码
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 确认问题、根因及影响范围，实施最小有效干预，禁止无关修改。 逐项验证修复前后状态及关联功能，失败则重新诊断。 仅在通过验收后关闭问题，输出修复证据、变更清单、 未解决项及阻塞原因。
+  variables: []
+  workflow: null
+meta:
+  source: manual-custom
+  source_ref: manual#manual_414605
+  source_hash: 80d68d1713b4d8ceb0b622216b85eabc56ec4b5941975271ab6a6ee4fefe1f7e
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: S
+  category: general
+  subcategory: problem_solving
+  collections: []
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1
+  supersedes: null
+  superseded_by: null
+  evolution_note: null

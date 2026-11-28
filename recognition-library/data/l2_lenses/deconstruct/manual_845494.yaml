@@ -1,0 +1,46 @@
+id: manual_845494
+title: 目标逆向补全
+tagline: 从目标推导应有之物，而非从现状猜测缺失之物
+routing:
+  primitive: deconstruct
+  goals:
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - general
+  app_affinity: []
+  pain_point: 已完成大量建设，却无法判断整体是否完备，存在尚未进入认知视野的必要条件
+  trigger_utterances:
+  - 看看有啥缺口
+  - 还缺点什么
+  - 帮我看看当前项目有什么缺口
+  - 距离实现我们的目标还缺少哪些东西
+  - 看看整个体系有没有遗漏什么必要的环节
+  - 看看当前项目有什么问题
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 从目标逆推必要能力、资源、依赖与流程，标记未经确认的假设。 逐项映射实际状态，识别缺失、部分满足及链路断点。 说明每项缺口的依据与目标影响，区分阻断性缺口、非阻断性缺口、 可选增强及未验证项。仅分析，不实施补全。
+  variables: []
+  workflow: null
+meta:
+  source: manual-custom
+  source_ref: manual#manual_845494
+  source_hash: c3a00a3c8188c180982bf430447b4149fc152d31734c1c08519bef7ffd7165a7
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: S
+  category: general
+  subcategory: problem_solving
+  collections: []
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1
+  created_at: 2026-11-28T12:57:25+0800
+  supersedes: null
+  superseded_by: null
+  evolution_note: null

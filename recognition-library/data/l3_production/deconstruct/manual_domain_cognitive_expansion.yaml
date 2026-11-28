@@ -58,7 +58,13 @@ meta:
   tier: S
   category: general
   subcategory: problem_solving
-  collections: []
+  collections:
+  - col_item_3c3742f184
+  - col_vibe_codeing
   base_weight: 1.15
   confidence: 1.0
   version: 1
+  created_at: null
+  supersedes: null
+  superseded_by: null
+  evolution_note: null

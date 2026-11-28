@@ -29,6 +29,7 @@ routing:
   - 反对生硬的平行分组，帮我用问题驱动的方式展开这份内容
   - 用种子到生长的递进结构重构这份资料
   - organize this book or knowledge system organically instead of flat categories
+  - 帮我好好组织一下内容
   anti_triggers:
   - 只需要快速提取 3 条要点摘要，不需编排结构
   - 已经有确定好的一二三章目录只需逐字润色
@@ -49,7 +50,12 @@ meta:
   tier: S
   category: engineering
   subcategory: architecture
-  collections: []
+  collections:
+  - col_item_3c3742f184
   base_weight: 1.0
   confidence: 0.95
   version: 1
+  created_at: null
+  supersedes: null
+  superseded_by: null
+  evolution_note: null

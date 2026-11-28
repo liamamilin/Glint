@@ -16,16 +16,25 @@ import yaml
 
 from pipeline.embed_client import Embedder
 from pipeline.l1_to_l2 import load_existing_l2_lenses
-from pipeline.l2_to_l3 import DEFAULT_CLEANING_RULES_PATH, run_l2_to_l3
+from pipeline.l2_to_l3 import DEFAULT_CLEANING_RULES_PATH, load_cleaning_rules, run_l2_to_l3
 from pipeline.ontology import Ontology, validate_placeholders
 from pipeline.schema import BuildManifest, L2Lens, OverlayFile
 
 
-def load_overlay(overlay_path: Path) -> OverlayFile:
-    if not overlay_path.exists():
-        return OverlayFile()
-    raw = yaml.safe_load(overlay_path.read_text(encoding="utf-8")) or {}
-    return OverlayFile.model_validate(raw)
+def load_overlay(overlay_path: Path, meta_vault_dir: Path | None = None) -> OverlayFile:
+    base = OverlayFile()
+    if overlay_path.exists():
+        raw = yaml.safe_load(overlay_path.read_text(encoding="utf-8")) or {}
+        base = OverlayFile.model_validate(raw)
+    if meta_vault_dir is not None:
+        vault_ov_path = meta_vault_dir / "overrides.yaml"
+        if vault_ov_path.exists():
+            v_raw = yaml.safe_load(vault_ov_path.read_text(encoding="utf-8")) or {}
+            vault_ov = OverlayFile.model_validate(v_raw)
+            merged = dict(base.overrides)
+            merged.update(vault_ov.overrides)
+            base = OverlayFile(overrides=merged)
+    return base
 
 
 def apply_overlays(
@@ -84,6 +93,10 @@ def apply_overlays(
                 kept = [t for t in lens.routing.trigger_utterances if t.strip() not in rm_set]
                 if kept:
                     lens.routing.trigger_utterances = kept
+            if ov.superseded_by is not None:
+                lens.meta.superseded_by = ov.superseded_by
+            if ov.evolution_note is not None:
+                lens.meta.evolution_note = ov.evolution_note
         merged.append(lens)
     return merged
 
@@ -93,16 +106,27 @@ def validate_l2_repository(
     overlay_path: Path,
     ontology: Ontology | None = None,
     meta_vault_dir: Path | None = None,
+    rules_path: Path = DEFAULT_CLEANING_RULES_PATH,
 ) -> tuple[list[L2Lens], list[str]]:
-    """Validate all L2 lenses + overlays against Ontology SSOT."""
+    """Validate all L2 lenses + overlays against Ontology SSOT and core quality gates."""
     ont = ontology or Ontology.load()
+    rules = load_cleaning_rules(rules_path)
+    min_triggers = int(rules.get("min_trigger_utterances", 2))
+    min_conf = float(rules.get("min_confidence", 0.60))
+
     errors: list[str] = []
     lenses_map = load_existing_l2_lenses(l2_dir)
     if meta_vault_dir is not None:
         vault_l2 = meta_vault_dir / "l2_lenses"
         if vault_l2.exists():
-            lenses_map.update(load_existing_l2_lenses(vault_l2))
-    overlay = load_overlay(overlay_path)
+            vault_map = load_existing_l2_lenses(vault_l2)
+            dup_ids = sorted(set(lenses_map.keys()) & set(vault_map.keys()))
+            for dup_id in dup_ids:
+                errors.append(
+                    f"{dup_id}: duplicate lens ID exists in both public l2_lenses and meta-vault/l2_lenses"
+                )
+            lenses_map.update(vault_map)
+    overlay = load_overlay(overlay_path, meta_vault_dir=meta_vault_dir)
 
     try:
         merged = apply_overlays(lenses_map, overlay, ont)
@@ -120,6 +144,12 @@ def validate_l2_repository(
                 errors.append(f"{lens.id}: invalid clarity '{c}'")
         if lens.execution.action_type not in ont.action_types:
             errors.append(f"{lens.id}: invalid action_type '{lens.execution.action_type}'")
+        if len(lens.routing.trigger_utterances) < min_triggers:
+            errors.append(
+                f"{lens.id}: insufficient trigger_utterances ({len(lens.routing.trigger_utterances)} < {min_triggers})"
+            )
+        if lens.meta.confidence < min_conf:
+            errors.append(f"{lens.id}: low confidence ({lens.meta.confidence:.2f} < {min_conf:.2f})")
         ph_errs = validate_placeholders(
             lens.execution.content,
             lens.execution.action_type,
@@ -184,7 +214,7 @@ def build_release(
     vectors = inv_vectors[on_shelf_indices] if inv_vectors is not None else None
     shadow = [inventory[i] for i in off_shelf_indices]
     shadow_vectors = inv_vectors[off_shelf_indices] if (inv_vectors is not None and off_shelf_indices) else None
-    overlay_obj = load_overlay(overlay_path)
+    overlay_obj = load_overlay(overlay_path, meta_vault_dir=meta_vault_dir)
     shadow_payload: list[dict[str, Any]] = []
     for lens in shadow:
         row = lens.model_dump()

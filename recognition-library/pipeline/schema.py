@@ -117,6 +117,10 @@ class LensMeta(BaseModel):
     base_weight: float = Field(default=1.0, ge=0.0, le=5.0)
     confidence: float = Field(default=1.0, ge=0.0, le=1.0)
     version: int = 1
+    created_at: str | None = None
+    supersedes: str | None = None
+    superseded_by: str | None = None
+    evolution_note: str | None = None
 
 
 class L2Lens(BaseModel):
@@ -178,6 +182,8 @@ class LensOverride(BaseModel):
     app_affinity: list[str] | None = None
     add_trigger_utterances: list[str] | None = None
     remove_trigger_utterances: list[str] | None = None
+    superseded_by: str | None = None
+    evolution_note: str | None = None
 
 
 class OverlayFile(BaseModel):

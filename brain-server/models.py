@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Literal
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 
 class RouteRequest(BaseModel):
@@ -13,6 +13,13 @@ class RouteRequest(BaseModel):
         default=None,
         description="Optional explicit skill override (Phase 1 defaults to cognitive_cards)",
     )
+
+    @field_validator("input_text")
+    @classmethod
+    def _validate_non_blank_input(cls, value: str) -> str:
+        if not value.strip():
+            raise ValueError("input_text must not be empty or whitespace-only")
+        return value
 
 
 class IntentPrediction(BaseModel):
@@ -59,6 +66,13 @@ class FeedbackRequest(BaseModel):
     app_name: str = Field(default="Unknown")
     skill_type: str = Field(default="cognitive_cards")
     input_text: str = Field(..., min_length=1)
+
+    @field_validator("input_text")
+    @classmethod
+    def _validate_non_blank_input(cls, value: str) -> str:
+        if not value.strip():
+            raise ValueError("input_text must not be empty or whitespace-only")
+        return value
     recommended_ids: list[str] = Field(default_factory=list)
     selected_id: str | None = Field(
         default=None,
@@ -91,7 +105,7 @@ class HealthResponse(BaseModel):
     release_version: str | None = None
 
 
-SeedPoolMode = Literal["smart_mix", "l4_all", "l3_discovery", "tier_s"]
+SeedPoolMode = Literal["smart_mix", "pinned_only", "l4_all", "l3_discovery", "tier_s"]
 
 
 class SeedItem(BaseModel):
@@ -110,6 +124,7 @@ class SeedItem(BaseModel):
     probability_pct: float = 0.0
     recall_count_30d: int = 0
     reason_tag: str = ""
+    is_pinned: bool = False
 
 
 class SeedPoolResponse(BaseModel):
@@ -119,6 +134,7 @@ class SeedPoolResponse(BaseModel):
     total_l3: int = 0
     muted_count: int
     snoozed_count: int
+    pinned_count: int = 0
     release_version: str | None = None
 
 
@@ -135,12 +151,13 @@ class SeedDrawResponse(BaseModel):
     total_l3: int = 0
     muted_count: int = 0
     snoozed_count: int = 0
+    pinned_count: int = 0
     release_version: str | None = None
 
 
 class SeedFeedbackRequest(BaseModel):
     id: str = Field(..., min_length=1)
-    action: Literal["mute", "snooze", "unmute", "skip", "expand", "copy"]
+    action: Literal["mute", "snooze", "unmute", "skip", "expand", "copy", "pin", "unpin"]
     snooze_days: int = Field(default=7, ge=1, le=365)
     category: str | None = None
 
@@ -149,6 +166,18 @@ class SeedFeedbackResponse(BaseModel):
     ok: bool = True
     muted_count: int
     snoozed_count: int
+    pinned_count: int = 0
+
+
+class SeedPinnedUpdateRequest(BaseModel):
+    ids: list[str] = Field(default_factory=list)
+    mode: Literal["add", "remove", "replace"] = "add"
+
+
+class SeedPinnedUpdateResponse(BaseModel):
+    ok: bool = True
+    pinned_ids: list[str] = Field(default_factory=list)
+    pinned_count: int = 0
 
 
 class SeedConfigModel(BaseModel):
@@ -156,6 +185,7 @@ class SeedConfigModel(BaseModel):
     tier_a_weight: float = Field(default=2.0, ge=0.1, le=20.0)
     tier_b_weight: float = Field(default=1.0, ge=0.1, le=20.0)
     l3_smart_mix_share: float = Field(default=0.15, ge=0.0, le=0.8)
+    pinned_smart_mix_share: float = Field(default=0.30, ge=0.0, le=0.75)
     recall_decay_rate: float = Field(default=0.35, ge=0.0, le=2.0)
     skip_decay_factor: float = Field(default=0.72, ge=0.2, le=1.0)
 
@@ -166,13 +196,15 @@ class SeedStateEntry(BaseModel):
     layer: str = "L4"
     tier: str = "B"
     category: str = "general"
-    status: Literal["muted", "snoozed"]
+    status: Literal["muted", "snoozed", "pinned"]
     remaining_days: float | None = None
 
 
 class SeedStateResponse(BaseModel):
     config: SeedConfigModel
     hidden_items: list[SeedStateEntry] = Field(default_factory=list)
+    pinned_items: list[SeedStateEntry] = Field(default_factory=list)
+    pinned_ids: list[str] = Field(default_factory=list)
     skip_counts: dict[str, int] = Field(default_factory=dict)
     category_interest: dict[str, int] = Field(default_factory=dict)
     recent_shown_count: int = 0

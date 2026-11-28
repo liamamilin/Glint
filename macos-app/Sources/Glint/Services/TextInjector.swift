@@ -113,16 +113,30 @@ final class TextInjector {
                 didPostSelectionKey = true
             }
         case .wrap:
-            if card.prompt.contains("{{input}}") {
-                textToInsert = card.prompt.replacingOccurrences(of: "{{input}}", with: context.inputText)
+            let effectiveWrapInput: String
+            if context.captureScope == .paragraph, let prefix = context.wrapParagraphPrefix {
+                effectiveWrapInput = prefix
             } else {
-                textToInsert = context.inputText + card.prompt
+                effectiveWrapInput = context.inputText
+            }
+            if card.prompt.contains("{{input}}") {
+                textToInsert = card.prompt.replacingOccurrences(of: "{{input}}", with: effectiveWrapInput)
+            } else {
+                textToInsert = effectiveWrapInput + card.prompt
             }
             // Select the original span so Paste replaces it cleanly.
             switch context.captureScope {
             case .selection:
                 break // Still selected
+            case .line:
+                postKey(virtualKey: 123, flags: [.maskCommand, .maskShift])
+                didPostSelectionKey = true
             case .paragraph:
+                if let prefix = context.wrapParagraphPrefix,
+                   prefix.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                    // Caret sits at start of paragraph or on an empty trailing line: insert without backward selection.
+                    break
+                }
                 postKey(virtualKey: 126, flags: [.maskCommand, .maskShift])
                 didPostSelectionKey = true
             case .fullField:

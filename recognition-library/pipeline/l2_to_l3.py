@@ -7,6 +7,7 @@ dedup thresholds, or local overlays change. Never mutates L2 draft files.
 from __future__ import annotations
 
 import json
+import logging
 import os
 import re
 import shutil
@@ -15,6 +16,8 @@ from collections import Counter
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
+
+logger = logging.getLogger("glint.l2_to_l3")
 
 import numpy as np
 import yaml
@@ -106,11 +109,20 @@ def load_shelf_policy(path: Path = DEFAULT_SHELF_POLICY_PATH) -> dict[str, Any]:
     return yaml.safe_load(path.read_text(encoding="utf-8")) or {}
 
 
-def _load_overlay(overlay_path: Path) -> OverlayFile:
-    if not overlay_path.exists():
-        return OverlayFile()
-    raw = yaml.safe_load(overlay_path.read_text(encoding="utf-8")) or {}
-    return OverlayFile.model_validate(raw)
+def _load_overlay(overlay_path: Path, meta_vault_dir: Path | None = None) -> OverlayFile:
+    base = OverlayFile()
+    if overlay_path.exists():
+        raw = yaml.safe_load(overlay_path.read_text(encoding="utf-8")) or {}
+        base = OverlayFile.model_validate(raw)
+    if meta_vault_dir is not None:
+        v_ov_path = meta_vault_dir / "overrides.yaml"
+        if v_ov_path.exists():
+            v_raw = yaml.safe_load(v_ov_path.read_text(encoding="utf-8")) or {}
+            v_ov = OverlayFile.model_validate(v_raw)
+            merged = dict(base.overrides)
+            merged.update(v_ov.overrides)
+            base = OverlayFile(overrides=merged)
+    return base
 
 
 def _write_yaml(path: Path, data: dict[str, Any]) -> None:
@@ -444,6 +456,10 @@ def clean_single_lens(
                 if t_clean and t_clean not in merged_trigs:
                     merged_trigs.append(t_clean)
             lens.routing.trigger_utterances = merged_trigs
+        if ov.superseded_by is not None:
+            lens.meta.superseded_by = ov.superseded_by
+        if ov.evolution_note is not None:
+            lens.meta.evolution_note = ov.evolution_note
         actions.append("applied_overlay")
 
     # Declarative L4 Shelf computation:
@@ -476,11 +492,31 @@ def _merge_vault_shelf_policy(shelf_policy: dict[str, Any], meta_vault_dir: Path
         return shelf_policy
     vault_sp = yaml.safe_load(vault_sp_path.read_text(encoding="utf-8")) or {}
     merged = dict(shelf_policy)
+
     base_evergreen = list(shelf_policy.get("evergreen_ids") or [])
     for eid in vault_sp.get("evergreen_ids") or []:
         if eid not in base_evergreen:
             base_evergreen.append(eid)
     merged["evergreen_ids"] = base_evergreen
+
+    merged_cols: dict[str, Any] = {}
+    for cid, cinfo in (shelf_policy.get("collections") or {}).items():
+        if isinstance(cinfo, dict):
+            entry = dict(cinfo)
+            entry.setdefault("is_vault", False)
+            merged_cols[cid] = entry
+    for cid, cinfo in (vault_sp.get("collections") or {}).items():
+        if isinstance(cinfo, dict):
+            entry = dict(cinfo)
+            entry["is_vault"] = True
+            merged_cols[cid] = entry
+    merged["collections"] = merged_cols
+
+    base_active = list(shelf_policy.get("active_collections") or [])
+    for cid in vault_sp.get("active_collections") or []:
+        if cid not in base_active:
+            base_active.append(cid)
+    merged["active_collections"] = base_active
     return merged
 
 
@@ -535,7 +571,7 @@ def run_l2_to_l3(
     rules = load_cleaning_rules(rules_path)
     shelf_policy = _merge_vault_shelf_policy(load_shelf_policy(shelf_policy_path), meta_vault_dir)
     taxonomy = load_taxonomy()
-    overlay = _load_overlay(overlay_path)
+    overlay = _load_overlay(overlay_path, meta_vault_dir=meta_vault_dir)
     l2_map = load_existing_l2_lenses(l2_dir)
     public_ids = set(l2_map.keys())
     vault_ids: set[str] = set()
@@ -544,6 +580,12 @@ def run_l2_to_l3(
         if vault_l2_dir.exists():
             vault_map = load_existing_l2_lenses(vault_l2_dir)
             vault_ids = set(vault_map.keys())
+            dup_ids = sorted(public_ids & vault_ids)
+            if dup_ids:
+                raise ValueError(
+                    "Duplicate lens IDs between public l2_lenses and meta-vault/l2_lenses: "
+                    + ", ".join(dup_ids)
+                )
             l2_map.update(vault_map)
     workflow_map = load_workflow_map()
 
@@ -560,6 +602,12 @@ def run_l2_to_l3(
     q_dedup_dir = quarantine_dir / "l3_dedup"
     for d in (q_rules_dir, q_dedup_dir):
         if d.exists():
+            shutil.rmtree(d)
+
+    vq_rules_dir = (meta_vault_dir / "quarantine" / "l3_rules") if meta_vault_dir is not None else None
+    vq_dedup_dir = (meta_vault_dir / "quarantine" / "l3_dedup") if meta_vault_dir is not None else None
+    for d in (vq_rules_dir, vq_dedup_dir):
+        if d is not None and d.exists():
             shutil.rmtree(d)
 
     candidates: list[L2Lens] = []
@@ -589,19 +637,25 @@ def run_l2_to_l3(
             action_counter[act] += 1
             if not is_vault:
                 public_action_counter[act] += 1
-        if warnings and not is_vault:
-            report.warnings.append({"id": lens_id, "title": draft.title, "warnings": warnings})
+        if warnings:
+            if is_vault:
+                logger.warning("Vault lens '%s' warnings: %s", lens_id, "; ".join(warnings))
+            else:
+                report.warnings.append({"id": lens_id, "title": draft.title, "warnings": warnings})
 
         if cleaned is None:
-            if not is_vault:
-                rec = QuarantineRecord(
-                    id=draft.id,
-                    source=draft.meta.source,
-                    source_ref=draft.meta.source_ref,
-                    source_hash=draft.meta.source_hash,
-                    reasons=reasons,
-                    draft=draft.model_dump(),
-                )
+            rec = QuarantineRecord(
+                id=draft.id,
+                source=draft.meta.source,
+                source_ref=draft.meta.source_ref,
+                source_hash=draft.meta.source_hash,
+                reasons=reasons,
+                draft=draft.model_dump(),
+            )
+            if is_vault and vq_rules_dir is not None:
+                logger.warning("Vault lens '%s' failed L3 rule gate: %s", draft.id, ", ".join(reasons))
+                _write_yaml(vq_rules_dir / f"{draft.id}.yaml", rec.model_dump())
+            else:
                 _write_yaml(q_rules_dir / f"{draft.id}.yaml", rec.model_dump())
                 report.total_quarantined_rules += 1
             continue
@@ -635,17 +689,27 @@ def run_l2_to_l3(
                 if best_sim >= dedup_threshold:
                     winner = candidates[kept_indices[best_pos]]
                     is_private_pair = (lens.id in vault_ids) or (winner.id in vault_ids)
-                    if not is_private_pair:
-                        rec = QuarantineRecord(
-                            id=lens.id,
-                            source=lens.meta.source,
-                            source_ref=lens.meta.source_ref,
-                            source_hash=lens.meta.source_hash,
-                            reasons=[f"l3_semantic_duplicate:{winner.id}({best_sim:.3f}>={dedup_threshold:.2f})"],
-                            duplicate_of=winner.id,
-                            duplicate_score=round(best_sim, 4),
-                            draft=lens.model_dump(),
+                    rec = QuarantineRecord(
+                        id=lens.id,
+                        source=lens.meta.source,
+                        source_ref=lens.meta.source_ref,
+                        source_hash=lens.meta.source_hash,
+                        reasons=[f"l3_semantic_duplicate:{winner.id}({best_sim:.3f}>={dedup_threshold:.2f})"],
+                        duplicate_of=winner.id,
+                        duplicate_score=round(best_sim, 4),
+                        draft=lens.model_dump(),
+                    )
+                    if is_private_pair:
+                        logger.warning(
+                            "Vault-related lens '%s' dropped by L3 semantic dedup against '%s' (%.3f >= %.2f)",
+                            lens.id,
+                            winner.id,
+                            best_sim,
+                            dedup_threshold,
                         )
+                        if vq_dedup_dir is not None:
+                            _write_yaml(vq_dedup_dir / f"{lens.id}.yaml", rec.model_dump())
+                    else:
                         _write_yaml(q_dedup_dir / f"{lens.id}.yaml", rec.model_dump())
                         report.total_quarantined_dedup += 1
                         report.dedup_conflicts.append(
@@ -683,16 +747,35 @@ def run_l2_to_l3(
             if lens.id not in vault_ids:
                 public_action_counter["attached_workflow_step"] += 1
 
+    vault_col_ids = {
+        cid
+        for cid, cinfo in (shelf_policy.get("collections") or {}).items()
+        if isinstance(cinfo, dict) and cinfo.get("is_vault")
+    }
     public_kept = [l for l in kept_lenses if l.id not in vault_ids]
     vault_kept = [l for l in kept_lenses if l.id in vault_ids]
+
+    if vault_col_ids:
+        public_materialized = []
+        for lens in public_kept:
+            if any(c in vault_col_ids for c in lens.meta.collections):
+                cloned = lens.model_copy(deep=True)
+                cloned.meta.collections = [c for c in cloned.meta.collections if c not in vault_col_ids]
+                public_materialized.append(cloned)
+            else:
+                public_materialized.append(lens)
+    else:
+        public_materialized = public_kept
 
     report.total_l3_active = len(public_kept)
     report.total_l3_deprecated = len(deprecated_lenses)
     report.action_counts = dict(sorted(public_action_counter.items()))
 
-    # Materialize clean public L3 production directory atomically (never includes vault items)
-    _materialize_l3_dir(l3_dir, public_kept, report_dict=report.to_dict())
-    if meta_vault_dir is not None and vault_kept:
-        _materialize_l3_dir(meta_vault_dir / "l3_production", vault_kept, report_dict=None)
+    # Materialize clean public L3 production directory atomically (never includes vault items or vault collections)
+    _materialize_l3_dir(l3_dir, public_materialized, report_dict=report.to_dict())
+    if meta_vault_dir is not None:
+        vault_l3_dir = meta_vault_dir / "l3_production"
+        if vault_kept or vault_l3_dir.exists():
+            _materialize_l3_dir(vault_l3_dir, vault_kept, report_dict=None)
 
     return kept_lenses, kept_vectors, report

@@ -8,6 +8,7 @@ import threading
 import time
 import uuid
 from collections import Counter
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
@@ -37,6 +38,7 @@ from pipeline.forge import (
     forge_starter_domain_pack,
     import_atlas_offsets,
     ingest_l0_raw_text,
+    parse_card_import_text,
     search_atlas_l0,
 )
 from pipeline.l1_to_l2 import load_existing_l2_lenses
@@ -44,6 +46,7 @@ from pipeline.l2_to_l3 import (
     DEFAULT_CLEANING_RULES_PATH,
     DEFAULT_SHELF_POLICY_PATH,
     DEFAULT_TAXONOMY_PATH,
+    _merge_vault_shelf_policy,
     load_shelf_policy,
     load_taxonomy,
 )
@@ -63,6 +66,15 @@ L3_DIR = LIB_ROOT / "data" / "l3_production"
 OVERLAY_PATH = LIB_ROOT / "data" / "overlays" / "overrides.yaml"
 QUARANTINE_DIR = LIB_ROOT / "data" / "quarantine"
 DIST_DIR = LIB_ROOT / "dist"
+META_VAULT_DIR: Path | None = None
+
+
+def _get_vault_dir() -> Path | None:
+    if META_VAULT_DIR is not None:
+        return META_VAULT_DIR
+    if L2_DIR == (LIB_ROOT / "data" / "l2_lenses"):
+        return resolve_meta_vault_dir()
+    return None
 
 CONFIG_FILES = {
     "routing_policy": DEFAULT_POLICY_PATH,
@@ -93,10 +105,20 @@ class CollectionCreateRequest(BaseModel):
     description: str = ""
     lens_ids: list[str] = Field(default_factory=list)
     active: bool = True
+    is_vault: bool = False
 
 
 class CollectionToggleRequest(BaseModel):
     active: bool
+
+
+class CollectionRenameRequest(BaseModel):
+    name: str = Field(..., min_length=1)
+
+
+class LensCollectionUpdateRequest(BaseModel):
+    add: str | None = None
+    remove: str | None = None
 
 
 class BatchOverlayRequest(BaseModel):
@@ -105,6 +127,10 @@ class BatchOverlayRequest(BaseModel):
     tier: str | None = None
     category: str | None = None
     add_collection: str | None = None
+
+
+class CardImportParseRequest(BaseModel):
+    raw_text: str = Field(..., min_length=1)
 
 
 class ManualLensRequest(BaseModel):
@@ -118,6 +144,10 @@ class ManualLensRequest(BaseModel):
     inject_mode: str = "append"
     category: str = "custom"
     tier: str = "A"
+    supersedes_id: str | None = None
+    evolution_note: str | None = None
+    target_vault: bool = False
+    add_collection: str | None = None
 
 
 class L0IngestRequest(BaseModel):
@@ -222,22 +252,42 @@ def _count_l1_snapshots() -> dict[str, int]:
 
 
 def _load_display_lenses_cached(cache: dict[str, Any]) -> tuple[list[Any], Any]:
+    vault_dir = _get_vault_dir()
+    vault_l2_dir = (vault_dir / "l2_lenses") if vault_dir is not None else None
+    vault_l3_dir = (vault_dir / "l3_production") if vault_dir is not None else None
+    vault_ov_path = (vault_dir / "overrides.yaml") if vault_dir is not None else None
+    vault_sp_path = (vault_dir / "shelf_policy.yaml") if vault_dir is not None else None
+
     report_path = L3_DIR / "cleaning_report.json"
     r_mtime = report_path.stat().st_mtime_ns if report_path.exists() else -1
     o_mtime = OVERLAY_PATH.stat().st_mtime_ns if OVERLAY_PATH.exists() else -1
     s_mtime = DEFAULT_SHELF_POLICY_PATH.stat().st_mtime_ns if DEFAULT_SHELF_POLICY_PATH.exists() else -1
     l2_mtime = L2_DIR.stat().st_mtime_ns if L2_DIR.exists() else -1
-    cache_key = (r_mtime, o_mtime, s_mtime, l2_mtime)
+    l3_mtime = L3_DIR.stat().st_mtime_ns if L3_DIR.exists() else -1
+    vl2_mtime = vault_l2_dir.stat().st_mtime_ns if (vault_l2_dir is not None and vault_l2_dir.exists()) else -1
+    vl3_mtime = vault_l3_dir.stat().st_mtime_ns if (vault_l3_dir is not None and vault_l3_dir.exists()) else -1
+    vo_mtime = vault_ov_path.stat().st_mtime_ns if (vault_ov_path is not None and vault_ov_path.exists()) else -1
+    vsp_mtime = vault_sp_path.stat().st_mtime_ns if (vault_sp_path is not None and vault_sp_path.exists()) else -1
+    cache_key = (r_mtime, o_mtime, s_mtime, l2_mtime, l3_mtime, vl2_mtime, vl3_mtime, vo_mtime, vsp_mtime)
     if cache.get("key") == cache_key and cache.get("merged") is not None:
         return cache["merged"], cache["overlay"]
 
     ont = Ontology.load()
-    overlay = load_overlay(OVERLAY_PATH)
-    sp = load_shelf_policy()
+    overlay = load_overlay(OVERLAY_PATH, meta_vault_dir=vault_dir)
+    sp = _merge_vault_shelf_policy(load_shelf_policy(DEFAULT_SHELF_POLICY_PATH), vault_dir)
     l3_map = load_existing_l2_lenses(L3_DIR) if L3_DIR.exists() else {}
     l2_map = load_existing_l2_lenses(L2_DIR)
     combined = dict(l2_map)
     combined.update(l3_map)
+    vault_ids: set[str] = set()
+    if vault_l2_dir is not None and vault_l2_dir.exists():
+        vl2_map = load_existing_l2_lenses(vault_l2_dir)
+        vault_ids.update(vl2_map.keys())
+        combined.update(vl2_map)
+    if vault_l3_dir is not None and vault_l3_dir.exists():
+        vl3_map = load_existing_l2_lenses(vault_l3_dir)
+        vault_ids.update(vl3_map.keys())
+        combined.update(vl3_map)
     merged = apply_overlays(combined, overlay, ont)
 
     # Re-evaluate live declarative shelf & collection membership from shelf_policy.yaml
@@ -274,10 +324,30 @@ def _load_display_lenses_cached(cache: dict[str, Any]) -> tuple[list[Any], Any]:
             else:
                 lens.meta.shelf = "off_shelf"
 
+    mtimes: dict[str, float] = {}
+    for base_dir in [L2_DIR, vault_l2_dir]:
+        if base_dir is not None and base_dir.exists():
+            for p in base_dir.rglob("*.yaml"):
+                try:
+                    mtimes[p.stem] = p.stat().st_mtime
+                except OSError:
+                    continue
     cache["key"] = cache_key
     cache["merged"] = merged
     cache["overlay"] = overlay
+    cache["vault_ids"] = vault_ids
+    cache["mtimes"] = mtimes
     return merged, overlay
+
+
+def _resolve_created_ts(lens: Any, mtimes: dict[str, float]) -> float:
+    raw = getattr(lens.meta, "created_at", None)
+    if raw:
+        try:
+            return datetime.fromisoformat(str(raw)).timestamp()
+        except ValueError:
+            pass
+    return float(mtimes.get(lens.id, 0.0))
 
 
 class _JobStore:
@@ -336,22 +406,49 @@ class _JobStore:
 
 def _is_personal_source(source: str) -> bool:
     s = (source or "").strip().lower()
-    return s in {"manual-custom", "user-friction", "user-l0-forge"} or s.startswith("forge-")
+    return s in {"manual-custom", "user-friction", "user-l0-forge", "user-forge"} or s.startswith(("forge-", "user-"))
+
+
+def _load_all_l2_sources() -> tuple[dict[str, Any], set[str], Path | None]:
+    l2_map = load_existing_l2_lenses(L2_DIR)
+    vault_dir = _get_vault_dir()
+    vault_ids: set[str] = set()
+    if vault_dir is not None:
+        vault_l2 = vault_dir / "l2_lenses"
+        if vault_l2.exists():
+            vl2_map = load_existing_l2_lenses(vault_l2)
+            vault_ids = set(vl2_map.keys())
+            l2_map.update(vl2_map)
+    return l2_map, vault_ids, vault_dir
+
+
+def _overlay_path_for(lens_id: str, vault_ids: set[str], vault_dir: Path | None) -> Path:
+    if vault_dir is not None and lens_id in vault_ids:
+        return vault_dir / "overrides.yaml"
+    return OVERLAY_PATH
 
 
 def _latest_source_mtime_ns() -> int:
     latest = 0
-    for p in (OVERLAY_PATH, DEFAULT_SHELF_POLICY_PATH, DEFAULT_POLICY_PATH):
+    paths_to_check = [OVERLAY_PATH, DEFAULT_SHELF_POLICY_PATH, DEFAULT_POLICY_PATH]
+    dirs_to_scan = [L2_DIR]
+    vault_dir = _get_vault_dir()
+    if vault_dir is not None:
+        paths_to_check.extend([vault_dir / "overrides.yaml", vault_dir / "shelf_policy.yaml"])
+        dirs_to_scan.append(vault_dir / "l2_lenses")
+
+    for p in paths_to_check:
         if p.exists():
             latest = max(latest, p.stat().st_mtime_ns)
-    if L2_DIR.exists():
-        latest = max(latest, L2_DIR.stat().st_mtime_ns)
-        for p in L2_DIR.rglob("*"):
-            if p.is_dir() or p.suffix == ".yaml":
-                try:
-                    latest = max(latest, p.stat().st_mtime_ns)
-                except OSError:
-                    continue
+    for d in dirs_to_scan:
+        if d.exists():
+            latest = max(latest, d.stat().st_mtime_ns)
+            for p in d.rglob("*"):
+                if p.is_dir() or p.suffix == ".yaml":
+                    try:
+                        latest = max(latest, p.stat().st_mtime_ns)
+                    except OSError:
+                        continue
     return latest
 
 
@@ -372,7 +469,7 @@ def create_admin_app(router_skill: Any = None) -> FastAPI:
     def overview() -> dict[str, Any]:
         ont = Ontology.load()
         taxonomy = load_taxonomy()
-        shelf_policy = load_shelf_policy()
+        shelf_policy = _merge_vault_shelf_policy(load_shelf_policy(DEFAULT_SHELF_POLICY_PATH), _get_vault_dir())
         merged, overlay = _load_display_lenses_cached(lens_cache)
 
         by_primitive = {p: 0 for p in sorted(ont.primitives)}
@@ -485,8 +582,10 @@ def create_admin_app(router_skill: Any = None) -> FastAPI:
         category: str = "",
         subcategory: str = "",
         collection: str = "",
+        sort: str = "",
     ) -> dict[str, Any]:
         merged, overlay = _load_display_lenses_cached(lens_cache)
+        mtimes = lens_cache.get("mtimes") or {}
         q_lower = q.strip().lower()
         items: list[dict[str, Any]] = []
         for lens in merged:
@@ -500,14 +599,18 @@ def create_admin_app(router_skill: Any = None) -> FastAPI:
                 continue
             if status and lens.meta.status != status:
                 continue
-            if shelf == "l4_all":
+            if shelf == "archived":
+                if lens.meta.status != "deprecated":
+                    continue
+            elif shelf == "l4_all":
                 if lens.meta.status != "active" or lens.meta.shelf not in {"evergreen", "on_shelf"}:
                     continue
             elif shelf == "personal":
-                if not _is_personal_source(lens.meta.source):
+                if lens.meta.status == "deprecated" or not _is_personal_source(lens.meta.source):
                     continue
-            elif shelf and lens.meta.shelf != shelf:
-                continue
+            elif shelf:
+                if lens.meta.status == "deprecated" or lens.meta.shelf != shelf:
+                    continue
             if tier and lens.meta.tier != tier:
                 continue
             if category and lens.meta.category != category:
@@ -536,20 +639,26 @@ def create_admin_app(router_skill: Any = None) -> FastAPI:
             row["has_override"] = ov is not None
             row["override"] = ov.model_dump(exclude_none=True) if ov is not None else {}
             row["is_personal"] = _is_personal_source(lens.meta.source)
+            row["is_vault"] = lens.id in (lens_cache.get("vault_ids") or set())
+            row["created_at_ts"] = _resolve_created_ts(lens, mtimes)
             items.append(row)
+
+        if sort == "newest":
+            items.sort(key=lambda r: (-float(r.get("created_at_ts") or 0.0), str(r.get("id") or "")))
 
         return {"total": len(items), "items": items}
 
     @app.put("/api/overlays/{lens_id}")
     def upsert_overlay(lens_id: str, payload: LensOverride) -> dict[str, Any]:
         ont = Ontology.load()
-        l2_map = load_existing_l2_lenses(L2_DIR)
+        l2_map, vault_ids, vault_dir = _load_all_l2_sources()
         if lens_id not in l2_map:
             raise HTTPException(status_code=404, detail=f"Lens '{lens_id}' not found")
         if payload.primitive is not None and ont.normalize_primitive(payload.primitive) is None:
             raise HTTPException(status_code=400, detail=f"Invalid primitive '{payload.primitive}'")
 
-        overlay = load_overlay(OVERLAY_PATH)
+        ov_path = _overlay_path_for(lens_id, vault_ids, vault_dir)
+        overlay = load_overlay(ov_path)
         raw_map = {k: v.model_dump(exclude_none=True) for k, v in overlay.overrides.items()}
         new_fields = payload.model_dump(exclude_none=True)
         if new_fields:
@@ -558,25 +667,28 @@ def create_admin_app(router_skill: Any = None) -> FastAPI:
             raw_map[lens_id] = merged_entry
         else:
             raw_map.pop(lens_id, None)
-        _save_overlay_file(OVERLAY_PATH, raw_map)
+        _save_overlay_file(ov_path, raw_map)
         lens_cache.clear()
         return {"ok": True, "lens_id": lens_id, "override": raw_map.get(lens_id, {})}
 
     @app.delete("/api/overlays/{lens_id}")
     def delete_overlay(lens_id: str) -> dict[str, Any]:
-        overlay = load_overlay(OVERLAY_PATH)
+        _, vault_ids, vault_dir = _load_all_l2_sources()
+        ov_path = _overlay_path_for(lens_id, vault_ids, vault_dir)
+        overlay = load_overlay(ov_path)
         raw_map = {k: v.model_dump(exclude_none=True) for k, v in overlay.overrides.items()}
         raw_map.pop(lens_id, None)
-        _save_overlay_file(OVERLAY_PATH, raw_map)
+        _save_overlay_file(ov_path, raw_map)
         lens_cache.clear()
         return {"ok": True, "lens_id": lens_id}
 
     @app.post("/api/overlays/{lens_id}/add-trigger")
     def add_trigger_overlay(lens_id: str, req: AddTriggerRequest) -> dict[str, Any]:
-        l2_map = load_existing_l2_lenses(L2_DIR)
+        l2_map, vault_ids, vault_dir = _load_all_l2_sources()
         if lens_id not in l2_map:
             raise HTTPException(status_code=404, detail=f"Lens '{lens_id}' not found")
-        overlay = load_overlay(OVERLAY_PATH)
+        ov_path = _overlay_path_for(lens_id, vault_ids, vault_dir)
+        overlay = load_overlay(ov_path)
         raw_map = {k: v.model_dump(exclude_none=True) for k, v in overlay.overrides.items()}
         entry = dict(raw_map.get(lens_id, {}))
         existing = list(entry.get("add_trigger_utterances") or [])
@@ -590,17 +702,18 @@ def create_admin_app(router_skill: Any = None) -> FastAPI:
             if not entry["remove_trigger_utterances"]:
                 entry.pop("remove_trigger_utterances", None)
         raw_map[lens_id] = entry
-        _save_overlay_file(OVERLAY_PATH, raw_map)
+        _save_overlay_file(ov_path, raw_map)
         lens_cache.clear()
         return {"ok": True, "lens_id": lens_id, "add_trigger_utterances": existing}
 
     @app.post("/api/overlays/{lens_id}/remove-trigger")
     def remove_trigger_overlay(lens_id: str, req: AddTriggerRequest) -> dict[str, Any]:
-        l2_map = load_existing_l2_lenses(L2_DIR)
+        l2_map, vault_ids, vault_dir = _load_all_l2_sources()
         if lens_id not in l2_map:
             raise HTTPException(status_code=404, detail=f"Lens '{lens_id}' not found")
         utt = req.utterance.strip()
-        overlay = load_overlay(OVERLAY_PATH)
+        ov_path = _overlay_path_for(lens_id, vault_ids, vault_dir)
+        overlay = load_overlay(ov_path)
         raw_map = {k: v.model_dump(exclude_none=True) for k, v in overlay.overrides.items()}
         entry = dict(raw_map.get(lens_id, {}))
         added = list(entry.get("add_trigger_utterances") or [])
@@ -620,28 +733,34 @@ def create_admin_app(router_skill: Any = None) -> FastAPI:
             raw_map[lens_id] = entry
         else:
             raw_map.pop(lens_id, None)
-        _save_overlay_file(OVERLAY_PATH, raw_map)
+        _save_overlay_file(ov_path, raw_map)
         lens_cache.clear()
         return {"ok": True, "lens_id": lens_id, "removed": utt}
 
     @app.delete("/api/lenses/{lens_id}")
     def delete_personal_lens(lens_id: str) -> dict[str, Any]:
-        l2_map = load_existing_l2_lenses(L2_DIR)
+        l2_map, vault_ids, vault_dir = _load_all_l2_sources()
         lens = l2_map.get(lens_id)
         if lens is None:
             raise HTTPException(status_code=404, detail=f"卡片 '{lens_id}' 不存在")
         if not _is_personal_source(lens.meta.source):
             raise HTTPException(status_code=400, detail="内置卡片不支持删除，请改为「放回备用库」")
         removed_files = 0
-        for p in list(L2_DIR.rglob(f"{lens_id}.yaml")):
-            p.unlink(missing_ok=True)
-            removed_files += 1
+        dirs_to_purge = [L2_DIR, L3_DIR]
+        if vault_dir is not None and lens_id in vault_ids:
+            dirs_to_purge.extend([vault_dir / "l2_lenses", vault_dir / "l3_production"])
+        for base_dir in dirs_to_purge:
+            if base_dir.exists():
+                for p in list(base_dir.rglob(f"{lens_id}.yaml")):
+                    p.unlink(missing_ok=True)
+                    removed_files += 1
         # Also remove from overrides if present
-        overlay = load_overlay(OVERLAY_PATH)
+        ov_path = _overlay_path_for(lens_id, vault_ids, vault_dir)
+        overlay = load_overlay(ov_path)
         raw_map = {k: v.model_dump(exclude_none=True) for k, v in overlay.overrides.items()}
         if lens_id in raw_map:
             raw_map.pop(lens_id, None)
-            _save_overlay_file(OVERLAY_PATH, raw_map)
+            _save_overlay_file(ov_path, raw_map)
         lens_cache.clear()
         return {"ok": True, "lens_id": lens_id, "removed_files": removed_files}
 
@@ -738,36 +857,56 @@ def create_admin_app(router_skill: Any = None) -> FastAPI:
 
     @app.post("/api/overlays/batch")
     def batch_overlay(req: BatchOverlayRequest) -> dict[str, Any]:
-        overlay = load_overlay(OVERLAY_PATH)
-        raw_map = {k: v.model_dump(exclude_none=True) for k, v in overlay.overrides.items()}
+        _, vault_ids, vault_dir = _load_all_l2_sources()
+        updates_by_path: dict[Path, list[str]] = {}
         for lid in req.lens_ids:
-            entry = dict(raw_map.get(lid, {}))
-            if req.shelf is not None:
-                entry["shelf"] = req.shelf
-            if req.tier is not None:
-                entry["tier"] = req.tier
-                if req.tier == "S":
-                    entry["scope"] = "universal"
-            if req.category is not None:
-                entry["category"] = req.category
-            if entry:
-                raw_map[lid] = entry
-        _save_overlay_file(OVERLAY_PATH, raw_map)
+            ov_path = _overlay_path_for(lid, vault_ids, vault_dir)
+            updates_by_path.setdefault(ov_path, []).append(lid)
+
+        for ov_path, target_ids in updates_by_path.items():
+            overlay = load_overlay(ov_path)
+            raw_map = {k: v.model_dump(exclude_none=True) for k, v in overlay.overrides.items()}
+            for lid in target_ids:
+                entry = dict(raw_map.get(lid, {}))
+                if req.shelf is not None:
+                    entry["shelf"] = req.shelf
+                if req.tier is not None:
+                    entry["tier"] = req.tier
+                    if req.tier == "S":
+                        entry["scope"] = "universal"
+                if req.category is not None:
+                    entry["category"] = req.category
+                if entry:
+                    raw_map[lid] = entry
+            _save_overlay_file(ov_path, raw_map)
 
         if req.add_collection:
-            sp = load_shelf_policy()
-            cols = sp.setdefault("collections", {})
-            if req.add_collection in cols:
+            vault_sp_path = (vault_dir / "shelf_policy.yaml") if vault_dir is not None else None
+            vault_sp = load_shelf_policy(vault_sp_path) if (vault_sp_path is not None and vault_sp_path.exists()) else {}
+            if vault_sp_path is not None and req.add_collection in (vault_sp.get("collections") or {}):
+                cols = vault_sp.setdefault("collections", {})
                 existing_ids = list(cols[req.add_collection].get("lens_ids") or [])
                 cols[req.add_collection]["lens_ids"] = sorted(set(existing_ids + req.lens_ids))
-                _save_yaml(DEFAULT_SHELF_POLICY_PATH, sp)
+                _save_yaml(vault_sp_path, vault_sp)
+            else:
+                if any(lid in vault_ids for lid in req.lens_ids):
+                    raise HTTPException(
+                        status_code=400,
+                        detail="私有库卡片不能加入公开专题包（防止泄漏到公开配置），请加入私库专题包",
+                    )
+                sp = load_shelf_policy(DEFAULT_SHELF_POLICY_PATH)
+                cols = sp.setdefault("collections", {})
+                if req.add_collection in cols:
+                    existing_ids = list(cols[req.add_collection].get("lens_ids") or [])
+                    cols[req.add_collection]["lens_ids"] = sorted(set(existing_ids + req.lens_ids))
+                    _save_yaml(DEFAULT_SHELF_POLICY_PATH, sp)
 
         lens_cache.clear()
         return {"ok": True, "updated": len(req.lens_ids)}
 
     @app.put("/api/shelf/category-mode")
     def set_category_mode(req: CategoryModeRequest) -> dict[str, Any]:
-        sp = load_shelf_policy()
+        sp = load_shelf_policy(DEFAULT_SHELF_POLICY_PATH)
         sp.setdefault("category_modes", {})[req.category] = req.mode
         _save_yaml(DEFAULT_SHELF_POLICY_PATH, sp)
         lens_cache.clear()
@@ -775,8 +914,18 @@ def create_admin_app(router_skill: Any = None) -> FastAPI:
 
     @app.post("/api/shelf/collections")
     def create_collection(req: CollectionCreateRequest) -> dict[str, Any]:
-        sp = load_shelf_policy()
-        cid = make_stable_id("col", req.name)
+        _, vault_ids, vault_dir = _load_all_l2_sources()
+        use_vault = req.is_vault or any(lid in vault_ids for lid in req.lens_ids)
+        if use_vault:
+            if vault_dir is None:
+                raise HTTPException(status_code=400, detail="未配置本地私库目录，无法创建私库专题包")
+            target_path = vault_dir / "shelf_policy.yaml"
+            sp = load_shelf_policy(target_path) if target_path.exists() else {"version": "1.0"}
+            cid = make_stable_id("vcol", req.name)
+        else:
+            target_path = DEFAULT_SHELF_POLICY_PATH
+            sp = load_shelf_policy(DEFAULT_SHELF_POLICY_PATH)
+            cid = make_stable_id("col", req.name)
         sp.setdefault("collections", {})[cid] = {
             "name": req.name.strip(),
             "description": req.description.strip(),
@@ -786,36 +935,161 @@ def create_admin_app(router_skill: Any = None) -> FastAPI:
         if req.active and cid not in active_cols:
             active_cols.append(cid)
         sp["active_collections"] = active_cols
-        _save_yaml(DEFAULT_SHELF_POLICY_PATH, sp)
+        _save_yaml(target_path, sp)
         lens_cache.clear()
-        return {"ok": True, "id": cid}
+        return {"ok": True, "id": cid, "is_vault": use_vault}
 
     @app.put("/api/shelf/collections/{cid}/toggle")
     def toggle_collection(cid: str, req: CollectionToggleRequest) -> dict[str, Any]:
-        sp = load_shelf_policy()
-        if cid not in (sp.get("collections") or {}):
-            raise HTTPException(status_code=404, detail=f"Collection '{cid}' not found")
+        vault_dir = _get_vault_dir()
+        vault_sp_path = (vault_dir / "shelf_policy.yaml") if vault_dir is not None else None
+        vault_sp = load_shelf_policy(vault_sp_path) if (vault_sp_path is not None and vault_sp_path.exists()) else {}
+        if vault_sp_path is not None and cid in (vault_sp.get("collections") or {}):
+            target_path = vault_sp_path
+            sp = vault_sp
+        else:
+            target_path = DEFAULT_SHELF_POLICY_PATH
+            sp = load_shelf_policy(DEFAULT_SHELF_POLICY_PATH)
+            if cid not in (sp.get("collections") or {}):
+                raise HTTPException(status_code=404, detail=f"Collection '{cid}' not found")
         active_cols = list(sp.get("active_collections") or [])
         if req.active and cid not in active_cols:
             active_cols.append(cid)
         elif not req.active and cid in active_cols:
             active_cols.remove(cid)
         sp["active_collections"] = active_cols
-        _save_yaml(DEFAULT_SHELF_POLICY_PATH, sp)
+        _save_yaml(target_path, sp)
         lens_cache.clear()
         return {"ok": True, "id": cid, "active": req.active}
 
+    @app.put("/api/shelf/collections/{cid}")
+    def rename_collection(cid: str, req: CollectionRenameRequest) -> dict[str, Any]:
+        new_name = req.name.strip()
+        if not new_name:
+            raise HTTPException(status_code=400, detail="专题包名称不能为空")
+        vault_dir = _get_vault_dir()
+        vault_sp_path = (vault_dir / "shelf_policy.yaml") if vault_dir is not None else None
+        vault_sp = load_shelf_policy(vault_sp_path) if (vault_sp_path is not None and vault_sp_path.exists()) else {}
+        if vault_sp_path is not None and cid in (vault_sp.get("collections") or {}):
+            target_path = vault_sp_path
+            sp = vault_sp
+        else:
+            target_path = DEFAULT_SHELF_POLICY_PATH
+            sp = load_shelf_policy(DEFAULT_SHELF_POLICY_PATH)
+            if cid not in (sp.get("collections") or {}):
+                raise HTTPException(status_code=404, detail=f"Collection '{cid}' not found")
+        sp["collections"][cid]["name"] = new_name
+        _save_yaml(target_path, sp)
+        lens_cache.clear()
+        return {"ok": True, "id": cid, "name": new_name}
+
     @app.delete("/api/shelf/collections/{cid}")
     def delete_collection(cid: str) -> dict[str, Any]:
-        sp = load_shelf_policy()
+        vault_dir = _get_vault_dir()
+        vault_sp_path = (vault_dir / "shelf_policy.yaml") if vault_dir is not None else None
+        vault_sp = load_shelf_policy(vault_sp_path) if (vault_sp_path is not None and vault_sp_path.exists()) else {}
+        if vault_sp_path is not None and cid in (vault_sp.get("collections") or {}):
+            target_path = vault_sp_path
+            sp = vault_sp
+        else:
+            target_path = DEFAULT_SHELF_POLICY_PATH
+            sp = load_shelf_policy(DEFAULT_SHELF_POLICY_PATH)
         (sp.get("collections") or {}).pop(cid, None)
         sp["active_collections"] = [c for c in (sp.get("active_collections") or []) if c != cid]
-        _save_yaml(DEFAULT_SHELF_POLICY_PATH, sp)
+        _save_yaml(target_path, sp)
         lens_cache.clear()
         return {"ok": True, "id": cid}
 
+    @app.put("/api/lenses/{lens_id}/collections")
+    def update_lens_collections(lens_id: str, req: LensCollectionUpdateRequest) -> dict[str, Any]:
+        l2_map, vault_ids, vault_dir = _load_all_l2_sources()
+        if lens_id not in l2_map:
+            raise HTTPException(status_code=404, detail=f"卡片 '{lens_id}' 不存在")
+        is_vault_lens = lens_id in vault_ids
+        vault_sp_path = (vault_dir / "shelf_policy.yaml") if vault_dir is not None else None
+        vault_sp = load_shelf_policy(vault_sp_path) if (vault_sp_path is not None and vault_sp_path.exists()) else {}
+        pub_sp = load_shelf_policy(DEFAULT_SHELF_POLICY_PATH)
+        vault_cols = vault_sp.get("collections") or {}
+        pub_cols = pub_sp.get("collections") or {}
+
+        add_cid = (req.add or "").strip() or None
+        rm_cid = (req.remove or "").strip() or None
+
+        if add_cid:
+            if add_cid not in vault_cols and add_cid not in pub_cols:
+                raise HTTPException(status_code=404, detail=f"专题包 '{add_cid}' 不存在")
+            if is_vault_lens and add_cid not in vault_cols:
+                raise HTTPException(status_code=400, detail="私有库卡片不能加入公开专题包（防止泄漏），请加入私库专题包")
+
+        vault_dirty = False
+        pub_dirty = False
+        if add_cid:
+            if add_cid in vault_cols:
+                ids = list(vault_cols[add_cid].get("lens_ids") or [])
+                vault_cols[add_cid]["lens_ids"] = sorted(set(ids + [lens_id]))
+                vault_dirty = True
+            else:
+                ids = list(pub_cols[add_cid].get("lens_ids") or [])
+                pub_cols[add_cid]["lens_ids"] = sorted(set(ids + [lens_id]))
+                pub_dirty = True
+        if rm_cid:
+            if rm_cid in vault_cols:
+                vault_cols[rm_cid]["lens_ids"] = [x for x in (vault_cols[rm_cid].get("lens_ids") or []) if x != lens_id]
+                vault_dirty = True
+            elif rm_cid in pub_cols:
+                pub_cols[rm_cid]["lens_ids"] = [x for x in (pub_cols[rm_cid].get("lens_ids") or []) if x != lens_id]
+                pub_dirty = True
+
+        if vault_dirty and vault_sp_path is not None:
+            _save_yaml(vault_sp_path, vault_sp)
+        if pub_dirty:
+            _save_yaml(DEFAULT_SHELF_POLICY_PATH, pub_sp)
+        lens_cache.clear()
+        return {"ok": True, "lens_id": lens_id, "added": add_cid, "removed": rm_cid}
+
+    @app.post("/api/lenses/parse-import")
+    def api_parse_import(req: CardImportParseRequest) -> dict[str, Any]:
+        merged, _ = _load_display_lenses_cached(lens_cache)
+        existing_map = {l.id: l for l in merged}
+        vault_ids = lens_cache.get("vault_ids") or set()
+        return parse_card_import_text(req.raw_text, existing_lenses=existing_map, vault_ids=vault_ids)
+
     @app.post("/api/lenses/manual")
     def api_create_manual_lens(req: ManualLensRequest) -> dict[str, Any]:
+        # Validate ALL invariants before any filesystem mutation (atomic pre-flight gate)
+        l2_map, vault_ids, vault_dir = _load_all_l2_sources()
+        if req.target_vault:
+            if vault_dir is None:
+                raise HTTPException(status_code=400, detail="未配置本地私库目录，无法存入私库")
+            target_l2_dir = vault_dir / "l2_lenses"
+        else:
+            target_l2_dir = L2_DIR
+
+        merged_display, _ = _load_display_lenses_cached(lens_cache)
+        merged_map = {l.id: l for l in merged_display}
+
+        supersedes_id = (req.supersedes_id or "").strip() or None
+        next_version = 1
+        if supersedes_id:
+            if supersedes_id not in l2_map and supersedes_id not in merged_map:
+                raise HTTPException(status_code=404, detail=f"未找到待归档的前代卡片 '{supersedes_id}'")
+            pred = merged_map.get(supersedes_id) or l2_map[supersedes_id]
+            if pred.meta.status == "deprecated":
+                raise HTTPException(status_code=409, detail=f"前代卡片 '{supersedes_id}' 已归档，请勿重复归档覆盖演进链")
+            if supersedes_id in vault_ids and not req.target_vault:
+                raise HTTPException(
+                    status_code=400,
+                    detail="前代卡片属于本地私库，替代新版必须同样存入本地私库（防止私有卡片 ID 泄漏至公开仓库）",
+                )
+            next_version = int(pred.meta.version or 1) + 1
+
+        col_id = (req.add_collection or "").strip() or None
+        vault_sp_path = (vault_dir / "shelf_policy.yaml") if vault_dir is not None else None
+        vault_sp = load_shelf_policy(vault_sp_path) if (vault_sp_path is not None and vault_sp_path.exists()) else {}
+        col_is_vault = bool(col_id and vault_sp_path is not None and col_id in (vault_sp.get("collections") or {}))
+        if col_id and req.target_vault and not col_is_vault:
+            raise HTTPException(status_code=400, detail="私库卡片不能加入公开专题包（防止泄漏）")
+
         lens = create_manual_lens(
             title=req.title,
             tagline=req.tagline,
@@ -827,10 +1101,42 @@ def create_admin_app(router_skill: Any = None) -> FastAPI:
             inject_mode=req.inject_mode,
             category=req.category,
             tier=req.tier,
-            l2_dir=L2_DIR,
+            supersedes=supersedes_id,
+            evolution_note=req.evolution_note,
+            version=next_version,
+            l2_dir=target_l2_dir,
         )
+
+        # Archive predecessor via Overlay (never mutates read-only upstream YAML; strictly respects meta-vault isolation)
+        if supersedes_id:
+            ov_path = _overlay_path_for(supersedes_id, vault_ids, vault_dir)
+            overlay = load_overlay(ov_path)
+            raw_map = {k: v.model_dump(exclude_none=True) for k, v in overlay.overrides.items()}
+            entry = dict(raw_map.get(supersedes_id, {}))
+            entry["status"] = "deprecated"
+            entry["superseded_by"] = lens.id
+            if req.evolution_note and req.evolution_note.strip():
+                entry["evolution_note"] = req.evolution_note.strip()
+            raw_map[supersedes_id] = entry
+            _save_overlay_file(ov_path, raw_map)
+
+        # Optionally attach new card to a collection (pre-validated above)
+        if col_id:
+            if col_is_vault and vault_sp_path is not None:
+                cols = vault_sp.setdefault("collections", {})
+                existing_ids = list(cols[col_id].get("lens_ids") or [])
+                cols[col_id]["lens_ids"] = sorted(set(existing_ids + [lens.id]))
+                _save_yaml(vault_sp_path, vault_sp)
+            else:
+                sp = load_shelf_policy(DEFAULT_SHELF_POLICY_PATH)
+                cols = sp.setdefault("collections", {})
+                if col_id in cols:
+                    existing_ids = list(cols[col_id].get("lens_ids") or [])
+                    cols[col_id]["lens_ids"] = sorted(set(existing_ids + [lens.id]))
+                    _save_yaml(DEFAULT_SHELF_POLICY_PATH, sp)
+
         lens_cache.clear()
-        return {"ok": True, "lens": lens.model_dump()}
+        return {"ok": True, "lens": lens.model_dump(), "archived_predecessor": supersedes_id}
 
     @app.get("/api/quarantine")
     def list_quarantine() -> dict[str, Any]:
@@ -874,7 +1180,7 @@ def create_admin_app(router_skill: Any = None) -> FastAPI:
                 quarantine_dir=QUARANTINE_DIR,
                 dist_dir=DIST_DIR,
                 embedder=embedder,
-                meta_vault_dir=resolve_meta_vault_dir(),
+                meta_vault_dir=_get_vault_dir(),
             )
             lens_cache.clear()
             return release_dir, manifest
@@ -906,7 +1212,12 @@ def create_admin_app(router_skill: Any = None) -> FastAPI:
 
     @app.get("/api/evolution/analytics")
     def api_evolution_analytics(days: int = 30) -> dict[str, Any]:
-        return compute_usage_analytics(db_path=DEFAULT_USAGE_DB, l3_dir=L3_DIR, days=days)
+        return compute_usage_analytics(
+            db_path=DEFAULT_USAGE_DB,
+            l3_dir=L3_DIR,
+            days=days,
+            meta_vault_dir=_get_vault_dir(),
+        )
 
     @app.get("/api/evolution/proposals")
     def api_evolution_proposals(days: int = 30, min_imp: int = 5) -> dict[str, Any]:
@@ -916,6 +1227,7 @@ def create_admin_app(router_skill: Any = None) -> FastAPI:
             overlay_path=OVERLAY_PATH,
             days=days,
             min_impressions_demote=min_imp,
+            meta_vault_dir=_get_vault_dir(),
         )
 
     @app.post("/api/evolution/friction-to-draft")

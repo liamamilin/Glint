@@ -1,3 +1,8 @@
+> **[已归档 / ARCHIVED · 2026-11-27]**  
+> - **原路径**：`glint.md`（v0.1 初版构想与工程备忘）  
+> - **归档原因**：端口已由 `8765` 迁至 `18765`；默认热键已由 `Option + Space` 改为 `双击右 Option`；主路由已演进为 `BM25 + bge-m3` 混合粗排 + MPS `bge-reranker-v2-m3` 精排；供应链与管理台已迁入 `recognition-library/`；`training/export_dataset.py` 与 `train_mlx_lora.sh` 已失效并被 `recognition-library/pipeline/evolution.py`（SFT 导出）取代。  
+> - **唯一权威替代文档**：[docs/INDEX.md](../INDEX.md)、[recognition-library/design.md](../../recognition-library/design.md)、[recognition-library/roadmap.md](../../recognition-library/roadmap.md)、[README.md](../../README.md)。
+
 # Glint — 个人电脑常驻语义路由器（OS-level Micro-Router）
 
 > **A quiet glint of clarity, anywhere on your Mac.**

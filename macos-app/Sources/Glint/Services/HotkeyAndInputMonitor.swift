@@ -194,8 +194,8 @@ final class HotkeyAndInputMonitor {
             return Unmanaged.passUnretained(event)
         }
 
-        // Double Option mode: supports both Left Option (58) and Right Option (61),
-        // triggering only on two clean tap-releases of the same Option key within 420ms.
+        // Double Right Option mode (keyCode 61):
+        // triggers only on two clean tap-releases of Right Option within 420ms.
         if preset.isDoubleModifierTap {
             if type == .keyDown {
                 if activeOptionKeyCode != nil {

@@ -157,12 +157,22 @@ final class GlintCoordinator: ObservableObject {
         }
     }
 
-    func openAdminConsole() {
-        if let url = URL(string: "http://127.0.0.1:18765/admin/") {
+    func openAdminConsole(fragment: String? = nil) {
+        var components = URLComponents()
+        components.scheme = "http"
+        components.host = "127.0.0.1"
+        components.port = 18765
+        components.path = "/admin/"
+        components.fragment = fragment
+        if let url = components.url {
             NSWorkspace.shared.open(url)
         } else {
             panel.presentToast(message: "无法打开 Glint 管理台", symbol: "exclamationmark.triangle")
         }
+    }
+
+    func openAdminImportFromClipboard() {
+        openAdminConsole(fragment: "import")
     }
 
     func refreshBackendHealth() async {
@@ -183,10 +193,12 @@ final class GlintCoordinator: ObservableObject {
             return
         }
 
+        let t0 = CFAbsoluteTimeGetCurrent()
         inFlightTask?.cancel()
         inFlightTask = Task { [weak self] in
             guard let self else { return }
             let outcome = await self.contextReader.captureContext()
+            let t1 = CFAbsoluteTimeGetCurrent()
             guard !Task.isCancelled else { return }
 
             let context: CapturedContext
@@ -208,6 +220,11 @@ final class GlintCoordinator: ObservableObject {
             self.routingGeneration += 1
             let gen = self.routingGeneration
             self.isRouting = true
+            self.panel.allowsKeyFocus = false
+            self.panel.present(
+                rootView: CardLoadingPopupView(appName: context.appName),
+                anchorAXRect: context.anchorRect
+            )
             defer {
                 if self.routingGeneration == gen {
                     self.isRouting = false
@@ -219,7 +236,11 @@ final class GlintCoordinator: ObservableObject {
                     inputText: context.inputText,
                     appName: context.appName
                 )
-                guard !Task.isCancelled, !response.cards.isEmpty else { return }
+                let t2 = CFAbsoluteTimeGetCurrent()
+                guard !Task.isCancelled, !response.cards.isEmpty else {
+                    if !self.isPopupVisible { self.panel.dismiss() }
+                    return
+                }
                 self.activeContext = context
                 self.activeResponse = response
                 self.selectedIndex = 0
@@ -227,9 +248,22 @@ final class GlintCoordinator: ObservableObject {
                 self.backendSummary = "\(response.model) · 在线 (\(Int(response.latency_ms))ms)"
                 self.lastStatusMessage = "已在 \(context.appName) 路由 \(response.cards.count) 张卡片 (\(Int(response.latency_ms))ms)"
                 self.showPopup()
+                let t3 = CFAbsoluteTimeGetCurrent()
+
+                let captureMs = (t1 - t0) * 1000.0
+                let httpMs = (t2 - t1) * 1000.0
+                let renderMs = (t3 - t2) * 1000.0
+                let totalMs = (t3 - t0) * 1000.0
+                let ipcMs = httpMs - response.latency_ms
+                let perfLine = String(
+                    format: "[PERF][e2e] app=%@ total=%.1fms (capture=%.1f http=%.1f[server=%.1f ipc=%.1f] render=%.1f)",
+                    context.appName, totalMs, captureMs, httpMs, response.latency_ms, ipcMs, renderMs
+                )
+                NSLog("[Glint] %@", perfLine)
             } catch {
                 // Swallow task cancellation when the user re-triggers the hotkey mid-flight.
                 if Task.isCancelled || error is CancellationError || (error as? URLError)?.code == .cancelled {
+                    if !self.isPopupVisible { self.panel.dismiss() }
                     return
                 }
                 if (error as? URLError)?.code == .timedOut {
@@ -388,13 +422,8 @@ final class GlintCoordinator: ObservableObject {
         let trimmed = customText.trimmingCharacters(in: .whitespacesAndNewlines)
         dismissPopup(recordNegativeFeedback: false)
 
-        // Return focus back to the original host app cleanly.
-        if let hostApp = NSRunningApplication(processIdentifier: context.appPID) {
-            hostApp.activate(options: [])
-        }
-
         if shouldInject && !trimmed.isEmpty {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.08) { [weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.10) { [weak self] in
                 guard let self else { return }
                 let outcome = self.textInjector.injectRawAppend(trimmed, context: context)
                 if outcome == .copiedToClipboard {

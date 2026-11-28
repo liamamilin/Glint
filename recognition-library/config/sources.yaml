@@ -47,4 +47,4 @@ l1_sources:
     path: "../brain-server/data/cards.yaml"
     snapshot_dir: "data/l1_materials/glint_core"
     default_action_type: "inject_prompt"
-    description: "Glint 原生 8 张核心认知卡片"
+    description: "Glint 原生 9 张核心认知卡片"

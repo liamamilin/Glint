@@ -3,13 +3,17 @@
 from __future__ import annotations
 
 import json
+import logging
 import os
 import random
+import shutil
 import tempfile
 import threading
 import time
 from pathlib import Path
 from typing import Any
+
+logger = logging.getLogger("glint.seed_store")
 
 # Base tier weights inside L4 (higher = surfaced more frequently before behavior/recall modulation)
 TIER_BASE_WEIGHTS: dict[str, float] = {
@@ -22,6 +26,9 @@ TIER_BASE_WEIGHTS: dict[str, float] = {
 # Target exploration probability share for L3 dormant cards in `smart_mix` mode
 L3_SMART_MIX_SHARE: float = 0.15
 
+# Target deliberate-reinforcement share for manually pinned cards in `smart_mix` mode
+PINNED_SMART_MIX_SHARE: float = 0.30
+
 # Anti-repeat cooldown window (last N drawn cards get heavily damped)
 RECENT_SHOWN_WINDOW: int = 25
 
@@ -30,6 +37,7 @@ class SeedStore:
     """Thread-safe, atomic JSON store + weighted sampler for Glint Seed.
 
     Tracks:
+    - pinned_ids: user's manually curated focus list for deliberate reinforcement
     - muted_ids: permanently excluded from passive Seed carousel (active hotkey recall untouched)
     - snoozed_until: temporarily hidden until epoch timestamp
     - skip_counts: manual quick-skip counts (gently lowers probability)
@@ -49,6 +57,7 @@ class SeedStore:
             "tier_a_weight": TIER_BASE_WEIGHTS["A"],
             "tier_b_weight": TIER_BASE_WEIGHTS["B"],
             "l3_smart_mix_share": L3_SMART_MIX_SHARE,
+            "pinned_smart_mix_share": PINNED_SMART_MIX_SHARE,
             "recall_decay_rate": 0.35,
             "skip_decay_factor": 0.72,
         }
@@ -56,6 +65,7 @@ class SeedStore:
     def _default_state(self) -> dict[str, Any]:
         return {
             "config": self._default_config(),
+            "pinned_ids": [],
             "muted_ids": [],
             "snoozed_until": {},
             "skip_counts": {},
@@ -65,15 +75,27 @@ class SeedStore:
             "updated_at": 0.0,
         }
 
+    def _backup_corrupt_file(self) -> None:
+        backup_path = self._path.with_name(f"{self._path.name}.corrupt.{int(time.time())}.bak")
+        try:
+            shutil.copy2(self._path, backup_path)
+            logger.warning("Corrupt seed state backed up to %s before resetting defaults", backup_path)
+        except OSError:
+            pass
+
     def _load_unlocked(self) -> dict[str, Any]:
         state = self._default_state()
         if not self._path.exists():
             return state
         try:
             raw = json.loads(self._path.read_text(encoding="utf-8"))
-        except Exception:
+        except Exception as exc:
+            logger.warning("Failed to parse seed state JSON (%s): %s", self._path, exc)
+            self._backup_corrupt_file()
             return state
         if not isinstance(raw, dict):
+            logger.warning("Unexpected non-dict seed state payload (%s)", self._path)
+            self._backup_corrupt_file()
             return state
 
         now = time.time()
@@ -114,7 +136,16 @@ class SeedStore:
                     except (TypeError, ValueError):
                         pass
 
+        pinned_seen: set[str] = set()
+        pinned: list[str] = []
+        for x in raw.get("pinned_ids") or []:
+            key = str(x).strip()
+            if key and key not in pinned_seen:
+                pinned_seen.add(key)
+                pinned.append(key)
+
         state["config"] = cfg
+        state["pinned_ids"] = pinned
         state["muted_ids"] = muted
         state["snoozed_until"] = snoozed
         state["skip_counts"] = _int_map("skip_counts")
@@ -125,8 +156,16 @@ class SeedStore:
 
     def _save_unlocked(self, state: dict[str, Any]) -> None:
         self._path.parent.mkdir(parents=True, exist_ok=True)
+        pinned_clean: list[str] = []
+        seen_pin: set[str] = set()
+        for x in state.get("pinned_ids") or []:
+            key = str(x).strip()
+            if key and key not in seen_pin:
+                seen_pin.add(key)
+                pinned_clean.append(key)
         payload = {
             "config": state.get("config") or self._default_config(),
+            "pinned_ids": pinned_clean,
             "muted_ids": sorted(set(state.get("muted_ids") or [])),
             "snoozed_until": {k: round(float(v), 3) for k, v in sorted((state.get("snoozed_until") or {}).items())},
             "skip_counts": dict(sorted((state.get("skip_counts") or {}).items())),
@@ -164,13 +203,22 @@ class SeedStore:
         clean_id = lens_id.strip()
         with self._lock:
             st = self._load_unlocked()
+            pinned = list(st["pinned_ids"])
             muted = set(st["muted_ids"])
             snoozed = dict(st["snoozed_until"])
             skips = dict(st["skip_counts"])
             snooze_hist = dict(st["snooze_counts"])
             cat_int = dict(st["category_interest"])
 
-            if action == "mute":
+            if action == "pin":
+                if clean_id not in pinned:
+                    pinned.append(clean_id)
+                muted.discard(clean_id)
+                snoozed.pop(clean_id, None)
+                skips.pop(clean_id, None)
+            elif action == "unpin":
+                pinned = [x for x in pinned if x != clean_id]
+            elif action == "mute":
                 muted.add(clean_id)
                 snoozed.pop(clean_id, None)
             elif action == "snooze":
@@ -191,6 +239,7 @@ class SeedStore:
                     delta = 2 if action == "copy" else 1
                     cat_int[cat_key] = min(15, cat_int.get(cat_key, 0) + delta)
 
+            st["pinned_ids"] = pinned
             st["muted_ids"] = sorted(muted)
             st["snoozed_until"] = snoozed
             st["skip_counts"] = skips
@@ -198,6 +247,48 @@ class SeedStore:
             st["category_interest"] = cat_int
             self._save_unlocked(st)
             return len(muted), len(snoozed)
+
+    def set_pinned(self, ids: list[str], mode: str = "add") -> list[str]:
+        cleaned: list[str] = []
+        seen: set[str] = set()
+        for raw_id in ids:
+            cid = str(raw_id).strip()
+            if cid and cid not in seen:
+                seen.add(cid)
+                cleaned.append(cid)
+        with self._lock:
+            st = self._load_unlocked()
+            current = list(st["pinned_ids"])
+            muted = set(st["muted_ids"])
+            snoozed = dict(st["snoozed_until"])
+            skips = dict(st["skip_counts"])
+            if mode == "replace":
+                updated = cleaned
+            elif mode == "remove":
+                rm_set = set(cleaned)
+                updated = [x for x in current if x not in rm_set]
+            else:  # add
+                updated = list(current)
+                existing = set(current)
+                for cid in cleaned:
+                    if cid not in existing:
+                        updated.append(cid)
+                        existing.add(cid)
+            if mode in {"add", "replace"}:
+                for cid in updated:
+                    muted.discard(cid)
+                    snoozed.pop(cid, None)
+                    skips.pop(cid, None)
+            st["pinned_ids"] = updated
+            st["muted_ids"] = sorted(muted)
+            st["snoozed_until"] = snoozed
+            st["skip_counts"] = skips
+            self._save_unlocked(st)
+            return updated
+
+    def get_pinned_ids(self) -> list[str]:
+        with self._lock:
+            return list(self._load_unlocked()["pinned_ids"])
 
     def get_state_snapshot(self) -> dict[str, Any]:
         with self._lock:
@@ -219,6 +310,7 @@ class SeedStore:
             st = self._load_unlocked()
             fresh = self._default_state()
             fresh["config"] = st["config"]
+            fresh["pinned_ids"] = st["pinned_ids"]
             self._save_unlocked(fresh)
             return 0, 0
 
@@ -234,18 +326,25 @@ class SeedStore:
         with self._lock:
             st = self._load_unlocked()
 
+        pinned_set = set(st["pinned_ids"])
         muted = set(st["muted_ids"])
         snoozed = set(st["snoozed_until"].keys())
         skips: dict[str, int] = st["skip_counts"]
         snooze_hist: dict[str, int] = st["snooze_counts"]
         cat_int: dict[str, int] = st["category_interest"]
-        recent_set = set(st["recent_shown"])
         extra_excl = exclude_ids or set()
         hard_excluded = muted | snoozed
 
         # 1. Select layer candidates by mode
         pool_pairs: list[tuple[dict[str, Any], str]] = []
-        if mode == "tier_s":
+        if mode == "pinned_only":
+            for lens in l4_lenses:
+                if str(lens.get("id", "")).strip() in pinned_set:
+                    pool_pairs.append((lens, "L4"))
+            for lens in l3_lenses:
+                if str(lens.get("id", "")).strip() in pinned_set:
+                    pool_pairs.append((lens, "L3"))
+        elif mode == "tier_s":
             for lens in l4_lenses:
                 if str((lens.get("meta") or {}).get("tier") or "").upper() == "S":
                     pool_pairs.append((lens, "L4"))
@@ -276,8 +375,10 @@ class SeedStore:
             if filtered:
                 eligible = filtered
 
-        # Check whether there are non-recent items so cooldown doesn't starve tiny pools
-        has_non_recent = any(str(lens.get("id", "")) not in recent_set for lens, _ in eligible)
+        # Adaptive cooldown window so small pinned lists cycle evenly without starving
+        cooldown_size = min(RECENT_SHOWN_WINDOW, max(1, len(eligible) - 1)) if len(eligible) > 1 else 0
+        active_recent = set(st["recent_shown"][-cooldown_size:]) if cooldown_size > 0 else set()
+        has_non_recent = any(str(lens.get("id", "")) not in active_recent for lens, _ in eligible)
 
         cfg: dict[str, float] = st["config"]
         tier_weights = {
@@ -289,21 +390,28 @@ class SeedStore:
         recall_decay_rate = float(cfg.get("recall_decay_rate", 0.35))
         skip_decay_factor = float(cfg.get("skip_decay_factor", 0.72))
         l3_share = min(0.8, max(0.0, float(cfg.get("l3_smart_mix_share", L3_SMART_MIX_SHARE))))
+        pinned_share = min(0.75, max(0.0, float(cfg.get("pinned_smart_mix_share", PINNED_SMART_MIX_SHARE))))
 
         scored: list[dict[str, Any]] = []
-        l4_weight_sum = 0.0
-        l3_weight_sum = 0.0
+        other_l4_sum = 0.0
+        other_l3_sum = 0.0
+        pinned_sum = 0.0
 
         for lens, layer in eligible:
             seed = lens_to_seed_dict(lens, layer=layer)
             lid = seed["id"]
             tier = seed["tier"].upper()
             cat_key = seed["category"].lower()
+            is_pinned = lid in pinned_set
 
-            base_w = tier_weights.get(tier, tier_weights["B"]) if layer == "L4" else 1.0
+            if mode == "pinned_only":
+                base_w = 1.0
+            else:
+                base_w = tier_weights.get(tier, tier_weights["B"]) if layer == "L4" else 1.0
+
             recalls = recall_counts.get(lid, 0)
-            # Anti-echo-chamber decay: frequent hotkey recalls -> lower passive carousel weight
-            m_recall = max(0.25, 1.0 / (1.0 + recall_decay_rate * recalls))
+            # Deliberate reinforcement: pinned cards bypass active-recall decay
+            m_recall = 1.0 if is_pinned else max(0.25, 1.0 / (1.0 + recall_decay_rate * recalls))
 
             skip_n = skips.get(lid, 0)
             snooze_n = snooze_hist.get(lid, 0)
@@ -313,7 +421,7 @@ class SeedStore:
             m_affinity = min(1.6, 1.0 + 0.08 * cat_int.get(cat_key, 0))
 
             # Anti-repeat freshness damping
-            if has_non_recent and lid in recent_set:
+            if has_non_recent and lid in active_recent:
                 m_fresh = 0.02
             else:
                 m_fresh = 1.0
@@ -321,24 +429,38 @@ class SeedStore:
             w = max(0.001, base_w * m_recall * m_behavior * m_affinity * m_fresh)
             seed["weight"] = round(w, 4)
             seed["recall_count_30d"] = recalls
-            seed["reason_tag"] = _build_reason_tag(layer, tier, recalls, skip_n)
+            seed["is_pinned"] = is_pinned
+            seed["reason_tag"] = _build_reason_tag(layer, tier, recalls, skip_n, is_pinned=is_pinned)
 
-            if layer == "L4":
-                l4_weight_sum += w
+            if is_pinned:
+                pinned_sum += w
+            elif layer == "L4":
+                other_l4_sum += w
             else:
-                l3_weight_sum += w
+                other_l3_sum += w
             scored.append(seed)
 
-        # 2. In smart_mix mode, normalize L3 total weight to configured l3_smart_mix_share when both layers exist
-        if mode == "smart_mix" and l4_weight_sum > 0.0 and l3_weight_sum > 0.0:
-            if l3_share <= 0.0:
-                scale_l3 = 0.0
-            else:
-                target_l3_sum = l4_weight_sum * (l3_share / (1.0 - l3_share))
-                scale_l3 = target_l3_sum / l3_weight_sum
-            for seed in scored:
-                if seed["layer"] == "L3":
-                    seed["weight"] = round(seed["weight"] * scale_l3, 4)
+        # 2. In smart_mix mode, balance non-pinned L4/L3 by l3_share, then allocate pinned_share to pinned cards
+        if mode == "smart_mix":
+            if other_l4_sum > 0.0 and other_l3_sum > 0.0:
+                if l3_share <= 0.0:
+                    scale_l3 = 0.0
+                else:
+                    target_l3_sum = other_l4_sum * (l3_share / (1.0 - l3_share))
+                    scale_l3 = target_l3_sum / other_l3_sum
+                other_l3_sum = 0.0
+                for seed in scored:
+                    if not seed["is_pinned"] and seed["layer"] == "L3":
+                        seed["weight"] = round(seed["weight"] * scale_l3, 4)
+                        other_l3_sum += seed["weight"]
+
+            other_total = other_l4_sum + other_l3_sum
+            if pinned_sum > 0.0 and other_total > 0.0 and pinned_share > 0.0:
+                target_pin_sum = other_total * (pinned_share / (1.0 - pinned_share))
+                scale_pin = target_pin_sum / pinned_sum
+                for seed in scored:
+                    if seed["is_pinned"]:
+                        seed["weight"] = round(seed["weight"] * scale_pin, 4)
 
         total_w = sum(s["weight"] for s in scored) or 1.0
         for seed in scored:
@@ -378,7 +500,9 @@ class SeedStore:
         return picked, len(scored), muted_count, snoozed_count
 
 
-def _build_reason_tag(layer: str, tier: str, recalls: int, skips: int) -> str:
+def _build_reason_tag(layer: str, tier: str, recalls: int, skips: int, *, is_pinned: bool = False) -> str:
+    if is_pinned:
+        return "📌 精读强化 · 手动圈选"
     if layer == "L3":
         base = "L3 休眠探索 · 破盲"
     elif tier == "S":

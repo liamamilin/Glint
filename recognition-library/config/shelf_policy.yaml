@@ -1,30 +1,12 @@
-version: "2.3"
-
-# L3 库存 -> L4 上架货架 声明式调度策略（SSOT）
-# L4 最终上架集合 =
-#   [全部 S 级常青底座 (always_on_tier_s)]
-#   ∪ [各主领域按 category_modes 开放的卡片: off | tier_a | all]
-#   ∪ [已开启的自定义合集 active_collections]
-#   + [单卡 overrides 强制上架]
-#   - [单卡 overrides 强制下架 / deprecated]
-
+version: '2.3'
 always_on_tier_s: true
-
-# A 级精品自动判定阈值（满足任一自动归入 A 级，其余归入 B 级长尾）
 tier_a_min_confidence: 0.88
 tier_a_sources:
-  - "glint-core"
-  - "super-individual-toolbox"
-
-# 按来源默认下架清单（如 atlas-methods、cle-v0.7 筹备期默认仅进 L3 库存待命，需通过领域/合集或单卡显式上架）
+- glint-core
+- super-individual-toolbox
 off_shelf_sources:
-  - "atlas-methods"
-  - "cle-v0.7"
-
-# 各二级领域主类目的 L4 货架模式：
-#   off    = 该领域仅保留 S 级常青（非 S 级全部留在 L3 库存）
-#   tier_a = 仅上架该领域的 A 级精品（+ S 级）
-#   all    = 该领域 A+B 级全量上架 L4
+- atlas-methods
+- cle-v0.7
 category_modes:
   general: all
   engineering: all
@@ -32,198 +14,212 @@ category_modes:
   writing_comms: all
   personal_career: all
   custom: all
-
-# 用户自定义合集（跨领域场景包，支持一键整包上架 / 撤回 L3）
-active_collections: []
+active_collections:
+- col_vibe_codeing
+- col_item_3c3742f184
 collections:
   cle_m1_representation:
-    name: "CLE · M1 表征状态 (9)"
-    description: "认知语言工程 v0.7 M1 表征状态模型全量 9 个接口（所指 / 特征 / 概念 / 表达）"
+    name: CLE · M1 表征状态 (9)
+    description: 认知语言工程 v0.7 M1 表征状态模型全量 9 个接口（所指 / 特征 / 概念 / 表达）
     lens_ids:
-      - cle_m1_r_c2_identification
-      - cle_m1_r_p1_feature_selection
-      - cle_m1_r_p2_differentiation
-      - cle_m1_r_p3_categorization
-      - cle_m1_r_p4_abstraction
-      - cle_m1_r_c1_concept_formation
-      - cle_m1_r_p5_linguistic_encoding
-      - cle_m1_r_p6_compression
-      - cle_m1_r_p7_expansion
+    - cle_m1_r_c2_identification
+    - cle_m1_r_p1_feature_selection
+    - cle_m1_r_p2_differentiation
+    - cle_m1_r_p3_categorization
+    - cle_m1_r_p4_abstraction
+    - cle_m1_r_c1_concept_formation
+    - cle_m1_r_p5_linguistic_encoding
+    - cle_m1_r_p6_compression
+    - cle_m1_r_p7_expansion
   cle_m2_cognition:
-    name: "CLE · M2 个体认知 (35)"
-    description: "认知语言工程 v0.7 M2 个体认知状态模型全量 35 个接口（对象/关系/问题/目标/决策/计划/反思）"
+    name: CLE · M2 个体认知 (35)
+    description: 认知语言工程 v0.7 M2 个体认知状态模型全量 35 个接口（对象/关系/问题/目标/决策/计划/反思）
     lens_ids:
-      - cle_m2_c_p1_focus
-      - cle_m2_c_p2_explication
-      - cle_m2_c_p3_differentiation
-      - cle_m2_c_p13_boundary
-      - cle_m2_c_c1_specification
-      - cle_m2_c_p4_comparative_activation
-      - cle_m2_c_p5_difference_detection
-      - cle_m2_c_p6_similarity_detection
-      - cle_m2_c_p7_reference
-      - cle_m2_c_p14_relation_formation
-      - cle_m2_c_c4_problem_formation
-      - cle_m2_c_c5_problem_structuring
-      - cle_m2_c_p8_alternative_generation
-      - cle_m2_c_p9_search_bounding
-      - cle_m2_c_p10_assumption_explication
-      - cle_m2_c_p11_explanation_generation
-      - cle_m2_c_p12_explanation_diversification
-      - cle_m2_c_c2_assumption_examination
-      - cle_m2_c_c3_causal_structuring
-      - cle_m2_c_p17_preference_formation
-      - cle_m2_c_p16_desired_state
-      - cle_m2_c_c6_desired_change
-      - cle_m2_c_p18_goal_adoption
-      - cle_m2_c_c7_goal_formation
-      - cle_m2_c_c8_criteria_formation
-      - cle_m2_c_p15_prioritization
-      - cle_m2_c_c9_alternative_evaluation
-      - cle_m2_c_p21_option_selection
-      - cle_m2_c_c10_decision_formation
-      - cle_m2_c_c13_plan_formation
-      - cle_m2_c_c14_implementation_intention
-      - cle_m2_c_p19_evidence_linking
-      - cle_m2_c_p20_uncertainty
-      - cle_m2_c_c12_metacognitive
-      - cle_m2_c_c11_belief_calibration
+    - cle_m2_c_p1_focus
+    - cle_m2_c_p2_explication
+    - cle_m2_c_p3_differentiation
+    - cle_m2_c_p13_boundary
+    - cle_m2_c_c1_specification
+    - cle_m2_c_p4_comparative_activation
+    - cle_m2_c_p5_difference_detection
+    - cle_m2_c_p6_similarity_detection
+    - cle_m2_c_p7_reference
+    - cle_m2_c_p14_relation_formation
+    - cle_m2_c_c4_problem_formation
+    - cle_m2_c_c5_problem_structuring
+    - cle_m2_c_p8_alternative_generation
+    - cle_m2_c_p9_search_bounding
+    - cle_m2_c_p10_assumption_explication
+    - cle_m2_c_p11_explanation_generation
+    - cle_m2_c_p12_explanation_diversification
+    - cle_m2_c_c2_assumption_examination
+    - cle_m2_c_c3_causal_structuring
+    - cle_m2_c_p17_preference_formation
+    - cle_m2_c_p16_desired_state
+    - cle_m2_c_c6_desired_change
+    - cle_m2_c_p18_goal_adoption
+    - cle_m2_c_c7_goal_formation
+    - cle_m2_c_c8_criteria_formation
+    - cle_m2_c_p15_prioritization
+    - cle_m2_c_c9_alternative_evaluation
+    - cle_m2_c_p21_option_selection
+    - cle_m2_c_c10_decision_formation
+    - cle_m2_c_c13_plan_formation
+    - cle_m2_c_c14_implementation_intention
+    - cle_m2_c_p19_evidence_linking
+    - cle_m2_c_p20_uncertainty
+    - cle_m2_c_c12_metacognitive
+    - cle_m2_c_c11_belief_calibration
   cle_m3_interaction:
-    name: "CLE · M3 共享互动 (9)"
-    description: "认知语言工程 v0.7 M3 共享认知与互动状态模型全量 9 个接口（信息/对齐/分歧/背景）"
+    name: CLE · M3 共享互动 (9)
+    description: 认知语言工程 v0.7 M3 共享认知与互动状态模型全量 9 个接口（信息/对齐/分歧/背景）
     lens_ids:
-      - cle_m3_i_c1_shared_info
-      - cle_m3_i_p1_sharedness_verify
-      - cle_m3_i_c2_clarification
-      - cle_m3_i_c3_meaning_alignment
-      - cle_m3_i_c4_model_alignment
-      - cle_m3_i_c5_frame_alignment
-      - cle_m3_i_c6_disagreement_structuring
-      - cle_m3_i_c7_resolution_state
-      - cle_m3_i_c8_common_ground_update
+    - cle_m3_i_c1_shared_info
+    - cle_m3_i_p1_sharedness_verify
+    - cle_m3_i_c2_clarification
+    - cle_m3_i_c3_meaning_alignment
+    - cle_m3_i_c4_model_alignment
+    - cle_m3_i_c5_frame_alignment
+    - cle_m3_i_c6_disagreement_structuring
+    - cle_m3_i_c7_resolution_state
+    - cle_m3_i_c8_common_ground_update
   cle_m4_action:
-    name: "CLE · M4 语言行动 (29)"
-    description: "认知语言工程 v0.7 M4 语言行动状态模型全量 29 个接口（请求/规格/任务/角色/承诺/协作）"
+    name: CLE · M4 语言行动 (29)
+    description: 认知语言工程 v0.7 M4 语言行动状态模型全量 29 个接口（请求/规格/任务/角色/承诺/协作）
     lens_ids:
-      - cle_m4_a_p1_request_formation
-      - cle_m4_a_c1_request_resolution
-      - cle_m4_a_p9_task_definition
-      - cle_m4_a_p12_goal_definition
-      - cle_m4_a_p13_scope_definition
-      - cle_m4_a_p14_deliverable_definition
-      - cle_m4_a_p15_constraint_explication
-      - cle_m4_a_p16_acceptance_criteria
-      - cle_m4_a_c6_executable_spec
-      - cle_m4_a_p10_task_acceptance
-      - cle_m4_a_p11_task_completion
-      - cle_m4_a_p2_responsibility_claim
-      - cle_m4_a_p3_responsibility_acceptance
-      - cle_m4_a_c2_shared_responsibility
-      - cle_m4_a_p7_authority_claim
-      - cle_m4_a_p8_authority_recognition
-      - cle_m4_a_c4_authority_definition
-      - cle_m4_a_c5_authority_transfer
-      - cle_m4_a_c7_role_structuring
-      - cle_m4_a_p4_commitment_formation
-      - cle_m4_a_p5_commitment_fulfillment
-      - cle_m4_a_p6_commitment_release
-      - cle_m4_a_c3_commitment_renegotiation
-      - cle_m4_a_c8_dependency_structuring
-      - cle_m4_a_c9_coordination_formation
-      - cle_m4_a_c11_rule_formalization
-      - cle_m4_a_c12_governance_formation
-      - cle_m4_a_c10_coordination_stabilization
-      - cle_m4_a_c13_action_relation_revision
+    - cle_m4_a_p1_request_formation
+    - cle_m4_a_c1_request_resolution
+    - cle_m4_a_p9_task_definition
+    - cle_m4_a_p12_goal_definition
+    - cle_m4_a_p13_scope_definition
+    - cle_m4_a_p14_deliverable_definition
+    - cle_m4_a_p15_constraint_explication
+    - cle_m4_a_p16_acceptance_criteria
+    - cle_m4_a_c6_executable_spec
+    - cle_m4_a_p10_task_acceptance
+    - cle_m4_a_p11_task_completion
+    - cle_m4_a_p2_responsibility_claim
+    - cle_m4_a_p3_responsibility_acceptance
+    - cle_m4_a_c2_shared_responsibility
+    - cle_m4_a_p7_authority_claim
+    - cle_m4_a_p8_authority_recognition
+    - cle_m4_a_c4_authority_definition
+    - cle_m4_a_c5_authority_transfer
+    - cle_m4_a_c7_role_structuring
+    - cle_m4_a_p4_commitment_formation
+    - cle_m4_a_p5_commitment_fulfillment
+    - cle_m4_a_p6_commitment_release
+    - cle_m4_a_c3_commitment_renegotiation
+    - cle_m4_a_c8_dependency_structuring
+    - cle_m4_a_c9_coordination_formation
+    - cle_m4_a_c11_rule_formalization
+    - cle_m4_a_c12_governance_formation
+    - cle_m4_a_c10_coordination_stabilization
+    - cle_m4_a_c13_action_relation_revision
   sample_research_pack:
-    name: "专题深度调研包"
-    description: "新领域快速摸底、挤泡沫与一手信源追踪组合"
+    name: 专题深度调研包
+    description: 新领域快速摸底、挤泡沫与一手信源追踪组合
     lens_ids:
-      - pt_source_research
-      - pt_research_question
-      - disc_cognition_separating_signal_from_hype
-      - disc_cognition_weak_signal_radar
-      - pt_claim_evidence_matrix
-
-# 精选 S 级常青通用底座（永不自动下架；CLE v0.7 结构核心 27 项 + glint-core 8 项 + 精选跨领域常青卡）
+    - pt_source_research
+    - pt_research_question
+    - disc_cognition_separating_signal_from_hype
+    - disc_cognition_weak_signal_radar
+    - pt_claim_evidence_matrix
+  col_vibe_codeing:
+    name: Vibe_codeing
+    description: ''
+    lens_ids:
+    - manual_314571
+    - manual_414605
+    - manual_514093
+    - manual_845494
+    - manual_875385
+    - manual_930199
+    - manual_domain_cognitive_expansion
+  col_item_3c3742f184:
+    name: 写作与创作
+    description: ''
+    lens_ids:
+    - core_organic_growth
+    - manual_875385
+    - manual_930199
+    - manual_domain_cognitive_expansion
+    - usr_item_2eb9ad31ba
 evergreen_ids:
-  # CLE v0.7 结构核心 v0.2 + 模糊态/分类核心扩展 (27 项)
-  - cle_m1_r_c2_identification
-  - cle_m1_r_p2_differentiation
-  - cle_m1_r_p3_categorization
-  - cle_m1_r_p5_linguistic_encoding
-  - cle_m1_r_p6_compression
-  - cle_m1_r_p7_expansion
-  - cle_m2_c_p1_focus
-  - cle_m2_c_p2_explication
-  - cle_m2_c_p8_alternative_generation
-  - cle_m2_c_p16_desired_state
-  - cle_m2_c_p18_goal_adoption
-  - cle_m2_c_p19_evidence_linking
-  - cle_m2_c_p20_uncertainty
-  - cle_m2_c_c1_specification
-  - cle_m2_c_c4_problem_formation
-  - cle_m2_c_c8_criteria_formation
-  - cle_m2_c_c9_alternative_evaluation
-  - cle_m2_c_c10_decision_formation
-  - cle_m2_c_c13_plan_formation
-  - cle_m3_i_p1_sharedness_verify
-  - cle_m3_i_c2_clarification
-  - cle_m3_i_c3_meaning_alignment
-  - cle_m3_i_c6_disagreement_structuring
-  - cle_m4_a_p1_request_formation
-  - cle_m4_a_p9_task_definition
-  - cle_m4_a_p10_task_acceptance
-  - cle_m4_a_p11_task_completion
-  # Glint Core 通用思考底座 (9 项: 8 种子 + 1 有机生长编排)
-  - core_clarify_first
-  - core_mece_breakdown
-  - core_decision_matrix
-  - core_premortem
-  - core_red_team
-  - core_root_cause
-  - core_code_review
-  - core_de_ai_rewrite
-  - core_organic_growth
-  # Prompt Taxonomy 高频跨领域通配卡
-  - pt_source_research
-  - pt_research_question
-  - pt_evidence_map
-  - pt_research_brief_for_others
-  - pt_compare_options
-  - pt_mvp_scope
-  - pt_project_plan
-  - pt_summarize
-  - pt_rewrite
-  - pt_sort_out_concern
-  - pt_fact_check
-  - pt_review_code
-  - pt_debug_error
-  - pt_meeting_notes
-  - pt_exec_brief
-  - pt_draft_email
-  - pt_explain
-  - pt_brainstorm
-  - pt_headlines
-  - pt_handoff
-  # Discovery Taxonomy & Super Individual 通用常青卡
-  - disc_cognition_separating_signal_from_hype
-  - disc_cognition_weak_signal_radar
-  - disc_cognition_steelman_adversarial
-  - disc_cognition_looking_for_disconfirming_evidence
-  - disc_cognition_making_decisions_under_uncertainty
-  - disc_cognition_explicit_assumptions_audit
-  - disc_cognition_question_refinement_loop
-  - disc_cognition_identifying_true_bottleneck
-  - disc_cognition_avoiding_sunk_cost_trap
-  - disc_cognition_stopping_rules_and_cadence
-  - disc_cognition_cross_domain_analogy
-  - disc_cognition_separating_facts_from_stories
-  - disc_content_distilling_long_reads_into_key_shifts
-  - disc_content_tightening_prose_by_cutting_fluff
-  - disc_content_reader_first_opening_hook
-  - disc_life_simplifying_when_overwhelmed
-  - disc_career_translating_jargon_for_stakeholders
-  - disc_build_local_optimization_deadlocks
-  - sit_prd_01
-  - sit_cos_01
-  - sit_os_01
+- cle_m1_r_c2_identification
+- cle_m1_r_p2_differentiation
+- cle_m1_r_p3_categorization
+- cle_m1_r_p5_linguistic_encoding
+- cle_m1_r_p6_compression
+- cle_m1_r_p7_expansion
+- cle_m2_c_p1_focus
+- cle_m2_c_p2_explication
+- cle_m2_c_p8_alternative_generation
+- cle_m2_c_p16_desired_state
+- cle_m2_c_p18_goal_adoption
+- cle_m2_c_p19_evidence_linking
+- cle_m2_c_p20_uncertainty
+- cle_m2_c_c1_specification
+- cle_m2_c_c4_problem_formation
+- cle_m2_c_c8_criteria_formation
+- cle_m2_c_c9_alternative_evaluation
+- cle_m2_c_c10_decision_formation
+- cle_m2_c_c13_plan_formation
+- cle_m3_i_p1_sharedness_verify
+- cle_m3_i_c2_clarification
+- cle_m3_i_c3_meaning_alignment
+- cle_m3_i_c6_disagreement_structuring
+- cle_m4_a_p1_request_formation
+- cle_m4_a_p9_task_definition
+- cle_m4_a_p10_task_acceptance
+- cle_m4_a_p11_task_completion
+- core_clarify_first
+- core_mece_breakdown
+- core_decision_matrix
+- core_premortem
+- core_red_team
+- core_root_cause
+- core_code_review
+- core_de_ai_rewrite
+- core_organic_growth
+- pt_source_research
+- pt_research_question
+- pt_evidence_map
+- pt_research_brief_for_others
+- pt_compare_options
+- pt_mvp_scope
+- pt_project_plan
+- pt_summarize
+- pt_rewrite
+- pt_sort_out_concern
+- pt_fact_check
+- pt_review_code
+- pt_debug_error
+- pt_meeting_notes
+- pt_exec_brief
+- pt_draft_email
+- pt_explain
+- pt_brainstorm
+- pt_headlines
+- pt_handoff
+- disc_cognition_separating_signal_from_hype
+- disc_cognition_weak_signal_radar
+- disc_cognition_steelman_adversarial
+- disc_cognition_looking_for_disconfirming_evidence
+- disc_cognition_making_decisions_under_uncertainty
+- disc_cognition_explicit_assumptions_audit
+- disc_cognition_question_refinement_loop
+- disc_cognition_identifying_true_bottleneck
+- disc_cognition_avoiding_sunk_cost_trap
+- disc_cognition_stopping_rules_and_cadence
+- disc_cognition_cross_domain_analogy
+- disc_cognition_separating_facts_from_stories
+- disc_content_distilling_long_reads_into_key_shifts
+- disc_content_tightening_prose_by_cutting_fluff
+- disc_content_reader_first_opening_hook
+- disc_life_simplifying_when_overwhelmed
+- disc_career_translating_jargon_for_stakeholders
+- disc_build_local_optimization_deadlocks
+- sit_prd_01
+- sit_cos_01
+- sit_os_01

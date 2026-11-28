@@ -12,10 +12,35 @@ from models import FeedbackRequest
 
 # Privacy redaction patterns (design.md Section IV.E: never persist secrets/tokens/phones)
 REDACT_RULES: list[tuple[re.Pattern[str], str]] = [
-    (re.compile(r"\b(sk-[a-zA-Z0-9_-]{16,}|gh[pousr]_[a-zA-Z0-9]{20,}|AKIA[0-9A-Z]{16})\b"), "[REDACTED_KEY]"),
-    (re.compile(r"(?i)\b(Bearer\s+)[a-zA-Z0-9._\-]{16,}"), r"\1[REDACTED_TOKEN]"),
+    # API keys across common providers (sk-..., sk_live_..., pk_test_..., ghp_..., AKIA...)
     (
-        re.compile(r"(?i)\b((?:api[_-]?key|access[_-]?token|secret|password|passwd|pwd)\s*[:=]\s*['\"]?)([^\s'\",;]{4,})"),
+        re.compile(
+            r"\b(?:sk-[a-zA-Z0-9_-]{16,}|(?:sk|rk|pk)_(?:live|test|proj|ant)_[a-zA-Z0-9_-]{10,}|"
+            r"gh[pousr]_[a-zA-Z0-9_]{16,}|AKIA[0-9A-Z]{16})\b"
+        ),
+        "[REDACTED_KEY]",
+    ),
+    # JWT tokens (header.payload.signature)
+    (
+        re.compile(r"\beyJ[a-zA-Z0-9_-]{8,}\.[a-zA-Z0-9_-]{8,}\.[a-zA-Z0-9_-]{8,}\b"),
+        "[REDACTED_JWT]",
+    ),
+    # Bearer tokens
+    (re.compile(r"(?i)\b(Bearer\s+)[a-zA-Z0-9._\-]{8,}"), r"\1[REDACTED_TOKEN]"),
+    # URL embedded userinfo credentials (https://user:pass@host)
+    (re.compile(r"(https?://[^\s/:@]+:)[^\s@]+(@)"), r"\1[REDACTED]\2"),
+    # Quoted English/Chinese key-value secrets (allows spaces inside quotes)
+    (
+        re.compile(
+            r"(?i)((?:\b(?:api[_-]?key|access[_-]?token|secret|password|passwd|pwd)|密码|口令|密钥|秘钥|私钥)\s*[:=：]\s*)(['\"])[^'\"\n]+\2"
+        ),
+        r"\1\2[REDACTED]\2",
+    ),
+    # Unquoted English/Chinese key-value secrets (supports short passwords >= 1 char)
+    (
+        re.compile(
+            r"(?i)((?:\b(?:api[_-]?key|access[_-]?token|secret|password|passwd|pwd)|密码|口令|密钥|秘钥|私钥)\s*[:=：]\s*)([^\s'\",;，。；]+)"
+        ),
         r"\1[REDACTED]",
     ),
     (re.compile(r"(?<!\d)(1[3-9]\d)\d{4}(\d{4})(?!\d)"), r"\1****\2"),

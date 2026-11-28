@@ -1183,6 +1183,7 @@
           <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px">
             <input type="search" id="f-q" style="flex:1;min-width:220px" placeholder="搜索卡片名称、适用场景、口语说法或指令正文… (⌘K)" />
             <select id="f-primitive"><option value="">全部思考方式</option></select>
+            <select id="f-sort" title="排序方式"><option value="">默认排序</option><option value="newest">🕒 最新添加</option></select>
             <button class="btn sm" id="btn-clear-filters" style="display:none" onclick="resetLibraryFilters()">清空筛选</button>
             <button class="btn sm" id="btn-domain-rules" data-tip="按工作/生活领域统一设定默认启用范围，不常用领域可仅保留核心常驻卡" data-tip-pos="left">⚙️ 场景自动启用规则</button>
             <span id="lens-count" style="font-size:12.5px;color:var(--muted)"></span>
@@ -1218,6 +1219,7 @@
           <button class="btn sm primary" onclick="runBatch({shelf:'on_shelf'})">批量启用</button>
           <button class="btn sm" onclick="runBatch({shelf:'off_shelf'})">放回备用库</button>
           <button class="btn sm" onclick="runBatch({tier:'S',shelf:'evergreen'})">设为核心常驻</button>
+          <button class="btn sm soft" onclick="runBatchPin()">📌 加入精读轮播</button>
           <select id="batch-col-select" style="padding:4px 8px;font-size:12px"><option value="">加入专题卡包…</option></select>
           <button class="btn sm" id="btn-batch-clear">退出批量</button>
         </div>
@@ -1250,7 +1252,8 @@
             </div>
             <div style="display:flex;gap:8px;align-items:center">
               <select id="seed-mode-select">
-                <option value="smart_mix">智能混播（推荐 · 常用 + 探索）</option>
+                <option value="smart_mix">智能混播（推荐 · 精读 + 常用 + 探索）</option>
+                <option value="pinned_only">📌 仅播我的精读清单（刻意强化）</option>
                 <option value="l4_all">仅已启用卡片</option>
                 <option value="l3_discovery">仅备用库深度探索</option>
                 <option value="tier_s">仅核心常驻心法</option>
@@ -1287,6 +1290,10 @@
               </div>
             </div>
 
+            <div class="slider-row">
+              <div class="slider-head"><span>精读清单混播占比（手动圈选卡片保底出现）</span><span id="lbl-pinned-share" style="color:var(--accent)">30%</span></div>
+              <input type="range" id="rng-pinned-share" min="0" max="75" step="5" value="30" />
+            </div>
             <div class="slider-row">
               <div class="slider-head"><span>探索备用库比例（发现未知盲区）</span><span id="lbl-l3-share" style="color:var(--accent)">15%</span></div>
               <input type="range" id="rng-l3-share" min="0" max="60" step="5" value="15" />
@@ -1329,8 +1336,23 @@
         <div class="card">
           <div class="card-head">
             <div>
+              <h3>📌 我的精读清单（手动圈选 · 刻意强化）</h3>
+              <p class="card-desc">这里的卡片不受「主动召回衰减」影响；可在菜单栏切换「仅播我的精读清单」，或在智能混播中按上方占比保底轮播。</p>
+            </div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+              <select id="seed-pin-col-select" style="padding:5px 9px;font-size:12px"><option value="">从专题包一键导入…</option></select>
+              <button class="btn sm soft" id="btn-seed-pin-import-col">导入精读</button>
+              <button class="btn sm danger" id="btn-seed-pin-clear">清空精读</button>
+            </div>
+          </div>
+          <div id="seed-pinned-box" style="max-height:260px;overflow-y:auto"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div>
               <h3>接下来最常出现的 20 张种子</h3>
-              <p class="card-desc">根据你的使用习惯实时计算，你越熟悉的卡排得越靠后</p>
+              <p class="card-desc">根据你的使用习惯实时计算；精读清单卡片按设定占比强化展示</p>
             </div>
           </div>
           <div id="seed-prob-table" style="max-height:380px;overflow-y:auto"></div>
@@ -1356,12 +1378,28 @@
           <button class="seg-btn" data-cmode="pack">🧭 为新领域一键生成一套</button>
         </div>
 
-        <!-- Mode 1: Manual -->
+        <!-- Mode 1: Manual & Lightning Import -->
         <div class="card create-pane" id="cpane-manual">
+          <!-- Lightning Paste Import Box -->
+          <div style="background:linear-gradient(135deg, var(--accent-soft), rgba(124,58,237,0.06));border:1px solid rgba(37,99,235,0.22);border-radius:12px;padding:14px 16px;margin-bottom:16px">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px">
+              <div>
+                <strong style="font-size:14px">⚡ 闪电粘贴导入（强模型产出 3 秒入库）</strong>
+                <div style="font-size:12px;color:var(--muted);margin-top:2px">把强模型（直觉锻造 / 逆向抽骨 / 外科锐化）生成的整段回复或 YAML 代码块直接贴进来，自动解析回填全部字段。</div>
+              </div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap">
+                <button class="btn sm soft" type="button" id="btn-import-clipboard">📋 从剪贴板读取</button>
+                <button class="btn sm primary" type="button" id="btn-import-parse">解析填入下方</button>
+              </div>
+            </div>
+            <textarea id="mm-import-paste" style="min-height:76px;background:var(--surface);font-family:ui-monospace,Menlo,monospace;font-size:12px" placeholder="直接按 ⌘V 粘贴强模型的回复或 ```yaml 代码块，自动识别并填入下方表单…"></textarea>
+            <div id="mm-import-status" style="display:none;margin-top:8px;font-size:12px;line-height:1.5"></div>
+          </div>
+
           <div class="card-head">
             <div>
-              <h3>✍️ 手工创建我的思考卡片</h3>
-              <p class="card-desc">写清楚「什么时候用」和「希望 AI 怎么帮我」，也可以先套一个常用模板再改。</p>
+              <h3>✍️ 卡片内容与预览</h3>
+              <p class="card-desc">可由上方自动解析回填，也可手工编写或套用常用模板。</p>
             </div>
           </div>
           <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:14px">
@@ -1377,10 +1415,29 @@
             <div class="form-field"><label>所属场景领域</label><select id="mm-category"></select></div>
             <div class="form-field"><label>重要程度</label><select id="mm-tier"><option value="A">常用精品</option><option value="S">核心常驻（优先推荐）</option><option value="B">细分备用</option></select></div>
             <div class="form-field"><label>触发后的交互方式</label><select id="mm-action"><option value="inject_prompt">自动补充为高质量提示词</option><option value="show_checklist">浮窗展示检查清单（不改写输入）</option><option value="open_resource">打开工具或参考链接</option></select></div>
+            <div class="form-field"><label>注入模式</label><select id="mm-inject-mode"><option value="append">追加在输入后 (append)</option><option value="wrap">包裹输入上下文 (wrap)</option></select></div>
+            <div class="form-field"><label>存放位置</label><select id="mm-target-vault"><option value="0">普通自建库（默认）</option><option value="1">🔒 本地私库 (meta-vault · 不提交公开仓)</option></select></div>
           </div>
           <div class="form-field" style="margin-top:12px"><label>什么情况下需要这张卡？</label><input type="text" id="mm-pain" placeholder="例如：每周写周报总写成工作流水账，老板抓不到重点" /></div>
-          <div class="form-field" style="margin-top:12px"><label>我通常会怎么说？ <span class="form-hint">（每行一句，写 2–4 句日常口语，Glint 会据此精准识别）</span></label><textarea id="mm-triggers" style="min-height:78px" placeholder="帮我改一下这份周报&#10;把这周做的事总结给老板看"></textarea></div>
+          <div class="form-field" style="margin-top:12px"><label>我通常会怎么说？ <span class="form-hint">（每行一句，写 2–5 句日常口语，建议前 2 条写 4–8 字短口语）</span></label><textarea id="mm-triggers" style="min-height:78px" placeholder="帮我改一下这份周报&#10;把这周做的事总结给老板看"></textarea></div>
           <div class="form-field" style="margin-top:12px"><label>希望 AI 执行的指令或清单正文</label><textarea id="mm-content" placeholder="请把我的工作记录重构成：1）本周最关键的 3 个结果；2）当前风险与阻塞；3）需要决策确认的事项。"></textarea></div>
+
+          <!-- Lineage Archiving + One-Step Destination Options -->
+          <div style="margin-top:14px;padding:12px 14px;background:var(--surface-2);border:1px solid var(--border);border-radius:11px">
+            <input type="hidden" id="mm-supersedes-id" value="" />
+            <div id="mm-lineage-banner" style="display:none;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;padding:8px 10px;border-radius:8px;background:var(--amber-soft);margin-bottom:10px;font-size:12.5px">
+              <span id="mm-lineage-text"></span>
+              <button class="btn xs" type="button" id="btn-clear-supersedes">改为全新创建（不归档旧卡）</button>
+            </div>
+            <div class="form-grid">
+              <div class="form-field"><label>演进备注 <span class="form-hint">（选填，替换归档旧卡时记录改动原因）</span></label><input type="text" id="mm-evolution-note" placeholder="例如：外科锐化 v2，删去空洞套话并补 2 条红线" /></div>
+              <div class="form-field"><label>顺手加入专题包 <span class="form-hint">（可选）</span></label><select id="mm-add-col"><option value="">不加入专题包</option></select></div>
+            </div>
+            <label style="display:inline-flex;align-items:center;gap:7px;margin-top:10px;font-size:12.5px;color:var(--text-2);cursor:pointer">
+              <input type="checkbox" id="mm-pin-after" /> 📌 入库后顺手加入「桌面精读轮播清单」（刻意强化）
+            </label>
+          </div>
+
           <div style="margin-top:14px;display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap">
             <button class="btn" id="mm-save" data-tip="仅保存到草稿库，适合连续建多张卡后再统一同步" data-tip-pos="left">仅保存草稿</button>
             <button class="btn primary" id="mm-save-sync" data-tip="保存后立即自动更新本地索引（约 15 秒），完成后马上就能搜到" data-tip-pos="left">保存并立即同步上线</button>
@@ -1625,11 +1682,19 @@
       </div>
 
       <div id="m-tags" style="display:flex;flex-wrap:wrap;gap:6px;margin:12px 0"></div>
+      <div id="m-lineage" style="display:none;margin-bottom:12px;padding:9px 12px;border-radius:10px;background:var(--accent-soft);font-size:12.5px;line-height:1.5"></div>
 
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
         <button class="btn primary sm" id="m-copy">📋 复制卡片指令</button>
+        <button class="btn sm" id="m-toggle-pin">📌 加入精读轮播</button>
         <button class="btn sm soft" id="m-open-chatgpt">打开 ChatGPT 使用</button>
         <button class="btn sm soft" id="m-open-claude">打开 Claude 使用</button>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:14px;padding:9px 12px;background:var(--surface-2);border-radius:10px">
+        <span style="font-size:12px;font-weight:600;color:var(--muted)">📦 所属专题包：</span>
+        <div id="m-collections" style="display:flex;flex-wrap:wrap;gap:6px;align-items:center"></div>
+        <select id="m-add-col-select" style="padding:3px 8px;font-size:12px;margin-left:auto"><option value="">+ 加入专题包…</option></select>
       </div>
 
       <div style="background:var(--surface-2);border-radius:11px;padding:12px 14px;margin-bottom:14px">
@@ -1709,6 +1774,7 @@
     <span id="task-launcher-text">📋 任务进度</span>
   </button>
 
+  <div id="col-popover" style="display:none;position:fixed;z-index:110;min-width:210px;max-width:280px;max-height:290px;overflow-y:auto;background:var(--surface);border:1px solid var(--border-strong);border-radius:12px;box-shadow:var(--shadow-lg);padding:8px 10px"></div>
   <div class="toast" id="toast"></div>
 
   <script>
@@ -1719,6 +1785,7 @@
       nav: { shelf: 'l4_all', category: '', collection: '' },
       batchMode: false,
       checkedIds: new Set(),
+      pinnedIds: new Set(),
       atlasOffsets: new Set(),
       pendingChanges: false,
       pendingCount: 0,
@@ -2270,8 +2337,17 @@
       });
       ['ov-primitive', 'mm-primitive'].forEach(id => document.getElementById(id).innerHTML = primOpts);
       ['ov-category', 'mm-category', 'fg-cat'].forEach(id => document.getElementById(id).innerHTML = catOpts);
-      const colOpts = Object.entries(d.shelf_policy.collections || {}).map(([cid, c]) => `<option value="${esc(cid)}">${esc(c.name)}</option>`).join('');
+      const colOpts = Object.entries(d.shelf_policy.collections || {}).map(([cid, c]) => `<option value="${esc(cid)}">${c.is_vault ? '🔒 ' : ''}${esc(c.name)}</option>`).join('');
       document.getElementById('batch-col-select').innerHTML = '<option value="">加入专题卡包…</option>' + colOpts;
+      const pinColSel = document.getElementById('seed-pin-col-select');
+      if (pinColSel) pinColSel.innerHTML = '<option value="">从专题包一键导入…</option>' + colOpts;
+      const mmAddCol = document.getElementById('mm-add-col');
+      if (mmAddCol) mmAddCol.innerHTML = '<option value="">不加入专题包</option>' + colOpts;
+
+      try {
+        const st = await seedApi('state');
+        state.pinnedIds = new Set(st.pinned_ids || []);
+      } catch {}
 
       renderLibraryFilters(d);
     }
@@ -2427,6 +2503,7 @@
         { k: 'evergreen', label: `核心常驻 (${sh.evergreen || 0})` },
         { k: 'on_shelf', label: `场景专项 (${sh.on_shelf || 0})` },
         { k: 'off_shelf', label: `备用库 (${sh.off_shelf || 0})` },
+        ...(sh.deprecated ? [{ k: 'archived', label: `📦 已归档 (${sh.deprecated})` }] : []),
         { k: '', label: `全部 (${d.l3_total})` },
       ];
       document.getElementById('shelf-seg-bar').innerHTML = segs.map(s => `
@@ -2447,9 +2524,16 @@
         `<span style="font-size:12px;color:var(--muted);margin-right:2px">专题包：</span>` +
         cols.map(([cid, c]) => {
           const on = activeCols.has(cid);
-          return `<span class="filter-chip ${state.nav.collection === cid ? 'active' : ''}" onclick="setCollectionFilter('${esc(cid)}')">
-            📦 ${esc(c.name)}
+          const icon = c.is_vault ? '🔒' : '📦';
+          const tip = c.is_vault ? ' data-tip="本地私库专题包（仅本机生效，不会提交到公开仓库）"' : '';
+          const count = (c.lens_ids || []).length;
+          const displayName = /\(\d+\)\s*$/.test(c.name || '') ? c.name : `${c.name} (${count})`;
+          return `<span class="filter-chip ${state.nav.collection === cid ? 'active' : ''}"${tip} onclick="setCollectionFilter('${esc(cid)}')">
+            ${icon} ${esc(displayName)}
             <button class="btn xs ${on ? 'primary' : ''}" style="padding:1px 6px;font-size:10.5px;margin-left:2px" onclick="event.stopPropagation();toggleCollection('${esc(cid)}', ${!on})">${on ? '已开' : '开启'}</button>
+            <button class="btn xs" style="padding:1px 5px;font-size:10.5px" title="把该专题包全部加入桌面精读轮播" onclick="event.stopPropagation();pinCollection('${esc(cid)}')">📌</button>
+            <button class="btn xs" style="padding:1px 4px;font-size:10px" title="重命名专题包" onclick="event.stopPropagation();renameCollection('${esc(cid)}', ${esc(JSON.stringify(c.name || ''))})">✏️</button>
+            <button class="btn xs" style="padding:1px 5px;font-size:11px;color:var(--muted)" title="删除专题包（不删除卡片）" onclick="event.stopPropagation();deleteCollection('${esc(cid)}', ${esc(JSON.stringify(c.name || ''))})">×</button>
           </span>`;
         }).join('') +
         `<button class="btn xs soft" id="btn-new-col-inline">+ 新建专题包</button>`;
@@ -2472,7 +2556,14 @@
       }).join('');
     }
 
-    window.setShelfFilter = k => { state.nav.shelf = k; state.nav.collection = ''; renderLibraryFilters(state.overview); loadLenses(); };
+    window.setShelfFilter = k => {
+      state.nav.shelf = k;
+      state.nav.collection = '';
+      const sortEl = document.getElementById('f-sort');
+      if (sortEl && k === 'personal') sortEl.value = 'newest';
+      renderLibraryFilters(state.overview);
+      loadLenses();
+    };
     window.setCategoryFilter = cat => { state.nav.category = cat; state.nav.collection = ''; renderLibraryFilters(state.overview); loadLenses(); };
     window.setCollectionFilter = cid => {
       state.nav.collection = state.nav.collection === cid ? '' : cid;
@@ -2513,10 +2604,87 @@
       } catch (e) { toast('操作失败：' + e.message); }
     };
 
+    window.renameCollection = async (cid, oldName) => {
+      const next = prompt('修改专题包名称：', oldName || '');
+      if (!next || !next.trim() || next.trim() === oldName) return;
+      try {
+        await api(`api/shelf/collections/${encodeURIComponent(cid)}`, { method: 'PUT', body: JSON.stringify({ name: next.trim() }) });
+        toast(`已将专题包重命名为「${next.trim()}」`);
+        await refreshAll();
+      } catch (e) { toast('重命名失败：' + e.message); }
+    };
+
+    window.deleteCollection = async (cid, name) => {
+      if (!confirm(`确定删除专题包「${name}」吗？（不会删除里面的任何卡片）`)) return;
+      try {
+        await api(`api/shelf/collections/${encodeURIComponent(cid)}`, { method: 'DELETE' });
+        if (state.nav.collection === cid) state.nav.collection = '';
+        markPending(true);
+        toast(`已删除专题包「${name}」`);
+        await refreshAll();
+      } catch (e) { toast('删除失败：' + e.message); }
+    };
+
+    function closeColPopover() {
+      const pop = document.getElementById('col-popover');
+      if (pop) pop.style.display = 'none';
+    }
+    document.addEventListener('click', e => {
+      const pop = document.getElementById('col-popover');
+      if (pop && pop.style.display === 'block' && !pop.contains(e.target)) closeColPopover();
+    });
+
+    window.openCardCollectionPicker = (ev, lensId) => {
+      ev.stopPropagation();
+      const lens = state.lenses.find(x => x.id === lensId);
+      if (!lens) return;
+      const pop = document.getElementById('col-popover');
+      const cols = Object.entries(state.overview?.shelf_policy?.collections || {}).filter(([, c]) => !lens.is_vault || c.is_vault);
+      const memberSet = new Set(lens.meta?.collections || []);
+      if (!cols.length) {
+        pop.innerHTML = `<div style="font-size:12px;color:var(--muted);padding:6px">${lens.is_vault ? '暂无可用私库专题包' : '暂无专题包，请先点击「+ 新建专题包」'}</div>`;
+      } else {
+        pop.innerHTML = `<div style="font-size:11.5px;font-weight:600;color:var(--muted);padding:4px 6px 6px;border-bottom:1px solid var(--border);margin-bottom:4px">勾选加入 / 移出专题包</div>` +
+          cols.map(([cid, c]) => {
+            const has = memberSet.has(cid);
+            const icon = c.is_vault ? '🔒 ' : '📦 ';
+            return `<label style="display:flex;align-items:center;gap:8px;padding:6px;border-radius:7px;cursor:pointer;font-size:12.5px" onmouseover="this.style.background='var(--surface-2)'" onmouseout="this.style.background='transparent'">
+              <input type="checkbox" ${has ? 'checked' : ''} onchange="toggleLensInCollection('${esc(lensId)}','${esc(cid)}',this.checked)" />
+              <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${icon}${esc(c.name)}</span>
+            </label>`;
+          }).join('');
+      }
+      const rect = ev.currentTarget.getBoundingClientRect();
+      pop.style.display = 'block';
+      const left = Math.min(window.innerWidth - 260, Math.max(12, rect.left));
+      const top = Math.min(window.innerHeight - 280, rect.bottom + 6);
+      pop.style.left = left + 'px';
+      pop.style.top = top + 'px';
+    };
+
+    window.toggleLensInCollection = async (lensId, cid, shouldAdd) => {
+      try {
+        await api(`api/lenses/${encodeURIComponent(lensId)}/collections`, {
+          method: 'PUT',
+          body: JSON.stringify(shouldAdd ? { add: cid } : { remove: cid }),
+        });
+        markPending(true);
+        const colName = state.overview?.shelf_policy?.collections?.[cid]?.name || cid;
+        toast(shouldAdd ? `已加入专题包「${colName}」` : `已移出专题包「${colName}」`);
+        await refreshAll();
+        if (state.selectedLens && state.selectedLens.id === lensId) {
+          const updated = state.lenses.find(x => x.id === lensId);
+          if (updated) { state.selectedLens = updated; renderModalCollections(updated); }
+        }
+      } catch (e) { toast('操作失败：' + e.message); }
+    };
+
     function lensCardHtml(lens) {
       const shelf = lens.meta.shelf || 'on_shelf';
       const shInfo = SHELF_LABELS[shelf] || SHELF_LABELS.on_shelf;
       const isOff = shelf === 'off_shelf';
+      const isPinned = state.pinnedIds.has(lens.id);
+      const colCount = (lens.meta?.collections || []).length;
       const checked = state.checkedIds.has(lens.id) ? 'checked' : '';
       return `
         <div class="lens-card ${isOff ? 'dormant' : ''}" data-id="${esc(lens.id)}">
@@ -2536,13 +2704,57 @@
               <span class="pill prim">${esc(primLabel(lens.routing.primitive))}</span>
               <span class="pill">${esc(catLabel(lens.meta.category))}</span>
               ${lens.is_personal ? '<span class="pill purple">✨ 自建</span>' : ''}
+              ${lens.is_vault ? '<span class="pill">🔒 私库</span>' : ''}
               ${shelf === 'evergreen' ? `<span class="pill green">${shInfo.text}</span>` : ''}
               ${lens.has_override ? '<span class="pill amber">已调校</span>' : ''}
             </div>
-            <button class="btn xs" onclick="event.stopPropagation();quickCopyLens('${esc(lens.id)}')" data-tip="复制完整提示词正文，可直接发给 AI">复制</button>
+            <div style="display:flex;gap:5px">
+              <button class="btn xs ${colCount ? 'soft' : ''}" onclick="openCardCollectionPicker(event, '${esc(lens.id)}')" data-tip="加入或移出专题包">📦${colCount ? ' ' + colCount : ''}</button>
+              <button class="btn xs ${isPinned ? 'soft' : ''}" onclick="event.stopPropagation();quickTogglePin('${esc(lens.id)}')" data-tip="${isPinned ? '移出桌面精读轮播清单' : '加入桌面精读轮播清单（即时生效）'}">${isPinned ? '📌 精读中' : '📌'}</button>
+              <button class="btn xs" onclick="event.stopPropagation();quickCopyLens('${esc(lens.id)}')" data-tip="复制完整提示词正文，可直接发给 AI">复制</button>
+            </div>
           </div>
         </div>`;
     }
+
+    window.quickTogglePin = async id => {
+      const isPinned = state.pinnedIds.has(id);
+      try {
+        await seedApi('feedback', { method: 'POST', body: JSON.stringify({ id, action: isPinned ? 'unpin' : 'pin' }) });
+        if (isPinned) state.pinnedIds.delete(id); else state.pinnedIds.add(id);
+        toast(isPinned ? '已移出桌面精读清单（即时生效）' : '📌 已加入桌面精读轮播清单（即时生效）');
+        if (document.getElementById('view-library').classList.contains('active')) loadLenses();
+        if (state.selectedLens && state.selectedLens.id === id) syncModalPinBtn(id);
+      } catch (e) { toast('操作失败：' + e.message); }
+    };
+
+    window.runBatchPin = async () => {
+      if (!state.checkedIds.size) return toast('请先勾选至少一张卡片');
+      const ids = Array.from(state.checkedIds);
+      try {
+        const res = await seedApi('pinned', { method: 'PUT', body: JSON.stringify({ ids, mode: 'add' }) });
+        state.pinnedIds = new Set(res.pinned_ids || []);
+        toast(`📌 已将 ${ids.length} 张卡片加入桌面精读清单（当前共 ${res.pinned_count} 张，即时生效）`);
+        state.checkedIds.clear();
+        state.batchMode = false;
+        document.getElementById('batch-bar').classList.remove('show');
+        document.getElementById('btn-toggle-batch').textContent = '批量整理';
+        loadLenses();
+      } catch (e) { toast('加入精读失败：' + e.message); }
+    };
+
+    window.pinCollection = async cid => {
+      const col = state.overview?.shelf_policy?.collections?.[cid];
+      const ids = col?.lens_ids || [];
+      if (!ids.length) return toast('该专题包暂无卡片');
+      try {
+        const res = await seedApi('pinned', { method: 'PUT', body: JSON.stringify({ ids, mode: 'add' }) });
+        state.pinnedIds = new Set(res.pinned_ids || []);
+        toast(`📌 已将「${col.name}」的 ${ids.length} 张卡加入桌面精读清单（共 ${res.pinned_count} 张，即时生效）`);
+        if (document.getElementById('view-library').classList.contains('active')) loadLenses();
+        if (document.getElementById('view-seed').classList.contains('active')) loadSeedPanel();
+      } catch (e) { toast('导入精读失败：' + e.message); }
+    };
 
     window.quickCopyLens = id => {
       const l = state.lenses.find(x => x.id === id);
@@ -2599,6 +2811,7 @@
     window.resetLibraryFilters = () => {
       document.getElementById('f-q').value = '';
       document.getElementById('f-primitive').value = '';
+      document.getElementById('f-sort').value = '';
       state.nav = { shelf: 'l4_all', category: '', collection: '' };
       if (state.overview) renderLibraryFilters(state.overview);
       loadLenses();
@@ -2607,7 +2820,8 @@
     async function loadLenses() {
       const qVal = document.getElementById('f-q').value;
       const pVal = document.getElementById('f-primitive').value;
-      const hasFilter = Boolean(qVal.trim() || pVal || state.nav.category || state.nav.collection || state.nav.shelf !== 'l4_all');
+      const sortVal = document.getElementById('f-sort').value;
+      const hasFilter = Boolean(qVal.trim() || pVal || sortVal || state.nav.category || state.nav.collection || state.nav.shelf !== 'l4_all');
       const clrBtn = document.getElementById('btn-clear-filters');
       if (clrBtn) clrBtn.style.display = hasFilter ? 'inline-flex' : 'none';
       const params = new URLSearchParams({
@@ -2616,6 +2830,7 @@
         shelf: state.nav.shelf,
         category: state.nav.category,
         collection: state.nav.collection,
+        sort: sortVal,
       });
       const data = await api('api/lenses?' + params.toString());
       state.lenses = data.items || [];
@@ -2652,10 +2867,29 @@
       document.getElementById('m-tags').innerHTML = `
         <span class="pill prim">${esc(primLabel(lens.routing.primitive))}</span>
         <span class="pill">${esc(catLabel(lens.meta.category))}</span>
-        <span class="pill ${sh.cls}">${esc(sh.text)}</span>
+        <span class="pill ${lens.meta.status === 'deprecated' ? 'red' : sh.cls}">${lens.meta.status === 'deprecated' ? '📦 已归档' : esc(sh.text)}</span>
+        ${lens.meta.version > 1 ? `<span class="pill">v${esc(lens.meta.version)}</span>` : ''}
         ${lens.is_personal ? '<span class="pill purple">✨ 我制作的</span>' : ''}
+        ${lens.is_vault ? '<span class="pill">🔒 私库资产</span>' : ''}
         ${lens.has_override ? '<span class="pill amber">已个性化调校</span>' : ''}
       `;
+      const linEl = document.getElementById('m-lineage');
+      const linParts = [];
+      if (lens.meta.supersedes) {
+        linParts.push(`⬆️ 迭代自旧版：<a href="#" style="color:var(--accent);font-weight:600" onclick="event.preventDefault();openLensById('${esc(lens.meta.supersedes)}')">查看已归档前代卡片 (${esc(lens.meta.supersedes)})</a>`);
+      }
+      if (lens.meta.superseded_by) {
+        linParts.push(`⬇️ 已被新版替代：<a href="#" style="color:var(--accent);font-weight:600" onclick="event.preventDefault();openLensById('${esc(lens.meta.superseded_by)}')">跳转至当前新版 (${esc(lens.meta.superseded_by)})</a>`);
+      }
+      if (lens.meta.evolution_note) {
+        linParts.push(`📝 演进备注：${esc(lens.meta.evolution_note)}`);
+      }
+      if (linParts.length) {
+        linEl.innerHTML = linParts.join('<br/>');
+        linEl.style.display = 'block';
+      } else {
+        linEl.style.display = 'none';
+      }
       document.getElementById('m-pain').textContent = lens.routing.pain_point;
       renderModalTriggers(lens.routing.trigger_utterances || []);
       document.getElementById('m-content').innerHTML = highlightVars(lens.execution.content || '');
@@ -2672,8 +2906,42 @@
       document.getElementById('m-dev-id').textContent = `ID: ${lens.id} · source: ${lens.meta.source} · category: ${lens.meta.category}/${lens.meta.subcategory}`;
       document.getElementById('m-dev-id').style.display = state.devMode ? 'block' : 'none';
       document.getElementById('m-add-trig-input').value = '';
+      syncModalPinBtn(lens.id);
+      renderModalCollections(lens);
       document.getElementById('m-custom-details').open = false;
       document.getElementById('lens-modal').classList.add('open');
+    }
+
+    function renderModalCollections(lens) {
+      const allCols = state.overview?.shelf_policy?.collections || {};
+      const memberCols = lens.meta?.collections || [];
+      const box = document.getElementById('m-collections');
+      box.innerHTML = memberCols.length
+        ? memberCols.map(cid => {
+            const info = allCols[cid] || { name: cid };
+            const icon = info.is_vault ? '🔒 ' : '📦 ';
+            return `<span class="trig-pill"><span>${icon}${esc(info.name)}</span><button class="trig-del" title="从该专题包移出" onclick="toggleLensInCollection('${esc(lens.id)}','${esc(cid)}',false)">×</button></span>`;
+          }).join('')
+        : '<span style="font-size:12px;color:var(--muted)">暂未归入任何专题包</span>';
+      const sel = document.getElementById('m-add-col-select');
+      const memberSet = new Set(memberCols);
+      const avail = Object.entries(allCols).filter(([cid, c]) => !memberSet.has(cid) && (!lens.is_vault || c.is_vault));
+      sel.innerHTML = '<option value="">+ 加入专题包…</option>' + avail.map(([cid, c]) => `<option value="${esc(cid)}">${c.is_vault ? '🔒 ' : ''}${esc(c.name)}</option>`).join('');
+    }
+    document.getElementById('m-add-col-select').onchange = e => {
+      const cid = e.target.value;
+      if (cid && state.selectedLens) {
+        toggleLensInCollection(state.selectedLens.id, cid, true);
+        e.target.value = '';
+      }
+    };
+
+    function syncModalPinBtn(id) {
+      const btn = document.getElementById('m-toggle-pin');
+      if (!btn) return;
+      const pinned = state.pinnedIds.has(id);
+      btn.textContent = pinned ? '📌 已在精读清单（点击移出）' : '📌 加入精读轮播';
+      btn.classList.toggle('soft', pinned);
     }
 
     function renderModalTriggers(trigs) {
@@ -2713,6 +2981,9 @@
     });
     document.getElementById('m-copy').onclick = () => {
       if (state.selectedLens) copyText(state.selectedLens.execution.content, '已复制卡片指令，可直接粘贴给 AI');
+    };
+    document.getElementById('m-toggle-pin').onclick = () => {
+      if (state.selectedLens) quickTogglePin(state.selectedLens.id);
     };
     document.getElementById('m-open-chatgpt').onclick = async () => {
       if (!state.selectedLens) return;
@@ -2806,9 +3077,11 @@
     }
 
     function syncSeedSliderLabels() {
+      const pinShare = Number(document.getElementById('rng-pinned-share').value);
       const share = Number(document.getElementById('rng-l3-share').value);
       const decay = Number(document.getElementById('rng-recall-decay').value);
       const skip = Number(document.getElementById('rng-skip-decay').value);
+      document.getElementById('lbl-pinned-share').textContent = `${pinShare}%`;
       document.getElementById('lbl-l3-share').textContent = `${share}%`;
       document.getElementById('lbl-recall-decay').textContent = decay < 20 ? '温和' : (decay < 55 ? '适中' : '强反回音室');
       document.getElementById('lbl-skip-decay').textContent = skip > 82 ? '轻微' : (skip > 62 ? '明显' : '大幅减少');
@@ -2817,7 +3090,7 @@
       else if (share === 15 && decay === 35 && Math.abs(skip - 70) <= 3) document.getElementById('preset-balanced')?.classList.add('active');
       else if (share === 35 && decay === 50 && Math.abs(skip - 65) <= 3) document.getElementById('preset-explore')?.classList.add('active');
     }
-    ['rng-l3-share', 'rng-recall-decay', 'rng-skip-decay'].forEach(id => {
+    ['rng-pinned-share', 'rng-l3-share', 'rng-recall-decay', 'rng-skip-decay'].forEach(id => {
       document.getElementById(id).addEventListener('input', syncSeedSliderLabels);
     });
 
@@ -2854,22 +3127,36 @@
       try {
         const mode = document.getElementById('seed-mode-select').value || 'smart_mix';
         const [st, pool] = await Promise.all([seedApi('state'), seedApi('pool?mode=' + encodeURIComponent(mode))]);
+        state.pinnedIds = new Set(st.pinned_ids || []);
         const c = st.config || {};
         document.getElementById('sc-tier-s').value = c.tier_s_weight ?? 4.0;
         document.getElementById('sc-tier-a').value = c.tier_a_weight ?? 2.0;
         document.getElementById('sc-tier-b').value = c.tier_b_weight ?? 1.0;
+        document.getElementById('rng-pinned-share').value = Math.round((c.pinned_smart_mix_share ?? 0.30) * 100);
         document.getElementById('rng-l3-share').value = Math.round((c.l3_smart_mix_share ?? 0.15) * 100);
         document.getElementById('rng-recall-decay').value = Math.round((c.recall_decay_rate ?? 0.35) * 100);
         document.getElementById('rng-skip-decay').value = Math.round((c.skip_decay_factor ?? 0.72) * 100);
         syncSeedSliderLabels();
 
         const l3Share = pool.items.filter(x => x.layer === 'L3').reduce((a, b) => a + (b.probability_pct || 0), 0);
+        const pinnedItems = st.pinned_items || [];
         document.getElementById('seed-kpi-grid').innerHTML = `
           <div class="kpi"><div class="label">参与轮播的卡片</div><div class="val" style="color:var(--green)">${esc(pool.items.length)}</div><div class="sub">常用卡片 ${esc(st.total_l4)} · 备用探索 ${esc(st.total_l3)}</div></div>
+          <div class="kpi"><div class="label">我的精读清单</div><div class="val" style="color:var(--accent)">${esc(pinnedItems.length)}</div><div class="sub">混播保底 ${Math.round((c.pinned_smart_mix_share ?? 0.30) * 100)}% · 可切「仅播精读」</div></div>
           <div class="kpi"><div class="label">新视角探索比例</div><div class="val" style="color:var(--purple)">${l3Share.toFixed(0)}%</div><div class="sub">来自备用库的盲区卡片占比</div></div>
           <div class="kpi"><div class="label">已暂缓 / 不再显示</div><div class="val" style="color:var(--amber)">${esc(st.hidden_items.length)}</div><div class="sub">不影响快捷键主动唤起</div></div>
-          <div class="kpi"><div class="label">防重复冷却记录</div><div class="val">${esc(st.recent_shown_count)} / 25</div><div class="sub">最近看过的 25 张不会很快重复</div></div>
         `;
+
+        const pBox = document.getElementById('seed-pinned-box');
+        pBox.innerHTML = pinnedItems.length
+          ? `<table><tr><th>精读卡片</th><th>层级</th><th>领域</th><th></th></tr>` + pinnedItems.map(item => `
+              <tr>
+                <td><strong style="cursor:pointer" onclick="openLensById('${esc(item.id)}')">${esc(item.title)}</strong></td>
+                <td><span class="pill ${item.layer === 'L3' ? 'purple' : (item.tier === 'S' ? 'green' : '')}">${item.layer === 'L3' ? '备用探索' : (item.tier === 'S' ? '核心常驻' : '已启用')}</span></td>
+                <td style="color:var(--muted)">${esc(catLabel(item.category))}</td>
+                <td style="text-align:right"><button class="btn xs" onclick="unpinSeed('${esc(item.id)}')">移出</button></td>
+              </tr>`).join('') + `</table>`
+          : '<div class="empty-state">暂无圈选卡片。可在「我的卡片库」点击卡片上的 📌，或在上方选择一个专题包一键导入。</div>';
 
         const hBox = document.getElementById('seed-hidden-box');
         hBox.innerHTML = st.hidden_items.length
@@ -2887,7 +3174,7 @@
           ? `<table><tr><th>卡片</th><th>来源</th><th>近期主动使用</th><th style="width:160px">出现倾向</th><th>说明</th></tr>` + sorted.map(x => `
               <tr>
                 <td><strong style="cursor:pointer" onclick="openLensById('${esc(x.id)}')">${esc(x.title)}</strong></td>
-                <td><span class="pill ${x.layer === 'L3' ? 'purple' : (x.tier === 'S' ? 'green' : '')}">${x.layer === 'L3' ? '备用探索' : (x.tier === 'S' ? '核心常驻' : '已启用')}</span></td>
+                <td>${x.is_pinned ? '<span class="pill prim">📌 精读</span>' : `<span class="pill ${x.layer === 'L3' ? 'purple' : (x.tier === 'S' ? 'green' : '')}">${x.layer === 'L3' ? '备用探索' : (x.tier === 'S' ? '核心常驻' : '已启用')}</span>`}</td>
                 <td>${esc(x.recall_count_30d || 0)} 次</td>
                 <td><div class="bar-track"><div class="bar-fill" style="width:${Math.round((x.probability_pct || 0) / maxPct * 100)}%"></div></div></td>
                 <td style="color:var(--muted)">${esc((x.reason_tag || '').replace('Tier S 核心心法', '核心常驻'))}</td>
@@ -2905,6 +3192,7 @@
             tier_a_weight: parseFloat(document.getElementById('sc-tier-a').value) || 2.0,
             tier_b_weight: parseFloat(document.getElementById('sc-tier-b').value) || 1.0,
             l3_smart_mix_share: Number(document.getElementById('rng-l3-share').value) / 100,
+            pinned_smart_mix_share: Number(document.getElementById('rng-pinned-share').value) / 100,
             recall_decay_rate: Number(document.getElementById('rng-recall-decay').value) / 100,
             skip_decay_factor: Number(document.getElementById('rng-skip-decay').value) / 100,
           }),
@@ -2914,24 +3202,46 @@
       } catch (e) { toast('保存失败：' + e.message); }
     }
     document.getElementById('btn-seed-cfg-save').onclick = saveSeedConfig;
+    document.getElementById('btn-seed-pin-import-col').onclick = () => {
+      const cid = document.getElementById('seed-pin-col-select').value;
+      if (!cid) return toast('请先选择一个专题包');
+      pinCollection(cid);
+    };
+    document.getElementById('btn-seed-pin-clear').onclick = async () => {
+      if (!state.pinnedIds.size) return toast('精读清单已经是空的');
+      try {
+        await seedApi('pinned', { method: 'PUT', body: JSON.stringify({ ids: [], mode: 'replace' }) });
+        state.pinnedIds.clear();
+        toast('已清空精读清单');
+        loadSeedPanel();
+      } catch (e) { toast('清空失败：' + e.message); }
+    };
+    window.unpinSeed = async id => {
+      try {
+        await seedApi('feedback', { method: 'POST', body: JSON.stringify({ id, action: 'unpin' }) });
+        state.pinnedIds.delete(id);
+        toast('已移出精读清单');
+        loadSeedPanel();
+      } catch (e) { toast(e.message); }
+    };
     document.getElementById('btn-seed-draw-test').onclick = async () => {
       try {
         const mode = document.getElementById('seed-mode-select').value || 'smart_mix';
         const d = await seedApi('next', { method: 'POST', body: JSON.stringify({ mode, exclude_ids: [] }) });
         const stage = document.getElementById('seed-draw-stage');
         if (!d.item) {
-          stage.innerHTML = '<div style="color:var(--muted)">当前池暂无可抽取的卡片</div>';
+          stage.innerHTML = `<div style="color:var(--muted)">${mode === 'pinned_only' ? '精读清单为空，请先在下方导入专题包或在卡片库点 📌 加入' : '当前池暂无可抽取的卡片'}</div>`;
           return;
         }
         const it = d.item;
         stage.innerHTML = `
           <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
             <div style="display:flex;align-items:center;gap:8px">
-              <span class="pill ${it.layer === 'L3' ? 'purple' : 'green'}">${it.layer === 'L3' ? '✦ 备用库惊喜' : '✨ 桌面种子'}</span>
+              <span class="pill ${it.is_pinned ? 'prim' : (it.layer === 'L3' ? 'purple' : 'green')}">${it.is_pinned ? '📌 精读强化' : (it.layer === 'L3' ? '✦ 备用库惊喜' : '✨ 桌面种子')}</span>
               <span class="pill prim">${esc(primLabel(it.primitive))}</span>
             </div>
             <div style="display:flex;gap:6px">
-              <button class="btn xs primary" onclick="copyText(${esc(JSON.stringify(it.content || ''))}, '已复制种子指令')">复制指令</button>
+              <button class="btn xs primary" onclick="copyText(${esc(JSON.stringify(it.prompt || it.content || ''))}, '已复制种子指令')">复制指令</button>
               <button class="btn xs" onclick="openLensById('${esc(it.id)}')">查看全文</button>
             </div>
           </div>
@@ -2997,6 +3307,84 @@
       toast(`已套用「${t.title}」模板，按你的习惯微调后即可保存`);
     };
 
+    function setSupersedesPredecessor(pred) {
+      const hid = document.getElementById('mm-supersedes-id');
+      const banner = document.getElementById('mm-lineage-banner');
+      const txt = document.getElementById('mm-lineage-text');
+      if (pred && pred.id) {
+        hid.value = pred.id;
+        const vaultNote = pred.is_vault ? '（私库资产，已自动切换存放位置为 🔒 本地私库）' : '';
+        if (pred.is_vault) {
+          document.getElementById('mm-target-vault').value = '1';
+        }
+        txt.innerHTML = `🔄 检测到前代旧卡 <b>「${esc(pred.title)}」</b> (v${esc(pred.version || 1)})${esc(vaultNote)}：保存时将<b>新建 v${esc((pred.version || 1) + 1)} 卡片并自动归档旧卡</b>，完整保留演进溯源关系。`;
+        banner.style.display = 'flex';
+      } else {
+        hid.value = '';
+        banner.style.display = 'none';
+      }
+    }
+    document.getElementById('btn-clear-supersedes').onclick = () => {
+      setSupersedesPredecessor(null);
+      toast('已切换为全新创建（不归档旧卡）');
+    };
+
+    async function runImportParse(rawOverride = null) {
+      const ta = document.getElementById('mm-import-paste');
+      const raw = (rawOverride !== null ? rawOverride : ta.value).trim();
+      const stEl = document.getElementById('mm-import-status');
+      if (!raw) return toast('请先粘贴强模型生成的回复或 YAML 代码块');
+      try {
+        const res = await api('api/lenses/parse-import', { method: 'POST', body: JSON.stringify({ raw_text: raw }) });
+        if (!res.ok) {
+          stEl.style.display = 'block';
+          stEl.style.color = 'var(--amber)';
+          stEl.textContent = '⚠️ ' + (res.error || '未能解析出标准卡片结构');
+          return;
+        }
+        const c = res.card || {};
+        document.getElementById('mm-title').value = c.title || '';
+        document.getElementById('mm-tagline').value = c.tagline || '';
+        if (c.primitive) document.getElementById('mm-primitive').value = c.primitive;
+        if (c.category) document.getElementById('mm-category').value = c.category;
+        if (c.tier) document.getElementById('mm-tier').value = c.tier;
+        if (c.action_type) document.getElementById('mm-action').value = c.action_type;
+        if (c.inject_mode) document.getElementById('mm-inject-mode').value = c.inject_mode;
+        document.getElementById('mm-pain').value = c.pain_point || '';
+        document.getElementById('mm-triggers').value = (c.trigger_utterances || []).join('\n');
+        document.getElementById('mm-content').value = c.content || '';
+        if (c.evolution_note) document.getElementById('mm-evolution-note').value = c.evolution_note;
+        setSupersedesPredecessor(res.matched_predecessor || null);
+
+        const msgs = ['✅ 已自动解析并回填全部字段，扫一眼即可点右下角「保存并立即同步上线」'];
+        if (res.notes?.length) msgs.push('自动对齐：' + res.notes.join('；'));
+        if (res.warnings?.length) msgs.push('提醒：' + res.warnings.join('；'));
+        stEl.style.display = 'block';
+        stEl.style.color = res.warnings?.length ? 'var(--amber)' : 'var(--green)';
+        stEl.textContent = msgs.join(' · ');
+        toast('⚡ 解析成功！字段已自动填入下方表单');
+      } catch (e) {
+        stEl.style.display = 'block';
+        stEl.style.color = 'var(--red)';
+        stEl.textContent = '解析出错：' + e.message;
+      }
+    }
+    document.getElementById('btn-import-parse').onclick = () => runImportParse();
+    document.getElementById('btn-import-clipboard').onclick = async () => {
+      try {
+        const txt = await navigator.clipboard.readText();
+        if (!txt || !txt.trim()) return toast('剪贴板为空');
+        document.getElementById('mm-import-paste').value = txt;
+        await runImportParse(txt);
+      } catch {
+        document.getElementById('mm-import-paste').focus();
+        toast('浏览器未授予剪贴板读取权限，请直接按 ⌘V 粘贴到输入框（会自动解析）');
+      }
+    };
+    document.getElementById('mm-import-paste').addEventListener('paste', () => {
+      setTimeout(() => runImportParse(), 80);
+    });
+
     async function saveManualCard(autoSync, btn) {
       const title = document.getElementById('mm-title').value.trim();
       const pain = document.getElementById('mm-pain').value.trim();
@@ -3006,9 +3394,14 @@
       if (pain.length < 4) return toast('请简单描述「什么情况下需要这张卡」（至少 4 个字）');
       if (!triggers.length) return toast('请至少填写 1 句你平时会怎么说的口语');
       if (content.length < 4) return toast('请填写希望 AI 执行的指令或清单正文（至少 4 个字）');
+      const supersedesId = document.getElementById('mm-supersedes-id').value.trim() || null;
+      const evolutionNote = document.getElementById('mm-evolution-note').value.trim() || null;
+      const targetVault = document.getElementById('mm-target-vault').value === '1';
+      const addCollection = document.getElementById('mm-add-col').value || null;
+      const pinAfter = document.getElementById('mm-pin-after').checked;
       try {
         await withBtnLoading(btn, autoSync ? '保存并同步中…' : '正在保存…', autoSync ? '已上线 ✓' : '已保存 ✓', async () => {
-          await api('api/lenses/manual', {
+          const created = await api('api/lenses/manual', {
             method: 'POST',
             body: JSON.stringify({
               title,
@@ -3017,17 +3410,31 @@
               category: document.getElementById('mm-category').value,
               tier: document.getElementById('mm-tier').value,
               action_type: document.getElementById('mm-action').value,
+              inject_mode: document.getElementById('mm-inject-mode').value,
               pain_point: pain,
               trigger_utterances: triggers,
               content,
+              supersedes_id: supersedesId,
+              evolution_note: evolutionNote,
+              target_vault: targetVault,
+              add_collection: addCollection,
             }),
           });
-          ['mm-title', 'mm-tagline', 'mm-pain', 'mm-triggers', 'mm-content'].forEach(id => document.getElementById(id).value = '');
+          const newId = created?.lens?.id;
+          if (pinAfter && newId) {
+            await seedApi('feedback', { method: 'POST', body: JSON.stringify({ id: newId, action: 'pin' }) }).catch(() => {});
+            state.pinnedIds.add(newId);
+          }
+          ['mm-import-paste', 'mm-title', 'mm-tagline', 'mm-pain', 'mm-triggers', 'mm-content', 'mm-evolution-note'].forEach(id => document.getElementById(id).value = '');
+          document.getElementById('mm-import-status').style.display = 'none';
+          document.getElementById('mm-add-col').value = '';
+          document.getElementById('mm-target-vault').value = '0';
+          setSupersedesPredecessor(null);
           if (autoSync) {
             await runApplyBuild(null);
           } else {
             markPending(true);
-            toast('新卡片已保存为草稿！稍后点击左侧「立即同步生效」即可上线', 4200);
+            toast(supersedesId ? '新版卡片已保存且旧卡已归档！点左侧「立即同步生效」上线' : '新卡片已保存为草稿！稍后点击左侧「立即同步生效」即可上线', 4200);
             await refreshAll();
           }
         });
@@ -3418,15 +3825,17 @@
     let _qTimer = null;
     document.getElementById('f-q').addEventListener('input', () => { clearTimeout(_qTimer); _qTimer = setTimeout(loadLenses, 180); });
     document.getElementById('f-primitive').addEventListener('change', loadLenses);
+    document.getElementById('f-sort').addEventListener('change', loadLenses);
 
     async function refreshAll() {
       await loadOverview();
       if (document.getElementById('view-library').classList.contains('active')) await loadLenses();
     }
 
-    // Global keyboard ergonomics (Esc closes modal/drawer, Cmd/Ctrl+K focuses search)
+    // Global keyboard ergonomics (Esc closes modal/drawer/popover, Cmd/Ctrl+K focuses search)
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') {
+        closeColPopover();
         const modal = document.getElementById('lens-modal');
         if (modal.classList.contains('open')) { modal.classList.remove('open'); return; }
         const drawer = document.getElementById('home-teach-drawer');
@@ -3442,11 +3851,29 @@
       }
     });
 
+    async function handleImportHash() {
+      if (location.hash !== '#import') return;
+      switchView('create');
+      document.querySelector('#create-mode-bar .seg-btn[data-cmode="manual"]')?.click();
+      const ta = document.getElementById('mm-import-paste');
+      if (ta) ta.focus();
+      try {
+        const txt = await navigator.clipboard.readText();
+        if (txt && txt.trim()) {
+          ta.value = txt;
+          await runImportParse(txt);
+          return;
+        }
+      } catch {}
+      toast('已打开闪电导入页：按 ⌘V 粘贴或点「从剪贴板读取」即可自动解析', 4000);
+    }
+    window.addEventListener('hashchange', handleImportHash);
+
     // Boot
     applyTheme(state.theme);
     applyDevMode(state.devMode);
     initGuideBanner();
-    refreshAll();
+    refreshAll().then(() => handleImportHash());
     refreshJobs({ openIfRecent: true });
   </script>
 </body>
