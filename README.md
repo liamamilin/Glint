@@ -51,33 +51,23 @@ flowchart LR
 
 ## 实机产品截图
 
+**个人认知卡片空间 · 从一句日常想法，到三个互补的思考视角**
+
+![Glint 新版首页与实时试用](docs/assets/glint-home-20261128.jpg)
+
 <table>
   <tr>
-    <td width="52%" align="center" valign="top">
-      <strong>飞轮 A · 主动语义路由浮窗（任意输入框原位呼出）</strong><br/><br/>
-      <img src="docs/assets/router_popup.jpg" alt="Glint 主动语义路由三卡浮窗" width="380" /><br/><br/>
-      <strong>飞轮 B · 认知种子 Ambient HUD（桌面半透明陪伴小窗）</strong><br/><br/>
-      <img src="docs/assets/seed_hud.png" alt="Glint 认知种子 Ambient HUD" width="340" />
+    <td width="50%" align="center" valign="top">
+      <strong>卡片详情 · 适用场景、常用说法与完整指令</strong><br/><br/>
+      <img src="docs/assets/glint-card-detail-20261128.jpg" alt="Glint 新版认知卡片详情" width="440" />
     </td>
-    <td width="48%" align="center" valign="top">
-      <strong>认知种子 · 展开本体阅读卡（就地填空 + 一键直达 AI）</strong><br/><br/>
-      <img src="docs/assets/seed_reader.jpg" alt="Glint 认知种子展开阅读卡" width="360" />
+    <td width="50%" align="center" valign="top">
+      <strong>桌面陪伴 · 认知种子与陪伴节奏</strong><br/><br/>
+      <img src="docs/assets/glint-seed-hud-20261128.jpg" alt="Glint 新版原生认知种子小窗" width="400" /><br/><br/>
+      <img src="docs/assets/glint-companion-20261128.jpg" alt="Glint 新版桌面陪伴控制页" width="440" />
     </td>
   </tr>
 </table>
-
-<details>
-<summary>查看统一管理台后台截图（L3/L4 货架 & 认知种子概率控制面）</summary>
-
-<br/>
-
-**L3 库存 & L4 声明式货架 + 召回诊断**  
-![Glint L3/L4 货架与召回诊断](docs/assets/admin_shelf.png)
-
-**认知种子控制面板 · 实时概率调度与屏蔽管理**  
-![Glint 认知种子控制面板](docs/assets/admin_seed.png)
-
-</details>
 
 ---
 
