@@ -1,0 +1,46 @@
+id: manual_531545
+title: 区块链协议解剖
+tagline: 从账本与权力出发，还原加密货币的运行机制
+routing:
+  primitive: compress
+  goals:
+  - optimize
+  clarity_fit:
+  - vague
+  - concrete
+  domains:
+  - general
+  app_affinity: []
+  pain_point: 被区块链技术名词淹没，无法理解系统为何成立、如何运行及何时失效
+  trigger_utterances:
+  - 分析区块链
+  - 解构加密货币
+  - 这条公链到底是怎么运行的
+  - 这个币为什么能够成立
+  - 谁掌握了这个区块链的控制权
+  - 帮我分析一下这个区块链
+  anti_triggers: []
+execution:
+  action_type: inject_prompt
+  inject_mode: append
+  content: 从去中心化协作需求出发，拆解初始状态（发行与分配）、交易规则（合法变更）、记账规则（存储、提议、验证与共识）、激励机制（收益与作恶成本）。追溯协议修改权及拒绝权，揭示信任依赖、权力分布与失效条件。区分协议事实与设计假设。
+  variables: []
+  workflow: null
+meta:
+  source: manual-custom
+  source_ref: manual#manual_531545
+  source_hash: 8c04f866b0639579cfc02fc34305871f0942241b211a16a6c6026b3255972669
+  status: active
+  scope: domain_specific
+  shelf: on_shelf
+  tier: S
+  category: general
+  subcategory: problem_solving
+  collections: []
+  base_weight: 1.0
+  confidence: 1.0
+  version: 1
+  created_at: 2026-11-28T13:58:51+0800
+  supersedes: null
+  superseded_by: null
+  evolution_note: null

@@ -17,6 +17,7 @@ category_modes:
 active_collections:
 - col_vibe_codeing
 - col_item_3c3742f184
+- col_web3
 collections:
   cle_m1_representation:
     name: CLE · M1 表征状态 (9)
@@ -145,6 +146,10 @@ collections:
     - manual_930199
     - manual_domain_cognitive_expansion
     - usr_item_2eb9ad31ba
+  col_web3:
+    name: Web3
+    description: ''
+    lens_ids: []
 evergreen_ids:
 - cle_m1_r_c2_identification
 - cle_m1_r_p2_differentiation
