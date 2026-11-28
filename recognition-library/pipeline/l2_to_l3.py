@@ -424,6 +424,24 @@ def clean_single_lens(
             lens.title = ov.title
         if ov.tagline is not None:
             lens.tagline = ov.tagline
+        if ov.pain_point is not None and len(ov.pain_point.strip()) >= 4:
+            lens.routing.pain_point = ov.pain_point.strip()
+        if ov.content is not None and len(ov.content.strip()) >= 4:
+            ov_content = ov.content.strip()
+            if lens.execution.action_type == "inject_prompt":
+                if lens.execution.inject_mode == "append" and INPUT_PLACEHOLDER_RE.search(ov_content):
+                    ov_content = INPUT_PLACEHOLDER_RE.sub(" ", ov_content).strip()
+                elif lens.execution.inject_mode == "wrap" and "input" not in extract_placeholders(ov_content):
+                    ov_content = ov_content + "\n\n{{input}}"
+            lens.execution.content = ov_content
+            ov_curly = [v for v in extract_placeholders(ov_content) if v != "input"]
+            ov_cn: list[str] = []
+            if compiled_cn_pat is not None:
+                for m in compiled_cn_pat.finditer(ov_content):
+                    vn = m.group(1).strip()
+                    if vn and vn not in ov_cn:
+                        ov_cn.append(vn)
+            lens.execution.variables = list(dict.fromkeys(ov_curly + ov_cn))
         if ov.status is not None:
             lens.meta.status = ov.status
         if ov.tier is not None:
@@ -449,6 +467,12 @@ def clean_single_lens(
             lens.routing.domains = ov.domains
         if ov.app_affinity is not None:
             lens.routing.app_affinity = ov.app_affinity
+        if ov.trigger_utterances is not None:
+            cleaned_trigs = [t.strip() for t in ov.trigger_utterances if t.strip()]
+            if cleaned_trigs:
+                lens.routing.trigger_utterances = cleaned_trigs
+        if ov.anti_triggers is not None:
+            lens.routing.anti_triggers = [t.strip() for t in ov.anti_triggers if t.strip()]
         if ov.add_trigger_utterances:
             merged_trigs = list(lens.routing.trigger_utterances)
             for t in ov.add_trigger_utterances:
@@ -456,6 +480,11 @@ def clean_single_lens(
                 if t_clean and t_clean not in merged_trigs:
                     merged_trigs.append(t_clean)
             lens.routing.trigger_utterances = merged_trigs
+        if ov.remove_trigger_utterances:
+            rm_set = {t.strip() for t in ov.remove_trigger_utterances if t.strip()}
+            kept_trigs = [t for t in lens.routing.trigger_utterances if t.strip() not in rm_set]
+            if kept_trigs:
+                lens.routing.trigger_utterances = kept_trigs
         if ov.superseded_by is not None:
             lens.meta.superseded_by = ov.superseded_by
         if ov.evolution_note is not None:

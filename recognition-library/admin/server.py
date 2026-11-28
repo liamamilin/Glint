@@ -664,12 +664,14 @@ def create_admin_app(router_skill: Any = None) -> FastAPI:
         overlay = load_overlay(ov_path)
         raw_map = {k: v.model_dump(exclude_none=True) for k, v in overlay.overrides.items()}
         new_fields = payload.model_dump(exclude_none=True)
-        if new_fields:
-            merged_entry = dict(raw_map.get(lens_id, {}))
-            merged_entry.update(new_fields)
-            raw_map[lens_id] = merged_entry
-        else:
-            raw_map.pop(lens_id, None)
+        if not new_fields:
+            return {"ok": True, "lens_id": lens_id, "override": raw_map.get(lens_id, {})}
+        merged_entry = dict(raw_map.get(lens_id, {}))
+        merged_entry.update(new_fields)
+        if "trigger_utterances" in new_fields:
+            merged_entry.pop("add_trigger_utterances", None)
+            merged_entry.pop("remove_trigger_utterances", None)
+        raw_map[lens_id] = merged_entry
         _save_overlay_file(ov_path, raw_map)
         lens_cache.clear()
         return {"ok": True, "lens_id": lens_id, "override": raw_map.get(lens_id, {})}
@@ -1057,6 +1059,7 @@ def create_admin_app(router_skill: Any = None) -> FastAPI:
     def _lens_usage_30d(lens_id: str) -> dict[str, int]:
         if not DEFAULT_USAGE_DB.exists():
             return {"impressions": 0, "clicks": 0, "escapes": 0}
+        conn: sqlite3.Connection | None = None
         try:
             conn = sqlite3.connect(str(DEFAULT_USAGE_DB))
             cur = conn.cursor()
@@ -1075,22 +1078,24 @@ def create_admin_app(router_skill: Any = None) -> FastAPI:
                         clk += 1
                     elif not sel:
                         esc += 1
-            conn.close()
             return {"impressions": imp, "clicks": clk, "escapes": esc}
         except Exception:
             return {"impressions": 0, "clicks": 0, "escapes": 0}
+        finally:
+            if conn is not None:
+                conn.close()
 
     def _compute_lens_neighbors(lens_id: str, merged_map: dict[str, Any], top_n: int = 5) -> list[dict[str, Any]]:
         emb_path = DIST_DIR / "current" / "embeddings.npz"
         if not emb_path.exists():
             return []
         try:
-            npz = np.load(emb_path, allow_pickle=False)
-            ids = [str(x) for x in npz["ids"].tolist()]
-            if lens_id not in ids:
-                return []
-            idx = ids.index(lens_id)
-            vecs = np.asarray(npz["vectors"], dtype=np.float32)
+            with np.load(emb_path, allow_pickle=False) as npz:
+                ids = [str(x) for x in npz["ids"].tolist()]
+                if lens_id not in ids:
+                    return []
+                idx = ids.index(lens_id)
+                vecs = np.asarray(npz["vectors"], dtype=np.float32)
             norms = np.linalg.norm(vecs, axis=1, keepdims=True)
             vecs = vecs / np.maximum(norms, 1e-9)
             sims = (vecs @ vecs[idx]).reshape(-1)

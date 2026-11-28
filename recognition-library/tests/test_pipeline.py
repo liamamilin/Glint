@@ -1288,3 +1288,130 @@ def test_sort_newest_single_card_collections_and_rename(tmp_path: Path) -> None:
             admin_srv.META_VAULT_DIR,
             admin_srv.DEFAULT_SHELF_POLICY_PATH,
         ) = orig
+
+
+def test_inplace_overlay_fields_persist_in_l3_build_and_safe_upsert(tmp_path: Path) -> None:
+    from fastapi.testclient import TestClient
+
+    import admin.server as admin_srv
+    from pipeline.l2_to_l3 import run_l2_to_l3
+    from pipeline.schema import L2Lens, LensExecution, LensMeta, LensRouting
+
+    l2_dir = tmp_path / "l2_lenses"
+    l3_dir = tmp_path / "l3_production"
+    q_dir = tmp_path / "quarantine"
+    ov_path = tmp_path / "overrides.yaml"
+    dist_dir = tmp_path / "dist"
+    (l2_dir / "critique").mkdir(parents=True)
+    ov_path.write_text("overrides: {}\n", encoding="utf-8")
+
+    base_lens = L2Lens(
+        id="card_refill_test",
+        title="旧标题",
+        tagline="旧摘要",
+        routing=LensRouting(
+            primitive="critique",
+            goals=["evaluate"],
+            clarity_fit=["concrete"],
+            domains=["general"],
+            pain_point="旧痛点描述文本",
+            trigger_utterances=["旧口语一", "旧口语二"],
+            anti_triggers=[],
+        ),
+        execution=LensExecution(
+            action_type="inject_prompt",
+            inject_mode="wrap",
+            content="旧指令正文 {{input}}",
+            variables=[],
+        ),
+        meta=LensMeta(
+            source="manual-custom",
+            source_ref="manual#refill",
+            source_hash=content_sha256("refill"),
+            tier="A",
+        ),
+    )
+    (l2_dir / "critique" / "card_refill_test.yaml").write_text(
+        yaml.safe_dump(base_lens.model_dump(), allow_unicode=True), encoding="utf-8"
+    )
+
+    orig = (
+        admin_srv.L2_DIR,
+        admin_srv.L3_DIR,
+        admin_srv.OVERLAY_PATH,
+        admin_srv.QUARANTINE_DIR,
+        admin_srv.DIST_DIR,
+        admin_srv.META_VAULT_DIR,
+    )
+    try:
+        admin_srv.L2_DIR = l2_dir
+        admin_srv.L3_DIR = l3_dir
+        admin_srv.OVERLAY_PATH = ov_path
+        admin_srv.QUARANTINE_DIR = q_dir
+        admin_srv.DIST_DIR = dist_dir
+        admin_srv.META_VAULT_DIR = None
+        client = TestClient(admin_srv.create_admin_app())
+
+        # Seed prior add/remove trigger overrides and a base_weight
+        assert client.put("/api/overlays/card_refill_test", json={"base_weight": 1.4}).status_code == 200
+        assert client.post("/api/overlays/card_refill_test/add-trigger", json={"utterance": "历史新增口语"}).status_code == 200
+        assert client.post("/api/overlays/card_refill_test/remove-trigger", json={"utterance": "旧口语二"}).status_code == 200
+
+        # Empty PUT must NOT wipe existing overlay
+        r_empty = client.put("/api/overlays/card_refill_test", json={})
+        assert r_empty.status_code == 200
+        assert r_empty.json()["override"].get("base_weight") == 1.4
+
+        # In-place update with full trigger_utterances + anti_triggers + pain_point + content
+        r_upd = client.put(
+            "/api/overlays/card_refill_test",
+            json={
+                "pain_point": "新痛点描述文本",
+                "content": "新指令正文含【参数】",
+                "trigger_utterances": ["新口语一", "新口语二"],
+                "anti_triggers": ["无关场景不触发"],
+            },
+        )
+        assert r_upd.status_code == 200
+        ov_entry = r_upd.json()["override"]
+        assert "add_trigger_utterances" not in ov_entry
+        assert "remove_trigger_utterances" not in ov_entry
+        assert ov_entry["base_weight"] == 1.4
+
+        # run_l2_to_l3 & build_release must materialize ALL 5 overlay fields into L3 and dist/current
+        kept, _, _ = run_l2_to_l3(
+            l2_dir=l2_dir,
+            l3_dir=l3_dir,
+            overlay_path=ov_path,
+            quarantine_dir=q_dir,
+        )
+        assert len(kept) == 1
+        k0 = kept[0]
+        assert k0.routing.pain_point == "新痛点描述文本"
+        assert k0.routing.trigger_utterances == ["新口语一", "新口语二"]
+        assert k0.routing.anti_triggers == ["无关场景不触发"]
+        assert "{{input}}" in k0.execution.content
+        assert "参数" in k0.execution.variables
+
+        build_release(
+            l2_dir=l2_dir,
+            l3_dir=l3_dir,
+            overlay_path=ov_path,
+            quarantine_dir=q_dir,
+            dist_dir=dist_dir,
+            embedder=None,
+        )
+        published = json.loads((dist_dir / "current" / "lenses.json").read_text(encoding="utf-8"))
+        assert published[0]["routing"]["pain_point"] == "新痛点描述文本"
+        assert published[0]["routing"]["trigger_utterances"] == ["新口语一", "新口语二"]
+        assert published[0]["routing"]["anti_triggers"] == ["无关场景不触发"]
+        assert "新指令正文含【参数】" in published[0]["execution"]["content"]
+    finally:
+        (
+            admin_srv.L2_DIR,
+            admin_srv.L3_DIR,
+            admin_srv.OVERLAY_PATH,
+            admin_srv.QUARANTINE_DIR,
+            admin_srv.DIST_DIR,
+            admin_srv.META_VAULT_DIR,
+        ) = orig

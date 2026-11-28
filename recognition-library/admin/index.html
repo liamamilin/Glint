@@ -1420,6 +1420,7 @@
           </div>
           <div class="form-field" style="margin-top:12px"><label>什么情况下需要这张卡？</label><input type="text" id="mm-pain" placeholder="例如：每周写周报总写成工作流水账，老板抓不到重点" /></div>
           <div class="form-field" style="margin-top:12px"><label>我通常会怎么说？ <span class="form-hint">（每行一句，写 2–5 句日常口语，建议前 2 条写 4–8 字短口语）</span></label><textarea id="mm-triggers" style="min-height:78px" placeholder="帮我改一下这份周报&#10;把这周做的事总结给老板看"></textarea></div>
+          <div class="form-field" style="margin-top:12px"><label>防串台边界 (anti_triggers) <span class="form-hint">（选填，每行一条：哪些相似场景不要触发这张卡）</span></label><textarea id="mm-anti-triggers" style="min-height:54px" placeholder="仅需润色语气或压字数，不需要重构汇报结构"></textarea></div>
           <div class="form-field" style="margin-top:12px"><label>希望 AI 执行的指令或清单正文</label><textarea id="mm-content" placeholder="请把我的工作记录重构成：1）本周最关键的 3 个结果；2）当前风险与阻塞；3）需要决策确认的事项。"></textarea></div>
 
           <!-- Lineage Archiving + One-Step Destination Options -->
@@ -3057,6 +3058,9 @@
         };
         addDiff('标题', l.title, c.title);
         addDiff('摘要', l.tagline, c.tagline);
+        addDiff('思考方式', l.routing.primitive, c.primitive);
+        addDiff('所属领域', l.meta.category, c.category);
+        addDiff('质量梯队', l.meta.tier, c.tier);
         addDiff('适用场景', l.routing.pain_point, c.pain_point);
         const oldT = (l.routing.trigger_utterances || []).join(' / ');
         const newT = (c.trigger_utterances || []).join(' / ');
@@ -3094,11 +3098,15 @@
           const payload = {};
           if (c.title && c.title !== l.title) payload.title = c.title;
           if (c.tagline && c.tagline !== l.tagline) payload.tagline = c.tagline;
+          if (c.primitive && c.primitive !== l.routing.primitive) payload.primitive = c.primitive;
+          if (c.category && c.category !== l.meta.category) payload.category = c.category;
+          if (c.tier && c.tier !== l.meta.tier) payload.tier = c.tier;
           if (c.pain_point && c.pain_point.length >= 4 && c.pain_point !== l.routing.pain_point) payload.pain_point = c.pain_point;
           if (c.content && c.content.length >= 4 && c.content !== l.execution.content) payload.content = c.content;
           if (c.trigger_utterances?.length) payload.trigger_utterances = c.trigger_utterances;
           if (c.anti_triggers?.length) payload.anti_triggers = c.anti_triggers;
           if (c.evolution_note) payload.evolution_note = c.evolution_note;
+          if (!Object.keys(payload).length) return toast('未检测到可更新的字段变化');
           await api('api/overlays/' + encodeURIComponent(l.id), { method: 'PUT', body: JSON.stringify(payload) });
           markPending(true);
           toast(`✅ 已原地更新「${l.title}」，点左下角「立即同步生效」上线`, 4200);
@@ -3572,6 +3580,7 @@
         if (c.inject_mode) document.getElementById('mm-inject-mode').value = c.inject_mode;
         document.getElementById('mm-pain').value = c.pain_point || '';
         document.getElementById('mm-triggers').value = (c.trigger_utterances || []).join('\n');
+        document.getElementById('mm-anti-triggers').value = (c.anti_triggers || []).join('\n');
         document.getElementById('mm-content').value = c.content || '';
         if (c.evolution_note) document.getElementById('mm-evolution-note').value = c.evolution_note;
         setSupersedesPredecessor(res.matched_predecessor || null);
@@ -3609,6 +3618,7 @@
       const title = document.getElementById('mm-title').value.trim();
       const pain = document.getElementById('mm-pain').value.trim();
       const triggers = document.getElementById('mm-triggers').value.split('\n').map(s => s.trim()).filter(Boolean);
+      const antiTriggers = document.getElementById('mm-anti-triggers').value.split('\n').map(s => s.trim()).filter(Boolean);
       const content = document.getElementById('mm-content').value.trim();
       if (title.length < 2) return toast('请填写至少 2 个字的卡片标题');
       if (pain.length < 4) return toast('请简单描述「什么情况下需要这张卡」（至少 4 个字）');
@@ -3633,6 +3643,7 @@
               inject_mode: document.getElementById('mm-inject-mode').value,
               pain_point: pain,
               trigger_utterances: triggers,
+              anti_triggers: antiTriggers,
               content,
               supersedes_id: supersedesId,
               evolution_note: evolutionNote,
@@ -3645,7 +3656,7 @@
             await seedApi('feedback', { method: 'POST', body: JSON.stringify({ id: newId, action: 'pin' }) }).catch(() => {});
             state.pinnedIds.add(newId);
           }
-          ['mm-import-paste', 'mm-title', 'mm-tagline', 'mm-pain', 'mm-triggers', 'mm-content', 'mm-evolution-note'].forEach(id => document.getElementById(id).value = '');
+          ['mm-import-paste', 'mm-title', 'mm-tagline', 'mm-pain', 'mm-triggers', 'mm-anti-triggers', 'mm-content', 'mm-evolution-note'].forEach(id => document.getElementById(id).value = '');
           document.getElementById('mm-import-status').style.display = 'none';
           document.getElementById('mm-add-col').value = '';
           document.getElementById('mm-target-vault').value = '0';
