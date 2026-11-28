@@ -19,7 +19,9 @@ routing:
   - 距离实现我们的目标还缺少哪些东西
   - 看看整个体系有没有遗漏什么必要的环节
   - 看看当前项目有什么问题
-  anti_triggers: []
+  anti_triggers:
+  - 对已发现的具体代码报错或 Bug 做排障修复
+  - 单纯压缩总结现有长文或会议记录要点
 execution:
   action_type: inject_prompt
   inject_mode: append

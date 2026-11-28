@@ -21,7 +21,9 @@ routing:
   - 修复bug
   - 修复缺陷
   - 修复这些代码
-  anti_triggers: []
+  anti_triggers:
+  - 只需排查问题或制定修复计划，暂不执行实际修改
+  - 从零开发全新功能而非修复既有缺陷
 execution:
   action_type: inject_prompt
   inject_mode: append

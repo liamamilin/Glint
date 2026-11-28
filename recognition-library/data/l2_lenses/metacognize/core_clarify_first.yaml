@@ -17,6 +17,7 @@ routing:
   - Notion
   pain_point: 用户需求描述模糊、思路发散，AI 直接给完整方案容易答偏或遗漏关键约束
   trigger_utterances:
+  - 先反问我
   - 先别给方案，先问我几个问题
   - 需求还没想清楚，帮我 clarify 一下
   - 思路太散了，先帮我理清前提
@@ -28,7 +29,7 @@ routing:
 execution:
   action_type: inject_prompt
   inject_mode: append
-  content: 先不要急着给完整方案。请先找出我描述中缺失的关键信息，向我提出 3 个最核心的澄清问题。
+  content: 先不要急着给完整方案。请先找出我描述中最影响方向决策的缺失信息，只提出 2–3 个最核心的澄清问题（每个问题附带一句为何它会影响方案）；若我已给出清晰完整的目标与约束，请直接确认并开始执行，不必强行反问。
   variables: []
   workflow: null
 meta:
@@ -38,4 +39,4 @@ meta:
   status: active
   base_weight: 1.0
   confidence: 0.9
-  version: 1
+  version: 2

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-28T13:58:52+0800",
+  "generated_at": "2026-11-28T15:12:33+0800",
   "total_l2_input": 479,
   "total_l3_active": 479,
   "total_l3_deprecated": 0,
@@ -8,7 +8,7 @@
   "action_counts": {
     "applied_overlay": 41,
     "attached_workflow_step": 89,
-    "cleaned_triggers": 2,
+    "cleaned_triggers": 1,
     "normalized_domains": 22,
     "normalized_person_context": 8,
     "stripped_append_input_placeholder": 14,

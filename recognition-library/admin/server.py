@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import json
 import os
+import re
+import sqlite3
 import threading
 import time
 import uuid
@@ -139,6 +141,7 @@ class ManualLensRequest(BaseModel):
     primitive: str = "deconstruct"
     pain_point: str = Field(..., min_length=4)
     trigger_utterances: list[str] = Field(..., min_length=1)
+    anti_triggers: list[str] = Field(default_factory=list)
     content: str = Field(..., min_length=4)
     action_type: str = "inject_prompt"
     inject_mode: str = "append"
@@ -1047,6 +1050,188 @@ def create_admin_app(router_skill: Any = None) -> FastAPI:
         lens_cache.clear()
         return {"ok": True, "lens_id": lens_id, "added": add_cid, "removed": rm_cid}
 
+    _FLUFF_RE = re.compile(r"(请你作为|作为一名|资深专家|高级专家|请全面|请深入|请详细|请系统地|通俗易懂|专业且|高质量|尽可能详细)")
+    _RIGID_RE = re.compile(r"(字以内|严格短于|不超过\d+字|固定[0-9一二三四五]|必须输出\d+条|只给\d+条)")
+    _BOUNDARY_RE = re.compile(r"(例外|边界|不适用|跳过|不要|禁止|反模式|如果.*直接|前提|条件)")
+
+    def _lens_usage_30d(lens_id: str) -> dict[str, int]:
+        if not DEFAULT_USAGE_DB.exists():
+            return {"impressions": 0, "clicks": 0, "escapes": 0}
+        try:
+            conn = sqlite3.connect(str(DEFAULT_USAGE_DB))
+            cur = conn.cursor()
+            cur.execute(
+                "SELECT recommended_ids, selected_id FROM usage_events WHERE timestamp >= datetime('now', '-30 days')"
+            )
+            imp = clk = esc = 0
+            for rec_raw, sel in cur.fetchall():
+                try:
+                    recs = json.loads(rec_raw) if isinstance(rec_raw, str) else []
+                except Exception:
+                    recs = []
+                if lens_id in recs:
+                    imp += 1
+                    if sel == lens_id:
+                        clk += 1
+                    elif not sel:
+                        esc += 1
+            conn.close()
+            return {"impressions": imp, "clicks": clk, "escapes": esc}
+        except Exception:
+            return {"impressions": 0, "clicks": 0, "escapes": 0}
+
+    def _compute_lens_neighbors(lens_id: str, merged_map: dict[str, Any], top_n: int = 5) -> list[dict[str, Any]]:
+        emb_path = DIST_DIR / "current" / "embeddings.npz"
+        if not emb_path.exists():
+            return []
+        try:
+            npz = np.load(emb_path, allow_pickle=False)
+            ids = [str(x) for x in npz["ids"].tolist()]
+            if lens_id not in ids:
+                return []
+            idx = ids.index(lens_id)
+            vecs = np.asarray(npz["vectors"], dtype=np.float32)
+            norms = np.linalg.norm(vecs, axis=1, keepdims=True)
+            vecs = vecs / np.maximum(norms, 1e-9)
+            sims = (vecs @ vecs[idx]).reshape(-1)
+            order = np.argsort(-sims)
+            out: list[dict[str, Any]] = []
+            for j in order:
+                cid = ids[int(j)]
+                if cid == lens_id:
+                    continue
+                cand = merged_map.get(cid)
+                if cand is None or cand.meta.status == "deprecated":
+                    continue
+                out.append({
+                    "id": cid,
+                    "title": cand.title,
+                    "primitive": cand.routing.primitive,
+                    "cosine": round(float(sims[int(j)]), 3),
+                    "pain_point": cand.routing.pain_point,
+                    "triggers": list(cand.routing.trigger_utterances[:4]),
+                })
+                if len(out) >= top_n:
+                    break
+            return out
+        except Exception:
+            return []
+
+    @app.get("/api/lenses/{lens_id}/polish-prompt")
+    def api_lens_polish_prompt(lens_id: str, mode: str = "audit") -> dict[str, Any]:
+        merged, _ = _load_display_lenses_cached(lens_cache)
+        merged_map = {l.id: l for l in merged}
+        lens = merged_map.get(lens_id)
+        if lens is None:
+            raise HTTPException(status_code=404, detail=f"卡片 '{lens_id}' 不存在")
+
+        norm_mode = mode if mode in {"audit", "sharpen", "calibrate"} else "audit"
+        content = lens.execution.content or ""
+        trigs = [t.strip() for t in (lens.routing.trigger_utterances or []) if t.strip()]
+        antis = [t.strip() for t in (lens.routing.anti_triggers or []) if t.strip()]
+        neighbors = _compute_lens_neighbors(lens_id, merged_map, top_n=5)
+        usage = _lens_usage_30d(lens_id)
+
+        hints: list[dict[str, str]] = []
+        if not antis:
+            hints.append({"code": "missing_anti", "level": "warn", "label": "缺防串台边界 (anti_triggers)"})
+        if len(trigs) < 3:
+            hints.append({"code": "low_triggers", "level": "warn", "label": f"触发口语偏少 ({len(trigs)} 条)"})
+        elif not any(len(t) <= 8 for t in trigs):
+            hints.append({"code": "no_short_trigger", "level": "info", "label": "缺 4–8 字超短口语"})
+        if not _BOUNDARY_RE.search(content):
+            hints.append({"code": "missing_boundary", "level": "info", "label": "正文未见例外/适用边界"})
+        fluff_found = sorted(set(_FLUFF_RE.findall(content)))
+        if fluff_found:
+            hints.append({"code": "fluff", "level": "warn", "label": f"疑似套话词：{'/'.join(fluff_found[:3])}"})
+        rigid_found = sorted(set(_RIGID_RE.findall(content)))
+        if rigid_found:
+            hints.append({"code": "rigid", "level": "info", "label": f"含硬数量约束：{'/'.join(rigid_found[:2])}"})
+        high_sim = [n for n in neighbors if n["cosine"] >= 0.82]
+        if high_sim:
+            hints.append({
+                "code": "high_sim",
+                "level": "warn",
+                "label": f"{len(high_sim)} 张高相似老卡（最高 {high_sim[0]['cosine']:.2f}）",
+            })
+
+        card_yaml = yaml.safe_dump(
+            {
+                "id": lens.id,
+                "title": lens.title,
+                "tagline": lens.tagline,
+                "primitive": lens.routing.primitive,
+                "category": lens.meta.category,
+                "tier": lens.meta.tier,
+                "inject_mode": lens.execution.inject_mode or "append",
+                "pain_point": lens.routing.pain_point,
+                "trigger_utterances": trigs,
+                "anti_triggers": antis,
+                "content": content,
+            },
+            allow_unicode=True,
+            sort_keys=False,
+            width=120,
+        ).strip()
+
+        neighbor_lines = [
+            f"{i}. [{n['primitive']}] {n['title']} (id={n['id']}, 相似度={n['cosine']:.2f})\n   痛点：{n['pain_point']}\n   代表口语：{' / '.join(n['triggers'])}"
+            for i, n in enumerate(neighbors, start=1)
+        ]
+        hint_lines = [f"- {h['label']}" for h in hints] or ["- 静态结构完整，无明显硬伤"]
+        usage_line = (
+            f"近 30 天曝光 {usage['impressions']} 次，选用 {usage['clicks']} 次，Esc 跳过 {usage['escapes']} 次"
+            if usage["impressions"] > 0
+            else "近 30 天暂无使用记录"
+        )
+
+        if norm_mode == "sharpen":
+            task_header = (
+                "请对下面这张认知卡片做「外科锐化」：高信噪比优先，删去空话套话或把复杂经验压僵的伪硬约束，"
+                "补齐核心有效机制、适用条件与例外出口（若需补齐机制与边界，允许新版长于原版，不要为了强行变短删掉关键边界）。\n"
+                "请按 3 步输出：1) 病灶诊断（太水/跑偏 vs 过死/缺例外）；2) 删改与补强点；3) 文末附带可直接回填 Glint 的标准 ```yaml 代码块。"
+            )
+        elif norm_mode == "calibrate":
+            task_header = (
+                "请对下面这张认知卡片做「路由画像防串台校准」（尽量不动指令正文 content，除非发现执行面和路由面严重错位）：\n"
+                "1) 对照下方最相似的现有竞争老卡，指出最可能漏召回或串台的原因；\n"
+                "2) 避免在 pain_point 中写“提示词/模板/卡片”等元话语污染向量；\n"
+                "3) 给出高信噪比 trigger_utterances（含 1–2 条 4–8 字超短口语，不凑数）与明确的 anti_triggers（划清与邻卡的边界）；\n"
+                "4) 文末附带可直接回填 Glint 的标准 ```yaml 代码块。"
+            )
+        else:
+            task_header = (
+                "请对下面这张认知卡片做「全面体检与打磨」，同时覆盖内容质量与路由区分度：\n"
+                "1) 含水量与僵化度审计：检查是否有空洞套话，或把复杂经验压死的僵硬模板约束；\n"
+                "2) 机制与边界检查：是否保留了方法有效的原因、适用条件与例外/跳过出口；\n"
+                "3) 防串台校准：对照下方本机最相似的现有竞争老卡，检查 pain_point、trigger_utterances（含 1–2 条超短口语）与 anti_triggers 是否边界清晰；\n"
+                "4) 若某部分本就扎实，请直接确认无需强行改动；最后附带可直接回填 Glint 的标准 ```yaml 代码块。"
+            )
+
+        wrap_note = "（注意：本卡为 wrap 模式，content 中必须保留 {{input}} 占位符）" if (lens.execution.inject_mode == "wrap") else ""
+        prompt = (
+            f"{task_header}\n\n"
+            f"【目标卡片】\n```yaml\n{card_yaml}\n```\n\n"
+            f"【本机客观参考（纯本地检测，供诊断参考）】\n"
+            f"- 静态线索：\n" + "\n".join(hint_lines) + "\n"
+            f"- 近期使用：{usage_line}\n"
+            f"- 库中最相似的现有卡片（防串台对照）：\n"
+            + ("\n".join(neighbor_lines) if neighbor_lines else "  （暂无向量索引，可先构建卡片库）")
+            + "\n\n"
+            f"【回填格式要求】{wrap_note}\n"
+            "请在回答最后输出单个标准 ```yaml 代码块，包含扁平字段："
+            "title、tagline、primitive、category、tier、inject_mode、pain_point、trigger_utterances、anti_triggers、evolution_note（一句话说明改动点）、content。"
+        )
+        return {
+            "ok": True,
+            "lens_id": lens_id,
+            "mode": norm_mode,
+            "hints": hints,
+            "neighbors": neighbors,
+            "usage": usage,
+            "prompt": prompt,
+        }
+
     @app.post("/api/lenses/parse-import")
     def api_parse_import(req: CardImportParseRequest) -> dict[str, Any]:
         merged, _ = _load_display_lenses_cached(lens_cache)
@@ -1096,6 +1281,7 @@ def create_admin_app(router_skill: Any = None) -> FastAPI:
             primitive=req.primitive,
             pain_point=req.pain_point,
             trigger_utterances=req.trigger_utterances,
+            anti_triggers=req.anti_triggers,
             content=req.content,
             action_type=req.action_type,
             inject_mode=req.inject_mode,

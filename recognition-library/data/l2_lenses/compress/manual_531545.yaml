@@ -9,7 +9,9 @@ routing:
   - vague
   - concrete
   domains:
-  - general
+  - web3
+  - blockchain
+  - crypto
   app_affinity: []
   pain_point: 被区块链技术名词淹没，无法理解系统为何成立、如何运行及何时失效
   trigger_utterances:
@@ -19,7 +21,9 @@ routing:
   - 这个币为什么能够成立
   - 谁掌握了这个区块链的控制权
   - 帮我分析一下这个区块链
-  anti_triggers: []
+  anti_triggers:
+  - 单纯查询币价涨跌行情或短期投资买卖建议
+  - 与区块链或分布式账本无关的普通软件架构分析
 execution:
   action_type: inject_prompt
   inject_mode: append
@@ -33,7 +37,7 @@ meta:
   status: active
   scope: domain_specific
   shelf: on_shelf
-  tier: S
+  tier: A
   category: general
   subcategory: problem_solving
   collections: []

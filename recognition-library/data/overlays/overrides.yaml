@@ -10,6 +10,7 @@ overrides:
     - 提炼分类框架和归类依据
   cle_m1_r_p7_expansion:
     add_trigger_utterances:
+    - 这个是什么
     - 这个是什么情况
     - 展开讲讲这个是什么
     - 这个词太抽象了帮我拆开看具体包含什么
@@ -117,10 +118,13 @@ overrides:
     - 这是啥
     - 这个怎么用
     - 简单解释这个概念和原理
+    - 用认知脚手架循序渐进讲解编程概念
   pt_fact_check:
     add_trigger_utterances:
     - 核实官方套餐或规则调整是不是真的
     - 核实这条消息或政策变动
+    - 核实文章里的论据靠不靠谱
+    - 帮我核实这篇文章的说法和证据
   pt_how_to:
     add_trigger_utterances:
     - 怎么操作步骤指南
@@ -160,6 +164,8 @@ overrides:
     - 学习框架和系统入门路线
     - 新手入门怎么学
     - 我想要学习一门新领域怎么开始
+    - 编程学习路线与认知脚手架
+    - 系统学习编程的认知脚手架和入门方法
   pt_support_escalation:
     base_weight: 0.75
   pt_visual_critique:

@@ -1684,11 +1684,46 @@
       <div id="m-tags" style="display:flex;flex-wrap:wrap;gap:6px;margin:12px 0"></div>
       <div id="m-lineage" style="display:none;margin-bottom:12px;padding:9px 12px;border-radius:10px;background:var(--accent-soft);font-size:12.5px;line-height:1.5"></div>
 
+      <div id="m-diag-bar" style="display:none;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:12px;padding:8px 11px;border-radius:10px;background:var(--amber-soft);font-size:12px"></div>
+
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
         <button class="btn primary sm" id="m-copy">📋 复制卡片指令</button>
         <button class="btn sm" id="m-toggle-pin">📌 加入精读轮播</button>
-        <button class="btn sm soft" id="m-open-chatgpt">打开 ChatGPT 使用</button>
-        <button class="btn sm soft" id="m-open-claude">打开 Claude 使用</button>
+        <button class="btn sm soft" id="m-polish-toggle" data-tip="纯本地组装含相似竞争老卡的体检/打磨 Prompt，复制到外部强模型处理">🛠️ 生成打磨 Prompt</button>
+        <button class="btn sm soft" id="m-refill-toggle" data-tip="粘贴外部强模型输出的 YAML 代码块，预览差异并一键原地更新或升级归档">📥 粘贴回填</button>
+        <button class="btn sm" id="m-open-chatgpt">ChatGPT</button>
+        <button class="btn sm" id="m-open-claude">Claude</button>
+      </div>
+
+      <!-- Local Polish Prompt Builder (Preview + One-Click Copy, Zero External LLM) -->
+      <div id="m-polish-box" style="display:none;margin-bottom:14px;padding:12px 14px;border-radius:12px;background:var(--surface-2);border:1px solid var(--border-strong)">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px">
+          <div style="display:flex;gap:5px;flex-wrap:wrap" id="m-polish-modes">
+            <button class="btn xs primary" data-pmode="audit">🔍 全面体检</button>
+            <button class="btn xs" data-pmode="sharpen">🔪 外科锐化</button>
+            <button class="btn xs" data-pmode="calibrate">🎯 路由防串台</button>
+          </div>
+          <div style="display:flex;gap:6px">
+            <button class="btn xs primary" id="m-polish-copy">📋 一键复制 Prompt</button>
+            <button class="btn xs" id="m-polish-close">收起</button>
+          </div>
+        </div>
+        <div id="m-polish-neighbors" style="font-size:11.5px;color:var(--muted);margin-bottom:8px;line-height:1.5"></div>
+        <textarea id="m-polish-preview" readonly style="min-height:150px;background:var(--surface);font-family:ui-monospace,Menlo,monospace;font-size:11.5px"></textarea>
+      </div>
+
+      <!-- Strong-LLM YAML Round-Trip Refill Box -->
+      <div id="m-refill-box" style="display:none;margin-bottom:14px;padding:12px 14px;border-radius:12px;background:var(--surface-2);border:1px solid rgba(37,99,235,0.28)">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px">
+          <strong style="font-size:13px">📥 粘贴强模型打磨后的回复或 YAML 代码块</strong>
+          <div style="display:flex;gap:6px">
+            <button class="btn xs soft" id="m-refill-clip">📋 读剪贴板</button>
+            <button class="btn xs primary" id="m-refill-parse">解析对比</button>
+            <button class="btn xs" id="m-refill-close">收起</button>
+          </div>
+        </div>
+        <textarea id="m-refill-input" style="min-height:80px;background:var(--surface);font-family:ui-monospace,Menlo,monospace;font-size:11.5px" placeholder="按 ⌘V 粘贴强模型输出（含 ```yaml 代码块），自动解析并与当前版本对比差异…"></textarea>
+        <div id="m-refill-diff" style="display:none;margin-top:10px"></div>
       </div>
 
       <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:14px;padding:9px 12px;background:var(--surface-2);border-radius:10px">
@@ -2908,9 +2943,194 @@
       document.getElementById('m-add-trig-input').value = '';
       syncModalPinBtn(lens.id);
       renderModalCollections(lens);
+      document.getElementById('m-polish-box').style.display = 'none';
+      document.getElementById('m-refill-box').style.display = 'none';
+      document.getElementById('m-refill-input').value = '';
+      document.getElementById('m-refill-diff').style.display = 'none';
+      state.refillParsed = null;
       document.getElementById('m-custom-details').open = false;
       document.getElementById('lens-modal').classList.add('open');
+      loadModalDiagnostics(lens.id);
     }
+
+    async function loadModalDiagnostics(lensId, mode = 'audit', openBox = false) {
+      const bar = document.getElementById('m-diag-bar');
+      try {
+        const res = await api(`api/lenses/${encodeURIComponent(lensId)}/polish-prompt?mode=${encodeURIComponent(mode)}`);
+        if (!state.selectedLens || state.selectedLens.id !== lensId) return;
+        state.polishData = res;
+        const hints = res.hints || [];
+        if (hints.length) {
+          bar.innerHTML = `<span style="font-weight:600;color:var(--text)">🩺 体检线索：</span>` +
+            hints.map(h => `<span class="pill ${h.level === 'warn' ? 'amber' : ''}">${esc(h.label)}</span>`).join('') +
+            `<button class="btn xs soft" style="margin-left:auto" onclick="openPolishBox('audit')">去强模型打磨 →</button>`;
+          bar.style.display = 'flex';
+        } else {
+          bar.style.display = 'none';
+        }
+        document.getElementById('m-polish-preview').value = res.prompt || '';
+        const nbs = res.neighbors || [];
+        document.getElementById('m-polish-neighbors').innerHTML = nbs.length
+          ? `<b>已自动附带 Top-${nbs.length} 相似老卡：</b>` + nbs.map(n => `${esc(n.title)}(${n.cosine.toFixed(2)})`).join(' · ')
+          : '暂无向量索引，可先点左下角「更新卡片库」后再生成含相似老卡的 Prompt。';
+        document.querySelectorAll('#m-polish-modes button').forEach(b => {
+          b.classList.toggle('primary', b.dataset.pmode === res.mode);
+        });
+        if (openBox) document.getElementById('m-polish-box').style.display = 'block';
+      } catch {
+        bar.style.display = 'none';
+      }
+    }
+
+    window.openPolishBox = mode => {
+      if (!state.selectedLens) return;
+      document.getElementById('m-refill-box').style.display = 'none';
+      document.getElementById('m-polish-box').style.display = 'block';
+      loadModalDiagnostics(state.selectedLens.id, mode || 'audit', true);
+    };
+
+    document.getElementById('m-polish-toggle').onclick = () => {
+      const box = document.getElementById('m-polish-box');
+      if (box.style.display === 'block') { box.style.display = 'none'; return; }
+      openPolishBox('audit');
+    };
+    document.getElementById('m-polish-close').onclick = () => {
+      document.getElementById('m-polish-box').style.display = 'none';
+    };
+    document.querySelectorAll('#m-polish-modes button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (state.selectedLens) loadModalDiagnostics(state.selectedLens.id, btn.dataset.pmode, true);
+      });
+    });
+    document.getElementById('m-polish-copy').onclick = () => {
+      const txt = document.getElementById('m-polish-preview').value;
+      if (txt) copyText(txt, '已复制打磨 Prompt，粘贴到强模型即可分析');
+    };
+
+    document.getElementById('m-refill-toggle').onclick = () => {
+      const box = document.getElementById('m-refill-box');
+      const show = box.style.display !== 'block';
+      document.getElementById('m-polish-box').style.display = 'none';
+      box.style.display = show ? 'block' : 'none';
+      if (show) document.getElementById('m-refill-input').focus();
+    };
+    document.getElementById('m-refill-close').onclick = () => {
+      document.getElementById('m-refill-box').style.display = 'none';
+    };
+    document.getElementById('m-refill-clip').onclick = async () => {
+      try {
+        const txt = await navigator.clipboard.readText();
+        if (!txt || !txt.trim()) return toast('剪贴板为空');
+        document.getElementById('m-refill-input').value = txt;
+        await parseModalRefill(txt);
+      } catch {
+        document.getElementById('m-refill-input').focus();
+        toast('请直接按 ⌘V 粘贴到输入框（会自动解析）');
+      }
+    };
+    document.getElementById('m-refill-input').addEventListener('paste', () => {
+      setTimeout(() => parseModalRefill(), 80);
+    });
+    document.getElementById('m-refill-parse').onclick = () => parseModalRefill();
+
+    async function parseModalRefill(rawOverride = null) {
+      const l = state.selectedLens;
+      if (!l) return;
+      const raw = (rawOverride !== null ? rawOverride : document.getElementById('m-refill-input').value).trim();
+      const diffEl = document.getElementById('m-refill-diff');
+      if (!raw) return toast('请先粘贴强模型输出的 YAML 代码块');
+      try {
+        const res = await api('api/lenses/parse-import', { method: 'POST', body: JSON.stringify({ raw_text: raw }) });
+        if (!res.ok) {
+          diffEl.style.display = 'block';
+          diffEl.innerHTML = `<div style="color:var(--amber);font-size:12px">⚠️ ${esc(res.error || '未能解析 YAML')}</div>`;
+          return;
+        }
+        const c = res.card || {};
+        state.refillParsed = c;
+        const contentChanged = Boolean(c.content && c.content.trim() !== (l.execution.content || '').trim());
+        const rows = [];
+        const addDiff = (label, oldV, newV) => {
+          if ((oldV || '').trim() !== (newV || '').trim() && (newV || '').trim()) {
+            rows.push(`<div style="margin-bottom:6px"><b>${esc(label)}：</b><div style="color:var(--muted);text-decoration:line-through;font-size:11.5px">${esc(oldV || '（空）')}</div><div style="color:var(--green);font-size:12px">${esc(newV)}</div></div>`);
+          }
+        };
+        addDiff('标题', l.title, c.title);
+        addDiff('摘要', l.tagline, c.tagline);
+        addDiff('适用场景', l.routing.pain_point, c.pain_point);
+        const oldT = (l.routing.trigger_utterances || []).join(' / ');
+        const newT = (c.trigger_utterances || []).join(' / ');
+        addDiff('触发口语', oldT, newT);
+        const oldA = (l.routing.anti_triggers || []).join(' / ');
+        const newA = (c.anti_triggers || []).join(' / ');
+        if (newA !== oldA && (c.anti_triggers || []).length) addDiff('防串台边界 (anti_triggers)', oldA, newA);
+        addDiff('指令正文', l.execution.content, c.content);
+
+        const defaultModeHint = contentChanged
+          ? '检测到<b>指令正文已升级</b>，建议「升级替换（归档旧卡，保留演进血缘）」；也可选择「原地更新」。'
+          : '检测到<b>仅调整了路由画像/口语</b>（正文未变），建议「原地更新（保留原 ID 与历史统计）」。';
+        diffEl.style.display = 'block';
+        diffEl.innerHTML = `
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:10px 12px;max-height:220px;overflow-y:auto;font-size:12px">
+            ${rows.length ? rows.join('') : '<div style="color:var(--muted)">未检测到字段变化</div>'}
+          </div>
+          <div style="font-size:11.5px;color:var(--text-2);margin:8px 0">💡 ${defaultModeHint}</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">
+            <button class="btn sm ${contentChanged ? '' : 'primary'}" onclick="applyModalRefill('inplace')">✏️ 原地更新（不换 ID）</button>
+            <button class="btn sm ${contentChanged ? 'primary' : ''}" onclick="applyModalRefill('supersede')">🔄 升级替换（归档旧卡）</button>
+          </div>`;
+      } catch (e) {
+        diffEl.style.display = 'block';
+        diffEl.innerHTML = `<div style="color:var(--red);font-size:12px">解析失败：${esc(e.message)}</div>`;
+      }
+    }
+
+    window.applyModalRefill = async mode => {
+      const l = state.selectedLens;
+      const c = state.refillParsed;
+      if (!l || !c) return;
+      try {
+        if (mode === 'inplace') {
+          const payload = {};
+          if (c.title && c.title !== l.title) payload.title = c.title;
+          if (c.tagline && c.tagline !== l.tagline) payload.tagline = c.tagline;
+          if (c.pain_point && c.pain_point.length >= 4 && c.pain_point !== l.routing.pain_point) payload.pain_point = c.pain_point;
+          if (c.content && c.content.length >= 4 && c.content !== l.execution.content) payload.content = c.content;
+          if (c.trigger_utterances?.length) payload.trigger_utterances = c.trigger_utterances;
+          if (c.anti_triggers?.length) payload.anti_triggers = c.anti_triggers;
+          if (c.evolution_note) payload.evolution_note = c.evolution_note;
+          await api('api/overlays/' + encodeURIComponent(l.id), { method: 'PUT', body: JSON.stringify(payload) });
+          markPending(true);
+          toast(`✅ 已原地更新「${l.title}」，点左下角「立即同步生效」上线`, 4200);
+        } else {
+          await api('api/lenses/manual', {
+            method: 'POST',
+            body: JSON.stringify({
+              title: c.title || l.title,
+              tagline: c.tagline || l.tagline,
+              primitive: c.primitive || l.routing.primitive,
+              category: c.category || l.meta.category || 'custom',
+              tier: c.tier || l.meta.tier || 'A',
+              action_type: c.action_type || l.execution.action_type || 'inject_prompt',
+              inject_mode: c.inject_mode || l.execution.inject_mode || 'append',
+              pain_point: c.pain_point || l.routing.pain_point,
+              trigger_utterances: c.trigger_utterances?.length ? c.trigger_utterances : l.routing.trigger_utterances,
+              anti_triggers: c.anti_triggers?.length ? c.anti_triggers : (l.routing.anti_triggers || []),
+              content: c.content || l.execution.content,
+              supersedes_id: l.id,
+              evolution_note: c.evolution_note || '强模型打磨升级',
+              target_vault: Boolean(l.is_vault),
+            }),
+          });
+          markPending(true);
+          toast(`🔄 已创建新版并归档旧卡「${l.title}」，点左下角「立即同步生效」上线`, 4500);
+        }
+        document.getElementById('lens-modal').classList.remove('open');
+        await refreshAll();
+      } catch (e) {
+        toast('回填失败：' + e.message, 4500);
+      }
+    };
 
     function renderModalCollections(lens) {
       const allCols = state.overview?.shelf_policy?.collections || {};

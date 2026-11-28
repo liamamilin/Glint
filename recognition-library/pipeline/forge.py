@@ -163,6 +163,14 @@ def parse_card_import_text(
     else:
         trigs = []
 
+    raw_antis = parsed.get("anti_triggers") or routing.get("anti_triggers") or []
+    if isinstance(raw_antis, str):
+        anti_trigs = [s.strip() for s in re.split(r"[\n;；]+", raw_antis) if s.strip()]
+    elif isinstance(raw_antis, list):
+        anti_trigs = [str(s).strip() for s in raw_antis if str(s).strip()]
+    else:
+        anti_trigs = []
+
     supersedes_hint = str(parsed.get("supersedes") or meta.get("supersedes") or parsed.get("id") or "").strip()
     evolution_note = str(parsed.get("evolution_note") or meta.get("evolution_note") or "").strip()
 
@@ -219,6 +227,7 @@ def parse_card_import_text(
             "inject_mode": norm_inject,
             "pain_point": pain_point,
             "trigger_utterances": trigs,
+            "anti_triggers": anti_trigs,
             "content": content,
             "evolution_note": evolution_note,
         },
@@ -236,6 +245,7 @@ def create_manual_lens(
     pain_point: str,
     trigger_utterances: list[str],
     content: str,
+    anti_triggers: list[str] | None = None,
     action_type: str = "inject_prompt",
     inject_mode: str = "append",
     goals: list[str] | None = None,
@@ -251,6 +261,7 @@ def create_manual_lens(
     """Create a hand-crafted personal lens directly in L2 (ready for L2->L3 build)."""
     lid = make_stable_id("manual", f"{title}_{int(time.time() * 1000) % 1000000}")
     cleaned_triggers = [t.strip() for t in trigger_utterances if t.strip()]
+    cleaned_antis = [t.strip() for t in (anti_triggers or []) if t.strip()]
     if len(cleaned_triggers) < 2:
         for fallback in (title.strip(), pain_point.strip()):
             if fallback and fallback not in cleaned_triggers:
@@ -272,6 +283,7 @@ def create_manual_lens(
             app_affinity=[],
             pain_point=pain_point.strip(),
             trigger_utterances=cleaned_triggers,
+            anti_triggers=cleaned_antis,
         ),
         execution=LensExecution(
             action_type=norm_action,

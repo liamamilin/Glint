@@ -20,6 +20,7 @@ routing:
   - ChatGPT
   pain_point: 手里有个方案/设计看起来能跑，但怕上线后踩坑炸锅，想在投入资源前提前揪出致命漏洞并用最低成本验证
   trigger_utterances:
+  - 事前验尸
   - 这个方案半年后要是失败了会是因为什么
   - 帮我给这个设计挑挑刺找漏洞
   - 上线前先做一次事前验尸
@@ -31,7 +32,7 @@ routing:
 execution:
   action_type: inject_prompt
   inject_mode: append
-  content: 请用事前验尸（Pre-mortem）视角：假设这个方案半年后彻底失败了，反推最致命的 3 个漏洞，并给出最低成本的验证方法。
+  content: 请用事前验尸（Pre-mortem）视角：假设这个方案半年后彻底失败了，反推最致命的 2–3 条真实失效路径（避开泛泛的通用风险套话），并为每条路径给出最低成本的前置验证方法；若方案本身可逆且试错成本低于前置验证成本，请直接指出可小步上线验证。
   variables: []
   workflow: null
 meta:
@@ -47,7 +48,7 @@ meta:
   collections: []
   base_weight: 1.0
   confidence: 0.95
-  version: 1
+  version: 2
   created_at: null
   supersedes: null
   superseded_by: null

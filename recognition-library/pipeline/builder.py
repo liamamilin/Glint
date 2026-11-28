@@ -81,6 +81,12 @@ def apply_overlays(
                 lens.routing.domains = ov.domains
             if ov.app_affinity is not None:
                 lens.routing.app_affinity = ov.app_affinity
+            if ov.trigger_utterances is not None:
+                cleaned_trigs = [t.strip() for t in ov.trigger_utterances if t.strip()]
+                if cleaned_trigs:
+                    lens.routing.trigger_utterances = cleaned_trigs
+            if ov.anti_triggers is not None:
+                lens.routing.anti_triggers = [t.strip() for t in ov.anti_triggers if t.strip()]
             if ov.add_trigger_utterances:
                 merged_trigs = list(lens.routing.trigger_utterances)
                 for t in ov.add_trigger_utterances:

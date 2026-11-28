@@ -19,6 +19,7 @@ routing:
   - Chrome
   pain_point: 用户面对多个技术方案或选项难以取舍，缺乏结构化对比与明确推荐
   trigger_utterances:
+  - 对比选方案
   - A 方案和 B 方案哪个好
   - 这几个框架怎么选
   - 帮我对比一下这几个选项
@@ -30,7 +31,7 @@ routing:
 execution:
   action_type: inject_prompt
   inject_mode: append
-  content: 请提取最关键的 4-5 个评估维度，输出一份 Markdown 对比表格，并在最后给出明确的推荐结论与取舍理由。
+  content: 请提取真正拉开差距的 3–5 个关键评估维度，输出紧凑的 Markdown 对比表，并在最后给出明确的推荐结论、取舍理由与翻转条件（什么前提变化时应改选另一项）；若某选项在硬约束上已一票否决，先直接指出淘汰原因，不必强行打满全表。
   variables: []
   workflow: null
 meta:
@@ -46,7 +47,7 @@ meta:
   collections: []
   base_weight: 1.0
   confidence: 0.9
-  version: 1
+  version: 2
   created_at: null
   supersedes: null
   superseded_by: null

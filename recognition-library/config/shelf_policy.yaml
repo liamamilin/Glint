@@ -149,7 +149,8 @@ collections:
   col_web3:
     name: Web3
     description: ''
-    lens_ids: []
+    lens_ids:
+    - manual_531545
 evergreen_ids:
 - cle_m1_r_c2_identification
 - cle_m1_r_p2_differentiation

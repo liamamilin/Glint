@@ -21,7 +21,7 @@ routing:
   - 这个报错怎么排查
   - 服务挂了帮我找原因
   - debug 这个 error
-  - root cause 是什么
+  - 帮我定位这个故障的 root cause
   - 日志报错了但不知道哪出问题
   anti_triggers:
   - 只是想了解概念而非排查故障

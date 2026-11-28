@@ -18,7 +18,9 @@ routing:
   - 根据发现的问题帮我制定一个修复计划
   - 这些问题应该按照什么顺序解决
   - 把发现的问题转化成可以执行的改进方案
-  anti_triggers: []
+  anti_triggers:
+  - 尚未发现具体问题，需要先做排查或审计
+  - 已经确定计划，需要直接动手执行代码修复
 execution:
   action_type: inject_prompt
   inject_mode: append

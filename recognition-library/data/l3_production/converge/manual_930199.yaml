@@ -19,7 +19,9 @@ routing:
   - 把知识库里面过时和重复的内容清理一下
   - 项目已经发生了很多变化，把相关资料同步一下
   - 更新一下项目文档
-  anti_triggers: []
+  anti_triggers:
+  - 从零撰写一篇全新文章、方案或产品文档
+  - 仅对单段文字做去 AI 味润色或短摘要
 execution:
   action_type: inject_prompt
   inject_mode: append

@@ -21,7 +21,9 @@ routing:
   - 帮我优化一下项目
   - 优化一下性能
   - 优化一下稳定性
-  anti_triggers: []
+  anti_triggers:
+  - 修复明确的功能报错或逻辑 Bug（而非性能/稳定性优化）
+  - 接受削减功能或降低质量以换取速度的妥协方案
 execution:
   action_type: inject_prompt
   inject_mode: append

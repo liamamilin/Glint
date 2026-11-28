@@ -18,6 +18,7 @@ routing:
   - Terminal
   pain_point: 代码写完拿不准有没有隐藏 Bug、边界/并发竞态或过度复杂，想让资深架构师只看实质风险
   trigger_utterances:
+  - 审查代码
   - 帮我 review 这段代码
   - 这段代码有什么 bug 吗
   - 并发会不会有问题
@@ -29,7 +30,7 @@ routing:
 execution:
   action_type: inject_prompt
   inject_mode: wrap
-  content: '请作为资深架构师审查以下代码。忽略代码风格和命名吹毛求疵，只指出潜在 Bug、边界/并发风险以及可简化的复杂度：
+  content: '请审查以下代码：忽略命名和格式吹毛求疵，只指出实质性的 Bug、边界/并发风险及可简化的过度复杂逻辑，并说明触发条件与影响；若代码本身稳健清晰无实质隐患，请直接确认通过，不必凑问题：
 
 
     {{input}}'
@@ -42,4 +43,4 @@ meta:
   status: active
   base_weight: 1.0
   confidence: 0.95
-  version: 1
+  version: 2

@@ -180,6 +180,8 @@ class LensOverride(BaseModel):
     primitive: str | None = None
     domains: list[str] | None = None
     app_affinity: list[str] | None = None
+    trigger_utterances: list[str] | None = None
+    anti_triggers: list[str] | None = None
     add_trigger_utterances: list[str] | None = None
     remove_trigger_utterances: list[str] | None = None
     superseded_by: str | None = None
